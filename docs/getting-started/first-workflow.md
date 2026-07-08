@@ -23,18 +23,17 @@ For a smaller first workflow, use:
 VIPP synthetic multichannel volume
 ```
 
-## Which Input Selector Matters?
+## Choose The Source
 
-The toolbar `Input` dropdown selects the current napari layer used as the
-default source for simple workflows. It also controls which raw input layer VIPP
-hides while showing inspection layers.
+Select `Image Source` in the graph and choose the data in the inspector. Set
+`Source` to `napari layer`, `file path`, or `sample`. The napari layer dropdown
+is shown only when `Source` is `napari layer`; sample and file sources use their
+own controls.
 
-Saved example workflows usually use an explicit `Image Source` node. In that
-case, the `Image Source` parameters are the source of truth. If the node is set
-to a bundled sample or file path, changing the toolbar `Input` dropdown will not
-change the workflow result. To change the data for this workflow, select
-`Image Source` in the graph and change its `Source`, `Napari layer`, `Sample`,
-or `File path` fields in the inspector.
+When VIPP starts with bundled sample layers already open, the first
+`Image Source` automatically chooses the preferred time-lapse multichannel
+sample. You can change it by selecting the node and choosing another layer,
+sample, or file.
 
 ## Screenshot
 
