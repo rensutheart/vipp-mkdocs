@@ -14,8 +14,10 @@ examples/otsu-red-channel-labels.json
 
 What the screenshot shows:
 
-- napari viewer with the selected label output;
-- VIPP graph canvas with node thumbnails;
+- detached, maximized VIPP window;
+- hidden node library to give the graph more room;
+- graph zoomed out to show the full workflow;
+- graph canvas with node thumbnails;
 - channel splitting, thresholding, hole filling, connected components, and
   label filtering;
 - selected-node inspector for `Filter Labels By Volume`.
@@ -38,4 +40,3 @@ Use this screenshot in:
 | `synthetic-object-colocalization-association.json` | Object association table and merged metrics. |
 | `synthetic-deconvolution-rl-tv.json` | Blurred input, ordinary RL, and RL-TV comparison. |
 | Batch workflow | Batch preview dialog and explicit `Batch Output` nodes. |
-

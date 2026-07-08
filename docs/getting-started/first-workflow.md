@@ -1,7 +1,7 @@
 # First Workflow
 
-This first workflow creates labels from one fluorescence channel, then inspects
-and measures those labels.
+This first workflow creates cleaned labels from one fluorescence channel. Once
+the labels look reasonable, they can be measured in the next workflow step.
 
 ## Starting Point
 
@@ -28,9 +28,9 @@ VIPP synthetic multichannel volume
 ![First VIPP workflow overview](../assets/screenshots/getting-started/first-workflow-overview.png)
 
 This screenshot shows the checked-in first label-cleanup workflow loaded in
-napari. The viewer displays the selected label output, the graph shows
-intermediate thumbnails, and the inspector exposes the selected label-filtering
-parameters.
+VIPP as a detached, maximized window. The node library is hidden, the graph is
+zoomed out to show the full workflow, and the inspector exposes the selected
+label-filtering parameters.
 
 ## Build The Graph
 
@@ -38,11 +38,19 @@ Create this graph:
 
 ```text
 Image Source
-  -> Split Channels
   -> Gaussian Blur
   -> Otsu Threshold
+  -> Split Channels
   -> Fill Holes
   -> Label Connected Components
+  -> Clear Border Objects
+  -> Filter Labels By Volume
+```
+
+Natural next step:
+
+```text
+Filter Labels By Volume
   -> Measure Objects
 ```
 
@@ -55,7 +63,8 @@ Inspect these outputs before trusting the final table:
 - the binary mask after `Otsu Threshold`;
 - the cleaned mask after `Fill Holes`;
 - the label image after `Label Connected Components`;
-- the table preview from `Measure Objects`.
+- the border-cleared and volume-filtered labels;
+- the table preview after adding `Measure Objects`.
 
 ## Why This Workflow Matters
 

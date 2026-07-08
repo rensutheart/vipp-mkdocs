@@ -24,6 +24,10 @@ as thumbnails, napari layers, histograms, labels, or tables.
 - Keep the source image and key masks inspectable.
 - Use tunnels when a channel, mask, ROI, or reference image feeds many nodes.
 - Add graph notes at scientific decision points.
+- Detach and maximize VIPP for longer workflows.
+- Hide the node library after building the graph when you need more canvas
+  space.
+- Zoom out for whole-workflow review, then zoom in for parameter tuning.
 - Add explicit `Batch Output` nodes before running a workflow over a folder.
 - Save workflow snapshots before major parameter sweeps.
 
@@ -32,4 +36,3 @@ as thumbnails, napari layers, histograms, labels, or tables.
 - Treating the final table as trustworthy without inspecting masks and labels.
 - Reusing a workflow on structurally different data without retuning.
 - Hiding scientific decisions in file names or external notes only.
-

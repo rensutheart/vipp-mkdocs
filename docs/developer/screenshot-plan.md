@@ -48,6 +48,14 @@ docs/assets/screenshots/workflows/segmentation-label-inspection.png
 - Use the same software release as the docs page.
 - Use bundled samples or public data with clear licensing.
 - Keep image data non-sensitive.
+- Prefer a detached, maximized VIPP window for workflow screenshots.
+- Hide the node library once the graph is built unless the palette itself is
+  the topic.
+- Keep the inspector visible when parameters, histograms, metadata, or table
+  previews are part of the teaching point.
+- Zoom out enough that the relevant workflow is visible in one screenshot.
+- Include the napari viewer only when the viewer output itself is helpful for
+  the concept being explained.
 - Prefer stable viewport sizes.
 - Avoid screenshots that depend on temporary local paths.
 - Add captions that state what the user should notice.
@@ -56,4 +64,3 @@ docs/assets/screenshots/workflows/segmentation-label-inspection.png
 
 Until screenshots are captured, pages should avoid broken image links. Add
 screenshots only when the file exists.
-
