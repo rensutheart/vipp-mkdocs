@@ -84,3 +84,20 @@ Fix:
 - use toolbar `Calculate all`;
 - enable `Auto Recalculate` only if the node is fast enough.
 
+## Toolbar Input Does Not Change The Workflow
+
+Symptom:
+
+- selecting another item in the toolbar `Input` dropdown does not visibly change
+  the graph output;
+- the status still reports that the graph updated from the old sample or file.
+
+Check:
+
+- select the graph's `Image Source` node;
+- inspect whether `Source` is set to `sample` or `file path`;
+- change the source in the `Image Source` inspector controls, not only in the
+  toolbar dropdown.
+
+The toolbar `Input` dropdown is mainly the default/current napari-layer selector.
+An explicit `Image Source` node can override it.
