@@ -9,6 +9,16 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
+In VIPP, open them with:
+
+```text
+Open example...
+```
+
+The chooser groups workflows by task and opens each template with its bundled
+sample `Image Source` nodes already configured. Use `Load workflow...` for
+custom or external workflow JSON files.
+
 ## Workflow Index
 
 | Workflow | Input sample | Purpose |
@@ -54,4 +64,3 @@ When adding a new core example:
 4. Add a launcher shortcut if it is used often.
 5. Add a focused test that checks the expected output type and one meaningful
    invariant.
-

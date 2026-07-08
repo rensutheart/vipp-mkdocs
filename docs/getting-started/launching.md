@@ -15,7 +15,19 @@ Open the workflow widget from:
 Plugins > VIPP Workflow (napari-vipp)
 ```
 
-## Launch With Sample Data
+## Open A Bundled Example
+
+Use the VIPP toolbar:
+
+```text
+Open example...
+```
+
+The example chooser is grouped by workflow family. It opens a workflow template
+and sets its `Image Source` nodes to bundled samples. This is the recommended
+route for first-time use and documentation screenshots.
+
+## Optional: Launch With Raw Sample Layers
 
 Use the helper script:
 
@@ -23,7 +35,9 @@ Use the helper script:
 python scripts\launch_vipp_sample.py
 ```
 
-This opens napari with the bundled VIPP synthetic microscopy samples.
+This opens napari with the bundled VIPP synthetic microscopy samples as layers.
+Use it when you specifically want to inspect the raw sample data, not when you
+only need a runnable example workflow.
 
 ## Recommended Workspace
 
@@ -39,7 +53,7 @@ Practical layout tips:
 - zoom the graph out when documenting or reviewing the whole workflow;
 - show the napari viewer only when the image layer itself is part of the point.
 
-## Launch A Review Workflow
+## Optional: Launch A Review Workflow From The Command Line
 
 Example:
 
@@ -57,5 +71,5 @@ Common launcher names include:
 - `deconvolution`
 - `deconvolution-3d`
 
-You can also load workflow JSON files from the VIPP toolbar with
-`Load workflow...`.
+Inside VIPP, prefer `Open example...` for bundled templates. Use
+`Load workflow...` for custom or external workflow JSON files.

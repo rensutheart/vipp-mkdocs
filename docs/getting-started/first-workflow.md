@@ -5,35 +5,32 @@ the labels look reasonable, they can be measured in the next workflow step.
 
 ## Starting Point
 
-Open the bundled sample data:
+Open the runnable example from the VIPP toolbar:
 
 ```text
-File > Open Sample > VIPP synthetic microscopy samples
+Open example... > Segmentation & Labels > Red-Channel Label Cleanup
 ```
 
-The most useful starting sample is:
-
-```text
-VIPP synthetic time-lapse multichannel
-```
-
-For a smaller first workflow, use:
+This loads the checked-in label-cleanup workflow and sets its `Image Source`
+node to the bundled sample:
 
 ```text
 VIPP synthetic multichannel volume
 ```
 
-## Choose The Source
+Napari's `File > Open Sample` menu is not required for this workflow. Use it
+only when you want to inspect raw sample layers directly in the napari layer
+list.
+
+## Choose Or Change The Source
 
 Select `Image Source` in the graph and choose the data in the inspector. Set
 `Source` to `napari layer`, `file path`, or `sample`. The napari layer dropdown
 is shown only when `Source` is `napari layer`; sample and file sources use their
 own controls.
 
-When VIPP starts with bundled sample layers already open, the first
-`Image Source` automatically chooses the preferred time-lapse multichannel
-sample. You can change it by selecting the node and choosing another layer,
-sample, or file.
+For example workflows, `Source` is usually `sample`. You can switch it later to
+`napari layer` or `file path` when applying the workflow to your own data.
 
 ## Screenshot
 

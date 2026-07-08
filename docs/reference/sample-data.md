@@ -1,6 +1,17 @@
 # Sample Data
 
-VIPP ships synthetic microscopy-style samples through napari:
+VIPP ships synthetic microscopy-style samples that are available inside
+`Image Source`:
+
+```text
+Image Source > Source = sample
+```
+
+This is the normal route when building or adapting a workflow. The sample menu
+then lists every bundled sample without adding raw layers to napari first.
+
+Napari's sample-data menu is still useful when you want to inspect raw sample
+layers directly:
 
 ```text
 File > Open Sample > VIPP synthetic microscopy samples
@@ -41,4 +52,3 @@ Useful documentation samples to add:
 - puncta-in-cell sample for event localization;
 - anisotropic z-stack sample showing why pixel size matters;
 - batch folder with 3 to 5 matched inputs for batch documentation screenshots.
-

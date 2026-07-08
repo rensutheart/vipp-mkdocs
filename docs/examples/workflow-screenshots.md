@@ -6,7 +6,7 @@ This gallery collects screenshots from real VIPP workflows.
 
 ![First VIPP workflow overview](../assets/screenshots/getting-started/first-workflow-overview.png)
 
-Source workflow:
+Source workflow, opened from `Open example...`:
 
 ```text
 examples/otsu-red-channel-labels.json

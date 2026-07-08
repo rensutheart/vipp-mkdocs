@@ -3,6 +3,11 @@
 VIPP needs two different kinds of examples. Keeping them separate prevents the
 documentation from becoming confused.
 
+Use this rule of thumb:
+
+- samples are data sources selected in `Image Source > Source = sample`;
+- example workflows are runnable graph templates opened with `Open example...`.
+
 ## Core System Samples
 
 Core samples ship with the plugin. They should be deterministic, small enough
@@ -64,4 +69,3 @@ A documentation example should become a core system example when it has:
 - a row in the example workflow reference;
 - clear user-facing purpose;
 - stable expected outputs.
-

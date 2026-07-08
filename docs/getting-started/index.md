@@ -8,6 +8,5 @@ Recommended order:
 2. [Launching VIPP](launching.md)
 3. [First Workflow](first-workflow.md)
 
-The first workflow uses bundled sample data, so it does not require external
-microscopy files.
-
+The first workflow opens a bundled example workflow. Its `Image Source` node
+uses bundled sample data, so it does not require external microscopy files.
