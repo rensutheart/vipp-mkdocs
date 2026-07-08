@@ -71,8 +71,8 @@ Use:
 examples/otsu-red-channel-labels.json
 ```
 
-This demonstrates red-channel segmentation, mask cleanup, labels, border
-clearing, volume filtering, and inspectable outputs.
+This demonstrates red/TRITC-like channel segmentation, mask cleanup, labels,
+border clearing, volume filtering, and inspectable outputs.
 
 ## What To Check
 
@@ -81,4 +81,3 @@ clearing, volume filtering, and inspectable outputs.
 - Are touching objects merged?
 - Are small objects biological or artifacts?
 - Are physical units correct before size filtering or measurement?
-

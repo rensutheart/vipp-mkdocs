@@ -23,7 +23,7 @@ custom or external workflow JSON files.
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
-| `otsu-red-channel-labels.json` | synthetic multichannel volume | Label cleanup: blur, Otsu threshold, mask cleanup, connected components, border clearing, and volume filtering. |
+| `otsu-red-channel-labels.json` | synthetic multichannel volume | Label cleanup: split the red/TRITC-like channel, blur, Otsu threshold, mask cleanup, connected components, border clearing, and volume filtering. |
 | `red-channel-object-intensity-measurements.json` | synthetic multichannel volume | Multi-input object measurement using labels plus matching intensity image. |
 | `red-channel-merged-measurement-table.json` | synthetic multichannel volume | Morphology, intensity, table merge, and metadata columns. |
 | `synthetic-measurement-summary.json` | synthetic measurement summary | Grouped object-count and area summaries. |

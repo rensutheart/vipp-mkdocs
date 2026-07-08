@@ -22,7 +22,7 @@ File > Open Sample > VIPP synthetic microscopy samples
 | Sample | Axes | Purpose |
 | --- | --- | --- |
 | `VIPP synthetic volume` | `ZYX` | Basic grayscale z-stack with sphere/tube-like structures. |
-| `VIPP synthetic multichannel volume` | `CZYX` | Three-channel fluorescence-like volume for channel splitting and segmentation. |
+| `VIPP synthetic multichannel volume` | `CZYX` | Three-channel fluorescence-like volume with blue/DAPI-like nuclei, green/FITC-like neurites, and red/TRITC-like puncta for channel splitting and segmentation. |
 | `VIPP synthetic time-lapse multichannel` | `TCZYX` | Preferred starter sample with time, channel, z, y, and x axes. |
 | `VIPP synthetic measurement summary` | `TYX` | Known object counts/areas per timepoint for summary validation. |
 | `VIPP synthetic object morphology` | `YX` | Circle, ellipse, rectangle, and concave 2D objects for derived morphology. |

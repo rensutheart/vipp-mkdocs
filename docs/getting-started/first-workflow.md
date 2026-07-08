@@ -18,6 +18,9 @@ node to the bundled sample:
 VIPP synthetic multichannel volume
 ```
 
+The sample channels are ordered blue, green, red. This example explicitly uses
+the red/TRITC-like channel.
+
 Napari's `File > Open Sample` menu is not required for this workflow. Use it
 only when you want to inspect raw sample layers directly in the napari layer
 list.
@@ -38,8 +41,8 @@ For example workflows, `Source` is usually `sample`. You can switch it later to
 
 This screenshot shows the checked-in first label-cleanup workflow loaded in
 VIPP as a detached, maximized window. The node library is hidden, the graph is
-zoomed out to show the full workflow, and the inspector exposes the selected
-label-filtering parameters.
+zoomed out to show the full workflow, the preview mode is set to `MIP`, and the
+inspector exposes the selected label-filtering parameters.
 
 ## Build The Graph
 
@@ -47,9 +50,9 @@ Create this graph:
 
 ```text
 Image Source
+  -> Split Channels
   -> Gaussian Blur
   -> Otsu Threshold
-  -> Split Channels
   -> Fill Holes
   -> Label Connected Components
   -> Clear Border Objects
@@ -67,12 +70,12 @@ Filter Labels By Volume
 
 Inspect these outputs before trusting the final table:
 
-- the selected channel after `Split Channels`;
+- the red channel after `Split Channels`;
 - the blurred image;
 - the binary mask after `Otsu Threshold`;
 - the cleaned mask after `Fill Holes`;
 - the label image after `Label Connected Components`;
-- the border-cleared and volume-filtered labels;
+- the border-cleared labels and the volume-filtered labels;
 - the table preview after adding `Measure Objects`.
 
 ## Why This Workflow Matters

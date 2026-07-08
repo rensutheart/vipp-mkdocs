@@ -16,10 +16,11 @@ What the screenshot shows:
 
 - detached, maximized VIPP window;
 - hidden node library to give the graph more room;
+- `MIP` preview mode so the puncta are visible in one view;
 - graph zoomed out to show the full workflow;
 - graph canvas with node thumbnails;
-- channel splitting, thresholding, hole filling, connected components, and
-  label filtering;
+- red-channel splitting, thresholding, hole filling, connected components,
+  border clearing, and label-volume filtering;
 - selected-node inspector for `Filter Labels By Volume`.
 
 Use this screenshot in:
