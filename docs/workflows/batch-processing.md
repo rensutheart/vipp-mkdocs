@@ -50,15 +50,17 @@ Useful template fields include:
 - `{node_id}`
 - `{node_title}`
 
-## Reproducibility Artifacts
+## Run artifacts
 
 The dialog can write:
 
 - `vipp_batch_workflow.json`
 - `vipp_batch_pipeline.py`
 
-Future batch work should add saved batch configuration, output manifests, and
-per-item provenance.
+These files record useful parts of the run, but the current release does not
+claim a complete saved batch configuration or per-item provenance manifest.
+Retain a separate input manifest, source-pairing rule, environment, exclusions,
+and run log for consequential analyses.
 
 ## What To Check Before Running
 
@@ -68,4 +70,4 @@ per-item provenance.
 - Is overwrite behavior correct?
 - Are table outputs included?
 - Is memory mode appropriate for the image size?
-
+- Have you retained the previewed pairing and an input/output manifest?

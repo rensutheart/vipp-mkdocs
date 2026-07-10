@@ -76,6 +76,11 @@ border clearing, volume filtering, and inspectable outputs.
 
 ## What To Check
 
+![A threshold-mask intermediate output shown at full resolution above its VIPP graph](../assets/screenshots/workflows/inspect-intermediate-result.png)
+
+*Inspect a decisive intermediate at full resolution. Here the threshold mask is
+pinned in napari while its graph node and input histogram remain visible.*
+
 - Does the mask include the biology of interest?
 - Are background/noise structures being labeled as objects?
 - Are touching objects merged?

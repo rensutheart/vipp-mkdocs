@@ -1,75 +1,69 @@
-# Launching VIPP
+# Launch VIPP
 
-## Launch Napari And Open The Widget
+## Open the napari widget
 
-Activate the environment and start napari:
+Activate the environment used for installation and run:
 
-```powershell
-.\.venv\Scripts\activate
+```text
 napari
 ```
 
-Open the workflow widget from:
+In napari, choose:
 
 ```text
-Plugins > VIPP Workflow (napari-vipp)
+Plugins → VIPP Workflow (napari-vipp)
 ```
 
-## Open A Bundled Example
+The VIPP dock widget has three main regions:
 
-Use the VIPP toolbar:
+| Region | What it is for |
+| --- | --- |
+| Node library | Search or browse operations, then add them to the graph. |
+| Graph canvas | Connect and arrange the visible analysis. |
+| Inspector | Edit the selected node, calculate manual nodes, and inspect output metadata, images, histograms, or tables. |
+
+The top toolbar opens examples and workflows, saves or exports the graph,
+starts batch processing, and exposes display/execution settings.
+
+## Open a bundled example
+
+Choose **Open example…** in the VIPP toolbar. The chooser groups complete graph
+templates by task and configures their `Image Source` nodes to use matching
+bundled samples.
+
+For a first visit choose:
 
 ```text
-Open example...
+Segmentation & Labels → Red-Channel Label Cleanup
 ```
 
-The example chooser is grouped by workflow family. It opens a workflow template
-and sets its `Image Source` nodes to bundled samples. This is the recommended
-route for first-time use and documentation screenshots.
+This route does not require an external file or a layer opened through napari's
+sample menu.
 
-## Optional: Launch With Raw Sample Layers
+## Give the graph enough space
 
-Use the helper script:
+For a long workflow, drag the **VIPP Workflow** dock title bar out of napari (or
+double-click the title bar) and maximize the floating window. Hide the node
+library after adding nodes and keep the inspector visible while tuning. Use
+graph zoom for overview; use napari layers for full-resolution image comparison.
 
-```powershell
-python scripts\launch_vipp_sample.py
+## If VIPP is missing from the Plugins menu
+
+Check that napari is running from the same environment into which VIPP was
+installed:
+
+```text
+python -c "import sys; print(sys.executable)"
+python -c "import napari_vipp; print(napari_vipp.__file__)"
 ```
 
-This opens napari with the bundled VIPP synthetic microscopy samples as layers.
-Use it when you specifically want to inspect the raw sample data, not when you
-only need a runnable example workflow.
+If either command uses a different environment, close napari, activate the
+correct environment, and launch it again. See [report a problem](../troubleshooting/report-a-problem.md)
+if the plugin is installed but still not discovered.
 
-## Recommended Workspace
+## Maintainer launch scripts
 
-For serious workflow building, detach the VIPP widget from napari and maximize
-it. The graph is the main work surface, and a full-size VIPP window makes
-connections, thumbnails, tunnels, notes, and inspector controls much easier to
-read.
-
-Practical layout tips:
-
-- hide the node library after the graph is built to give the canvas more room;
-- keep the inspector visible while tuning parameters;
-- zoom the graph out when documenting or reviewing the whole workflow;
-- show the napari viewer only when the image layer itself is part of the point.
-
-## Optional: Launch A Review Workflow From The Command Line
-
-Example:
-
-```powershell
-python scripts\launch_vipp_intensity_workflow.py merged
-```
-
-Common launcher names include:
-
-- `intensity`
-- `merged`
-- `morphology`
-- `mesh`
-- `object-coloc`
-- `deconvolution`
-- `deconvolution-3d`
-
-Inside VIPP, prefer `Open example...` for bundled templates. Use
-`Load workflow...` for custom or external workflow JSON files.
+Repository scripts such as `scripts/launch_vipp_sample.py` and
+`scripts/launch_vipp_intensity_workflow.py --list` are for development,
+screenshots, and repeatable review. End users should normally use
+**Open example…** or **Load workflow…** inside VIPP.

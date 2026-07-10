@@ -1,48 +1,79 @@
-# napari-vipp Documentation
+---
+hide:
+  - navigation
+  - toc
+---
 
-`napari-vipp` is a napari-native visual image processing pipeline system for
-bioimage analysis. It lets users build graph workflows, inspect intermediate
-outputs, tune parameters, preserve image metadata, produce measurement tables,
-and export or batch-run workflows.
+<div class="vipp-hero" markdown>
+<div markdown>
 
-!!! warning "Alpha software"
-    VIPP is active alpha software. Workflows, node parameters, and file
-    compatibility may change between releases. Validate outputs before using
-    them for scientific interpretation or publication.
+<div class="vipp-kicker">Visual image processing pipelines for napari</div>
 
-## Use This Site When You Need To
+# See every decision in your analysis
 
-- get VIPP installed and launched;
-- understand images, masks, labels, tables, axes, and metadata;
-- choose the right node family for a task;
-- follow a workflow pattern;
-- find an example workflow or synthetic sample;
-- troubleshoot performance or memory behavior;
-- understand what is validated and what is still experimental.
+<p class="vipp-lede">Build bioimage-analysis workflows as connected graphs, inspect intermediate images and tables, then save the workflow for review, adaptation, or batch processing.</p>
 
-## Fast Paths
+<div class="vipp-actions" markdown>
+[Start with a guided example](getting-started/index.md){ .md-button .md-button--primary }
+[Find a workflow](workflows/index.md){ .md-button }
+</div>
 
-| Need | Start here |
+</div>
+<div class="vipp-hero__visual" markdown>
+
+![Napari with a docked VIPP label-cleanup workflow in the dark interface](assets/screenshots/workflows/first-workflow-overview.png)
+
+</div>
+</div>
+
+<p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
+
+!!! warning "Alpha release: validate before interpreting"
+    The current public baseline is **napari-vipp 0.11.0a1**. Interfaces,
+    workflow files, and parameter defaults may change between alpha releases.
+    Treat visual inspection, reference data, and domain review as part of the
+    analysis—not as optional cleanup after it.
+
+## Choose your path
+
+<div class="vipp-card-grid">
+<a class="vipp-card" href="getting-started/"><strong>New to VIPP</strong><span>Install the plugin, tour a finished graph, and build a small segmentation workflow.</span></a>
+<a class="vipp-card" href="workflows/"><strong>I have an analysis task</strong><span>Follow recipes for segmentation, measurements, networks, colocalization, restoration, or batch runs.</span></a>
+<a class="vipp-card" href="scientific-practice/"><strong>I need defensible results</strong><span>Choose dimensionality, tune on representative data, validate, and record what must be reported.</span></a>
+<a class="vipp-card" href="reference/"><strong>I know what I need</strong><span>Search all 108 nodes, bundled samples, example workflows, settings, formats, and compatibility notes.</span></a>
+</div>
+
+## What VIPP records—and what it does not
+
+VIPP workflow JSON records the graph, node parameters, connections, layout,
+and selected workflow state. Where available, image state carries axes, scale,
+units, channel information, and operation history through compatible nodes.
+This supports inspection and repeat execution, but it does **not** by itself
+guarantee scientific reproducibility: input identity, software environment,
+batch bindings, reference annotations, exclusions, and validation evidence must
+also be retained.
+
+```mermaid
+flowchart LR
+  A["Load representative data"] --> B["Build and tune graph"]
+  B --> C["Inspect intermediate outputs"]
+  C --> D["Validate against references"]
+  D --> E["Freeze workflow and environment"]
+  E --> F["Run batch and audit outputs"]
+```
+
+## Quick links
+
+| Goal | Go to |
 | --- | --- |
-| First-time user | [Installation](getting-started/installation.md) |
-| Build a simple graph | [First Workflow](getting-started/first-workflow.md) |
-| Understand ports and data types | [Data Types](concepts/data-types.md) |
-| Segment objects | [Segmentation And Label Cleanup](workflows/segmentation-label-cleanup.md) |
-| Measure objects and export tables | [Object Measurements And Tables](workflows/object-measurements-tables.md) |
-| Analyze skeleton networks | [Skeleton And Network Analysis](workflows/skeleton-network-analysis.md) |
-| Run colocalization analysis | [Colocalization And Association](workflows/colocalization-association.md) |
-| Check nodes by family | [Node Index](reference/node-index.md) |
-| Find sample data | [Sample Data](reference/sample-data.md) |
-| Find workflow JSON files | [Example Workflows](reference/example-workflows.md) |
+| Open a working example in five minutes | [Tour a finished workflow](getting-started/example-tour.md) |
+| Switch from synthetic data to your images | [Use your own images](getting-started/own-data.md) |
+| Understand images, masks, labels, and tables | [Data types](concepts/data-types.md) |
+| Diagnose a workflow that suddenly gives different counts | [Common problems](troubleshooting/common-pitfalls.md) |
+| Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
+| Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
-## Documentation Philosophy
-
-The documentation has two jobs:
-
-1. Help expert users get unstuck quickly.
-2. Preserve enough scientific context that workflows remain inspectable and
-   reportable.
-
-The future training book can teach bioimage analysis more slowly. This site is
-the quick, searchable system manual.
-
+The application is developed in the
+[`napari-vipp` repository](https://github.com/rensutheart/napari-vipp). This
+site is the quick, searchable manual; slower teaching material can live in a
+separate course or book.

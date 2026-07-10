@@ -1,55 +1,51 @@
-# Validation Status
+# Validation status
 
-This page separates evidence-backed claims from planned or future claims.
+This page summarizes the evidence shipped with the 0.11.0a1 application source.
+It is a claim boundary, not a certificate that every node is validated for
+every assay.
 
-## Evidence-Backed Now
+## Evidence available now
 
-Current evidence includes:
+- automated tests cover graph behavior, persistence, previews, export,
+  operations, UI behavior, I/O routes, and bundled examples;
+- 13 deterministic synthetic samples and 12 checked-in workflows support
+  regression checks and inspection;
+- an analytical phantom report exercises calibrated object/mesh morphology;
+- method notes and focused tests cover colocalization calculations;
+- tables, CSV/TSV writing, workflow JSON, and Python generation have automated
+  behavior checks.
 
-- automated tests for graph behavior, workflow persistence, preview, export,
-  operations, widget behavior, I/O, and example workflows;
-- deterministic synthetic samples;
-- checked-in workflow JSON files;
-- analytical phantom validation for calibrated object and mesh morphology;
-- method documentation and tests for colocalization calculations;
-- table outputs and CSV/TSV saving;
-- workflow JSON and Python export.
+The release's generated calibrated-morphology report records **28/28 checks
+passed**. Its own scope excludes broad numerical equivalence, biological
+interpretation, and all data conditions. The application test suite checks that
+the report remains synchronized with the validation script.
 
-The calibrated morphology validation report currently records:
+## Do not generalize this evidence into
 
-```text
-28 checks
-28 passed
-Status: PASS
-```
+- usability superiority over other tools;
+- broad equivalence to Fiji, CellProfiler, scikit-image, or another package;
+- scalability to whole-slide or high-content datasets;
+- complete OME/acquisition metadata fidelity;
+- biological validity of a segmentation, restoration, or measurement workflow;
+- user-study evidence beyond explicitly described pilot observations.
 
-## Strong Claims To Avoid Until Further Validation
+## High-priority evidence gaps
 
-Do not claim yet:
+Passing deterministic tests is valuable internal evidence, but it is not the
+same as an external comparison or assay validation. The distinction matters:
 
-- broad usability superiority over other tools;
-- numerical equivalence to Fiji, CellProfiler, scikit-image, or other packages
-  across a broad benchmark corpus;
-- scalability to very large whole-slide or HCS data;
-- complete OME metadata fidelity;
-- biological validity of a segmentation or measurement workflow;
-- user-study evidence beyond pilot observations.
+| Area | Current in-repository evidence | Next evidence needed |
+| --- | --- | --- |
+| Watershed/object separation | Touching-disk split tests, exported-workflow execution, and 3D-default behavior tests | Broader 3D phantoms, split/merge metrics, external comparison, representative real images |
+| Colocalization/association | Deterministic metric, overlap, distance, and association tests plus synthetic examples | External numerical comparisons and assay-specific positive/negative controls |
+| Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
+| I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
+| PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
+| Large data/batch | Functional batch, cache, path, and memory-guard tests | Memory/time benchmarks, interruption recovery, saved configuration, per-item provenance |
+| Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
-## Planned Validation Packs
+## For your workflow
 
-High-value future validation reports:
-
-- watershed and touching-object separation;
-- colocalization deterministic overlap scenarios;
-- object association, nearest distance, and event localization;
-- skeleton/network topology and branch-length checks;
-- OME-TIFF and OME-Zarr round trips;
-- real PSF/deconvolution examples;
-- real microscope file import metadata checks.
-
-## Publication Use
-
-Use this page to decide what can be stated in a paper, documentation page, or
-release note. If a claim is not evidence-backed, label it as planned,
-experimental, or future work.
-
+Use [validate a workflow](../scientific-practice/validation.md) to choose
+assay-specific evidence. If a public claim depends on a gap above, label it as a
+limitation or produce the required evidence before making the claim.

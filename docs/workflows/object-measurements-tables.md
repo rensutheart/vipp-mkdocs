@@ -43,17 +43,37 @@ convex hull metrics, or 3D solidity matter.
 
 This node is manual/cached because mesh calculations can be expensive.
 
+![A napari 3D rendering of the synthetic anisotropic label objects used for mesh-morphology review](../assets/screenshots/workflows/mesh-3d-result.png)
+
+*Inspect the 3D label geometry as well as the resulting table. The bundled
+phantom includes varied shapes and anisotropic calibration for regression and
+demonstration—not biological validation.*
+
 ## Table Assembly
 
-```text
-Measure Objects
-Measure Objects + Intensity
-Measure 3D Mesh Morphology
-  -> Merge Tables
-  -> Select Table Columns
-  -> Add Metadata Columns
-  -> Summarize Measurements or Batch Output
+```mermaid
+flowchart LR
+  L["Labels"] --> M["Measure Objects"]
+  L --> I["Measure Objects + Intensity"]
+  X["Matching intensity image"] --> I
+  L --> D["Measure 3D Mesh Morphology"]
+  M --> J["Merge Tables"]
+  I --> J
+  D --> J
+  J --> S["Select Table Columns"]
+  S --> A["Add Metadata Columns"]
+  A --> U["Summarize or Batch Output"]
 ```
+
+Only merge branches that share compatible identity keys and meaning. A table
+with the expected row count can still be wrong if time, label, or source
+identity columns were dropped or misaligned.
+
+![An undocked VIPP mesh-morphology workflow with calculated measurement branches and a selected ten-column table](../assets/screenshots/workflows/mesh-measurement-table.png)
+
+*The bundled mesh example combines calibrated object and mesh measurements,
+then selects a compact table whose rows, columns, units, and values can be
+reviewed before export.*
 
 ## Reference Workflows
 
@@ -73,4 +93,3 @@ Measure 3D Mesh Morphology
 - Are leading axes such as time represented by identity columns?
 - Do table units match the reported measurement?
 - Have metadata columns such as treatment, replicate, or batch been added?
-

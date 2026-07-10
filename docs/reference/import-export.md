@@ -1,44 +1,43 @@
-# Import And Export
+# Supported input and output
 
-VIPP uses one headless I/O layer for interactive sources, quick saves, `Save
-Image`, batch outputs, and exported Python scripts.
+VIPP routes interactive sources, selected-output saves, `Save Image`, batch
+outputs, and generated scripts through a shared headless I/O layer. Format
+support does not imply lossless preservation of every source metadata field.
 
-## Import Sources
+## Input routes
 
-| Source | Current behavior |
+| Source | Behavior in 0.11.0a1 |
 | --- | --- |
-| Napari layer | Uses an existing viewer layer as graph input. |
-| Bundled sample | Uses VIPP synthetic microscopy samples. |
-| OME-TIFF | Reads image series, semantic axes, physical scale, channel names, and selected acquisition metadata. |
-| ImageJ TIFF | Reads hyperstack axes, z spacing, frame interval, unit, and XY resolution where present. |
-| TIFF | Reads independent TIFF series and basic axes. |
-| OME-Zarr 0.4/0.5 | Discovers image and label groups, reads multiscale level 0 for analysis, and marks label groups as labels. |
-| NPY/NPZ | Reads one NPY array or selected NPZ member. |
-| PNG/JPEG/BMP/GIF/WebP/TGA/PNM | Reads ordinary raster images. Animated rasters use a leading time axis. |
+| Napari layer | Uses an existing viewer layer and the layer metadata exposed to VIPP. |
+| Bundled sample | Loads one of 13 deterministic VIPP samples. |
+| OME-TIFF | Reads image series and supported semantic axes, scale, channel, and selected acquisition fields from OME metadata. |
+| ImageJ TIFF | Reads supported hyperstack axes, XY resolution, z spacing, frame interval, and unit fields where present. |
+| Conventional TIFF | Reads TIFF series and infers basic axes where explicit semantic metadata is absent. |
+| Local OME-Zarr 0.4/0.5 | Discovers supported image/label groups and reads analysis level 0; label groups are marked as labels. |
+| NPY / NPZ | Reads one NPY array or a selected NPZ member; semantic microscopy metadata is not inherent. |
+| PNG, JPEG, BMP, GIF, WebP, TGA, PNM | Reads ordinary raster images; animated rasters use a leading time axis. |
+| Optional microscope readers | Uses an installed format-specific/BioIO route and normalizes fields the reader exposes. Coverage varies by format. |
 
-## Export Choices
+Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
+and chosen series. Missing fields can be inferred; an inference is not the same
+as acquisition metadata.
 
-| Format | Use when |
-| --- | --- |
-| OME-Zarr | Large or chunked image data, or image plus label analysis packages. |
-| OME-TIFF | Portable processed image with OME-XML metadata. |
-| ImageJ TIFF | Direct Fiji/ImageJ hyperstack compatibility matters most. |
-| TIFF | Broad TIFF compatibility or preservation of 32-bit label IDs. |
-| NPY | Exact array exchange without scientific image metadata. |
-| PNG/JPEG/BMP/GIF/WebP/TGA/PNM | 2D display image exports. |
+## Export choices
 
-## Important Warnings
+| Format | Use when | Check carefully |
+| --- | --- | --- |
+| OME-Zarr | Chunked multidimensional image data or an image with associated label outputs | Current export/pyramid scope and downstream reader compatibility |
+| OME-TIFF | A portable processed image with supported OME metadata | dtype, axes, scale, and series after reopening |
+| ImageJ TIFF | Fiji/ImageJ hyperstack interoperability is required | It cannot safely represent 32-bit integer label IDs |
+| TIFF | Broad TIFF compatibility or 32-bit labels are needed | Semantic metadata may be limited compared with OME routes |
+| NPY | Exact array/dtype exchange in Python | Axes, scale, units, and channel semantics must be stored separately |
+| Ordinary raster | A 2D display image is required | Display-oriented only; not a quantitative stack/archive format |
+| CSV / TSV | A table will be analyzed elsewhere | Units, identity columns, missing values, and delimiter handling |
 
-- Use OME-TIFF, ImageJ TIFF, TIFF, OME-Zarr, or NPY for stacks.
-- Use conventional TIFF, OME-TIFF, or OME-Zarr for 32-bit labels.
-- ImageJ TIFF cannot safely represent 32-bit integer label IDs.
-- Ordinary raster exports are display-oriented and only available for 2D
-  intensity or 2D RGB/RGBA outputs.
+## OME analysis dataset
 
-## OME Analysis Dataset Export
-
-`Export OME dataset...` writes one reference image plus graph label outputs into
-one `.ome.zarr` store:
+**Export OME dataset…** writes one reference image and graph label outputs into
+one local `.ome.zarr` store:
 
 ```text
 /
@@ -48,12 +47,20 @@ one `.ome.zarr` store:
       s0
 ```
 
-Use this when label outputs should remain associated with a reference image.
+Use it when label outputs should remain associated with a reference image. For
+a standalone label image, use TIFF/OME-TIFF or provide an image-linked OME-Zarr
+dataset; the command is not a general project archiver.
 
-## Current Limitations
+## Current limitations
 
-- OME-Zarr pyramids and preview-level selection are not exposed.
-- Plate/well/field browsing is still planned.
-- Remote URI support is still planned.
-- Lazy OME-Zarr reads may still materialize when eager operations run.
+- Analysis reads use OME-Zarr level 0; preview-level/pyramid selection is not
+  exposed.
+- Plate/well/field browsing and remote URI input are planned, not current.
+- Lazy OME-Zarr arrays may materialize when an eager operation executes.
+- Only supported metadata fields propagate through compatible operations and
+  writers; complete source metadata fidelity is not claimed.
+- Reopen representative outputs in the intended downstream software before a
+  large run.
 
+For what workflow and Python export preserve, see the
+[workflow and export contract](workflow-contract.md).

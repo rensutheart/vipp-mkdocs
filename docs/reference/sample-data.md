@@ -1,6 +1,7 @@
 # Sample Data
 
-VIPP ships synthetic microscopy-style samples that are available inside
+VIPP 0.11.0a1 ships **13** deterministic microscopy-style samples that are
+available inside
 `Image Source`:
 
 ```text
@@ -43,12 +44,6 @@ Documentation-only samples can be more tutorial-specific. A documentation
 sample can become a core sample when it supports a stable workflow and has test
 coverage.
 
-## Suggested Future Samples
-
-Useful documentation samples to add:
-
-- simple nuclei segmentation sample with known labels;
-- touching-object watershed sample with reference markers;
-- puncta-in-cell sample for event localization;
-- anisotropic z-stack sample showing why pixel size matters;
-- batch folder with 3 to 5 matched inputs for batch documentation screenshots.
+Synthetic truth is valuable for demonstrations and regression checks, but it
+does not establish performance on a biological assay. Validate a transferred
+workflow on representative real data and independent references.

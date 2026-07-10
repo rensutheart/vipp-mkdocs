@@ -17,7 +17,7 @@ as thumbnails, napari layers, histograms, labels, or tables.
 | Graph notes | Record reasoning next to workflow steps. |
 | Graph search | Find nodes, operation IDs, tunnel names, and batch output tags. |
 | Workflow JSON | Save the graph, node parameters, connections, canvas positions, tunnels, and selected UI state. |
-| Python export | Generate a runnable headless script from the graph. |
+| Python export | Generate a headless script for supported graph operations and I/O. |
 
 ## Good Graph Habits
 

@@ -1,12 +1,16 @@
 # Reference
 
-The reference pages are for quick lookup.
+Use reference pages for exact release facts; use tutorials and how-to guides for
+task sequences.
 
 | Page | Use |
 | --- | --- |
-| [Node Index](node-index.md) | Find nodes by family and output type. |
-| [Sample Data](sample-data.md) | Choose bundled synthetic data. |
-| [Example Workflows](example-workflows.md) | Choose a bundled workflow template to open or screenshot. |
-| [Import And Export](import-export.md) | Choose file formats and export modes. |
-| [Cache And Memory](cache-memory.md) | Understand responsiveness and RAM behavior. |
-| [Validation Status](validation-status.md) | See what claims are evidence-backed. |
+| [All 108 nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
+| [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |
+| [Example workflows](example-workflows.md) | Choose one of 12 runnable graph templates. |
+| [Bundled sample data](sample-data.md) | Choose one of 13 deterministic samples. |
+| [Workflow and export contract](workflow-contract.md) | Understand what JSON, generated Python, and batch artifacts contain. |
+| [Supported input and output](import-export.md) | Select a format and review metadata/dtype limitations. |
+| [Cache and memory](cache-memory.md) | Understand responsiveness and RAM behavior. |
+| [Validation status](validation-status.md) | Separate current evidence from claim gaps. |
+| [Versions and compatibility](versioning.md) | Match stable/nightly manuals and alpha software. |

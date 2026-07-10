@@ -1,6 +1,6 @@
 # Example Workflows
 
-Example workflows are checked into the repository under:
+The release contains **12** example workflows under:
 
 ```text
 examples/
@@ -44,15 +44,26 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Known names:
+Use `--list` to print the release's exact IDs. In 0.11.0a1 they are:
 
-- `intensity`
-- `merged`
-- `morphology`
-- `mesh`
-- `object-coloc`
-- `deconvolution`
-- `deconvolution-3d`
+| ID | Example title |
+| --- | --- |
+| `label-cleanup` | Red-Channel Label Cleanup |
+| `object-intensity` | Object Intensity Measurements |
+| `merged-measurements` | Merged Measurement Table |
+| `summary-table` | Grouped Measurement Summary |
+| `derived-morphology` | Derived 2D Object Morphology |
+| `mesh-morphology` | 3D Mesh Morphology |
+| `skeleton-qc` | Skeleton QC |
+| `advanced-skeleton` | Advanced Skeleton Network |
+| `racc-colocalization` | RACC Colocalization |
+| `object-colocalization` | Object Colocalization Association |
+| `deconvolution-2d` | 2D Richardson-Lucy / TV Deconvolution |
+| `deconvolution-3d` | 3D Richardson-Lucy / TV Deconvolution |
+
+Legacy launcher aliases such as `intensity`, `merged`, and `mesh` remain for
+maintainers, but documentation should use the canonical IDs above. An unknown
+ID is an error; it does not silently open another example.
 
 ## Adding A Core Example Workflow
 

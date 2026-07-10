@@ -1,27 +1,36 @@
-# Developer Overview
+# Contributor guide
 
-This section is for maintainers, contributors, and documentation authors.
+Contributions that improve correctness, scientific clarity, accessibility,
+tests, examples, or documentation are welcome. The application and manual are
+maintained in separate repositories:
 
-For code architecture, the canonical source is the repository docs:
+| Repository | Scope |
+| --- | --- |
+| [`napari-vipp`](https://github.com/rensutheart/napari-vipp) | Application, operation registry, examples, tests, release metadata |
+| [`vipp-mkdocs`](https://github.com/rensutheart/vipp-mkdocs) | Public, versioned user manual |
 
-- `docs/architecture.md`
-- `docs/developer-notes.md`
-- `docs/planning.md`
-- `docs/node-roadmap.md`
-- `docs/research-and-publication.md`
+Publication plans, private datasets, ethics material, unpublished results, and
+internal screenshot roadmaps do not belong in either public manual page.
 
-This MkDocs site is the user-facing searchable manual. It should avoid
-duplicating deep implementation notes unless users need the information to run,
-inspect, report, or troubleshoot workflows.
+## Pick a contribution path
 
-## Documentation Roles
+- [Set up a development environment](development-setup.md)
+- [Add or change an operation](operations.md)
+- [Test and document changes](testing-docs.md)
+- [Publish versioned documentation](docs-releases.md)
 
-| Document type | Belongs here? | Purpose |
-| --- | --- | --- |
-| Task guide | Yes | Help users perform a workflow. |
-| Node reference | Yes | Help users choose and configure nodes. |
-| Troubleshooting | Yes | Help users recover from common problems. |
-| API docs | Later | Useful when the plugin API stabilizes. |
-| Internal design notes | Mostly no | Keep in repository developer docs. |
-| Publication planning | No | Keep in publication scratch space. |
+## Principles
 
+1. **Correctness before breadth.** A smaller validated node is preferable to a
+   broad claim with unclear behavior.
+2. **Metadata claims are field-specific.** State exactly which axes, scale,
+   units, channels, or history are transformed or retained.
+3. **Graph examples must be executable.** Core JSON examples use bundled
+   deterministic samples and have focused assertions.
+4. **UI labels and docs move together.** Search the manual for changed labels,
+   defaults, node titles, formats, and version references.
+5. **Scientific limitations are user-facing behavior.** Put material caveats
+   beside the task, not only in an internal roadmap.
+
+Before opening a pull request, describe the user-visible outcome, tests run,
+scientific assumptions, compatibility impact, and documentation changes.

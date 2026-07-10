@@ -1,12 +1,11 @@
-# napari-vipp MkDocs Material Draft
+# VIPP user manual
 
-This is a first-pass searchable documentation scaffold for `napari-vipp`.
+This repository contains the public, searchable manual for
+[`napari-vipp`](https://github.com/rensutheart/napari-vipp). The manual is
+separate from the application repository so documentation releases and the
+software release cycle can be managed independently.
 
-It is intentionally separate from the active code repository while the
-documentation structure is being planned. Once stable, it can be moved into the
-main repository or published as a separate documentation site.
-
-## Preview Locally
+## Preview locally
 
 ```powershell
 python -m venv .venv
@@ -15,12 +14,21 @@ python -m pip install -r requirements.txt
 mkdocs serve
 ```
 
-Then open the local URL printed by MkDocs.
+On macOS or Linux, activate with `source .venv/bin/activate`. Open the local URL
+printed by MkDocs. A production-equivalent check is:
 
-## Current Purpose
+```text
+mkdocs build --strict
+```
 
-- Make VIPP searchable for expert users who want to get going quickly.
-- Separate task-oriented docs from long-form training material.
-- Identify where more documentation-only examples are needed.
-- Identify which examples and samples should graduate into the core plugin.
+## Versions
 
+The site uses [mike](https://github.com/jimporter/mike):
+
+- **stable** points to the manual for the current supported release;
+- **nightly** is rebuilt from the documentation `main` branch;
+- release-numbered snapshots remain available for older workflows.
+
+See `docs/developer/docs-releases.md` for the deployment procedure. Publication
+plans, manuscripts, private datasets, and internal screenshot roadmaps do not
+belong in this repository.

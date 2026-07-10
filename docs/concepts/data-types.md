@@ -1,6 +1,8 @@
 # Data Types
 
-VIPP uses typed graph data so the workflow can preserve scientific meaning.
+VIPP uses typed graph data to communicate and check intended scientific
+meaning. Port types prevent many category errors; they cannot determine whether
+an image, mask, or table is appropriate for your biological question.
 
 | Type | Meaning | Typical napari display |
 | --- | --- | --- |
@@ -50,6 +52,6 @@ Common table nodes include:
 
 ## Manual Calculation Nodes
 
-Expensive table-producing nodes are manual/cached. Select the node and click
-`Calculate` or use toolbar `Calculate all`.
-
+Expensive measurement, graph-analysis, RACC, and deconvolution nodes can be
+manual/cached. Select the node and click `Calculate` or use toolbar
+`Calculate all`.

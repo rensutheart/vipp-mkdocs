@@ -1,14 +1,17 @@
 # Troubleshooting
 
-Use these pages when VIPP is slow, confusing, or producing outputs that do not
-match expectation.
+Start with the earliest stage that differs from expectation. Changing the final
+measurement rarely fixes a wrong channel, axis interpretation, threshold mask,
+or label image.
 
-Start with:
+| Symptom | Start here |
+| --- | --- |
+| Wrong objects, counts, channels, units, or stale tables | [Common problems](common-pitfalls.md) |
+| Slow interaction or high RAM use | [Performance and memory](performance.md) |
+| Installation/plugin discovery problem | [Install VIPP](../getting-started/installation.md) |
+| Reproducible bug or missing behavior | [Report a problem](report-a-problem.md) |
 
-- [Performance](performance.md)
-- [Common Pitfalls](common-pitfalls.md)
-
-When a result looks wrong, inspect upstream nodes before changing the final
-measurement node. Most failures originate in channel choice, calibration,
-thresholding, spatial processing, or label cleanup.
-
+Before debugging your own file, open the matching bundled example. If the
+example works, compare source type, axes, scale, dtype, channel mapping, shape,
+and release version. If the example fails, capture the exact error and version
+without changing multiple settings at once.

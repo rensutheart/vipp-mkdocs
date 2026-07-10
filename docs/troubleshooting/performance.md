@@ -7,7 +7,7 @@ Try these in order:
 1. Turn `Run all in BG` off and compare latency.
 2. Disable thumbnails globally.
 3. Switch preview mode from `MIP` to `Slice`.
-4. Set `Follow napari dims` off when you need a fixed reference view.
+4. Turn `Link napari/VIPP sliders` off when you need a fixed reference view.
 5. Reduce graph fan-out while tuning upstream nodes.
 6. Use `Smart interactive cache` or `Low-memory mode`.
 7. Mark expensive intermediates with `Keep output cached`.
@@ -42,3 +42,6 @@ Expect heavier computation from:
 Batch runs use low-memory retention internally. Add explicit `Batch Output`
 nodes so VIPP keeps and writes only the outputs that matter.
 
+Large OME-Zarr or lazy inputs can still materialize when an eager operation
+runs. Cache mode controls retained graph outputs; it cannot remove every
+temporary allocation made inside NumPy, SciPy, or scikit-image.

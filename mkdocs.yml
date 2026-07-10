@@ -1,93 +1,170 @@
-site_name: napari-vipp Documentation
-site_description: Searchable user and system documentation for napari-vipp.
+site_name: VIPP User Manual
+site_description: Build, inspect, validate, and share bioimage-analysis workflows in napari.
 site_author: Rensu P. Theart
-repo_url: https://github.com/rensutheart/napari-vipp
-repo_name: rensutheart/napari-vipp
+site_url: https://rensutheart.github.io/vipp-mkdocs/
+repo_url: https://github.com/rensutheart/vipp-mkdocs
+repo_name: rensutheart/vipp-mkdocs
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; Rensu P. Theart.
 
 theme:
   name: material
   language: en
+  custom_dir: docs/overrides
+  icon:
+    repo: fontawesome/brands/github
   features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.expand
-    - navigation.indexes
-    - navigation.top
-    - search.suggest
-    - search.highlight
-    - search.share
+    - announce.dismiss
+    - content.action.edit
+    - content.code.annotate
     - content.code.copy
     - content.tabs.link
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: teal
       accent: deep orange
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-    - scheme: slate
-      primary: teal
-      accent: deep orange
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+extra_css:
+  - assets/stylesheets/extra.css
 
 plugins:
-  - search
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - redirects:
+      redirect_maps:
+        getting-started/first-workflow.md: getting-started/example-tour.md
+        examples/index.md: reference/example-workflows.md
+  - git-revision-date-localized:
+      enable_creation_date: false
+      fallback_to_build_date: true
+      type: date
 
 markdown_extensions:
+  - abbr
   - admonition
   - attr_list
   - def_list
+  - footnotes
   - md_in_html
   - tables
   - toc:
       permalink: true
+      title: On this page
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
 
+extra:
+  version:
+    provider: mike
+    default: stable
+    alias: true
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rensutheart/napari-vipp
+      name: napari-vipp source code
+  generator: false
+  status:
+    alpha: Alpha
+
 nav:
   - Home: index.md
-  - Getting Started:
-      - Overview: getting-started/index.md
-      - Installation: getting-started/installation.md
-      - Launching VIPP: getting-started/launching.md
-      - First Workflow: getting-started/first-workflow.md
+  - Start here:
+      - Start here: getting-started/index.md
+      - Install VIPP: getting-started/installation.md
+      - Launch VIPP: getting-started/launching.md
+      - Tour a finished workflow: getting-started/example-tour.md
+      - Build your first workflow: getting-started/build-workflow.md
+      - Use your own images: getting-started/own-data.md
+  - Tutorials:
+      - Choose a tutorial: workflows/index.md
+      - Segment and clean labels: workflows/segmentation-label-cleanup.md
+      - Measure objects and tables: workflows/object-measurements-tables.md
+      - Analyze skeleton networks: workflows/skeleton-network-analysis.md
+      - Measure colocalization: workflows/colocalization-association.md
+      - Restore with a PSF: workflows/psf-deconvolution.md
+      - Process a folder: workflows/batch-processing.md
+  - How-to guides:
+      - How-to guides: how-to/index.md
+      - Edit and organize a graph: how-to/edit-graph.md
+      - Inspect and compare outputs: how-to/inspect-outputs.md
+      - Save, share, and export: how-to/save-share-export.md
+      - Work with files and stores: reference/import-export.md
+      - Manage memory and speed: reference/cache-memory.md
   - Concepts:
-      - Overview: concepts/index.md
-      - Graph Workflows: concepts/graph-workflows.md
-      - Data Types: concepts/data-types.md
-      - Axes And Metadata: concepts/axes-and-metadata.md
-      - Inspection Model: concepts/inspection-model.md
-      - Examples And Samples: concepts/examples-and-samples.md
-  - Workflows:
-      - Overview: workflows/index.md
-      - Segmentation And Label Cleanup: workflows/segmentation-label-cleanup.md
-      - Object Measurements And Tables: workflows/object-measurements-tables.md
-      - Skeleton And Network Analysis: workflows/skeleton-network-analysis.md
-      - Colocalization And Association: workflows/colocalization-association.md
-      - PSF And Deconvolution: workflows/psf-deconvolution.md
-      - Batch Processing: workflows/batch-processing.md
-  - Examples:
-      - Overview: examples/index.md
-      - Workflow Screenshots: examples/workflow-screenshots.md
+      - Concepts: concepts/index.md
+      - Graph workflows: concepts/graph-workflows.md
+      - Images, masks, labels, tables: concepts/data-types.md
+      - Axes, scale, and metadata: concepts/axes-and-metadata.md
+      - Inspection and calculation: concepts/inspection-model.md
+      - Samples and examples: concepts/examples-and-samples.md
+  - Scientific practice:
+      - Scientific practice: scientific-practice/index.md
+      - Choose 2D or 3D: scientific-practice/choosing-dimensionality.md
+      - Tune without fooling yourself: scientific-practice/parameter-tuning.md
+      - Validate a workflow: scientific-practice/validation.md
+      - Report a VIPP analysis: scientific-practice/reporting.md
   - Reference:
-      - Overview: reference/index.md
-      - Node Index: reference/node-index.md
-      - Sample Data: reference/sample-data.md
-      - Example Workflows: reference/example-workflows.md
-      - Import And Export: reference/import-export.md
-      - Cache And Memory: reference/cache-memory.md
-      - Validation Status: reference/validation-status.md
+      - Reference: reference/index.md
+      - All 108 nodes: reference/node-index.md
+      - Toolbar and settings: reference/interface.md
+      - Example workflows: reference/example-workflows.md
+      - Bundled sample data: reference/sample-data.md
+      - Workflow and export contract: reference/workflow-contract.md
+      - Supported input and output: reference/import-export.md
+      - Validation status: reference/validation-status.md
+      - Versions and compatibility: reference/versioning.md
   - Troubleshooting:
-      - Overview: troubleshooting/index.md
-      - Performance: troubleshooting/performance.md
-      - Common Pitfalls: troubleshooting/common-pitfalls.md
-  - Developer:
-      - Overview: developer/index.md
-      - Documentation Roadmap: developer/documentation-roadmap.md
-      - Screenshot Plan: developer/screenshot-plan.md
+      - Troubleshooting: troubleshooting/index.md
+      - Common problems: troubleshooting/common-pitfalls.md
+      - Performance and memory: troubleshooting/performance.md
+      - Report a problem: troubleshooting/report-a-problem.md
+  - Contributors:
+      - Contributor guide: developer/index.md
+      - Set up a development environment: developer/development-setup.md
+      - Add or change an operation: developer/operations.md
+      - Test and document changes: developer/testing-docs.md
+      - Documentation releases: developer/docs-releases.md

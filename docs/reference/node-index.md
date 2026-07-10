@@ -1,10 +1,28 @@
 # Node Index
 
-This page lists the implemented node families from the current `NODE_LIBRARY`.
+This page lists all **108 operation specifications** registered by
+`NODE_LIBRARY` in napari-vipp 0.11.0a1.
 
-!!! note
-    The full parameter-level reference still needs to be generated. This first
-    index is organized for search and workflow discovery.
+!!! info "Scope of this reference"
+    Titles and families were checked against the release registry. Input and
+    output summaries describe the ordinary/default ports; `Split Channels`,
+    `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
+    from runtime data. Parameter widgets, defaults, and bounds in the installed
+    release remain the source of truth until a generated parameter reference is
+    published.
+
+| Family | Nodes |
+| --- | ---: |
+| Image Data | 24 |
+| Filtering | 17 |
+| Segmentation | 17 |
+| Morphology | 13 |
+| Measurements | 12 |
+| Colocalization & Spatial Analysis | 10 |
+| Label Operations | 7 |
+| Intensity & Contrast | 5 |
+| Projection | 3 |
+| **Total** | **108** |
 
 ## Image Data
 
@@ -34,7 +52,7 @@ This page lists the implemented node families from the current `NODE_LIBRARY`.
 | `Extract Channel` | array | image | Select one channel from a multichannel image. |
 | `Combine Channels` | array inputs | image | Stack inputs into a multichannel image. |
 | `Split Channels` | array | dynamic outputs | Emit one output per channel. |
-| `Composite -> RGB` | array | image | Render multichannel data as RGB. |
+| `Composite → RGB` | array | image | Render multichannel data as RGB. |
 | `Assign Channel Colors` | array | same as input | Change carried channel display colors. |
 
 ### Math And Logic
@@ -99,9 +117,9 @@ This page lists the implemented node families from the current `NODE_LIBRARY`.
 
 ### Restoration And PSF
 
-!!! warning "Experimental / next-release area"
-    Include these pages only for releases where PSF/deconvolution nodes are
-    public.
+These nodes are public in 0.11.0a1. They have synthetic examples and automated
+coverage, but broad real-image restoration validation remains an evidence gap;
+see [validation status](validation-status.md).
 
 | Node | Input | Output | Execution | Use |
 | --- | --- | --- | --- | --- |
@@ -228,4 +246,3 @@ This page lists the implemented node families from the current `NODE_LIBRARY`.
 | `Label Overlap Association` | reference plus target labels | table | manual |
 | `Nearest Object Distance` | reference plus target labels | table | manual |
 | `Event Localization` | events plus regions | table | manual |
-

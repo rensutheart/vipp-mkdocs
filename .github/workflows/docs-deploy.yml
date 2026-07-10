@@ -1,0 +1,58 @@
+name: Deploy versioned documentation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Software version to publish, for example 0.11.0a1"
+        required: true
+        type: string
+      make_stable:
+        description: "Move the stable alias and site default to this version"
+        required: true
+        default: true
+        type: boolean
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install documentation dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Build with warnings as errors
+        run: mkdocs build --strict
+      - name: Configure deployment identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Deploy nightly manual
+        if: github.event_name == 'push'
+        run: mike deploy --push nightly
+      - name: Deploy release manual
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          VERSION: ${{ inputs.version }}
+          MAKE_STABLE: ${{ inputs.make_stable }}
+        run: |
+          if [ "$MAKE_STABLE" = "true" ]; then
+            mike deploy --push --update-aliases "$VERSION" stable
+            mike set-default --push stable
+          else
+            mike deploy --push "$VERSION"
+          fi

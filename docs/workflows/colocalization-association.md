@@ -5,27 +5,42 @@ workflows.
 
 ## Pixel Colocalization
 
-```text
-channel 1 + channel 2
-  -> Colocalization Metrics
-  -> Colocalized Voxels
-  -> RACC Index
+```mermaid
+flowchart LR
+  C1["Channel 1"] --> M["Colocalization Metrics"]
+  C2["Channel 2"] --> M
+  C1 --> V["Colocalized Voxels"]
+  C2 --> V
+  C1 --> R["RACC Index"]
+  C2 --> R
 ```
 
 Use `Colocalized Voxels` for visual threshold review. Use metric tables for
-quantitative reporting.
+quantitative reporting. These are parallel consumers of the two channels; none
+is the input to the next.
 
 ## ROI-Masked Colocalization
 
-```text
-channel 1 + channel 2 + ROI mask
-  -> Masked Colocalization Metrics
-  -> Masked Colocalized Voxels
-  -> Masked RACC Index
+```mermaid
+flowchart LR
+  C1["Channel 1"] --> M["Masked metrics"]
+  C2["Channel 2"] --> M
+  ROI["ROI mask"] --> M
+  C1 --> V["Masked colocalized voxels"]
+  C2 --> V
+  ROI --> V
+  C1 --> R["Masked RACC index"]
+  C2 --> R
+  ROI --> R
 ```
 
 Use masked variants when the analysis population should be restricted to cells,
 regions, tissue, or user-defined ROIs.
+
+![An undocked VIPP colocalization graph with parallel metrics and image branches and a scatter plot in the inspector](../assets/screenshots/workflows/colocalization-parallel-branches.png)
+
+*The same red/green channel outputs feed independent metric, voxel, and RACC
+branches. The selected calculated node exposes its threshold scatter for QC.*
 
 ## Object Colocalization
 
@@ -82,7 +97,6 @@ Report:
 
 ## Validation Note
 
-The current implementation has method documentation and automated tests. A
-future validation report should add deterministic overlap scenarios and
-external numerical comparisons before making broad claims.
-
+The 0.11.0a1 implementation has method documentation and automated tests. Broad
+cross-tool or biological validity claims still require deterministic benchmark
+packs, external numerical comparisons, and assay-specific validation.

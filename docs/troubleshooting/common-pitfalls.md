@@ -1,5 +1,18 @@
 # Common Pitfalls
 
+## Manual And Manual Version Differ
+
+Symptom:
+
+- a control, node, parameter, or workflow in the manual is absent or renamed;
+- a saved workflow opens differently.
+
+Fix:
+
+- compare the VIPP version badge with the manual's version selector;
+- use the numbered manual matching the plugin;
+- migrate a copy of an alpha workflow and compare it with known sample outputs.
+
 ## Wrong Channel
 
 Symptom:
@@ -97,3 +110,32 @@ Check:
 - inspect whether `Source` is set to `napari layer`, `sample`, or `file path`;
 - if `Source` is `napari layer`, choose the desired layer in the node inspector;
 - if `Source` is `sample` or `file path`, change the sample or file path there.
+
+## File Opens With Wrong Axes Or Scale
+
+Symptom:
+
+- z appears as time or channel;
+- physical measurements are implausible;
+- a reader opens the wrong series.
+
+Fix:
+
+- inspect source metadata and acquisition records;
+- select the intended series/store group;
+- use `Reorder Axes` or `Set Pixel Size / Units` only with known values;
+- reproduce the issue with a non-sensitive minimal file before reporting it.
+
+## Exported Workflow Is Not A Complete Archive
+
+Symptom:
+
+- another computer cannot find source files;
+- generated Python differs from interactive display/caching;
+- batch pairing cannot be reconstructed from JSON alone.
+
+Fix:
+
+- read the [workflow and export contract](../reference/workflow-contract.md);
+- share an environment and input manifest with the workflow;
+- preserve batch bindings, pairings, exclusions, and output checksums separately.
