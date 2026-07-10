@@ -5,7 +5,10 @@ site_url: https://rensutheart.github.io/vipp-mkdocs/
 repo_url: https://github.com/rensutheart/vipp-mkdocs
 repo_name: rensutheart/vipp-mkdocs
 edit_uri: edit/main/docs/
-copyright: Copyright &copy; Rensu P. Theart.
+copyright: >-
+  Copyright &copy; 2026 Rensu P. Theart. Documentation text and original
+  screenshots are licensed under
+  <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
 
 theme:
   name: material
@@ -157,6 +160,7 @@ nav:
       - Supported input and output: reference/import-export.md
       - Validation status: reference/validation-status.md
       - Versions and compatibility: reference/versioning.md
+      - Licence and reuse: reference/license.md
   - Troubleshooting:
       - Troubleshooting: troubleshooting/index.md
       - Common problems: troubleshooting/common-pitfalls.md

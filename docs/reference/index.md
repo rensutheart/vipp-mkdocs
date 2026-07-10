@@ -14,3 +14,4 @@ task sequences.
 | [Cache and memory](cache-memory.md) | Understand responsiveness and RAM behavior. |
 | [Validation status](validation-status.md) | Separate current evidence from claim gaps. |
 | [Versions and compatibility](versioning.md) | Match stable/nightly manuals and alpha software. |
+| [Licence and reuse](license.md) | Reuse manual text or screenshots with the correct attribution. |
