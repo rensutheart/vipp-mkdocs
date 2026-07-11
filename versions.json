@@ -3,5 +3,12 @@
     "version": "nightly",
     "title": "nightly",
     "aliases": []
+  },
+  {
+    "version": "0.11.0a2",
+    "title": "0.11.0a2",
+    "aliases": [
+      "stable"
+    ]
   }
 ]
