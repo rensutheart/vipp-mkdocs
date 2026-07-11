@@ -1,6 +1,6 @@
 # VIPP — Visual Image Processing Platform
 
-**A visual workflow platform for reproducible bioimage analysis.**
+**Visual workflows for reproducible bioimage analysis.**
 
 This repository contains the public, searchable manual for VIPP, the **Visual
 Image Processing Platform**, distributed for napari as

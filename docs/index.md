@@ -16,7 +16,7 @@ hide:
 
 # See every decision in your analysis
 
-<p class="vipp-tagline">A visual workflow platform for reproducible bioimage analysis.</p>
+<p class="vipp-tagline">Visual workflows for reproducible bioimage analysis.</p>
 
 <p class="vipp-lede">Build bioimage-analysis workflows as connected graphs, inspect intermediate images and tables, then save the workflow for review, adaptation, or batch processing.</p>
 
