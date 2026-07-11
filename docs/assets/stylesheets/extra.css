@@ -67,6 +67,14 @@
   text-transform: uppercase;
 }
 
+.vipp-tagline {
+  max-width: 42rem;
+  margin: 0 0 .55rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
 .vipp-lede {
   max-width: 46rem;
   font-size: 1.15rem;

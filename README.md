@@ -1,6 +1,9 @@
-# VIPP user manual
+# VIPP — Visual Image Processing Platform
 
-This repository contains the public, searchable manual for
+**A visual workflow platform for reproducible bioimage analysis.**
+
+This repository contains the public, searchable manual for VIPP, the **Visual
+Image Processing Platform**, distributed for napari as
 [`napari-vipp`](https://github.com/rensutheart/napari-vipp). The manual is
 separate from the application repository so documentation releases and the
 software release cycle can be managed independently.

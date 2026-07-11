@@ -12,9 +12,11 @@ hide:
   <img class="vipp-logo vipp-logo--dark" src="assets/branding/vipp-logo-dark.svg" alt="VIPP">
 </div>
 
-<div class="vipp-kicker">Visual image processing pipelines for napari</div>
+<div class="vipp-kicker">VIPP — Visual Image Processing Platform</div>
 
 # See every decision in your analysis
+
+<p class="vipp-tagline">A visual workflow platform for reproducible bioimage analysis.</p>
 
 <p class="vipp-lede">Build bioimage-analysis workflows as connected graphs, inspect intermediate images and tables, then save the workflow for review, adaptation, or batch processing.</p>
 
