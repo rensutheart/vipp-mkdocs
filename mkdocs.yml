@@ -14,6 +14,8 @@ theme:
   name: material
   language: en
   custom_dir: docs/overrides
+  logo: assets/branding/vipp-mark.svg
+  favicon: assets/branding/vipp-mark.svg
   icon:
     repo: fontawesome/brands/github
   features:
