@@ -17,6 +17,34 @@
   max-width: 90rem;
 }
 
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.vipp-hero__brand {
+  margin-bottom: 1.35rem;
+}
+
+.vipp-logo {
+  display: block;
+  width: min(100%, 23rem);
+  height: auto;
+}
+
+.vipp-logo--dark {
+  display: none;
+}
+
+[data-md-color-scheme="slate"] .vipp-logo--light {
+  display: none;
+}
+
+[data-md-color-scheme="slate"] .vipp-logo--dark {
+  display: block;
+}
+
 .vipp-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(18rem, .9fr);
