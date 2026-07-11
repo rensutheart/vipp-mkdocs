@@ -9,7 +9,7 @@ or label image.
 | Wrong objects, counts, channels, units, or stale tables | [Common problems](common-pitfalls.md) |
 | Slow interaction or high RAM use | [Performance and memory](performance.md) |
 | Installation/plugin discovery problem | [Install VIPP](../getting-started/installation.md) |
-| Reproducible bug or missing behavior | [Report a problem](report-a-problem.md) |
+| Question, reproducible bug, or missing behavior | [Get help or report a problem](report-a-problem.md) |
 
 Before debugging your own file, open the matching bundled example. If the
 example works, compare source type, axes, scale, dtype, channel mapping, shape,

@@ -36,7 +36,7 @@ Use this pattern:
 
 For example:
 
-> Adapted from Rensu P. Theart, *VIPP User Manual*, version 0.11.0a1,
+> Adapted from Rensu P. Theart, *VIPP User Manual*, version 0.11.0a2,
 > “Build your first workflow,” [source page URL], licensed under CC BY 4.0.
 > Changes: screenshot cropped and labels added.
 

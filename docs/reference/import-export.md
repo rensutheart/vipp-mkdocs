@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.11.0a1 |
+| Source | Behavior in 0.11.0a2 |
 | --- | --- |
 | Napari layer | Uses an existing viewer layer and the layer metadata exposed to VIPP. |
 | Bundled sample | Loads one of 13 deterministic VIPP samples. |

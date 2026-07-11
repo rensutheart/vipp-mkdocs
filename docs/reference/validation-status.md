@@ -1,6 +1,6 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.11.0a1 application source.
+This page summarizes the evidence shipped with the 0.11.0a2 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.
 

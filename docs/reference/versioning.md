@@ -8,8 +8,10 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The current public software baseline is **0.11.0a1**. The `a1` suffix means an
-alpha pre-release, not a nightly build.
+The current public software baseline is **0.11.0a2**. Its `a2` suffix identifies
+the second alpha build in the 0.11.0 release series; it is a tagged pre-release,
+not a nightly build. See [installation](../getting-started/installation.md) for
+the platform-verification status of this release.
 
 ## Match software and manual
 
@@ -32,10 +34,10 @@ python -m pip install "napari[pyqt6]"
 python -m pip install --pre napari-vipp
 ```
 
-To reproduce an older alpha exactly, specify the version in a fresh environment:
+To reproduce a specific alpha exactly, specify the version in a fresh environment:
 
 ```text
-python -m pip install "napari[pyqt6]" "napari-vipp==0.11.0a1"
+python -m pip install "napari[pyqt6]" "napari-vipp==0.11.0a2"
 ```
 
 ## Nightly policy

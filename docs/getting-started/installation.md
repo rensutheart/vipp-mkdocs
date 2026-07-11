@@ -1,7 +1,15 @@
 # Install VIPP
 
-VIPP 0.11.0a1 requires **Python 3.10 or newer**. Because the current release is
+VIPP 0.11.0a2 requires **Python 3.12 or newer**. Because the current release is
 a pre-release, pip needs the `--pre` flag to select it from PyPI.
+
+!!! info "Platform verification for 0.11.0a2"
+    The clean-environment procedure below is verified on **Windows 11 with
+    Python 3.12 and PyQt6**. The same installation pattern worked on macOS for
+    an earlier alpha, but 0.11.0a2 still needs current macOS verification.
+    Interactive Linux installation also awaits external verification, although
+    the automated suite runs on Linux. Treat the macOS and Linux commands as
+    expected installation paths, not verified support claims.
 
 ## Recommended: a dedicated environment
 
@@ -9,7 +17,7 @@ A separate environment prevents unrelated scientific packages from changing
 VIPP's dependencies. The commands below install napari with PyQt6 and the
 tagged VIPP release.
 
-=== "Windows PowerShell"
+=== "Windows — verified"
 
     ```powershell
     py -3.12 -m venv vipp-env
@@ -20,7 +28,7 @@ tagged VIPP release.
     napari
     ```
 
-=== "macOS / Linux"
+=== "macOS — re-verification pending"
 
     ```bash
     python3.12 -m venv vipp-env
@@ -31,9 +39,20 @@ tagged VIPP release.
     napari
     ```
 
-If `python3.12` is unavailable, use any installed Python from 3.10 onward.
-Conda or Mamba environments are also suitable; activate the environment before
-running the final `python -m pip install ...` command.
+=== "Linux — verification pending"
+
+    ```bash
+    python3.12 -m venv vipp-env
+    source vipp-env/bin/activate
+    python -m pip install --upgrade pip
+    python -m pip install "napari[pyqt6]"
+    python -m pip install --pre napari-vipp
+    napari
+    ```
+
+Conda or Mamba environments are also suitable; use Python 3.12 or newer and
+activate the environment before running the final
+`python -m pip install ...` command.
 
 !!! note "Stable manual versus nightly manual"
     The commands above install the release documented by this version of the
@@ -58,7 +77,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.11.0a1
+0.11.0a2
 ```
 
 ## Optional microscope readers

@@ -97,6 +97,6 @@ Report:
 
 ## Validation Note
 
-The 0.11.0a1 implementation has method documentation and automated tests. Broad
+The 0.11.0a2 implementation has method documentation and automated tests. Broad
 cross-tool or biological validity claims still require deterministic benchmark
 packs, external numerical comparisons, and assay-specific validation.

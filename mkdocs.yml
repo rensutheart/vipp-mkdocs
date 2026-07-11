@@ -48,14 +48,15 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-  font:
-    text: Inter
-    code: JetBrains Mono
+  font: false
 
 extra_css:
   - assets/stylesheets/extra.css
 
 plugins:
+  - privacy:
+      assets: true
+      assets_fetch: true
   - search:
       lang: en
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
@@ -160,12 +161,13 @@ nav:
       - Supported input and output: reference/import-export.md
       - Validation status: reference/validation-status.md
       - Versions and compatibility: reference/versioning.md
+      - Privacy: reference/privacy.md
       - Licence and reuse: reference/license.md
   - Troubleshooting:
       - Troubleshooting: troubleshooting/index.md
       - Common problems: troubleshooting/common-pitfalls.md
       - Performance and memory: troubleshooting/performance.md
-      - Report a problem: troubleshooting/report-a-problem.md
+      - Get help or report a problem: troubleshooting/report-a-problem.md
   - Contributors:
       - Contributor guide: developer/index.md
       - Set up a development environment: developer/development-setup.md

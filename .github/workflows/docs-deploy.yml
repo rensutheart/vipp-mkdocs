@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Software version to publish, for example 0.11.0a1"
+        description: "Software version to publish, for example 0.11.0a2"
         required: true
         type: string
       make_stable:

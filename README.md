@@ -41,3 +41,21 @@ and source-code excerpts from it remain separately licensed under the [BSD
 3-Clause License](https://github.com/rensutheart/napari-vipp/blob/main/LICENSE).
 See the manual's [licence and reuse guide](docs/reference/license.md) for scope
 and an attribution example.
+
+## Support
+
+- Use [GitHub Issues](https://github.com/rensutheart/napari-vipp/issues) for
+  reproducible defects, documentation errors, and focused feature requests.
+- Use [GitHub Discussions](https://github.com/rensutheart/napari-vipp/discussions)
+  for installation help, workflow questions, ideas, and reusable examples.
+- Use the [napari category on image.sc](https://forum.image.sc/tag/napari) for
+  broader bioimage-analysis and method questions.
+
+The [support guide](docs/troubleshooting/report-a-problem.md) explains what to
+include and how to avoid disclosing restricted data.
+
+## Privacy
+
+The site configures no audience analytics or marketing trackers, uses system
+fonts, and bundles externally referenced theme assets at build time. See the
+[privacy page](docs/reference/privacy.md) for browser and hosting details.

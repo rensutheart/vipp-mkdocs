@@ -1,7 +1,7 @@
 # Node Index
 
 This page lists all **108 operation specifications** registered by
-`NODE_LIBRARY` in napari-vipp 0.11.0a1.
+`NODE_LIBRARY` in napari-vipp 0.11.0a2.
 
 !!! info "Scope of this reference"
     Titles and families were checked against the release registry. Input and
@@ -117,7 +117,7 @@ This page lists all **108 operation specifications** registered by
 
 ### Restoration And PSF
 
-These nodes are public in 0.11.0a1. They have synthetic examples and automated
+These nodes are public in 0.11.0a2. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 

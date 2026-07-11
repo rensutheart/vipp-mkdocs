@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.11.0a1. Controls can collapse into
+Labels below match napari-vipp 0.11.0a2. Controls can collapse into
 **Settings** when the window is narrow.
 
 ## Workflow toolbar

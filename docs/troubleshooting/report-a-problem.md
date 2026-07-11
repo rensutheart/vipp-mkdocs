@@ -1,8 +1,18 @@
-# Report a problem
+# Get help or report a problem
 
-Search existing [napari-vipp issues](https://github.com/rensutheart/napari-vipp/issues)
-before opening a new report. A small reproducible case is more useful than a
-large private dataset or an unexplained screenshot.
+Choose the route that matches what you need. Keeping questions separate from
+trackable defects makes both easier to find later.
+
+| Route | Best for |
+| --- | --- |
+| [GitHub Issues](https://github.com/rensutheart/napari-vipp/issues/new/choose) | Reproducible defects, incorrect documentation, and focused feature requests. Search [existing issues](https://github.com/rensutheart/napari-vipp/issues) first. |
+| [GitHub Discussions](https://github.com/rensutheart/napari-vipp/discussions) | Installation help, workflow design questions, ideas, and examples that may help other VIPP users. |
+| [image.sc — napari](https://forum.image.sc/tag/napari) | Broader bioimage-analysis and scientific-method questions that benefit from the wider community. Put `napari-vipp` and its version in the title or opening paragraph. |
+| [Private security reporting](https://github.com/rensutheart/napari-vipp/security/policy) | A credible vulnerability or sensitive security detail that should not be public. |
+
+If a discussion reveals a reproducible software defect, link it from a focused
+GitHub issue. A small reproducible case is more useful than a large private
+dataset or an unexplained screenshot.
 
 ## Include
 
@@ -34,6 +44,7 @@ columns, window titles, and recent-file dialogs can reveal sensitive context.
 
 ## Security problems
 
-Do not disclose a credible vulnerability in a public issue before checking the
-application repository's security policy. Use its private reporting route where
-available.
+Do not disclose a credible vulnerability in an Issue, Discussion, or image.sc
+topic. Follow the application repository's [security
+policy](https://github.com/rensutheart/napari-vipp/security/policy) and use its
+private reporting route.
