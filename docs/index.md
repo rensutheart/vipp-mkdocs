@@ -7,6 +7,11 @@ hide:
 <div class="vipp-hero" markdown>
 <div markdown>
 
+<div class="vipp-hero__brand">
+  <img class="vipp-logo vipp-logo--light" src="assets/branding/vipp-logo.svg" alt="VIPP">
+  <img class="vipp-logo vipp-logo--dark" src="assets/branding/vipp-logo-dark.svg" alt="VIPP">
+</div>
+
 <div class="vipp-kicker">Visual image processing pipelines for napari</div>
 
 # See every decision in your analysis
