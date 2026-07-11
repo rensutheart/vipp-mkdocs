@@ -1,5 +1,5 @@
 site_name: VIPP — Visual Image Processing Platform
-site_description: A visual workflow platform for reproducible bioimage analysis.
+site_description: Visual workflows for reproducible bioimage analysis.
 site_author: Rensu P. Theart
 site_url: https://rensutheart.github.io/vipp-mkdocs/
 repo_url: https://github.com/rensutheart/vipp-mkdocs
