@@ -12,13 +12,13 @@
         <meta name="author" content="Rensu P. Theart">
       
       
-        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/scientific-practice/reporting/">
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/releases/0.12.0a1/">
       
       
-        <link rel="prev" href="../validation/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../reference/">
+        <link rel="next" href="../../getting-started/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Report a VIPP analysis - VIPP — Visual Image Processing Platform</title>
+        <title>0.12.0a1 - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#report-a-vipp-analysis" class="md-skip">
+        <a href="#vipp-0120a1" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Report a VIPP analysis
+              0.12.0a1
             
           </span>
         </div>
@@ -263,11 +263,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../releases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -373,13 +375,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../scientific-practice/" class="md-tabs__link">
           
   
   
@@ -529,6 +529,8 @@
       
   
   
+    
+  
   
   
     
@@ -544,20 +546,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../releases/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -570,13 +575,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Release notes
@@ -589,10 +594,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../releases/0.12.0a1/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a1
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -603,6 +630,160 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before upgrading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scientific-behavior-and-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scientific behavior and compatibility
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scientific behavior and compatibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-axes-and-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit axes and channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stable-sources-and-physical-grids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stable sources and physical grids
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-contracts-fail-visibly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operation contracts fail visibly
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-persistence-execution-and-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow persistence, execution, and export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deterministic-batch-configuration-and-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deterministic batch configuration and provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retained-batch-workspace-and-representative-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retained batch workspace and representative navigation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostics-histograms-and-presentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnostics, histograms, and presentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#richardson-lucy-tv-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Richardson-Lucy TV controls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-cache-and-platform-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime, cache, and platform behavior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-and-contributor-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture and contributor impact
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-status-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation status and limitations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1404,8 +1585,6 @@
       
   
   
-    
-  
   
   
     
@@ -1427,23 +1606,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../scientific-practice/" class="md-nav__link ">
               
   
   
@@ -1456,13 +1632,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Scientific practice
@@ -1478,7 +1654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../choosing-dimensionality/" class="md-nav__link">
+      <a href="../../scientific-practice/choosing-dimensionality/" class="md-nav__link">
         
   
   
@@ -1501,7 +1677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../parameter-tuning/" class="md-nav__link">
+      <a href="../../scientific-practice/parameter-tuning/" class="md-nav__link">
         
   
   
@@ -1524,7 +1700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../validation/" class="md-nav__link">
+      <a href="../../scientific-practice/validation/" class="md-nav__link">
         
   
   
@@ -1544,32 +1720,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Report a VIPP analysis
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/reporting/" class="md-nav__link">
         
   
   
@@ -1580,64 +1734,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#methods-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      Methods checklist
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#suggested-concise-wording" class="md-nav__link">
-    <span class="md-ellipsis">
-      Suggested concise wording
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#archive-an-analysis-bundle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Archive an analysis bundle
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cite-vipp" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cite VIPP
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2324,36 +2420,132 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#methods-checklist" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods checklist
+      Highlights
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#suggested-concise-wording" class="md-nav__link">
+  <a href="#before-upgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      Suggested concise wording
+      Before upgrading
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#archive-an-analysis-bundle" class="md-nav__link">
+  <a href="#scientific-behavior-and-compatibility" class="md-nav__link">
     <span class="md-ellipsis">
-      Archive an analysis bundle
+      Scientific behavior and compatibility
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scientific behavior and compatibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-axes-and-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit axes and channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stable-sources-and-physical-grids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stable sources and physical grids
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-contracts-fail-visibly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operation contracts fail visibly
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-persistence-execution-and-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow persistence, execution, and export
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cite-vipp" class="md-nav__link">
+  <a href="#deterministic-batch-configuration-and-provenance" class="md-nav__link">
     <span class="md-ellipsis">
-      Cite VIPP
+      Deterministic batch configuration and provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retained-batch-workspace-and-representative-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retained batch workspace and representative navigation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostics-histograms-and-presentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnostics, histograms, and presentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#richardson-lucy-tv-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Richardson-Lucy TV controls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-cache-and-platform-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime, cache, and platform behavior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-and-contributor-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture and contributor impact
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-status-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation status and limitations
     </span>
   </a>
   
@@ -2375,7 +2567,7 @@
 
 
   
-    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/scientific-practice/reporting.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/releases/0.12.0a1.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2383,78 +2575,266 @@
   
 
 
-<h1 id="report-a-vipp-analysis">Report a VIPP analysis<a class="headerlink" href="#report-a-vipp-analysis" title="Permanent link">&para;</a></h1>
-<p>Readers should be able to identify the software, reconstruct the graph, find
-the data, and understand which decisions or exclusions were manual.</p>
-<h2 id="methods-checklist">Methods checklist<a class="headerlink" href="#methods-checklist" title="Permanent link">&para;</a></h2>
-<p>Report:</p>
+<h1 id="vipp-0120a1">VIPP 0.12.0a1<a class="headerlink" href="#vipp-0120a1" title="Permanent link">&para;</a></h1>
+<p><strong>Release date:</strong> 14 July 2026</p>
+<p><strong>Maturity:</strong> Alpha pre-release</p>
+<p>VIPP 0.12.0a1 is a major architectural and scientific-contract overhaul. It
+makes source identity, axis/channel meaning, physical-grid compatibility,
+workflow execution, Python export, and batch provenance explicit. It also adds
+a retained batch workspace for reviewing representatives and completed runs.</p>
+<p>This release deliberately rejects several ambiguous behaviors instead of
+guessing. An error that appears after upgrading can therefore be a new safety
+check rather than a regression.</p>
+<div class="admonition danger">
+<p class="admonition-title">Workflow compatibility break</p>
+<p>0.12.0a1 writes <strong>workflow schema version 3</strong>. Schema versions 1 and 2 are
+rejected; there is no automatic migration. Keep the VIPP environment that
+created an older workflow, preserve the original JSON, and recreate and
+validate the graph in 0.12. Do not change only the <code>version</code> field.</p>
+</div>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>napari-vipp version (and commit for nightly/development builds);</li>
-<li>Python and important dependency versions or an environment file;</li>
-<li>workflow JSON and, if used, generated Python;</li>
-<li>input dataset identifiers, acquisition details, series selection, and axes;</li>
-<li>channel mapping, physical scale, and any metadata corrections;</li>
-<li>source checksums/identities and the source revision accepted at calculation;</li>
-<li>for multi-input nodes: how physical-grid alignment, scale, units, and origin
-  were established, plus any explicit registration/resampling performed;</li>
-<li>node sequence, decisive parameter values, and 2D/3D handling;</li>
-<li>for automatic thresholds: method, stack/slice scope, and the saved float
-  histogram-bin count where applicable; for Minimum, also the maximum smoothing
-  iterations;</li>
-<li>for <code>Rescale Intensity</code> or <code>Clip</code>: percentile/data-range/explicit-value mode
-  and its saved cutoffs;</li>
-<li>how non-finite source values were detected, justified, and handled when they
-  occurred;</li>
-<li>tuning set, held-out validation set, reference annotation procedure, and
-  quantitative metrics;</li>
-<li>manual calculations, exclusions, retries, and QC criteria;</li>
-<li>batch source pairing, naming, output formats, overwrite behavior, workflow and
-  config hashes, manifest/run id, item/output statuses, retries, and partial or
-  skipped outputs;</li>
-<li>location and license of data, workflows, code, validation artifacts, and
-  output tables.</li>
+<li>Stable, revision-checked file/store and napari-layer sources.</li>
+<li>Explicit axes, channel choices, RGB meaning, and physical-grid validation.</li>
+<li>One validated headless executor shared by the GUI and generated Python.</li>
+<li>Versioned batch configuration, deterministic preview/execution planning,
+  manifests, archives, item sidecars, and collision policies.</li>
+<li>A retained <strong>Batch workspace...</strong> with full-plan representative navigation,
+  item progress, final status, validation, and manifest paths.</li>
+<li>Exact, chunk-bounded diagnostic calculations with stale-result protection.</li>
+<li>More usable Richardson-Lucy TV controls and consistent draggable histogram
+  thresholds.</li>
+<li>A smaller composition root and enforced Qt-free scientific service layer.</li>
 </ul>
-<h2 id="suggested-concise-wording">Suggested concise wording<a class="headerlink" href="#suggested-concise-wording" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>Images were processed with napari-vipp 0.12.0a1 using the archived workflow
-JSON [identifier]. The workflow was developed on [development set] and frozen
-before evaluation on [held-out set]. Intermediate masks and labels were
-reviewed using predefined criteria [reference], and [metrics] were calculated
-against [reference annotations/phantoms].</p>
-</blockquote>
-<p>An appropriate threshold detail could read: “The complete <code>float32</code> stack was
-segmented with Otsu's method using 1,024 histogram bins; all finite pixels were
-included and non-finite pixels were assigned to background.” Do not report the
-inspector chart's display bins as the algorithm setting.</p>
-<p>Adapt the text to what was actually done. Do not state that VIPP guarantees
-reproducibility, metadata fidelity, or biological correctness.</p>
-<h2 id="archive-an-analysis-bundle">Archive an analysis bundle<a class="headerlink" href="#archive-an-analysis-bundle" title="Permanent link">&para;</a></h2>
-<p>Prefer a DOI-backed repository for final artifacts. Include:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>analysis/
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  README.md
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  environment.yml or requirements.txt
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  workflow.json
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  generated_pipeline.py        # if used
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  vipp_batch_config.json        # if batch processing was used
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  vipp_batch_manifest.json      # latest finalized run
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  batch-manifest-archives/
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  batch-item-sidecars/
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  inputs-manifest.csv
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  validation/
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  qc/
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  outputs/
-</span></code></pre></div>
-<p>Use checksums or persistent dataset identifiers when input images cannot be
-redistributed. Review paths and metadata for confidential information before
-deposit.</p>
-<p>For a batch analysis, preserve the exact workflow/config pair and their hashes;
-do not archive only the thin runner. Retain partial, skipped, and failed status
-evidence as well as successful outputs. Sidecars are a recovery trail and
-should be interpreted with the finalized manifest after an interruption.</p>
-<h2 id="cite-vipp">Cite VIPP<a class="headerlink" href="#cite-vipp" title="Permanent link">&para;</a></h2>
-<p>Use the current record in the application's <code>CITATION.cff</code>. Until a software
-paper or DOI is available, cite the exact software release and repository URL
-in addition to describing the workflow.</p>
+<h2 id="before-upgrading">Before upgrading<a class="headerlink" href="#before-upgrading" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Record the exact older VIPP version and preserve its environment if an
+   existing workflow must remain executable.</li>
+<li>Make read-only copies of workflow JSON, generated Python, inputs, outputs,
+   methods notes, and validation evidence.</li>
+<li>Recreate schema-1/2 graphs in 0.12.0a1. Compare every node, connection,
+   dynamic port, parameter, source series, axis, channel, scale, unit, and
+   result on known data.</li>
+<li>Select every new required <code>channel_axis</code>, Composite-to-RGB mapping, threshold
+   scope/bin choice, and intensity cutoff deliberately.</li>
+<li>Regenerate exported Python. A 0.12 export records its generating VIPP
+   version and refuses a different runtime.</li>
+<li>Preview a batch again and save a new batch config. Do not treat an older
+   ad-hoc runner or file list as equivalent to the 0.12 batch contract.</li>
+</ol>
+<p>See the complete <a href="../../reference/versioning/#upgrade-to-0120a1">upgrade procedure</a>
+and <a href="../../reference/workflow-contract/">workflow contract</a>.</p>
+<h2 id="scientific-behavior-and-compatibility">Scientific behavior and compatibility<a class="headerlink" href="#scientific-behavior-and-compatibility" title="Permanent link">&para;</a></h2>
+<h3 id="explicit-axes-and-channels">Explicit axes and channels<a class="headerlink" href="#explicit-axes-and-channels" title="Permanent link">&para;</a></h3>
+<p>Operations whose result depends on channel placement now persist a
+<code>channel_axis</code> choice. <code>-1</code> means scalar/no-channel data; it no longer means
+“guess from a trailing axis of length three or four.” Generic <code>C</code> axes remain
+scientific channels unless metadata explicitly declares <code>rgb</code> or <code>rgba</code>.</p>
+<p>This affects crop, blur and denoising, background correction, edge filters,
+automatic/manual/adaptive thresholds, and other channel-sensitive operations.
+Axis metadata carries confidence: an explicit reader/user declaration is not
+treated as interchangeable with shape inference. Automatic spatial,
+projection, channel, and PSF choices fail when only ambiguous inferred meaning
+is available.</p>
+<p><code>Composite to RGB</code> preserves native numeric values by default. Independent
+per-channel 1st-to-99th-percentile normalization is available only as an
+explicit lossy mapping. Wide integers, floating overflow, non-finite, complex,
+object, duplicated-axis, and conflicting-axis cases are validated rather than
+silently coerced.</p>
+<h3 id="stable-sources-and-physical-grids">Stable sources and physical grids<a class="headerlink" href="#stable-sources-and-physical-grids" title="Permanent link">&para;</a></h3>
+<p>Local files and directory stores receive an identity derived from their path
+revision and bytes. VIPP checks that identity around inspection and
+materialization, owns a read-only snapshot, and pins it until <strong>Refresh</strong>. A
+source changed during calculation is rejected. Live NumPy-backed napari layers
+are likewise copied and revision-tokened; supported data, metadata, RGB, axes,
+scale, translation, unit, rotation, shear, and affine events invalidate stale
+work.</p>
+<p>Multi-image operations no longer use equal array shape as proof of alignment.
+They validate axis meaning, sample counts, scale, compatible units, and origin.
+Image/mask broadcasting is semantic rather than based on coincident sizes, and
+image/PSF operations require compatible spatial sampling. VIPP does not insert
+hidden registration, resampling, axis reinterpretation, or origin repair.</p>
+<h3 id="operation-contracts-fail-visibly">Operation contracts fail visibly<a class="headerlink" href="#operation-contracts-fail-visibly" title="Permanent link">&para;</a></h3>
+<p>Parameter validation was tightened across crop, projection, split/range
+grammar, Canny, hysteresis, difference-of-Gaussians, image arithmetic, gamma,
+linear scaling, dtype conversion, and PSF generation. Invalid values fail
+instead of being clamped, reordered, rounded, or replaced. Kernels accept
+read-only inputs and must not mutate source/cache buffers.</p>
+<h2 id="workflow-persistence-execution-and-export">Workflow persistence, execution, and export<a class="headerlink" href="#workflow-persistence-execution-and-export" title="Permanent link">&para;</a></h2>
+<p>Schema 3 persists the choices required by the stricter scientific contracts,
+including channel semantics and Composite-to-RGB mapping. Workflow files are
+decoded into detached, validated <code>GraphSnapshot</code> and <code>WorkflowSnapshot</code>
+values. Port/type/cycle/tunnel validation completes before live editor state is
+replaced.</p>
+<p>JSON and generated text are written through flushed, fsynced, same-directory
+temporary files and atomically replaced. Non-finite JSON is rejected; a failed
+write leaves the prior artifact intact. Related files remain separate
+artifacts—not one multi-file transaction.</p>
+<p>Background execution crosses a typed, detached request/result boundary. Qt
+workers adapt signals and do not own scientific calculation. Late results are
+discarded after graph/source revisions change or the widget shuts down.</p>
+<p><strong>Export Python...</strong> now embeds immutable, validated workflow JSON and invokes
+the same executor as VIPP. Each call constructs a fresh pipeline, preserves
+<code>ImageState</code> through supported load/save paths, and supports explicit
+multi-source bindings. Missing, duplicate, or unknown sources fail. Generated
+programs are locked to the exact VIPP version that created them.</p>
+<h2 id="deterministic-batch-configuration-and-provenance">Deterministic batch configuration and provenance<a class="headerlink" href="#deterministic-batch-configuration-and-provenance" title="Permanent link">&para;</a></h2>
+<p>The collection batch system now uses a single deterministic planner for both
+preview and execution. Each bound source collection is sorted and paired by
+position; all collections must contain the same number of items. Planning
+resolves selected outputs and detects duplicate, existing-path, input-overlap,
+and within-plan collisions before graph execution.</p>
+<p><code>Batch Output</code> nodes are authoritative. A warned compatibility fallback may
+save terminal nodes only when each terminal has one unambiguous output port.
+Workflows with enabled <code>Save Image</code> side effects are rejected for batch use.</p>
+<p>A versioned <code>vipp_batch_config.json</code> records:</p>
+<ul>
+<li>source-node bindings, folders, patterns, and deterministic pairing;</li>
+<li>output folder, names, formats, and <code>Error</code>/<code>Skip</code>/<code>Overwrite</code> policy;</li>
+<li>resolved output declarations;</li>
+<li>the required workflow companion and optional runner;</li>
+<li>the canonical scientific workflow hash.</li>
+</ul>
+<p>Every run writes a latest <code>vipp_batch_manifest.json</code>, a run-id archive, and
+per-item sidecar checkpoints. These record workflow/config hashes, software
+versions, source identities and metadata, planned output paths/policies,
+errors, and item/output states. Successful outputs survive later item failures;
+final summaries distinguish completed, partial, skipped, and failed items.</p>
+<p>For each item, outputs are staged privately, every source identity is
+reverified, and only then are outputs promoted one at a time. A source revision
+change publishes none of that item's outputs. A later promotion failure is
+recorded as partial. Sidecars provide an interruption-recovery trail but are
+not a cross-file transaction log.</p>
+<p>The generated <code>vipp_batch_pipeline.py</code> is now a thin launcher that defaults to
+its sibling config and delegates to the same headless batch core as the GUI.</p>
+<h2 id="retained-batch-workspace-and-representative-navigation">Retained batch workspace and representative navigation<a class="headerlink" href="#retained-batch-workspace-and-representative-navigation" title="Permanent link">&para;</a></h2>
+<p><strong>Run batch...</strong> has been replaced by <strong>Batch workspace...</strong>. The modeless,
+retained workspace keeps configuration, the reviewed plan, run progress,
+final statuses, validation, and the manifest path available while the graph is
+visible. Its body scrolls on small displays while Run and Close remain fixed.</p>
+<p>After preview, Previous/Next buttons, a slider, and preview-table activation can
+select any item in the complete plan. VIPP atomically swaps all collection-bound
+Image Sources and calculates only that representative through the live graph.
+It does not save outputs, change serialized source parameters, or alter the
+workflow hash. Requested and successfully committed representative positions
+are tracked separately so a failed or stale asynchronous load is never labelled
+as displayed.</p>
+<p>Editing the scientific graph or batch setup marks the reviewed plan stale.
+Run performs a fresh preflight and stops for review if files, destinations,
+collision states, sources, or the graph differ. Historical run status remains
+visible until a new preview.</p>
+<p><strong>Open batch demo...</strong> creates a safe working copy of a deterministic two-source,
+three-item bundle. Navigate all three paired fields, then <strong>Run demo batch</strong> to
+produce nine NPY/TIFF/TSV outputs and validate exact arrays/rows, identities,
+hashes, manifests, archives, and three finalized item sidecars.</p>
+<h2 id="diagnostics-histograms-and-presentation">Diagnostics, histograms, and presentation<a class="headerlink" href="#diagnostics-histograms-and-presentation" title="Permanent link">&para;</a></h2>
+<p>The new Qt-free diagnostics core provides exact finite statistics, extrema,
+percentiles, histograms, contrast limits, and label-volume summaries. Bounded
+chunks control temporary memory; they never imply hidden sampling. Large work
+runs through typed, stale-safe workers.</p>
+<p>Generated inspect/pin layers receive detached arrays. Provisional contrast is
+display-only and later replaced by exact finite limits; presentation cannot
+feed back into source selection, graph caches, or scientific outputs.</p>
+<p>Input-histogram guides now behave consistently:</p>
+<ul>
+<li>Binary and Hysteresis thresholds and explicit Rescale/Clip guides are
+  draggable and queue interactive recalculation.</li>
+<li>Both Rescale Intensity guides can be dragged. Moving a percentile-derived
+  guide switches the node to explicit values and preserves the other exact
+  cutoff.</li>
+<li>Clicking a guide without moving it does not edit a parameter.</li>
+<li>Unchanged input counts are reused while a manual guide moves; the output
+  histogram refreshes when the output population changes.</li>
+</ul>
+<h2 id="richardson-lucy-tv-controls">Richardson-Lucy TV controls<a class="headerlink" href="#richardson-lucy-tv-controls" title="Permanent link">&para;</a></h2>
+<p>Every Richardson-Lucy TV parameter now has an effect-oriented tooltip on its
+label and interactive controls. Practical slider windows are independent of
+the spinner's accepted values:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Slider</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Iterations</td>
+<td>Linear, 1–100</td>
+<td>More iterations can recover detail but increase time and amplify noise, ringing, or PSF mismatch.</td>
+</tr>
+<tr>
+<td>TV regularization</td>
+<td>Geometric, 1e-6–0.1</td>
+<td>Larger values suppress noise more strongly but can flatten fine structures; enter <code>0</code> in the spinner to disable.</td>
+</tr>
+<tr>
+<td>TV epsilon</td>
+<td>Geometric, 1e-12–1e-2</td>
+<td>Stabilizes the TV gradient norm near zero.</td>
+</tr>
+<tr>
+<td>Filter epsilon</td>
+<td>Geometric, 1e-15–1e-3</td>
+<td>Stabilizes very small predicted-blur denominators; enter <code>0</code> to disable.</td>
+</tr>
+<tr>
+<td>Denominator floor</td>
+<td>Geometric, 1e-3–1</td>
+<td>Limits extreme TV correction; larger values increase stability but can weaken correction.</td>
+</tr>
+</tbody>
+</table>
+<p>The spinner remains the exact-entry control and can accept valid values outside
+the slider window. Slider ranges are exploration aids, not scientific validity
+limits.</p>
+<h2 id="runtime-cache-and-platform-behavior">Runtime, cache, and platform behavior<a class="headerlink" href="#runtime-cache-and-platform-behavior" title="Permanent link">&para;</a></h2>
+<p>Adaptive execution moves known-expensive work and inputs of at least 4,000,000
+elements or 32 MiB away from the UI thread. <strong>Run all in BG</strong> remains a force-all
+override. Exact diagnostics share this policy and remain complete-population
+calculations.</p>
+<p>Cache status now dispatches by operating system instead of assuming
+<code>os.sysconf</code> exists everywhere:</p>
+<ul>
+<li>Windows reads available/total physical memory with
+  <code>GlobalMemoryStatusEx</code> and never calls <code>sysconf</code>;</li>
+<li>macOS reads VM statistics with <code>host_statistics64</code>, using guarded <code>sysconf</code>
+  calls for page size and physical-page count;</li>
+<li>other POSIX systems use guarded <code>sysconf</code> page counters.</li>
+</ul>
+<p>If a required API is absent or fails, the display reports memory as unavailable
+instead of crashing or fabricating a value. Cache values remain operational
+estimates, not a full process or Python-heap profile.</p>
+<p>The batch representative strip now starts in its compact arrangement and uses
+wrapping labels whose platform-specific size hints cannot force the dock wider.
+Its minimum-size hint stays at or below <strong>420 px</strong> on Windows, macOS, and Linux;
+at that width, header controls, source details, progress, and workspace action
+stack instead of being clipped.</p>
+<h2 id="architecture-and-contributor-impact">Architecture and contributor impact<a class="headerlink" href="#architecture-and-contributor-impact" title="Permanent link">&para;</a></h2>
+<p><code>_widget.py</code> is now primarily the composition root and was reduced by roughly
+4,500 net lines. Reusable controls, dialogs, plots, examples, sources, workers,
+history, lifecycle, view-dimension, and batch responsibilities moved into
+focused <code>ui/</code> modules. Qt-free <code>core/</code> services own grids, diagnostics,
+snapshots, execution, atomic I/O, source identity, file snapshots, and batch
+setup/execution. Architecture tests enforce dependency direction.</p>
+<p>See <a href="../../developer/architecture/">architecture and scientific boundaries</a> for
+the module map, ownership rules, and contributor verification ladder.</p>
+<h2 id="validation-status-and-limitations">Validation status and limitations<a class="headerlink" href="#validation-status-and-limitations" title="Permanent link">&para;</a></h2>
+<p>0.12.0a1 includes expanded operation-contract, golden, example, workflow,
+export, batch, source, grid, diagnostic, architecture, and Qt integration tests.
+The deterministic batch bundle provides exact end-to-end checks for its small
+defined case.</p>
+<p>These tests do <strong>not</strong> establish broad biological validity, cross-tool
+equivalence, microscope-format coverage, whole-slide/HCS scalability, or
+restoration quality on a particular assay. Batch remains local-file and
+position-pairing oriented; semantic-axis iteration and plate/well/field HCS
+traversal are outside this release. Many scientific operations remain eager.
+GPU acceleration, blind/spatially varying deconvolution, and broad real-data
+benchmark packs remain future work.</p>
+<p>Read <a href="../../reference/validation-status/">validation status</a>, validate each
+transferred workflow on representative and held-out data, and report remaining
+limitations beside any scientific claim.</p>
 
 
 
@@ -2513,7 +2893,7 @@ in addition to describing the workflow.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../validation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Validate a workflow">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Release notes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2523,20 +2903,20 @@ in addition to describing the workflow.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Validate a workflow
+                Release notes
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../reference/" class="md-footer__link md-footer__link--next" aria-label="Next: Reference">
+          <a href="../../getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Start here">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Reference
+                Start here
               </div>
             </div>
             <div class="md-footer__button md-icon">
