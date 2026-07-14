@@ -53,7 +53,8 @@ The workflow saves parameters that can change calculations, including:
 - `Clip` cutoff mode and explicit values;
 - `Linear Scale + Offset` values written by Auto Contrast;
 - required channel-axis choices for channel-sensitive operations;
-- Composite-to-RGB native-versus-normalized intensity mapping.
+- Composite-to-RGB `channel_axis_mode`, `mapping_mode`, ordered per-source
+  `channel_colors`, and native-versus-normalized intensity mapping.
 
 Compact histogram chart bins, napari layer contrast limits, provisional display
 ranges, and inspector layout do not alter node arrays. They are not substitutes

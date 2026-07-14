@@ -56,6 +56,18 @@ newer than the latest tagged alpha.
 | `Composite → RGB` | array | image | Render multichannel data as RGB. |
 | `Assign Channel Colors` | array | same as input | Change carried channel display colors. |
 
+`Composite → RGB` separates **Channel axis mode** and **RGB mapping mode**.
+Each can be Auto, with its resolved choice shown read-only, or Manual. Manual
+axis mode permits any valid deliberate axis choice. Manual mapping provides a
+dynamic selector for every source channel: Unassigned, Red, Green, Blue,
+Magenta, Cyan, or Yellow. Unassigned channels contribute nothing; all assigned
+channels, including stacks wider than RGB/RGBA, mix additively. Changing the
+mapping invalidates the composite and its descendants only. Every calculated
+manual result upstream remains cached in every cache mode; unchanged automatic
+intermediates remain eligible for normal Smart/Low-memory pruning. Intensity
+mapping is a separate native-preserving versus explicitly lossy percentile
+choice.
+
 ### Math And Logic
 
 | Node | Input | Output | Use |

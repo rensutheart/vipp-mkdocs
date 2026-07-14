@@ -14,6 +14,17 @@ downstream edits feel immediate.
 
 Batch collection runs use low-memory retention internally.
 
+Calculated **manual-node** results are retained in every interactive cache mode.
+That includes an expensive Richardson-Lucy deconvolution several hops upstream
+from the node currently being edited. A downstream Composite → RGB mapping edit
+therefore invalidates the composite and its descendants without discarding the
+manual result that feeds it.
+
+Automatic upstream nodes are likewise not invalidated by an unrelated
+downstream edit, but Smart/Low-memory mode may intentionally prune their cached
+arrays. VIPP recomputes a pruned automatic intermediate when needed. Mark a
+specific automatic node **Keep output cached** when it must survive that policy.
+
 ## Memory Guard
 
 When keep-all mode uses too much reclaimable memory, VIPP can automatically

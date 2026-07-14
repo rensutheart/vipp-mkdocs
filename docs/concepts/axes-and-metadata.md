@@ -45,6 +45,21 @@ In workflow schema 3, affected operations persist `channel_axis`. The value
 `-1` means scalar/no-channel data. It does not ask VIPP to detect RGB from
 shape.
 
+`Composite → RGB` adds explicit authoring modes around that contract.
+**Channel axis mode = Auto** resolves the carried explicit channel axis and
+shows it read-only; **Manual** enables the axis selector and permits any valid
+deliberate choice, including Z even when the metadata also declares C. **RGB
+mapping mode = Auto** similarly shows the resolved per-source-channel mapping
+read-only, while **Manual** exposes one colour assignment per detected channel.
+
+Manual assignments are Unassigned, Red, Green, Blue, Magenta, Cyan, and Yellow.
+Unassigned contributes nothing; composite colours contribute to multiple RGB
+planes, and multiple source channels can add to the same plane. The mapping is
+not limited to three or four source channels. Auto mode uses declared encoded
+RGB/RGBA order where applicable and otherwise blends every fluorescence channel
+by carried pseudo-colour, falling back through Blue, Green, Red, Magenta,
+Yellow, and Cyan repeatedly.
+
 ## Physical Scale
 
 Scale-aware measurements use pixel size and units when available.
