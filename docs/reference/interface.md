@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.11.0a2. Controls can collapse into
+Labels below match napari-vipp 0.12.0a1. Controls can collapse into
 **Settings** when the window is narrow.
 
 ## Workflow toolbar
@@ -8,14 +8,15 @@ Labels below match napari-vipp 0.11.0a2. Controls can collapse into
 | Control | Effect |
 | --- | --- |
 | **New workflow…** | Reset after confirmation to one unbound `Image Source` on an otherwise empty graph. |
-| **Open example…** | Open one of 12 bundled templates with sample sources configured. |
+| **Open example…** | Open one of 13 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
 | **Load workflow…** | Open an external or previously saved workflow JSON. |
 | **Save workflow…** | Save graph structure, parameters, layout, and selected UI state—not computed arrays. |
 | **Export Python…** | Generate a headless script using supported operation and I/O calls. |
-| **Run batch…** | Preview and execute the current graph over local collections. |
+| **Batch workspace…** | Open the retained local-collection setup, representative navigator, run progress, final status, and provenance view. |
 | **Export OME dataset…** | Save one reference image with associated graph label outputs. |
 | **Tunnels…** | Manage named graph outputs and subscribers. |
 | **Auto structure graph** | Apply a one-shot source-to-sink layout; undo restores positions. |
+| **Focus** | Recover the graph center without changing zoom, selection, layout, cache state, or undo history. |
 | **Refresh** | Re-evaluate ordinary automatic graph state. |
 | **Calculate all** | Calculate manual nodes that are not current. |
 | **Undo / Redo** | Reverse or restore supported workflow edits. |
@@ -36,7 +37,7 @@ Labels below match napari-vipp 0.11.0a2. Controls can collapse into
 
 | Setting | Meaning |
 | --- | --- |
-| Run all in background | Dispatches all recomputes to background processing; when off, only known slower operations use it. |
+| Run all in BG | Checked: dispatch every graph recompute to background processing. Unchecked: use adaptive execution, keeping small ordinary work immediate while backgrounding known expensive operations and large inputs. |
 | Cache mode | Keep all outputs, use Smart interactive cache, or use Low-memory mode. |
 | Auto memory guard | Switches away from keep-all and prunes optional outputs if the configured cache share is exceeded. |
 | Cache limit | Share of free-or-reclaimable memory used by the keep-all cache before the guard acts. |
@@ -47,9 +48,56 @@ Labels below match napari-vipp 0.11.0a2. Controls can collapse into
 cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
 scikit-image call already executing.
 
+The current adaptive large-input boundary is 4,000,000 elements or 32 MiB,
+whichever is reached first. This applies even when **Run all in BG** is
+unchecked. Exact threshold diagnostics, Auto Contrast, colocalization density,
+and generated-layer contrast calculations also leave the user-interface thread
+when their inputs are large.
+
+Background execution changes *where* work runs, not the method or the values it
+uses. Exact operations still inspect the complete required population. They may
+consume CPU time and memory while napari remains responsive.
+
 ## Inspector surfaces
 
 Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
 **Pin selected**, and **Save selected output…**.
+
+## Auto Contrast Versus Display Contrast
+
+**Auto Contrast** appears for `Linear Scale + Offset`. It calculates exact
+full-input finite percentiles from the chosen saturation setting and writes the
+resulting `alpha` and `beta` into the node. It therefore changes workflow data.
+
+The contrast limits on inspect and pinned napari layers are display-only. Large
+layers can briefly use an explicit provisional dtype range while VIPP obtains
+the exact full finite range in the background. A manual napari contrast edit
+made during that calculation is preserved. Neither the provisional nor final
+layer contrast changes downstream arrays, masks, thresholds, or measurements.
+
+The histogram panel is also a display summary. It counts every finite value,
+but its chart bins are independent of a floating-point automatic-threshold
+node's saved **Float histogram bins** parameter.
+
+## Draggable histogram guides
+
+Input-histogram markers for Binary Threshold, Hysteresis Threshold, explicit
+Rescale Intensity/Clip cutoffs, and supported colocalization thresholds are
+editable by dragging. A pointer click without movement does not change the
+parameter.
+
+Rescale Intensity has two draggable guides. Moving a percentile-derived guide
+switches the node to **Explicit values**, preserves the other exact cutoff, and
+queues interactive recalculation. This is a scientific parameter edit: save
+the workflow after accepting it. VIPP reuses unchanged input counts while a
+manual marker moves and refreshes the output histogram after the output changes.
+
+## Batch representative strip
+
+After a successful batch preview, a persistent strip above the graph exposes
+Previous/Next, a full-plan slider, item position, batch ID, and every paired
+filename. It calculates one representative only and never saves batch outputs.
+The requested item is labelled as current only after all matching sources load
+and the graph calculation succeeds. See [process a folder](../workflows/batch-processing.md).

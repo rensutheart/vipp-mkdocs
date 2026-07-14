@@ -11,7 +11,8 @@ Fix:
 
 - compare the VIPP version badge with the manual's version selector;
 - use the numbered manual matching the plugin;
-- migrate a copy of an alpha workflow and compare it with known sample outputs.
+- recreate a copy of an alpha workflow and compare it with known sample
+  outputs. Schema-1/2 files cannot be migrated by changing the JSON version.
 
 ## Wrong Channel
 
@@ -126,16 +127,54 @@ Fix:
 - use `Reorder Axes` or `Set Pixel Size / Units` only with known values;
 - reproduce the issue with a non-sensitive minimal file before reporting it.
 
+## Source Changed But VIPP Keeps The Earlier Revision
+
+Symptom:
+
+- a file was overwritten in place, but the graph still shows the verified
+  earlier bytes; or
+- calculation reports that a source revision changed.
+
+Fix:
+
+- this is the stable-source contract, not an implicit reload failure;
+- finish/archive the current revision or select **Refresh** to accept the new
+  file/layer state deliberately;
+- preview a batch again after any source change.
+
+## Same Shape But Inputs Are Rejected
+
+Symptom:
+
+- a multi-image, mask/image, or image/PSF node reports incompatible grids even
+  though array shapes match.
+
+Check semantic axes, scale, units, and origin. Equal shape does not prove
+physical alignment. Register/resample explicitly with a justified method; do
+not remove calibration merely to bypass the safety check.
+
+## Batch Plan Became Stale
+
+Symptom:
+
+- Run refreshes the preview and stops; or
+- representative navigation remains available but the plan is labelled stale.
+
+The graph, setup, sources, destinations, output declarations, or collision state
+changed since review. Inspect the new full plan, navigate representatives again
+when relevant, then run only after the fresh preflight is acceptable.
+
 ## Exported Workflow Is Not A Complete Archive
 
 Symptom:
 
 - another computer cannot find source files;
-- generated Python differs from interactive display/caching;
-- batch pairing cannot be reconstructed from JSON alone.
+- exported Python will not run under a different VIPP version;
+- batch pairing cannot be reconstructed from workflow JSON alone.
 
 Fix:
 
 - read the [workflow and export contract](../reference/workflow-contract.md);
 - share an environment and input manifest with the workflow;
-- preserve batch bindings, pairings, exclusions, and output checksums separately.
+- preserve `vipp_batch_config.json`, the workflow companion, finalized
+  manifests/archives, sidecars, exclusions, and output checksums.

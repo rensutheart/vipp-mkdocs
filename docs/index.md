@@ -36,10 +36,15 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    The current public baseline is **napari-vipp 0.11.0a2**. Interfaces,
+    The current public baseline is **napari-vipp 0.12.0a1**. Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
+
+!!! important "0.12 workflow compatibility"
+    This release writes workflow schema 3 and intentionally rejects schema 1
+    and 2. Read the [0.12.0a1 release notes](releases/0.12.0a1.md) before
+    upgrading an existing analysis.
 
 ## Choose your path
 
@@ -79,6 +84,7 @@ flowchart LR
 | Diagnose a workflow that suddenly gives different counts | [Common problems](troubleshooting/common-pitfalls.md) |
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
+| Understand what changed in 0.12 | [0.12.0a1 release notes](releases/0.12.0a1.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

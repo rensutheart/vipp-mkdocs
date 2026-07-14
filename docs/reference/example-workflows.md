@@ -1,6 +1,6 @@
 # Example Workflows
 
-The release contains **12** example workflows under:
+The release contains **13** example workflows under:
 
 ```text
 examples/
@@ -23,6 +23,7 @@ custom or external workflow JSON files.
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
+| `synthetic-batch-provenance.json` | generated two-source NumPy collection | Three paired items, explicit NPY/TIFF/TSV outputs, representative navigation, saved config/runner, exact ground truth, manifests, archives, and item sidecars. Open it through the chooser and create a writable working copy. |
 | `otsu-red-channel-labels.json` | synthetic multichannel volume | Label cleanup: split the red/TRITC-like channel, blur, Otsu threshold, mask cleanup, connected components, border clearing, and volume filtering. |
 | `red-channel-object-intensity-measurements.json` | synthetic multichannel volume | Multi-input object measurement using labels plus matching intensity image. |
 | `red-channel-merged-measurement-table.json` | synthetic multichannel volume | Morphology, intensity, table merge, and metadata columns. |
@@ -44,10 +45,11 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.11.0a2 they are:
+Use `--list` to print the release's exact IDs. In 0.12.0a1 they are:
 
 | ID | Example title |
 | --- | --- |
+| `batch-provenance` | Deterministic Batch & Provenance |
 | `label-cleanup` | Red-Channel Label Cleanup |
 | `object-intensity` | Object Intensity Measurements |
 | `merged-measurements` | Merged Measurement Table |

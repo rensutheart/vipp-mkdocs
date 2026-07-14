@@ -26,6 +26,18 @@ thresholding, morphology, or colocalized-voxel nodes.
 
 Use masks before label creation when you are still deciding what is foreground.
 
+VIPP stores binary masks as Boolean arrays where possible. If a Boolean mask is
+connected to a global automatic-threshold node, VIPP recognizes that it is
+already segmented and preserves its `True`/`False` decisions. It does not
+reinterpret the two levels through Otsu, Triangle, Li, Yen, Isodata, or Minimum
+thresholding.
+
+For floating-point intensity images, non-finite pixels (`NaN`, positive
+infinity, or negative infinity) are excluded from global automatic-threshold
+estimation and become `False` in the resulting mask. Inspect why those values
+exist; treating them as background is a defined calculation rule, not evidence
+that the source data are valid.
+
 ## Labels
 
 Labels represent object identity. Label `0` is background; positive integers are

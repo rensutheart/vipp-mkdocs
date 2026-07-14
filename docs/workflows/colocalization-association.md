@@ -42,6 +42,28 @@ regions, tissue, or user-defined ROIs.
 *The same red/green channel outputs feed independent metric, voxel, and RACC
 branches. The selected calculated node exposes its threshold scatter for QC.*
 
+## What The Scatter Inspector Calculates
+
+The colocalization inspector calculates all three summaries over every voxel in
+the analysis population:
+
+- the total ROI population (or the complete image when no ROI is connected);
+- the number meeting both channel thresholds;
+- the complete two-dimensional scatter-density grid.
+
+Large datasets are processed in bounded chunks and off the user-interface
+thread. Chunking limits temporary memory; it is not sampling. The density image,
+ROI count, and colocalized count all represent the complete ROI population.
+
+For example, a summary such as `Exact colocalized count: 18,420/251,006` means
+that all 251,006 ROI voxels contributed to both the count and the displayed
+density. The scatter grid is a visual QC summary; the metric table and
+`Colocalized Voxels` output remain the appropriate quantitative artifacts.
+
+Dragging a threshold guide switches the node to manual thresholds. This is a
+scientific parameter change, not merely a plot adjustment, so recalculate stale
+manual outputs and save the workflow afterward.
+
 ## Object Colocalization
 
 ```text
@@ -90,6 +112,7 @@ Report:
 - preprocessing steps;
 - threshold mode and final thresholds;
 - analysis population: whole image, ROI, or object labels;
+- how the ROI was defined and its voxel count;
 - whether intensities were normalized or clipped;
 - 2D/3D and leading-axis handling;
 - ROI or label-generation method;
@@ -97,6 +120,6 @@ Report:
 
 ## Validation Note
 
-The 0.11.0a2 implementation has method documentation and automated tests. Broad
+The current implementation has method documentation and automated tests. Broad
 cross-tool or biological validity claims still require deterministic benchmark
 packs, external numerical comparisons, and assay-specific validation.

@@ -1,15 +1,14 @@
 # Install VIPP
 
-VIPP 0.11.0a2 requires **Python 3.12 or newer**. Because the current release is
+VIPP 0.12.0a1 requires **Python 3.12 or newer**. Because the current release is
 a pre-release, pip needs the `--pre` flag to select it from PyPI.
 
-!!! info "Platform verification for 0.11.0a2"
-    The clean-environment procedure below is verified on **Windows 11 with
-    Python 3.12 and PyQt6**. The same installation pattern worked on macOS for
-    an earlier alpha, but 0.11.0a2 still needs current macOS verification.
-    Interactive Linux installation also awaits external verification, although
-    the automated suite runs on Linux. Treat the macOS and Linux commands as
-    expected installation paths, not verified support claims.
+!!! info "Platform verification for 0.12.0a1"
+    Release CI exercises the application and package on Linux and Windows.
+    A current manual GUI installation/smoke pass is still required before a
+    platform should be described as broadly verified. Treat the commands below
+    as supported installation paths, not evidence that every reader, dataset,
+    display server, or GPU/driver combination has been validated.
 
 ## Recommended: a dedicated environment
 
@@ -17,7 +16,7 @@ A separate environment prevents unrelated scientific packages from changing
 VIPP's dependencies. The commands below install napari with PyQt6 and the
 tagged VIPP release.
 
-=== "Windows — verified"
+=== "Windows"
 
     ```powershell
     py -3.12 -m venv vipp-env
@@ -28,7 +27,7 @@ tagged VIPP release.
     napari
     ```
 
-=== "macOS — re-verification pending"
+=== "macOS"
 
     ```bash
     python3.12 -m venv vipp-env
@@ -39,7 +38,7 @@ tagged VIPP release.
     napari
     ```
 
-=== "Linux — verification pending"
+=== "Linux"
 
     ```bash
     python3.12 -m venv vipp-env
@@ -77,7 +76,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.11.0a2
+0.12.0a1
 ```
 
 ## Optional microscope readers
@@ -108,6 +107,10 @@ python -m pip install --upgrade "napari[pyqt6]" "https://github.com/rensutheart/
 Development workflows may not reopen in a stable alpha release. Record the
 commit hash as well as the package version if results depend on an unreleased
 build.
+
+Before upgrading an existing workflow, read
+[versions and compatibility](../reference/versioning.md) and preserve the old
+environment. Schema-1/2 workflows do not open in 0.12.0a1.
 
 ## Developer installation
 

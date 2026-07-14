@@ -118,6 +118,9 @@ extra:
 
 nav:
   - Home: index.md
+  - Release notes:
+      - Release notes: releases/index.md
+      - 0.12.0a1: releases/0.12.0a1.md
   - Start here:
       - Start here: getting-started/index.md
       - Install VIPP: getting-started/installation.md
@@ -172,6 +175,7 @@ nav:
       - Get help or report a problem: troubleshooting/report-a-problem.md
   - Contributors:
       - Contributor guide: developer/index.md
+      - Architecture and scientific boundaries: developer/architecture.md
       - Set up a development environment: developer/development-setup.md
       - Add or change an operation: developer/operations.md
       - Test and document changes: developer/testing-docs.md

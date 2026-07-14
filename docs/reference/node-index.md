@@ -1,7 +1,8 @@
 # Node Index
 
 This page lists all **108 operation specifications** registered by
-`NODE_LIBRARY` in napari-vipp 0.11.0a2.
+`NODE_LIBRARY` in the current manual track. Nightly parameter behavior can be
+newer than the latest tagged alpha.
 
 !!! info "Scope of this reference"
     Titles and families were checked against the release registry. Input and
@@ -85,6 +86,15 @@ This page lists all **108 operation specifications** registered by
 | `Normalize` | image | Normalize intensity values. |
 | `Clip` | image | Clip intensity range. |
 
+`Rescale Intensity` offers exact full-input percentiles or saved explicit input
+values. `Clip` offers an unchanged full-data-range mode or saved explicit clamp
+values. Integer percentiles and clipping preserve native int64/uint64 levels;
+unrepresentable fractional bounds or intervals too wide for faithful ratio
+arithmetic report an error rather than being silently rounded. Auto Contrast
+for `Linear Scale + Offset` writes calculated parameters
+and is not merely a display adjustment. See
+[Tune without fooling yourself](../scientific-practice/parameter-tuning.md).
+
 ## Filtering
 
 ### Background Correction
@@ -117,7 +127,7 @@ This page lists all **108 operation specifications** registered by
 
 ### Restoration And PSF
 
-These nodes are public in 0.11.0a2. They have synthetic examples and automated
+These nodes are public in 0.12.0a1. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 
@@ -150,6 +160,13 @@ see [validation status](validation-status.md).
 | `Minimum Threshold` | mask |
 | `Binary Threshold` | mask |
 | `Hysteresis Threshold` | mask |
+
+Otsu, Triangle, Yen, Isodata, and Minimum count every finite input value.
+Integers use exact native levels for observed spans up to 65,536; floats use the
+saved 2–65,536 bin setting (default 256). Li operates on raw finite values.
+Minimum also saves its maximum smoothing iterations and fails explicitly when
+it cannot identify a valid two-peak histogram. See
+[Segmentation and label cleanup](../workflows/segmentation-label-cleanup.md).
 
 ### Local Thresholds
 

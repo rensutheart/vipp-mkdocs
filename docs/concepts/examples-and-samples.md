@@ -27,7 +27,7 @@ Examples:
 - measurement summary sample with known object counts;
 - 3D mesh morphology phantom;
 - skeleton network sample;
-- colocalization sample;
+- synthetic colocalization dataset;
 - synthetic deconvolution image and PSF.
 
 ## Core Example Workflows

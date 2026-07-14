@@ -14,6 +14,7 @@ internal screenshot roadmaps do not belong in either public manual page.
 
 ## Pick a contribution path
 
+- [Understand architecture and scientific boundaries](architecture.md)
 - [Set up a development environment](development-setup.md)
 - [Add or change an operation](operations.md)
 - [Test and document changes](testing-docs.md)

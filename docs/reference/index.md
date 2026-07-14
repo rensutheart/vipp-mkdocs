@@ -5,11 +5,12 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
+| [0.12.0a1 release notes](../releases/0.12.0a1.md) | Review compatibility breaks, new contracts, upgrade steps, and limitations. |
 | [All 108 nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
 | [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |
-| [Example workflows](example-workflows.md) | Choose one of 12 runnable graph templates. |
+| [Example workflows](example-workflows.md) | Choose one of 13 runnable graph templates, including the deterministic batch bundle. |
 | [Bundled sample data](sample-data.md) | Choose one of 13 deterministic samples. |
-| [Workflow and export contract](workflow-contract.md) | Understand what JSON, generated Python, and batch artifacts contain. |
+| [Workflow and export contract](workflow-contract.md) | Understand schema 3, shared-executor Python, stable sources, and batch artifacts. |
 | [Supported input and output](import-export.md) | Select a format and review metadata/dtype limitations. |
 | [Cache and memory](cache-memory.md) | Understand responsiveness and RAM behavior. |
 | [Validation status](validation-status.md) | Separate current evidence from claim gaps. |

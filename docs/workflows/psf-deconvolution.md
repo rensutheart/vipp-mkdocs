@@ -1,7 +1,7 @@
 # Restore with a PSF
 
 Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.11.0a2. The
+RL with total-variation regularization (RL-TV) are public in 0.12.0a1. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation.
 
@@ -70,6 +70,31 @@ Check:
   structure;
 - sensitivity to iteration count and TV regularization;
 - whether conclusions remain when compared with the original image.
+
+## Understand the RL-TV controls
+
+Hover a Richardson-Lucy TV parameter label, slider, spinner, checkbox, or
+choice control for a concise effect-oriented tooltip. Slider ranges are
+practical exploration windows; the adjacent spinner is the exact-entry control
+and accepts valid values outside the slider window.
+
+| Parameter | Slider window | Interpretation |
+| --- | --- | --- |
+| `Spatial processing` | Choice | Use 3D ZYX only for a true volumetric image/PSF pair; use 2D YX for independent planes. |
+| `Iterations` | Linear 1–100 | Start around 10–30. More iterations can recover detail but increase time and amplify noise, ringing, or PSF mismatch. |
+| `TV regularization` | Geometric 1e-6–0.1 | Larger values suppress noise more strongly but can flatten fine structure. Enter `0` in the spinner for ordinary RL behavior. |
+| `TV epsilon` | Geometric 1e-12–1e-2 | Smooths the TV gradient norm near zero; change it only with a defined stability test. |
+| `Filter epsilon` | Geometric 1e-15–1e-3 | Suppresses unstable ratio updates where predicted blur is tiny. Enter `0` in the spinner to disable it. |
+| `Denominator floor` | Geometric 1e-3–1 | Larger values limit extreme TV correction but can weaken the regularization update. |
+
+`Normalize PSF` is normally enabled. `Clip negative input` and `Clip output
+negative` are usually appropriate for non-negative microscopy intensity data,
+but clipping is a scientific choice. `Preserve input scale` maps the result
+back near the input intensity scale after internal normalization.
+
+The positive logarithmic sliders use true geometric interpolation, making
+orders of magnitude accessible without sacrificing spinner precision. Do not
+treat the ends of a slider as validated parameter limits.
 
 ## Bundled examples
 

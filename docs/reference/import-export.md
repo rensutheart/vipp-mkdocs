@@ -6,9 +6,9 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.11.0a2 |
+| Source | Behavior in 0.12.0a1 |
 | --- | --- |
-| Napari layer | Uses an existing viewer layer and the layer metadata exposed to VIPP. |
+| Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 13 deterministic VIPP samples. |
 | OME-TIFF | Reads image series and supported semantic axes, scale, channel, and selected acquisition fields from OME metadata. |
 | ImageJ TIFF | Reads supported hyperstack axes, XY resolution, z spacing, frame interval, and unit fields where present. |
@@ -21,6 +21,21 @@ support does not imply lossless preservation of every source metadata field.
 Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
 as acquisition metadata.
+
+## Source revision contract
+
+File and directory-store sources are identified from their path revision and
+bytes before and after inspection/materialization. VIPP owns a read-only array
+snapshot pinned until **Refresh**. If the source changes during work, the
+result is rejected rather than combining revisions.
+
+Live NumPy-backed napari layers are copied and revision-tokened. Supported data,
+metadata, RGB, axes, scale, translation, unit, rotation, shear, and affine
+changes invalidate stale work. A live lazy array or transform that cannot be
+detached without changing pixels is rejected.
+
+These checks protect one execution boundary; they do not replace an archival
+checksum or persistent dataset identifier.
 
 ## Export choices
 
@@ -61,6 +76,20 @@ dataset; the command is not a general project archiver.
   writers; complete source metadata fidelity is not claimed.
 - Reopen representative outputs in the intended downstream software before a
   large run.
+- Same-shape inputs can still be scientifically misregistered even when their
+  declared grids match. VIPP validates declared axes/calibration; it does not
+  infer biological correspondence or perform registration.
+- Local batch processing pairs sorted file collections by position. Semantic
+  axis iteration, remote collection input, and plate/well/field HCS traversal
+  are outside 0.12.0a1.
+
+## Multi-input grid safety
+
+Operations that combine arrays validate more than shape: axis meaning, sample
+counts, scale, compatible units, and origin must satisfy the operation's grid
+contract. Masks broadcast by unique semantic correspondence, not coincident
+sizes. Image/PSF pairs require compatible spatial sampling. VIPP does not
+silently resample, register, reorder, or repair a transform.
 
 For what workflow and Python export preserve, see the
 [workflow and export contract](workflow-contract.md).

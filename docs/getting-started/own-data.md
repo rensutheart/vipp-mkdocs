@@ -8,13 +8,29 @@ valid is the important part.
 
 | Route | Best for | Important limitation |
 | --- | --- | --- |
-| `napari layer` | Images already opened, cropped, or registered in napari | The workflow depends on a layer being present and correctly selected. |
-| `file path` | A repeatable local file input | Moving or renaming the file breaks the local path. |
+| `napari layer` | Images already opened, cropped, or registered in napari | The workflow depends on a layer being present and correctly selected; unsupported live/lazy transforms can be rejected. |
+| `file path` | A repeatable local file input | Moving, renaming, or replacing the file changes/breaks the source identity. |
 | `sample` | Tutorials, regression checks, and demonstrations | Synthetic data does not establish performance on your assay. |
 | Local OME-Zarr store | Chunked multidimensional data | Many operations are eager and can still materialize large arrays. |
 
 Select `Image Source`, set **Source**, and then use the control specific to that
 route. The napari layer chooser is only shown for `napari layer`.
+
+## Understand the source revision
+
+During one interactive revision, VIPP does not repeatedly read an uncontrolled
+moving target. A local file or directory store is identified before and after
+inspection/materialization, detached into an owned read-only snapshot, and
+pinned until **Refresh**. A revision changed during calculation is rejected.
+
+NumPy-backed napari layers are also copied with a revision token. Data,
+metadata, RGB, axis, scale, translation, unit, rotation, shear, and affine
+events invalidate stale work. VIPP rejects live data or transforms that cannot
+be frozen without changing pixels.
+
+**Refresh** is the explicit instruction to accept the current source revision.
+Record an external checksum or repository identifier for long-term provenance;
+the workflow stores a source parameter/path, not the image bytes.
 
 ## Check metadata before processing
 
@@ -25,6 +41,10 @@ Confirm at minimum:
 - pixel size, z-step, and unit;
 - whether the data is intensity, RGB, a binary mask, or labels;
 - whether the reader selected the intended image/series.
+
+For a multi-input node, also confirm that corresponding axes describe the same
+physical grid. Equal shape does not prove equal scale, units, origin, or axis
+meaning. VIPP rejects detected mismatches rather than resampling silently.
 
 Use `Reorder Axes` only when you understand the actual stored order. Use
 `Set Pixel Size / Units` to repair missing or known-wrong calibration, and
@@ -44,6 +64,10 @@ images from the new acquisition family:
 
 Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.
+
+When moving a schema-1/2 workflow to 0.12, rebuild it deliberately and resolve
+new explicit channel-axis, RGB/intensity mapping, and grid choices. See
+[versions and compatibility](../reference/versioning.md#upgrade-to-0120a1).
 
 ## Protect sensitive data
 

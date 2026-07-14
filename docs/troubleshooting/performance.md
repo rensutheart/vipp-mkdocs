@@ -4,7 +4,9 @@
 
 Try these in order:
 
-1. Turn `Run all in BG` off and compare latency.
+1. Leave `Run all in BG` off initially so adaptive execution can choose between
+   immediate and background work. Turn it on if repeated small recomputes still
+   make interaction uncomfortable.
 2. Disable thumbnails globally.
 3. Switch preview mode from `MIP` to `Slice`.
 4. Turn `Link napari/VIPP sliders` off when you need a fixed reference view.
@@ -14,11 +16,26 @@ Try these in order:
 
 ## Background Execution
 
-`Run all in BG` controls how many graph recomputes are dispatched to background
-processing.
+`Run all in BG` controls whether background execution is forced or adaptive.
 
-- Off: only known slower operations use background mode.
-- On: all recomputes use background mode.
+- Off: small ordinary work can run immediately; known expensive operations and
+  inputs of at least 4,000,000 elements or 32 MiB run in the background.
+- On: all graph recomputes use background mode.
+
+The same large-input policy protects exact inspector work such as automatic
+threshold guides, histogram summaries, colocalization density, Auto Contrast,
+and generated-layer display ranges. The UI may show a calculating state before
+the exact result appears.
+
+Moving a calculation to the background does not sample the image or change its
+numerical method. A complete-data calculation can still take time and compete
+for memory bandwidth.
+
+Exact interior percentiles require one native-dtype working buffer for the
+order-statistic selection. The common integer `0..100` percentile pair uses
+exact extrema without that buffer. Integer Rescale maps the output in bounded
+chunks, while integer Clip stays in the native dtype and avoids a whole-image
+float temporary.
 
 The `Cancel` button cancels queued reruns and asks cooperative operations to
 stop. It cannot forcibly interrupt a NumPy, SciPy, or scikit-image call already

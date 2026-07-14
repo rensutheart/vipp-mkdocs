@@ -12,6 +12,24 @@ rather than treating a thumbnail as evidence for every decision.
 | Label-volume histogram | Size-filter cutoff review | Shape or identity correctness |
 | Table preview | Columns, rows, units, obvious missingness | Statistical validation of measurements |
 
+## Read Display Summaries Correctly
+
+An inspector histogram counts every finite value in the chosen slice or stack,
+then groups those counts into a compact chart. Its chart bins are independent
+of the saved **Float histogram bins** used by histogram-based automatic
+threshold nodes. Changing plot log scale or appearance does not change the
+mask.
+
+The colocalization scatter density, ROI population, and colocalized count are
+also calculated over every ROI voxel. On a large input, wait for the exact
+background calculation to finish before capturing a QC screenshot.
+
+Napari contrast limits are display-only. For a large inspect or pinned layer,
+VIPP may show an explicit provisional dtype range first and replace it with the
+exact full finite range when the background calculation completes. A manual
+contrast adjustment made while waiting is preserved. Neither range changes the
+node output or downstream measurements.
+
 ## Pin an output in napari
 
 1. Select a node with an image-like output.

@@ -8,10 +8,13 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The current public software baseline is **0.11.0a2**. Its `a2` suffix identifies
-the second alpha build in the 0.11.0 release series; it is a tagged pre-release,
-not a nightly build. See [installation](../getting-started/installation.md) for
-the platform-verification status of this release.
+The current public software baseline is **0.12.0a1**. Its `a1` suffix identifies
+the first alpha build in the 0.12.0 release series; it is a tagged pre-release,
+not a nightly build. See [installation](../getting-started/installation.md) and
+the [0.12.0a1 release notes](../releases/0.12.0a1.md).
+
+The `main`/nightly manual can describe behavior newer than the latest tag. Use
+the version selector when you need the manual for an installed release.
 
 ## Match software and manual
 
@@ -22,8 +25,37 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-Keep an original copy, migrate a duplicate, and compare graph structure,
-parameters, dynamic ports, and results on known sample data.
+VIPP 0.12.0a1 uses schema version 3; versions 1 and 2 are rejected rather than
+migrated automatically. Keep an original copy, rebuild a duplicate deliberately,
+and compare graph structure, parameters, sources, axes, channels, physical
+grids, dynamic ports, and results on known sample data. See the
+[workflow contract](workflow-contract.md).
+
+## Upgrade to 0.12.0a1
+
+Schema 3 exists because silently supplying new scientific defaults could change
+results. In particular, 0.12 requires explicit channel-axis and RGB/intensity
+mapping choices for affected operations and strengthens source/grid behavior.
+
+1. Keep the exact older VIPP environment and original workflow read-only.
+2. Record the old graph, parameters, dynamic output ports, input series, axes,
+   channel mapping, scale, units, and representative outputs.
+3. Recreate the workflow in 0.12.0a1. Do **not** edit only the JSON `version`.
+4. Resolve each new required scientific choice explicitly. Do not infer
+   `channel_axis` from a trailing length-three/four dimension unless the data
+   really are declared RGB/RGBA.
+5. Verify every multi-input grid. Equal shape alone no longer establishes
+   compatible axes, sampling, units, or origin.
+6. Compare decisive intermediates and final measurements against known data or
+   reference annotations before batch use.
+7. Regenerate Python exports; generated programs require the exact VIPP runtime
+   version that created them.
+8. Create and preview a new `vipp_batch_config.json`; archive the workflow,
+   config, manifest, sidecars, environment, and validation evidence together.
+
+If the old environment is unavailable, use the JSON and methods notes as a
+reference for manual reconstruction, but do not claim numerical equivalence
+without testing it.
 
 ## Install a release
 
@@ -37,7 +69,7 @@ python -m pip install --pre napari-vipp
 To reproduce a specific alpha exactly, specify the version in a fresh environment:
 
 ```text
-python -m pip install "napari[pyqt6]" "napari-vipp==0.11.0a2"
+python -m pip install "napari[pyqt6]" "napari-vipp==0.12.0a1"
 ```
 
 ## Nightly policy

@@ -35,6 +35,16 @@ Examples:
 - `Split Channels` should be used for a semantic channel axis.
 - `Split Axis` should be used for time, Z, or non-channel axes.
 
+VIPP distinguishes axes explicitly supplied by a reader or user from axes
+inferred from shape. Operations that need scientific meaning can reject an
+inferred-only choice rather than guessing. A trailing dimension of length three
+or four is not, by itself, evidence of RGB/RGBA; a generic `C` axis remains a
+scientific channel axis unless color semantics are declared explicitly.
+
+In workflow schema 3, affected operations persist `channel_axis`. The value
+`-1` means scalar/no-channel data. It does not ask VIPP to detect RGB from
+shape.
+
 ## Physical Scale
 
 Scale-aware measurements use pixel size and units when available.
@@ -50,9 +60,31 @@ Physical scale affects:
 - 3D mesh surface and volume;
 - anisotropic projections and rescaling.
 
+## Physical-grid compatibility
+
+Two arrays with the same shape are not necessarily aligned. Multi-image,
+image/mask, and image/PSF operations can also require compatible:
+
+- semantic axis names and types;
+- sample counts on corresponding axes;
+- physical scale and compatible units;
+- physical origin/translation.
+
+VIPP validates these fields where the operation requires alignment. It does not
+silently register, resample, reorder, reinterpret, or repair an origin to make
+inputs fit. Semantic mask broadcasting follows uniquely corresponding axes,
+not merely equal dimension sizes. Deconvolution additionally requires image/PSF
+sampling compatibility.
+
+Use an explicit, documented preprocessing step outside or inside the graph when
+registration or resampling is scientifically justified, then validate its
+effect.
+
 ## Metadata Is Not Magic
 
-When files lack reliable metadata, VIPP falls back to inferred axes and should
-make that fallback visible. Always check metadata before reporting quantitative
-physical units.
-
+When files lack reliable metadata, VIPP may expose inferred axes but does not
+promote that inference to authoritative meaning. Always check metadata before
+reporting quantitative physical units or relying on an automatic spatial,
+channel, projection, or PSF choice. Malformed/duplicated axes, stale shapes,
+non-finite scale/origin, and non-positive calibration are errors rather than
+triggers for replacement guesses.
