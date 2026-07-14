@@ -2615,8 +2615,8 @@ validate the graph in 0.12. Do not change only the <code>version</code> field.</
 <li>Recreate schema-1/2 graphs in 0.12.0a1. Compare every node, connection,
    dynamic port, parameter, source series, axis, channel, scale, unit, and
    result on known data.</li>
-<li>Select every new required <code>channel_axis</code>, Composite-to-RGB mapping, threshold
-   scope/bin choice, and intensity cutoff deliberately.</li>
+<li>Select every new required channel-axis mode, Composite-to-RGB mapping,
+   threshold scope/bin choice, and intensity cutoff deliberately.</li>
 <li>Regenerate exported Python. A 0.12 export records its generating VIPP
    version and refuses a different runtime.</li>
 <li>Preview a batch again and save a new batch config. Do not treat an older
@@ -2639,8 +2639,32 @@ is available.</p>
 <p><code>Composite to RGB</code> preserves native numeric values by default. Independent
 per-channel 1st-to-99th-percentile normalization is available only as an
 explicit lossy mapping. Wide integers, floating overflow, non-finite, complex,
-object, duplicated-axis, and conflicting-axis cases are validated rather than
-silently coerced.</p>
+object, duplicated-axis, invalid manual index, and ambiguous automatic-axis
+cases are validated rather than silently coerced. Manual axis mode deliberately
+permits any valid chosen axis—including Z when metadata declares a separate C
+axis.</p>
+<p>Composite configuration now exposes two persisted decisions:</p>
+<ul>
+<li><strong>Channel axis mode</strong> — <code>Auto</code> resolves the explicit carried channel axis and
+  shows it in a disabled selector; <code>Manual</code> enables any valid explicit axis
+  choice, including a deliberate spatial-axis mapping.</li>
+<li><strong>RGB mapping mode</strong> — <code>Auto</code> shows a disabled resolved mapping;
+  <code>Manual</code> enables one assignment for every detected source channel.</li>
+</ul>
+<p>Manual choices are <code>Unassigned</code>, Red, Green, Blue, Magenta, Cyan, and Yellow.
+Unassigned channels contribute nothing; composite colours and repeated
+assignments mix additively. The dynamic form supports arbitrary source-channel
+counts, not only three RGB selectors. Auto mapping preserves declared encoded
+RGB/RGBA order (alpha ignored) or blends <strong>all</strong> fluorescence channels using
+their carried pseudo-colours and the repeating Blue/Green/Red/Magenta/Yellow/
+Cyan fallback. Legacy numeric axis and RGB-plane fields remain hidden only for
+workflow compatibility.</p>
+<p>Changing these controls invalidates Composite → RGB and its downstream
+dependants only. Every calculated upstream manual result—including a
+deconvolution several hops away—remains cached in Keep-all, Smart, and
+Low-memory modes. Automatic upstream nodes are not invalidated by the edit, but
+their arrays remain eligible for normal Smart/Low-memory pruning and are
+recomputed if needed.</p>
 <h3 id="stable-sources-and-physical-grids">Stable sources and physical grids<a class="headerlink" href="#stable-sources-and-physical-grids" title="Permanent link">&para;</a></h3>
 <p>Local files and directory stores receive an identity derived from their path
 revision and bytes. VIPP checks that identity around inspection and
@@ -2855,7 +2879,7 @@ limitations beside any scientific claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 19:12:57 UTC">July 14, 2026</span>
   </span>
 
     
