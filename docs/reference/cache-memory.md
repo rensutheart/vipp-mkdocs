@@ -20,6 +20,12 @@ from the node currently being edited. A downstream Composite → RGB mapping edi
 therefore invalidates the composite and its descendants without discarding the
 manual result that feeds it.
 
+When a stale manual node blocks a branch, VIPP also temporarily retains every
+dark-amber downstream result as one coherent cached snapshot. Smart and
+Low-memory modes do not prune that waiting branch. Recalculating the
+bright-amber barrier replaces the snapshot in dependency order, after which
+the normal cache policy applies again.
+
 Automatic upstream nodes are likewise not invalidated by an unrelated
 downstream edit, but Smart/Low-memory mode may intentionally prune their cached
 arrays. VIPP recomputes a pruned automatic intermediate when needed. Mark a

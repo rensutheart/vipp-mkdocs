@@ -65,6 +65,20 @@ execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
 **Pin selected**, and **Save selected output…**.
 
+### Stale and waiting node colors
+
+Manual/cached execution barriers apply to every VIPP operation that uses the
+manual policy, including measurements, graph analysis, colocalization, and
+deconvolution.
+
+| Graph color | Meaning | Action |
+| --- | --- | --- |
+| Bright amber | This is the first stale manual node stopping the branch. Its cached result no longer matches the current upstream graph. | Select this node and choose **Recalculate**, or use **Calculate all**. |
+| Dark amber | This downstream result is also stale, but it is waiting for the bright-amber upstream barrier. VIPP retains the last coherent cached branch and does not recalculate this node yet. | Resolve the bright-amber node first; this node will then run or become the next actionable barrier. |
+
+This distinction also applies during background execution. A dark-amber node
+does not show a processing spinner until it is actually runnable.
+
 ## Auto Contrast Versus Display Contrast
 
 **Auto Contrast** appears for `Linear Scale + Offset`. It calculates exact
