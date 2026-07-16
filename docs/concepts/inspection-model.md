@@ -29,6 +29,36 @@ required value contributes even though the result is grouped for display.
 | Colocalization scatter | Every ROI voxel contributes to the 255 × 255 density grid; ROI population and the number meeting both thresholds are also exact. | Colormap, logarithmic count display, and guide styling do not change thresholds or results. |
 | Inspect or pinned image contrast | The final display range spans every finite value and zero, using exact finite extrema. | Contrast limits affect only rendering in napari, never the stored node output or downstream calculations. |
 
+### Progressive inspection during a run
+
+As each node completes in a background run, its card becomes current and its
+sampled thumbnail updates immediately; later cards can still be calculating or
+waiting. If the active cache policy already retains that node, selecting or
+pinning it and opening its table or metadata uses the same newly completed
+run-scoped payload. An otherwise prunable Low-memory intermediate gets the card
+state and thumbnail without forcing VIPP to retain its full-volume payload.
+
+This is a progress view, not a partial scientific commit. VIPP publishes the
+new workflow cache only when the complete run is accepted against the same
+graph and source revisions. Cancellation, failure, a newer edit, or a
+superseding run removes the temporary overlays and restores the last coherent
+inspection state.
+
+### Reused and replaced napari layers
+
+Compatible generated `Image` results reuse the same napari layer object. VIPP
+replaces its data reference with a non-writeable view of the exact output and
+resets colormap, blending, contrast, scale, and related metadata. This avoids a
+duplicate full-volume copy and prevents display choices from the previously
+selected node leaking into the new one. Any pending contrast result for the old
+selection is invalidated.
+
+VIPP creates a replacement layer when the presentation class or layout is
+genuinely incompatible, such as `Image` versus label-ID `Labels`, or an RGB
+layout change. A Boolean mask pinned as a `Labels` overlay requires a uint8
+presentation copy. The original cached Boolean array remains the scientific
+output used by downstream nodes and saving.
+
 ### Large generated layers
 
 When an inspect, pinned, or RGB-channel layer is large, VIPP first supplies a

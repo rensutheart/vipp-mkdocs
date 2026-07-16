@@ -1,6 +1,6 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.12.0a1 application source.
+This page summarizes the evidence shipped with the 0.12.0a2 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.
 
@@ -19,7 +19,10 @@ every assay.
 - an analytical phantom report exercises calibrated object/mesh morphology;
 - method notes and focused tests cover colocalization calculations;
 - tables, CSV/TSV writing, workflow JSON, and Python generation have automated
-  behavior checks.
+  behavior checks; and
+- focused UI/execution tests cover isolated-tuning boundaries, actionable and
+  waiting stale states, progressive node previews, compatible layer reuse, and
+  rejection of stale contrast/histogram results.
 
 Release CI covers package/manifest, lint, and test behavior on Linux and
 Windows. A passing CI matrix is not equivalent to a manual GUI smoke pass on
@@ -59,8 +62,11 @@ same as an external comparison or assay validation. The distinction matters:
 
 ## Release-specific limitations
 
-- Workflow schema 1 and 2 are intentionally rejected; 0.12.0a1 has no automatic
+- Workflow schema 1 and 2 are intentionally rejected; 0.12.0a2 has no automatic
   migration.
+- Valid 0.12.0a1 schema-3 workflows load structurally, but cached pixels/tables
+  are not serialized and exported Python is runtime-version pinned. Recalculate,
+  regenerate exports, and validate after upgrading.
 - Batch processing is local-file and sorted-position oriented. It does not
   iterate selected T/C/Z combinations or discover plate/well/field structure.
 - Many operations are eager even when a source format supports lazy/chunked

@@ -27,7 +27,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.12.0a1 accepts schema version 3 and rejects versions 1 and 2 with an
+VIPP 0.12.0a2 accepts schema version 3 and rejects versions 1 and 2 with an
 explicit error. There is no automatic migration path. This prevents an old file
 from being silently reinterpreted with invented threshold, cutoff, channel-axis,
 color, or intensity-mapping choices.
@@ -37,6 +37,14 @@ that created it when it must be inspected or run. Rebuild the graph in 0.12
 from the old graph and methods notes, then compare nodes, connections, dynamic
 ports, parameters, sources, metadata, and results on known data. Do not change
 the JSON version number by hand.
+
+0.12.0a2 does not increment the schema. A valid schema-3 workflow saved by
+0.12.0a1 therefore loads structurally in 0.12.0a2. That means the graph,
+parameters, connections, and persisted workflow state can be reconstructed; it
+does not mean prior calculated results were embedded or revalidated. Scientific
+pixel/table caches, thumbnails, pinned layers, and other interactive display
+state are not serialized in workflow JSON. Recalculate and validate the graph
+after upgrading.
 
 Alpha compatibility is not guaranteed across future schema or operation
 changes. Preserve the original file and exact VIPP version, and test a duplicate
@@ -69,7 +77,8 @@ supported `ImageState` through source and save paths and accepts explicit
 bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
-different runtime. Regenerate and revalidate exported code after an upgrade.
+different runtime. Regenerate and revalidate exported code after every VIPP
+upgrade, including 0.12.0a1 to 0.12.0a2.
 Interactive caches, thumbnails, pinned layers, and graph layout remain UI
 state and are not reproduced.
 

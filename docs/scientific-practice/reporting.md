@@ -34,7 +34,7 @@ Report:
 
 ## Suggested concise wording
 
-> Images were processed with napari-vipp 0.12.0a1 using the archived workflow
+> Images were processed with napari-vipp 0.12.0a2 using the archived workflow
 > JSON [identifier]. The workflow was developed on [development set] and frozen
 > before evaluation on [held-out set]. Intermediate masks and labels were
 > reviewed using predefined criteria [reference], and [metrics] were calculated

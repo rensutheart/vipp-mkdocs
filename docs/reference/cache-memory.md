@@ -21,10 +21,21 @@ therefore invalidates the composite and its descendants without discarding the
 manual result that feeds it.
 
 When a stale manual node blocks a branch, VIPP also temporarily retains every
-dark-amber downstream result as one coherent cached snapshot. Smart and
-Low-memory modes do not prune that waiting branch. Recalculating the
-bright-amber barrier replaces the snapshot in dependency order, after which
-the normal cache policy applies again.
+dark-amber downstream result that already exists as one coherent cached
+snapshot. A waiting node with no previous result remains unavailable. Smart
+and Low-memory modes do not prune existing results from that waiting branch.
+Recalculating the bright-amber barrier replaces the snapshot in dependency
+order, after which the normal cache policy applies again.
+
+The same retention rule protects existing results in a branch held by **Tune
+node in isolation**. Starting isolation requires a coherent cached result for
+the selected node and no pending or in-flight pipeline, source-load, or batch
+work; it does not require every descendant to have an output. After the first
+parameter edit, the tuned root is bright amber and its descendants remain
+darker amber until **Apply and continue**, **Calculate all**, or **Cancel
+tuning** releases the temporary boundary. Descendants without a previous
+result remain unavailable while they wait. The boundary and restore snapshot
+are transient and are not serialized.
 
 Automatic upstream nodes are likewise not invalidated by an unrelated
 downstream edit, but Smart/Low-memory mode may intentionally prune their cached
@@ -91,6 +102,26 @@ Several inspector calculations follow the same principle:
 
 The provisional layer range is display-only. It does not make the node output
 or downstream analysis provisional.
+
+## Progressive Display, Atomic Scientific Cache
+
+During a background graph run, each completed node can update its card state and
+sampled thumbnail immediately while later nodes continue. If the selected cache
+mode already retains that node, the same run-scoped payload can also update its
+inspection layer, pinned layer, table preview, and metadata. Smart and
+Low-memory modes do not retain an otherwise prunable full-volume intermediate
+merely to provide this progress display.
+
+These updates are presentation overlays owned by the active run. They do not
+partially publish results into the live scientific cache. VIPP commits the
+workflow outputs and execution states only after the complete result is
+accepted against the same workflow and source revisions. Cancellation,
+failure, a newer edit, or a superseding run discards the overlays and restores
+the previous coherent cache view.
+
+This distinction matters when monitoring a long pipeline: a newly grey/current
+card and thumbnail mean that node completed in the active run, but the workflow
+as a whole is not committed until the run finishes successfully.
 
 !!! note "Background does not mean free"
 

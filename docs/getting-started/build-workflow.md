@@ -61,7 +61,7 @@ Choose **Save workflow…** and use a name that communicates its purpose and
 release, for example:
 
 ```text
-nuclei-segmentation-vipp-0.12.0a1.json
+nuclei-segmentation-vipp-0.12.0a2.json
 ```
 
 Also record:

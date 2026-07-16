@@ -31,6 +31,44 @@ Work from upstream to downstream:
 Changing several stages together makes it difficult to know which decision
 improved or damaged the result.
 
+## Isolate a fast parameter decision
+
+Use **Tune node in isolation** when the selected operation is quick to evaluate
+but its downstream branch is expensive. The selected node must have a coherent
+cached result, and no dirty edit, pipeline calculation, source load, or batch
+run can be pending or in flight. Its descendants need not all have outputs.
+
+During isolation, edits recalculate only the selected node and any missing
+upstream dependency. The tuned node is bright amber. Its downstream closure is
+darker amber and keeps each last coherent result that already exists. A
+descendant without a previous result remains unavailable. Existing waiting
+previews are useful as a reference, but they are not evidence for the new
+parameter choice.
+
+After inspecting the local result:
+
+- choose **Apply and continue** to keep the latest parameters and result, then
+  resume calculation from the direct downstream nodes;
+- choose **Cancel tuning** to restore the session-start parameters, output, and
+  execution state without recalculating the held branch; or
+- choose **Calculate all** to apply the result, leave isolation, and continue
+  the graph under the normal automatic/manual-node policy.
+
+Only one node can be isolated at a time. Undo/redo and edits to graph structure,
+layout, notes, or the loaded workflow first commit the current tuning result,
+so Cancel never restores across a different graph revision. Isolation is
+transient interactive state and is not serialized into workflow JSON; save the
+workflow after accepting the parameter decision.
+
+Isolation changes *when* descendants run, not the calculation performed by the
+tuned node. Keep the same development/held-out separation and inspect failures
+across representative samples before freezing the workflow.
+
+![Gaussian Blur being tuned in isolation while the darker-amber downstream branch remains paused](../assets/screenshots/workflows/isolated-node-tuning.png)
+
+*The selected node has a current local result. Apply resumes the darker-amber
+branch; Cancel restores the calculated session-start result.*
+
 ## Choose intensity cutoffs deliberately
 
 `Rescale Intensity` and `Clip` expose modes that look similar but make different

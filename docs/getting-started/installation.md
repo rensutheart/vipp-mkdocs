@@ -1,9 +1,9 @@
 # Install VIPP
 
-VIPP 0.12.0a1 requires **Python 3.12 or newer**. Because the current release is
+VIPP 0.12.0a2 requires **Python 3.12 or newer**. Because the current release is
 a pre-release, pip needs the `--pre` flag to select it from PyPI.
 
-!!! info "Platform verification for 0.12.0a1"
+!!! info "Platform verification for 0.12.0a2"
     Release CI exercises the application and package on Linux and Windows.
     A current manual GUI installation/smoke pass is still required before a
     platform should be described as broadly verified. Treat the commands below
@@ -76,7 +76,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.12.0a1
+0.12.0a2
 ```
 
 ## Optional microscope readers
@@ -110,7 +110,10 @@ build.
 
 Before upgrading an existing workflow, read
 [versions and compatibility](../reference/versioning.md) and preserve the old
-environment. Schema-1/2 workflows do not open in 0.12.0a1.
+environment. Schema-1/2 workflows do not open in 0.12.0a2. Valid schema-3
+workflows from 0.12.0a1 load structurally, but cached results are not serialized;
+recalculate and validate them after upgrading. Regenerate exported Python too,
+because it requires the exact VIPP runtime version that created it.
 
 ## Developer installation
 

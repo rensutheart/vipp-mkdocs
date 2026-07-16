@@ -26,14 +26,14 @@ Before moving `stable`:
    be labelled verified; state other platforms as pending.
 5. Run `mkdocs build --strict` and visually review key pages.
 6. In GitHub Actions, run **Deploy versioned documentation** with a version such
-   as `0.12.0a1` and `make_stable=true`.
+   as `0.12.0a2` and `make_stable=true`.
 7. Open the public site, select both the numbered release and `stable`, then
    verify installation, search, code highlighting, redirects, and images.
 
 The workflow executes the equivalent of:
 
 ```text
-mike deploy --push --update-aliases 0.12.0a1 stable
+mike deploy --push --update-aliases 0.12.0a2 stable
 mike set-default --push stable
 ```
 
@@ -44,7 +44,7 @@ record it in the repository history.
 ## Preview versioned output locally
 
 ```text
-mike deploy 0.12.0a1 stable
+mike deploy 0.12.0a2 stable
 mike deploy nightly
 mike serve
 ```

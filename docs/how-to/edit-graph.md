@@ -29,6 +29,24 @@ or table merge still depends on it.
   chosen, or what an exclusion means.
 - Use graph search to find titles, operation IDs, tunnel names, and batch tags.
 
+### Choose a port-label mode
+
+The **Port labels** setting has three display modes:
+
+| Mode | Behavior |
+| --- | --- |
+| `Ambiguous only` | Default. Show persistent names on nodes with more than one input or output, where choosing the correct port matters. |
+| `Show all` | Label every input and output port. Useful while learning or reviewing a workflow. |
+| `Hide all` | Hide persistent labels for the most compact graph; hover and connection behavior are unchanged. |
+
+Long names are elided on the card and show their full text in a tooltip. Labels
+reserve card space but deliberately do not reposition the graph when the mode
+changes. If existing cards now overlap, the status bar reports how many pairs
+overlap. Run **Auto structure graph** to rebuild a size-aware source-to-sink
+layout, or move those cards manually. Auto structure remains a one-shot,
+undoable layout edit; port-label visibility does not change the workflow's
+connections or scientific calculation.
+
 ## Use tunnels for repeated sources
 
 Named tunnels let one output feed distant nodes without long crossing wires.
@@ -60,3 +78,10 @@ Save a named workflow checkpoint before replacing a segmentation method,
 changing axes, or rewiring measurement branches. Version control is preferable
 for important workflow JSON files because it makes parameter and connection
 changes reviewable.
+
+If a node is currently being tuned in isolation, a history-backed graph edit
+(including layout, notes, undo/redo, loading another workflow, or structural
+changes) first applies the current tuning result. This prevents **Cancel
+tuning** from restoring state across two different graph revisions. The
+temporary isolation boundary itself is session-only and is never saved in the
+workflow.

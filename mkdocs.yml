@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.12.0a2: releases/0.12.0a2.md
       - 0.12.0a1: releases/0.12.0a1.md
   - Start here:
       - Start here: getting-started/index.md

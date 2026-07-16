@@ -1,10 +1,11 @@
 # Restore with a PSF
 
 Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.12.0a1. The
+RL with total-variation regularization (RL-TV) are public in 0.12.0a2. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
-stale, its descendants retain their last coherent cached results and wait.
+stale, its descendants wait and retain their last coherent cached results when
+those exist. A descendant with no prior output remains unavailable.
 Recalculating the deconvolution resumes that downstream branch.
 
 !!! caution "Evidence boundary"
@@ -12,6 +13,40 @@ Recalculating the deconvolution resumes that downstream branch.
     not establish broad restoration quality on real microscopes, acquisition
     settings, or biological targets. Review noise, ringing, edges, and apparent
     structures against an appropriate reference.
+
+## Read the PSF preflight
+
+The RL and RL-TV inspector presents a read-only PSF preflight before expensive
+restoration. It groups evidence rather than rendering every diagnostic in the
+same warning color:
+
+| Status | Meaning | Response |
+| --- | --- | --- |
+| `Ready` | All checks that can currently be performed passed. | Confirm that the PSF model and acquisition still match; Ready is not a biological-quality guarantee. |
+| `Warning` | Calculation can run, but one or more conditions may reduce scientific reliability. | Read **Needs attention** and the corresponding **What to do next** actions before interpreting the result. |
+| `Invalid` | A required property is incompatible or unsafe for the requested calculation. | Fix the invalid item before calculating. |
+| `Unknown` | Inputs, values, or spatial rank are unresolved, or available metadata cannot be interpreted well enough to complete one or more checks. | Resolve or calculate the named input or repair its metadata, then return to the deconvolution node. |
+
+Missing physical calibration is a `Warning`, not `Unknown`: calculation can
+run, but VIPP cannot verify image-versus-PSF sampling compatibility and does
+not invent unit spacing.
+
+**Checks passed** lists affirmative results such as compatible rank and physical
+sampling, finite non-negative values, normalization near one, odd dimensions,
+centering, contained support, or a met conventional-widefield Nyquist estimate.
+A passed item is not a warning simply because it contains numbers such as
+`sum = 1` or `peak offset = 0`.
+
+**Needs attention** separates warnings from invalid conditions and explains the
+specific consequence. **Could not check** identifies unavailable evidence
+rather than guessing. **What to do next** translates the detected issue into
+contextual actions; it does not silently modify, crop, resample, or normalize
+the scientific inputs.
+
+The overall status is the most serious available result. A Nyquist warning is
+reported alongside PSF checks because it concerns acquisition sampling, while
+support and boundary-tail warnings concern the finite PSF and image arrays.
+These conditions can occur independently and can require different actions.
 
 ## Use a measured PSF
 
@@ -34,10 +69,11 @@ flowchart LR
 5. Compare each output with the unchanged input; do not feed RL into RL-TV when
    the intent is method comparison.
 
-![An undocked VIPP graph with one prepared PSF feeding parallel Richardson-Lucy and RL-TV branches](../assets/screenshots/workflows/deconvolution-alternative-branches.png)
+![An undocked VIPP graph with one prepared PSF feeding parallel Richardson-Lucy and RL-TV branches beside structured PSF preflight guidance](../assets/screenshots/workflows/deconvolution-alternative-branches.png)
 
 *Both calculated alternatives use the same image and prepared PSF. The RL-TV
-inspector shows the iteration and regularization choices used for that branch.*
+inspector separates passed checks, attention items, and next actions instead of
+presenting every diagnostic as an undifferentiated warning.*
 
 ## Generate a Born-Wolf PSF
 
@@ -115,6 +151,13 @@ Two warnings can therefore coexist without contradiction:
 - **Tail check passed, image-extent warning:** the kernel window contains its
   modeled tail adequately, but the image is too short on an axis for every
   output location to have complete support under the current boundary model.
+
+The image-extent warning distinguishes equality from excess. When the PSF and
+image have the same number of samples on an axis, exactly one convolution
+alignment has full support and there is no surrounding fully supported
+interior margin. When the PSF has more samples than the image, no output
+position on that axis has full support. Both cases can calculate using the
+current zero-outside-image boundary assumption.
 
 Do not shrink a PSF only to remove an image-extent warning. For volumetric
 restoration, possible responses include acquiring guard planes around the
