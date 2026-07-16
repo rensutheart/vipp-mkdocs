@@ -540,6 +540,8 @@
       
         
       
+        
+      
     
     
     
@@ -583,6 +585,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1428,6 +1453,24 @@
   
     <nav class="md-nav" aria-label="Calculation And Display Are Different Contracts">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#progressive-inspection-during-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progressive inspection during a run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reused-and-replaced-napari-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reused and replaced napari layers
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#large-generated-layers" class="md-nav__link">
@@ -2358,6 +2401,24 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#progressive-inspection-during-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progressive inspection during a run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reused-and-replaced-napari-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reused and replaced napari layers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#large-generated-layers" class="md-nav__link">
     <span class="md-ellipsis">
       Large generated layers
@@ -2494,6 +2555,30 @@ required value contributes even though the result is grouped for display.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="progressive-inspection-during-a-run">Progressive inspection during a run<a class="headerlink" href="#progressive-inspection-during-a-run" title="Permanent link">&para;</a></h3>
+<p>As each node completes in a background run, its card becomes current and its
+sampled thumbnail updates immediately; later cards can still be calculating or
+waiting. If the active cache policy already retains that node, selecting or
+pinning it and opening its table or metadata uses the same newly completed
+run-scoped payload. An otherwise prunable Low-memory intermediate gets the card
+state and thumbnail without forcing VIPP to retain its full-volume payload.</p>
+<p>This is a progress view, not a partial scientific commit. VIPP publishes the
+new workflow cache only when the complete run is accepted against the same
+graph and source revisions. Cancellation, failure, a newer edit, or a
+superseding run removes the temporary overlays and restores the last coherent
+inspection state.</p>
+<h3 id="reused-and-replaced-napari-layers">Reused and replaced napari layers<a class="headerlink" href="#reused-and-replaced-napari-layers" title="Permanent link">&para;</a></h3>
+<p>Compatible generated <code>Image</code> results reuse the same napari layer object. VIPP
+replaces its data reference with a non-writeable view of the exact output and
+resets colormap, blending, contrast, scale, and related metadata. This avoids a
+duplicate full-volume copy and prevents display choices from the previously
+selected node leaking into the new one. Any pending contrast result for the old
+selection is invalidated.</p>
+<p>VIPP creates a replacement layer when the presentation class or layout is
+genuinely incompatible, such as <code>Image</code> versus label-ID <code>Labels</code>, or an RGB
+layout change. A Boolean mask pinned as a <code>Labels</code> overlay requires a uint8
+presentation copy. The original cached Boolean array remains the scientific
+output used by downstream nodes and saving.</p>
 <h3 id="large-generated-layers">Large generated layers<a class="headerlink" href="#large-generated-layers" title="Permanent link">&para;</a></h3>
 <p>When an inspect, pinned, or RGB-channel layer is large, VIPP first supplies a
 provisional dtype-based contrast range so napari can show the layer without
@@ -2579,7 +2664,7 @@ channel.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
   </span>
 
     

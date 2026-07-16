@@ -540,6 +540,8 @@
       
         
       
+        
+      
     
     
     
@@ -583,6 +585,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1029,6 +1054,15 @@
       On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#read-the-psf-preflight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read the PSF preflight
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#use-a-measured-psf" class="md-nav__link">
@@ -2390,6 +2424,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#read-the-psf-preflight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read the PSF preflight
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#use-a-measured-psf" class="md-nav__link">
     <span class="md-ellipsis">
       Use a measured PSF
@@ -2517,10 +2560,11 @@
 
 <h1 id="restore-with-a-psf">Restore with a PSF<a class="headerlink" href="#restore-with-a-psf" title="Permanent link">&para;</a></h1>
 <p>Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.12.0a1. The
+RL with total-variation regularization (RL-TV) are public in 0.12.0a2. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
-stale, its descendants retain their last coherent cached results and wait.
+stale, its descendants wait and retain their last coherent cached results when
+those exist. A descendant with no prior output remains unavailable.
 Recalculating the deconvolution resumes that downstream branch.</p>
 <div class="admonition caution">
 <p class="admonition-title">Evidence boundary</p>
@@ -2529,6 +2573,58 @@ not establish broad restoration quality on real microscopes, acquisition
 settings, or biological targets. Review noise, ringing, edges, and apparent
 structures against an appropriate reference.</p>
 </div>
+<h2 id="read-the-psf-preflight">Read the PSF preflight<a class="headerlink" href="#read-the-psf-preflight" title="Permanent link">&para;</a></h2>
+<p>The RL and RL-TV inspector presents a read-only PSF preflight before expensive
+restoration. It groups evidence rather than rendering every diagnostic in the
+same warning color:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ready</code></td>
+<td>All checks that can currently be performed passed.</td>
+<td>Confirm that the PSF model and acquisition still match; Ready is not a biological-quality guarantee.</td>
+</tr>
+<tr>
+<td><code>Warning</code></td>
+<td>Calculation can run, but one or more conditions may reduce scientific reliability.</td>
+<td>Read <strong>Needs attention</strong> and the corresponding <strong>What to do next</strong> actions before interpreting the result.</td>
+</tr>
+<tr>
+<td><code>Invalid</code></td>
+<td>A required property is incompatible or unsafe for the requested calculation.</td>
+<td>Fix the invalid item before calculating.</td>
+</tr>
+<tr>
+<td><code>Unknown</code></td>
+<td>Inputs, values, or spatial rank are unresolved, or available metadata cannot be interpreted well enough to complete one or more checks.</td>
+<td>Resolve or calculate the named input or repair its metadata, then return to the deconvolution node.</td>
+</tr>
+</tbody>
+</table>
+<p>Missing physical calibration is a <code>Warning</code>, not <code>Unknown</code>: calculation can
+run, but VIPP cannot verify image-versus-PSF sampling compatibility and does
+not invent unit spacing.</p>
+<p><strong>Checks passed</strong> lists affirmative results such as compatible rank and physical
+sampling, finite non-negative values, normalization near one, odd dimensions,
+centering, contained support, or a met conventional-widefield Nyquist estimate.
+A passed item is not a warning simply because it contains numbers such as
+<code>sum = 1</code> or <code>peak offset = 0</code>.</p>
+<p><strong>Needs attention</strong> separates warnings from invalid conditions and explains the
+specific consequence. <strong>Could not check</strong> identifies unavailable evidence
+rather than guessing. <strong>What to do next</strong> translates the detected issue into
+contextual actions; it does not silently modify, crop, resample, or normalize
+the scientific inputs.</p>
+<p>The overall status is the most serious available result. A Nyquist warning is
+reported alongside PSF checks because it concerns acquisition sampling, while
+support and boundary-tail warnings concern the finite PSF and image arrays.
+These conditions can occur independently and can require different actions.</p>
 <h2 id="use-a-measured-psf">Use a measured PSF<a class="headerlink" href="#use-a-measured-psf" title="Permanent link">&para;</a></h2>
 <p>The image and PSF are independent inputs; the two restoration methods branch
 in parallel for comparison:</p>
@@ -2546,9 +2642,10 @@ in parallel for comparison:</p>
 <li>Compare each output with the unchanged input; do not feed RL into RL-TV when
    the intent is method comparison.</li>
 </ol>
-<p><img alt="An undocked VIPP graph with one prepared PSF feeding parallel Richardson-Lucy and RL-TV branches" src="../../assets/screenshots/workflows/deconvolution-alternative-branches.png" /></p>
+<p><img alt="An undocked VIPP graph with one prepared PSF feeding parallel Richardson-Lucy and RL-TV branches beside structured PSF preflight guidance" src="../../assets/screenshots/workflows/deconvolution-alternative-branches.png" /></p>
 <p><em>Both calculated alternatives use the same image and prepared PSF. The RL-TV
-inspector shows the iteration and regularization choices used for that branch.</em></p>
+inspector separates passed checks, attention items, and next actions instead of
+presenting every diagnostic as an undifferentiated warning.</em></p>
 <h2 id="generate-a-born-wolf-psf">Generate a Born-Wolf PSF<a class="headerlink" href="#generate-a-born-wolf-psf" title="Permanent link">&para;</a></h2>
 <p><code>Born-Wolf PSF</code> uses a reference image to resolve compatible axes/channels and
 can draw on supported pixel size, z-step, channel, and objective metadata.
@@ -2638,6 +2735,12 @@ energy is below exactly 1%.</p>
   modeled tail adequately, but the image is too short on an axis for every
   output location to have complete support under the current boundary model.</li>
 </ul>
+<p>The image-extent warning distinguishes equality from excess. When the PSF and
+image have the same number of samples on an axis, exactly one convolution
+alignment has full support and there is no surrounding fully supported
+interior margin. When the PSF has more samples than the image, no output
+position on that axis has full support. Both cases can calculate using the
+current zero-outside-image boundary assumption.</p>
 <p>Do not shrink a PSF only to remove an image-extent warning. For volumetric
 restoration, possible responses include acquiring guard planes around the
 region of interest, interpreting or cropping affected output margins, or using
@@ -2800,7 +2903,7 @@ evidence gap; see <a href="../../reference/validation-status/">validation status
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 10:43:49 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
   </span>
 
     

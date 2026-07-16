@@ -540,6 +540,8 @@
       
         
       
+        
+      
     
     
     
@@ -583,6 +585,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1754,6 +1779,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Execution and memory settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tune-one-node-in-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tune one node in isolation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1767,9 +1807,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stale-and-waiting-node-colors" class="md-nav__link">
+  <a href="#numeric-parameter-entry" class="md-nav__link">
     <span class="md-ellipsis">
-      Stale and waiting node colors
+      Numeric parameter entry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-execution-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual execution colors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-napari-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated napari layers
     </span>
   </a>
   
@@ -2390,6 +2448,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Execution and memory settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tune-one-node-in-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tune one node in isolation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2403,9 +2476,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stale-and-waiting-node-colors" class="md-nav__link">
+  <a href="#numeric-parameter-entry" class="md-nav__link">
     <span class="md-ellipsis">
-      Stale and waiting node colors
+      Numeric parameter entry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-execution-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual execution colors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-napari-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated napari layers
     </span>
   </a>
   
@@ -2468,7 +2559,7 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.12.0a1. Controls can collapse into
+<p>Labels below match napari-vipp 0.12.0a2. Controls can collapse into
 <strong>Settings</strong> when the window is narrow.</p>
 <h2 id="workflow-toolbar">Workflow toolbar<a class="headerlink" href="#workflow-toolbar" title="Permanent link">&para;</a></h2>
 <table>
@@ -2525,7 +2616,7 @@
 </tr>
 <tr>
 <td><strong>Calculate all</strong></td>
-<td>Calculate manual nodes that are not current.</td>
+<td>Calculate manual nodes that are not current. During isolated tuning, first apply the tuned result and release the temporary downstream boundary.</td>
 </tr>
 <tr>
 <td><strong>Undo / Redo</strong></td>
@@ -2567,11 +2658,21 @@
 <td>Includes per-node thumbnail visibility in workflow UI state.</td>
 </tr>
 <tr>
+<td>Port labels</td>
+<td><code>Ambiguous only</code> (default) labels multi-input or multi-output nodes, <code>Show all</code> labels every port, and <code>Hide all</code> removes persistent labels.</td>
+</tr>
+<tr>
 <td>Graph zoom</td>
 <td>Scales graph cards; reset returns to 100%.</td>
 </tr>
 </tbody>
 </table>
+<p>Long port names are shortened on the card and retain their full text in a
+tooltip. Changing the label mode can make an already tightly packed layout
+overlap; VIPP reports the number of overlapping card pairs in the status bar.
+Use <strong>Auto structure graph</strong> to make label-aware space, or move the affected
+cards manually. Label visibility is a graph-display choice and never changes
+connections or processed data.</p>
 <h2 id="execution-and-memory-settings">Execution and memory settings<a class="headerlink" href="#execution-and-memory-settings" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2618,12 +2719,43 @@ when their inputs are large.</p>
 <p>Background execution changes <em>where</em> work runs, not the method or the values it
 uses. Exact operations still inspect the complete required population. They may
 consume CPU time and memory while napari remains responsive.</p>
+<h3 id="tune-one-node-in-isolation">Tune one node in isolation<a class="headerlink" href="#tune-one-node-in-isolation" title="Permanent link">&para;</a></h3>
+<p><strong>Tune node in isolation</strong> is available in the selected-node inspector and the
+node context menu. The selected node must have a coherent cached result, and no
+dirty edit, pipeline calculation, source load, or batch run can be pending or
+in flight. Downstream nodes do not all need to have outputs.</p>
+<p>While the session is active, parameter edits recalculate the selected node but
+pause propagation beyond it. The tuned node is the bright-amber actionable
+frontier. Its downstream closure is darker amber and labelled as waiting; those
+cards keep their last coherent results when they have them and otherwise remain
+unavailable. Neither case may be interpreted as a result of the new parameter
+values.</p>
+<ul>
+<li><strong>Apply and continue</strong> keeps the latest parameters and local result, releases
+  the boundary, and resumes calculation from the node's direct descendants.</li>
+<li><strong>Cancel tuning</strong> restores the parameters, output, and execution state that
+  were current when the session began without recalculating the held branch.</li>
+<li><strong>Calculate all</strong> applies the current tuning result before performing its
+  ordinary automatic and manual-node scheduling.</li>
+</ul>
+<p>Only one node can be isolated at a time. A graph, layout, note, workflow-load,
+undo/redo, or other history-backed edit first commits the current tuning result,
+so cancellation cannot cross graph revisions. The isolation boundary and its
+restoration snapshot are transient session state; they are not written to
+workflow JSON.</p>
 <h2 id="inspector-surfaces">Inspector surfaces<a class="headerlink" href="#inspector-surfaces" title="Permanent link">&para;</a></h2>
 <p>Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
 <strong>Pin selected</strong>, and <strong>Save selected output…</strong>.</p>
-<h3 id="stale-and-waiting-node-colors">Stale and waiting node colors<a class="headerlink" href="#stale-and-waiting-node-colors" title="Permanent link">&para;</a></h3>
+<h3 id="numeric-parameter-entry">Numeric parameter entry<a class="headerlink" href="#numeric-parameter-entry" title="Permanent link">&para;</a></h3>
+<p>Numeric spinners accept direct keyboard entry as well as their step buttons and
+paired sliders. Floating-point fields accept decimal points or commas and
+scientific notation such as <code>2e-4</code>; sufficiently small non-zero values are also
+displayed in scientific notation. A slider is an exploration window, not
+necessarily the full valid entry range. Right-click a numeric field and choose
+<strong>Reset to default</strong> to restore that operation's declared default.</p>
+<h3 id="manual-execution-colors">Manual execution colors<a class="headerlink" href="#manual-execution-colors" title="Permanent link">&para;</a></h3>
 <p>Manual/cached execution barriers apply to every VIPP operation that uses the
 manual policy, including measurements, graph analysis, colocalization, and
 deconvolution.</p>
@@ -2638,18 +2770,52 @@ deconvolution.</p>
 <tbody>
 <tr>
 <td>Bright amber</td>
-<td>This is the first stale manual node stopping the branch. Its cached result no longer matches the current upstream graph.</td>
-<td>Select this node and choose <strong>Recalculate</strong>, or use <strong>Calculate all</strong>.</td>
+<td>This is the first manual node stopping the branch. It has never been calculated, or its cached result is stale.</td>
+<td>Select this node and choose <strong>Calculate</strong> or <strong>Recalculate</strong>, or use <strong>Calculate all</strong>.</td>
 </tr>
 <tr>
 <td>Dark amber</td>
-<td>This downstream result is also stale, but it is waiting for the bright-amber upstream barrier. VIPP retains the last coherent cached branch and does not recalculate this node yet.</td>
+<td>This downstream node is also stale, but it is waiting for the bright-amber upstream barrier. VIPP retains its last coherent cached result when one exists; otherwise it remains unavailable.</td>
 <td>Resolve the bright-amber node first; this node will then run or become the next actionable barrier.</td>
 </tr>
 </tbody>
 </table>
+<p><img alt="Two bright-amber deconvolution frontiers, darker-amber waiting descendants, and the amber Calculate all control" src="../../assets/screenshots/workflows/manual-execution-frontier.png" /></p>
+<p><em>The two deconvolution branches are actionable. Rescale Intensity and Otsu
+Threshold wait behind the selected RL-TV branch and are not the source of the
+problem.</em></p>
+<p>The toolbar <strong>Calculate all</strong> button also turns bright amber while an
+uncalculated or stale manual frontier needs attention. It returns to the normal
+toolbar style when no such action remains. A node already configured for
+<strong>Auto Recalculate</strong> does not trigger this user-action prompt while VIPP is
+handling it automatically.</p>
 <p>This distinction also applies during background execution. A dark-amber node
-does not show a processing spinner until it is actually runnable.</p>
+does not show a processing spinner until it is actually runnable. Once that
+node finishes updating, it returns to its normal current color immediately
+while later nodes continue calculating; it does not remain dark amber until the
+whole branch finishes. Every completed card receives a run-scoped execution
+state and sampled thumbnail. Selecting, pinning, or inspecting tables and
+metadata uses the same newly completed run-scoped payload when the active cache
+policy already retains that node. Low-memory pruning remains in force for other
+intermediates, which follow the normal cache-restore behavior when selected.
+VIPP still commits the scientific workflow cache only after accepting the
+complete background run. Cancelling, superseding, or editing during a run
+discards these temporary presentation updates and restores the last coherent
+cache view.</p>
+<h3 id="generated-napari-layers">Generated napari layers<a class="headerlink" href="#generated-napari-layers" title="Permanent link">&para;</a></h3>
+<p>When two inspected results have compatible napari <code>Image</code> presentation, VIPP
+reuses the existing layer object and replaces only its data reference. The new
+reference exposes the exact underlying pixels as a non-writeable view; VIPP
+also resets colormap, blending, contrast, scale, and related display metadata
+so settings from the previous node cannot leak into the next view. This makes
+switching between compatible image-sized nodes largely independent of volume
+size.</p>
+<p>VIPP replaces the layer for a genuine presentation-class change, such as
+<code>Image</code> to <code>Labels</code>, or for an incompatible RGB layout. A Boolean mask pinned
+as a napari <code>Labels</code> overlay requires a uint8 presentation copy. That conversion
+is limited to the class-changing display path and is not written back to the
+node output: the scientific cache, saved output, and downstream calculations
+retain the original exact array.</p>
 <h2 id="auto-contrast-versus-display-contrast">Auto Contrast Versus Display Contrast<a class="headerlink" href="#auto-contrast-versus-display-contrast" title="Permanent link">&para;</a></h2>
 <p><strong>Auto Contrast</strong> appears for <code>Linear Scale + Offset</code>. It calculates exact
 full-input finite percentiles from the chosen saturation setting and writes the
@@ -2698,7 +2864,7 @@ and the graph calculation succeeds. See <a href="../../workflows/batch-processin
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 10:43:49 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
   </span>
 
     

@@ -540,6 +540,8 @@
       
         
       
+        
+      
     
     
     
@@ -583,6 +585,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1571,6 +1596,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#isolate-a-fast-parameter-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolate a fast parameter decision
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#choose-intensity-cutoffs-deliberately" class="md-nav__link">
     <span class="md-ellipsis">
       Choose intensity cutoffs deliberately
@@ -2375,6 +2409,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#isolate-a-fast-parameter-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolate a fast parameter decision
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#choose-intensity-cutoffs-deliberately" class="md-nav__link">
     <span class="md-ellipsis">
       Choose intensity cutoffs deliberately
@@ -2476,6 +2519,37 @@ keep related images in the same partition.</p>
 </ol>
 <p>Changing several stages together makes it difficult to know which decision
 improved or damaged the result.</p>
+<h2 id="isolate-a-fast-parameter-decision">Isolate a fast parameter decision<a class="headerlink" href="#isolate-a-fast-parameter-decision" title="Permanent link">&para;</a></h2>
+<p>Use <strong>Tune node in isolation</strong> when the selected operation is quick to evaluate
+but its downstream branch is expensive. The selected node must have a coherent
+cached result, and no dirty edit, pipeline calculation, source load, or batch
+run can be pending or in flight. Its descendants need not all have outputs.</p>
+<p>During isolation, edits recalculate only the selected node and any missing
+upstream dependency. The tuned node is bright amber. Its downstream closure is
+darker amber and keeps each last coherent result that already exists. A
+descendant without a previous result remains unavailable. Existing waiting
+previews are useful as a reference, but they are not evidence for the new
+parameter choice.</p>
+<p>After inspecting the local result:</p>
+<ul>
+<li>choose <strong>Apply and continue</strong> to keep the latest parameters and result, then
+  resume calculation from the direct downstream nodes;</li>
+<li>choose <strong>Cancel tuning</strong> to restore the session-start parameters, output, and
+  execution state without recalculating the held branch; or</li>
+<li>choose <strong>Calculate all</strong> to apply the result, leave isolation, and continue
+  the graph under the normal automatic/manual-node policy.</li>
+</ul>
+<p>Only one node can be isolated at a time. Undo/redo and edits to graph structure,
+layout, notes, or the loaded workflow first commit the current tuning result,
+so Cancel never restores across a different graph revision. Isolation is
+transient interactive state and is not serialized into workflow JSON; save the
+workflow after accepting the parameter decision.</p>
+<p>Isolation changes <em>when</em> descendants run, not the calculation performed by the
+tuned node. Keep the same development/held-out separation and inspect failures
+across representative samples before freezing the workflow.</p>
+<p><img alt="Gaussian Blur being tuned in isolation while the darker-amber downstream branch remains paused" src="../../assets/screenshots/workflows/isolated-node-tuning.png" /></p>
+<p><em>The selected node has a current local result. Apply resumes the darker-amber
+branch; Cancel restores the calculated session-start result.</em></p>
 <h2 id="choose-intensity-cutoffs-deliberately">Choose intensity cutoffs deliberately<a class="headerlink" href="#choose-intensity-cutoffs-deliberately" title="Permanent link">&para;</a></h2>
 <p><code>Rescale Intensity</code> and <code>Clip</code> expose modes that look similar but make different
 scientific promises.</p>
@@ -2591,7 +2665,7 @@ a genuinely independent set when claims depend on unbiased performance.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
   </span>
 
     

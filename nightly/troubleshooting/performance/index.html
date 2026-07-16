@@ -540,6 +540,8 @@
       
         
       
+        
+      
     
     
     
@@ -583,6 +585,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2049,6 +2074,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#switching-between-node-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switching Between Node Results
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#expensive-node-families" class="md-nav__link">
     <span class="md-ellipsis">
       Expensive Node Families
@@ -2342,6 +2376,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#switching-between-node-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switching Between Node Results
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#expensive-node-families" class="md-nav__link">
     <span class="md-ellipsis">
       Expensive Node Families
@@ -2411,6 +2454,12 @@ the exact result appears.</p>
 <p>Moving a calculation to the background does not sample the image or change its
 numerical method. A complete-data calculation can still take time and compete
 for memory bandwidth.</p>
+<p>Completed nodes publish a run-scoped card state and sampled thumbnail while the
+rest of a background run continues. A retained selected or pinned result can
+update from the same active-run payload. This progress is deliberately
+separate from the live scientific cache, which is committed only after the
+whole run is accepted; cancelling or superseding the run restores the previous
+coherent view.</p>
 <p>Exact interior percentiles require one native-dtype working buffer for the
 order-statistic selection. The common integer <code>0..100</code> percentile pair uses
 exact extrema without that buffer. Integer Rescale maps the output in bounded
@@ -2419,6 +2468,22 @@ float temporary.</p>
 <p>The <code>Cancel</code> button cancels queued reruns and asks cooperative operations to
 stop. It cannot forcibly interrupt a NumPy, SciPy, or scikit-image call already
 inside a work unit.</p>
+<h2 id="switching-between-node-results">Switching Between Node Results<a class="headerlink" href="#switching-between-node-results" title="Permanent link">&para;</a></h2>
+<p>For compatible napari <code>Image</code> presentations, VIPP keeps the same generated
+inspect or pin layer and swaps only its data reference. The reference is a
+non-writeable view of the exact node pixels; no full-volume image copy is made
+for the switch. VIPP explicitly resets colormap, blending, contrast, scale, and
+display metadata so presentation settings from the previous result do not
+carry over. Stale contrast workers are invalidated when the selection changes.</p>
+<p>A genuine class or layout change still needs replacement. Examples include an
+<code>Image</code> versus a label-ID <code>Labels</code> layer and incompatible RGB layouts. A
+Boolean mask pinned as a <code>Labels</code> overlay requires a uint8 presentation copy;
+that conversion is limited to the class-changing display path and does not
+replace the original node output used by downstream calculations or saving.</p>
+<p>Card thumbnails are rendered at display resolution. Their downsampling and
+contrast work affect visualization only, never the scientific array. This is
+why thumbnails can update quickly without changing the exact data produced by
+the operation.</p>
 <h2 id="expensive-node-families">Expensive Node Families<a class="headerlink" href="#expensive-node-families" title="Permanent link">&para;</a></h2>
 <p>Expect heavier computation from:</p>
 <ul>
@@ -2457,7 +2522,7 @@ temporary allocation made inside NumPy, SciPy, or scikit-image.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
   </span>
 
     
