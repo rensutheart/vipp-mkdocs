@@ -65,7 +65,7 @@ execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
 **Pin selected**, and **Save selected output…**.
 
-### Stale and waiting node colors
+### Manual execution colors
 
 Manual/cached execution barriers apply to every VIPP operation that uses the
 manual policy, including measurements, graph analysis, colocalization, and
@@ -73,11 +73,25 @@ deconvolution.
 
 | Graph color | Meaning | Action |
 | --- | --- | --- |
-| Bright amber | This is the first stale manual node stopping the branch. Its cached result no longer matches the current upstream graph. | Select this node and choose **Recalculate**, or use **Calculate all**. |
+| Bright amber | This is the first manual node stopping the branch. It has never been calculated, or its cached result is stale. | Select this node and choose **Calculate** or **Recalculate**, or use **Calculate all**. |
 | Dark amber | This downstream result is also stale, but it is waiting for the bright-amber upstream barrier. VIPP retains the last coherent cached branch and does not recalculate this node yet. | Resolve the bright-amber node first; this node will then run or become the next actionable barrier. |
 
+The toolbar **Calculate all** button also turns bright amber while an
+uncalculated or stale manual frontier needs attention. It returns to the normal
+toolbar style when no such action remains. A node already configured for
+**Auto Recalculate** does not trigger this user-action prompt while VIPP is
+handling it automatically.
+
 This distinction also applies during background execution. A dark-amber node
-does not show a processing spinner until it is actually runnable.
+does not show a processing spinner until it is actually runnable. Once that
+node finishes updating, it returns to its normal current color immediately
+while later nodes continue calculating; it does not remain dark amber until the
+whole branch finishes. Selecting or pinning that node uses the same newly
+completed run-scoped result shown by its card when the active cache policy
+retains that node. Low-memory pruning remains in force for other intermediates,
+which follow the normal cache-restore behavior when selected. VIPP still
+commits the scientific workflow cache only after accepting the complete
+background run.
 
 ## Auto Contrast Versus Display Contrast
 
