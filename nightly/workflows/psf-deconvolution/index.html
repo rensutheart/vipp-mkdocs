@@ -1046,6 +1046,63 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Generate a Born-Wolf PSF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-born-wolf-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose Born-Wolf support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose Born-Wolf support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-repeatable-selection-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      A repeatable selection procedure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-xy-support-is-square" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why XY support is square
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-some-fiji-or-imagej-examples-use-image-sized-psfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why some Fiji or ImageJ examples use image-sized PSFs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-user-set-born-wolf-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other user-set Born-Wolf parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2348,6 +2405,63 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Generate a Born-Wolf PSF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-born-wolf-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose Born-Wolf support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose Born-Wolf support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-repeatable-selection-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      A repeatable selection procedure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-xy-support-is-square" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why XY support is square
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-some-fiji-or-imagej-examples-use-image-sized-psfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why some Fiji or ImageJ examples use image-sized PSFs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-user-set-born-wolf-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other user-set Born-Wolf parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2405,7 +2519,9 @@
 <p>Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
 RL with total-variation regularization (RL-TV) are public in 0.12.0a1. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
-start expensive work without an explicit calculation.</p>
+start expensive work without an explicit calculation. While a deconvolution is
+stale, its descendants retain their last coherent cached results and wait.
+Recalculating the deconvolution resumes that downstream branch.</p>
 <div class="admonition caution">
 <p class="admonition-title">Evidence boundary</p>
 <p>Synthetic examples and automated checks support operation behavior. They do
@@ -2444,6 +2560,137 @@ Explicit parameter overrides remain the user's responsibility.</p>
   Q --&gt; D</code></pre>
 <p>Multi-channel reference data can produce dynamic PSF output ports. Inspect the
 resolved channel and dimensionality before connecting a restoration node.</p>
+<h3 id="choose-born-wolf-support">Choose Born-Wolf support<a class="headerlink" href="#choose-born-wolf-support" title="Permanent link">&para;</a></h3>
+<p>The sampling interval, PSF support, and image extent are different quantities.
+Keeping them separate prevents several common configuration mistakes:</p>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Meaning</th>
+<th>How VIPP obtains it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XY pixel size and Z step</td>
+<td>Physical distance between neighboring PSF samples</td>
+<td>Read from supported image metadata or entered manually</td>
+</tr>
+<tr>
+<td>XY and Z support</td>
+<td>Finite number of samples retained around the PSF center</td>
+<td>Chosen by the user; the defaults are starting values</td>
+</tr>
+<tr>
+<td>Image extent</td>
+<td>Number of acquired pixels or planes available for restoration</td>
+<td>Determined by the input image</td>
+</tr>
+<tr>
+<td>Pupil samples</td>
+<td>Numerical quadrature resolution for PSF generation</td>
+<td>Chosen by the user; independent of spatial sampling and support</td>
+</tr>
+</tbody>
+</table>
+<p><code>Auto from metadata</code> can resolve physical sampling and supported optical
+parameters. It cannot determine one universally correct finite support. The
+ideal optical model has tails, so choosing an array boundary also chooses a
+truncation tolerance. VIPP keeps that choice explicit and checks the generated
+kernel rather than presenting a metadata-derived cutoff as exact.</p>
+<p>The physical span shown beside a support field is the distance between the two
+outer sample centers:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>physical span = (support samples - 1) x sampling interval
+</span></code></pre></div>
+<p>This value helps compare settings across datasets, but it is not by itself a
+pass/fail criterion.</p>
+<h4 id="a-repeatable-selection-procedure">A repeatable selection procedure<a class="headerlink" href="#a-repeatable-selection-procedure" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Resolve or enter wavelength, numerical aperture, refractive index, XY pixel
+   size, and Z step. Confirm their units and channel assignment.</li>
+<li>Review the widefield Nyquist result separately. A Nyquist warning describes
+   acquisition sampling; increasing PSF support cannot reconstruct frequencies
+   that were not sampled.</li>
+<li>Begin with odd support dimensions. Calculate the Born-Wolf PSF.</li>
+<li>Read the tail-containment result. VIPP measures the fraction of normalized
+   intensity on the outermost one-sample shell. If it exceeds the current 1%
+   practical threshold, increase the identified axis and calculate again.</li>
+<li>Review image extent independently. The PSF should normally be smaller than
+   the image on every processed spatial axis. If it is not, review boundary
+   assumptions and whether the acquisition covers enough context.</li>
+<li>Inspect the generated PSF and restored result. Check centering, normalization,
+   ringing, edge behavior, noise amplification, and sensitivity to reasonable
+   parameter changes.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">What the tail percentage means</p>
+<p>The percentage is intensity <strong>on the sampled boundary</strong>, not a measurement
+of intensity outside the array. Passing the check is a practical indication
+that the boundary values are small; it is not proof that all omitted tail
+energy is below exactly 1%.</p>
+</div>
+<p>Two warnings can therefore coexist without contradiction:</p>
+<ul>
+<li><strong>Nyquist met, tail warning:</strong> the PSF is sampled finely enough, but the
+  finite kernel window should be enlarged on the named axis.</li>
+<li><strong>Tail check passed, image-extent warning:</strong> the kernel window contains its
+  modeled tail adequately, but the image is too short on an axis for every
+  output location to have complete support under the current boundary model.</li>
+</ul>
+<p>Do not shrink a PSF only to remove an image-extent warning. For volumetric
+restoration, possible responses include acquiring guard planes around the
+region of interest, interpreting or cropping affected output margins, or using
+2D YX processing only when independent plane-wise imaging is the intended
+scientific model.</p>
+<h4 id="why-xy-support-is-square">Why XY support is square<a class="headerlink" href="#why-xy-support-is-square" title="Permanent link">&para;</a></h4>
+<p>VIPP's scalar Born-Wolf generator uses one XY sampling interval and a
+rotationally symmetric optical model. It therefore produces a square YX kernel
+even when the camera frame is rectangular. The kernel describes the response
+around a point, not the camera field of view. A measured PSF or a more specific
+optical model is more appropriate when the system is astigmatic, spatially
+varying, or otherwise not rotationally symmetric.</p>
+<h4 id="why-some-fiji-or-imagej-examples-use-image-sized-psfs">Why some Fiji or ImageJ examples use image-sized PSFs<a class="headerlink" href="#why-some-fiji-or-imagej-examples-use-image-sized-psfs" title="Permanent link">&para;</a></h4>
+<p>Software packages can impose different array-shape conventions while modeling
+the same physical sampling. The <a href="https://imagej.net/imaging/deconvolution/">ImageJ deconvolution guide</a>
+describes PSF width, height, and depth as PSF dimensions and permits a PSF equal
+to or smaller than the image. A <a href="https://py.imagej.net/en/latest/Deconvolution.html">PyImageJ 3D deconvolution example</a>
+constructs an image-sized diffraction kernel for that particular operation.</p>
+<p>VIPP accepts a smaller centered kernel, so its support dimensions do not need
+to equal the image dimensions. What must remain compatible is the physical
+sampling interval and spatial dimensionality. Matching the full image shape in
+VIPP can add substantial generation, memory, and convolution cost without
+improving the optical model.</p>
+<h4 id="other-user-set-born-wolf-parameters">Other user-set Born-Wolf parameters<a class="headerlink" href="#other-user-set-born-wolf-parameters" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Practical interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Pupil samples</code></td>
+<td>Numerical integration accuracy. Use the default for ordinary work; for stringent validation, compare increasing values and stop when the generated PSF and downstream result have converged sufficiently for the analysis.</td>
+</tr>
+<tr>
+<td><code>Normalize sum to 1</code></td>
+<td>Normally keep enabled for Richardson-Lucy restoration so the PSF acts as a unit-sum blur kernel.</td>
+</tr>
+<tr>
+<td><code>Channel</code></td>
+<td>Confirm that the selected or automatically resolved wavelength belongs to the image channel being restored.</td>
+</tr>
+<tr>
+<td><code>Spatial processing</code></td>
+<td>Use 3D ZYX for a genuinely volumetric image and PSF model; use 2D YX only when planes are intended to be processed independently.</td>
+</tr>
+</tbody>
+</table>
+<p>The Born-Wolf model and its Nyquist summary describe conventional widefield
+fluorescence. Reconstructed SIM, confocal, light-sheet, aberrated, or other
+modalities may require a measured or modality-specific PSF and sampling model.</p>
 <h2 id="prepare-and-inspect-the-psf">Prepare and inspect the PSF<a class="headerlink" href="#prepare-and-inspect-the-psf" title="Permanent link">&para;</a></h2>
 <p>Depending on its settings, <code>Prepare / Validate PSF</code> can clip negative values,
 center the peak or centroid, normalize the sum, force odd shape, and reject an
@@ -2553,7 +2800,7 @@ evidence gap; see <a href="../../reference/validation-status/">validation status
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 10:43:49 UTC">July 16, 2026</span>
   </span>
 
     
