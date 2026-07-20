@@ -542,6 +542,8 @@
       
         
       
+        
+      
     
     
     
@@ -585,6 +587,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2427,7 +2452,7 @@
 
 
 <h1 id="validation-status">Validation status<a class="headerlink" href="#validation-status" title="Permanent link">&para;</a></h1>
-<p>This page summarizes the evidence shipped with the 0.12.0a2 application source.
+<p>This page summarizes the evidence shipped with the 0.12.0a3 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.</p>
 <h2 id="evidence-available-now">Evidence available now<a class="headerlink" href="#evidence-available-now" title="Permanent link">&para;</a></h2>
@@ -2448,12 +2473,21 @@ every assay.</p>
   behavior checks; and</li>
 <li>focused UI/execution tests cover isolated-tuning boundaries, actionable and
   waiting stale states, progressive node previews, compatible layer reuse, and
-  rejection of stale contrast/histogram results.</li>
+  rejection of stale contrast/histogram results; and</li>
+<li>batch tests cover attached-config validation and round-trip, restore without
+  preview, direct plan-only execution, complete-item fast skips, transient
+  atomic-write retries, and continuing after a final item-sidecar failure.</li>
 </ul>
 <p>Release CI covers package/manifest, lint, and test behavior on Linux and
 Windows. A passing CI matrix is not equivalent to a manual GUI smoke pass on
 every operating system, Qt/display environment, filesystem, or microscope
 reader.</p>
+<p>A bounded manual Windows acceptance pass for 0.12.0a3 covered direct
+unpreviewed batch execution, complete <code>Skip</code> items, continued processing after
+an item failure, attached-config save/reload, and a representative 3D
+deconvolution batch. It does not establish cross-platform behavior, broad
+filesystem interoperability, large-collection scalability, or restoration
+quality for arbitrary samples.</p>
 <p>The release's generated calibrated-morphology report records <strong>28/28 checks
 passed</strong>. Its own scope excludes broad numerical equivalence, biological
 interpretation, and all data conditions. The application test suite checks that
@@ -2511,12 +2545,12 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Large data/batch</td>
-<td>Functional cache/path/memory tests plus deterministic saved config, planner, source verification, staging, manifest/archive, sidecar, collision, replay, and exact-output bundle</td>
-<td>Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, semantic-axis iteration, and HCS traversal</td>
+<td>Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, and a bounded Windows acceptance pass</td>
+<td>Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal</td>
 </tr>
 <tr>
 <td>Workflow/export architecture</td>
-<td>Schema-3 rejection/round-trip, snapshot materialization, atomic-write failure, shared-executor export, multi-source binding, and runtime-version tests</td>
+<td>Schema-3 rejection/round-trip, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor export, multi-source binding, and runtime-version tests</td>
 <td>Independent reproducibility exercises across archived environments and long-lived release migrations</td>
 </tr>
 <tr>
@@ -2528,11 +2562,11 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </table>
 <h2 id="release-specific-limitations">Release-specific limitations<a class="headerlink" href="#release-specific-limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Workflow schema 1 and 2 are intentionally rejected; 0.12.0a2 has no automatic
+<li>Workflow schema 1 and 2 are intentionally rejected; 0.12.0a3 has no automatic
   migration.</li>
-<li>Valid 0.12.0a1 schema-3 workflows load structurally, but cached pixels/tables
-  are not serialized and exported Python is runtime-version pinned. Recalculate,
-  regenerate exports, and validate after upgrading.</li>
+<li>Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows load structurally, but cached
+  pixels/tables are not serialized and exported Python is runtime-version
+  pinned. Recalculate, regenerate exports, and validate after upgrading.</li>
 <li>Batch processing is local-file and sorted-position oriented. It does not
   iterate selected T/C/Z combinations or discover plate/well/field structure.</li>
 <li>Many operations are eager even when a source format supports lazy/chunked
@@ -2568,7 +2602,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
   </span>
 
     

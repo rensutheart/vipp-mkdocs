@@ -542,6 +542,8 @@
       
         
       
+        
+      
     
     
     
@@ -585,6 +587,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1902,6 +1927,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#move-from-0120a2-to-0120a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.12.0a2 to 0.12.0a3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-from-0120a1-to-0120a2" class="md-nav__link">
     <span class="md-ellipsis">
       Move from 0.12.0a1 to 0.12.0a2
@@ -2367,6 +2401,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#move-from-0120a2-to-0120a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.12.0a2 to 0.12.0a3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-from-0120a1-to-0120a2" class="md-nav__link">
     <span class="md-ellipsis">
       Move from 0.12.0a1 to 0.12.0a2
@@ -2454,10 +2497,10 @@
 </tr>
 </tbody>
 </table>
-<p>The current public software baseline is <strong>0.12.0a2</strong>. Its <code>a2</code> suffix identifies
-the second alpha build in the 0.12.0 release series; it is a tagged pre-release,
+<p>The current public software baseline is <strong>0.12.0a3</strong>. Its <code>a3</code> suffix identifies
+the third alpha build in the 0.12.0 release series; it is a tagged pre-release,
 not a nightly build. See <a href="../../getting-started/installation/">installation</a> and
-the <a href="../../releases/0.12.0a2/">0.12.0a2 release notes</a>.</p>
+the <a href="../../releases/0.12.0a3/">0.12.0a3 release notes</a>.</p>
 <p>The <code>main</code>/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.</p>
 <h2 id="match-software-and-manual">Match software and manual<a class="headerlink" href="#match-software-and-manual" title="Permanent link">&para;</a></h2>
@@ -2468,12 +2511,35 @@ selector in the site header. If they differ:</p>
 <li>install the release described by the manual in a separate environment.</li>
 </ul>
 <p>Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.12.0a2 retains schema version 3; versions 1 and 2 are rejected rather
-than migrated automatically. A valid 0.12.0a1 schema-3 workflow loads
-structurally in 0.12.0a2, but workflow JSON contains no cached scientific
+VIPP 0.12.0a3 retains schema version 3; versions 1 and 2 are rejected rather
+than migrated automatically. Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows
+load structurally in 0.12.0a3, but workflow JSON contains no cached scientific
 pixels/tables. Recalculate and compare graph structure, parameters, sources,
 axes, channels, physical grids, dynamic ports, and results on known sample
 data. See the <a href="../workflow-contract/">workflow contract</a>.</p>
+<h2 id="move-from-0120a2-to-0120a3">Move from 0.12.0a2 to 0.12.0a3<a class="headerlink" href="#move-from-0120a2-to-0120a3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Keep the original workflow, 0.12.0a2 environment, standalone batch config,
+   manifests, item sidecars, and validated outputs for provenance.</li>
+<li>Open a duplicate workflow in 0.12.0a3 and confirm that graph structure,
+   parameters, dynamic ports, sources, and Batch Output declarations are as
+   expected.</li>
+<li>Recalculate the workflow and compare decisive intermediates and final
+   measurements. Cached scientific results are not serialized in workflow
+   JSON.</li>
+<li>If using Batch workspace, review the suggested or restored destination,
+   source bindings, patterns, formats, collision policy, and fresh preflight.
+   Preview remains optional; Run does not implicitly calculate a representative.</li>
+<li>Regenerate and revalidate Python exports. An export refuses a VIPP runtime
+   version different from the one that generated it.</li>
+<li>Inspect the finalized manifest and item sidecars after a batch, including
+   partial, skipped, and failed items.</li>
+</ol>
+<p>A 0.12.0a3 workflow can optionally carry a top-level <code>batch_config</code>. VIPP
+0.12.0a2 can still reconstruct the schema-3 scientific graph because it ignores
+that unknown top-level attachment, but it does not restore it and will omit it
+if the workflow is saved again. Preserve the original 0.12.0a3 file when moving
+between releases.</p>
 <h2 id="move-from-0120a1-to-0120a2">Move from 0.12.0a1 to 0.12.0a2<a class="headerlink" href="#move-from-0120a1-to-0120a2" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Keep the original workflow and 0.12.0a1 environment for provenance.</li>
@@ -2518,7 +2584,7 @@ without testing it.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python -m pip install --pre napari-vipp
 </span></code></pre></div>
 <p>To reproduce a specific alpha exactly, specify the version in a fresh environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install &quot;napari[pyqt6]&quot; &quot;napari-vipp==0.12.0a2&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install &quot;napari[pyqt6]&quot; &quot;napari-vipp==0.12.0a3&quot;
 </span></code></pre></div>
 <h2 id="nightly-policy">Nightly policy<a class="headerlink" href="#nightly-policy" title="Permanent link">&para;</a></h2>
 <p>Nightly documentation may describe work not yet available from PyPI and can
@@ -2545,7 +2611,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
   </span>
 
     

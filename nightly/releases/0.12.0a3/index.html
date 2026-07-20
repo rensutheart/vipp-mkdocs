@@ -12,13 +12,13 @@
         <meta name="author" content="Rensu P. Theart">
       
       
-        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/workflows/segmentation-label-cleanup/">
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/releases/0.12.0a3/">
       
       
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../object-measurements-tables/">
+        <link rel="next" href="../0.12.0a2/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Segment and clean labels - VIPP — Visual Image Processing Platform</title>
+        <title>0.12.0a3 - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#segmentation-and-label-cleanup" class="md-skip">
+        <a href="#vipp-0120a3" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Segment and clean labels
+              0.12.0a3
             
           </span>
         </div>
@@ -263,11 +263,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../releases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -307,13 +309,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../workflows/" class="md-tabs__link">
           
   
   
@@ -529,6 +529,8 @@
       
   
   
+    
+  
   
   
     
@@ -548,20 +550,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../releases/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -574,13 +579,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Release notes
@@ -593,10 +598,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a3
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -607,6 +634,82 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-upgrading-from-0120a2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before upgrading from 0.12.0a2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-batch-execution-and-suggested-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Direct batch execution and suggested output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faster-skips-and-more-resilient-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faster skips and more resilient provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-attached-batch-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow-attached Batch workspace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-and-validation-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatibility and validation boundary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -619,7 +722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+      <a href="../0.12.0a2/" class="md-nav__link">
         
   
   
@@ -642,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a1/" class="md-nav__link">
+      <a href="../0.12.0a1/" class="md-nav__link">
         
   
   
@@ -859,8 +962,6 @@
       
   
   
-    
-  
   
   
     
@@ -886,23 +987,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../workflows/" class="md-nav__link ">
               
   
   
@@ -915,13 +1013,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Tutorials
@@ -934,32 +1032,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Segment and clean labels
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../workflows/segmentation-label-cleanup/" class="md-nav__link">
         
   
   
@@ -970,124 +1046,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basic-pattern" class="md-nav__link">
-    <span class="md-ellipsis">
-      Basic Pattern
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recommended-first-graph" class="md-nav__link">
-    <span class="md-ellipsis">
-      Recommended First Graph
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Key Nodes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-global-automatic-thresholds-use-the-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      How Global Automatic Thresholds Use The Data
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How Global Automatic Thresholds Use The Data">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#practical-bin-guidance" class="md-nav__link">
-    <span class="md-ellipsis">
-      Practical bin guidance
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#minimum-threshold-failure-is-explicit" class="md-nav__link">
-    <span class="md-ellipsis">
-      Minimum Threshold Failure Is Explicit
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2d-versus-3d" class="md-nav__link">
-    <span class="md-ellipsis">
-      2D Versus 3D
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#split-touching-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      Split Touching Objects
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference Workflow
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-to-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      What To Check
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1100,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../object-measurements-tables/" class="md-nav__link">
+      <a href="../../workflows/object-measurements-tables/" class="md-nav__link">
         
   
   
@@ -1123,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../skeleton-network-analysis/" class="md-nav__link">
+      <a href="../../workflows/skeleton-network-analysis/" class="md-nav__link">
         
   
   
@@ -1146,7 +1104,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../colocalization-association/" class="md-nav__link">
+      <a href="../../workflows/colocalization-association/" class="md-nav__link">
         
   
   
@@ -1169,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../psf-deconvolution/" class="md-nav__link">
+      <a href="../../workflows/psf-deconvolution/" class="md-nav__link">
         
   
   
@@ -1192,7 +1150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../batch-processing/" class="md-nav__link">
+      <a href="../../workflows/batch-processing/" class="md-nav__link">
         
   
   
@@ -2434,96 +2392,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basic-pattern" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Basic Pattern
+      Highlights
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-first-graph" class="md-nav__link">
+  <a href="#before-upgrading-from-0120a2" class="md-nav__link">
     <span class="md-ellipsis">
-      Recommended First Graph
+      Before upgrading from 0.12.0a2
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-nodes" class="md-nav__link">
+  <a href="#direct-batch-execution-and-suggested-output" class="md-nav__link">
     <span class="md-ellipsis">
-      Key Nodes
+      Direct batch execution and suggested output
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-global-automatic-thresholds-use-the-data" class="md-nav__link">
+  <a href="#faster-skips-and-more-resilient-provenance" class="md-nav__link">
     <span class="md-ellipsis">
-      How Global Automatic Thresholds Use The Data
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How Global Automatic Thresholds Use The Data">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#practical-bin-guidance" class="md-nav__link">
-    <span class="md-ellipsis">
-      Practical bin guidance
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#minimum-threshold-failure-is-explicit" class="md-nav__link">
-    <span class="md-ellipsis">
-      Minimum Threshold Failure Is Explicit
+      Faster skips and more resilient provenance
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2d-versus-3d" class="md-nav__link">
+  <a href="#workflow-attached-batch-workspace" class="md-nav__link">
     <span class="md-ellipsis">
-      2D Versus 3D
+      Workflow-attached Batch workspace
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#split-touching-objects" class="md-nav__link">
+  <a href="#compatibility-and-validation-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      Split Touching Objects
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference Workflow
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-to-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      What To Check
+      Compatibility and validation boundary
     </span>
   </a>
   
@@ -2545,7 +2461,7 @@
 
 
   
-    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/workflows/segmentation-label-cleanup.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/releases/0.12.0a3.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2553,171 +2469,126 @@
   
 
 
-<h1 id="segmentation-and-label-cleanup">Segmentation And Label Cleanup<a class="headerlink" href="#segmentation-and-label-cleanup" title="Permanent link">&para;</a></h1>
-<p>Segmentation workflows usually turn an intensity image into a mask, then into
-labels.</p>
-<h2 id="basic-pattern">Basic Pattern<a class="headerlink" href="#basic-pattern" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Image Source
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; Extract Channel or Split Channels
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  -&gt; optional background correction / denoising
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  -&gt; threshold
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  -&gt; morphology cleanup
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  -&gt; Label Connected Components
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  -&gt; label filtering
-</span></code></pre></div>
-<h2 id="recommended-first-graph">Recommended First Graph<a class="headerlink" href="#recommended-first-graph" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Image Source
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  -&gt; Split Channels
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  -&gt; Gaussian Blur
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  -&gt; Otsu Threshold
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  -&gt; Fill Holes
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  -&gt; Remove Small Objects
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  -&gt; Label Connected Components
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  -&gt; Filter Labels By Volume
-</span></code></pre></div>
-<h2 id="key-nodes">Key Nodes<a class="headerlink" href="#key-nodes" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Common nodes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Channel selection</td>
-<td><code>Extract Channel</code>, <code>Split Channels</code></td>
-</tr>
-<tr>
-<td>Smoothing</td>
-<td><code>Gaussian Blur</code>, <code>Gaussian Blur 3D</code>, <code>Median Filter</code>, <code>Non-Local Means</code></td>
-</tr>
-<tr>
-<td>Background</td>
-<td><code>Rolling-Ball Background</code>, <code>Subtract Background</code></td>
-</tr>
-<tr>
-<td>Threshold</td>
-<td><code>Otsu Threshold</code>, <code>Triangle Threshold</code>, <code>Li Threshold</code>, <code>Yen Threshold</code>, <code>Binary Threshold</code>, local threshold nodes</td>
-</tr>
-<tr>
-<td>Mask cleanup</td>
-<td><code>Fill Holes</code>, <code>Remove Small Objects</code>, morphology nodes</td>
-</tr>
-<tr>
-<td>Label creation</td>
-<td><code>Label Connected Components</code>, watershed nodes</td>
-</tr>
-<tr>
-<td>Label cleanup</td>
-<td><code>Clear Border Objects</code>, <code>Filter Labels By Volume</code>, <code>Filter Labels By Property</code>, <code>Relabel Sequential</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="how-global-automatic-thresholds-use-the-data">How Global Automatic Thresholds Use The Data<a class="headerlink" href="#how-global-automatic-thresholds-use-the-data" title="Permanent link">&para;</a></h2>
-<p><code>Otsu Threshold</code>, <code>Triangle Threshold</code>, <code>Yen Threshold</code>, <code>Isodata Threshold</code>,
-and <code>Minimum Threshold</code> calculate from every finite value in the selected
-scope. VIPP does not estimate these thresholds from a pixel sample.</p>
-<table>
-<thead>
-<tr>
-<th>Input</th>
-<th>Scientific behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Boolean mask</td>
-<td>The input is already a segmentation, so VIPP preserves its <code>True</code>/<code>False</code> decisions instead of thresholding it again.</td>
-</tr>
-<tr>
-<td>Integer image</td>
-<td>Every native integer level from the observed minimum to maximum receives its own bin. This is exact for spans of up to 65,536 levels.</td>
-</tr>
-<tr>
-<td>Floating-point image</td>
-<td>All finite values are counted into the saved <strong>Float histogram bins</strong> setting: 2–65,536 bins, with 256 as the default.</td>
-</tr>
-<tr>
-<td>Li threshold</td>
-<td>Li operates iteratively on the raw finite intensity values and does not have a histogram-bin setting. Integer inputs retain exact native offsets; a relative span wider than 2^53 reports an error because Li's float64 iteration cannot represent every level faithfully.</td>
-</tr>
-</tbody>
-</table>
-<p>For a wide integer image whose observed range spans more than 65,536 levels,
-VIPP stops with an explanatory error. It does not silently merge integer
-levels. Convert or rescale deliberately to <code>uint16</code> or floating point, record
-that step, and inspect its effect before thresholding.</p>
-<p><code>NaN</code>, positive infinity, and negative infinity are excluded while an
-automatic threshold is calculated. Those pixels become <code>False</code> (background)
-in the output mask. An empty input or one containing no finite values reports
-an error instead of receiving an invented cutoff.</p>
+<h1 id="vipp-0120a3">VIPP 0.12.0a3<a class="headerlink" href="#vipp-0120a3" title="Permanent link">&para;</a></h1>
+<p><strong>Release date:</strong> 20 July 2026</p>
+<p><strong>Maturity:</strong> Alpha pre-release</p>
+<p>VIPP 0.12.0a3 makes local collection processing more direct, resilient, and
+portable as an interactive setup. It removes an unnecessary preview gate,
+improves existing-output and transient-lock handling, and lets a workflow carry
+its validated Batch workspace configuration when the user chooses.</p>
 <div class="admonition important">
-<p class="admonition-title">The float bin count is a method parameter</p>
-<p>For floating-point data, changing <strong>Float histogram bins</strong> can change the
-threshold and the resulting mask. The value is saved in the workflow. The
-bins drawn in the inspector are a separate display choice and do not
-replace this setting.</p>
+<p class="admonition-title">Workflow schema remains 3</p>
+<p>This release does <strong>not</strong> increment the workflow schema. Valid schema-3
+workflows from 0.12.0a1 and 0.12.0a2 load structurally in 0.12.0a3.
+Workflow JSON still contains no cached scientific pixels or tables, so
+recalculate and validate after upgrading. Schema versions 1 and 2 remain
+rejected.</p>
+<p>A workflow may now contain an optional top-level <code>batch_config</code>. The
+attachment stores versioned collection bindings and run settings, including
+local paths; it does not store source pixels, calculated outputs, manifests,
+or sidecars. It is excluded from the scientific workflow hash and is
+validated against the containing graph before use.</p>
+<p>Generated Python is a separate artifact: it records the exact VIPP version
+that created it and refuses another runtime. Regenerate and revalidate every
+export under 0.12.0a3.</p>
 </div>
-<h3 id="practical-bin-guidance">Practical bin guidance<a class="headerlink" href="#practical-bin-guidance" title="Permanent link">&para;</a></h3>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>For <code>uint8</code>, <code>uint16</code>, or another integer image with a range of at most
-  65,536 levels, leave <strong>Float histogram bins</strong> alone: integer levels are
-  counted natively regardless of that float-only setting.</li>
-<li>For floating-point images, start with the saved default of 256. On the
-  development set, compare scientifically plausible alternatives such as 256,
-  1,024, and 4,096 when the decision appears bin-sensitive.</li>
-<li>Do not assume that the largest allowed value is automatically best. More
-  bins can make a sparse or noisy histogram less stable.</li>
-<li>Freeze and report the selected value with the threshold scope and
-  preprocessing steps.</li>
+<li>Start a new or deliberately edited batch with one <strong>Run batch</strong> click. Run
+  performs its own plan-only preflight; representative Preview remains optional.</li>
+<li>Accept or change a clearly marked suggested <code>output</code> subdirectory after
+  binding the first source folder.</li>
+<li>Finalize items whose <code>Skip</code> outputs all exist without loading their source
+  pixels or calculating the graph.</li>
+<li>Retry transient Windows, cloud-sync, and indexing locks during atomic
+  replacement, while keeping run-level provenance mandatory.</li>
+<li>Save a workflow with or without its active Batch workspace through an
+  explicit Yes/No/Cancel choice, then restore a valid attachment without
+  previewing or calculating it.</li>
+<li>Use one separated <strong>Batch workspace...</strong> toolbar action, with Load-before-Save
+  ordering shared by the main toolbar and Batch workspace.</li>
 </ul>
-<p>For example, a methods record might state: “Otsu thresholding used the complete
-<code>float32</code> stack with 1,024 histogram bins; non-finite pixels were treated as
-background.”</p>
-<h2 id="minimum-threshold-failure-is-explicit">Minimum Threshold Failure Is Explicit<a class="headerlink" href="#minimum-threshold-failure-is-explicit" title="Permanent link">&para;</a></h2>
-<p><code>Minimum Threshold</code> repeatedly smooths the exact histogram until two maxima
-remain, then selects the valley between them. <strong>Maximum smoothing iterations</strong>
-is a saved parameter from 1 to 10,000; the default is 10,000.</p>
-<p>Some distributions do not have a suitable two-peak solution. If two maxima
-cannot be found, or the saved iteration limit is reached, the node reports a
-failure. VIPP does not silently substitute Otsu, reuse an old threshold, or
-return a plausible-looking mask. Treat the failure as evidence that this
-method is unsuitable for that input or that preprocessing needs review.</p>
-<h2 id="2d-versus-3d">2D Versus 3D<a class="headerlink" href="#2d-versus-3d" title="Permanent link">&para;</a></h2>
-<p>For z-stacks, decide whether objects should be connected across <code>Z</code>.</p>
+<h2 id="before-upgrading-from-0120a2">Before upgrading from 0.12.0a2<a class="headerlink" href="#before-upgrading-from-0120a2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Preserve the original workflow, environment, inputs, outputs, standalone
+   batch config, manifests, sidecars, and validation evidence.</li>
+<li>Open a duplicate schema-3 workflow in 0.12.0a3 and inspect its graph,
+   parameters, sources, connections, output declarations, and dynamic ports.</li>
+<li>Recalculate the graph. Cached results are not serialized in workflow JSON.</li>
+<li>Compare decisive intermediates and final measurements with the validated
+   0.12.0a2 results or other reference data.</li>
+<li>Regenerate exported Python and rerun its validation under 0.12.0a3.</li>
+<li>Perform a fresh batch preflight and inspect the output destination,
+   existing-file policy, final manifest, and item sidecars.</li>
+</ol>
+<p>See <a href="../../reference/versioning/">versions and compatibility</a>, the
+<a href="../../reference/workflow-contract/">workflow contract</a>, and
+<a href="../../reference/validation-status/">validation status</a>.</p>
+<h2 id="direct-batch-execution-and-suggested-output">Direct batch execution and suggested output<a class="headerlink" href="#direct-batch-execution-and-suggested-output" title="Permanent link">&para;</a></h2>
+<p><strong>Run batch</strong> no longer calculates a representative as an implicit prerequisite.
+When no reviewed plan is current—for example, just after loading a config or
+editing a setting—the same click builds a fresh plan-only preflight and starts
+the full run. <strong>Preview batch</strong> remains available when the user wants to load
+and calculate a representative for visual review.</p>
+<p>An unexpectedly changed plan that had already been reviewed still stops for
+confirmation. This preserves the distinction between intentionally starting an
+unpreviewed plan and silently running a plan whose files, destinations,
+collisions, output declarations, or workflow hash changed after review.</p>
+<p>After the first batch source folder is bound, VIPP suggests its <code>output</code>
+subdirectory. Amber text identifies an unconfirmed suggestion rather than an
+invalid path. Focusing, clicking, editing, or explicitly choosing the field
+confirms it; saved config destinations remain explicit and are not replaced by
+the suggestion.</p>
+<h2 id="faster-skips-and-more-resilient-provenance">Faster skips and more resilient provenance<a class="headerlink" href="#faster-skips-and-more-resilient-provenance" title="Permanent link">&para;</a></h2>
+<p>When every resolved destination for an item already exists under <code>Skip</code>, VIPP
+records the no-op without opening the source or calculating the graph. An item
+with both existing and missing outputs still calculates normally so the missing
+outputs can be generated correctly.</p>
+<p>Atomic artifact replacement now retries transient access failures for several
+seconds. This targets short-lived locks from Windows, cloud synchronization,
+indexing, or similar services without hiding a persistent permission or path
+problem. Redundant item-sidecar rewrites were also removed.</p>
+<p>If a final per-item sidecar still cannot be written, the run records that item
+as partial and applies <strong>Continue after item failures</strong> to the remaining items.
+Failure to finalize the authoritative run manifest remains a run-level error;
+VIPP does not report a successful batch without durable final provenance.</p>
+<h2 id="workflow-attached-batch-workspace">Workflow-attached Batch workspace<a class="headerlink" href="#workflow-attached-batch-workspace" title="Permanent link">&para;</a></h2>
+<p>When a Batch workspace is active, <strong>Save workflow...</strong> now asks:</p>
 <ul>
-<li>Use 2D processing when each <code>YX</code> plane should be independent.</li>
-<li>Use 3D processing when the object exists as one <code>ZYX</code> volume.</li>
-<li>Use <code>Auto from axes</code> only after checking that VIPP has interpreted the axes
-  correctly.</li>
+<li><strong>Yes</strong> attaches its validated versioned batch configuration to the workflow
+  JSON;</li>
+<li><strong>No</strong> writes the ordinary graph-only workflow; and</li>
+<li><strong>Cancel</strong> writes nothing.</li>
 </ul>
-<h2 id="split-touching-objects">Split Touching Objects<a class="headerlink" href="#split-touching-objects" title="Permanent link">&para;</a></h2>
-<p>Use watershed when simple connected components merge neighboring objects:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mask
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; Euclidean Distance Transform
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  -&gt; H-Maxima Markers
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  -&gt; Marker-Controlled Watershed
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  -&gt; Filter Labels By Volume
-</span></code></pre></div>
-<p>For a compact single-node starting point, use <code>Auto Watershed From Mask</code>.</p>
-<h2 id="reference-workflow">Reference Workflow<a class="headerlink" href="#reference-workflow" title="Permanent link">&para;</a></h2>
-<p>Use:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>examples/otsu-red-channel-labels.json
-</span></code></pre></div>
-<p>This demonstrates red/TRITC-like channel segmentation, mask cleanup, labels,
-border clearing, volume filtering, and inspectable outputs.</p>
-<h2 id="what-to-check">What To Check<a class="headerlink" href="#what-to-check" title="Permanent link">&para;</a></h2>
-<p><img alt="A threshold-mask intermediate output shown at full resolution above its VIPP graph" src="../../assets/screenshots/workflows/inspect-intermediate-result.png" /></p>
-<p><em>Inspect a decisive intermediate at full resolution. Here the threshold mask is
-pinned in napari while its graph node and input histogram remain visible.</em></p>
-<ul>
-<li>Does the mask include the biology of interest?</li>
-<li>Are background/noise structures being labeled as objects?</li>
-<li>Are touching objects merged?</li>
-<li>Are small objects biological or artifacts?</li>
-<li>Are physical units correct before size filtering or measurement?</li>
-</ul>
+<p>Loading a workflow with a valid attachment restores and opens Batch workspace
+with its fields populated. It does not scan the collection, load a
+representative, build a preview, or calculate the graph. <strong>Run batch</strong> always
+performs a fresh preflight. An invalid or mismatched attachment is not silently
+applied; the scientific graph can still load while VIPP reports that the Batch
+workspace was not restored.</p>
+<p>The standalone <code>vipp_batch_config.json</code> remains the appropriate artifact for
+the supplied headless runner or when workflow and automation configuration are
+managed separately. Neither form replaces finalized manifests, archives, and
+item sidecars from an actual run.</p>
+<p>The main toolbar now presents the sole <strong>Batch workspace...</strong> action between
+workflow loading and the separated export group. The duplicate action in the
+representative strip was removed. Both the main workflow controls and Batch
+workspace place Load before Save.</p>
+<h2 id="compatibility-and-validation-boundary">Compatibility and validation boundary<a class="headerlink" href="#compatibility-and-validation-boundary" title="Permanent link">&para;</a></h2>
+<p>0.12.0a3 is a focused Batch workspace reliability and persistence release.
+Workflow schema remains 3, the scientific workflow hash remains based on the
+scientific graph rather than its optional batch attachment, and scientific
+cache publication remains atomic.</p>
+<p>A manual Windows acceptance pass covered direct unpreviewed execution, complete
+<code>Skip</code> items, continued processing after an item failure, attached-config
+save/reload, and a representative 3D deconvolution batch. This is useful
+release-level evidence, but it is not a cross-platform stress study, a broad
+microscope-file interoperability matrix, or validation of restoration quality
+for arbitrary samples.</p>
+<p>VIPP remains alpha software. The public
+<a href="../../reference/validation-status/">validation-status page</a> separates current
+automated and bounded manual evidence from real-image, performance,
+interoperability, and usability evidence still required.</p>
 
 
 
@@ -2738,7 +2609,7 @@ pinned in napari while its graph node and input histogram remain visible.</em></
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
   </span>
 
     
@@ -2776,7 +2647,7 @@ pinned in napari while its graph node and input histogram remain visible.</em></
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Choose a tutorial">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Release notes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2786,20 +2657,20 @@ pinned in napari while its graph node and input histogram remain visible.</em></
                 Previous
               </span>
               <div class="md-ellipsis">
-                Choose a tutorial
+                Release notes
               </div>
             </div>
           </a>
         
         
           
-          <a href="../object-measurements-tables/" class="md-footer__link md-footer__link--next" aria-label="Next: Measure objects and tables">
+          <a href="../0.12.0a2/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.12.0a2">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Measure objects and tables
+                0.12.0a2
               </div>
             </div>
             <div class="md-footer__button md-icon">
