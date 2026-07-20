@@ -2535,9 +2535,12 @@
 
 
 <h1 id="process-a-folder">Process a folder<a class="headerlink" href="#process-a-folder" title="Permanent link">&para;</a></h1>
-<p><strong>Batch workspace...</strong> configures and runs one validated workflow over paired
-collections of local files. The interactive graph always represents one item;
-preview and execution cover the complete deterministic plan.</p>
+<p>The sole <strong>Batch workspace...</strong> button in the main toolbar configures and runs
+one validated workflow over paired collections of local files. It is visually
+separated between <strong>Load workflow...</strong> and the export actions because it opens
+a retained working setup rather than exporting an artifact. The interactive
+graph always represents one item; preview and execution cover the complete
+deterministic plan.</p>
 <div class="admonition important">
 <p class="admonition-title">Representative is not the batch</p>
 <p>Moving the representative slider swaps every collection-bound <code>Image
@@ -2549,18 +2552,32 @@ outputs or run the rest of the collection.</p>
 <li>Build, tune, and validate the graph on defined development data.</li>
 <li>Add explicit <code>Batch Output</code> nodes for every image, mask, label, RGB result,
    or table to save.</li>
-<li>Save the workflow.</li>
 <li>Open <strong>Batch workspace...</strong> and bind each varying <code>Image Source</code> to a local
    folder and pattern.</li>
 <li>Choose an output folder, formats, naming, and existing-file policy.</li>
-<li>Select <strong>Preview batch</strong>. Review all pairing and collision summaries.</li>
-<li>Navigate several representatives, including difficult and boundary cases.</li>
-<li>Save <code>vipp_batch_config.json</code> when the plan is intended for replay.</li>
-<li>Select <strong>Run batch</strong>. If the fresh preflight differs, review the refreshed
-   plan and run again only after accepting it.</li>
+<li>Optionally select <strong>Preview batch</strong> to review pairing and collision summaries.</li>
+<li>When previewing, navigate several representatives, including difficult and
+   boundary cases.</li>
+<li>Save the workflow and choose <strong>Yes</strong> to attach the Batch workspace, or use
+   <strong>Save config...</strong> when a separate headless-replay configuration is needed.</li>
+<li>Select <strong>Run batch</strong>. It performs its own plan-only preflight and starts
+   directly when no reviewed plan is current. If a displayed plan changed
+   unexpectedly, review the refreshed plan and run again only after accepting it.</li>
 <li>Inspect outputs, final status, validation text, manifest, archive, and item
     sidecars before treating the run as complete.</li>
 </ol>
+<p>After the first source folder is bound, VIPP suggests its <code>output</code> subdirectory
+as the destination. Amber means that this is an unconfirmed suggestion, not an
+invalid path. Review it before running or previewing the batch. Focusing,
+clicking, editing, or choosing the output folder confirms it and restores the
+normal text colour; later source-folder changes then leave it unchanged. For
+multiple sources, the suggestion follows the first bound (primary) source.</p>
+<div class="admonition caution">
+<p class="admonition-title">Recursive input patterns</p>
+<p>If a pattern searches subdirectories, such as <code>**/*.tif</code>, choose an output
+folder outside the input tree. Otherwise, files from an earlier run could
+match the next input search.</p>
+</div>
 <h2 id="deterministic-pairing">Deterministic pairing<a class="headerlink" href="#deterministic-pairing" title="Permanent link">&para;</a></h2>
 <p>VIPP sorts matched paths independently for every bound source and pairs them by
 position. Every bound source must match the same number of files.</p>
@@ -2630,6 +2647,10 @@ inputs, and collisions within the plan before graph execution.</p>
 </tr>
 </tbody>
 </table>
+<p>When every resolved output for an item already exists under <code>Skip</code>, VIPP records
+that no-op without loading the source pixels or calculating the graph. If an
+item has a mixture of existing and missing outputs, it still calculates once so
+the missing outputs can be produced correctly.</p>
 <p>An explicit overwrite choice on a <code>Batch Output</code> node takes precedence over
 the batch default.</p>
 <h2 id="review-representatives">Review representatives<a class="headerlink" href="#review-representatives" title="Permanent link">&para;</a></h2>
@@ -2656,9 +2677,30 @@ historical, but it is not authorization to run the old plan.</p>
 <p>Run always performs a fresh preflight. If sources, files, destinations,
 collision states, output declarations, or workflow hash differ from the plan
 you reviewed, VIPP refreshes the workspace and stops for review. Select Run
-again only after confirming the new plan.</p>
+again only after confirming the new plan. When there is no current reviewed
+plan - for example, immediately after loading a config or deliberately editing
+a setting - the same Run click uses the fresh plan and starts execution. It does
+not calculate a graph representative first; <strong>Preview batch</strong> remains optional.</p>
 <h2 id="save-and-replay-a-configuration">Save and replay a configuration<a class="headerlink" href="#save-and-replay-a-configuration" title="Permanent link">&para;</a></h2>
-<p><strong>Save config...</strong> writes a versioned <code>vipp_batch_config.json</code> containing:</p>
+<p>When Batch workspace is active, <strong>Save workflow...</strong> offers three choices:</p>
+<ul>
+<li><strong>Yes</strong> attaches the current versioned batch configuration to the workflow
+  JSON. It records collection bindings, local input/output paths, patterns,
+  formats, and run policies, but no source pixels, calculated results, or batch
+  outputs.</li>
+<li><strong>No</strong> saves an ordinary graph-only workflow.</li>
+<li><strong>Cancel</strong> does not save a file.</li>
+</ul>
+<p>Loading a workflow with a valid attachment restores and opens Batch workspace
+with its fields populated. VIPP does not preview the plan, read a
+representative, or calculate the graph as part of that batch restore. Use
+optional <strong>Preview batch</strong> for inspection, or choose <strong>Run batch</strong> to perform a
+fresh preflight and start the full run. An invalid or mismatched attachment is
+not silently applied; the scientific workflow can still load while VIPP
+reports that the Batch workspace was not restored.</p>
+<p>For command-line replay or when workflow and automation settings should remain
+separate, use <strong>Save config...</strong>. It writes a standalone versioned
+<code>vipp_batch_config.json</code> containing:</p>
 <ul>
 <li>source-node bindings, folders, and patterns;</li>
 <li>output folder and default image format;</li>
@@ -2714,6 +2756,11 @@ skipped, and failed items separately.</p>
 between output promotion and checkpoint replacement. They are a recovery trail,
 not a multi-file transaction log. Inspect files and sidecars before deciding
 what to rerun.</p>
+<p>VIPP retries transient Windows and cloud-sync locks during atomic replacement.
+If a final per-item sidecar still cannot be written, the authoritative run
+manifest records that item as partial; <strong>Continue after item failures</strong> controls
+whether later items run. Failure to finalize the run manifest itself remains a
+run-level error because VIPP must not report success without durable provenance.</p>
 <h2 id="deterministic-batch-demo">Deterministic batch demo<a class="headerlink" href="#deterministic-batch-demo" title="Permanent link">&para;</a></h2>
 <p>Choose <strong>Open example... → Deterministic Batch &amp; Provenance → Open batch
 demo...</strong>. Select a writable location; VIPP creates a unique working copy and
@@ -2759,7 +2806,7 @@ not evidence that another assay or naming scheme is valid.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:02:12 UTC">July 20, 2026</span>
   </span>
 
     

@@ -2440,8 +2440,8 @@ interchangeable.</p>
 <tbody>
 <tr>
 <td>Workflow JSON (schema 3)</td>
-<td>Reopen/edit the validated scientific graph in VIPP 0.12</td>
-<td>Cached pixels/tables, Python environment, source bytes, collection bindings</td>
+<td>Reopen/edit the validated scientific graph in VIPP 0.12; optionally restore an attached versioned Batch workspace configuration</td>
+<td>Cached pixels/tables, Python environment, source bytes</td>
 </tr>
 <tr>
 <td>Exported Python</td>
@@ -2472,7 +2472,24 @@ interchangeable.</p>
 </table>
 <h2 id="save-a-workflow">Save a workflow<a class="headerlink" href="#save-a-workflow" title="Permanent link">&para;</a></h2>
 <p>Choose <strong>Save workflow…</strong>. Use <code>.json</code> and include a meaningful analysis name.
-Before sharing:</p>
+If a Batch workspace is active, VIPP asks what to save:</p>
+<ul>
+<li><strong>Yes</strong> attaches the current versioned batch configuration to the same
+  workflow JSON. This includes source bindings, local input/output paths,
+  patterns, formats, and run policies. It does not include input pixels,
+  computed arrays, or output files.</li>
+<li><strong>No</strong> writes the ordinary graph-only workflow. Use <strong>Save config…</strong> in
+  Batch workspace if a separate configuration is required.</li>
+<li><strong>Cancel</strong> writes nothing.</li>
+</ul>
+<p>Loading a workflow with a valid attachment restores and opens Batch workspace
+with those settings. It does not scan the collection, build a preview, load a
+representative, or run the graph for the batch setup. <strong>Preview batch</strong> remains
+optional, and <strong>Run batch</strong> performs a fresh preflight. If the attachment is
+unsupported or does not match the workflow, VIPP loads the scientific workflow
+but reports that its Batch workspace could not be restored rather than silently
+applying the settings.</p>
+<p>Before sharing:</p>
 <ol>
 <li>Reopen the file in the same VIPP release.</li>
 <li>Confirm every <code>Image Source</code> intentionally references a sample, layer, file,
@@ -2512,6 +2529,11 @@ and graph layout are presentation state and are intentionally absent.</p>
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 <code>vipp_batch_pipeline.py</code> is only a thin launcher for that config; it is not a
 substitute for the workflow/config pair.</p>
+<p>The standalone config remains the appropriate form for the supplied headless
+batch runner and for workflows/configs managed as separate automation
+artifacts. An attached config is convenient for reopening the interactive
+setup as one file; it does not replace the finalized manifests and sidecars
+that document an actual run.</p>
 <p>Inspect partial, skipped, and failed records as well as successful outputs.
 Sidecars help reconstruct an interrupted run, but outputs and provenance files
 are not one multi-file transaction.</p>
@@ -2525,8 +2547,8 @@ are not one multi-file transaction.</p>
 <li>validation/QC evidence;</li>
 <li>method notes for manual decisions, exclusions, source/grid assumptions, and
   batch pairing;</li>
-<li>for batch work: config, manifest archives, sidecars, and the workflow/config
-  hashes reported by the finalized run.</li>
+<li>for batch work: the attached or standalone config, manifest archives,
+  sidecars, and the workflow/config hashes reported by the finalized run.</li>
 </ul>
 <p>For publication, follow the <a href="../../scientific-practice/reporting/">reporting checklist</a>.</p>
 
@@ -2549,7 +2571,7 @@ are not one multi-file transaction.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:02:12 UTC">July 20, 2026</span>
   </span>
 
     
