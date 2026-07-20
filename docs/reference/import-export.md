@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.12.0a2 |
+| Source | Behavior in 0.12.0a3 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 13 deterministic VIPP samples. |
@@ -81,7 +81,7 @@ dataset; the command is not a general project archiver.
   infer biological correspondence or perform registration.
 - Local batch processing pairs sorted file collections by position. Semantic
   axis iteration, remote collection input, and plate/well/field HCS traversal
-  are outside 0.12.0a2.
+  are outside 0.12.0a3.
 
 ## Multi-input grid safety
 

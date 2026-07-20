@@ -44,11 +44,14 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.12.0a2 still writes schema 3 and rejects versions 1 and 2. Valid 0.12.0a1
-schema-3 workflows load structurally, but cached pixels and tables are not
-serialized in the workflow. Recalculate and revalidate after upgrading.
-For a 0.12.0a1 workflow, follow the
-[0.12.0a1 to 0.12.0a2 procedure](../reference/versioning.md#move-from-0120a1-to-0120a2).
+0.12.0a3 still writes schema 3 and rejects versions 1 and 2. Valid 0.12.0a1 and
+0.12.0a2 schema-3 workflows load structurally, but cached pixels and tables are
+not serialized in the workflow. Recalculate and revalidate after upgrading.
+For a 0.12.0a2 workflow, follow the
+[0.12.0a2 to 0.12.0a3 procedure](../reference/versioning.md#move-from-0120a2-to-0120a3).
+The earlier
+[0.12.0a1 to 0.12.0a2 procedure](../reference/versioning.md#move-from-0120a1-to-0120a2)
+remains available for older workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-to-0120a1).
 

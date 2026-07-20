@@ -1,6 +1,6 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.12.0a2 application source.
+This page summarizes the evidence shipped with the 0.12.0a3 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.
 
@@ -22,12 +22,22 @@ every assay.
   behavior checks; and
 - focused UI/execution tests cover isolated-tuning boundaries, actionable and
   waiting stale states, progressive node previews, compatible layer reuse, and
-  rejection of stale contrast/histogram results.
+  rejection of stale contrast/histogram results; and
+- batch tests cover attached-config validation and round-trip, restore without
+  preview, direct plan-only execution, complete-item fast skips, transient
+  atomic-write retries, and continuing after a final item-sidecar failure.
 
 Release CI covers package/manifest, lint, and test behavior on Linux and
 Windows. A passing CI matrix is not equivalent to a manual GUI smoke pass on
 every operating system, Qt/display environment, filesystem, or microscope
 reader.
+
+A bounded manual Windows acceptance pass for 0.12.0a3 covered direct
+unpreviewed batch execution, complete `Skip` items, continued processing after
+an item failure, attached-config save/reload, and a representative 3D
+deconvolution batch. It does not establish cross-platform behavior, broad
+filesystem interoperability, large-collection scalability, or restoration
+quality for arbitrary samples.
 
 The release's generated calibrated-morphology report records **28/28 checks
 passed**. Its own scope excludes broad numerical equivalence, biological
@@ -56,17 +66,17 @@ same as an external comparison or assay validation. The distinction matters:
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
-| Large data/batch | Functional cache/path/memory tests plus deterministic saved config, planner, source verification, staging, manifest/archive, sidecar, collision, replay, and exact-output bundle | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, semantic-axis iteration, and HCS traversal |
-| Workflow/export architecture | Schema-3 rejection/round-trip, snapshot materialization, atomic-write failure, shared-executor export, multi-source binding, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
+| Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, and a bounded Windows acceptance pass | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
+| Workflow/export architecture | Schema-3 rejection/round-trip, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor export, multi-source binding, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
 | Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
 ## Release-specific limitations
 
-- Workflow schema 1 and 2 are intentionally rejected; 0.12.0a2 has no automatic
+- Workflow schema 1 and 2 are intentionally rejected; 0.12.0a3 has no automatic
   migration.
-- Valid 0.12.0a1 schema-3 workflows load structurally, but cached pixels/tables
-  are not serialized and exported Python is runtime-version pinned. Recalculate,
-  regenerate exports, and validate after upgrading.
+- Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows load structurally, but cached
+  pixels/tables are not serialized and exported Python is runtime-version
+  pinned. Recalculate, regenerate exports, and validate after upgrading.
 - Batch processing is local-file and sorted-position oriented. It does not
   iterate selected T/C/Z combinations or discover plate/well/field structure.
 - Many operations are eager even when a source format supports lazy/chunked

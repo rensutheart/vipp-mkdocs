@@ -8,10 +8,10 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The current public software baseline is **0.12.0a2**. Its `a2` suffix identifies
-the second alpha build in the 0.12.0 release series; it is a tagged pre-release,
+The current public software baseline is **0.12.0a3**. Its `a3` suffix identifies
+the third alpha build in the 0.12.0 release series; it is a tagged pre-release,
 not a nightly build. See [installation](../getting-started/installation.md) and
-the [0.12.0a2 release notes](../releases/0.12.0a2.md).
+the [0.12.0a3 release notes](../releases/0.12.0a3.md).
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -25,12 +25,36 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.12.0a2 retains schema version 3; versions 1 and 2 are rejected rather
-than migrated automatically. A valid 0.12.0a1 schema-3 workflow loads
-structurally in 0.12.0a2, but workflow JSON contains no cached scientific
+VIPP 0.12.0a3 retains schema version 3; versions 1 and 2 are rejected rather
+than migrated automatically. Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows
+load structurally in 0.12.0a3, but workflow JSON contains no cached scientific
 pixels/tables. Recalculate and compare graph structure, parameters, sources,
 axes, channels, physical grids, dynamic ports, and results on known sample
 data. See the [workflow contract](workflow-contract.md).
+
+## Move from 0.12.0a2 to 0.12.0a3
+
+1. Keep the original workflow, 0.12.0a2 environment, standalone batch config,
+   manifests, item sidecars, and validated outputs for provenance.
+2. Open a duplicate workflow in 0.12.0a3 and confirm that graph structure,
+   parameters, dynamic ports, sources, and Batch Output declarations are as
+   expected.
+3. Recalculate the workflow and compare decisive intermediates and final
+   measurements. Cached scientific results are not serialized in workflow
+   JSON.
+4. If using Batch workspace, review the suggested or restored destination,
+   source bindings, patterns, formats, collision policy, and fresh preflight.
+   Preview remains optional; Run does not implicitly calculate a representative.
+5. Regenerate and revalidate Python exports. An export refuses a VIPP runtime
+   version different from the one that generated it.
+6. Inspect the finalized manifest and item sidecars after a batch, including
+   partial, skipped, and failed items.
+
+A 0.12.0a3 workflow can optionally carry a top-level `batch_config`. VIPP
+0.12.0a2 can still reconstruct the schema-3 scientific graph because it ignores
+that unknown top-level attachment, but it does not restore it and will omit it
+if the workflow is saved again. Preserve the original 0.12.0a3 file when moving
+between releases.
 
 ## Move from 0.12.0a1 to 0.12.0a2
 
@@ -84,7 +108,7 @@ python -m pip install --pre napari-vipp
 To reproduce a specific alpha exactly, specify the version in a fresh environment:
 
 ```text
-python -m pip install "napari[pyqt6]" "napari-vipp==0.12.0a2"
+python -m pip install "napari[pyqt6]" "napari-vipp==0.12.0a3"
 ```
 
 ## Nightly policy

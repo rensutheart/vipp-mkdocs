@@ -27,7 +27,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.12.0a2 accepts schema version 3 and rejects versions 1 and 2 with an
+VIPP 0.12.0a3 accepts schema version 3 and rejects versions 1 and 2 with an
 explicit error. There is no automatic migration path. This prevents an old file
 from being silently reinterpreted with invented threshold, cutoff, channel-axis,
 color, or intensity-mapping choices.
@@ -38,17 +38,38 @@ from the old graph and methods notes, then compare nodes, connections, dynamic
 ports, parameters, sources, metadata, and results on known data. Do not change
 the JSON version number by hand.
 
-0.12.0a2 does not increment the schema. A valid schema-3 workflow saved by
-0.12.0a1 therefore loads structurally in 0.12.0a2. That means the graph,
-parameters, connections, and persisted workflow state can be reconstructed; it
-does not mean prior calculated results were embedded or revalidated. Scientific
-pixel/table caches, thumbnails, pinned layers, and other interactive display
-state are not serialized in workflow JSON. Recalculate and validate the graph
-after upgrading.
+0.12.0a3 does not increment the schema. Valid schema-3 workflows saved by
+0.12.0a1 or 0.12.0a2 therefore load structurally in 0.12.0a3. That means the
+graph, parameters, connections, and persisted workflow state can be
+reconstructed; it does not mean prior calculated results were embedded or
+revalidated. Scientific pixel/table caches, thumbnails, pinned layers, and
+other interactive display state are not serialized in workflow JSON.
+Recalculate and validate the graph after upgrading.
 
 Alpha compatibility is not guaranteed across future schema or operation
 changes. Preserve the original file and exact VIPP version, and test a duplicate
 before using it in a consequential analysis.
+
+### Optional Batch workspace attachment
+
+A 0.12.0a3 workflow can carry an optional top-level `batch_config`. The
+attachment is a versioned batch configuration containing source bindings,
+local input/output paths, patterns, formats, output policy, and run settings.
+It contains no source pixels, calculated arrays, output files, manifests, or
+item sidecars.
+
+The attachment is validated against the containing graph when it is saved and
+loaded. It is deliberately excluded from the scientific workflow hash: changing
+where or how a graph is applied must not create a self-referential hash or imply
+that the graph's scientific operations changed. An invalid, unsupported, or
+mismatched attachment is not silently applied; VIPP can still load the
+scientific graph while reporting that Batch workspace was not restored.
+
+Restoring a valid attachment opens Batch workspace and populates its fields. It
+does not scan the collection, build a preview, load a representative, or
+calculate the graph. **Preview batch** remains optional and **Run batch** always
+performs a fresh preflight. Because paths are local configuration, review and
+repair them after moving a workflow to another computer.
 
 ### Scientific parameters versus inspector state
 
@@ -78,17 +99,20 @@ bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
 different runtime. Regenerate and revalidate exported code after every VIPP
-upgrade, including 0.12.0a1 to 0.12.0a2.
+upgrade, including 0.12.0a2 to 0.12.0a3.
 Interactive caches, thumbnails, pinned layers, and graph layout remain UI
 state and are not reproduced.
 
 ## Batch artifacts
 
-A batch run uses a versioned `vipp_batch_config.json` that records collection
-bindings, output policy, resolved output declarations, the workflow companion,
-and the canonical workflow hash. Preview and execution share one deterministic
-sorted positional pairing and output planner. A fresh preflight must still match
-the reviewed plan before execution.
+A batch run uses either a standalone versioned `vipp_batch_config.json` or the
+equivalent validated configuration attached to a workflow. It records
+collection bindings, output policy, resolved output declarations, the workflow
+companion, and the canonical workflow hash. Preview and execution share one
+deterministic sorted positional pairing and output planner. Run always performs
+a fresh plan-only preflight. A new or deliberately edited plan can start in the
+same click without calculating a representative; an unexpectedly changed plan
+that was already reviewed stops for confirmation.
 
 Each run writes a latest manifest, a run-id archive, and item sidecars recording
 software versions, source identities/metadata, hashes, planned outputs,
@@ -96,6 +120,12 @@ policies, errors, and status. Output promotion is atomic per file after all
 sources for an item are reverified. These artifacts improve auditability but do
 not form one transaction across every output and sidecar; inspect the recovery
 trail after an interruption.
+
+An item whose resolved `Skip` destinations all exist is finalized without
+loading source pixels or calculating the graph. Atomic artifact replacement
+retries short-lived access failures. If a final item sidecar still cannot be
+written, that item is partial and **Continue after item failures** controls
+whether later items run; final run-manifest persistence remains mandatory.
 
 See [process a folder](../workflows/batch-processing.md) for the complete user
 contract.
