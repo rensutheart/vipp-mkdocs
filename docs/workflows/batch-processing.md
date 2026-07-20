@@ -1,8 +1,11 @@
 # Process a folder
 
-**Batch workspace...** configures and runs one validated workflow over paired
-collections of local files. The interactive graph always represents one item;
-preview and execution cover the complete deterministic plan.
+The sole **Batch workspace...** button in the main toolbar configures and runs
+one validated workflow over paired collections of local files. It is visually
+separated between **Load workflow...** and the export actions because it opens
+a retained working setup rather than exporting an artifact. The interactive
+graph always represents one item; preview and execution cover the complete
+deterministic plan.
 
 !!! important "Representative is not the batch"
 
@@ -15,17 +18,32 @@ preview and execution cover the complete deterministic plan.
 1. Build, tune, and validate the graph on defined development data.
 2. Add explicit `Batch Output` nodes for every image, mask, label, RGB result,
    or table to save.
-3. Save the workflow.
-4. Open **Batch workspace...** and bind each varying `Image Source` to a local
+3. Open **Batch workspace...** and bind each varying `Image Source` to a local
    folder and pattern.
-5. Choose an output folder, formats, naming, and existing-file policy.
-6. Select **Preview batch**. Review all pairing and collision summaries.
-7. Navigate several representatives, including difficult and boundary cases.
-8. Save `vipp_batch_config.json` when the plan is intended for replay.
-9. Select **Run batch**. If the fresh preflight differs, review the refreshed
-   plan and run again only after accepting it.
-10. Inspect outputs, final status, validation text, manifest, archive, and item
+4. Choose an output folder, formats, naming, and existing-file policy.
+5. Optionally select **Preview batch** to review pairing and collision summaries.
+6. When previewing, navigate several representatives, including difficult and
+   boundary cases.
+7. Save the workflow and choose **Yes** to attach the Batch workspace, or use
+   **Save config...** when a separate headless-replay configuration is needed.
+8. Select **Run batch**. It performs its own plan-only preflight and starts
+   directly when no reviewed plan is current. If a displayed plan changed
+   unexpectedly, review the refreshed plan and run again only after accepting it.
+9. Inspect outputs, final status, validation text, manifest, archive, and item
     sidecars before treating the run as complete.
+
+After the first source folder is bound, VIPP suggests its `output` subdirectory
+as the destination. Amber means that this is an unconfirmed suggestion, not an
+invalid path. Review it before running or previewing the batch. Focusing,
+clicking, editing, or choosing the output folder confirms it and restores the
+normal text colour; later source-folder changes then leave it unchanged. For
+multiple sources, the suggestion follows the first bound (primary) source.
+
+!!! caution "Recursive input patterns"
+
+    If a pattern searches subdirectories, such as `**/*.tif`, choose an output
+    folder outside the input tree. Otherwise, files from an earlier run could
+    match the next input search.
 
 ## Deterministic pairing
 
@@ -99,6 +117,11 @@ Choose the batch default deliberately:
 | `Skip` | Keep the file unchanged and record the output as skipped. |
 | `Overwrite` | Replace the destination and record the new write. |
 
+When every resolved output for an item already exists under `Skip`, VIPP records
+that no-op without loading the source pixels or calculating the graph. If an
+item has a mixture of existing and missing outputs, it still calculates once so
+the missing outputs can be produced correctly.
+
 An explicit overwrite choice on a `Batch Output` node takes precedence over
 the batch default.
 
@@ -133,11 +156,33 @@ historical, but it is not authorization to run the old plan.
 Run always performs a fresh preflight. If sources, files, destinations,
 collision states, output declarations, or workflow hash differ from the plan
 you reviewed, VIPP refreshes the workspace and stops for review. Select Run
-again only after confirming the new plan.
+again only after confirming the new plan. When there is no current reviewed
+plan - for example, immediately after loading a config or deliberately editing
+a setting - the same Run click uses the fresh plan and starts execution. It does
+not calculate a graph representative first; **Preview batch** remains optional.
 
 ## Save and replay a configuration
 
-**Save config...** writes a versioned `vipp_batch_config.json` containing:
+When Batch workspace is active, **Save workflow...** offers three choices:
+
+- **Yes** attaches the current versioned batch configuration to the workflow
+  JSON. It records collection bindings, local input/output paths, patterns,
+  formats, and run policies, but no source pixels, calculated results, or batch
+  outputs.
+- **No** saves an ordinary graph-only workflow.
+- **Cancel** does not save a file.
+
+Loading a workflow with a valid attachment restores and opens Batch workspace
+with its fields populated. VIPP does not preview the plan, read a
+representative, or calculate the graph as part of that batch restore. Use
+optional **Preview batch** for inspection, or choose **Run batch** to perform a
+fresh preflight and start the full run. An invalid or mismatched attachment is
+not silently applied; the scientific workflow can still load while VIPP
+reports that the Batch workspace was not restored.
+
+For command-line replay or when workflow and automation settings should remain
+separate, use **Save config...**. It writes a standalone versioned
+`vipp_batch_config.json` containing:
 
 - source-node bindings, folders, and patterns;
 - output folder and default image format;
@@ -200,6 +245,12 @@ Sidecars reduce ambiguity after interruption, but there is a small window
 between output promotion and checkpoint replacement. They are a recovery trail,
 not a multi-file transaction log. Inspect files and sidecars before deciding
 what to rerun.
+
+VIPP retries transient Windows and cloud-sync locks during atomic replacement.
+If a final per-item sidecar still cannot be written, the authoritative run
+manifest records that item as partial; **Continue after item failures** controls
+whether later items run. Failure to finalize the run manifest itself remains a
+run-level error because VIPP must not report success without durable provenance.
 
 ## Deterministic batch demo
 

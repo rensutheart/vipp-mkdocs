@@ -9,10 +9,10 @@ Labels below match napari-vipp 0.12.0a2. Controls can collapse into
 | --- | --- |
 | **New workflow…** | Reset after confirmation to one unbound `Image Source` on an otherwise empty graph. |
 | **Open example…** | Open one of 13 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
-| **Load workflow…** | Open an external or previously saved workflow JSON. |
-| **Save workflow…** | Save graph structure, parameters, layout, and selected UI state—not computed arrays. |
+| **Load workflow…** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores and opens Batch workspace without running a preview. |
+| **Save workflow…** | Save graph structure, parameters, layout, and selected UI state—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
+| **Batch workspace…** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
 | **Export Python…** | Generate a headless script using supported operation and I/O calls. |
-| **Batch workspace…** | Open the retained local-collection setup, representative navigator, run progress, final status, and provenance view. |
 | **Export OME dataset…** | Save one reference image with associated graph label outputs. |
 | **Tunnels…** | Manage named graph outputs and subscribers. |
 | **Auto structure graph** | Apply a one-shot source-to-sink layout; undo restores positions. |
@@ -198,4 +198,6 @@ After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired
 filename. It calculates one representative only and never saves batch outputs.
 The requested item is labelled as current only after all matching sources load
-and the graph calculation succeeds. See [process a folder](../workflows/batch-processing.md).
+and the graph calculation succeeds. The strip does not duplicate the main
+**Batch workspace…** action; use the sole toolbar button to reopen the retained
+workspace. See [process a folder](../workflows/batch-processing.md).

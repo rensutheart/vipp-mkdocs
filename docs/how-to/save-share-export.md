@@ -5,7 +5,7 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 3) | Reopen/edit the validated scientific graph in VIPP 0.12 | Cached pixels/tables, Python environment, source bytes, collection bindings |
+| Workflow JSON (schema 3) | Reopen/edit the validated scientific graph in VIPP 0.12; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor | Interactive UI, caches, a portable runtime environment |
 | Saved image/table | Analysis result or QC artifact | The graph and parameter rationale |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive or arbitrary standalone table provenance |
@@ -15,6 +15,24 @@ interchangeable.
 ## Save a workflow
 
 Choose **Save workflow…**. Use `.json` and include a meaningful analysis name.
+If a Batch workspace is active, VIPP asks what to save:
+
+- **Yes** attaches the current versioned batch configuration to the same
+  workflow JSON. This includes source bindings, local input/output paths,
+  patterns, formats, and run policies. It does not include input pixels,
+  computed arrays, or output files.
+- **No** writes the ordinary graph-only workflow. Use **Save config…** in
+  Batch workspace if a separate configuration is required.
+- **Cancel** writes nothing.
+
+Loading a workflow with a valid attachment restores and opens Batch workspace
+with those settings. It does not scan the collection, build a preview, load a
+representative, or run the graph for the batch setup. **Preview batch** remains
+optional, and **Run batch** performs a fresh preflight. If the attachment is
+unsupported or does not match the workflow, VIPP loads the scientific workflow
+but reports that its Batch workspace could not be restored rather than silently
+applying the settings.
+
 Before sharing:
 
 1. Reopen the file in the same VIPP release.
@@ -65,6 +83,12 @@ run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is only a thin launcher for that config; it is not a
 substitute for the workflow/config pair.
 
+The standalone config remains the appropriate form for the supplied headless
+batch runner and for workflows/configs managed as separate automation
+artifacts. An attached config is convenient for reopening the interactive
+setup as one file; it does not replace the finalized manifests and sidecars
+that document an actual run.
+
 Inspect partial, skipped, and failed records as well as successful outputs.
 Sidecars help reconstruct an interrupted run, but outputs and provenance files
 are not one multi-file transaction.
@@ -80,7 +104,7 @@ At minimum include:
 - validation/QC evidence;
 - method notes for manual decisions, exclusions, source/grid assumptions, and
   batch pairing;
-- for batch work: config, manifest archives, sidecars, and the workflow/config
-  hashes reported by the finalized run.
+- for batch work: the attached or standalone config, manifest archives,
+  sidecars, and the workflow/config hashes reported by the finalized run.
 
 For publication, follow the [reporting checklist](../scientific-practice/reporting.md).
