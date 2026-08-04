@@ -544,6 +544,8 @@
       
         
       
+        
+      
     
     
     
@@ -587,6 +589,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1853,7 +1878,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -2579,7 +2604,11 @@ outputs or run the rest of the collection.</p>
    or table to save.</li>
 <li>Open <strong>Batch workspace...</strong> and bind each varying <code>Image Source</code> to a local
    folder and pattern.</li>
-<li>Choose an output folder, formats, naming, and existing-file policy.</li>
+<li>Choose the intended toolbar compute request. New work defaults to Auto;
+   choose CPU for a portable reference run or Selective for reviewed per-node
+   preferences.</li>
+<li>Choose an output folder, formats, naming, existing-file policy, fallback
+   policy, device, and accelerator-memory settings.</li>
 <li>Optionally select <strong>Preview batch</strong> to review pairing and collision summaries.</li>
 <li>When previewing, navigate several representatives, including difficult and
    boundary cases.</li>
@@ -2588,8 +2617,10 @@ outputs or run the rest of the collection.</p>
 <li>Select <strong>Run batch</strong>. It performs its own plan-only preflight and starts
    directly when no reviewed plan is current. If a displayed plan changed
    unexpectedly, review the refreshed plan and run again only after accepting it.</li>
-<li>Inspect outputs, final status, validation text, manifest, archive, and item
-    sidecars before treating the run as complete.</li>
+<li>Inspect outputs, final status, validation text, manifest, archive, item
+    sidecars, configured/effective compute requests, actual node
+    implementations, fallbacks, and cleanup evidence before treating the run as
+    complete.</li>
 </ol>
 <p>After the first source folder is bound, VIPP suggests its <code>output</code> subdirectory
 as the destination. Amber means that this is an unconfirmed suggestion, not an
@@ -2612,7 +2643,7 @@ position. Every bound source must match the same number of files.</p>
 </span></code></pre></div>
 <p>Directory names and filename similarity do not create biological pairing.
 Inspect the preview and retain an independent sample/field map when position is
-not sufficient evidence. Time, channel, and Z remain inside each file; 0.12
+not sufficient evidence. Time, channel, and Z remain inside each file; 0.13
 does not iterate semantic-axis combinations or discover plate/well/field HCS
 structure.</p>
 <p>The first bound source is the primary source used by default naming. Fixed
@@ -2731,9 +2762,16 @@ separate, use <strong>Save config...</strong>. It writes a standalone versioned
 <li>output folder and default image format;</li>
 <li>filename/output declarations and existing-file policy;</li>
 <li>continue-after-failure behavior;</li>
+<li>complete compute mode, per-node preferences, fallback policy,
+  runtime/device selection, and accelerator memory limits;</li>
 <li>the required workflow companion and optional runner;</li>
 <li>the canonical scientific workflow hash.</li>
 </ul>
+<p>Batch config schema 2 stores this compute request. A version-1 config had no
+compute fields and loads as explicit CPU. Loading a config does not silently
+replace the toolbar request; it retains its saved request until the user changes
+a toolbar compute setting, at which point the current complete toolbar request
+is used for the next preview, save, or run.</p>
 <p><strong>Load config...</strong> validates it against the current workflow. A hash or resolved
 output mismatch fails rather than silently applying stale selections.</p>
 <p>The optional <code>vipp_batch_pipeline.py</code> is a thin command-line launcher. It
@@ -2741,6 +2779,23 @@ defaults to its sibling config, resolves the recorded workflow, and delegates
 to the same headless batch core as the workspace. It is different from
 <strong>Export Python...</strong>, whose immutable embedded workflow and primary-source
 folder helper serve a different automation use case.</p>
+<p>The runner uses the config request by default. Its CLI can overlay explicitly
+supplied <code>--compute-mode</code>, <code>--fallback-policy</code>, and repeatable
+<code>--node-preference NODE_ID=PREFERENCE</code> options without mutating the saved
+config. Use <code>--progress</code> to print both overall-item and current-operation
+updates. Exit code <code>0</code> means no recorded failures, <code>1</code> means a finalized batch
+contains failures, <code>2</code> means setup/execution failed before a normal result, and
+<code>130</code> means cooperative cancellation.</p>
+<p>Run the saved request with:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python vipp_batch_pipeline.py --progress
+</span></code></pre></div>
+<p>Override only a deliberate difference from the saved config, for example:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python vipp_batch_pipeline.py --progress --compute-mode selective --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
+</span></code></pre></div>
+<p>Node IDs come from the reviewed workflow/config. Stable preferences include
+<code>auto</code>, <code>cpu</code>, <code>best_gpu</code>, <code>library:&lt;library-id&gt;</code>, and
+<code>implementation:&lt;implementation-id&gt;</code>. Prefer a library choice for portability;
+an exact implementation pin can be unavailable on another computer.</p>
 <h2 id="execution-and-publication-safety">Execution and publication safety<a class="headerlink" href="#execution-and-publication-safety" title="Permanent link">&para;</a></h2>
 <p>For each item, VIPP:</p>
 <ol>
@@ -2748,6 +2803,7 @@ folder helper serve a different automation use case.</p>
 <li>runs the complete graph through the shared headless executor;</li>
 <li>writes all outputs to private staging paths;</li>
 <li>reverifies every source identity;</li>
+<li>synchronizes and verifies accelerator cleanup when device work occurred;</li>
 <li>promotes staged outputs to final paths one at a time;</li>
 <li>updates provenance status and checkpoints.</li>
 </ol>
@@ -2756,8 +2812,22 @@ promoted. A failure during later promotion can leave earlier outputs from the
 same item successfully published; the item is recorded as <code>partial</code> rather
 than hidden. Successful earlier items remain available. With <strong>Continue after
 item failures</strong> enabled, later items continue.</p>
-<p>Item progress is intentionally item-level. One expensive item can stay at
-<code>running</code> for a long time while its graph invocation completes.</p>
+<p>Batch displays two progress levels. <strong>Overall</strong> reports the item number, batch
+ID, and final item status. <strong>Current operation</strong> reports the containing item,
+node/operation, completed checkpoint, total checkpoints, and message. A
+monolithic NumPy, SciPy, CuPy, cuCIM, or writer call can still remain at one
+percentage until it returns because VIPP does not invent internal progress.</p>
+<p><strong>Cancel</strong> requests cooperative cancellation between nodes, device segments,
+iterative/tiled checkpoints, output staging, source verification, and items.
+The active operation may finish its current atomic library call first. On the
+normal cancellation path, the active item and its unpublished outputs become
+<code>cancelled</code>, later unstarted items become <code>skipped</code>, manifest/archive/checkpoint
+evidence is finalized, and the runner exits <code>130</code>. Once the short multi-output
+promotion boundary begins, VIPP completes it to avoid an avoidable partial set.</p>
+<p>With <strong>visible</strong> fallback, a complete transactional GPU segment can be retried
+once on CPU only after a classified, retryable OOM and proven GPU cleanup.
+<strong>Strict</strong> returns the typed memory failure. Other device errors are not silently
+renamed or retried. Each later item is replanned independently.</p>
 <h2 id="provenance-artifacts">Provenance artifacts<a class="headerlink" href="#provenance-artifacts" title="Permanent link">&para;</a></h2>
 <p>A workspace-started run writes the resolved configuration beside its outputs.
 Every workspace or headless run writes:</p>
@@ -2766,17 +2836,24 @@ Every workspace or headless run writes:</p>
 <li>a run-id manifest archive — preserves prior finalized runs;</li>
 <li>a run-id sidecar directory — per-item/output checkpoints during execution.</li>
 </ul>
-<p>The manifest records:</p>
+<p>The version-2 manifest records:</p>
 <ul>
 <li>canonical workflow/config and their hashes;</li>
 <li>VIPP, Python, and relevant runtime package versions;</li>
 <li>each source identity and available metadata;</li>
 <li>every planned output path, format, and collision policy;</li>
-<li>errors and item/output states.</li>
+<li>errors and item/output states;</li>
+<li>the configured and effective compute requests, whether a CLI/UI override was
+  used, and their fingerprints;</li>
+<li>for every calculated item, the formal execution document and digest with
+  actual CPU/CuPy/cuCIM decisions, implementation IDs/versions, memory
+  estimates, fallbacks, outcome, and cleanup; and</li>
+<li>an execution-provenance digest on every published output record that links it
+  to that exact item execution.</li>
 </ul>
-<p>Output states are <code>pending</code>, <code>completed</code>, <code>skipped</code>, or <code>failed</code>. Item states
-can also be <code>running</code> or <code>partial</code>. Final summaries count completed, partial,
-skipped, and failed items separately.</p>
+<p>Output states are <code>pending</code>, <code>completed</code>, <code>skipped</code>, <code>cancelled</code>, or <code>failed</code>.
+Item states can also be <code>running</code> or <code>partial</code>. Final summaries count completed,
+partial, skipped, cancelled, and failed items separately.</p>
 <p>Sidecars reduce ambiguity after interruption, but there is a small window
 between output promotion and checkpoint replacement. They are a recovery trail,
 not a multi-file transaction log. Inspect files and sidecars before deciding
@@ -2807,7 +2884,9 @@ not evidence that another assay or naming scheme is valid.</p>
 <li>Axes, channels, physical scale, origin, and units are appropriate.</li>
 <li>Output names, formats, subfolders, and collision policy are intentional.</li>
 <li>The fresh preflight matches the reviewed plan.</li>
-<li>Completed/partial/skipped/failed counts match expectations.</li>
+<li>The configured and effective compute requests match the intended run, and
+  actual node badges/provenance explain CPU, GPU, or fallback decisions.</li>
+<li>Completed/partial/skipped/cancelled/failed counts match expectations.</li>
 <li>Manifests, archives, sidecars, environment, exclusions, QC, and validation
   evidence are retained with the outputs.</li>
 </ul>
@@ -2831,7 +2910,7 @@ not evidence that another assay or naming scheme is valid.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:02:12 UTC">July 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     

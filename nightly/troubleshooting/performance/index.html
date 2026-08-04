@@ -544,6 +544,8 @@
       
         
       
+        
+      
     
     
     
@@ -587,6 +589,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1705,7 +1730,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -2090,9 +2115,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cpu-auto-and-selective-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU, Auto, and Selective compute
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#background-execution" class="md-nav__link">
     <span class="md-ellipsis">
       Background Execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu-memory-and-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU memory and fallback
     </span>
   </a>
   
@@ -2392,9 +2435,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cpu-auto-and-selective-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU, Auto, and Selective compute
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#background-execution" class="md-nav__link">
     <span class="md-ellipsis">
       Background Execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu-memory-and-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU memory and fallback
     </span>
   </a>
   
@@ -2465,6 +2526,33 @@
 <li>Use <code>Smart interactive cache</code> or <code>Low-memory mode</code>.</li>
 <li>Mark expensive intermediates with <code>Keep output cached</code>.</li>
 </ol>
+<p>If optional CUDA support is installed, also inspect the toolbar's actual-run
+summary and node badges. <strong>Auto</strong> may correctly choose CPU for a small workload,
+an unsupported dtype/parameter region, an unqualified environment, or a graph
+whose transfer boundaries outweigh one fast kernel. Use <strong>Compute setup and
+memory…</strong> for the typed reason; do not infer GPU use from the selected mode.</p>
+<h2 id="cpu-auto-and-selective-compute">CPU, Auto, and Selective compute<a class="headerlink" href="#cpu-auto-and-selective-compute" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>CPU</strong> runs the authoritative host implementation everywhere.</li>
+<li><strong>Auto</strong> considers only scientifically admitted implementations and may keep
+  a node on CPU when that is faster or evidence is insufficient.</li>
+<li><strong>Selective</strong> exposes per-node library choices plus node and whole-pipeline
+  benchmarking. A separate lock preserves an authored choice during <strong>Find
+  fastest pipeline…</strong>.</li>
+</ul>
+<p>Benchmarking uses the exact current data and validates parity before timing. A
+whole-pipeline search can be intentionally expensive because it compares
+alternatives whose winner is not known in advance. Its overall bar reports
+nodes/search progress; its current-operation bar reports truthful checkpoints
+within the active parity, warmup, or timed call. If the time limit is reached,
+the result must say which comparisons completed and remain. Exact completed
+records can be reused on retry.</p>
+<p>Do not change dtype only to win a benchmark unless that conversion is a
+scientifically intended workflow step. Some GPU kernels, especially filtering
+and deconvolution, gain much more on <code>float32</code> than on native <code>uint16</code>, and a
+particular native-integer GPU path may be ineligible because it cannot preserve
+the CPU result. If conversion is appropriate for the analysis, add and report
+an explicit <code>Convert Dtype</code> node; VIPP never synthesizes one for the optimizer.</p>
 <h2 id="background-execution">Background Execution<a class="headerlink" href="#background-execution" title="Permanent link">&para;</a></h2>
 <p><code>Run all in BG</code> controls whether background execution is forced or adaptive.</p>
 <ul>
@@ -2493,6 +2581,23 @@ float temporary.</p>
 <p>The <code>Cancel</code> button cancels queued reruns and asks cooperative operations to
 stop. It cannot forcibly interrupt a NumPy, SciPy, or scikit-image call already
 inside a work unit.</p>
+<p>The same rule applies to CuPy/cuCIM calls and file writers. GPU progress is
+published only after stream synchronization at a declared checkpoint, so a
+monolithic plane/volume can appear stationary until that call finishes. This
+is an honest boundary, not a stalled percentage. Cooperative cancellation then
+waits for synchronization and cleanup before output publication.</p>
+<h2 id="gpu-memory-and-fallback">GPU memory and fallback<a class="headerlink" href="#gpu-memory-and-fallback" title="Permanent link">&para;</a></h2>
+<p>VIPP evaluates an operation-specific conservative device-memory estimate
+before launching a GPU segment. <strong>Compute setup and memory…</strong> reports separate
+VRAM on a discrete NVIDIA device; the CPU/cache indicator reports host RAM.
+Future unified-memory providers must report one shared budget rather than
+adding RAM and VRAM as though they were independent.</p>
+<p>With visible fallback, one complete device segment can retry on CPU after a
+classified runtime OOM only after the GPU attempt synchronizes and cleans up.
+The badge turns amber and the execution report retains the attempted segment,
+required/available memory where known, exception, cleanup, and CPU retry result.
+Strict selective fallback returns the typed failure. Other GPU faults are not
+silently treated as OOM.</p>
 <h2 id="switching-between-node-results">Switching Between Node Results<a class="headerlink" href="#switching-between-node-results" title="Permanent link">&para;</a></h2>
 <p>For compatible napari <code>Image</code> presentations, VIPP keeps the same generated
 inspect or pin layer and swaps only its data reference. The reference is a
@@ -2547,7 +2652,7 @@ temporary allocation made inside NumPy, SciPy, or scikit-image.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     

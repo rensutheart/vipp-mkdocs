@@ -544,6 +544,8 @@
       
         
       
+        
+      
     
     
     
@@ -587,6 +589,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -809,6 +834,15 @@
   <a href="#confirm-the-installation" class="md-nav__link">
     <span class="md-ellipsis">
       Confirm the installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-nvidia-cuda-acceleration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional NVIDIA CUDA acceleration
     </span>
   </a>
   
@@ -1799,7 +1833,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -2401,6 +2435,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#optional-nvidia-cuda-acceleration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional NVIDIA CUDA acceleration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#optional-microscope-readers" class="md-nav__link">
     <span class="md-ellipsis">
       Optional microscope readers
@@ -2452,15 +2495,17 @@
 
 
 <h1 id="install-vipp">Install VIPP<a class="headerlink" href="#install-vipp" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.12.0a3 requires <strong>Python 3.12 or newer</strong>. Because the current release is
-a pre-release, pip needs the <code>--pre</code> flag to select it from PyPI.</p>
+<p>VIPP 0.13.0a1 supports <strong>CPython 3.12 and 3.13</strong>. Because the current release
+is a pre-release, pip needs the <code>--pre</code> flag to select it from PyPI.</p>
 <div class="admonition info">
-<p class="admonition-title">Platform verification for 0.12.0a3</p>
-<p>Release CI exercises the application and package on Linux and Windows.
-A current manual GUI installation/smoke pass is still required before a
-platform should be described as broadly verified. Treat the commands below
-as supported installation paths, not evidence that every reader, dataset,
-display server, or GPU/driver combination has been validated.</p>
+<p class="admonition-title">Platform and Python verification for 0.13.0a1</p>
+<p>The base CPU application is intended for Windows, macOS, and Linux. Release
+Release CI targets CPython 3.12 and 3.13 on all three operating systems;
+package metadata deliberately excludes unqualified Python 3.14 and newer.
+CUDA extras are limited to 64-bit CPython 3.12 on native Windows/Linux.
+Treat the commands below as installation paths, not evidence that every
+reader, dataset, display server, GPU, driver, or scientific stack has been
+validated.</p>
 </div>
 <h2 id="recommended-a-dedicated-environment">Recommended: a dedicated environment<a class="headerlink" href="#recommended-a-dedicated-environment" title="Permanent link">&para;</a></h2>
 <p>A separate environment prevents unrelated scientific packages from changing
@@ -2473,8 +2518,8 @@ tagged VIPP release.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">.\</span><span class="n">vipp-env</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&quot;</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-pre</span> <span class="n">napari-vipp</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">napari</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-pre</span> <span class="s2">&quot;napari-vipp==0.13.0a1&quot;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">vipp</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -2482,8 +2527,8 @@ tagged VIPP release.</p>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>vipp-env/bin/activate
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&quot;</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>napari-vipp
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>napari
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span><span class="s2">&quot;napari-vipp==0.13.0a1&quot;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>vipp
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -2491,13 +2536,13 @@ tagged VIPP release.</p>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">source</span><span class="w"> </span>vipp-env/bin/activate
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&quot;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>napari-vipp
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>napari
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span><span class="s2">&quot;napari-vipp==0.13.0a1&quot;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>vipp
 </span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Conda or Mamba environments are also suitable; use Python 3.12 or newer and
+<p>Conda or Mamba environments are also suitable; use Python 3.12 or 3.13 and
 activate the environment before running the final
 <code>python -m pip install ...</code> command.</p>
 <div class="admonition note">
@@ -2518,8 +2563,62 @@ the nightly manual. See <a href="../../reference/versioning/">versions and compa
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python -c &quot;import importlib.metadata as m; print(m.version(&#39;napari-vipp&#39;))&quot;
 </span></code></pre></div>
 <p>Expected for this release:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>0.12.0a3
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>0.13.0a1
 </span></code></pre></div>
+<h2 id="optional-nvidia-cuda-acceleration">Optional NVIDIA CUDA acceleration<a class="headerlink" href="#optional-nvidia-cuda-acceleration" title="Permanent link">&para;</a></h2>
+<p>The base installation is complete and remains the portable recommendation. A
+new session defaults to <strong>Auto</strong>, but Auto uses CPU normally when no admitted
+accelerator is present. GPU packages are optional and are not imported merely
+to load VIPP or run a CPU workflow.</p>
+<div class="admonition warning">
+<p class="admonition-title">The first public GPU gate is deliberately narrow</p>
+<p>The 0.13.0a1 admission evidence covers one exact native-Windows stack:
+64-bit CPython 3.12, NumPy 2.5.1, SciPy 1.18.0, scikit-image 0.26.0,
+CuPy/CuPyX 14.1.1, CUDA runtime API 13.2, driver API 13.3, and the recorded
+RTX 5090/compute-capability-12.0 device. A different GPU, OS, driver,
+runtime, or package set can install successfully and still resolve every
+GPU candidate to CPU because that environment has not passed the release's
+evidence gate. Native Linux and RTX 40-series qualification are pending.</p>
+</div>
+<p>Use a <strong>new</strong> environment and install exactly one CUDA-major extra. For the
+current CUDA 13 track:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows · CUDA 13</label><label for="__tabbed_2_2">Linux · CUDA 13</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="n">vipp-gpu-env</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">.\</span><span class="n">vipp-gpu-env</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-pre</span> <span class="s2">&quot;napari[pyqt6]&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a1&quot;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">vipp-compute-doctor</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">vipp</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>vipp-gpu-env
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">source</span><span class="w"> </span>vipp-gpu-env/bin/activate
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&quot;</span><span class="w"> </span><span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a1&quot;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>vipp-compute-doctor<span class="w"> </span>--track<span class="w"> </span>cuda13
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>vipp
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>The <code>gpu-cuda12</code> extra is a qualification/development track in this alpha; the
+current public policy does not admit it. Do not install <code>gpu-cuda12</code> and
+<code>gpu-cuda13</code> into the same environment. A passing import or CUDA kernel probe
+does not by itself establish scientific admission for an operation.</p>
+<p><code>vipp-compute-doctor</code> reports the selected track, installed packages, runtime
+probe, device, and current policy eligibility without asking the GUI to import
+a broken accelerator stack. VIPP's <strong>Compute setup and memory…</strong> dialog exposes
+the same diagnosis and a copyable fresh-environment repair command. VIPP never
+runs that command without the user's action.</p>
+<p>cuCIM-backed candidates require a separately reviewed, checksum-recorded build.
+There is no general public native-Windows cuCIM extra in 0.13.0a1, and the
+validated source-built wheel omits Clara whole-slide I/O. Do not install an
+arbitrary cuCIM build and assume it is admitted.</p>
+<p>macOS has no CUDA path. Use the base CPU installation on Intel or Apple Silicon;
+Metal/MPS/MLX acceleration is a future study, not part of this release.</p>
 <h2 id="optional-microscope-readers">Optional microscope readers<a class="headerlink" href="#optional-microscope-readers" title="Permanent link">&para;</a></h2>
 <p>The base package supports the documented TIFF, OME-Zarr, NumPy, and ordinary
 raster routes. Install only the reader family you need, then restart napari.</p>
@@ -2533,19 +2632,19 @@ raster routes. Install only the reader family you need, then restart napari.</p>
 <tbody>
 <tr>
 <td>Nikon ND2</td>
-<td><code>python -m pip install --pre "napari-vipp[nd2]"</code></td>
+<td><code>python -m pip install --pre "napari-vipp[nd2]==0.13.0a1"</code></td>
 </tr>
 <tr>
 <td>Zeiss CZI</td>
-<td><code>python -m pip install --pre "napari-vipp[czi]"</code></td>
+<td><code>python -m pip install --pre "napari-vipp[czi]==0.13.0a1"</code></td>
 </tr>
 <tr>
 <td>Mixed microscope formats</td>
-<td><code>python -m pip install --pre "napari-vipp[microscope]"</code></td>
+<td><code>python -m pip install --pre "napari-vipp[microscope]==0.13.0a1"</code></td>
 </tr>
 <tr>
 <td>BioIO/Bio-Formats fallback</td>
-<td><code>python -m pip install --pre "napari-vipp[bioformats]"</code></td>
+<td><code>python -m pip install --pre "napari-vipp[bioformats]==0.13.0a1"</code></td>
 </tr>
 </tbody>
 </table>
@@ -2555,25 +2654,26 @@ interpreted correctly. Check representative files from your facility before
 quantitative use.</p>
 <h2 id="install-the-development-branch">Install the development branch<a class="headerlink" href="#install-the-development-branch" title="Permanent link">&para;</a></h2>
 <p>Use this only for testing unreleased work:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&quot; &quot;https://github.com/rensutheart/napari-vipp/archive/refs/heads/main.zip&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&quot; &quot;https://github.com/rensutheart/napari-vipp/archive/refs/heads/main.zip&quot;
 </span></code></pre></div>
 <p>Development workflows may not reopen in a stable alpha release. Record the
 commit hash as well as the package version if results depend on an unreleased
 build.</p>
 <p>Before upgrading an existing workflow, read
 <a href="../../reference/versioning/">versions and compatibility</a> and preserve the old
-environment. Schema-1/2 workflows do not open in 0.12.0a3. Valid schema-3
-workflows from 0.12.0a1 and 0.12.0a2 load structurally, but cached results are
-not serialized; recalculate and validate them after upgrading. Regenerate
-exported Python too, because it requires the exact VIPP runtime version that
-created it.</p>
+environment. Schema-1/2 workflows do not open in 0.13.0a1. Valid schema-3
+workflows load structurally with an explicit CPU compute request; saving writes
+schema 4. Cached results are not serialized, so recalculate and validate after
+upgrading. Version-1 batch configs similarly load as CPU and save as version 2.
+Regenerate exported Python too, because it requires the exact VIPP runtime
+version that created it.</p>
 <h2 id="developer-installation">Developer installation<a class="headerlink" href="#developer-installation" title="Permanent link">&para;</a></h2>
 <p>Contributors should clone the application repository and install it editable:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd </span><span class="n">napari-vipp</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-e</span> <span class="s2">&quot;.[dev]&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">cd </span><span class="n">napari-vipp</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-e</span> <span class="s2">&quot;.[dev]&quot;</span>
 </span></code></pre></div>
 <p>Continue with the <a href="../../developer/development-setup/">development setup</a>.</p>
 
@@ -2596,7 +2696,7 @@ created it.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     

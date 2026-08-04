@@ -544,6 +544,8 @@
       
         
       
+        
+      
     
     
     
@@ -587,6 +589,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1710,7 +1735,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -1780,9 +1805,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#workflow-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow tabs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#workflow-toolbar" class="md-nav__link">
     <span class="md-ellipsis">
       Workflow toolbar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute controls
     </span>
   </a>
   
@@ -2449,9 +2492,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#workflow-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow tabs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#workflow-toolbar" class="md-nav__link">
     <span class="md-ellipsis">
       Workflow toolbar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute controls
     </span>
   </a>
   
@@ -2584,8 +2645,19 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.12.0a3. Controls can collapse into
+<p>Labels below match napari-vipp 0.13.0a1. Controls can collapse into
 <strong>Settings</strong> when the window is narrow.</p>
+<h2 id="workflow-tabs">Workflow tabs<a class="headerlink" href="#workflow-tabs" title="Permanent link">&para;</a></h2>
+<p>The movable tab bar holds independent live workflow sessions. Each tab retains
+its graph, calculated results, ancillary caches, undo/redo history, inspector
+state, file path, dirty baseline, display choices, compute request, and Batch
+workspace. <strong>New workflow…</strong> and <strong>Load workflow…</strong> create sessions rather than
+discarding another open graph. Tabs can be renamed, reordered, and closed with
+Save/Discard/Cancel handling.</p>
+<p>Switching tabs restores retained state and does not recalculate scientific
+results. A collection batch remains owned by its originating tab; VIPP blocks
+closing that origin, launching a second batch, or closing the application until
+the active run finishes or cooperatively cancels.</p>
 <h2 id="workflow-toolbar">Workflow toolbar<a class="headerlink" href="#workflow-toolbar" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2597,7 +2669,7 @@
 <tbody>
 <tr>
 <td><strong>New workflow…</strong></td>
-<td>Reset after confirmation to one unbound <code>Image Source</code> on an otherwise empty graph.</td>
+<td>Create a new tab containing one unbound <code>Image Source</code> on an otherwise empty graph.</td>
 </tr>
 <tr>
 <td><strong>Open example…</strong></td>
@@ -2649,6 +2721,61 @@
 </tr>
 </tbody>
 </table>
+<h2 id="compute-controls">Compute controls<a class="headerlink" href="#compute-controls" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU / Auto / Selective</strong></td>
+<td>CPU forces authoritative host implementations. Auto uses an admitted GPU only when the complete planned workload is supported and beneficial. Selective exposes authored per-node choices.</td>
+</tr>
+<tr>
+<td>Actual-run compute summary</td>
+<td>After an accepted run, summarizes the CPU/GPU mix or fallback state; hover for why the run made those decisions.</td>
+</tr>
+<tr>
+<td><strong>Find fastest pipeline…</strong></td>
+<td>In Selective mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying.</td>
+</tr>
+<tr>
+<td><strong>Strict selective GPU choices</strong></td>
+<td>Fail when an explicitly selected GPU implementation is unavailable instead of visibly falling back to CPU.</td>
+</tr>
+<tr>
+<td><strong>Compute setup and memory…</strong></td>
+<td>Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported.</td>
+</tr>
+</tbody>
+</table>
+<p>New sessions default to <strong>Auto</strong>. A schema-3 workflow loads as <strong>CPU</strong> because
+the old file did not author compute intent. Auto choosing CPU is not necessarily
+a fallback: CPU can be faster for a small call or required because the exact
+dtype, parameters, shape, memory, environment, or provider is outside the
+validated region.</p>
+<p>In Selective mode, an implemented node shows <strong>Follow pipeline policy</strong>,
+<strong>CPU</strong>, and one <strong>GPU · library</strong> entry for each declared library. <strong>Best GPU</strong>
+appears only when several libraries genuinely compete. Exact implementation
+pins are an advanced persistence/API feature; a loaded pin remains visible
+until deliberately replaced. A separate optimizer lock—not merely choosing a
+backend—preserves a node during <strong>Find fastest</strong>.</p>
+<p>Calculated cards show compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>, <strong>GPU · cuCIM</strong>, or amber
+<strong>CPU fallback</strong> badges. A muted badge belongs to the last accepted run while a
+new result is pending. Hover or inspect the node for the implementation ID and
+version, runtime/device, preference, decision reason, benchmark evidence,
+memory estimate, and fallback details.</p>
+<p>Node benchmarking and whole-pipeline optimization use the exact current inputs
+and require scientific parity before timing alternatives. CPU timing uses
+paired warm medians; GPU timing distinguishes resident compute from transfers
+modeled across the complete pipeline. The optimizer reports overall and
+current-operation progress. A monolithic library call can remain at one
+percentage until it returns; a reached time limit means comparisons remain, not
+that the current graph was proved optimal. Completed exact benchmark records
+are reused on retry.</p>
 <h2 id="display-settings">Display settings<a class="headerlink" href="#display-settings" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2733,9 +2860,17 @@ connections or processed data.</p>
 </tr>
 </tbody>
 </table>
+<p>Host cache status reports RAM. <strong>Compute setup and memory…</strong> adds accelerator
+memory: discrete NVIDIA devices report separate VRAM, while a future unified-
+memory provider must report the shared budget rather than double-counting it.
+The executor applies an operation-specific conservative memory estimate before
+device work; the estimate and any typed OOM/fallback are part of execution
+provenance.</p>
 <p><strong>Cancel</strong> prevents queued reruns and ignores the active result. It asks
 cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
-scikit-image call already executing.</p>
+scikit-image, CuPy, or cuCIM call already executing. GPU progress advances only
+after synchronization at a truthful operation checkpoint, and cancellation
+waits for cleanup before a result can be published.</p>
 <p>The current adaptive large-input boundary is 4,000,000 elements or 32 MiB,
 whichever is reached first. This applies even when <strong>Run all in BG</strong> is
 unchecked. Exact threshold diagnostics, Auto Contrast, colocalization density,
@@ -2891,7 +3026,7 @@ workspace. See <a href="../../workflows/batch-processing/">process a folder</a>.
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     
@@ -2929,7 +3064,7 @@ workspace. See <a href="../../workflows/batch-processing/">process a folder</a>.
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../node-index/" class="md-footer__link md-footer__link--prev" aria-label="Previous: All 108 nodes">
+          <a href="../node-index/" class="md-footer__link md-footer__link--prev" aria-label="Previous: All 112 nodes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2939,7 +3074,7 @@ workspace. See <a href="../../workflows/batch-processing/">process a folder</a>.
                 Previous
               </span>
               <div class="md-ellipsis">
-                All 108 nodes
+                All 112 nodes
               </div>
             </div>
           </a>

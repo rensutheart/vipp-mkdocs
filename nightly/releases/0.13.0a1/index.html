@@ -12,13 +12,13 @@
         <meta name="author" content="Rensu P. Theart">
       
       
-        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/scientific-practice/validation/">
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/releases/0.13.0a1/">
       
       
-        <link rel="prev" href="../parameter-tuning/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../reporting/">
+        <link rel="next" href="../0.12.0a3/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Validate a workflow - VIPP — Visual Image Processing Platform</title>
+        <title>0.13.0a1 - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#validate-a-workflow" class="md-skip">
+        <a href="#vipp-0130a1" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Validate a workflow
+              0.13.0a1
             
           </span>
         </div>
@@ -263,11 +263,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../releases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -373,13 +375,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../scientific-practice/" class="md-tabs__link">
           
   
   
@@ -529,6 +529,8 @@
       
   
   
+    
+  
   
   
     
@@ -550,20 +552,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../releases/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -576,13 +581,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Release notes
@@ -595,10 +600,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -609,6 +636,100 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu-operation-coverage-in-this-alpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU operation coverage in this alpha
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-policy-and-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute policy and optimizer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durable-batch-generated-python-cli-and-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Durable batch, generated Python, CLI, and export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-and-interface-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow and interface changes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scientific-node-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scientific-node changes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-from-0120a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade from 0.12.0a3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alpha-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alpha limitations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -621,7 +742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+      <a href="../0.12.0a3/" class="md-nav__link">
         
   
   
@@ -644,7 +765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+      <a href="../0.12.0a2/" class="md-nav__link">
         
   
   
@@ -667,7 +788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a1/" class="md-nav__link">
+      <a href="../0.12.0a1/" class="md-nav__link">
         
   
   
@@ -1479,8 +1600,6 @@
       
   
   
-    
-  
   
   
     
@@ -1502,23 +1621,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../scientific-practice/" class="md-nav__link ">
               
   
   
@@ -1531,13 +1647,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Scientific practice
@@ -1553,7 +1669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../choosing-dimensionality/" class="md-nav__link">
+      <a href="../../scientific-practice/choosing-dimensionality/" class="md-nav__link">
         
   
   
@@ -1576,7 +1692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../parameter-tuning/" class="md-nav__link">
+      <a href="../../scientific-practice/parameter-tuning/" class="md-nav__link">
         
   
   
@@ -1596,32 +1712,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Validate a workflow
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/validation/" class="md-nav__link">
         
   
   
@@ -1632,73 +1726,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#match-evidence-to-the-claim" class="md-nav__link">
-    <span class="md-ellipsis">
-      Match evidence to the claim
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-a-reference-set" class="md-nav__link">
-    <span class="md-ellipsis">
-      Build a reference set
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#report-more-than-one-score" class="md-nav__link">
-    <span class="md-ellipsis">
-      Report more than one score
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#keep-validation-independent" class="md-nav__link">
-    <span class="md-ellipsis">
-      Keep validation independent
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-vipps-own-evidence-conservatively" class="md-nav__link">
-    <span class="md-ellipsis">
-      Read VIPP's own evidence conservatively
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1711,7 +1738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reporting/" class="md-nav__link">
+      <a href="../../scientific-practice/reporting/" class="md-nav__link">
         
   
   
@@ -2408,45 +2435,72 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#match-evidence-to-the-claim" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Match evidence to the claim
+      Highlights
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-a-reference-set" class="md-nav__link">
+  <a href="#gpu-operation-coverage-in-this-alpha" class="md-nav__link">
     <span class="md-ellipsis">
-      Build a reference set
+      GPU operation coverage in this alpha
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#report-more-than-one-score" class="md-nav__link">
+  <a href="#compute-policy-and-optimizer" class="md-nav__link">
     <span class="md-ellipsis">
-      Report more than one score
+      Compute policy and optimizer
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#keep-validation-independent" class="md-nav__link">
+  <a href="#durable-batch-generated-python-cli-and-export" class="md-nav__link">
     <span class="md-ellipsis">
-      Keep validation independent
+      Durable batch, generated Python, CLI, and export
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#read-vipps-own-evidence-conservatively" class="md-nav__link">
+  <a href="#workflow-and-interface-changes" class="md-nav__link">
     <span class="md-ellipsis">
-      Read VIPP's own evidence conservatively
+      Workflow and interface changes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scientific-node-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scientific-node changes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-from-0120a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade from 0.12.0a3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alpha-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alpha limitations
     </span>
   </a>
   
@@ -2468,7 +2522,7 @@
 
 
   
-    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/scientific-practice/validation.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/releases/0.13.0a1.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2476,65 +2530,249 @@
   
 
 
-<h1 id="validate-a-workflow">Validate a workflow<a class="headerlink" href="#validate-a-workflow" title="Permanent link">&para;</a></h1>
-<p>Validation asks whether a frozen workflow produces sufficiently accurate and
-stable outputs for a defined use. Passing software tests shows that code
-behaves as specified; it does not establish biological validity for your data.</p>
-<h2 id="match-evidence-to-the-claim">Match evidence to the claim<a class="headerlink" href="#match-evidence-to-the-claim" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Claim</th>
-<th>Useful evidence</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>An operation matches its mathematical definition</td>
-<td>Unit tests, analytical phantoms, numerical comparison to a documented reference</td>
-</tr>
-<tr>
-<td>A file route preserves required information</td>
-<td>Round-trip fixtures, metadata assertions, visual inspection of representative real files</td>
-</tr>
-<tr>
-<td>A segmentation identifies the target</td>
-<td>Blinded reference annotations, object/boundary metrics, error taxonomy across representative conditions</td>
-</tr>
-<tr>
-<td>A measurement is quantitatively accurate</td>
-<td>Calibrated phantoms or objects with known dimensions/intensities</td>
-</tr>
-<tr>
-<td>A workflow is robust</td>
-<td>Held-out data across acquisition days, operators, biological conditions, and known artifacts</td>
-</tr>
-<tr>
-<td>Users can complete a task</td>
-<td>Preregistered usability protocol and task evidence—not developer observation alone</td>
-</tr>
-</tbody>
-</table>
-<h2 id="build-a-reference-set">Build a reference set<a class="headerlink" href="#build-a-reference-set" title="Permanent link">&para;</a></h2>
-<p>Define the unit of analysis and sampling frame. Include ordinary cases and
-predefined hard cases. Reference annotations should have documented rules; for
-subjective targets, measure agreement between annotators and resolve ambiguous
-cases without using the workflow output as the authority.</p>
-<h2 id="report-more-than-one-score">Report more than one score<a class="headerlink" href="#report-more-than-one-score" title="Permanent link">&para;</a></h2>
-<p>For segmentation consider object detection, splits/merges, pixel overlap,
-boundary error, and count/size bias. For measurements examine error across the
-range, not only correlation. For spatial association use deterministic
-geometries with known overlap/distance before interpreting biological samples.</p>
-<p>Always show representative failure cases and uncertainty. Select examples by a
-predefined rule or show a balanced range, not only the most attractive field.</p>
-<h2 id="keep-validation-independent">Keep validation independent<a class="headerlink" href="#keep-validation-independent" title="Permanent link">&para;</a></h2>
-<p>Do not use the held-out set to choose parameters. Freeze the workflow and
-software environment first. Record any failed items, exclusions, retries, or
-manual interventions.</p>
-<h2 id="read-vipps-own-evidence-conservatively">Read VIPP's own evidence conservatively<a class="headerlink" href="#read-vipps-own-evidence-conservatively" title="Permanent link">&para;</a></h2>
-<p>The <a href="../../reference/validation-status/">validation status</a> lists evidence in the
-application repository and important gaps. Those checks support software-level
-claims; they do not validate a specific biological workflow for you.</p>
+<h1 id="vipp-0130a1">VIPP 0.13.0a1<a class="headerlink" href="#vipp-0130a1" title="Permanent link">&para;</a></h1>
+<p><strong>Release date:</strong> 4 August 2026</p>
+<p><strong>Maturity:</strong> Alpha pre-release</p>
+<p>VIPP 0.13.0a1 is the first substantial GPU-acceleration alpha. It adds an
+evidence-gated CPU/CUDA execution architecture, makes the same compute request
+available to interactive workflows and durable automation, and records what
+actually ran. It also includes workflow tabs, new filtering, thresholding, and
+colocalization nodes, and a broad set of graph, display, microscope-metadata,
+optimizer, cache, memory, cancellation, and publication fixes.</p>
+<p>This is a progress release, not a claim of complete GPU coverage. The portable
+baseline remains CPU execution on Windows, macOS, and Linux. A GPU
+implementation is considered only for its explicitly validated operation,
+dtype, parameter, shape, dependency, and environment region; other calls use a
+visible CPU decision or fail according to the requested fallback policy.</p>
+<div class="admonition important">
+<p class="admonition-title">Workflow schema is now 4</p>
+<p>Schema 4 stores the authored compute mode and per-node preferences. A valid
+schema-3 workflow loads with an explicit <strong>CPU</strong> request so upgrading cannot
+silently move an older analysis to a GPU. Saving it in 0.13 writes schema 4.
+Schemas 1 and 2 remain rejected.</p>
+<p>Batch configuration and manifest schemas are now version 2. A version-1
+batch config loads as an explicit CPU request. Generated Python remains
+locked to the exact VIPP version that created it; regenerate and revalidate
+every export under 0.13.0a1.</p>
+</div>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Choose <strong>CPU</strong>, <strong>Auto</strong>, or <strong>Selective</strong> from the main toolbar. Selective
+  mode exposes one CPU choice and one choice for each scientifically admitted
+  GPU library on an implemented node.</li>
+<li>Read compact CPU, CuPy, cuCIM, or amber CPU-fallback badges on calculated
+  node cards, with details available for the actual implementation and reason.</li>
+<li>Benchmark one eligible node or ask VIPP to find a fastest measured whole-
+  pipeline assignment. Results are review-first: the graph does not change
+  until the proposed assignment is applied.</li>
+<li>Keep compatible arrays resident across GPU nodes while retaining private,
+  transactional device values, memory admission, synchronized progress,
+  cooperative cancellation, cleanup, and classified OOM behavior.</li>
+<li>Carry compute intent and exact actual-run provenance through Batch workspace,
+  the saved batch runner, generated Python/CLI, and standalone output export.</li>
+<li>Work with several independent live workflows through movable tabs without
+  replacing another graph or its caches, undo history, inspector state, or
+  Batch workspace.</li>
+<li>Use new <strong>Sigma Filter</strong>, <strong>ImageJ Auto Threshold (8-bit)</strong>,
+  <strong>Colocalization Scatter Plot</strong>, and <strong>Masked Colocalization Scatter Plot</strong>
+  nodes.</li>
+</ul>
+<h2 id="gpu-operation-coverage-in-this-alpha">GPU operation coverage in this alpha<a class="headerlink" href="#gpu-operation-coverage-in-this-alpha" title="Permanent link">&para;</a></h2>
+<p>The following operation regions have validated accelerator candidates in the
+0.13.0a1 code base:</p>
+<ul>
+<li>rolling-ball background estimation and background subtraction;</li>
+<li>median filtering;</li>
+<li>2D and 3D Gaussian blur;</li>
+<li>ordinary Richardson-Lucy deconvolution;</li>
+<li>Richardson-Lucy TV deconvolution;</li>
+<li>Canny edge detection;</li>
+<li>Otsu thresholding;</li>
+<li>Sigma Filter;</li>
+<li>connected-components labeling; and</li>
+<li>the basic schemas of object measurements with and without intensity.</li>
+</ul>
+<p>Coverage is narrower than the corresponding CPU nodes. For example, a provider
+can be valid only for particular dtypes, dimensionalities, parameter values, or
+memory bounds. VIPP does not insert an unrequested dtype conversion merely to
+make a node eligible. In particular, some floating-point filtering and
+deconvolution workloads can benefit much more from a GPU than native <code>uint16</code>
+workloads, but an explicit <code>Convert Dtype</code> node remains a scientific authoring
+decision—not an optimizer rewrite.</p>
+<p>The first public CUDA admission record is intentionally exact: native Windows,
+64-bit CPython 3.12, NumPy 2.5.1, SciPy 1.18.0, scikit-image 0.26.0, CuPy/CuPyX
+14.1.1, CUDA runtime API 13.2, CUDA driver API 13.3, and the recorded RTX 5090
+device. Changed hardware, platform, Python ABI, driver, CUDA runtime, or
+scientific-stack versions are not silently generalized from that evidence.
+Native Linux and RTX 40-series Windows qualification remain pending; macOS has
+no CUDA provider and remains CPU-only while Apple-accelerator research is
+pending.</p>
+<p>cuCIM-backed operation regions are also gated independently. The current native
+Windows evidence uses a checksum-recorded source-built <code>cucim.skimage</code> wheel;
+there is no general public Windows cuCIM install extra, and the wheel does not
+contain Clara whole-slide I/O. A feature-complete, maintainable cuCIM/Clara
+route remains planned work.</p>
+<p>See <a href="../../getting-started/installation/">installation</a> for the base and optional
+CUDA commands, and <a href="../../reference/validation-status/">validation status</a> for
+the evidence boundary.</p>
+<h2 id="compute-policy-and-optimizer">Compute policy and optimizer<a class="headerlink" href="#compute-policy-and-optimizer" title="Permanent link">&para;</a></h2>
+<p><strong>Auto</strong> is the default for a new session. It may choose CPU even when a GPU is
+available because transfer, cold-start, residency, memory, and confidence are
+part of the complete-pipeline decision. When no compatible accelerator stack
+is installed, Auto remains a normal CPU execution mode and setup diagnostics
+offer a copyable command; the base application does not import optional GPU
+packages just to load a workflow.</p>
+<p><strong>CPU</strong> forces the reference CPU path. <strong>Selective</strong> exposes per-node authored
+choices and the whole-pipeline optimizer. A loaded exact implementation pin can
+remain visible for compatibility, but the normal UI uses concise CPU and
+library-level choices. Unsupported nodes remain visibly CPU.</p>
+<p>The optimizer compares every scientifically eligible implementation for each
+unlocked node, reuses exact workload/environment benchmark records, and then
+validates a proposed whole-pipeline assignment. A long operation can remain
+inside one honest progress unit when the underlying CPU or GPU library exposes
+no safe sub-operation checkpoint. Reaching the time limit means the search
+ended before every planned comparison—not that the current assignment was
+proved optimal. Completed exact node results are retained for a retry, and no
+assignment changes until the user reviews and applies it.</p>
+<h2 id="durable-batch-generated-python-cli-and-export">Durable batch, generated Python, CLI, and export<a class="headerlink" href="#durable-batch-generated-python-cli-and-export" title="Permanent link">&para;</a></h2>
+<p>Interactive and durable surfaces now submit the same versioned compute request
+to the shared headless executor. They preserve:</p>
+<ul>
+<li>compute mode, per-node preferences, fallback policy, runtime/device choice,
+  and accelerator-memory limits;</li>
+<li>the actual runtime, implementation library, stable implementation ID and
+  version, parity policy, decision reason, environment fingerprint, benchmark
+  digest, and memory estimate for each completed node;</li>
+<li>classified availability and eligibility fallbacks plus attempted device-OOM
+  fallback records;</li>
+<li>nested overall-item and current-operation progress; and</li>
+<li>cooperative cancellation, synchronization, cleanup, and publication status.</li>
+</ul>
+<p>A version-2 batch manifest stores the configured and effective requests, the
+override status and fingerprints, and an execution document/digest for every
+calculated item. Published output records link to that exact item execution.
+The saved <code>vipp_batch_pipeline.py</code> runner accepts explicit compute overrides,
+prints both progress streams with <code>--progress</code>, and returns exit code <code>130</code>
+after cooperative cancellation.</p>
+<p>Generated workflow programs expose a complete <code>compute_request</code>, progress
+callback, and cancellation token to Python callers. Their CLI accepts
+<code>--compute-mode</code>, <code>--fallback-policy</code>, repeatable <code>--node-preference</code>,
+<code>--progress</code>, and provenance controls. Successful standalone outputs receive an
+atomic <code>.vipp-provenance.json</code> sibling by default; failed or cancelled
+single-output runs attempt a failure sidecar. Generated output publication is
+transactional and fails closed when execution cleanup or final promotion cannot
+be established.</p>
+<p>With <strong>visible</strong> fallback, one complete device segment can be retried on CPU
+after a classified, retryable OOM only after GPU synchronization and cleanup.
+<strong>Strict</strong> returns the typed failure instead. Other device defects are never
+renamed as OOM or silently retried. A later batch item is planned independently;
+one fallback does not rewrite the saved request for the remaining collection.</p>
+<p>The generated <code>batch_process()</code> folder helper remains a convenience for one
+varying primary source. It does not provide the saved runner's multi-source
+pairing, source-byte identities, collision plan, staging, checkpoints,
+manifest, or durable replay guarantees. Use the saved batch runner for
+production collection processing.</p>
+<h2 id="workflow-and-interface-changes">Workflow and interface changes<a class="headerlink" href="#workflow-and-interface-changes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Workflow tabs retain independent graphs, results, caches, histories,
+  inspector state, paths, dirty baselines, and Batch workspaces. A batch remains
+  attached to its originating tab and blocks only lifecycle actions that would
+  invalidate that run.</li>
+<li>Image Source cards show their current sample, layer, file, or collection
+  binding in an elided subtitle and full tooltip.</li>
+<li>Named output tunnels can be rerouted by dragging their source badge to a
+  compatible output. The edit is validated, atomic, and undoable.</li>
+<li>The compute summary, severity-aware message strip, actionable full-width
+  alerts, and node badges now form one execution-feedback system.</li>
+<li>The pipeline optimizer reports overall and current-operation progress and
+  explains time-limit exhaustion in terms of completed and remaining work.</li>
+<li>VIPP-generated napari layers retain a compatible user's camera, slice,
+  translation, rotation, zoom, and display styling across recalculation, so a
+  tuned region does not jump back to a default view.</li>
+<li>ND2 ordered-axis metadata now keeps napari/VIPP T, Z, and C navigation aligned
+  with the loaded array.</li>
+<li><code>Crop Stack</code> preserves image, mask, and label port types, including cropped
+  ROI masks connected to masked analysis nodes.</li>
+</ul>
+<h2 id="scientific-node-changes">Scientific-node changes<a class="headerlink" href="#scientific-node-changes" title="Permanent link">&para;</a></h2>
+<p><strong>Sigma Filter</strong> is an edge-preserving Lee filter with an explicit, versioned
+CPU contract and a validated CuPy implementation for its admitted region.
+<strong>ImageJ Auto Threshold (8-bit)</strong> provides an experimental, source-aligned
+ImageJ 1.54p target for scalar <code>uint8</code>, <code>uint16</code>, and <code>float32</code> conversion plus
+<code>Default</code>/<code>Triangle</code> behavior without changing VIPP's generic threshold nodes.
+Boolean and RGB/RGBA handling are VIPP extensions and are not claimed as
+ImageJ-exact. The two scatter-plot graph nodes make native-range colocalization
+density and threshold-guide images durable graph outputs.</p>
+<p>Colocalization calculations now retain finite native intensities rather than
+jointly rescaling/clipping both channels to 0–255. Thresholds and intensity
+sums therefore use native units. The implementation also revises automatic
+Costes threshold search, Pearson population names, and Manders definitions as a
+source-aligned compatibility implementation targeting Fiji Coloc 2 3.1.0.
+Independent numerical parity validation is pending. These changes can
+materially alter results from an older workflow even when its graph structure
+is unchanged.</p>
+<div class="admonition warning">
+<p class="admonition-title">Independent colocalization review remains required</p>
+<p>The new colocalization and ImageJ-threshold paths have frozen automated
+regression fixtures, but not independently generated upstream golden
+fixtures. Treat these paths as experimental in 0.13.0a1, preserve prior
+results, and perform an external Fiji/reference comparison before using the
+revised values in a consequential analysis. The recorded
+<code>fiji_coloc2_3.1</code> semantics value names the target contract, not parity
+certification; tables separately record
+<code>coloc_validation_status=experimental_source_aligned_golden_parity_pending</code>.</p>
+</div>
+<h2 id="upgrade-from-0120a3">Upgrade from 0.12.0a3<a class="headerlink" href="#upgrade-from-0120a3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Preserve the 0.12.0a3 environment, original schema-3 workflow, generated
+   Python, batch config/manifests/sidecars, inputs, outputs, and validation
+   evidence.</li>
+<li>Open a duplicate in 0.13.0a1. Confirm that it reports <strong>CPU</strong> compute intent,
+   then inspect graph structure, source bindings, parameters, dynamic ports,
+   axes, channels, physical grids, and output declarations.</li>
+<li>Recalculate and compare decisive intermediates and final results. Cached
+   arrays and tables are not serialized in workflow JSON.</li>
+<li>Give special attention to colocalization thresholds/metrics, native-unit
+   sums, cropped mask ports, ND2 axis ordering, and any operation for which a
+   GPU preference is later enabled.</li>
+<li>Save only after review; the duplicate becomes schema 4. Keep the original
+   schema-3 file unchanged for provenance.</li>
+<li>Recreate or load the Batch workspace. A version-1 batch config becomes an
+   explicit CPU request; review and save it as version 2 before using GPU
+   execution.</li>
+<li>Regenerate exported Python and the saved batch runner under 0.13.0a1. An old
+   generated program refuses the new runtime by design.</li>
+<li>Run a fresh batch preflight, exercise cancellation on non-critical data,
+   and inspect configured/effective compute requests, node decisions,
+   fallbacks, cleanup, output links, and final item statuses in the manifest.</li>
+</ol>
+<p>See <a href="../../reference/versioning/">versions and compatibility</a>, the
+<a href="../../reference/workflow-contract/">workflow and export contract</a>, and
+<a href="../../workflows/batch-processing/">process a folder</a>.</p>
+<h2 id="alpha-limitations">Alpha limitations<a class="headerlink" href="#alpha-limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>GPU support is partial and environment-gated; timing evidence from one RTX
+  5090 is not a portable speed promise or a permanent Auto choice.</li>
+<li>Native Linux GPU, RTX 40-series Windows, Apple M1 Max acceleration, and a
+  distributable feature-complete cuCIM/Clara route remain future validation.</li>
+<li>Batch pairing remains local-file, sorted-position pairing. VIPP does not yet
+  iterate semantic T/C/Z combinations or discover plate/well/field HCS layouts.</li>
+<li>Item checkpoints are a recovery trail, not automatic resume. Artifact
+  atomicity is per file; a multi-output promotion failure can create an
+  explicitly recorded partial item.</li>
+<li>A monolithic library call or writer can delay progress and cancellation until
+  its next truthful checkpoint. VIPP does not invent percentages inside calls
+  it cannot observe.</li>
+<li>Generated Python requires the exact creating VIPP version, and the simple
+  generated folder loop is not the durable batch runner.</li>
+<li>Broad reader interoperability, real-assay restoration, colocalization
+  equivalence, large-collection stress, and cross-platform manual GUI evidence
+  remain bounded as described in <a href="../../reference/validation-status/">validation status</a>.</li>
+</ul>
+<p>VIPP remains alpha software. Record the application version, workflow, compute
+request, actual implementation provenance, environment, inputs, batch
+configuration, manifests, fallbacks, and validation evidence for consequential
+work.</p>
 
 
 
@@ -2555,7 +2793,7 @@ claims; they do not validate a specific biological workflow for you.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 10, 2026 20:25:04 UTC">July 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     
@@ -2593,7 +2831,7 @@ claims; they do not validate a specific biological workflow for you.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../parameter-tuning/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tune without fooling yourself">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Release notes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2603,20 +2841,20 @@ claims; they do not validate a specific biological workflow for you.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Tune without fooling yourself
+                Release notes
               </div>
             </div>
           </a>
         
         
           
-          <a href="../reporting/" class="md-footer__link md-footer__link--next" aria-label="Next: Report a VIPP analysis">
+          <a href="../0.12.0a3/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.12.0a3">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Report a VIPP analysis
+                0.12.0a3
               </div>
             </div>
             <div class="md-footer__button md-icon">

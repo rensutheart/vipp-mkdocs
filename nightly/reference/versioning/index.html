@@ -544,6 +544,8 @@
       
         
       
+        
+      
     
     
     
@@ -587,6 +589,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1710,7 +1735,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -1921,6 +1946,15 @@
   <a href="#match-software-and-manual" class="md-nav__link">
     <span class="md-ellipsis">
       Match software and manual
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#move-from-0120a3-to-0130a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.12.0a3 to 0.13.0a1
     </span>
   </a>
   
@@ -2401,6 +2435,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#move-from-0120a3-to-0130a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.12.0a3 to 0.13.0a1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-from-0120a2-to-0120a3" class="md-nav__link">
     <span class="md-ellipsis">
       Move from 0.12.0a2 to 0.12.0a3
@@ -2497,10 +2540,10 @@
 </tr>
 </tbody>
 </table>
-<p>The current public software baseline is <strong>0.12.0a3</strong>. Its <code>a3</code> suffix identifies
-the third alpha build in the 0.12.0 release series; it is a tagged pre-release,
+<p>The current public software baseline is <strong>0.13.0a1</strong>. Its <code>a1</code> suffix identifies
+the first alpha build in the 0.13.0 release series; it is a tagged pre-release,
 not a nightly build. See <a href="../../getting-started/installation/">installation</a> and
-the <a href="../../releases/0.12.0a3/">0.12.0a3 release notes</a>.</p>
+the <a href="../../releases/0.13.0a1/">0.13.0a1 release notes</a>.</p>
 <p>The <code>main</code>/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.</p>
 <h2 id="match-software-and-manual">Match software and manual<a class="headerlink" href="#match-software-and-manual" title="Permanent link">&para;</a></h2>
@@ -2511,12 +2554,51 @@ selector in the site header. If they differ:</p>
 <li>install the release described by the manual in a separate environment.</li>
 </ul>
 <p>Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.12.0a3 retains schema version 3; versions 1 and 2 are rejected rather
-than migrated automatically. Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows
-load structurally in 0.12.0a3, but workflow JSON contains no cached scientific
+VIPP 0.13.0a1 writes schema version 4; versions 1 and 2 are rejected. Valid
+schema-3 workflows load structurally with an explicit CPU compute request and
+become schema 4 only when saved. Workflow JSON contains no cached scientific
 pixels/tables. Recalculate and compare graph structure, parameters, sources,
-axes, channels, physical grids, dynamic ports, and results on known sample
-data. See the <a href="../workflow-contract/">workflow contract</a>.</p>
+axes, channels, physical grids, dynamic ports, compute request, actual backend,
+and results on known sample data. See the
+<a href="../workflow-contract/">workflow contract</a>.</p>
+<h2 id="move-from-0120a3-to-0130a1">Move from 0.12.0a3 to 0.13.0a1<a class="headerlink" href="#move-from-0120a3-to-0130a1" title="Permanent link">&para;</a></h2>
+<p>0.13 introduces durable compute intent and can also change calculated
+colocalization values. Treat the upgrade as a scientific review, not only a
+file-format conversion.</p>
+<ol>
+<li>Keep the original schema-3 workflow, 0.12.0a3 environment, generated Python,
+   batch config, manifests, sidecars, and validated outputs unchanged.</li>
+<li>Open a duplicate in 0.13.0a1. Confirm that its migrated compute mode is
+   <strong>CPU</strong>. Inspect graph structure, parameters, dynamic ports, source bindings,
+   axes/channels, physical grids, Batch Output declarations, and optional Batch
+   workspace attachment.</li>
+<li>Recalculate on CPU and compare decisive intermediates and final results.
+   Cached arrays/tables were never embedded in the workflow. Give particular
+   attention to colocalization thresholds, native-unit intensity sums, Pearson
+   population fields, Manders fields, cropped masks, and ND2 axis order.</li>
+<li>Save the reviewed duplicate as schema 4. The saved <code>execution.compute</code>
+   object records <code>cpu</code>, <code>auto</code>, or <code>selective</code> mode and any authored per-node
+   preferences; it does not record a promise about which implementation will
+   actually be available on another machine.</li>
+<li>If acceleration is wanted, enable Auto or Selective only after the CPU
+   comparison. Review CPU/CuPy/cuCIM/fallback badges and retain the actual-run
+   execution provenance. Do not add an unplanned <code>Convert Dtype</code> merely to make
+   a GPU benchmark faster.</li>
+<li>Load or recreate Batch workspace. Version-1 batch configs migrate to an
+   explicit CPU request and save as version 2. Review the configured/effective
+   requests, memory and fallback policy, bindings, paths, collision policy, and
+   fresh preflight before running.</li>
+<li>Regenerate and revalidate exported Python and the saved batch runner. A
+   generated 0.12 program refuses a 0.13 runtime by design.</li>
+<li>For a consequential batch, test progress, cancellation, and OOM/fallback on
+   non-critical data, then inspect the version-2 manifest's execution documents,
+   digests, output links, cleanup evidence, and
+   partial/skipped/cancelled/failed records.</li>
+</ol>
+<p>The colocalization and ImageJ-threshold revisions have frozen automated
+fixtures but still require independent upstream-method review. Treat them as
+experimental and perform an external reference comparison before relying on
+the revised values.</p>
 <h2 id="move-from-0120a2-to-0120a3">Move from 0.12.0a2 to 0.12.0a3<a class="headerlink" href="#move-from-0120a2-to-0120a3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Keep the original workflow, 0.12.0a2 environment, standalone batch config,
@@ -2584,8 +2666,16 @@ without testing it.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python -m pip install --pre napari-vipp
 </span></code></pre></div>
 <p>To reproduce a specific alpha exactly, specify the version in a fresh environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install &quot;napari[pyqt6]&quot; &quot;napari-vipp==0.12.0a3&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install --pre &quot;napari[pyqt6]&quot; &quot;napari-vipp==0.13.0a1&quot;
 </span></code></pre></div>
+<p>For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install --pre &quot;napari[pyqt6]&quot; &quot;napari-vipp[gpu-cuda13]==0.13.0a1&quot;
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vipp-compute-doctor --track cuda13
+</span></code></pre></div>
+<p>The extra installs a reproducible CUDA/CuPy track; it does not make an
+unqualified GPU, driver, OS, or scientific stack scientifically admitted.
+Never install both CUDA-major extras into one environment. See
+<a href="../../getting-started/installation/#optional-nvidia-cuda-acceleration">installation</a>.</p>
 <h2 id="nightly-policy">Nightly policy<a class="headerlink" href="#nightly-policy" title="Permanent link">&para;</a></h2>
 <p>Nightly documentation may describe work not yet available from PyPI and can
 change without migration support. If unreleased behavior contributes to an
@@ -2611,7 +2701,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     

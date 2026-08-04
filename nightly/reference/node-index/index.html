@@ -26,7 +26,7 @@
     
     
       
-        <title>All 108 nodes - VIPP — Visual Image Processing Platform</title>
+        <title>All 112 nodes - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              All 108 nodes
+              All 112 nodes
             
           </span>
         </div>
@@ -544,6 +544,8 @@
       
         
       
+        
+      
     
     
     
@@ -587,6 +589,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1719,7 +1744,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -1732,7 +1757,7 @@
   
   
   <span class="md-ellipsis">
-    All 108 nodes
+    All 112 nodes
     
   </span>
   
@@ -2854,7 +2879,7 @@
 
 
 <h1 id="node-index">Node Index<a class="headerlink" href="#node-index" title="Permanent link">&para;</a></h1>
-<p>This page lists all <strong>108 operation specifications</strong> registered by
+<p>This page lists all <strong>112 operation specifications</strong> registered by
 <code>NODE_LIBRARY</code> in the current manual track. Nightly parameter behavior can be
 newer than the latest tagged alpha.</p>
 <div class="admonition info">
@@ -2866,12 +2891,17 @@ from runtime data. Parameter widgets, defaults, and bounds in the installed
 release remain the source of truth until a generated parameter reference is
 published.</p>
 </div>
-<p>In 0.12.0a3, manual/cached nodes and nodes selected for isolated tuning use the
+<p>In 0.13.0a1, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. <strong>Tune node in isolation</strong> recalculates only the selected node until
 the session is applied or cancelled. This changes execution and presentation,
 not the operation's scientific definition.</p>
+<p>Implemented nodes can also show an actual-run <strong>CPU</strong>, <strong>GPU · CuPy</strong>, <strong>GPU ·
+cuCIM</strong>, or amber <strong>CPU fallback</strong> badge. The badge is execution provenance for
+the accepted result, not part of the operation's scientific definition. A GPU
+choice appears only for a validated dtype/parameter/shape/environment region;
+unsupported calls retain the CPU operation.</p>
 <table>
 <thead>
 <tr>
@@ -2886,11 +2916,11 @@ not the operation's scientific definition.</p>
 </tr>
 <tr>
 <td>Filtering</td>
-<td style="text-align: right;">17</td>
+<td style="text-align: right;">18</td>
 </tr>
 <tr>
 <td>Segmentation</td>
-<td style="text-align: right;">17</td>
+<td style="text-align: right;">18</td>
 </tr>
 <tr>
 <td>Morphology</td>
@@ -2902,7 +2932,7 @@ not the operation's scientific definition.</p>
 </tr>
 <tr>
 <td>Colocalization &amp; Spatial Analysis</td>
-<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
 </tr>
 <tr>
 <td>Label Operations</td>
@@ -2918,7 +2948,7 @@ not the operation's scientific definition.</p>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
-<td style="text-align: right;"><strong>108</strong></td>
+<td style="text-align: right;"><strong>112</strong></td>
 </tr>
 </tbody>
 </table>
@@ -3242,6 +3272,11 @@ and is not merely a display adjustment. See
 <td>Remove salt-and-pepper noise.</td>
 </tr>
 <tr>
+<td><code>Sigma Filter</code></td>
+<td>image</td>
+<td>Edge-preserving local smoothing using a sigma-selected circular neighborhood.</td>
+</tr>
+<tr>
 <td><code>Bilateral Filtering</code></td>
 <td>image</td>
 <td>Edge-preserving smoothing.</td>
@@ -3291,7 +3326,7 @@ and is not merely a display adjustment. See
 </tbody>
 </table>
 <h3 id="restoration-and-psf">Restoration And PSF<a class="headerlink" href="#restoration-and-psf" title="Permanent link">&para;</a></h3>
-<p>These nodes are public in 0.12.0a3. They have synthetic examples and automated
+<p>These nodes are public in 0.13.0a1. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see <a href="../validation-status/">validation status</a>.</p>
 <table>
@@ -3402,6 +3437,10 @@ see <a href="../validation-status/">validation status</a>.</p>
 </tr>
 <tr>
 <td><code>Hysteresis Threshold</code></td>
+<td>mask</td>
+</tr>
+<tr>
+<td><code>ImageJ Auto Threshold (8-bit)</code></td>
 <td>mask</td>
 </tr>
 </tbody>
@@ -3793,6 +3832,18 @@ it cannot identify a valid two-peak histogram. See
 <td>manual</td>
 </tr>
 <tr>
+<td><code>Colocalization Scatter Plot</code></td>
+<td>channel 1 plus channel 2</td>
+<td>image</td>
+<td>manual</td>
+</tr>
+<tr>
+<td><code>Masked Colocalization Scatter Plot</code></td>
+<td>channel 1 plus channel 2 plus ROI</td>
+<td>image</td>
+<td>manual</td>
+</tr>
+<tr>
 <td><code>Object Colocalization Metrics</code></td>
 <td>labels plus two channels</td>
 <td>table</td>
@@ -3838,7 +3889,7 @@ it cannot identify a valid two-peak histogram. See
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2026 14:48:53 UTC">July 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
   </span>
 
     
