@@ -48,7 +48,7 @@ New workflows request **Auto** compute. After calculation, read the compact
 badge on Gaussian Blur, Otsu Threshold, and Label Connected Components. A CPU
 badge is expected because ordinary Auto execution in 0.13.0a1 carries no local
 timing evidence; it is not proof that setup failed. Keep this first tutorial
-scientifically focused; use Selective and the separate
+scientifically focused; use Prefer GPU or Selective with the separate
 [CPU/GPU guide](../how-to/choose-compute.md) before benchmarking providers.
 
 ## 4. Add a measurement branch

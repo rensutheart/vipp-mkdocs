@@ -136,12 +136,19 @@ not use `Reorder Axes` as a blind visual repair. If controls remain absent or
 move the wrong content, report a minimal non-sensitive file plus reader and VIPP
 versions.
 
-## Auto Or Selective Still Shows CPU
+## Auto, Prefer GPU, Or Selective Still Shows CPU
 
 For **Auto**, CPU is expected in the standard 0.13.0a1 interfaces: calculation
 does not attach local timing evidence, and Auto does not benchmark implicitly.
-Use Selective and apply a reviewed provider or **Find fastest** proposal when
-GPU execution is intended.
+Use Prefer GPU when every reviewed eligible accelerator should run regardless
+of speed. Use Selective and apply a reviewed provider or **Find fastest** when
+you need per-node control or a measured assignment.
+
+For **Prefer GPU**, CPU means that no reviewed accelerator passed every gate for
+that exact call. Read the explained dtype, parameter, shape, dependency,
+environment, or memory reason. Prefer GPU does not cast inputs, alter
+parameters, use developer-hidden providers, or waive scientific admission to
+increase the GPU count.
 
 For **Selective**, CPU can still be the only scientifically admitted result for
 the exact dtype, parameters, shape, memory, provider, or environment, or it can

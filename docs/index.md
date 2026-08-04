@@ -36,9 +36,12 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This nightly manual is prepared for the **napari-vipp 0.13.0a1 release
-    candidate**. Until its tag and packages are published, use the stable
-    manual for the current public release. Interfaces,
+    This nightly manual is prepared for the **napari-vipp 0.13.0a1 release**.
+    Automated candidate `444f682` has passed the full local suite, package and
+    artifact checks, and a real RTX 5090 Prefer-GPU integration test. Manual
+    Prefer-GPU UI acceptance, the final tag, and publication are still pending.
+    Until its tag and packages are published, use the stable manual for the
+    current public release. Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.

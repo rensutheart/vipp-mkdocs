@@ -6,13 +6,18 @@ data.
 
 ## Release candidate
 
-- [0.13.0a1](0.13.0a1.md) — evidence-gated CPU/GPU execution, durable compute
-  provenance and cancellation across interactive and automated surfaces,
-  workflow tabs, new scientific nodes, and extensive correctness/UI fixes.
+- [0.13.0a1](0.13.0a1.md) — evidence-gated
+  **CPU / Auto / Prefer GPU / Selective** execution, durable compute provenance and
+  cancellation across interactive and automated surfaces, workflow tabs, new
+  scientific nodes, and extensive correctness/UI fixes.
 
 This nightly entry is the prepared release manual. It becomes the stable,
 numbered release documentation only after the matching application tag/package
-and manual snapshot are published.
+and manual snapshot are published. The earlier `e024409` artifact checkpoint
+predates Prefer GPU. Replacement automated candidate `444f682` passed its full
+local suite, package/artifact checks, and real RTX 5090 Prefer-GPU integration
+test. Manual UI acceptance on that exact commit, the final tag, and publication
+remain pending.
 
 0.13.0a1 writes workflow schema 4 and batch config/manifest schema 2. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;

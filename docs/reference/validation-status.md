@@ -29,12 +29,14 @@ every assay.
 - compute tests cover import-safe CPU-only use, workflow-schema-4 and
   batch-schema-2 intent, eligibility planning, exact implementation identity,
   resident device segments, memory admission, classified fallback, optimizer
-  review/apply, progress, cancellation, cleanup, and atomic publication; and
+  review/apply, Prefer-GPU selection/serialization/UI/durable behavior,
+  progress, cancellation, cleanup, and atomic publication; and
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-The 0.13.0a1 candidate at application commit `e024409` passed package/manifest,
-lint, and CPython 3.12 and 3.13 CI on Linux, Windows, and macOS. The candidate
+The earlier pre-Prefer-GPU candidate at application commit `e024409` passed
+package/manifest, lint, and CPython 3.12 and 3.13 CI on Linux, Windows, and
+macOS. The candidate
 wheel and source distribution built and passed Twine metadata checks; a clean
 CPU-only wheel environment passed installation/import checks, and the installed
 CUDA wheel environment passed compute-doctor plus the two opt-in real-CUDA
@@ -42,6 +44,34 @@ durable batch/generated-Python tests. A green CI/package matrix is not
 equivalent to a manual GUI smoke pass on every operating system, Qt/display
 environment, filesystem, microscope reader, or GPU. See the
 [candidate CI run](https://github.com/rensutheart/napari-vipp/actions/runs/30945609407).
+Those results remain evidence for that exact tree, but the Prefer-GPU source
+change invalidates it as the final release candidate.
+
+The replacement automated candidate is pushed application commit
+[`444f68290fe4359b05c68a027d3ae0a413412fe5`](https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5)
+on `codex/gpu-cross-platform-support`. Its full local suite completed in 299.65
+seconds with **3,754 passed, 2 skipped, 2 xfailed, 83 warnings, and zero
+failures**. The skips are the opt-in real-CUDA durable batch smokes. The xfails
+are the documented CuPy `uint8`/`uint16` integer-parity gaps. Ruff, source and
+installed-wheel npe2 manifest validation, package build, Twine, and the
+installed-wheel resource smoke passed.
+
+The candidate's real RTX 5090 Prefer-GPU integration test passed and selected
+CPU Extract Channel, cuCIM Subtract Background, CPU native-`uint16` Gaussian,
+and CuPyX Median without per-node overrides. The complete pipeline had exact
+parity, no fallback, and clean accelerator cleanup. This verifies the automated
+placement contract for that environment; manual Prefer-GPU UI acceptance is
+still pending.
+
+The exact candidate artifact hashes are:
+
+- wheel: `58b08cbb8396c9fe27d28a69d52b06e160817e58987e6dc3b8c5059f3dae9804`;
+- source distribution:
+  `00fcb15452d3ed71d344859d4306cbcdcc458686959169a2c47485d8f7abec9b`.
+
+The tag, publication, and post-publication checks remain pending. See the
+[release notes](../releases/0.13.0a1.md#prefer-gpu-automated-candidate-evidence)
+for the separate historical and current artifact tables.
 
 A bounded source-candidate smoke on 4 August 2026 used application commit
 `e024409` on an Apple M1 Max (`arm64`) running macOS 26.5.2. Manual checks
@@ -62,17 +92,32 @@ deconvolution batch. It does not establish cross-platform behavior, broad
 filesystem interoperability, large-collection scalability, or restoration
 quality for arbitrary samples.
 
-The 0.13 source-current full local suite passed **3,722 tests**, with **2
+On 4 August 2026, the operator also reported a bounded native-Windows napari UI
+smoke pass on the later `ff21040` development checkout. A local schema-4
+Selective workflow loaded the representative private ND2 acquisition and
+exercised the intended channel, slice navigation/display behavior, and
+backend-badge presentation. The retained last-run JSON was subsequently
+overwritten by an Auto run, so it does not independently preserve the exact
+mixed-backend assignment or cleanup result. This is operator-attested UI
+regression evidence only; it is not Prefer-GPU, final-wheel, durable-replay, or
+broad Windows/GPU qualification.
+
+The `e024409` full local suite passed **3,722 tests**, with **2
 skipped**, **2 documented expected failures**, and 83 warnings. The two final
 real-CUDA durable execution tests passed when enabled. These numbers describe
-one release-candidate checkout and should be paired with the final tagged
-commit's CI and artifact-smoke results before publication.
+that earlier candidate checkout. Preserve them as historical evidence, but do
+not use them as final-release counts; add the final tagged commit's CI and
+artifact-smoke results before publication.
 
-The source-current native-Windows RTX 5090 evidence records operation-level
+The recorded native-Windows RTX 5090 evidence records operation-level
 scientific parity, memory, progress/cancellation, cleanup, and timing for the
-declared public GPU regions. Recent large-stack Richardson-Lucy examples ranged
-from about 63x to 88x CPU/GPU speedup and Richardson-Lucy TV examples from about
-60x to 100x on that one machine. These are descriptive machine-local results,
+declared public GPU regions. The source-candidate timing refresh measured
+Richardson-Lucy at 24.898/0.414 seconds CPU/GPU (60.20x) on the private ND2
+volume, 35.997/0.455 seconds (79.14x) on the medium synthetic volume, and
+137.820/1.517 seconds (90.87x) on the large synthetic volume. Richardson-Lucy
+TV measured 34.921/0.599 seconds (58.34x) on the private volume and
+55.936/0.564 seconds (98.61x) on the medium volume; both RL-TV workloads
+reported parity and clean cleanup. These are descriptive machine-local results,
 not portable performance guarantees or durable Auto assignments.
 
 The release's generated calibrated-morphology report records **28/28 checks
@@ -101,7 +146,7 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, one installed-wheel native-Windows RTX 5090 environment, real durable batch/generated-export smokes, OOM/cancellation/cleanup coverage, clean CPU-wheel validation, and a bounded M1 Max CPU launch/basic-processing/batch-cancel/memory-presentation smoke | Native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, the pushed `444f682` automated candidate with 3,754 passing tests and zero failures, clean wheel/sdist plus manifest/resource checks, a real RTX 5090 Prefer-GPU placement/parity/cleanup test, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Manual Prefer-GPU UI acceptance on the exact candidate, final tag/publication checks, native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
 | Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 2, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
@@ -114,10 +159,12 @@ same as an external comparison or assay validation. The distinction matters:
   serialized and exported Python is runtime-version pinned. Recalculate,
   regenerate exports, and validate after upgrading.
 - Version-1 batch configs load as explicit CPU and save as version 2. A saved
-  Auto/Selective request is intent; actual implementation provenance must be
-  retained from each run. Standard interactive, saved-batch, and generated
-  execution in 0.13.0a1 attaches no local performance evidence, so fresh Auto
-  candidates stay CPU; reviewed UI GPU assignments are Selective.
+  Auto, Prefer GPU, or Selective request is intent; actual implementation
+  provenance must be retained from each run. Standard interactive, saved-batch,
+  and generated execution in 0.13.0a1 attaches no local performance evidence, so
+  fresh Auto candidates stay CPU. Prefer GPU instead requests every reviewed
+  eligible accelerator regardless of speed; Selective owns per-node choices
+  and benchmarking.
 - GPU candidates cover only declared operation/dtype/parameter/shape/memory and
   environment regions. The initial public gate is one exact native-Windows RTX
   5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the

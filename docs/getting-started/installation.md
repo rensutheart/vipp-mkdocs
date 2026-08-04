@@ -67,9 +67,10 @@ activate the environment before running the final
 
 !!! note "Stable manual versus nightly manual"
     In a numbered/stable manual, the commands above install the documented
-    release. In this prepublication nightly, use the immutable candidate commit
-    below until the tag/package exists. Do not install arbitrary newer `main`
-    work merely because you are reading nightly. See
+    release. This prepublication nightly records immutable automated candidate
+    `444f682`; manual Prefer-GPU UI acceptance, tagging, and publication remain
+    pending. Do not install arbitrary newer `main` merely because you are
+    reading nightly. See
     [versions and compatibility](../reference/versioning.md).
 
 ## Confirm the installation
@@ -98,9 +99,10 @@ Expected for this release:
 The base installation is complete and remains the portable recommendation. A
 new session defaults to **Auto**. Standard 0.13.0a1 execution does not attach
 local timing evidence, so fresh Auto candidates remain CPU even after CUDA is
-installed; select a reviewed GPU provider or apply **Find fastest** in
-Selective mode to use it. GPU packages are optional and are not imported merely
-to load VIPP or run a CPU workflow.
+installed. Select **Prefer GPU** to use every reviewed eligible accelerator
+regardless of speed, or use Selective/**Find fastest** for per-node control and
+measurement. GPU packages are optional and are not imported merely to load VIPP
+or run a CPU workflow.
 
 !!! warning "The first public GPU gate is deliberately narrow"
 
@@ -190,16 +192,24 @@ quantitative use.
 
 ## Test the unpublished candidate or development branch
 
-Before the tag/package is published, install the reviewed application candidate
-by immutable commit rather than assuming that `main` points to the same source:
+The earlier reviewed commit `e024409` predates the Prefer-GPU source change and
+is no longer the current 0.13.0a1 candidate. Do not use its source archive or
+artifact hashes to qualify the eventual release.
+
+The pushed replacement automated candidate is
+`444f68290fe4359b05c68a027d3ae0a413412fe5`. Install that exact commit rather
+than assuming that `main` points to the same source:
 
 ```text
-python -m pip install --upgrade "napari[pyqt6]" "napari-vipp @ https://github.com/rensutheart/napari-vipp/archive/e02440989001f05ca17c845e3113ee2537a66c77.zip"
+python -m pip install --upgrade "napari[pyqt6]" "napari-vipp @ https://github.com/rensutheart/napari-vipp/archive/444f68290fe4359b05c68a027d3ae0a413412fe5.zip"
 ```
 
-Record that full commit with every candidate result. The candidate wheel/sdist
-and final published artifacts must be checked separately; a source-archive test
-is not a PyPI installation claim.
+Its automated suite, build/Twine, manifest, clean artifact, installed-wheel
+resource, and RTX 5090 Prefer-GPU integration checks passed. Manual Prefer-GPU
+UI acceptance is still pending. Record the full commit with every result;
+source-archive testing is not a PyPI installation or publication claim. Exact
+candidate artifact hashes are in the
+[release notes](../releases/0.13.0a1.md#prefer-gpu-automated-candidate-evidence).
 
 For newer unreleased `main` work, use:
 

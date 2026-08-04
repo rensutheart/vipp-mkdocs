@@ -55,7 +55,7 @@ New sessions request **Auto** compute. After each calculated node, read its
 compact CPU/GPU badge rather than assuming Auto used a GPU. Ordinary Auto runs
 in 0.13.0a1 carry no local timing evidence, so fresh candidates stay on CPU;
 the exact data or environment can independently require CPU as well. This tour
-does not require GPU setup; use Selective and the
+does not require GPU setup; use Prefer GPU or Selective with the
 [CPU/GPU guide](../how-to/choose-compute.md) after you understand the graph and
 its outputs.
 

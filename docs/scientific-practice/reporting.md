@@ -52,10 +52,14 @@ Report:
 > against [reference annotations/phantoms].
 
 For an accelerated run, add wording such as: “The saved workflow requested
-Selective compute. The archived execution report records CuPy implementation
+Prefer GPU compute. The archived execution report records CuPy implementation
 `[ID/version]` on `[device/environment]` for `[nodes]`, CPU for `[nodes]`, and
 `[no fallbacks / classified fallback details]`.” Do not report “GPU analysis”
 from toolbar intent alone.
+
+If Selective was used, also report the authored per-node choices or applied
+optimizer assignment. Prefer GPU means accelerator placement regardless of
+speed; it is not a claim that GPU was faster.
 
 If a generated CLI wrote outputs, retain whether provenance was enabled and the
 atomic sibling sidecars. For batch, retain the finalized version-2 manifest and

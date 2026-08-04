@@ -32,7 +32,8 @@ If finite `float32` is appropriate for both the image and PSF, add explicit
 gains on large stacks. Converting only to win a benchmark is not scientifically
 neutral. Read the badge/provenance and the
 [CPU/GPU guide](../how-to/choose-compute.md) rather than assuming that Auto used
-the GPU.
+the GPU. Prefer GPU deliberately ignores speed, but still uses CPU when this
+scientific region or environment gate is not satisfied.
 
 !!! caution "Evidence boundary"
     Synthetic examples and automated checks support operation behavior. They do

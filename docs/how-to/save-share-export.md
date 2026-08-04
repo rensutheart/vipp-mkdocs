@@ -97,6 +97,14 @@ and cooperative cancellation token. The generated CLI accepts
 `--progress`, and provenance controls. Omitted CLI fields retain the embedded
 schema-4 request; overrides do not mutate the workflow.
 
+`--compute-mode prefer_gpu` requests every scientifically eligible reviewed
+public GPU implementation regardless of CPU speed. It requires visible
+fallback; when no fallback override is provided, the CLI supplies `visible`,
+while an explicit strict combination is rejected. Stored per-node preferences
+remain in the workflow but are inactive outside Selective. The generated path
+uses the same planner and exact implementation provenance as interactive and
+batch execution.
+
 With provenance enabled, a successful saved output receives an atomic sibling
 such as `result.ome.tif.vipp-provenance.json`. The document binds the output
 node/port to the effective request, actual CPU/CuPy/cuCIM implementation,

@@ -17,18 +17,22 @@ Try these in order:
 If optional CUDA support is installed, also inspect the toolbar's actual-run
 summary and node badges. In ordinary 0.13.0a1 execution, **Auto** does not carry
 local timing evidence and therefore resolves fresh candidates to CPU. Use
-**Selective** for a reviewed GPU provider or apply a **Find fastest** proposal;
-then use **Compute setup and memory…** and the badge reason to understand any
-call-specific rejection or fallback. Do not infer GPU use from the selected
-mode. For the complete decision sequence and operation matrix, see
+**Prefer GPU** to use every reviewed eligible accelerator regardless of speed,
+or use **Selective** for per-node choices and **Find fastest**. Then use
+**Compute setup and memory…** and the badge reason to understand any call-specific
+CPU decision or fallback. Do not infer GPU use from the selected mode. For the complete decision sequence and operation matrix, see
 [choose and verify CPU or GPU compute](../how-to/choose-compute.md).
 
-## CPU, Auto, and Selective compute
+## CPU, Auto, Prefer GPU, and Selective compute
 
 - **CPU** runs the authoritative host implementation everywhere.
 - **Auto** is conservative and never benchmarks implicitly. Standard 0.13.0a1
   execution supplies no performance evidence, so fresh Auto calls stay on CPU;
   the API can accept validated evidence explicitly.
+- **Prefer GPU** uses every scientifically eligible reviewed public GPU
+  candidate without requiring it to beat CPU. It still enforces all dtype,
+  parameter, dependency, environment, parity, and memory gates, and unsupported
+  nodes receive explained ordinary CPU decisions.
 - **Selective** exposes per-node library choices plus node and whole-pipeline
   benchmarking. A separate lock preserves an authored choice during **Find
   fastest pipeline…**.
@@ -101,8 +105,8 @@ With visible fallback, one complete device segment can retry on CPU after a
 classified runtime OOM only after the GPU attempt synchronizes and cleans up.
 The badge turns amber and the execution report retains the attempted segment,
 required/available memory where known, exception, cleanup, and CPU retry result.
-Strict selective fallback returns the typed failure. Other GPU faults are not
-silently treated as OOM.
+Prefer GPU requires this visible policy. Strict selective fallback returns the
+typed failure. Other GPU faults are not silently treated as OOM.
 
 ## Switching Between Node Results
 

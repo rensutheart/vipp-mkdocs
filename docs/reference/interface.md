@@ -50,7 +50,7 @@ and the accepted edit is atomic and undoable.
 
 | Control | Effect |
 | --- | --- |
-| **CPU / Auto / Selective** | CPU forces authoritative host implementations. Auto is the conservative default; ordinary UI/batch/generated runs in this alpha supply no local timing evidence, so fresh Auto candidates remain CPU. Selective exposes authored CPU/GPU choices and benchmarking. |
+| **CPU / Auto / Prefer GPU / Selective** | CPU forces authoritative host implementations. Auto is the conservative default; ordinary UI/batch/generated runs in this alpha supply no local timing evidence, so fresh Auto candidates remain CPU. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Selective exposes authored per-node CPU/GPU choices and benchmarking. |
 | Actual-run compute summary | After an accepted run, summarizes the CPU/GPU mix or fallback state; hover for why the run made those decisions. |
 | **Find fastest pipeline…** | In Selective mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying. |
 | **Strict selective GPU choices** | Fail when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
@@ -61,8 +61,16 @@ the old file did not author compute intent. Auto never benchmarks during a
 calculation. Because the standard interactive, saved-batch, and generated paths
 do not attach performance evidence in 0.13.0a1, fresh Auto calls resolve to CPU;
 programmatic callers can provide validated evidence explicitly. To run GPU from
-the normal interface, use a reviewed Selective provider or apply a **Find
-fastest** proposal, which writes Selective per-node preferences.
+the normal interface, use **Prefer GPU** for global accelerator placement or a
+reviewed Selective provider/**Find fastest** proposal for per-node control.
+
+Prefer GPU bypasses only Auto's CPU-versus-GPU performance gate. Scientific,
+dtype, parameter, dependency, environment, and memory admission remain active,
+and unsupported nodes receive an explained ordinary CPU decision. Prefer GPU
+requires visible fallback. If every eligible GPU has complete comparable timing
+evidence, VIPP chooses the fastest GPU; otherwise stable implementation-ID order
+provides a deterministic choice without making a speed claim. Per-node
+preferences and both benchmark actions are inactive until Selective is restored.
 
 In Selective mode, an operation with a declared provider shows **Follow pipeline
 policy**, **CPU**, and one **GPU · library** entry for each declared library.

@@ -25,11 +25,12 @@ The VIPP dock widget has a workflow tab bar and three main work regions:
 
 The top toolbar opens examples and workflows, saves or exports the graph,
 starts batch processing, and exposes display/execution settings. Its
-**CPU / Auto / Selective** control is the authored compute request; new sessions
+**CPU / Auto / Prefer GPU / Selective** control is the authored compute request; new sessions
 default to Auto. After calculation, the toolbar summary and compact node badges
 show what actually ran. Ordinary 0.13.0a1 runs attach no local timing evidence,
-so fresh Auto candidates stay on CPU. Use a reviewed Selective choice or apply a
-**Find fastest** proposal when GPU execution is intended.
+so fresh Auto candidates stay on CPU. Use **Prefer GPU** when every reviewed
+eligible accelerator should run regardless of speed. Use a reviewed Selective
+choice or apply a **Find fastest** proposal for per-node control and measurement.
 
 VIPP's severity-aware message strip reports graph, workflow, and compute
 feedback. Napari's own bottom status bar reports viewer coordinates and layer

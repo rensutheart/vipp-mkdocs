@@ -35,9 +35,9 @@ A current file identifies itself with:
 
 VIPP 0.13.0a1 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
 an explicit error. Schema 4 adds portable authored compute intent under
-`execution.compute`, including `cpu`, `auto`, or `selective` mode and per-node
-preferences. It does not store a claim that the same backend will be available
-or fastest on another computer.
+`execution.compute`, including `cpu`, `auto`, `prefer_gpu`, or `selective` mode
+and per-node preferences. It does not store a claim that the same backend will
+be available or fastest on another computer.
 
 A schema-3 workflow has no compute contract. It therefore loads with an
 explicit **CPU** request, never the new-session Auto default. Saving the reviewed
@@ -62,6 +62,13 @@ before execution. They express an authored preference such as CPU or a GPU
 library, not a hidden cast or a stored benchmark result. The execution report,
 rather than workflow intent, is the record of the runtime, implementation,
 fallback, and environment that actually produced a result.
+
+Per-node preferences are active only in Selective. CPU, Auto, and Prefer GPU
+preserve them as dormant authored intent so switching modes is lossless. Prefer
+GPU considers all reviewed public GPU candidates regardless of CPU speed, but
+retains scientific, dtype, parameter, dependency, environment, and memory
+admission. It requires visible fallback; an unsupported node receives an
+explained ordinary CPU decision.
 
 Alpha compatibility is not guaranteed across future schema or operation
 changes. Preserve the original file and exact VIPP version, and test a duplicate
@@ -139,6 +146,11 @@ only explicitly supplied `--compute-mode`, `--fallback-policy`, and repeatable
 `--node-preference` values; omitted fields retain the embedded schema-4 request.
 It also supports `--progress` and provenance controls. A runtime override does
 not mutate the embedded workflow.
+
+The serialized and CLI value for Prefer GPU is `prefer_gpu`. Changing only the
+CLI mode to that value defaults the effective fallback to `visible`; explicitly
+combining it with `strict` fails request validation. Interactive, batch, and
+generated execution use the same selection and provenance contract.
 
 `PipelineResults` exposes the effective compute request, the formal execution
 report, per-node compute provenance, and output-bound provenance. A successful

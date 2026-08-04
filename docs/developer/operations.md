@@ -63,11 +63,13 @@ GPU. For each public region:
 8. Carry exact implementation, environment, decision, fallback, memory, and
    cleanup provenance through interactive, batch, generated Python/CLI, and
    export execution.
-9. Promote only the reviewed region as a public provider/Selective choice.
-   Auto additionally requires explicit validated performance evidence; standard
-   0.13.0a1 execution does not synthesize or persist that evidence. Broader CPU
-   behavior remains first-class and must not be described as a failed GPU
-   feature.
+9. Promote only the reviewed region as a public provider. Public Selective and
+   Prefer-GPU visibility require scientific and operational admission; Auto
+   additionally requires explicit validated performance evidence. Standard
+   0.13.0a1 execution does not synthesize or persist that evidence. Prefer GPU
+   bypasses only the CPU-speed gate and must never waive dtype, parameter,
+   environment, dependency, or memory gates. Broader CPU behavior remains
+   first-class and must not be described as a failed GPU feature.
 
 ## Scientific tests
 
