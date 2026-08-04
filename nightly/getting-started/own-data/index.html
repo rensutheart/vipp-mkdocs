@@ -1212,6 +1212,8 @@
       
         
       
+        
+      
     
     
     
@@ -1255,6 +1257,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2513,7 +2538,10 @@ valid is the important part.</p>
 </tbody>
 </table>
 <p>Select <code>Image Source</code>, set <strong>Source</strong>, and then use the control specific to that
-route. The napari layer chooser is only shown for <code>napari layer</code>.</p>
+route. The napari layer chooser is only shown for <code>napari layer</code>. The Image
+Source card's live subtitle shows the current layer, sample, file, or collection
+representative; hover the card for the complete binding when the subtitle is
+elided.</p>
 <h2 id="understand-the-source-revision">Understand the source revision<a class="headerlink" href="#understand-the-source-revision" title="Permanent link">&para;</a></h2>
 <p>During one interactive revision, VIPP does not repeatedly read an uncontrolled
 moving target. A local file or directory store is identified before and after
@@ -2541,6 +2569,13 @@ meaning. VIPP rejects detected mismatches rather than resampling silently.</p>
 <p>Use <code>Reorder Axes</code> only when you understand the actual stored order. Use
 <code>Set Pixel Size / Units</code> to repair missing or known-wrong calibration, and
 record where the corrected values came from.</p>
+<p>For Nikon ND2, 0.13 follows the reader's ordered dimension mapping when its
+labels and sizes exactly match the returned array. This fixes affected T/Z/C
+sliders and keeps napari and VIPP slice selection aligned. Still verify the
+displayed axis order, array shape, channel choice, and movement of every T, Z,
+and C control on a representative file. An inconsistent reader mapping is not
+trusted; VIPP falls back conservatively rather than reordering pixels from a
+malformed declaration.</p>
 <h2 id="transfer-a-workflow-deliberately">Transfer a workflow deliberately<a class="headerlink" href="#transfer-a-workflow-deliberately" title="Permanent link">&para;</a></h2>
 <p>Do not judge transfer only from the final object count. On representative
 images from the new acquisition family:</p>
@@ -2554,9 +2589,12 @@ images from the new acquisition family:</p>
 </ol>
 <p>Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.</p>
-<p>When moving a schema-1/2 workflow to 0.12, rebuild it deliberately and resolve
-new explicit channel-axis, RGB/intensity mapping, and grid choices. See
-<a href="../../reference/versioning/#upgrade-to-0120a1">versions and compatibility</a>.</p>
+<p>When moving from 0.12.0a3 to 0.13.0a1, keep the original schema-3 file and open
+a duplicate. It loads with explicit CPU intent; inspect graph structure,
+sources, axes, parameters, dynamic ports, and decisive outputs before saving
+the duplicate as schema 4. Rebuild schema-1/2 workflows deliberately; changing
+only the JSON version is unsafe. See
+<a href="../../reference/versioning/#move-from-0120a3-to-0130a1">versions and compatibility</a>.</p>
 <h2 id="protect-sensitive-data">Protect sensitive data<a class="headerlink" href="#protect-sensitive-data" title="Permanent link">&para;</a></h2>
 <p>Workflow JSON may contain local paths, source names, graph notes, or metadata
 values. Review it before sharing publicly. Do not use patient identifiers,
@@ -2585,7 +2623,7 @@ examples, notes, or metadata columns.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

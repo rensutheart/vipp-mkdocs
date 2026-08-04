@@ -1120,6 +1120,8 @@
       
         
       
+        
+      
     
     
     
@@ -1166,6 +1168,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1262,6 +1287,24 @@
   <a href="#pin-an-output-in-napari" class="md-nav__link">
     <span class="md-ellipsis">
       Pin an output in napari
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-what-implementation-produced-the-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify what implementation produced the output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-colocalization-scatter-at-useful-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect colocalization scatter at useful resolution
     </span>
   </a>
   
@@ -2426,6 +2469,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#verify-what-implementation-produced-the-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify what implementation produced the output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-colocalization-scatter-at-useful-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect colocalization scatter at useful resolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compare-3d-data-without-hiding-failures" class="md-nav__link">
     <span class="md-ellipsis">
       Compare 3D data without hiding failures
@@ -2527,13 +2588,23 @@ of the saved <strong>Float histogram bins</strong> used by histogram-based autom
 threshold nodes. Changing plot log scale or appearance does not change the
 mask.</p>
 <p>The colocalization scatter density, ROI population, and colocalized count are
-also calculated over every ROI voxel. On a large input, wait for the exact
-background calculation to finish before capturing a QC screenshot.</p>
+also calculated over every ROI voxel. Threshold-independent density remains
+visible while exact threshold-dependent counts are recalculated, but a
+calculating count is not final evidence. Interactive density is capped at 1,024
+bins per axis; dedicated graph scatter nodes can render up to 4,096. On a large
+input, wait for the exact background calculation to finish before capturing a
+QC screenshot or recording a count.</p>
 <p>Napari contrast limits are display-only. For a large inspect or pinned layer,
 VIPP may show an explicit provisional dtype range first and replace it with the
 exact full finite range when the background calculation completes. A manual
 contrast adjustment made while waiting is preserved. Neither range changes the
 node output or downstream measurements.</p>
+<p>Recalculating the same selected node/output preserves its compatible display
+profile and the napari camera, displayed dimensions, slice positions, zoom,
+translation, and rotation. Switching to another output restores that output's
+own saved profile or safe defaults, so styles do not leak between scientific
+results. Use the inspector header's reset-to-defaults action when you want to
+discard the selected output's remembered presentation.</p>
 <h2 id="pin-an-output-in-napari">Pin an output in napari<a class="headerlink" href="#pin-an-output-in-napari" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Select a node with an image-like output.</li>
@@ -2545,6 +2616,24 @@ node output or downstream measurements.</p>
 <p>Pin the raw image, a decisive intermediate mask, and the final labels for an
 overlay review. Hide or show layers to locate false positives, missed objects,
 merged objects, and boundary errors.</p>
+<h2 id="verify-what-implementation-produced-the-output">Verify what implementation produced the output<a class="headerlink" href="#verify-what-implementation-produced-the-output" title="Permanent link">&para;</a></h2>
+<p>After an accepted calculation, read the card's compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>,
+<strong>GPU · cuCIM</strong>, or amber <strong>CPU fallback</strong> badge. A muted badge belongs to the
+last accepted result while the node is stale or updating. Hover or inspect the
+node for the implementation ID/version, decision reason, memory estimate, and
+fallback details. The toolbar mode is only the request; it cannot establish
+what produced the displayed pixels or table.</p>
+<p>See <a href="../choose-compute/">choose and verify CPU or GPU compute</a> before comparing
+or benchmarking implementations.</p>
+<h2 id="inspect-colocalization-scatter-at-useful-resolution">Inspect colocalization scatter at useful resolution<a class="headerlink" href="#inspect-colocalization-scatter-at-useful-resolution" title="Permanent link">&para;</a></h2>
+<p>The inspector and resizable pop-out share a linked colormap selector. Changing
+it redraws the cached density and does not change thresholds or metrics. The
+pop-out can save PNG or TIFF at its current display resolution.</p>
+<p>Use <code>Colocalization Scatter Plot</code> or its masked variant when the scatter itself
+must be a durable graph output. Those nodes support native populated axis
+ranges, optional symmetric percentile clipping, independent histogram bins and
+square output size up to 4,096. Threshold guides are drawn after density
+aggregation so downsampling does not erase them.</p>
 <h2 id="compare-3d-data-without-hiding-failures">Compare 3D data without hiding failures<a class="headerlink" href="#compare-3d-data-without-hiding-failures" title="Permanent link">&para;</a></h2>
 <p>A maximum-intensity projection can make a workflow look persuasive while
 hiding slice-specific noise or z-merging. Review at least:</p>
@@ -2593,7 +2682,7 @@ replacement for them.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

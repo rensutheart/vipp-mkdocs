@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2536,6 +2561,26 @@ the application; reusable policy should still move to the narrowest owner.</p>
 <td><code>core/execution.py</code>, <code>ui/workers.py</code></td>
 </tr>
 <tr>
+<td>Compute contracts and implementation declarations</td>
+<td><code>core/compute_contracts.py</code>, <code>core/compute_specs.py</code></td>
+</tr>
+<tr>
+<td>Lazy providers, environment probes, and device lifecycle</td>
+<td><code>core/compute_registry.py</code>, <code>core/gpu/</code></td>
+</tr>
+<tr>
+<td>Eligibility, policy artifacts, graph planning, and memory admission</td>
+<td><code>core/compute_policy.py</code>, <code>core/compute_policy_artifact.py</code>, <code>core/compute_planning.py</code></td>
+</tr>
+<tr>
+<td>Exact benchmarking and whole-pipeline optimization</td>
+<td><code>core/compute_benchmark*.py</code>, <code>core/compute_pipeline_optimizer*.py</code></td>
+</tr>
+<tr>
+<td>Actual implementation/fallback/cleanup provenance</td>
+<td><code>core/execution_provenance.py</code></td>
+</tr>
+<tr>
 <td>Atomic JSON/text replacement</td>
 <td><code>core/atomic_io.py</code></td>
 </tr>
@@ -2580,6 +2625,10 @@ the application; reusable policy should still move to the narrowest owner.</p>
    every source, then promote; record partial publication explicitly.</li>
 <li><strong>Export uses the shared executor.</strong> Generated Python must preserve graph,
    source, metadata, version, and operation semantics.</li>
+<li><strong>Acceleration is evidence-gated.</strong> CPU remains authoritative; optional
+    providers are lazy, casts are never synthesized, exact eligibility and
+    memory are checked before device work, and accepted results retain actual
+    implementation/fallback/cleanup provenance.</li>
 </ol>
 <h2 id="execution-boundaries">Execution boundaries<a class="headerlink" href="#execution-boundaries" title="Permanent link">&para;</a></h2>
 <p><code>GraphSnapshot</code> owns detached ordered nodes, connections, and tunnels.
@@ -2593,6 +2642,18 @@ only while its run, graph, and source revision tokens remain current.</p>
 <p>The same executor is used by the GUI and <strong>Export Python...</strong>. Batch adds a
 deterministic planner, source identity checks, staged output promotion, and
 manifest/sidecar provenance around that executor.</p>
+<p>The compute planner resolves the portable request against immutable operation
+contracts, executable policy, exact workload facts, environment probes,
+benchmark evidence, and memory admission. Adjacent compatible operations can
+form a private device-resident segment. Device values never enter the public
+host cache or napari directly; a planned host boundary, synchronization, and
+cleanup gate precede result acceptance. A fair accelerator lease serializes
+VIPP work for one runtime/device key.</p>
+<p>Node benchmarking compares ordered detached inputs against the authoritative
+CPU call before timing. Whole-pipeline optimization models transfers and
+validates a review-only proposal. Interactive, batch, generated Python/CLI, and
+export all consume the same execution report, so UI badges are a presentation
+of provenance rather than a second compute policy.</p>
 <h2 id="adding-or-changing-behavior">Adding or changing behavior<a class="headerlink" href="#adding-or-changing-behavior" title="Permanent link">&para;</a></h2>
 <p>For a scientific operation, define the population, axes/ranks, dtype and unit
 behavior, parameter domain, output contract, edge cases, and reference method
@@ -2634,7 +2695,7 @@ documentation.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

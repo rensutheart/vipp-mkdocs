@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1832,6 +1857,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#feedback-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feedback surfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#display-settings" class="md-nav__link">
     <span class="md-ellipsis">
       Display settings
@@ -1893,9 +1927,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#generated-napari-layers" class="md-nav__link">
+  <a href="#the-active-vipp-inspect-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Generated napari layers
+      The active VIPP Inspect layer
     </span>
   </a>
   
@@ -1919,6 +1953,15 @@
   <a href="#draggable-histogram-guides" class="md-nav__link">
     <span class="md-ellipsis">
       Draggable histogram guides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colocalization-scatter-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Colocalization scatter controls
     </span>
   </a>
   
@@ -2519,6 +2562,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#feedback-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feedback surfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#display-settings" class="md-nav__link">
     <span class="md-ellipsis">
       Display settings
@@ -2580,9 +2632,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#generated-napari-layers" class="md-nav__link">
+  <a href="#the-active-vipp-inspect-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Generated napari layers
+      The active VIPP Inspect layer
     </span>
   </a>
   
@@ -2606,6 +2658,15 @@
   <a href="#draggable-histogram-guides" class="md-nav__link">
     <span class="md-ellipsis">
       Draggable histogram guides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colocalization-scatter-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Colocalization scatter controls
     </span>
   </a>
   
@@ -2655,7 +2716,10 @@ workspace. <strong>New workflow…</strong> and <strong>Load workflow…</strong
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.</p>
 <p>Switching tabs restores retained state and does not recalculate scientific
-results. A collection batch remains owned by its originating tab; VIPP blocks
+results. The selected tab is acknowledged immediately and can show an
+indeterminate restoration state while its retained graph, inspector,
+thumbnails, and caches are reattached; this is not a processing run. A
+collection batch remains owned by its originating tab; VIPP blocks
 closing that origin, launching a second batch, or closing the application until
 the active run finishes or cooperatively cancels.</p>
 <h2 id="workflow-toolbar">Workflow toolbar<a class="headerlink" href="#workflow-toolbar" title="Permanent link">&para;</a></h2>
@@ -2681,11 +2745,15 @@ the active run finishes or cooperatively cancels.</p>
 </tr>
 <tr>
 <td><strong>Save workflow…</strong></td>
-<td>Save graph structure, parameters, layout, and selected UI state—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON.</td>
+<td>Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON.</td>
 </tr>
 <tr>
 <td><strong>Batch workspace…</strong></td>
 <td>Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions.</td>
+</tr>
+<tr>
+<td><strong>Leave batch mode</strong></td>
+<td>When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run.</td>
 </tr>
 <tr>
 <td><strong>Export Python…</strong></td>
@@ -2721,6 +2789,12 @@ the active run finishes or cooperatively cancels.</p>
 </tr>
 </tbody>
 </table>
+<p>Image Source cards display the live layer, sample, file, or collection binding
+in an elided subtitle and retain the complete value in a tooltip. A compatible
+node dropped onto an existing wire can split that connection in place. Named
+output tunnels can be rerouted by dragging their source badge to another
+compatible output; preview/commit share type, cycle, and topology validation,
+and the accepted edit is atomic and undoable.</p>
 <h2 id="compute-controls">Compute controls<a class="headerlink" href="#compute-controls" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2732,7 +2806,7 @@ the active run finishes or cooperatively cancels.</p>
 <tbody>
 <tr>
 <td><strong>CPU / Auto / Selective</strong></td>
-<td>CPU forces authoritative host implementations. Auto uses an admitted GPU only when the complete planned workload is supported and beneficial. Selective exposes authored per-node choices.</td>
+<td>CPU forces authoritative host implementations. Auto is the conservative default; ordinary UI/batch/generated runs in this alpha supply no local timing evidence, so fresh Auto candidates remain CPU. Selective exposes authored CPU/GPU choices and benchmarking.</td>
 </tr>
 <tr>
 <td>Actual-run compute summary</td>
@@ -2744,7 +2818,7 @@ the active run finishes or cooperatively cancels.</p>
 </tr>
 <tr>
 <td><strong>Strict selective GPU choices</strong></td>
-<td>Fail when an explicitly selected GPU implementation is unavailable instead of visibly falling back to CPU.</td>
+<td>Fail when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy.</td>
 </tr>
 <tr>
 <td><strong>Compute setup and memory…</strong></td>
@@ -2753,16 +2827,20 @@ the active run finishes or cooperatively cancels.</p>
 </tbody>
 </table>
 <p>New sessions default to <strong>Auto</strong>. A schema-3 workflow loads as <strong>CPU</strong> because
-the old file did not author compute intent. Auto choosing CPU is not necessarily
-a fallback: CPU can be faster for a small call or required because the exact
-dtype, parameters, shape, memory, environment, or provider is outside the
-validated region.</p>
-<p>In Selective mode, an implemented node shows <strong>Follow pipeline policy</strong>,
-<strong>CPU</strong>, and one <strong>GPU · library</strong> entry for each declared library. <strong>Best GPU</strong>
-appears only when several libraries genuinely compete. Exact implementation
-pins are an advanced persistence/API feature; a loaded pin remains visible
-until deliberately replaced. A separate optimizer lock—not merely choosing a
-backend—preserves a node during <strong>Find fastest</strong>.</p>
+the old file did not author compute intent. Auto never benchmarks during a
+calculation. Because the standard interactive, saved-batch, and generated paths
+do not attach performance evidence in 0.13.0a1, fresh Auto calls resolve to CPU;
+programmatic callers can provide validated evidence explicitly. To run GPU from
+the normal interface, use a reviewed Selective provider or apply a <strong>Find
+fastest</strong> proposal, which writes Selective per-node preferences.</p>
+<p>In Selective mode, an operation with a declared provider shows <strong>Follow pipeline
+policy</strong>, <strong>CPU</strong>, and one <strong>GPU · library</strong> entry for each declared library.
+The choice remains visible even when the current call or environment will later
+be rejected, fall back, or fail; execution admission is call-specific. <strong>Best
+GPU</strong> appears only when several libraries genuinely compete. Exact
+implementation pins are an advanced persistence/API feature; a loaded pin
+remains visible until deliberately replaced. A separate optimizer lock—not
+merely choosing a backend—preserves a node during <strong>Find fastest</strong>.</p>
 <p>Calculated cards show compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>, <strong>GPU · cuCIM</strong>, or amber
 <strong>CPU fallback</strong> badges. A muted badge belongs to the last accepted run while a
 new result is pending. Hover or inspect the node for the implementation ID and
@@ -2776,6 +2854,19 @@ current-operation progress. A monolithic library call can remain at one
 percentage until it returns; a reached time limit means comparisons remain, not
 that the current graph was proved optimal. Completed exact benchmark records
 are reused on retry.</p>
+<p>For the practical sequence, first-release GPU-region summary, dtype caveats,
+and platform/install boundary, see
+<a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a>.</p>
+<h2 id="feedback-surfaces">Feedback surfaces<a class="headerlink" href="#feedback-surfaces" title="Permanent link">&para;</a></h2>
+<p>VIPP uses one severity-aware message strip for workflow, graph, source, compute,
+and batch feedback. Routine information and warnings remain lightweight; only
+an actionable error uses a filled, full-width alert. A message is not the
+execution record: the toolbar actual-run summary and per-node badges carry the
+compact compute result, while the detailed execution/provenance view explains
+implementation and fallback decisions.</p>
+<p>Napari's status bar at the bottom of the viewer is separate. It belongs to the
+viewer and reports coordinates, values, and layer interaction; VIPP does not
+duplicate that purpose in its message strip.</p>
 <h2 id="display-settings">Display settings<a class="headerlink" href="#display-settings" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2821,7 +2912,7 @@ are reused on retry.</p>
 </table>
 <p>Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
-overlap; VIPP reports the number of overlapping card pairs in the status bar.
+overlap; VIPP reports the number of overlapping card pairs in its message strip.
 Use <strong>Auto structure graph</strong> to make label-aware space, or move the affected
 cards manually. Label visibility is a graph-display choice and never changes
 connections or processed data.</p>
@@ -2907,7 +2998,8 @@ workflow JSON.</p>
 <p>Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
-<strong>Pin selected</strong>, and <strong>Save selected output…</strong>.</p>
+<strong>Pin selected</strong>, <strong>Save selected output…</strong>, and an explicit reset of the
+selected output's remembered display profile.</p>
 <h3 id="numeric-parameter-entry">Numeric parameter entry<a class="headerlink" href="#numeric-parameter-entry" title="Permanent link">&para;</a></h3>
 <p>Numeric spinners accept direct keyboard entry as well as their step buttons and
 paired sliders. Floating-point fields accept decimal points or commas and
@@ -2962,14 +3054,23 @@ VIPP still commits the scientific workflow cache only after accepting the
 complete background run. Cancelling, superseding, or editing during a run
 discards these temporary presentation updates and restores the last coherent
 cache view.</p>
-<h3 id="generated-napari-layers">Generated napari layers<a class="headerlink" href="#generated-napari-layers" title="Permanent link">&para;</a></h3>
-<p>When two inspected results have compatible napari <code>Image</code> presentation, VIPP
-reuses the existing layer object and replaces only its data reference. The new
-reference exposes the exact underlying pixels as a non-writeable view; VIPP
-also resets colormap, blending, contrast, scale, and related display metadata
-so settings from the previous node cannot leak into the next view. This makes
-switching between compatible image-sized nodes largely independent of volume
-size.</p>
+<h3 id="the-active-vipp-inspect-layer">The active VIPP Inspect layer<a class="headerlink" href="#the-active-vipp-inspect-layer" title="Permanent link">&para;</a></h3>
+<p>When the same logical node/output recalculates with a compatible active VIPP
+<strong>Inspect</strong> <code>Image</code> presentation, VIPP reuses the existing layer object and
+replaces only its data reference. The new reference exposes the exact
+underlying pixels as a non-writeable view. VIPP preserves displayed dimensions
+and slice positions, camera zoom/translation/rotation, and compatible styling
+such as colormap, contrast, blending, opacity, visibility, gamma,
+interpolation, and compatible rendering settings. Layer scale is reapplied
+from output metadata; arbitrary napari transforms are not saved in a display
+profile. Isolated tuning therefore remains on the same viewed region. Pinned
+layers are separate viewer artifacts and do not receive this saved per-output
+profile behavior.</p>
+<p>VIPP remembers presentation independently by node, output port, and RGB
+surface and saves those profiles as workflow UI state. Switching to a different
+logical output restores that output's profile or initializes safe defaults;
+the previous output's styling cannot leak across the switch. Use the inspector
+header reset action to return the selected output deliberately to defaults.</p>
 <p>VIPP replaces the layer for a genuine presentation-class change, such as
 <code>Image</code> to <code>Labels</code>, or for an incompatible RGB layout. A Boolean mask pinned
 as a napari <code>Labels</code> overlay requires a uint8 presentation copy. That conversion
@@ -2998,6 +3099,19 @@ switches the node to <strong>Explicit values</strong>, preserves the other exact
 queues interactive recalculation. This is a scientific parameter edit: save
 the workflow after accepting it. VIPP reuses unchanged input counts while a
 manual marker moves and refreshes the output histogram after the output changes.</p>
+<h2 id="colocalization-scatter-controls">Colocalization scatter controls<a class="headerlink" href="#colocalization-scatter-controls" title="Permanent link">&para;</a></h2>
+<p>The inspector scatter and resizable pop-out share a two-way linked colormap
+selector. Redrawing from the cached threshold-independent density does not
+change channels, ROI, thresholds, counts, or tables. Threshold scrubbing moves
+the guides immediately, marks the old exact count as calculating, coalesces
+rapid requests, and recounts the complete ROI before publishing a new value.</p>
+<p>Interactive density is capped and reported at 1,024 bins per axis to keep the
+viewer responsive. <code>Colocalization Scatter Plot</code> and its masked variant are
+ordinary graph nodes with independently configurable bins and square output
+size up to 4,096, native populated axis ranges, optional symmetric percentile
+clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
+at its current display resolution; use a graph node when the scatter image must
+be part of the durable workflow.</p>
 <h2 id="batch-representative-strip">Batch representative strip<a class="headerlink" href="#batch-representative-strip" title="Permanent link">&para;</a></h2>
 <p>After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired
@@ -3005,7 +3119,9 @@ filename. It calculates one representative only and never saves batch outputs.
 The requested item is labelled as current only after all matching sources load
 and the graph calculation succeeds. The strip does not duplicate the main
 <strong>Batch workspace…</strong> action; use the sole toolbar button to reopen the retained
-workspace. See <a href="../../workflows/batch-processing/">process a folder</a>.</p>
+workspace. <strong>Leave batch mode</strong> discards these transient representative source
+overrides and returns the tab to ordinary single-image use; it is disabled
+during a run. See <a href="../../workflows/batch-processing/">process a folder</a>.</p>
 
 
 
@@ -3026,7 +3142,7 @@ workspace. See <a href="../../workflows/batch-processing/">process a folder</a>.
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

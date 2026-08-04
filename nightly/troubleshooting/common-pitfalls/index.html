@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2164,6 +2189,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#auto-or-selective-still-shows-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto Or Selective Still Shows CPU
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizer-progress-appears-stationary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimizer Progress Appears Stationary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#source-changed-but-vipp-keeps-the-earlier-revision" class="md-nav__link">
     <span class="md-ellipsis">
       Source Changed But VIPP Keeps The Earlier Revision
@@ -2561,6 +2604,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#auto-or-selective-still-shows-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto Or Selective Still Shows CPU
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizer-progress-appears-stationary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimizer Progress Appears Stationary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#source-changed-but-vipp-keeps-the-earlier-revision" class="md-nav__link">
     <span class="md-ellipsis">
       Source Changed But VIPP Keeps The Earlier Revision
@@ -2739,6 +2800,33 @@
 <li>use <code>Reorder Axes</code> or <code>Set Pixel Size / Units</code> only with known values;</li>
 <li>reproduce the issue with a non-sensitive minimal file before reporting it.</li>
 </ul>
+<p>For an ND2 file in 0.13, compare the reported ordered shape/axes with the
+reader/acquisition record and move every available T, Z, and C slider. Each
+control should change the corresponding content in both napari and the linked
+VIPP preview. VIPP trusts the reader's ordered dimensions only when their labels
+and sizes exactly match the array; otherwise it falls back conservatively. Do
+not use <code>Reorder Axes</code> as a blind visual repair. If controls remain absent or
+move the wrong content, report a minimal non-sensitive file plus reader and VIPP
+versions.</p>
+<h2 id="auto-or-selective-still-shows-cpu">Auto Or Selective Still Shows CPU<a class="headerlink" href="#auto-or-selective-still-shows-cpu" title="Permanent link">&para;</a></h2>
+<p>For <strong>Auto</strong>, CPU is expected in the standard 0.13.0a1 interfaces: calculation
+does not attach local timing evidence, and Auto does not benchmark implicitly.
+Use Selective and apply a reviewed provider or <strong>Find fastest</strong> proposal when
+GPU execution is intended.</p>
+<p>For <strong>Selective</strong>, CPU can still be the only scientifically admitted result for
+the exact dtype, parameters, shape, memory, provider, or environment, or it can
+be an amber visible fallback from a forced GPU choice. Read the node badge and
+decision reason, then run <strong>Compute setup and memory…</strong>. The standard CUDA extra
+does not include the separately reviewed cuCIM build used by background and
+basic measurement candidates. See
+<a href="../../how-to/choose-compute/">choose and verify compute</a>.</p>
+<h2 id="optimizer-progress-appears-stationary">Optimizer Progress Appears Stationary<a class="headerlink" href="#optimizer-progress-appears-stationary" title="Permanent link">&para;</a></h2>
+<p>The current-operation bar advances only at truthful checkpoints. A monolithic
+CPU/GPU library call can stay at one percentage until it returns. Cancelling is
+also cooperative at those boundaries. If the time limit is reached, read which
+comparisons completed and remain: budget exhaustion means the search is
+incomplete, not that the current assignment was proved optimal. Exact completed
+records can be reused on retry.</p>
 <h2 id="source-changed-but-vipp-keeps-the-earlier-revision">Source Changed But VIPP Keeps The Earlier Revision<a class="headerlink" href="#source-changed-but-vipp-keeps-the-earlier-revision" title="Permanent link">&para;</a></h2>
 <p>Symptom:</p>
 <ul>
@@ -2805,7 +2893,7 @@ when relevant, then run only after the fresh preflight is acceptable.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

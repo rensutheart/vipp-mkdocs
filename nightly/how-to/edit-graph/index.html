@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/how-to/edit-graph/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../choose-compute/">
       
       
         <link rel="next" href="../inspect-outputs/">
@@ -1120,6 +1120,8 @@
       
         
       
+        
+      
     
     
     
@@ -1166,6 +1168,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2530,6 +2555,10 @@
 canvas. Connect an output port to a compatible input. When inserting into an
 existing branch, use the connection insertion affordance if the candidate node
 accepts the upstream type and can produce the downstream type.</p>
+<p>An <code>Image Source</code> card shows its current layer, sample, file, or collection
+representative as a live subtitle. Hover for the complete binding. The subtitle
+follows representative changes and is a quick way to catch a graph connected
+to the wrong input without opening every source inspector.</p>
 <p>If no node is compatible, inspect both port types. Converting a mask to labels
 usually needs <code>Label Connected Components</code>; applying an image as if it were a
 mask is not an acceptable type conversion.</p>
@@ -2575,8 +2604,8 @@ or table merge still depends on it.</p>
 </table>
 <p>Long names are elided on the card and show their full text in a tooltip. Labels
 reserve card space but deliberately do not reposition the graph when the mode
-changes. If existing cards now overlap, the status bar reports how many pairs
-overlap. Run <strong>Auto structure graph</strong> to rebuild a size-aware source-to-sink
+changes. If existing cards now overlap, the VIPP message strip reports how many
+pairs overlap. Run <strong>Auto structure graph</strong> to rebuild a size-aware source-to-sink
 layout, or move those cards manually. Auto structure remains a one-shot,
 undoable layout edit; port-label visibility does not change the workflow's
 connections or scientific calculation.</p>
@@ -2587,6 +2616,11 @@ or <code>red_channel</code>, and attach compatible inputs as subscribers.</p>
 <p>Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use
 <strong>Tunnels…</strong> to focus the source, reveal subscribers, rename, or remove it.</p>
+<p>To reroute a named output tunnel, drag its source badge to another compatible
+output. Preview and commit use the same port-type, cycle, and topology checks;
+an accepted reroute is one atomic, undoable graph edit. Subscribers keep the
+tunnel name, so rename it as part of the review if the new source changes its
+scientific meaning.</p>
 <h2 id="show-alternatives-honestly">Show alternatives honestly<a class="headerlink" href="#show-alternatives-honestly" title="Permanent link">&para;</a></h2>
 <p>Two methods being compared should share the same input and run in parallel:</p>
 <pre class="mermaid"><code>flowchart LR
@@ -2627,7 +2661,7 @@ workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     
@@ -2665,7 +2699,7 @@ workflow.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: How-to guides">
+          <a href="../choose-compute/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Choose CPU or GPU compute">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2675,7 +2709,7 @@ workflow.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                How-to guides
+                Choose CPU or GPU compute
               </div>
             </div>
           </a>

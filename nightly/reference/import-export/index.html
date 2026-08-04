@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2653,6 +2678,10 @@ support does not imply lossless preservation of every source metadata field.</p>
 <td>Reads TIFF series and infers basic axes where explicit semantic metadata is absent.</td>
 </tr>
 <tr>
+<td>Nikon ND2 with the optional <code>nd2</code> reader</td>
+<td>Uses the reader's ordered dimension mapping when labels/sizes exactly match the returned shape, keeping T/Z/C navigation aligned; malformed mappings fall back conservatively.</td>
+</tr>
+<tr>
 <td>Local OME-Zarr 0.4/0.5</td>
 <td>Discovers supported image/label groups and reads analysis level 0; label groups are marked as labels.</td>
 </tr>
@@ -2673,6 +2702,10 @@ support does not imply lossless preservation of every source metadata field.</p>
 <p>Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
 as acquisition metadata.</p>
+<p>For ND2, actively move the T, Z, and C sliders on a representative acquisition
+and verify that the expected content changes. Ordered-axis normalization fixes
+the affected 0.12 behavior, but it cannot prove that a third-party reader's
+metadata or selected series matches the experiment.</p>
 <h2 id="source-revision-contract">Source revision contract<a class="headerlink" href="#source-revision-contract" title="Permanent link">&para;</a></h2>
 <p>File and directory-store sources are identified from their path revision and
 bytes before and after inspection/materialization. VIPP owns a read-only array
@@ -2742,7 +2775,9 @@ one local <code>.ome.zarr</code> store:</p>
 </span></code></pre></div>
 <p>Use it when label outputs should remain associated with a reference image. For
 a standalone label image, use TIFF/OME-TIFF or provide an image-linked OME-Zarr
-dataset; the command is not a general project archiver.</p>
+dataset; the command is not a general project archiver. This UI action
+serializes accepted cached values. It does not rerun the graph through the
+shared executor or create an exact compute-provenance sidecar.</p>
 <h2 id="current-limitations">Current limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Analysis reads use OME-Zarr level 0; preview-level/pyramid selection is not
@@ -2761,22 +2796,26 @@ dataset; the command is not a general project archiver.</p>
   are outside 0.13.0a1.</li>
 </ul>
 <h2 id="execution-provenance-for-saved-outputs">Execution provenance for saved outputs<a class="headerlink" href="#execution-provenance-for-saved-outputs" title="Permanent link">&para;</a></h2>
-<p>The interactive <strong>Save selected output…</strong> action writes the selected result but
-is not a complete analysis archive. Generated Python/CLI can additionally write
-an atomic <code>.vipp-provenance.json</code> sibling that binds the output node/port to the
-effective compute request, actual CPU/CuPy/cuCIM implementation, environment,
-fallback records, outcome, and cleanup evidence. Failed or cancelled
-single-output publication attempts a failure sidecar at the requested
-destination name.</p>
+<p>The interactive <strong>Save selected output…</strong> action writes the selected cached
+result directly. It does not rerun the graph or write exact execution
+provenance, so it is not a complete analysis archive. Generated Python/CLI can
+instead write an atomic <code>.vipp-provenance.json</code> sibling that binds the output
+node/port to the effective compute request, actual CPU/CuPy/cuCIM
+implementation, environment, fallback records, outcome, and cleanup evidence.
+Failed or cancelled single-output publication attempts a failure sidecar at
+the requested destination name.</p>
 <p>Batch uses its authoritative version-2 manifest instead of duplicating one
 sidecar per output. Every published output record carries an execution digest
 link to that item's complete execution document. Preserve the manifest,
 archive, item checkpoints, workflow/config pair, and source identities with the
 files.</p>
-<p>An output remains private until source reverification and execution cleanup are
-established. OOM fallback is recorded rather than hidden, and a cleanup or
-publication failure prevents a newly calculated standalone output from being
-presented as successfully published.</p>
+<p>A generated standalone output remains private until execution cleanup and its
+requested staged publication checks are established. Its source identity is
+only as strong as the <code>ImageDataset</code>, <code>SourcePayload</code>, or raw-array metadata the
+caller supplied. Saved batch execution additionally captures and reverifies
+source bytes before promoting an item's outputs. OOM fallback is recorded
+rather than hidden, and a cleanup or publication failure prevents a newly
+calculated output from being presented as successfully published.</p>
 <h2 id="multi-input-grid-safety">Multi-input grid safety<a class="headerlink" href="#multi-input-grid-safety" title="Permanent link">&para;</a></h2>
 <p>Operations that combine arrays validate more than shape: axis meaning, sample
 counts, scale, compatible units, and origin must satisfy the operation's grid
@@ -2805,7 +2844,7 @@ silently resample, register, reorder, or repair a transform.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

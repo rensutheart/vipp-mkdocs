@@ -709,6 +709,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#release-candidate-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release-candidate verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#upgrade-from-0120a3" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade from 0.12.0a3
@@ -1239,6 +1248,8 @@
       
         
       
+        
+      
     
     
     
@@ -1282,6 +1293,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2489,6 +2523,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#release-candidate-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release-candidate verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#upgrade-from-0120a3" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade from 0.12.0a3
@@ -2531,7 +2574,7 @@
 
 
 <h1 id="vipp-0130a1">VIPP 0.13.0a1<a class="headerlink" href="#vipp-0130a1" title="Permanent link">&para;</a></h1>
-<p><strong>Release date:</strong> 4 August 2026</p>
+<p><strong>Target release date:</strong> 4 August 2026</p>
 <p><strong>Maturity:</strong> Alpha pre-release</p>
 <p>VIPP 0.13.0a1 is the first substantial GPU-acceleration alpha. It adds an
 evidence-gated CPU/CUDA execution architecture, makes the same compute request
@@ -2543,7 +2586,8 @@ optimizer, cache, memory, cancellation, and publication fixes.</p>
 baseline remains CPU execution on Windows, macOS, and Linux. A GPU
 implementation is considered only for its explicitly validated operation,
 dtype, parameter, shape, dependency, and environment region; other calls use a
-visible CPU decision or fail according to the requested fallback policy.</p>
+normal explained CPU decision, an amber fallback from a forced Selective
+choice, or a typed failure according to the exact rejection and policy.</p>
 <div class="admonition important">
 <p class="admonition-title">Workflow schema is now 4</p>
 <p>Schema 4 stores the authored compute mode and per-node preferences. A valid
@@ -2557,9 +2601,10 @@ every export under 0.13.0a1.</p>
 </div>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Choose <strong>CPU</strong>, <strong>Auto</strong>, or <strong>Selective</strong> from the main toolbar. Selective
-  mode exposes one CPU choice and one choice for each scientifically admitted
-  GPU library on an implemented node.</li>
+<li>Choose <strong>CPU</strong>, <strong>Auto</strong>, or <strong>Selective</strong> from the main toolbar. Auto is a
+  conservative CPU default in the ordinary 0.13.0a1 interfaces; Selective mode
+  exposes one CPU choice and one choice for each declared GPU library on an
+  implemented node.</li>
 <li>Read compact CPU, CuPy, cuCIM, or amber CPU-fallback badges on calculated
   node cards, with details available for the actual implementation and reason.</li>
 <li>Benchmark one eligible node or ask VIPP to find a fastest measured whole-
@@ -2569,7 +2614,8 @@ every export under 0.13.0a1.</p>
   transactional device values, memory admission, synchronized progress,
   cooperative cancellation, cleanup, and classified OOM behavior.</li>
 <li>Carry compute intent and exact actual-run provenance through Batch workspace,
-  the saved batch runner, generated Python/CLI, and standalone output export.</li>
+  the saved batch runner, generated Python/CLI, and generated-CLI output
+  publication.</li>
 <li>Work with several independent live workflows through movable tabs without
   replacing another graph or its caches, undo history, inspector state, or
   Batch workspace.</li>
@@ -2599,6 +2645,12 @@ make a node eligible. In particular, some floating-point filtering and
 deconvolution workloads can benefit much more from a GPU than native <code>uint16</code>
 workloads, but an explicit <code>Convert Dtype</code> node remains a scientific authoring
 decision—not an optimizer rewrite.</p>
+<p>The standard <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX track. It does
+not distribute the separately reviewed cuCIM build, so Rolling-Ball/Subtract
+Background and the basic measurement candidates normally remain CPU after the
+ordinary public GPU install. See the
+<a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">readable first-region summary</a>
+for dtypes, dimensionalities, parameter profiles, and common CPU decisions.</p>
 <p>The first public CUDA admission record is intentionally exact: native Windows,
 64-bit CPython 3.12, NumPy 2.5.1, SciPy 1.18.0, scikit-image 0.26.0, CuPy/CuPyX
 14.1.1, CUDA runtime API 13.2, CUDA driver API 13.3, and the recorded RTX 5090
@@ -2616,16 +2668,20 @@ route remains planned work.</p>
 CUDA commands, and <a href="../../reference/validation-status/">validation status</a> for
 the evidence boundary.</p>
 <h2 id="compute-policy-and-optimizer">Compute policy and optimizer<a class="headerlink" href="#compute-policy-and-optimizer" title="Permanent link">&para;</a></h2>
-<p><strong>Auto</strong> is the default for a new session. It may choose CPU even when a GPU is
-available because transfer, cold-start, residency, memory, and confidence are
-part of the complete-pipeline decision. When no compatible accelerator stack
-is installed, Auto remains a normal CPU execution mode and setup diagnostics
-offer a copyable command; the base application does not import optional GPU
-packages just to load a workflow.</p>
+<p><strong>Auto</strong> is the default for a new session and never benchmarks while calculating
+a graph. Ordinary interactive, saved-batch, and generated execution does not
+attach local performance evidence in 0.13.0a1, so fresh Auto candidates resolve
+to CPU even on an admitted GPU system. Programmatic callers can explicitly
+supply validated evidence. The normal UI route to GPU is a reviewed Selective
+provider or an applied <strong>Find fastest</strong> proposal; applying a proposal writes
+Selective per-node preferences. Setup diagnostics still offer a copyable
+installation command, and the base application does not import optional GPU
+packages merely to load a workflow.</p>
 <p><strong>CPU</strong> forces the reference CPU path. <strong>Selective</strong> exposes per-node authored
 choices and the whole-pipeline optimizer. A loaded exact implementation pin can
 remain visible for compatibility, but the normal UI uses concise CPU and
-library-level choices. Unsupported nodes remain visibly CPU.</p>
+library-level choices. A provider choice is declaration-based and can remain
+visible even when call-specific admission later falls back or fails.</p>
 <p>The optimizer compares every scientifically eligible implementation for each
 unlocked node, reuses exact workload/environment benchmark records, and then
 validates a proposed whole-pipeline assignment. A long operation can remain
@@ -2645,7 +2701,8 @@ to the shared headless executor. They preserve:</p>
   digest, and memory estimate for each completed node;</li>
 <li>classified availability and eligibility fallbacks plus attempted device-OOM
   fallback records;</li>
-<li>nested overall-item and current-operation progress; and</li>
+<li>operation-level progress on every execution surface, plus nested overall-item
+  progress for collection batch runs; and</li>
 <li>cooperative cancellation, synchronization, cleanup, and publication status.</li>
 </ul>
 <p>A version-2 batch manifest stores the configured and effective requests, the
@@ -2657,11 +2714,15 @@ after cooperative cancellation.</p>
 <p>Generated workflow programs expose a complete <code>compute_request</code>, progress
 callback, and cancellation token to Python callers. Their CLI accepts
 <code>--compute-mode</code>, <code>--fallback-policy</code>, repeatable <code>--node-preference</code>,
-<code>--progress</code>, and provenance controls. Successful standalone outputs receive an
-atomic <code>.vipp-provenance.json</code> sibling by default; failed or cancelled
-single-output runs attempt a failure sidecar. Generated output publication is
-transactional and fails closed when execution cleanup or final promotion cannot
-be established.</p>
+<code>--progress</code>, and <code>--provenance</code> / <code>--no-provenance</code>. The CLI enables provenance
+by default; the Python save API writes it when the caller supplies the execution
+document. Failed or cancelled single-output runs attempt a failure sidecar.
+Generated output publication stages the complete requested output/sidecar set,
+rejects duplicate destinations, and commits with rollback for caught promotion
+failures. It returns <code>0</code> on success, <code>2</code> on setup/execution/publication failure,
+and <code>130</code> after cooperative cancellation. Exact source-byte reverification
+before promotion remains a saved-batch guarantee; arbitrary generated-Python
+array callers provide their own source identity and stability.</p>
 <p>With <strong>visible</strong> fallback, one complete device segment can be retried on CPU
 after a classified, retryable OOM only after GPU synchronization and cleanup.
 <strong>Strict</strong> returns the typed failure instead. Other device defects are never
@@ -2678,6 +2739,8 @@ production collection processing.</p>
   inspector state, paths, dirty baselines, and Batch workspaces. A batch remains
   attached to its originating tab and blocks only lifecycle actions that would
   invalidate that run.</li>
+<li><strong>Leave batch mode</strong> discards retained representative source overrides and
+  returns an idle workflow tab to ordinary single-image work.</li>
 <li>Image Source cards show their current sample, layer, file, or collection
   binding in an elided subtitle and full tooltip.</li>
 <li>Named output tunnels can be rerouted by dragging their source badge to a
@@ -2686,9 +2749,10 @@ production collection processing.</p>
   alerts, and node badges now form one execution-feedback system.</li>
 <li>The pipeline optimizer reports overall and current-operation progress and
   explains time-limit exhaustion in terms of completed and remaining work.</li>
-<li>VIPP-generated napari layers retain a compatible user's camera, slice,
+<li>The active VIPP <strong>Inspect</strong> layer retains a compatible user's camera, slice,
   translation, rotation, zoom, and display styling across recalculation, so a
-  tuned region does not jump back to a default view.</li>
+  tuned region does not jump back to a default view. Pinned layers remain
+  separate viewer artifacts rather than saved per-output profiles.</li>
 <li>ND2 ordered-axis metadata now keeps napari/VIPP T, Z, and C navigation aligned
   with the loaded array.</li>
 <li><code>Crop Stack</code> preserves image, mask, and label port types, including cropped
@@ -2703,11 +2767,22 @@ ImageJ 1.54p target for scalar <code>uint8</code>, <code>uint16</code>, and <cod
 Boolean and RGB/RGBA handling are VIPP extensions and are not claimed as
 ImageJ-exact. The two scatter-plot graph nodes make native-range colocalization
 density and threshold-guide images durable graph outputs.</p>
+<p>The scatter inspector now reuses threshold-independent density while exact
+full-ROI counts are recomputed, moves guides immediately during threshold
+scrubbing, coalesces rapid requests, and links its colormap with a resizable
+PNG/TIFF pop-out. Interactive density is capped at 1,024 bins per axis; graph
+scatter nodes retain independently configured bins/output size up to 4,096,
+native populated ranges, optional symmetric percentile clipping, and
+memory-bounded masked accumulation. Inspect display profiles are remembered per
+node/output/RGB surface and saved independently from scientific parameters.</p>
 <p>Colocalization calculations now retain finite native intensities rather than
 jointly rescaling/clipping both channels to 0–255. Thresholds and intensity
 sums therefore use native units. The implementation also revises automatic
 Costes threshold search, Pearson population names, and Manders definitions as a
 source-aligned compatibility implementation targeting Fiji Coloc 2 3.1.0.
+Canonical Pearson names now distinguish any-channel (OR) and both-channel
+populations. Fiji M1/M2 and thresholded tM1/tM2 are separate; legacy
+<code>manders_m1</code>/<code>manders_m2</code> columns alias tM1/tM2 for compatibility.
 Independent numerical parity validation is pending. These changes can
 materially alter results from an older workflow even when its graph structure
 is unchanged.</p>
@@ -2722,6 +2797,37 @@ revised values in a consequential analysis. The recorded
 certification; tables separately record
 <code>coloc_validation_status=experimental_source_aligned_golden_parity_pending</code>.</p>
 </div>
+<h2 id="release-candidate-verification">Release-candidate verification<a class="headerlink" href="#release-candidate-verification" title="Permanent link">&para;</a></h2>
+<p>The prepared application candidate is commit
+<code>e02440989001f05ca17c845e3113ee2537a66c77</code>. Its full local suite completed with
+3,722 passed, 2 skipped, and 2 documented expected failures. Package/manifest,
+lint, and CPython 3.12/3.13 tests passed on Windows, Linux, and macOS in the
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/30945609407">candidate CI run</a>.
+The wheel and source distribution passed Twine checks, clean CPU-wheel
+installation checks, and installed-wheel CUDA diagnostics/durable execution
+smokes within the stated native-Windows evidence boundary.</p>
+<p>The locally verified candidate artifacts are:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>napari_vipp-0.13.0a1-py3-none-any.whl</code></td>
+<td><code>A05F2292B3C8E1FF37CF6009C5BA6100ECE92EA11E92423A72C20960B179F379</code></td>
+</tr>
+<tr>
+<td><code>napari_vipp-0.13.0a1.tar.gz</code></td>
+<td><code>FAEC77C0CD10E2B1F60AFA7C55CEC16139B89ADF42DCE626E76AFB9878A2D12C</code></td>
+</tr>
+</tbody>
+</table>
+<p>These hashes identify the prepared files, not a published release until the
+matching tag and exact artifacts are uploaded. If the application source or
+artifacts change, rebuild, recheck, and replace this evidence before release.</p>
 <h2 id="upgrade-from-0120a3">Upgrade from 0.12.0a3<a class="headerlink" href="#upgrade-from-0120a3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Preserve the 0.12.0a3 environment, original schema-3 workflow, generated
@@ -2752,7 +2858,12 @@ certification; tables separately record
 <h2 id="alpha-limitations">Alpha limitations<a class="headerlink" href="#alpha-limitations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>GPU support is partial and environment-gated; timing evidence from one RTX
-  5090 is not a portable speed promise or a permanent Auto choice.</li>
+  5090 is not a portable speed promise. Standard execution does not persist or
+  inject it as an Auto choice; reviewed UI assignments are Selective.</li>
+<li>Label Connected Components acceleration requires a Boolean call resolved as
+  2D or 3D. Numeric and oversized 2D/3D calls retain CPU, while a Boolean call
+  with another or unresolved spatial rank is a typed non-CPU preflight failure
+  in this alpha; select CPU for that case.</li>
 <li>Native Linux GPU, RTX 40-series Windows, Apple M1 Max acceleration, and a
   distributable feature-complete cuCIM/Clara route remain future validation.</li>
 <li>Batch pairing remains local-file, sorted-position pairing. VIPP does not yet
@@ -2793,7 +2904,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

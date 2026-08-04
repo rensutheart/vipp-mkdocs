@@ -1221,6 +1221,8 @@
       
         
       
+        
+      
     
     
     
@@ -1264,6 +1266,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2498,9 +2523,9 @@
 <p>In this exercise you will create a short segmentation graph from an empty
 canvas. It uses bundled data, so unexpected results are easier to diagnose.</p>
 <h2 id="1-start-clean">1. Start clean<a class="headerlink" href="#1-start-clean" title="Permanent link">&para;</a></h2>
-<p>Choose <strong>New workflow…</strong> and confirm the reset. VIPP keeps one unbound
-<code>Image Source</code> on the otherwise empty canvas. Select that source (do not add a
-second one) and set:</p>
+<p>Choose <strong>New workflow…</strong>. VIPP opens a new tab and preserves any other workflow
+tabs. The new graph contains one unbound <code>Image Source</code> on an otherwise empty
+canvas. Select that source (do not add a second one) and set:</p>
 <table>
 <thead>
 <tr>
@@ -2540,6 +2565,12 @@ prefer the semantic name; otherwise verify the index visually.</p>
 <p>Restore a conservative value before continuing. There is no universally
 correct blur or threshold: tune against the structures your assay intends to
 measure.</p>
+<p>New workflows request <strong>Auto</strong> compute. After calculation, read the compact
+badge on Gaussian Blur, Otsu Threshold, and Label Connected Components. A CPU
+badge is expected because ordinary Auto execution in 0.13.0a1 carries no local
+timing evidence; it is not proof that setup failed. Keep this first tutorial
+scientifically focused; use Selective and the separate
+<a href="../../how-to/choose-compute/">CPU/GPU guide</a> before benchmarking providers.</p>
 <h2 id="4-add-a-measurement-branch">4. Add a measurement branch<a class="headerlink" href="#4-add-a-measurement-branch" title="Permanent link">&para;</a></h2>
 <p>Add <code>Measure Objects</code> and connect the labels to it:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Label Connected Components → Measure Objects
@@ -2562,8 +2593,10 @@ release, for example:</p>
 <a href="../../reference/workflow-contract/">workflow contract</a> for what it does and
 does not preserve.</p>
 <h2 id="6-test-that-the-workflow-reopens">6. Test that the workflow reopens<a class="headerlink" href="#6-test-that-the-workflow-reopens" title="Permanent link">&para;</a></h2>
-<p>Create a new workflow, then load the saved JSON. Confirm the source, graph,
-parameters, and connections before relying on the file as an analysis record.</p>
+<p>Create another workflow tab, then load the saved JSON. <strong>Load workflow…</strong> opens
+another session rather than replacing the active graph. Confirm the source,
+graph, parameters, connections, and authored compute request before relying on
+the file as an analysis record.</p>
 <p>Next, learn how to <a href="../own-data/">use your own images</a> without assuming that the
 same parameters will transfer unchanged.</p>
 
@@ -2586,7 +2619,7 @@ same parameters will transfer unchanged.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

@@ -1266,6 +1266,8 @@
       
         
       
+        
+      
     
     
     
@@ -1309,6 +1311,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2597,6 +2622,11 @@ deterministic plan.</p>
 Source</code> and calculates one item through the live graph. It does not save
 outputs or run the rest of the collection.</p>
 </div>
+<p>The Batch workspace and any active run belong to the workflow tab that started
+them. Other tabs remain editable while the background run proceeds, and all
+progress/completion returns to the origin tab. VIPP blocks closing that origin,
+starting a second batch, or exiting the application until execution finishes or
+cooperative cancellation completes and final state is persisted.</p>
 <h2 id="recommended-sequence">Recommended sequence<a class="headerlink" href="#recommended-sequence" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Build, tune, and validate the graph on defined development data.</li>
@@ -2604,9 +2634,10 @@ outputs or run the rest of the collection.</p>
    or table to save.</li>
 <li>Open <strong>Batch workspace...</strong> and bind each varying <code>Image Source</code> to a local
    folder and pattern.</li>
-<li>Choose the intended toolbar compute request. New work defaults to Auto;
-   choose CPU for a portable reference run or Selective for reviewed per-node
-   preferences.</li>
+<li>Choose the intended toolbar compute request. New work defaults to Auto,
+   which remains CPU in ordinary 0.13.0a1 batch execution because no local
+   timing evidence is attached. Choose CPU for an explicit portable reference
+   or Selective for reviewed CPU/GPU per-node preferences.</li>
 <li>Choose an output folder, formats, naming, existing-file policy, fallback
    policy, device, and accelerator-memory settings.</li>
 <li>Optionally select <strong>Preview batch</strong> to review pairing and collision summaries.</li>
@@ -2726,6 +2757,10 @@ one displayed.</p>
 <p>Representative arrays are cached within a bounded session. Their file
 identities stay pinned so a file overwritten after review is rejected on
 revisit or Run. Use <strong>Refresh</strong> to accept a new revision deliberately.</p>
+<p>Choose <strong>Leave batch mode</strong> when the tab should return to ordinary single-image
+work. It discards the retained representative source overrides but does not
+delete collection files, outputs, or saved configurations. The action is
+unavailable during an active run.</p>
 <h2 id="stale-plans-and-fresh-preflight">Stale plans and fresh preflight<a class="headerlink" href="#stale-plans-and-fresh-preflight" title="Permanent link">&para;</a></h2>
 <p>Changing batch settings or the scientific graph marks the runnable plan stale.
 The previous representative pairing remains available and is labelled as
@@ -2885,7 +2920,9 @@ not evidence that another assay or naming scheme is valid.</p>
 <li>Output names, formats, subfolders, and collision policy are intentional.</li>
 <li>The fresh preflight matches the reviewed plan.</li>
 <li>The configured and effective compute requests match the intended run, and
-  actual node badges/provenance explain CPU, GPU, or fallback decisions.</li>
+  the version-2 manifest and item execution provenance explain the actual CPU,
+  GPU, and fallback decisions. Interactive node badges describe the last
+  accepted interactive calculation, not every detached batch item.</li>
 <li>Completed/partial/skipped/cancelled/failed counts match expectations.</li>
 <li>Manifests, archives, sidecars, environment, exclusions, QC, and validation
   evidence are retained with the outputs.</li>
@@ -2910,7 +2947,7 @@ not evidence that another assay or naming scheme is valid.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

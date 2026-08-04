@@ -1059,8 +1059,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#imagej-auto-threshold-is-a-separate-conversion-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageJ Auto Threshold is a separate conversion path
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-and-gpu-boundaries-in-this-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU and GPU boundaries in this workflow
+    </span>
+  </a>
   
 </li>
       
@@ -1263,6 +1281,8 @@
       
         
       
+        
+      
     
     
     
@@ -1306,6 +1326,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2504,8 +2547,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#imagej-auto-threshold-is-a-separate-conversion-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageJ Auto Threshold is a separate conversion path
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-and-gpu-boundaries-in-this-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU and GPU boundaries in this workflow
+    </span>
+  </a>
   
 </li>
       
@@ -2615,7 +2676,7 @@ labels.</p>
 </tr>
 <tr>
 <td>Smoothing</td>
-<td><code>Gaussian Blur</code>, <code>Gaussian Blur 3D</code>, <code>Median Filter</code>, <code>Non-Local Means</code></td>
+<td><code>Gaussian Blur</code>, <code>Gaussian Blur 3D</code>, <code>Median Filter</code>, <code>Sigma Filter</code>, <code>Non-Local Means</code></td>
 </tr>
 <tr>
 <td>Background</td>
@@ -2623,7 +2684,7 @@ labels.</p>
 </tr>
 <tr>
 <td>Threshold</td>
-<td><code>Otsu Threshold</code>, <code>Triangle Threshold</code>, <code>Li Threshold</code>, <code>Yen Threshold</code>, <code>Binary Threshold</code>, local threshold nodes</td>
+<td><code>Otsu Threshold</code>, <code>Triangle Threshold</code>, <code>Li Threshold</code>, <code>Yen Threshold</code>, <code>Binary Threshold</code>, <code>ImageJ Auto Threshold (8-bit)</code>, local threshold nodes</td>
 </tr>
 <tr>
 <td>Mask cleanup</td>
@@ -2700,6 +2761,31 @@ replace this setting.</p>
 <p>For example, a methods record might state: “Otsu thresholding used the complete
 <code>float32</code> stack with 1,024 histogram bins; non-finite pixels were treated as
 background.”</p>
+<h3 id="imagej-auto-threshold-is-a-separate-conversion-path">ImageJ Auto Threshold is a separate conversion path<a class="headerlink" href="#imagej-auto-threshold-is-a-separate-conversion-path" title="Permanent link">&para;</a></h3>
+<p><code>ImageJ Auto Threshold (8-bit)</code> is an explicit experimental compatibility node
+targeting ImageJ 1.54p <code>Default</code> or <code>Triangle</code> behavior. It first follows the
+declared per-plane 8-bit conversion for scalar <code>uint8</code>, <code>uint16</code>, or <code>float32</code>,
+then thresholds that result. It does not change the generic VIPP Otsu,
+Triangle, Li, Yen, Isodata, or Minimum nodes.</p>
+<p>Boolean handling and RGB/RGBA luma reduction are VIPP extensions and are not
+claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Independent
+ImageJ-generated golden parity is pending, so record the node explicitly and
+compare against the intended ImageJ reference before consequential use.</p>
+<h2 id="cpu-and-gpu-boundaries-in-this-workflow">CPU and GPU boundaries in this workflow<a class="headerlink" href="#cpu-and-gpu-boundaries-in-this-workflow" title="Permanent link">&para;</a></h2>
+<p>Otsu, Canny, Gaussian, median, Sigma Filter, background correction, and
+connected components have GPU candidates only inside declared regions. Common
+examples are finite <code>float32</code> for Gaussian, Boolean masks for connected
+components, and Boolean/<code>uint8</code>/<code>uint16</code> for the exact Canny region. Otsu covers
+more real dtypes but retains its exact 65,536-level integer-span and float-bin
+rules. Fallback-safe unsupported calls use an explained CPU decision; invalid
+or explicitly non-fallback-safe calls fail planning. In particular, non-CPU
+planning requires a Boolean connected-components call resolved as 2D or 3D.
+VIPP never inserts a cast.</p>
+<p>Read each node badge after calculation and see the
+<a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">CPU/GPU operation matrix</a>
+before authoring a provider choice. GPU eligibility says that an implementation
+matches its declared CPU contract; it does not validate the segmentation for
+your assay.</p>
 <h2 id="minimum-threshold-failure-is-explicit">Minimum Threshold Failure Is Explicit<a class="headerlink" href="#minimum-threshold-failure-is-explicit" title="Permanent link">&para;</a></h2>
 <p><code>Minimum Threshold</code> repeatedly smooths the exact histogram until two maxima
 remain, then selects the valley between them. <strong>Maximum smoothing iterations</strong>
@@ -2763,7 +2849,7 @@ pinned in napari while its graph node and input histogram remain visible.</em></
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 14, 2026 18:25:45 UTC">July 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

@@ -1120,6 +1120,8 @@
       
         
       
+        
+      
     
     
     
@@ -1166,6 +1168,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1285,6 +1310,15 @@
   <a href="#save-a-selected-output" class="md-nav__link">
     <span class="md-ellipsis">
       Save a selected output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-an-ome-analysis-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export an OME analysis dataset
     </span>
   </a>
   
@@ -2426,6 +2460,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#export-an-ome-analysis-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export an OME analysis dataset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#export-python" class="md-nav__link">
     <span class="md-ellipsis">
       Export Python
@@ -2506,7 +2549,7 @@ interchangeable.</p>
 <tr>
 <td>OME analysis dataset</td>
 <td>Reference image plus associated graph label outputs</td>
-<td>A complete project/archive or arbitrary standalone table provenance</td>
+<td>A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar</td>
 </tr>
 <tr>
 <td>Batch config (version 2)</td>
@@ -2522,6 +2565,9 @@ interchangeable.</p>
 </table>
 <h2 id="save-a-workflow">Save a workflow<a class="headerlink" href="#save-a-workflow" title="Permanent link">&para;</a></h2>
 <p>Choose <strong>Save workflow…</strong>. Use <code>.json</code> and include a meaningful analysis name.
+The action saves the active workflow tab; other tabs keep their own paths,
+dirty baselines, caches, and histories. Closing a dirty tab still uses
+Save/Discard/Cancel handling.
 If a Batch workspace is active, VIPP asks what to save:</p>
 <ul>
 <li><strong>Yes</strong> attaches the current versioned batch configuration to the same
@@ -2563,6 +2609,16 @@ for scientific images prefer a format that can represent the axes, dtype, and
 calibration you need.</p>
 <p>Read the <a href="../../reference/import-export/">input/output reference</a> before using a
 display-oriented raster format or ImageJ TIFF for label IDs.</p>
+<p>This interactive action writes the selected cached value directly. It does not
+rerun the graph through the shared executor or create an exact execution-
+provenance sidecar. Use the generated CLI with provenance enabled, or the
+durable batch runner, when the saved result must carry that record.</p>
+<h2 id="export-an-ome-analysis-dataset">Export an OME analysis dataset<a class="headerlink" href="#export-an-ome-analysis-dataset" title="Permanent link">&para;</a></h2>
+<p><strong>Export OME dataset…</strong> serializes the cached reference image and selected graph
+label outputs. It likewise does not rerun the graph or add exact per-node
+compute provenance. Use it for the documented image/label association, not as
+a substitute for generated-CLI provenance or a finalized batch manifest and
+item sidecars.</p>
 <h2 id="export-python">Export Python<a class="headerlink" href="#export-python" title="Permanent link">&para;</a></h2>
 <p>Choose <strong>Export Python…</strong> when a graph needs a reviewable headless program. The
 script embeds validated immutable workflow JSON, constructs a fresh pipeline
@@ -2584,6 +2640,18 @@ node/port to the effective request, actual CPU/CuPy/cuCIM implementation,
 fallbacks, environment, outcome, and cleanup evidence. A failed or cancelled
 single-output run also attempts a failure sidecar. Publication fails closed if
 GPU cleanup or final promotion cannot be established.</p>
+<p>The generated CLI enables provenance by default and exposes
+<code>--provenance</code> / <code>--no-provenance</code>. It stages every requested output and
+sidecar privately, rejects duplicate destinations, verifies cleanup, then
+commits the requested set with rollback for caught commit failures. Sidecars
+promote before their outputs, so an abrupt process crash may leave an orphan
+sidecar but not a newly published output missing requested provenance. A
+failure sidecar distinguishes execution failure from publication failure.</p>
+<p>Generated CLI progress is operation-level. Exit code <code>0</code> means success, <code>2</code>
+means setup/execution/publication failure, and <code>130</code> means cooperative
+cancellation. Exact source-byte reverification before output promotion belongs
+to the saved batch contract; a generated Python caller is responsible for the
+identity and stability of arbitrary arrays or supplied source payloads.</p>
 <p>Use <code>python generated_pipeline.py --help</code> for the exact source-binding and
 output arguments emitted for that graph. Add <code>--progress</code> for operation updates
 and supply compute overrides only when the run should deliberately differ from
@@ -2649,7 +2717,7 @@ durable replay.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

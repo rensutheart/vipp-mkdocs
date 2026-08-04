@@ -1120,6 +1120,8 @@
       
         
       
+        
+      
     
     
     
@@ -1166,6 +1168,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1331,6 +1356,15 @@
   <a href="#memory-guard" class="md-nav__link">
     <span class="md-ellipsis">
       Memory Guard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#device-residency-and-accelerator-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Device residency and accelerator memory
     </span>
   </a>
   
@@ -2435,6 +2469,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#device-residency-and-accelerator-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Device residency and accelerator memory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#per-node-keep-cached" class="md-nav__link">
     <span class="md-ellipsis">
       Per-Node Keep Cached
@@ -2495,9 +2538,11 @@
 
 
 <h1 id="cache-and-memory">Cache And Memory<a class="headerlink" href="#cache-and-memory" title="Permanent link">&para;</a></h1>
-<p>VIPP is currently an eager interactive workflow builder. Most nodes calculate
-NumPy-like in-memory outputs so thumbnails, inspection, pinned layers, and
-downstream edits feel immediate.</p>
+<p>VIPP is currently an eager interactive workflow builder. Its accepted public
+cache uses host NumPy-like in-memory outputs so thumbnails, inspection, pinned
+layers, and downstream edits feel immediate. Eligible nodes may use private
+device-resident segments during a run, but those values cross a verified host
+boundary before they become public results.</p>
 <h2 id="cache-modes">Cache Modes<a class="headerlink" href="#cache-modes" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2563,6 +2608,35 @@ operating-system-specific path:</p>
 value, VIPP reports memory as unavailable rather than crashing or inventing a
 number. The value is still an operational estimate, and container/VM limits
 can differ from host memory.</p>
+<h2 id="device-residency-and-accelerator-memory">Device residency and accelerator memory<a class="headerlink" href="#device-residency-and-accelerator-memory" title="Permanent link">&para;</a></h2>
+<p>The interactive scientific cache remains host-owned. During one accepted run,
+eligible adjacent GPU nodes can use a private device-resident segment so VIPP
+does not transfer every intermediate back to NumPy. Private device values are
+transactional execution state: they are not workflow persistence, public cache
+entries, or napari layers, and they must be synchronized and cleaned before a
+host result is accepted or published.</p>
+<p>Before launching a segment, VIPP applies a conservative, operation-specific
+memory model to the device inputs, outputs, simultaneously live intermediates,
+library workspace, and uncertainty allowance. A fair process-wide accelerator
+lease prevents unrelated VIPP jobs from interleaving on the same runtime/device
+while allowing separate device keys to proceed independently.</p>
+<p><strong>Compute setup and memory…</strong> distinguishes host RAM from VRAM on a discrete
+NVIDIA GPU. A future Apple or other unified-memory provider must report one
+shared physical budget rather than adding RAM and VRAM as though they were
+independent. macOS remains CPU-only in 0.13.0a1.</p>
+<p>With <strong>visible</strong> fallback, one complete device segment may retry once on CPU
+after a classified runtime OOM, but only after synchronization and proven
+cleanup. The accepted badge becomes amber and provenance retains the attempted
+segment, memory evidence, exception, cleanup, and retry. <strong>Strict</strong> returns the
+typed failure. Availability or eligibility decisions made before device work
+are still explained but are not runtime OOM fallbacks.</p>
+<p>Cache mode limits retained graph outputs; it cannot cap every NumPy/SciPy or
+CuPy/cuCIM temporary. Low-memory mode can therefore coexist with an operation
+whose CPU RAM or VRAM workspace is large. Basic GPU measurement nodes also
+cross a deliberate host boundary for an exact typed-table finalizer after the
+bounded device calculation.</p>
+<p>See <a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a> for the
+operation regions and fallback workflow.</p>
 <h2 id="per-node-keep-cached">Per-Node Keep Cached<a class="headerlink" href="#per-node-keep-cached" title="Permanent link">&para;</a></h2>
 <p>Use <code>Keep output cached</code> for important intermediates such as:</p>
 <ul>
@@ -2649,7 +2723,7 @@ a lazy or lower-cost one.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

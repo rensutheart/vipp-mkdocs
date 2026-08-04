@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2471,6 +2496,14 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
 <td>Reuse a source such as a channel, mask, ROI, or reference image without drawing long wires.</td>
 </tr>
 <tr>
+<td>Live source subtitles</td>
+<td>See the layer, sample, file, or collection representative bound to each Image Source; hover for the complete value.</td>
+</tr>
+<tr>
+<td>Workflow tabs</td>
+<td>Keep independent graphs, results, caches, histories, inspectors, paths, compute requests, and Batch workspaces open together.</td>
+</tr>
+<tr>
 <td>Graph notes</td>
 <td>Record reasoning next to workflow steps.</td>
 </tr>
@@ -2480,11 +2513,15 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
 </tr>
 <tr>
 <td>Workflow JSON</td>
-<td>Save the graph, node parameters, connections, canvas positions, tunnels, and selected UI state.</td>
+<td>Save the graph, node parameters, connections, canvas positions, tunnels, portable schema-4 compute intent, and selected UI state.</td>
+</tr>
+<tr>
+<td>Actual-run provenance</td>
+<td>Record the CPU/CuPy/cuCIM implementation and fallback that produced each accepted result; authored intent alone is not proof.</td>
 </tr>
 <tr>
 <td>Python export</td>
-<td>Generate a headless script for supported graph operations and I/O.</td>
+<td>Generate a version-locked headless program that uses the same execution service, compute request, progress, cancellation, and optional output provenance.</td>
 </tr>
 </tbody>
 </table>
@@ -2498,6 +2535,7 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
   space.</li>
 <li>Zoom out for whole-workflow review, then zoom in for parameter tuning.</li>
 <li>Add explicit <code>Batch Output</code> nodes before running a workflow over a folder.</li>
+<li>Read actual-run badges before assuming that Auto or Selective used a GPU.</li>
 <li>Save workflow snapshots before major parameter sweeps.</li>
 </ul>
 <h2 id="avoid">Avoid<a class="headerlink" href="#avoid" title="Permanent link">&para;</a></h2>
@@ -2526,7 +2564,7 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 10, 2026 20:25:04 UTC">July 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

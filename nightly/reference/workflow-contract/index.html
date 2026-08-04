@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2569,11 +2594,16 @@ review an analysis.</p>
 <li>node operation IDs, titles, parameters, and canvas positions;</li>
 <li>connections and output-port hints;</li>
 <li>named tunnels and graph notes;</li>
-<li>selected workflow/UI state such as thumbnail visibility where enabled.</li>
+<li>selected workflow/UI state such as thumbnail visibility and per-node/output
+  display profiles where enabled.</li>
 </ul>
 <p>It does <strong>not</strong> embed calculated pixel arrays or tables. It also does not, by
 itself, freeze the Python environment, preserve every external source, prove
 metadata correctness, or capture the rationale for every choice.</p>
+<p>Workflow tabs are independent live sessions, not one multi-workflow file.
+<strong>Save workflow…</strong> serializes the active tab only. Other open tabs, their
+caches, undo/redo histories, transient viewport, and in-flight state are not
+bundled into that JSON.</p>
 <h3 id="current-schema-version-4">Current schema: version 4<a class="headerlink" href="#current-schema-version-4" title="Permanent link">&para;</a></h3>
 <p>A current file identifies itself with:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
@@ -2646,6 +2676,15 @@ repair them after moving a workflow to another computer.</p>
 ranges, and inspector layout do not alter node arrays. They are not substitutes
 for the saved scientific parameters. A screenshot can document what was
 reviewed, but the workflow JSON is the authoritative editable graph.</p>
+<p>In 0.13, compatible VIPP Inspect display profiles are saved independently by
+node, output port, and RGB surface. They can include colormap, contrast,
+blending, opacity, visibility, gamma, interpolation, and compatible
+projection/rendering settings, but remain presentation state: restoring or
+resetting one cannot change a cached array, threshold, mask, label image, or
+table. Physical layer scale continues to come from image metadata, and
+arbitrary napari transforms are not included. The napari camera/dimension view
+is also preserved while the same output recalculates in a live session; do not
+confuse that view-continuity feature with scientific workflow provenance.</p>
 <h2 id="generated-python">Generated Python<a class="headerlink" href="#generated-python" title="Permanent link">&para;</a></h2>
 <p>Python export embeds immutable validated workflow JSON and reconstructs a fresh
 pipeline for each call through the same headless executor as VIPP. It preserves
@@ -2663,10 +2702,23 @@ It also supports <code>--progress</code> and provenance controls. A runtime over
 not mutate the embedded workflow.</p>
 <p><code>PipelineResults</code> exposes the effective compute request, the formal execution
 report, per-node compute provenance, and output-bound provenance. A successful
-<code>save_image()</code> writes an atomic <code>.vipp-provenance.json</code> sibling by default. The
-document identifies the output node/port and actual implementation, not merely
-the requested mode. Publication fails when execution cleanup or final
-promotion cannot be established.</p>
+<code>save_image()</code> writes an atomic <code>.vipp-provenance.json</code> sibling when the caller
+supplies the provenance document. The generated CLI enables provenance by
+default and exposes <code>--provenance</code> / <code>--no-provenance</code>. The document identifies
+the output node/port and actual implementation, not merely the requested mode.</p>
+<p>The generated CLI stages every requested output and sidecar in one private
+same-directory publication set, rejects duplicate destinations, verifies
+execution cleanup, and commits the set together with rollback for caught commit
+failures. Requested provenance sidecars are promoted before their outputs, so
+an abrupt process crash can leave an orphan sidecar but not a newly published
+output lacking its requested provenance. Failure sidecars distinguish execution
+from publication failure. Normal exit is <code>0</code>, setup/execution/publication
+failure is <code>2</code>, and cooperative cancellation is <code>130</code>.</p>
+<p>Generated CLI progress is operation-level. The saved batch runner additionally
+has an overall-item stream because it owns a collection plan. Generated inputs
+carry supplied <code>ImageDataset</code>/<code>SourcePayload</code> identity and metadata; exact
+source-byte reverification before publication is a durable saved-batch
+guarantee, not a promise for every arbitrary generated-Python array caller.</p>
 <h2 id="batch-artifacts">Batch artifacts<a class="headerlink" href="#batch-artifacts" title="Permanent link">&para;</a></h2>
 <p>A batch run uses either a standalone version-2 <code>vipp_batch_config.json</code> or the
 equivalent validated configuration attached to a workflow. It records
@@ -2757,7 +2809,7 @@ source identities and calibration evidence with the workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

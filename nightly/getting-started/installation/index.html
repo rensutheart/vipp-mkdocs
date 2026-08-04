@@ -858,9 +858,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-the-development-branch" class="md-nav__link">
+  <a href="#test-the-unpublished-candidate-or-development-branch" class="md-nav__link">
     <span class="md-ellipsis">
-      Install the development branch
+      Test the unpublished candidate or development branch
     </span>
   </a>
   
@@ -1221,6 +1221,8 @@
       
         
       
+        
+      
     
     
     
@@ -1264,6 +1266,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2453,9 +2478,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-the-development-branch" class="md-nav__link">
+  <a href="#test-the-unpublished-candidate-or-development-branch" class="md-nav__link">
     <span class="md-ellipsis">
-      Install the development branch
+      Test the unpublished candidate or development branch
     </span>
   </a>
   
@@ -2495,12 +2520,14 @@
 
 
 <h1 id="install-vipp">Install VIPP<a class="headerlink" href="#install-vipp" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.13.0a1 supports <strong>CPython 3.12 and 3.13</strong>. Because the current release
-is a pre-release, pip needs the <code>--pre</code> flag to select it from PyPI.</p>
+<p>VIPP 0.13.0a1 supports <strong>CPython 3.12 and 3.13</strong>. After the candidate is
+published, pip needs the <code>--pre</code> flag to select this alpha from PyPI. Before the
+tag/package exists, use the immutable-candidate instructions below for release
+candidate testing; do not treat that checkout as a published release.</p>
 <div class="admonition info">
 <p class="admonition-title">Platform and Python verification for 0.13.0a1</p>
 <p>The base CPU application is intended for Windows, macOS, and Linux. Release
-Release CI targets CPython 3.12 and 3.13 on all three operating systems;
+CI targets CPython 3.12 and 3.13 on all three operating systems;
 package metadata deliberately excludes unqualified Python 3.14 and newer.
 CUDA extras are limited to 64-bit CPython 3.12 on native Windows/Linux.
 Treat the commands below as installation paths, not evidence that every
@@ -2509,8 +2536,8 @@ validated.</p>
 </div>
 <h2 id="recommended-a-dedicated-environment">Recommended: a dedicated environment<a class="headerlink" href="#recommended-a-dedicated-environment" title="Permanent link">&para;</a></h2>
 <p>A separate environment prevents unrelated scientific packages from changing
-VIPP's dependencies. The commands below install napari with PyQt6 and the
-tagged VIPP release.</p>
+VIPP's dependencies. Once 0.13.0a1 is published, the commands below install
+napari with PyQt6 and that tagged release.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">macOS</label><label for="__tabbed_1_3">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2547,9 +2574,11 @@ activate the environment before running the final
 <code>python -m pip install ...</code> command.</p>
 <div class="admonition note">
 <p class="admonition-title">Stable manual versus nightly manual</p>
-<p>The commands above install the release documented by this version of the
-site. Do not install the development branch just because you are reading
-the nightly manual. See <a href="../../reference/versioning/">versions and compatibility</a>.</p>
+<p>In a numbered/stable manual, the commands above install the documented
+release. In this prepublication nightly, use the immutable candidate commit
+below until the tag/package exists. Do not install arbitrary newer <code>main</code>
+work merely because you are reading nightly. See
+<a href="../../reference/versioning/">versions and compatibility</a>.</p>
 </div>
 <h2 id="confirm-the-installation">Confirm the installation<a class="headerlink" href="#confirm-the-installation" title="Permanent link">&para;</a></h2>
 <p>After napari opens:</p>
@@ -2567,8 +2596,10 @@ the nightly manual. See <a href="../../reference/versioning/">versions and compa
 </span></code></pre></div>
 <h2 id="optional-nvidia-cuda-acceleration">Optional NVIDIA CUDA acceleration<a class="headerlink" href="#optional-nvidia-cuda-acceleration" title="Permanent link">&para;</a></h2>
 <p>The base installation is complete and remains the portable recommendation. A
-new session defaults to <strong>Auto</strong>, but Auto uses CPU normally when no admitted
-accelerator is present. GPU packages are optional and are not imported merely
+new session defaults to <strong>Auto</strong>. Standard 0.13.0a1 execution does not attach
+local timing evidence, so fresh Auto candidates remain CPU even after CUDA is
+installed; select a reviewed GPU provider or apply <strong>Find fastest</strong> in
+Selective mode to use it. GPU packages are optional and are not imported merely
 to load VIPP or run a CPU workflow.</p>
 <div class="admonition warning">
 <p class="admonition-title">The first public GPU gate is deliberately narrow</p>
@@ -2579,10 +2610,14 @@ RTX 5090/compute-capability-12.0 device. A different GPU, OS, driver,
 runtime, or package set can install successfully and still resolve every
 GPU candidate to CPU because that environment has not passed the release's
 evidence gate. Native Linux and RTX 40-series qualification are pending.</p>
+<p>The standard CUDA extra installs the pinned CuPy/CuPyX stack. It does not
+include the separately reviewed cuCIM build used by the background and
+basic measurement candidates, so those nodes normally remain CPU after the
+public install below.</p>
 </div>
 <p>Use a <strong>new</strong> environment and install exactly one CUDA-major extra. For the
 current CUDA 13 track:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows · CUDA 13</label><label for="__tabbed_2_2">Linux · CUDA 13</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows · CUDA 13</label><label for="__tabbed_2_2">Linux · CUDA 13 qualification</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="n">vipp-gpu-env</span>
@@ -2601,6 +2636,9 @@ current CUDA 13 track:</p>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>vipp-compute-doctor<span class="w"> </span>--track<span class="w"> </span>cuda13
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>vipp
 </span></code></pre></div>
+<p>This creates the intended qualification/development environment, but the
+0.13.0a1 public policy does not yet admit Linux GPU execution. Expect visible
+CPU decisions until native-Linux evidence is promoted in a future policy.</p>
 </div>
 </div>
 </div>
@@ -2619,6 +2657,9 @@ validated source-built wheel omits Clara whole-slide I/O. Do not install an
 arbitrary cuCIM build and assume it is admitted.</p>
 <p>macOS has no CUDA path. Use the base CPU installation on Intel or Apple Silicon;
 Metal/MPS/MLX acceleration is a future study, not part of this release.</p>
+<p>Continue with <a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a>
+for the per-operation matrix, badge meanings, benchmarks, fallback, and durable
+provenance.</p>
 <h2 id="optional-microscope-readers">Optional microscope readers<a class="headerlink" href="#optional-microscope-readers" title="Permanent link">&para;</a></h2>
 <p>The base package supports the documented TIFF, OME-Zarr, NumPy, and ordinary
 raster routes. Install only the reader family you need, then restart napari.</p>
@@ -2652,9 +2693,16 @@ raster routes. Install only the reader family you need, then restart napari.</p>
 a file is not proof that every axis, unit, timestamp, or acquisition field was
 interpreted correctly. Check representative files from your facility before
 quantitative use.</p>
-<h2 id="install-the-development-branch">Install the development branch<a class="headerlink" href="#install-the-development-branch" title="Permanent link">&para;</a></h2>
-<p>Use this only for testing unreleased work:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&quot; &quot;https://github.com/rensutheart/napari-vipp/archive/refs/heads/main.zip&quot;
+<h2 id="test-the-unpublished-candidate-or-development-branch">Test the unpublished candidate or development branch<a class="headerlink" href="#test-the-unpublished-candidate-or-development-branch" title="Permanent link">&para;</a></h2>
+<p>Before the tag/package is published, install the reviewed application candidate
+by immutable commit rather than assuming that <code>main</code> points to the same source:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&quot; &quot;napari-vipp @ https://github.com/rensutheart/napari-vipp/archive/e02440989001f05ca17c845e3113ee2537a66c77.zip&quot;
+</span></code></pre></div>
+<p>Record that full commit with every candidate result. The candidate wheel/sdist
+and final published artifacts must be checked separately; a source-archive test
+is not a PyPI installation claim.</p>
+<p>For newer unreleased <code>main</code> work, use:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&quot; &quot;https://github.com/rensutheart/napari-vipp/archive/refs/heads/main.zip&quot;
 </span></code></pre></div>
 <p>Development workflows may not reopen in a stable alpha release. Record the
 commit hash as well as the package version if results depend on an unreleased
@@ -2669,11 +2717,11 @@ Regenerate exported Python too, because it requires the exact VIPP runtime
 version that created it.</p>
 <h2 id="developer-installation">Developer installation<a class="headerlink" href="#developer-installation" title="Permanent link">&para;</a></h2>
 <p>Contributors should clone the application repository and install it editable:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">cd </span><span class="n">napari-vipp</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-e</span> <span class="s2">&quot;.[dev]&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">cd </span><span class="n">napari-vipp</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-e</span> <span class="s2">&quot;.[dev]&quot;</span>
 </span></code></pre></div>
 <p>Continue with the <a href="../../developer/development-setup/">development setup</a>.</p>
 
@@ -2696,7 +2744,7 @@ version that created it.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:32:01 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

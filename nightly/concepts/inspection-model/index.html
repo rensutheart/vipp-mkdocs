@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1514,9 +1539,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reused-and-replaced-napari-layers" class="md-nav__link">
+  <a href="#reused-and-replaced-inspect-layers" class="md-nav__link">
     <span class="md-ellipsis">
-      Reused and replaced napari layers
+      Reused and replaced Inspect layers
     </span>
   </a>
   
@@ -2460,9 +2485,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reused-and-replaced-napari-layers" class="md-nav__link">
+  <a href="#reused-and-replaced-inspect-layers" class="md-nav__link">
     <span class="md-ellipsis">
-      Reused and replaced napari layers
+      Reused and replaced Inspect layers
     </span>
   </a>
   
@@ -2595,8 +2620,8 @@ required value contributes even though the result is grouped for display.</p>
 </tr>
 <tr>
 <td>Colocalization scatter</td>
-<td>Every ROI voxel contributes to the 255 × 255 density grid; ROI population and the number meeting both thresholds are also exact.</td>
-<td>Colormap, logarithmic count display, and guide styling do not change thresholds or results.</td>
+<td>Every ROI voxel contributes to the configured density; ROI population and the number meeting both thresholds are exact. Threshold-independent density can be reused while an exact recount runs.</td>
+<td>Interactive rendering is capped at 1,024 bins per axis; graph scatter nodes can request up to 4,096. Colormap, logarithmic display, guide styling, and rendered output size do not change thresholds or metric tables.</td>
 </tr>
 <tr>
 <td>Inspect or pinned image contrast</td>
@@ -2617,18 +2642,30 @@ new workflow cache only when the complete run is accepted against the same
 graph and source revisions. Cancellation, failure, a newer edit, or a
 superseding run removes the temporary overlays and restores the last coherent
 inspection state.</p>
-<h3 id="reused-and-replaced-napari-layers">Reused and replaced napari layers<a class="headerlink" href="#reused-and-replaced-napari-layers" title="Permanent link">&para;</a></h3>
-<p>Compatible generated <code>Image</code> results reuse the same napari layer object. VIPP
-replaces its data reference with a non-writeable view of the exact output and
-resets colormap, blending, contrast, scale, and related metadata. This avoids a
-duplicate full-volume copy and prevents display choices from the previously
-selected node leaking into the new one. Any pending contrast result for the old
-selection is invalidated.</p>
-<p>VIPP creates a replacement layer when the presentation class or layout is
+<h3 id="reused-and-replaced-inspect-layers">Reused and replaced Inspect layers<a class="headerlink" href="#reused-and-replaced-inspect-layers" title="Permanent link">&para;</a></h3>
+<p>Recalculating the same logical node/output reuses a compatible active VIPP
+<strong>Inspect</strong> layer and replaces only its data reference with a non-writeable view
+of the exact output. VIPP preserves the working view—displayed dimensions and
+slice positions, camera zoom, translation, and rotation—and compatible user
+styling such as colormap, contrast, blending, opacity, visibility, gamma,
+interpolation, and compatible rendering settings. Physical layer scale
+continues to come from the output metadata; arbitrary napari transforms are not
+part of the saved display profile. This lets you zoom into a structure, tune a
+node in isolation, and compare the same region after each calculation without
+the viewer jumping back to a default. Pinned layers are separate napari viewer
+artifacts and do not receive this saved per-output profile behavior.</p>
+<p>Display profiles are remembered independently for each node, output port, and
+RGB display surface and are saved as presentation state in the workflow. When
+you switch to another logical output, VIPP restores that output's own compatible
+profile or initializes safe defaults; styling from the previous output does not
+leak into it. Use the inspector header's reset action when the selected output
+should return deliberately to VIPP defaults.</p>
+<p>VIPP creates a replacement Inspect layer when the presentation class or layout is
 genuinely incompatible, such as <code>Image</code> versus label-ID <code>Labels</code>, or an RGB
 layout change. A Boolean mask pinned as a <code>Labels</code> overlay requires a uint8
 presentation copy. The original cached Boolean array remains the scientific
-output used by downstream nodes and saving.</p>
+output used by downstream nodes and saving. Any pending display calculation
+for a superseded output is invalidated.</p>
 <h3 id="large-generated-layers">Large generated layers<a class="headerlink" href="#large-generated-layers" title="Permanent link">&para;</a></h3>
 <p>When an inspect, pinned, or RGB-channel layer is large, VIPP first supplies a
 provisional dtype-based contrast range so napari can show the layer without
@@ -2655,6 +2692,12 @@ values, retains the other exact cutoff, and recalculates the node. A click that
 does not move the guide is not an edit. The same no-movement rule prevents
 accidental Binary Threshold changes. Save the workflow after accepting a drag;
 guide position is a presentation affordance for a persisted scientific value.</p>
+<p>For colocalization, threshold scrubbing moves compatible guides immediately
+and keeps the threshold-independent density visible while the exact full-ROI
+count is recomputed. Rapid requests are coalesced. A density is reused only
+while channels, ROI, native intensity context, and histogram definition still
+match. The linked inspector and resizable pop-out colormap selectors redraw
+from that cached density without recalculating a scientific result.</p>
 <h3 id="split-channels-presentation-output">Split Channels presentation output<a class="headerlink" href="#split-channels-presentation-output" title="Permanent link">&para;</a></h3>
 <p><code>Split Channels</code> produces one scientific graph output per channel, but its node
 card and inspector need one channel to present at a time. If downstream
@@ -2714,7 +2757,7 @@ channel.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 16, 2026 14:24:01 UTC">July 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     

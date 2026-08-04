@@ -1118,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1161,6 +1163,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2459,6 +2484,26 @@ checks before handoff:</p>
 <li>cancellation, memory retention, and repeated UI actions;</li>
 <li>bundled examples reopening and satisfying a meaningful invariant.</li>
 </ul>
+<p>For an accelerated implementation also cover:</p>
+<ul>
+<li>CPU-only import/discovery and missing/broken optional-provider behavior;</li>
+<li>admitted and rejected dtype/shape/parameter/environment matrices;</li>
+<li>exact or explicitly bounded CPU/GPU parity on adversarial and representative
+  fixtures before performance timing;</li>
+<li>device residency, transfer boundaries, memory-model bounds, and host
+  finalizers;</li>
+<li>synchronized progress, cancellation at each honest checkpoint, fair lease
+  behavior, and zero-residue cleanup on every exit path;</li>
+<li>classified runtime OOM with visible one-segment retry versus Strict failure;</li>
+<li>immutable policy/evidence hash validation and exact-workload benchmark
+  invalidation/reuse; and</li>
+<li>identical request/provenance/publication behavior in interactive, batch,
+  generated Python/CLI, and export surfaces.</li>
+</ul>
+<p>Real-device tests are opt-in and must state the exact hardware, driver, runtime,
+scientific-stack, and policy identity. Run the <code>real_cuda</code> selection only on an
+appropriate isolated host; mocks and a successful kernel probe do not establish
+scientific admission.</p>
 <p>Prefer a small parameterized test over many near-identical cases. Keep an
 end-to-end UI test only when it protects behavior that cannot be established at
 a lower layer.</p>
@@ -2503,7 +2548,7 @@ against the registry.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 10, 2026 20:25:04 UTC">July 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
   </span>
 
     
