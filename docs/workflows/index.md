@@ -17,4 +17,6 @@ visible.
 
 Build and tune the workflow interactively first. Add `Batch Output` nodes only
 after the intermediate images, masks, labels, and tables are scientifically
-reasonable.
+reasonable. Establish a CPU reference before optimizing execution, and retain
+actual implementation provenance rather than inferring GPU use from the toolbar
+request. See [choose and verify compute](../how-to/choose-compute.md).

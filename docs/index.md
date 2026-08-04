@@ -36,7 +36,9 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    The current public baseline is **napari-vipp 0.13.0a1**. Interfaces,
+    This nightly manual is prepared for the **napari-vipp 0.13.0a1 release
+    candidate**. Until its tag and packages are published, use the stable
+    manual for the current public release. Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
@@ -54,6 +56,7 @@ hide:
 <div class="vipp-card-grid">
 <a class="vipp-card" href="getting-started/"><strong>New to VIPP</strong><span>Install the plugin, tour a finished graph, and build a small segmentation workflow.</span></a>
 <a class="vipp-card" href="workflows/"><strong>I have an analysis task</strong><span>Follow recipes for segmentation, measurements, networks, colocalization, restoration, or batch runs.</span></a>
+<a class="vipp-card" href="how-to/choose-compute/"><strong>I want to use my GPU</strong><span>Install the optional stack, choose a compute policy, benchmark safely, and verify what actually ran.</span></a>
 <a class="vipp-card" href="scientific-practice/"><strong>I need defensible results</strong><span>Choose dimensionality, tune on representative data, validate, and record what must be reported.</span></a>
 <a class="vipp-card" href="reference/"><strong>I know what I need</strong><span>Search all 112 nodes, bundled samples, example workflows, settings, formats, and compatibility notes.</span></a>
 </div>
@@ -87,7 +90,8 @@ flowchart LR
 | Diagnose a workflow that suddenly gives different counts | [Common problems](troubleshooting/common-pitfalls.md) |
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
-| Understand the GPU-progress alpha | [0.13.0a1 release notes](releases/0.13.0a1.md) |
+| Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
+| Review everything changed in 0.13 | [0.13.0a1 release notes](releases/0.13.0a1.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

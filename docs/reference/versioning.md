@@ -8,10 +8,13 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The current public software baseline is **0.13.0a1**. Its `a1` suffix identifies
-the first alpha build in the 0.13.0 release series; it is a tagged pre-release,
-not a nightly build. See [installation](../getting-started/installation.md) and
-the [0.13.0a1 release notes](../releases/0.13.0a1.md).
+This `main`/nightly manual is prepared for the **0.13.0a1 release candidate**.
+Its `a1` suffix identifies the first alpha build in the 0.13.0 release series.
+It becomes a release-numbered public manual only after the matching application
+tag/package and documentation snapshot are published. Until then, stable still
+points to the previous public release. See
+[installation](../getting-started/installation.md) and the
+[0.13.0a1 release notes](../releases/0.13.0a1.md).
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -53,10 +56,12 @@ file-format conversion.
    object records `cpu`, `auto`, or `selective` mode and any authored per-node
    preferences; it does not record a promise about which implementation will
    actually be available on another machine.
-5. If acceleration is wanted, enable Auto or Selective only after the CPU
-   comparison. Review CPU/CuPy/cuCIM/fallback badges and retain the actual-run
-   execution provenance. Do not add an unplanned `Convert Dtype` merely to make
-   a GPU benchmark faster.
+5. If acceleration is wanted, switch to Selective only after the CPU
+   comparison, then choose a reviewed provider or apply **Find fastest**.
+   Standard 0.13.0a1 Auto runs carry no local timing evidence and remain CPU.
+   Review CPU/CuPy/cuCIM/fallback badges and retain the actual-run execution
+   provenance. Do not add an unplanned `Convert Dtype` merely to make a GPU
+   benchmark faster.
 6. Load or recreate Batch workspace. Version-1 batch configs migrate to an
    explicit CPU request and save as version 2. Review the configured/effective
    requests, memory and fallback policy, bindings, paths, collision policy, and

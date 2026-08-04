@@ -8,13 +8,16 @@ interchangeable.
 | Workflow JSON (schema 4) | Reopen/edit the graph and authored compute request in VIPP 0.13; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
-| OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive or arbitrary standalone table provenance |
+| OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
 | Batch config (version 2) | Recreate source bindings, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
 | Batch manifest/archive/sidecars (version 2) | Audit planned inputs/outputs, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
 
 ## Save a workflow
 
 Choose **Save workflow…**. Use `.json` and include a meaningful analysis name.
+The action saves the active workflow tab; other tabs keep their own paths,
+dirty baselines, caches, and histories. Closing a dirty tab still uses
+Save/Discard/Cancel handling.
 If a Batch workspace is active, VIPP asks what to save:
 
 - **Yes** attaches the current versioned batch configuration to the same
@@ -62,6 +65,19 @@ calibration you need.
 Read the [input/output reference](../reference/import-export.md) before using a
 display-oriented raster format or ImageJ TIFF for label IDs.
 
+This interactive action writes the selected cached value directly. It does not
+rerun the graph through the shared executor or create an exact execution-
+provenance sidecar. Use the generated CLI with provenance enabled, or the
+durable batch runner, when the saved result must carry that record.
+
+## Export an OME analysis dataset
+
+**Export OME dataset…** serializes the cached reference image and selected graph
+label outputs. It likewise does not rerun the graph or add exact per-node
+compute provenance. Use it for the documented image/label association, not as
+a substitute for generated-CLI provenance or a finalized batch manifest and
+item sidecars.
+
 ## Export Python
 
 Choose **Export Python…** when a graph needs a reviewable headless program. The
@@ -87,6 +103,20 @@ node/port to the effective request, actual CPU/CuPy/cuCIM implementation,
 fallbacks, environment, outcome, and cleanup evidence. A failed or cancelled
 single-output run also attempts a failure sidecar. Publication fails closed if
 GPU cleanup or final promotion cannot be established.
+
+The generated CLI enables provenance by default and exposes
+`--provenance` / `--no-provenance`. It stages every requested output and
+sidecar privately, rejects duplicate destinations, verifies cleanup, then
+commits the requested set with rollback for caught commit failures. Sidecars
+promote before their outputs, so an abrupt process crash may leave an orphan
+sidecar but not a newly published output missing requested provenance. A
+failure sidecar distinguishes execution failure from publication failure.
+
+Generated CLI progress is operation-level. Exit code `0` means success, `2`
+means setup/execution/publication failure, and `130` means cooperative
+cancellation. Exact source-byte reverification before output promotion belongs
+to the saved batch contract; a generated Python caller is responsible for the
+identity and stability of arbitrary arrays or supplied source payloads.
 
 Use `python generated_pipeline.py --help` for the exact source-binding and
 output arguments emitted for that graph. Add `--progress` for operation updates

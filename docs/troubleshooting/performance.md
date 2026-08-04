@@ -15,16 +15,20 @@ Try these in order:
 7. Mark expensive intermediates with `Keep output cached`.
 
 If optional CUDA support is installed, also inspect the toolbar's actual-run
-summary and node badges. **Auto** may correctly choose CPU for a small workload,
-an unsupported dtype/parameter region, an unqualified environment, or a graph
-whose transfer boundaries outweigh one fast kernel. Use **Compute setup and
-memory…** for the typed reason; do not infer GPU use from the selected mode.
+summary and node badges. In ordinary 0.13.0a1 execution, **Auto** does not carry
+local timing evidence and therefore resolves fresh candidates to CPU. Use
+**Selective** for a reviewed GPU provider or apply a **Find fastest** proposal;
+then use **Compute setup and memory…** and the badge reason to understand any
+call-specific rejection or fallback. Do not infer GPU use from the selected
+mode. For the complete decision sequence and operation matrix, see
+[choose and verify CPU or GPU compute](../how-to/choose-compute.md).
 
 ## CPU, Auto, and Selective compute
 
 - **CPU** runs the authoritative host implementation everywhere.
-- **Auto** considers only scientifically admitted implementations and may keep
-  a node on CPU when that is faster or evidence is insufficient.
+- **Auto** is conservative and never benchmarks implicitly. Standard 0.13.0a1
+  execution supplies no performance evidence, so fresh Auto calls stay on CPU;
+  the API can accept validated evidence explicitly.
 - **Selective** exposes per-node library choices plus node and whole-pipeline
   benchmarking. A separate lock preserves an authored choice during **Find
   fastest pipeline…**.
@@ -101,12 +105,19 @@ silently treated as OOM.
 
 ## Switching Between Node Results
 
-For compatible napari `Image` presentations, VIPP keeps the same generated
-inspect or pin layer and swaps only its data reference. The reference is a
-non-writeable view of the exact node pixels; no full-volume image copy is made
-for the switch. VIPP explicitly resets colormap, blending, contrast, scale, and
-display metadata so presentation settings from the previous result do not
-carry over. Stale contrast workers are invalidated when the selection changes.
+When the same logical node/output recalculates, VIPP keeps its compatible
+active **Inspect** layer and swaps only the data reference. The reference is a
+non-writeable view of the exact node pixels; no full-volume image copy is made.
+Its compatible per-output display profile and napari camera, displayed
+dimensions, slice positions, zoom, translation, and rotation are preserved, so
+isolated tuning stays focused on the same region. Pinned layers are separate
+viewer artifacts and do not receive this saved per-output profile behavior.
+
+Switching to a different logical output restores that output's own remembered
+profile or initializes safe defaults. Presentation settings do not leak from
+one scientific result into another. Use the inspector reset-to-defaults action
+to clear a selected output's saved style. Stale contrast workers are invalidated
+when their output context changes.
 
 A genuine class or layout change still needs replacement. Examples include an
 `Image` versus a label-ID `Labels` layer and incompatible RGB layouts. A

@@ -4,11 +4,15 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Current release
+## Release candidate
 
 - [0.13.0a1](0.13.0a1.md) — evidence-gated CPU/GPU execution, durable compute
   provenance and cancellation across interactive and automated surfaces,
   workflow tabs, new scientific nodes, and extensive correctness/UI fixes.
+
+This nightly entry is the prepared release manual. It becomes the stable,
+numbered release documentation only after the matching application tag/package
+and manual snapshot are published.
 
 0.13.0a1 writes workflow schema 4 and batch config/manifest schema 2. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;

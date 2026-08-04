@@ -22,6 +22,27 @@ High-risk changes need more than a happy-path unit test. Consider:
 - cancellation, memory retention, and repeated UI actions;
 - bundled examples reopening and satisfying a meaningful invariant.
 
+For an accelerated implementation also cover:
+
+- CPU-only import/discovery and missing/broken optional-provider behavior;
+- admitted and rejected dtype/shape/parameter/environment matrices;
+- exact or explicitly bounded CPU/GPU parity on adversarial and representative
+  fixtures before performance timing;
+- device residency, transfer boundaries, memory-model bounds, and host
+  finalizers;
+- synchronized progress, cancellation at each honest checkpoint, fair lease
+  behavior, and zero-residue cleanup on every exit path;
+- classified runtime OOM with visible one-segment retry versus Strict failure;
+- immutable policy/evidence hash validation and exact-workload benchmark
+  invalidation/reuse; and
+- identical request/provenance/publication behavior in interactive, batch,
+  generated Python/CLI, and export surfaces.
+
+Real-device tests are opt-in and must state the exact hardware, driver, runtime,
+scientific-stack, and policy identity. Run the `real_cuda` selection only on an
+appropriate isolated host; mocks and a successful kernel probe do not establish
+scientific admission.
+
 Prefer a small parameterized test over many near-identical cases. Keep an
 end-to-end UI test only when it protects behavior that cannot be established at
 a lower layer.

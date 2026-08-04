@@ -13,7 +13,10 @@ discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.
 
 Switching tabs restores retained state and does not recalculate scientific
-results. A collection batch remains owned by its originating tab; VIPP blocks
+results. The selected tab is acknowledged immediately and can show an
+indeterminate restoration state while its retained graph, inspector,
+thumbnails, and caches are reattached; this is not a processing run. A
+collection batch remains owned by its originating tab; VIPP blocks
 closing that origin, launching a second batch, or closing the application until
 the active run finishes or cooperatively cancels.
 
@@ -24,8 +27,9 @@ the active run finishes or cooperatively cancels.
 | **New workflow…** | Create a new tab containing one unbound `Image Source` on an otherwise empty graph. |
 | **Open example…** | Open one of 13 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
 | **Load workflow…** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores and opens Batch workspace without running a preview. |
-| **Save workflow…** | Save graph structure, parameters, layout, and selected UI state—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
+| **Save workflow…** | Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
 | **Batch workspace…** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
+| **Leave batch mode** | When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run. |
 | **Export Python…** | Generate a headless script using supported operation and I/O calls. |
 | **Export OME dataset…** | Save one reference image with associated graph label outputs. |
 | **Tunnels…** | Manage named graph outputs and subscribers. |
@@ -35,28 +39,39 @@ the active run finishes or cooperatively cancels.
 | **Calculate all** | Calculate manual nodes that are not current. During isolated tuning, first apply the tuned result and release the temporary downstream boundary. |
 | **Undo / Redo** | Reverse or restore supported workflow edits. |
 
+Image Source cards display the live layer, sample, file, or collection binding
+in an elided subtitle and retain the complete value in a tooltip. A compatible
+node dropped onto an existing wire can split that connection in place. Named
+output tunnels can be rerouted by dragging their source badge to another
+compatible output; preview/commit share type, cycle, and topology validation,
+and the accepted edit is atomic and undoable.
+
 ## Compute controls
 
 | Control | Effect |
 | --- | --- |
-| **CPU / Auto / Selective** | CPU forces authoritative host implementations. Auto uses an admitted GPU only when the complete planned workload is supported and beneficial. Selective exposes authored per-node choices. |
+| **CPU / Auto / Selective** | CPU forces authoritative host implementations. Auto is the conservative default; ordinary UI/batch/generated runs in this alpha supply no local timing evidence, so fresh Auto candidates remain CPU. Selective exposes authored CPU/GPU choices and benchmarking. |
 | Actual-run compute summary | After an accepted run, summarizes the CPU/GPU mix or fallback state; hover for why the run made those decisions. |
 | **Find fastest pipeline…** | In Selective mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying. |
-| **Strict selective GPU choices** | Fail when an explicitly selected GPU implementation is unavailable instead of visibly falling back to CPU. |
+| **Strict selective GPU choices** | Fail when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
 
 New sessions default to **Auto**. A schema-3 workflow loads as **CPU** because
-the old file did not author compute intent. Auto choosing CPU is not necessarily
-a fallback: CPU can be faster for a small call or required because the exact
-dtype, parameters, shape, memory, environment, or provider is outside the
-validated region.
+the old file did not author compute intent. Auto never benchmarks during a
+calculation. Because the standard interactive, saved-batch, and generated paths
+do not attach performance evidence in 0.13.0a1, fresh Auto calls resolve to CPU;
+programmatic callers can provide validated evidence explicitly. To run GPU from
+the normal interface, use a reviewed Selective provider or apply a **Find
+fastest** proposal, which writes Selective per-node preferences.
 
-In Selective mode, an implemented node shows **Follow pipeline policy**,
-**CPU**, and one **GPU · library** entry for each declared library. **Best GPU**
-appears only when several libraries genuinely compete. Exact implementation
-pins are an advanced persistence/API feature; a loaded pin remains visible
-until deliberately replaced. A separate optimizer lock—not merely choosing a
-backend—preserves a node during **Find fastest**.
+In Selective mode, an operation with a declared provider shows **Follow pipeline
+policy**, **CPU**, and one **GPU · library** entry for each declared library.
+The choice remains visible even when the current call or environment will later
+be rejected, fall back, or fail; execution admission is call-specific. **Best
+GPU** appears only when several libraries genuinely compete. Exact
+implementation pins are an advanced persistence/API feature; a loaded pin
+remains visible until deliberately replaced. A separate optimizer lock—not
+merely choosing a backend—preserves a node during **Find fastest**.
 
 Calculated cards show compact **CPU**, **GPU · CuPy**, **GPU · cuCIM**, or amber
 **CPU fallback** badges. A muted badge belongs to the last accepted run while a
@@ -73,6 +88,23 @@ percentage until it returns; a reached time limit means comparisons remain, not
 that the current graph was proved optimal. Completed exact benchmark records
 are reused on retry.
 
+For the practical sequence, first-release GPU-region summary, dtype caveats,
+and platform/install boundary, see
+[choose and verify CPU or GPU compute](../how-to/choose-compute.md).
+
+## Feedback surfaces
+
+VIPP uses one severity-aware message strip for workflow, graph, source, compute,
+and batch feedback. Routine information and warnings remain lightweight; only
+an actionable error uses a filled, full-width alert. A message is not the
+execution record: the toolbar actual-run summary and per-node badges carry the
+compact compute result, while the detailed execution/provenance view explains
+implementation and fallback decisions.
+
+Napari's status bar at the bottom of the viewer is separate. It belongs to the
+viewer and reports coordinates, values, and layer interaction; VIPP does not
+duplicate that purpose in its message strip.
+
 ## Display settings
 
 | Setting | Choices / meaning |
@@ -88,7 +120,7 @@ are reused on retry.
 
 Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
-overlap; VIPP reports the number of overlapping card pairs in the status bar.
+overlap; VIPP reports the number of overlapping card pairs in its message strip.
 Use **Auto structure graph** to make label-aware space, or move the affected
 cards manually. Label visibility is a graph-display choice and never changes
 connections or processed data.
@@ -159,7 +191,8 @@ workflow JSON.
 Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
-**Pin selected**, and **Save selected output…**.
+**Pin selected**, **Save selected output…**, and an explicit reset of the
+selected output's remembered display profile.
 
 ### Numeric parameter entry
 
@@ -207,15 +240,25 @@ complete background run. Cancelling, superseding, or editing during a run
 discards these temporary presentation updates and restores the last coherent
 cache view.
 
-### Generated napari layers
+### The active VIPP Inspect layer
 
-When two inspected results have compatible napari `Image` presentation, VIPP
-reuses the existing layer object and replaces only its data reference. The new
-reference exposes the exact underlying pixels as a non-writeable view; VIPP
-also resets colormap, blending, contrast, scale, and related display metadata
-so settings from the previous node cannot leak into the next view. This makes
-switching between compatible image-sized nodes largely independent of volume
-size.
+When the same logical node/output recalculates with a compatible active VIPP
+**Inspect** `Image` presentation, VIPP reuses the existing layer object and
+replaces only its data reference. The new reference exposes the exact
+underlying pixels as a non-writeable view. VIPP preserves displayed dimensions
+and slice positions, camera zoom/translation/rotation, and compatible styling
+such as colormap, contrast, blending, opacity, visibility, gamma,
+interpolation, and compatible rendering settings. Layer scale is reapplied
+from output metadata; arbitrary napari transforms are not saved in a display
+profile. Isolated tuning therefore remains on the same viewed region. Pinned
+layers are separate viewer artifacts and do not receive this saved per-output
+profile behavior.
+
+VIPP remembers presentation independently by node, output port, and RGB
+surface and saves those profiles as workflow UI state. Switching to a different
+logical output restores that output's profile or initializes safe defaults;
+the previous output's styling cannot leak across the switch. Use the inspector
+header reset action to return the selected output deliberately to defaults.
 
 VIPP replaces the layer for a genuine presentation-class change, such as
 `Image` to `Labels`, or for an incompatible RGB layout. A Boolean mask pinned
@@ -253,6 +296,22 @@ queues interactive recalculation. This is a scientific parameter edit: save
 the workflow after accepting it. VIPP reuses unchanged input counts while a
 manual marker moves and refreshes the output histogram after the output changes.
 
+## Colocalization scatter controls
+
+The inspector scatter and resizable pop-out share a two-way linked colormap
+selector. Redrawing from the cached threshold-independent density does not
+change channels, ROI, thresholds, counts, or tables. Threshold scrubbing moves
+the guides immediately, marks the old exact count as calculating, coalesces
+rapid requests, and recounts the complete ROI before publishing a new value.
+
+Interactive density is capped and reported at 1,024 bins per axis to keep the
+viewer responsive. `Colocalization Scatter Plot` and its masked variant are
+ordinary graph nodes with independently configurable bins and square output
+size up to 4,096, native populated axis ranges, optional symmetric percentile
+clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
+at its current display resolution; use a graph node when the scatter image must
+be part of the durable workflow.
+
 ## Batch representative strip
 
 After a successful batch preview, a persistent strip above the graph exposes
@@ -261,4 +320,6 @@ filename. It calculates one representative only and never saves batch outputs.
 The requested item is labelled as current only after all matching sources load
 and the graph calculation succeeds. The strip does not duplicate the main
 **Batch workspace…** action; use the sole toolbar button to reopen the retained
-workspace. See [process a folder](../workflows/batch-processing.md).
+workspace. **Leave batch mode** discards these transient representative source
+overrides and returns the tab to ordinary single-image use; it is disabled
+during a run. See [process a folder](../workflows/batch-processing.md).

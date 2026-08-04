@@ -141,6 +141,7 @@ nav:
       - Process a folder: workflows/batch-processing.md
   - How-to guides:
       - How-to guides: how-to/index.md
+      - Choose CPU or GPU compute: how-to/choose-compute.md
       - Edit and organize a graph: how-to/edit-graph.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
       - Save, share, and export: how-to/save-share-export.md

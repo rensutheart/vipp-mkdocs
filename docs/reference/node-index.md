@@ -22,8 +22,12 @@ not the operation's scientific definition.
 Implemented nodes can also show an actual-run **CPU**, **GPU · CuPy**, **GPU ·
 cuCIM**, or amber **CPU fallback** badge. The badge is execution provenance for
 the accepted result, not part of the operation's scientific definition. A GPU
-choice appears only for a validated dtype/parameter/shape/environment region;
-unsupported calls retain the CPU operation.
+choice appears for an operation with a declared provider; it is not filtered by
+the current dtype, parameters, shape, memory, dependencies, or environment.
+Call-specific admission happens during planning and can select CPU, visibly
+fall back, or fail. See the
+[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1)
+for the accelerated node families and their first public regions.
 
 | Family | Nodes |
 | --- | ---: |
@@ -52,7 +56,7 @@ unsupported calls retain the CPU operation.
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
-| `Crop Stack` | array | image | Crop spatial edges. |
+| `Crop Stack` | image, mask, or labels | same as input | Crop spatial edges while preserving graph-port type, including ROI masks. |
 | `Select Axis Slice` | array | any | Keep or select an index/range along an axis. |
 | `Split Axis` | array | dynamic outputs | Split time, z, or other non-channel axes. |
 | `Reorder Axes` | array | same as input | Reinterpret and transpose axis order. |

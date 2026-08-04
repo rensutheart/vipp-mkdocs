@@ -114,6 +114,21 @@ the biological method requires the same absolute cutoffs across samples.
 Record why the chosen rule is appropriate. Avoid changing between percentiles
 and values merely to make individual fields look similar.
 
+## Treat dtype conversion as a method decision
+
+Some admitted GPU regions—most notably Gaussian blur and deconvolution—require
+finite `float32` and can be much faster there than the corresponding native
+integer workflow. VIPP never inserts that conversion during compute planning or
+optimization. Add `Convert Dtype` only when its preserve/rescale policy is
+appropriate for the analysis, then recheck thresholds, rounding, output
+formats, memory, and validation results. Record the conversion even when its
+immediate motivation was performance.
+
+Benchmark only after graph structure and scientific parameters are sensible on
+representative data. A node or pipeline benchmark compares implementations of
+the authored calculation; it must not become a reason to retune the calculation
+until the fastest result looks attractive.
+
 ## Distinguish Auto Contrast From Layer Contrast
 
 When `Linear Scale + Offset` is selected, **Auto Contrast** calculates exact
@@ -152,6 +167,8 @@ Once the development set is satisfactory:
 - record VIPP and dependency versions;
 - lock input selection and exclusion rules;
 - define outputs and batch naming;
+- record the compute request, any optimizer locks/assignment, and the actual
+  implementation provenance expected to be audited;
 - evaluate without further tuning on the held-out set.
 
 If evaluation prompts a change, describe that change and repeat evaluation on

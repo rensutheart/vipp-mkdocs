@@ -26,7 +26,7 @@ required value contributes even though the result is grouped for display.
 | --- | --- | --- |
 | Intensity histogram | Every finite value in the selected slice or stack is counted. | Counts are grouped for drawing: two bars for Boolean data, one for a constant image, 256 for non-negative integer data within 0–255, and otherwise 128 display bins. These bins are not the automatic-threshold bin setting. |
 | Automatic-threshold guide | The guide uses the node's saved scope and scientific method parameters. | Line colour, plot scale, and the chart's display bins do not change the mask. |
-| Colocalization scatter | Every ROI voxel contributes to the 255 × 255 density grid; ROI population and the number meeting both thresholds are also exact. | Colormap, logarithmic count display, and guide styling do not change thresholds or results. |
+| Colocalization scatter | Every ROI voxel contributes to the configured density; ROI population and the number meeting both thresholds are exact. Threshold-independent density can be reused while an exact recount runs. | Interactive rendering is capped at 1,024 bins per axis; graph scatter nodes can request up to 4,096. Colormap, logarithmic display, guide styling, and rendered output size do not change thresholds or metric tables. |
 | Inspect or pinned image contrast | The final display range spans every finite value and zero, using exact finite extrema. | Contrast limits affect only rendering in napari, never the stored node output or downstream calculations. |
 
 ### Progressive inspection during a run
@@ -44,20 +44,33 @@ graph and source revisions. Cancellation, failure, a newer edit, or a
 superseding run removes the temporary overlays and restores the last coherent
 inspection state.
 
-### Reused and replaced napari layers
+### Reused and replaced Inspect layers
 
-Compatible generated `Image` results reuse the same napari layer object. VIPP
-replaces its data reference with a non-writeable view of the exact output and
-resets colormap, blending, contrast, scale, and related metadata. This avoids a
-duplicate full-volume copy and prevents display choices from the previously
-selected node leaking into the new one. Any pending contrast result for the old
-selection is invalidated.
+Recalculating the same logical node/output reuses a compatible active VIPP
+**Inspect** layer and replaces only its data reference with a non-writeable view
+of the exact output. VIPP preserves the working view—displayed dimensions and
+slice positions, camera zoom, translation, and rotation—and compatible user
+styling such as colormap, contrast, blending, opacity, visibility, gamma,
+interpolation, and compatible rendering settings. Physical layer scale
+continues to come from the output metadata; arbitrary napari transforms are not
+part of the saved display profile. This lets you zoom into a structure, tune a
+node in isolation, and compare the same region after each calculation without
+the viewer jumping back to a default. Pinned layers are separate napari viewer
+artifacts and do not receive this saved per-output profile behavior.
 
-VIPP creates a replacement layer when the presentation class or layout is
+Display profiles are remembered independently for each node, output port, and
+RGB display surface and are saved as presentation state in the workflow. When
+you switch to another logical output, VIPP restores that output's own compatible
+profile or initializes safe defaults; styling from the previous output does not
+leak into it. Use the inspector header's reset action when the selected output
+should return deliberately to VIPP defaults.
+
+VIPP creates a replacement Inspect layer when the presentation class or layout is
 genuinely incompatible, such as `Image` versus label-ID `Labels`, or an RGB
 layout change. A Boolean mask pinned as a `Labels` overlay requires a uint8
 presentation copy. The original cached Boolean array remains the scientific
-output used by downstream nodes and saving.
+output used by downstream nodes and saving. Any pending display calculation
+for a superseded output is invalidated.
 
 ### Large generated layers
 
@@ -90,6 +103,13 @@ values, retains the other exact cutoff, and recalculates the node. A click that
 does not move the guide is not an edit. The same no-movement rule prevents
 accidental Binary Threshold changes. Save the workflow after accepting a drag;
 guide position is a presentation affordance for a persisted scientific value.
+
+For colocalization, threshold scrubbing moves compatible guides immediately
+and keeps the threshold-independent density visible while the exact full-ROI
+count is recomputed. Rapid requests are coalesced. A density is reused only
+while channels, ROI, native intensity context, and histogram definition still
+match. The linked inspector and resizable pop-out colormap selectors redraw
+from that cached density without recalculating a scientific result.
 
 ### Split Channels presentation output
 

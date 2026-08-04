@@ -21,14 +21,25 @@ threshold nodes. Changing plot log scale or appearance does not change the
 mask.
 
 The colocalization scatter density, ROI population, and colocalized count are
-also calculated over every ROI voxel. On a large input, wait for the exact
-background calculation to finish before capturing a QC screenshot.
+also calculated over every ROI voxel. Threshold-independent density remains
+visible while exact threshold-dependent counts are recalculated, but a
+calculating count is not final evidence. Interactive density is capped at 1,024
+bins per axis; dedicated graph scatter nodes can render up to 4,096. On a large
+input, wait for the exact background calculation to finish before capturing a
+QC screenshot or recording a count.
 
 Napari contrast limits are display-only. For a large inspect or pinned layer,
 VIPP may show an explicit provisional dtype range first and replace it with the
 exact full finite range when the background calculation completes. A manual
 contrast adjustment made while waiting is preserved. Neither range changes the
 node output or downstream measurements.
+
+Recalculating the same selected node/output preserves its compatible display
+profile and the napari camera, displayed dimensions, slice positions, zoom,
+translation, and rotation. Switching to another output restores that output's
+own saved profile or safe defaults, so styles do not leak between scientific
+results. Use the inspector header's reset-to-defaults action when you want to
+discard the selected output's remembered presentation.
 
 ## Pin an output in napari
 
@@ -41,6 +52,30 @@ node output or downstream measurements.
 Pin the raw image, a decisive intermediate mask, and the final labels for an
 overlay review. Hide or show layers to locate false positives, missed objects,
 merged objects, and boundary errors.
+
+## Verify what implementation produced the output
+
+After an accepted calculation, read the card's compact **CPU**, **GPU · CuPy**,
+**GPU · cuCIM**, or amber **CPU fallback** badge. A muted badge belongs to the
+last accepted result while the node is stale or updating. Hover or inspect the
+node for the implementation ID/version, decision reason, memory estimate, and
+fallback details. The toolbar mode is only the request; it cannot establish
+what produced the displayed pixels or table.
+
+See [choose and verify CPU or GPU compute](choose-compute.md) before comparing
+or benchmarking implementations.
+
+## Inspect colocalization scatter at useful resolution
+
+The inspector and resizable pop-out share a linked colormap selector. Changing
+it redraws the cached density and does not change thresholds or metrics. The
+pop-out can save PNG or TIFF at its current display resolution.
+
+Use `Colocalization Scatter Plot` or its masked variant when the scatter itself
+must be a durable graph output. Those nodes support native populated axis
+ranges, optional symmetric percentile clipping, independent histogram bins and
+square output size up to 4,096. Threshold guides are drawn after density
+aggregation so downsampling does not erase them.
 
 ## Compare 3D data without hiding failures
 

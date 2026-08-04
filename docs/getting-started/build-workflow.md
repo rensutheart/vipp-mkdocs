@@ -5,9 +5,9 @@ canvas. It uses bundled data, so unexpected results are easier to diagnose.
 
 ## 1. Start clean
 
-Choose **New workflow…** and confirm the reset. VIPP keeps one unbound
-`Image Source` on the otherwise empty canvas. Select that source (do not add a
-second one) and set:
+Choose **New workflow…**. VIPP opens a new tab and preserves any other workflow
+tabs. The new graph contains one unbound `Image Source` on an otherwise empty
+canvas. Select that source (do not add a second one) and set:
 
 | Setting | Value |
 | --- | --- |
@@ -44,6 +44,13 @@ Restore a conservative value before continuing. There is no universally
 correct blur or threshold: tune against the structures your assay intends to
 measure.
 
+New workflows request **Auto** compute. After calculation, read the compact
+badge on Gaussian Blur, Otsu Threshold, and Label Connected Components. A CPU
+badge is expected because ordinary Auto execution in 0.13.0a1 carries no local
+timing evidence; it is not proof that setup failed. Keep this first tutorial
+scientifically focused; use Selective and the separate
+[CPU/GPU guide](../how-to/choose-compute.md) before benchmarking providers.
+
 ## 4. Add a measurement branch
 
 Add `Measure Objects` and connect the labels to it:
@@ -77,8 +84,10 @@ does not preserve.
 
 ## 6. Test that the workflow reopens
 
-Create a new workflow, then load the saved JSON. Confirm the source, graph,
-parameters, and connections before relying on the file as an analysis record.
+Create another workflow tab, then load the saved JSON. **Load workflow…** opens
+another session rather than replacing the active graph. Confirm the source,
+graph, parameters, connections, and authored compute request before relying on
+the file as an analysis record.
 
 Next, learn how to [use your own images](own-data.md) without assuming that the
 same parameters will transfer unchanged.

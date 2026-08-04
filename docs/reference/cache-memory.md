@@ -1,8 +1,10 @@
 # Cache And Memory
 
-VIPP is currently an eager interactive workflow builder. Most nodes calculate
-NumPy-like in-memory outputs so thumbnails, inspection, pinned layers, and
-downstream edits feel immediate.
+VIPP is currently an eager interactive workflow builder. Its accepted public
+cache uses host NumPy-like in-memory outputs so thumbnails, inspection, pinned
+layers, and downstream edits feel immediate. Eligible nodes may use private
+device-resident segments during a run, but those values cross a verified host
+boundary before they become public results.
 
 ## Cache Modes
 
@@ -62,6 +64,42 @@ If a platform API is unavailable, returns an error, or supplies an invalid
 value, VIPP reports memory as unavailable rather than crashing or inventing a
 number. The value is still an operational estimate, and container/VM limits
 can differ from host memory.
+
+## Device residency and accelerator memory
+
+The interactive scientific cache remains host-owned. During one accepted run,
+eligible adjacent GPU nodes can use a private device-resident segment so VIPP
+does not transfer every intermediate back to NumPy. Private device values are
+transactional execution state: they are not workflow persistence, public cache
+entries, or napari layers, and they must be synchronized and cleaned before a
+host result is accepted or published.
+
+Before launching a segment, VIPP applies a conservative, operation-specific
+memory model to the device inputs, outputs, simultaneously live intermediates,
+library workspace, and uncertainty allowance. A fair process-wide accelerator
+lease prevents unrelated VIPP jobs from interleaving on the same runtime/device
+while allowing separate device keys to proceed independently.
+
+**Compute setup and memory…** distinguishes host RAM from VRAM on a discrete
+NVIDIA GPU. A future Apple or other unified-memory provider must report one
+shared physical budget rather than adding RAM and VRAM as though they were
+independent. macOS remains CPU-only in 0.13.0a1.
+
+With **visible** fallback, one complete device segment may retry once on CPU
+after a classified runtime OOM, but only after synchronization and proven
+cleanup. The accepted badge becomes amber and provenance retains the attempted
+segment, memory evidence, exception, cleanup, and retry. **Strict** returns the
+typed failure. Availability or eligibility decisions made before device work
+are still explained but are not runtime OOM fallbacks.
+
+Cache mode limits retained graph outputs; it cannot cap every NumPy/SciPy or
+CuPy/cuCIM temporary. Low-memory mode can therefore coexist with an operation
+whose CPU RAM or VRAM workspace is large. Basic GPU measurement nodes also
+cross a deliberate host boundary for an exact typed-table finalizer after the
+bounded device calculation.
+
+See [choose and verify CPU or GPU compute](../how-to/choose-compute.md) for the
+operation regions and fallback workflow.
 
 ## Per-Node Keep Cached
 

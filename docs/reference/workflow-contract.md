@@ -10,11 +10,17 @@ A saved workflow represents the editable graph. It can include:
 - node operation IDs, titles, parameters, and canvas positions;
 - connections and output-port hints;
 - named tunnels and graph notes;
-- selected workflow/UI state such as thumbnail visibility where enabled.
+- selected workflow/UI state such as thumbnail visibility and per-node/output
+  display profiles where enabled.
 
 It does **not** embed calculated pixel arrays or tables. It also does not, by
 itself, freeze the Python environment, preserve every external source, prove
 metadata correctness, or capture the rationale for every choice.
+
+Workflow tabs are independent live sessions, not one multi-workflow file.
+**Save workflow…** serializes the active tab only. Other open tabs, their
+caches, undo/redo histories, transient viewport, and in-flight state are not
+bundled into that JSON.
 
 ### Current schema: version 4
 
@@ -105,6 +111,16 @@ ranges, and inspector layout do not alter node arrays. They are not substitutes
 for the saved scientific parameters. A screenshot can document what was
 reviewed, but the workflow JSON is the authoritative editable graph.
 
+In 0.13, compatible VIPP Inspect display profiles are saved independently by
+node, output port, and RGB surface. They can include colormap, contrast,
+blending, opacity, visibility, gamma, interpolation, and compatible
+projection/rendering settings, but remain presentation state: restoring or
+resetting one cannot change a cached array, threshold, mask, label image, or
+table. Physical layer scale continues to come from image metadata, and
+arbitrary napari transforms are not included. The napari camera/dimension view
+is also preserved while the same output recalculates in a live session; do not
+confuse that view-continuity feature with scientific workflow provenance.
+
 ## Generated Python
 
 Python export embeds immutable validated workflow JSON and reconstructs a fresh
@@ -126,10 +142,25 @@ not mutate the embedded workflow.
 
 `PipelineResults` exposes the effective compute request, the formal execution
 report, per-node compute provenance, and output-bound provenance. A successful
-`save_image()` writes an atomic `.vipp-provenance.json` sibling by default. The
-document identifies the output node/port and actual implementation, not merely
-the requested mode. Publication fails when execution cleanup or final
-promotion cannot be established.
+`save_image()` writes an atomic `.vipp-provenance.json` sibling when the caller
+supplies the provenance document. The generated CLI enables provenance by
+default and exposes `--provenance` / `--no-provenance`. The document identifies
+the output node/port and actual implementation, not merely the requested mode.
+
+The generated CLI stages every requested output and sidecar in one private
+same-directory publication set, rejects duplicate destinations, verifies
+execution cleanup, and commits the set together with rollback for caught commit
+failures. Requested provenance sidecars are promoted before their outputs, so
+an abrupt process crash can leave an orphan sidecar but not a newly published
+output lacking its requested provenance. Failure sidecars distinguish execution
+from publication failure. Normal exit is `0`, setup/execution/publication
+failure is `2`, and cooperative cancellation is `130`.
+
+Generated CLI progress is operation-level. The saved batch runner additionally
+has an overall-item stream because it owns a collection plan. Generated inputs
+carry supplied `ImageDataset`/`SourcePayload` identity and metadata; exact
+source-byte reverification before publication is a durable saved-batch
+guarantee, not a promise for every arbitrary generated-Python array caller.
 
 ## Batch artifacts
 

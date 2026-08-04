@@ -32,6 +32,9 @@ internal screenshot roadmaps do not belong in either public manual page.
    defaults, node titles, formats, and version references.
 5. **Scientific limitations are user-facing behavior.** Put material caveats
    beside the task, not only in an internal roadmap.
+6. **Compute intent is not execution evidence.** Keep CPU authoritative, declare
+   GPU regions narrowly, and make actual implementation, fallback, memory,
+   cancellation, and cleanup provenance visible on every execution surface.
 
 Before opening a pull request, describe the user-visible outcome, tests run,
 scientific assumptions, compatibility impact, and documentation changes.

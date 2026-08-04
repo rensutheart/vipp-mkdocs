@@ -51,6 +51,14 @@ Select each node from left to right:
 7. **Filter Labels By Volume:** inspect the incoming size distribution and the
    labels that were removed.
 
+New sessions request **Auto** compute. After each calculated node, read its
+compact CPU/GPU badge rather than assuming Auto used a GPU. Ordinary Auto runs
+in 0.13.0a1 carry no local timing evidence, so fresh candidates stay on CPU;
+the exact data or environment can independently require CPU as well. This tour
+does not require GPU setup; use Selective and the
+[CPU/GPU guide](../how-to/choose-compute.md) after you understand the graph and
+its outputs.
+
 Use **Pin selected** to keep an important output as a napari layer while you
 select another node. A pinned layer is for comparison; it is not a new graph
 connection.

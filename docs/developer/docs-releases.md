@@ -20,14 +20,22 @@ Before moving `stable`:
 
 1. Check out the manual content that matches the application release.
 2. Update all explicit version facts, install commands, counts, examples,
-   validation status, and compatibility notes.
+   validation status, compatibility notes, the CPU/GPU operation matrix, and
+   the distinction between installable and publicly admitted environments.
 3. Replace screenshots with captures from the same release.
 4. Re-run the documented installation check on each platform whose status will
    be labelled verified; state other platforms as pending.
-5. Run `mkdocs build --strict` and visually review key pages.
-6. In GitHub Actions, run **Deploy versioned documentation** with a version such
+5. Confirm the release-candidate application commit, full CI/test counts,
+   package/Twine/clean-wheel results, real-device evidence boundary, and final
+   wheel/sdist hashes. Do not copy timing from a development report as a
+   portable performance promise.
+6. Run `mkdocs build --strict` and visually review key pages, navigation,
+   internal links, tables, and both themes.
+7. Publish and verify the matching application tag and packages before moving
+   the documentation's `stable` alias.
+8. In GitHub Actions, run **Deploy versioned documentation** with a version such
    as `0.13.0a1` and `make_stable=true`.
-7. Open the public site, select both the numbered release and `stable`, then
+9. Open the public site, select both the numbered release and `stable`, then
    verify installation, search, code highlighting, redirects, and images.
 
 The workflow executes the equivalent of:

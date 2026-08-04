@@ -19,6 +19,13 @@ an image, mask, or table is appropriate for your biological question.
 Images carry array data plus metadata such as axes, scale, unit, channel names,
 source identity, and operation history where available.
 
+`Convert Dtype` is an explicit scientific operation. Its scaling choice can
+preserve representable values or intentionally remap the range, which may
+change thresholds, rounding, writers, memory, and downstream interpretation.
+VIPP's optimizer never inserts a cast to make a GPU candidate eligible. Where
+`float32` is justified, an authored conversion can unlock much larger Gaussian
+or deconvolution gains; record and validate that conversion like any other node.
+
 ## Masks
 
 Masks represent inside/outside decisions. They are usually produced by

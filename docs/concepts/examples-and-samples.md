@@ -42,7 +42,15 @@ Examples:
 - 3D mesh morphology;
 - skeleton QC;
 - colocalization and object association;
-- PSF-aware deconvolution.
+- PSF-aware deconvolution; and
+- deterministic two-source Batch & Provenance processing.
+
+The Batch & Provenance chooser creates a unique writable working copy rather
+than pointing the graph at immutable package files. Its three paired items,
+nine expected NPY/TIFF/TSV outputs, workflow/config hashes, manifests, archives,
+and item sidecars form a durable execution regression fixture. It demonstrates
+the contract for its synthetic data; it is not a general validation of another
+collection's pairing or biology.
 
 ## Documentation Examples
 

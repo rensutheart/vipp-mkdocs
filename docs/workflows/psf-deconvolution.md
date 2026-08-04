@@ -8,6 +8,32 @@ stale, its descendants wait and retain their last coherent cached results when
 those exist. A descendant with no prior output remains unavailable.
 Recalculating the deconvolution resumes that downstream branch.
 
+## CPU and GPU restoration coverage
+
+Both deconvolution nodes have public GPU candidates only for finite `float32`
+Image and PSF inputs in resolved 2D or 3D, with compatible non-empty extents,
+positive PSF mass, odd PSF sizes, and the reviewed normalization/clipping/scale
+options. VIPP never converts the inputs or changes restoration parameters to
+enter that region.
+
+For ordinary RL, the first GPU region requires `filter_epsilon=1e-8` and 1–25
+iterations. The authoritative CPU default is `1e-12`; keeping that default, any
+other epsilon, or more than 25 iterations deliberately stays on CPU. This is a
+scientific eligibility decision, not an error.
+
+For RL-TV, lambda zero inherits ordinary RL's region. Positive TV is initially
+admitted only for `TV regularization=0.002`, `TV epsilon=1e-6`,
+`filter epsilon=1e-12`, `denominator floor=0.05`, and exactly 10 or 25
+iterations. Other authored profiles remain CPU and are never rounded or
+truncated to make them eligible.
+
+If finite `float32` is appropriate for both the image and PSF, add explicit
+`Convert Dtype` nodes and review their scaling mode; this can produce major GPU
+gains on large stacks. Converting only to win a benchmark is not scientifically
+neutral. Read the badge/provenance and the
+[CPU/GPU guide](../how-to/choose-compute.md) rather than assuming that Auto used
+the GPU.
+
 !!! caution "Evidence boundary"
     Synthetic examples and automated checks support operation behavior. They do
     not establish broad restoration quality on real microscopes, acquisition

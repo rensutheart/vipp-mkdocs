@@ -17,7 +17,7 @@ flowchart TD
   B --> A["Audit outputs and report exclusions"]
 ```
 
-## Four questions to ask
+## Five questions to ask
 
 1. **What is the target?** A nucleus, punctum, branch, event, overlap, or
    intensity summary needs an operational definition.
@@ -28,6 +28,9 @@ flowchart TD
    output used to tune the workflow.
 4. **What would make the workflow fail?** Predefine failure/QC criteria before
    seeing all experimental results.
+5. **What actually ran?** Archive accepted CPU/CuPy/cuCIM implementation and
+   fallback provenance. Auto or Selective intent alone is not an execution
+   record, and CPU/GPU parity does not replace assay validation.
 
 ## Continue by decision
 
@@ -35,6 +38,8 @@ flowchart TD
 - [Tune without fooling yourself](parameter-tuning.md) before a parameter sweep.
 - [Validate a workflow](validation.md) before drawing biological conclusions.
 - [Report a VIPP analysis](reporting.md) before sharing or publishing.
+- [Choose and verify compute](../how-to/choose-compute.md) before interpreting
+  a benchmark or accelerated run.
 
 !!! danger "Inspection is necessary, not sufficient"
     A plausible overlay can still be biased, inconsistent, or wrong outside the

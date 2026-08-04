@@ -25,12 +25,29 @@ dataset or an unexplained screenshot.
 - source shape, axes, dtype, scale/unit, and format;
 - whether a bundled sample reproduces it;
 - for a numerical problem, a tiny synthetic array and expected invariant.
+- for compute/GPU behavior: requested mode, node badge/decision reason, fallback
+  policy, provider/device, `vipp-compute-doctor` output, and the relevant
+  execution report or redacted provenance sidecar;
+- for optimizer behavior: node/provider stage, both progress values, time
+  limit, completed/remaining comparisons, and whether exact evidence was reused;
+- for ND2 T/Z/C behavior: ordered shape/axes reported by the reader, which
+  slider is missing or wrong, and a minimal non-sensitive file when possible.
 
 Get the core versions with:
 
 ```text
 python -c "import importlib.metadata as m, sys; print(sys.version); print('napari-vipp', m.version('napari-vipp')); print('napari', m.version('napari'))"
 ```
+
+For an optional CUDA environment also run:
+
+```text
+vipp-compute-doctor --track cuda13
+```
+
+Review its output before posting: local paths, host/device names, and
+environment details can be identifying. Do not attach a full batch manifest or
+workflow until source paths and metadata have been redacted.
 
 ## Protect data and identities
 

@@ -31,6 +31,26 @@ Use this when you want measurements such as:
 - channel intensity inside segmented objects;
 - object features for PCA or treatment separation.
 
+## CPU and GPU measurement coverage
+
+The 0.13.0a1 cuCIM candidates cover only the basic `Measure Objects` and
+`Measure Objects + Intensity` schemas. They require native-endian,
+non-negative `int32` labels in resolved 2D/3D leading blocks. The intensity
+variant additionally accepts matching Boolean, `uint8`, `uint16`, or finite
+`float32` intensity data.
+
+Enabling shape/axis/boundary descriptors, derived ratios, 2D moments, or other
+extended groups keeps the complete node on the authoritative CPU path. This is
+expected and appears in the node decision; the GPU provider never returns a
+reduced table while pretending the requested schema was complete. Its bounded
+device calculation is finished by an exact typed host-table finalizer that
+preserves schema, row/column order, units, integer fields, and missing-value
+semantics.
+
+The standard `gpu-cuda13` extra does not distribute the separately reviewed
+cuCIM Windows build, so these nodes normally remain CPU after an ordinary GPU
+install. See [choose and verify compute](../how-to/choose-compute.md).
+
 ## 3D Mesh Morphology
 
 ```text

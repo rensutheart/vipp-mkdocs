@@ -7,6 +7,11 @@ canvas. Connect an output port to a compatible input. When inserting into an
 existing branch, use the connection insertion affordance if the candidate node
 accepts the upstream type and can produce the downstream type.
 
+An `Image Source` card shows its current layer, sample, file, or collection
+representative as a live subtitle. Hover for the complete binding. The subtitle
+follows representative changes and is a quick way to catch a graph connected
+to the wrong input without opening every source inspector.
+
 If no node is compatible, inspect both port types. Converting a mask to labels
 usually needs `Label Connected Components`; applying an image as if it were a
 mask is not an acceptable type conversion.
@@ -41,8 +46,8 @@ The **Port labels** setting has three display modes:
 
 Long names are elided on the card and show their full text in a tooltip. Labels
 reserve card space but deliberately do not reposition the graph when the mode
-changes. If existing cards now overlap, the status bar reports how many pairs
-overlap. Run **Auto structure graph** to rebuild a size-aware source-to-sink
+changes. If existing cards now overlap, the VIPP message strip reports how many
+pairs overlap. Run **Auto structure graph** to rebuild a size-aware source-to-sink
 layout, or move those cards manually. Auto structure remains a one-shot,
 undoable layout edit; port-label visibility does not change the workflow's
 connections or scientific calculation.
@@ -56,6 +61,12 @@ or `red_channel`, and attach compatible inputs as subscribers.
 Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use
 **Tunnels…** to focus the source, reveal subscribers, rename, or remove it.
+
+To reroute a named output tunnel, drag its source badge to another compatible
+output. Preview and commit use the same port-type, cycle, and topology checks;
+an accepted reroute is one atomic, undoable graph edit. Subscribers keep the
+tunnel name, so rename it as part of the review if the new source changes its
+scientific meaning.
 
 ## Show alternatives honestly
 

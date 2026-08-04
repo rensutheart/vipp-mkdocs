@@ -13,6 +13,8 @@ Report:
 - authored compute mode and per-node preferences, plus the actual CPU/CuPy/
   cuCIM implementation IDs/versions, environment fingerprint, fallback/OOM
   records, and cleanup outcome from execution provenance;
+- any explicit optimizer locks, exact-workload benchmark/assignment used, and
+  whether a time limit left alternatives unmeasured;
 - input dataset identifiers, acquisition details, series selection, and axes;
 - channel mapping, physical scale, and any metadata corrections;
 - source checksums/identities and the source revision accepted at calculation;
@@ -24,6 +26,11 @@ Report:
   iterations;
 - for `Rescale Intensity` or `Clip`: percentile/data-range/explicit-value mode
   and its saved cutoffs;
+- every explicit dtype conversion and its preserve/rescale policy, especially
+  when it enabled a floating-point GPU region;
+- for colocalization: native intensity units, threshold mode/values, ROI,
+  canonical Pearson/Manders column names, `coloc_semantics`, and
+  `coloc_validation_status`;
 - how non-finite source values were detected, justified, and handled when they
   occurred;
 - tuning set, held-out validation set, reference annotation procedure, and
@@ -45,10 +52,15 @@ Report:
 > against [reference annotations/phantoms].
 
 For an accelerated run, add wording such as: “The saved workflow requested
-Auto compute. The archived execution report records CuPy implementation
+Selective compute. The archived execution report records CuPy implementation
 `[ID/version]` on `[device/environment]` for `[nodes]`, CPU for `[nodes]`, and
 `[no fallbacks / classified fallback details]`.” Do not report “GPU analysis”
 from toolbar intent alone.
+
+If a generated CLI wrote outputs, retain whether provenance was enabled and the
+atomic sibling sidecars. For batch, retain the finalized version-2 manifest and
+execution digests rather than reconstructing implementation choices from card
+badges or screenshots.
 
 An appropriate threshold detail could read: “The complete `float32` stack was
 segmented with Otsu's method using 1,024 histogram bins; all finite pixels were

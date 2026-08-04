@@ -33,9 +33,9 @@ Image Source
 | Step | Common nodes |
 | --- | --- |
 | Channel selection | `Extract Channel`, `Split Channels` |
-| Smoothing | `Gaussian Blur`, `Gaussian Blur 3D`, `Median Filter`, `Non-Local Means` |
+| Smoothing | `Gaussian Blur`, `Gaussian Blur 3D`, `Median Filter`, `Sigma Filter`, `Non-Local Means` |
 | Background | `Rolling-Ball Background`, `Subtract Background` |
-| Threshold | `Otsu Threshold`, `Triangle Threshold`, `Li Threshold`, `Yen Threshold`, `Binary Threshold`, local threshold nodes |
+| Threshold | `Otsu Threshold`, `Triangle Threshold`, `Li Threshold`, `Yen Threshold`, `Binary Threshold`, `ImageJ Auto Threshold (8-bit)`, local threshold nodes |
 | Mask cleanup | `Fill Holes`, `Remove Small Objects`, morphology nodes |
 | Label creation | `Label Connected Components`, watershed nodes |
 | Label cleanup | `Clear Border Objects`, `Filter Labels By Volume`, `Filter Labels By Property`, `Relabel Sequential` |
@@ -86,6 +86,37 @@ an error instead of receiving an invented cutoff.
 For example, a methods record might state: “Otsu thresholding used the complete
 `float32` stack with 1,024 histogram bins; non-finite pixels were treated as
 background.”
+
+### ImageJ Auto Threshold is a separate conversion path
+
+`ImageJ Auto Threshold (8-bit)` is an explicit experimental compatibility node
+targeting ImageJ 1.54p `Default` or `Triangle` behavior. It first follows the
+declared per-plane 8-bit conversion for scalar `uint8`, `uint16`, or `float32`,
+then thresholds that result. It does not change the generic VIPP Otsu,
+Triangle, Li, Yen, Isodata, or Minimum nodes.
+
+Boolean handling and RGB/RGBA luma reduction are VIPP extensions and are not
+claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Independent
+ImageJ-generated golden parity is pending, so record the node explicitly and
+compare against the intended ImageJ reference before consequential use.
+
+## CPU and GPU boundaries in this workflow
+
+Otsu, Canny, Gaussian, median, Sigma Filter, background correction, and
+connected components have GPU candidates only inside declared regions. Common
+examples are finite `float32` for Gaussian, Boolean masks for connected
+components, and Boolean/`uint8`/`uint16` for the exact Canny region. Otsu covers
+more real dtypes but retains its exact 65,536-level integer-span and float-bin
+rules. Fallback-safe unsupported calls use an explained CPU decision; invalid
+or explicitly non-fallback-safe calls fail planning. In particular, non-CPU
+planning requires a Boolean connected-components call resolved as 2D or 3D.
+VIPP never inserts a cast.
+
+Read each node badge after calculation and see the
+[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1)
+before authoring a provider choice. GPU eligibility says that an implementation
+matches its declared CPU contract; it does not validate the segmentation for
+your assay.
 
 ## Minimum Threshold Failure Is Explicit
 

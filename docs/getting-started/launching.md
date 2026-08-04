@@ -14,22 +14,32 @@ In napari, choose:
 Plugins → VIPP Workflow (napari-vipp)
 ```
 
-The VIPP dock widget has three main regions:
+The VIPP dock widget has a workflow tab bar and three main work regions:
 
 | Region | What it is for |
 | --- | --- |
+| Workflow tabs | Keep several independent graphs, results, caches, histories, inspectors, paths, and Batch workspaces open. Switching tabs restores state without scientific recalculation. |
 | Node library | Search or browse operations, then add them to the graph. |
 | Graph canvas | Connect and arrange the visible analysis. |
 | Inspector | Edit the selected node, calculate manual nodes, and inspect output metadata, images, histograms, or tables. |
 
 The top toolbar opens examples and workflows, saves or exports the graph,
-starts batch processing, and exposes display/execution settings.
+starts batch processing, and exposes display/execution settings. Its
+**CPU / Auto / Selective** control is the authored compute request; new sessions
+default to Auto. After calculation, the toolbar summary and compact node badges
+show what actually ran. Ordinary 0.13.0a1 runs attach no local timing evidence,
+so fresh Auto candidates stay on CPU. Use a reviewed Selective choice or apply a
+**Find fastest** proposal when GPU execution is intended.
+
+VIPP's severity-aware message strip reports graph, workflow, and compute
+feedback. Napari's own bottom status bar reports viewer coordinates and layer
+information; the two surfaces have different owners and purposes.
 
 ## Open a bundled example
 
-Choose **Open example…** in the VIPP toolbar. The chooser groups complete graph
-templates by task and configures their `Image Source` nodes to use matching
-bundled samples.
+Choose **Open example…** in the VIPP toolbar. The chooser opens a new workflow
+tab, groups complete graph templates by task, and configures their `Image
+Source` nodes to use matching bundled samples.
 
 For a first visit choose:
 

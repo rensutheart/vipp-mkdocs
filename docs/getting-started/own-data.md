@@ -14,7 +14,10 @@ valid is the important part.
 | Local OME-Zarr store | Chunked multidimensional data | Many operations are eager and can still materialize large arrays. |
 
 Select `Image Source`, set **Source**, and then use the control specific to that
-route. The napari layer chooser is only shown for `napari layer`.
+route. The napari layer chooser is only shown for `napari layer`. The Image
+Source card's live subtitle shows the current layer, sample, file, or collection
+representative; hover the card for the complete binding when the subtitle is
+elided.
 
 ## Understand the source revision
 
@@ -50,6 +53,14 @@ Use `Reorder Axes` only when you understand the actual stored order. Use
 `Set Pixel Size / Units` to repair missing or known-wrong calibration, and
 record where the corrected values came from.
 
+For Nikon ND2, 0.13 follows the reader's ordered dimension mapping when its
+labels and sizes exactly match the returned array. This fixes affected T/Z/C
+sliders and keeps napari and VIPP slice selection aligned. Still verify the
+displayed axis order, array shape, channel choice, and movement of every T, Z,
+and C control on a representative file. An inconsistent reader mapping is not
+trusted; VIPP falls back conservatively rather than reordering pixels from a
+malformed declaration.
+
 ## Transfer a workflow deliberately
 
 Do not judge transfer only from the final object count. On representative
@@ -65,9 +76,12 @@ images from the new acquisition family:
 Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.
 
-When moving a schema-1/2 workflow to 0.12, rebuild it deliberately and resolve
-new explicit channel-axis, RGB/intensity mapping, and grid choices. See
-[versions and compatibility](../reference/versioning.md#upgrade-to-0120a1).
+When moving from 0.12.0a3 to 0.13.0a1, keep the original schema-3 file and open
+a duplicate. It loads with explicit CPU intent; inspect graph structure,
+sources, axes, parameters, dynamic ports, and decisive outputs before saving
+the duplicate as schema 4. Rebuild schema-1/2 workflows deliberately; changing
+only the JSON version is unsafe. See
+[versions and compatibility](../reference/versioning.md#move-from-0120a3-to-0130a1).
 
 ## Protect sensitive data
 

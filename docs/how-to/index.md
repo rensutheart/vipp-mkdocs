@@ -4,6 +4,7 @@ How-to guides answer a focused question once you know the basic interface.
 
 | I want to… | Guide |
 | --- | --- |
+| choose CPU, Auto, or per-node GPU execution and verify what ran | [Choose and verify CPU or GPU compute](choose-compute.md) |
 | insert, duplicate, arrange, annotate, or simplify nodes | [Edit and organize a graph](edit-graph.md) |
 | compare intermediate outputs in napari | [Inspect and compare outputs](inspect-outputs.md) |
 | keep a workflow, send it to someone, or generate Python | [Save, share, and export](save-share-export.md) |

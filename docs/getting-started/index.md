@@ -28,8 +28,16 @@ You are ready to run a folder only when you can:
 - inspect the mask and labels—not only the final table;
 - explain the parameters that materially change the result;
 - identify representative images that were not used for tuning;
+- distinguish the requested compute mode from the CPU/GPU badge showing what
+  actually ran;
 - save a workflow and reopen it in the same VIPP release.
 
 If any of those are unfamiliar, the [concepts](../concepts/index.md) and
 [scientific-practice](../scientific-practice/index.md) sections provide the
 necessary background without assuming Python knowledge.
+
+Optional GPU use is not required for this route. New sessions default to Auto,
+which is a conservative CPU path in the ordinary 0.13.0a1 interfaces. Continue
+to [choose and verify CPU or GPU compute](../how-to/choose-compute.md) only after
+the workflow is scientifically sensible on representative data; reviewed GPU
+execution uses Selective choices.

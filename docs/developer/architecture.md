@@ -31,6 +31,11 @@ the application; reusable policy should still move to the narrowest owner.
 | Live napari-layer snapshots and invalidation | `ui/source_adapter.py` |
 | Detached graph/workflow state | `core/snapshots.py`, `core/workflow.py` |
 | Typed headless execution and Qt adaptation | `core/execution.py`, `ui/workers.py` |
+| Compute contracts and implementation declarations | `core/compute_contracts.py`, `core/compute_specs.py` |
+| Lazy providers, environment probes, and device lifecycle | `core/compute_registry.py`, `core/gpu/` |
+| Eligibility, policy artifacts, graph planning, and memory admission | `core/compute_policy.py`, `core/compute_policy_artifact.py`, `core/compute_planning.py` |
+| Exact benchmarking and whole-pipeline optimization | `core/compute_benchmark*.py`, `core/compute_pipeline_optimizer*.py` |
+| Actual implementation/fallback/cleanup provenance | `core/execution_provenance.py` |
 | Atomic JSON/text replacement | `core/atomic_io.py` |
 | Batch configuration, planning, and execution | `core/batch_setup.py`, `core/batch.py` |
 | Retained batch UI and representative navigation | `ui/batch.py`, `ui/batch_controller.py`, `ui/batch_navigator.py` |
@@ -60,6 +65,10 @@ the application; reusable policy should still move to the narrowest owner.
    every source, then promote; record partial publication explicitly.
 9. **Export uses the shared executor.** Generated Python must preserve graph,
    source, metadata, version, and operation semantics.
+10. **Acceleration is evidence-gated.** CPU remains authoritative; optional
+    providers are lazy, casts are never synthesized, exact eligibility and
+    memory are checked before device work, and accepted results retain actual
+    implementation/fallback/cleanup provenance.
 
 ## Execution boundaries
 
@@ -76,6 +85,20 @@ only while its run, graph, and source revision tokens remain current.
 The same executor is used by the GUI and **Export Python...**. Batch adds a
 deterministic planner, source identity checks, staged output promotion, and
 manifest/sidecar provenance around that executor.
+
+The compute planner resolves the portable request against immutable operation
+contracts, executable policy, exact workload facts, environment probes,
+benchmark evidence, and memory admission. Adjacent compatible operations can
+form a private device-resident segment. Device values never enter the public
+host cache or napari directly; a planned host boundary, synchronization, and
+cleanup gate precede result acceptance. A fair accelerator lease serializes
+VIPP work for one runtime/device key.
+
+Node benchmarking compares ordered detached inputs against the authoritative
+CPU call before timing. Whole-pipeline optimization models transfers and
+validates a review-only proposal. Interactive, batch, generated Python/CLI, and
+export all consume the same execution report, so UI badges are a presentation
+of provenance rather than a second compute policy.
 
 ## Adding or changing behavior
 

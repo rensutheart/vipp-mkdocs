@@ -1,11 +1,13 @@
 # Install VIPP
 
-VIPP 0.13.0a1 supports **CPython 3.12 and 3.13**. Because the current release
-is a pre-release, pip needs the `--pre` flag to select it from PyPI.
+VIPP 0.13.0a1 supports **CPython 3.12 and 3.13**. After the candidate is
+published, pip needs the `--pre` flag to select this alpha from PyPI. Before the
+tag/package exists, use the immutable-candidate instructions below for release
+candidate testing; do not treat that checkout as a published release.
 
 !!! info "Platform and Python verification for 0.13.0a1"
     The base CPU application is intended for Windows, macOS, and Linux. Release
-    Release CI targets CPython 3.12 and 3.13 on all three operating systems;
+    CI targets CPython 3.12 and 3.13 on all three operating systems;
     package metadata deliberately excludes unqualified Python 3.14 and newer.
     CUDA extras are limited to 64-bit CPython 3.12 on native Windows/Linux.
     Treat the commands below as installation paths, not evidence that every
@@ -15,8 +17,8 @@ is a pre-release, pip needs the `--pre` flag to select it from PyPI.
 ## Recommended: a dedicated environment
 
 A separate environment prevents unrelated scientific packages from changing
-VIPP's dependencies. The commands below install napari with PyQt6 and the
-tagged VIPP release.
+VIPP's dependencies. Once 0.13.0a1 is published, the commands below install
+napari with PyQt6 and that tagged release.
 
 === "Windows"
 
@@ -56,9 +58,11 @@ activate the environment before running the final
 `python -m pip install ...` command.
 
 !!! note "Stable manual versus nightly manual"
-    The commands above install the release documented by this version of the
-    site. Do not install the development branch just because you are reading
-    the nightly manual. See [versions and compatibility](../reference/versioning.md).
+    In a numbered/stable manual, the commands above install the documented
+    release. In this prepublication nightly, use the immutable candidate commit
+    below until the tag/package exists. Do not install arbitrary newer `main`
+    work merely because you are reading nightly. See
+    [versions and compatibility](../reference/versioning.md).
 
 ## Confirm the installation
 
@@ -84,8 +88,10 @@ Expected for this release:
 ## Optional NVIDIA CUDA acceleration
 
 The base installation is complete and remains the portable recommendation. A
-new session defaults to **Auto**, but Auto uses CPU normally when no admitted
-accelerator is present. GPU packages are optional and are not imported merely
+new session defaults to **Auto**. Standard 0.13.0a1 execution does not attach
+local timing evidence, so fresh Auto candidates remain CPU even after CUDA is
+installed; select a reviewed GPU provider or apply **Find fastest** in
+Selective mode to use it. GPU packages are optional and are not imported merely
 to load VIPP or run a CPU workflow.
 
 !!! warning "The first public GPU gate is deliberately narrow"
@@ -97,6 +103,11 @@ to load VIPP or run a CPU workflow.
     runtime, or package set can install successfully and still resolve every
     GPU candidate to CPU because that environment has not passed the release's
     evidence gate. Native Linux and RTX 40-series qualification are pending.
+
+    The standard CUDA extra installs the pinned CuPy/CuPyX stack. It does not
+    include the separately reviewed cuCIM build used by the background and
+    basic measurement candidates, so those nodes normally remain CPU after the
+    public install below.
 
 Use a **new** environment and install exactly one CUDA-major extra. For the
 current CUDA 13 track:
@@ -112,7 +123,7 @@ current CUDA 13 track:
     vipp
     ```
 
-=== "Linux · CUDA 13"
+=== "Linux · CUDA 13 qualification"
 
     ```bash
     python3.12 -m venv vipp-gpu-env
@@ -122,6 +133,10 @@ current CUDA 13 track:
     vipp-compute-doctor --track cuda13
     vipp
     ```
+
+    This creates the intended qualification/development environment, but the
+    0.13.0a1 public policy does not yet admit Linux GPU execution. Expect visible
+    CPU decisions until native-Linux evidence is promoted in a future policy.
 
 The `gpu-cuda12` extra is a qualification/development track in this alpha; the
 current public policy does not admit it. Do not install `gpu-cuda12` and
@@ -142,6 +157,10 @@ arbitrary cuCIM build and assume it is admitted.
 macOS has no CUDA path. Use the base CPU installation on Intel or Apple Silicon;
 Metal/MPS/MLX acceleration is a future study, not part of this release.
 
+Continue with [choose and verify CPU or GPU compute](../how-to/choose-compute.md)
+for the per-operation matrix, badge meanings, benchmarks, fallback, and durable
+provenance.
+
 ## Optional microscope readers
 
 The base package supports the documented TIFF, OME-Zarr, NumPy, and ordinary
@@ -159,9 +178,20 @@ a file is not proof that every axis, unit, timestamp, or acquisition field was
 interpreted correctly. Check representative files from your facility before
 quantitative use.
 
-## Install the development branch
+## Test the unpublished candidate or development branch
 
-Use this only for testing unreleased work:
+Before the tag/package is published, install the reviewed application candidate
+by immutable commit rather than assuming that `main` points to the same source:
+
+```text
+python -m pip install --upgrade "napari[pyqt6]" "napari-vipp @ https://github.com/rensutheart/napari-vipp/archive/e02440989001f05ca17c845e3113ee2537a66c77.zip"
+```
+
+Record that full commit with every candidate result. The candidate wheel/sdist
+and final published artifacts must be checked separately; a source-archive test
+is not a PyPI installation claim.
+
+For newer unreleased `main` work, use:
 
 ```text
 python -m pip install --upgrade "napari[pyqt6]" "https://github.com/rensutheart/napari-vipp/archive/refs/heads/main.zip"

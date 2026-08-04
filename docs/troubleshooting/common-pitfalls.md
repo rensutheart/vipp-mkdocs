@@ -127,6 +127,39 @@ Fix:
 - use `Reorder Axes` or `Set Pixel Size / Units` only with known values;
 - reproduce the issue with a non-sensitive minimal file before reporting it.
 
+For an ND2 file in 0.13, compare the reported ordered shape/axes with the
+reader/acquisition record and move every available T, Z, and C slider. Each
+control should change the corresponding content in both napari and the linked
+VIPP preview. VIPP trusts the reader's ordered dimensions only when their labels
+and sizes exactly match the array; otherwise it falls back conservatively. Do
+not use `Reorder Axes` as a blind visual repair. If controls remain absent or
+move the wrong content, report a minimal non-sensitive file plus reader and VIPP
+versions.
+
+## Auto Or Selective Still Shows CPU
+
+For **Auto**, CPU is expected in the standard 0.13.0a1 interfaces: calculation
+does not attach local timing evidence, and Auto does not benchmark implicitly.
+Use Selective and apply a reviewed provider or **Find fastest** proposal when
+GPU execution is intended.
+
+For **Selective**, CPU can still be the only scientifically admitted result for
+the exact dtype, parameters, shape, memory, provider, or environment, or it can
+be an amber visible fallback from a forced GPU choice. Read the node badge and
+decision reason, then run **Compute setup and memory…**. The standard CUDA extra
+does not include the separately reviewed cuCIM build used by background and
+basic measurement candidates. See
+[choose and verify compute](../how-to/choose-compute.md).
+
+## Optimizer Progress Appears Stationary
+
+The current-operation bar advances only at truthful checkpoints. A monolithic
+CPU/GPU library call can stay at one percentage until it returns. Cancelling is
+also cooperative at those boundaries. If the time limit is reached, read which
+comparisons completed and remain: budget exhaustion means the search is
+incomplete, not that the current assignment was proved optimal. Exact completed
+records can be reused on retry.
+
 ## Source Changed But VIPP Keeps The Earlier Revision
 
 Symptom:

@@ -13,6 +13,12 @@ deterministic plan.
     Source` and calculates one item through the live graph. It does not save
     outputs or run the rest of the collection.
 
+The Batch workspace and any active run belong to the workflow tab that started
+them. Other tabs remain editable while the background run proceeds, and all
+progress/completion returns to the origin tab. VIPP blocks closing that origin,
+starting a second batch, or exiting the application until execution finishes or
+cooperative cancellation completes and final state is persisted.
+
 ## Recommended sequence
 
 1. Build, tune, and validate the graph on defined development data.
@@ -20,9 +26,10 @@ deterministic plan.
    or table to save.
 3. Open **Batch workspace...** and bind each varying `Image Source` to a local
    folder and pattern.
-4. Choose the intended toolbar compute request. New work defaults to Auto;
-   choose CPU for a portable reference run or Selective for reviewed per-node
-   preferences.
+4. Choose the intended toolbar compute request. New work defaults to Auto,
+   which remains CPU in ordinary 0.13.0a1 batch execution because no local
+   timing evidence is attached. Choose CPU for an explicit portable reference
+   or Selective for reviewed CPU/GPU per-node preferences.
 5. Choose an output folder, formats, naming, existing-file policy, fallback
    policy, device, and accelerator-memory settings.
 6. Optionally select **Preview batch** to review pairing and collision summaries.
@@ -152,6 +159,11 @@ one displayed.
 Representative arrays are cached within a bounded session. Their file
 identities stay pinned so a file overwritten after review is rejected on
 revisit or Run. Use **Refresh** to accept a new revision deliberately.
+
+Choose **Leave batch mode** when the tab should return to ordinary single-image
+work. It discards the retained representative source overrides but does not
+delete collection files, outputs, or saved configurations. The action is
+unavailable during an active run.
 
 ## Stale plans and fresh preflight
 
@@ -341,7 +353,9 @@ not evidence that another assay or naming scheme is valid.
 - Output names, formats, subfolders, and collision policy are intentional.
 - The fresh preflight matches the reviewed plan.
 - The configured and effective compute requests match the intended run, and
-  actual node badges/provenance explain CPU, GPU, or fallback decisions.
+  the version-2 manifest and item execution provenance explain the actual CPU,
+  GPU, and fallback decisions. Interactive node badges describe the last
+  accepted interactive calculation, not every detached batch item.
 - Completed/partial/skipped/cancelled/failed counts match expectations.
 - Manifests, archives, sidecars, environment, exclusions, QC, and validation
   evidence are retained with the outputs.

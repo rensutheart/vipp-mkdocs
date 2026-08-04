@@ -28,6 +28,13 @@ review workflows with:
 python scripts/launch_vipp_intensity_workflow.py --list
 ```
 
+The editable `.[dev]` environment is the portable CPU development baseline. On
+an NVIDIA qualification host, create a separate CPython 3.12 environment for
+exactly one CUDA track; do not add CUDA 12 and CUDA 13 extras to the same
+environment. Run `vipp-compute-doctor --track cuda13` before any opt-in
+`real_cuda` tests. A working import or kernel is still not operation admission;
+the executable environment and workload policy must also match.
+
 ## Manual repository
 
 ```powershell

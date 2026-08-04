@@ -14,10 +14,13 @@ as thumbnails, napari layers, histograms, labels, or tables.
 | Multi-input nodes | Express operations such as labels plus intensity image, image plus PSF, or two-channel colocalization. |
 | Multi-output nodes | Split channels, split axes, skeleton keypoints, or graph tables into separate outputs. |
 | Named tunnels | Reuse a source such as a channel, mask, ROI, or reference image without drawing long wires. |
+| Live source subtitles | See the layer, sample, file, or collection representative bound to each Image Source; hover for the complete value. |
+| Workflow tabs | Keep independent graphs, results, caches, histories, inspectors, paths, compute requests, and Batch workspaces open together. |
 | Graph notes | Record reasoning next to workflow steps. |
 | Graph search | Find nodes, operation IDs, tunnel names, and batch output tags. |
-| Workflow JSON | Save the graph, node parameters, connections, canvas positions, tunnels, and selected UI state. |
-| Python export | Generate a headless script for supported graph operations and I/O. |
+| Workflow JSON | Save the graph, node parameters, connections, canvas positions, tunnels, portable schema-4 compute intent, and selected UI state. |
+| Actual-run provenance | Record the CPU/CuPy/cuCIM implementation and fallback that produced each accepted result; authored intent alone is not proof. |
+| Python export | Generate a version-locked headless program that uses the same execution service, compute request, progress, cancellation, and optional output provenance. |
 
 ## Good Graph Habits
 
@@ -29,6 +32,7 @@ as thumbnails, napari layers, histograms, labels, or tables.
   space.
 - Zoom out for whole-workflow review, then zoom in for parameter tuning.
 - Add explicit `Batch Output` nodes before running a workflow over a folder.
+- Read actual-run badges before assuming that Auto or Selective used a GPU.
 - Save workflow snapshots before major parameter sweeps.
 
 ## Avoid

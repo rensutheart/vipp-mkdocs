@@ -64,6 +64,22 @@ RGB/RGBA order where applicable and otherwise blends every fluorescence channel
 by carried pseudo-colour, falling back through Blue, Green, Red, Magenta,
 Yellow, and Cyan repeatedly.
 
+## Ordered ND2 dimensions in 0.13
+
+For Nikon ND2, VIPP follows the reader's ordered `sizes` mapping only when the
+dimension labels and sizes exactly match the returned array shape. This keeps
+T, Z, and C controls attached to the dimensions they actually index and fixes
+affected cases where a napari slider moved without changing the expected
+slice.
+
+An inconsistent mapping is not used to transpose or relabel pixels. VIPP falls
+back to conservative shape-based axis inference. That fallback is not itself a
+visible uncertainty flag, so manual verification is required: compare the
+displayed axis order and shape with acquisition records, move every T/Z/C
+control on a representative file, and inspect the resulting channel and slice
+before quantitative processing. Do not add `Reorder Axes` merely to make the
+controls look familiar unless the stored order is known independently.
+
 ## Physical Scale
 
 Scale-aware measurements use pixel size and units when available.
