@@ -1,6 +1,6 @@
 # Node Index
 
-This page lists all **108 operation specifications** registered by
+This page lists all **112 operation specifications** registered by
 `NODE_LIBRARY` in the current manual track. Nightly parameter behavior can be
 newer than the latest tagged alpha.
 
@@ -12,25 +12,31 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-In 0.12.0a3, manual/cached nodes and nodes selected for isolated tuning use the
+In 0.13.0a1, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. **Tune node in isolation** recalculates only the selected node until
 the session is applied or cancelled. This changes execution and presentation,
 not the operation's scientific definition.
 
+Implemented nodes can also show an actual-run **CPU**, **GPU · CuPy**, **GPU ·
+cuCIM**, or amber **CPU fallback** badge. The badge is execution provenance for
+the accepted result, not part of the operation's scientific definition. A GPU
+choice appears only for a validated dtype/parameter/shape/environment region;
+unsupported calls retain the CPU operation.
+
 | Family | Nodes |
 | --- | ---: |
 | Image Data | 24 |
-| Filtering | 17 |
-| Segmentation | 17 |
+| Filtering | 18 |
+| Segmentation | 18 |
 | Morphology | 13 |
 | Measurements | 12 |
-| Colocalization & Spatial Analysis | 10 |
+| Colocalization & Spatial Analysis | 12 |
 | Label Operations | 7 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **108** |
+| **Total** | **112** |
 
 ## Image Data
 
@@ -131,6 +137,7 @@ and is not merely a display adjustment. See
 | `Gaussian Blur` | image | Gaussian smoothing. |
 | `Gaussian Blur 3D` | image | Volumetric Gaussian smoothing. |
 | `Median Filter` | image | Remove salt-and-pepper noise. |
+| `Sigma Filter` | image | Edge-preserving local smoothing using a sigma-selected circular neighborhood. |
 | `Bilateral Filtering` | image | Edge-preserving smoothing. |
 | `Non-Local Means` | image | Denoising for suitable data. |
 
@@ -146,7 +153,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes are public in 0.12.0a3. They have synthetic examples and automated
+These nodes are public in 0.13.0a1. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 
@@ -179,6 +186,7 @@ see [validation status](validation-status.md).
 | `Minimum Threshold` | mask |
 | `Binary Threshold` | mask |
 | `Hysteresis Threshold` | mask |
+| `ImageJ Auto Threshold (8-bit)` | mask |
 
 Otsu, Triangle, Yen, Isodata, and Minimum count every finite input value.
 Integers use exact native levels for observed spans up to 65,536; floats use the
@@ -278,6 +286,8 @@ it cannot identify a valid two-peak histogram. See
 | `Masked Colocalized Voxels` | channel 1 plus channel 2 plus ROI | image | automatic |
 | `RACC Index` | channel 1 plus channel 2 | image | manual |
 | `Masked RACC Index` | channel 1 plus channel 2 plus ROI | image | manual |
+| `Colocalization Scatter Plot` | channel 1 plus channel 2 | image | manual |
+| `Masked Colocalization Scatter Plot` | channel 1 plus channel 2 plus ROI | image | manual |
 | `Object Colocalization Metrics` | labels plus two channels | table | manual |
 | `Label Overlap Association` | reference plus target labels | table | manual |
 | `Nearest Object Distance` | reference plus target labels | table | manual |

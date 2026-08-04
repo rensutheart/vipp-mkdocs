@@ -1,6 +1,6 @@
 # Architecture and scientific boundaries
 
-VIPP 0.12 separates scientific services from Qt presentation so the same
+VIPP 0.13 separates scientific services from Qt presentation so the same
 validated behavior can support interactive execution, generated Python, and
 batch runs.
 

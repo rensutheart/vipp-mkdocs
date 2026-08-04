@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.12.0a3 |
+| Source | Behavior in 0.13.0a1 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 13 deterministic VIPP samples. |
@@ -81,7 +81,28 @@ dataset; the command is not a general project archiver.
   infer biological correspondence or perform registration.
 - Local batch processing pairs sorted file collections by position. Semantic
   axis iteration, remote collection input, and plate/well/field HCS traversal
-  are outside 0.12.0a3.
+  are outside 0.13.0a1.
+
+## Execution provenance for saved outputs
+
+The interactive **Save selected output…** action writes the selected result but
+is not a complete analysis archive. Generated Python/CLI can additionally write
+an atomic `.vipp-provenance.json` sibling that binds the output node/port to the
+effective compute request, actual CPU/CuPy/cuCIM implementation, environment,
+fallback records, outcome, and cleanup evidence. Failed or cancelled
+single-output publication attempts a failure sidecar at the requested
+destination name.
+
+Batch uses its authoritative version-2 manifest instead of duplicating one
+sidecar per output. Every published output record carries an execution digest
+link to that item's complete execution document. Preserve the manifest,
+archive, item checkpoints, workflow/config pair, and source identities with the
+files.
+
+An output remains private until source reverification and execution cleanup are
+established. OOM fallback is recorded rather than hidden, and a cleanup or
+publication failure prevents a newly calculated standalone output from being
+presented as successfully published.
 
 ## Multi-input grid safety
 

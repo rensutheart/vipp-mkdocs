@@ -16,35 +16,46 @@ It does **not** embed calculated pixel arrays or tables. It also does not, by
 itself, freeze the Python environment, preserve every external source, prove
 metadata correctness, or capture the rationale for every choice.
 
-### Current schema: version 3
+### Current schema: version 4
 
 A current file identifies itself with:
 
 ```json
 {
   "type": "napari-vipp-workflow",
-  "version": 3
+  "version": 4
 }
 ```
 
-VIPP 0.12.0a3 accepts schema version 3 and rejects versions 1 and 2 with an
-explicit error. There is no automatic migration path. This prevents an old file
-from being silently reinterpreted with invented threshold, cutoff, channel-axis,
-color, or intensity-mapping choices.
+VIPP 0.13.0a1 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
+an explicit error. Schema 4 adds portable authored compute intent under
+`execution.compute`, including `cpu`, `auto`, or `selective` mode and per-node
+preferences. It does not store a claim that the same backend will be available
+or fastest on another computer.
+
+A schema-3 workflow has no compute contract. It therefore loads with an
+explicit **CPU** request, never the new-session Auto default. Saving the reviewed
+workflow emits schema 4. This one conservative migration does not relax the
+scientific reasons that schemas 1 and 2 remain rejected.
 
 Retain an older workflow unchanged for provenance and use the VIPP environment
-that created it when it must be inspected or run. Rebuild the graph in 0.12
+that created it when it must be inspected or run. Rebuild the graph in 0.13
 from the old graph and methods notes, then compare nodes, connections, dynamic
 ports, parameters, sources, metadata, and results on known data. Do not change
 the JSON version number by hand.
 
-0.12.0a3 does not increment the schema. Valid schema-3 workflows saved by
-0.12.0a1 or 0.12.0a2 therefore load structurally in 0.12.0a3. That means the
-graph, parameters, connections, and persisted workflow state can be
-reconstructed; it does not mean prior calculated results were embedded or
+A schema-3 workflow saved by 0.12 can therefore be reconstructed in 0.13 with
+its graph, parameters, connections, and persisted workflow state plus a known
+CPU request. This does not mean prior calculated results were embedded or
 revalidated. Scientific pixel/table caches, thumbnails, pinned layers, and
-other interactive display state are not serialized in workflow JSON.
-Recalculate and validate the graph after upgrading.
+runtime execution reports are not serialized in workflow JSON. Recalculate and
+validate the graph after upgrading.
+
+Schema-4 per-node preferences are keyed by workflow node ID and validated
+before execution. They express an authored preference such as CPU or a GPU
+library, not a hidden cast or a stored benchmark result. The execution report,
+rather than workflow intent, is the record of the runtime, implementation,
+fallback, and environment that actually produced a result.
 
 Alpha compatibility is not guaranteed across future schema or operation
 changes. Preserve the original file and exact VIPP version, and test a duplicate
@@ -52,11 +63,15 @@ before using it in a consequential analysis.
 
 ### Optional Batch workspace attachment
 
-A 0.12.0a3 workflow can carry an optional top-level `batch_config`. The
-attachment is a versioned batch configuration containing source bindings,
-local input/output paths, patterns, formats, output policy, and run settings.
-It contains no source pixels, calculated arrays, output files, manifests, or
-item sidecars.
+A 0.13.0a1 workflow can carry an optional top-level `batch_config`. The
+version-2 attachment contains source bindings, local input/output paths,
+patterns, formats, output policy, run settings, and a complete compute request,
+including runtime/device and accelerator-memory settings. It contains no source
+pixels, calculated arrays, output files, manifests, or item sidecars.
+
+A version-1 batch config had no compute request and loads as explicit CPU. It
+saves as version 2 only after validation. VIPP never guesses that an older
+collection run intended to use an accelerator.
 
 The attachment is validated against the containing graph when it is saved and
 loaded. It is deliberately excluded from the scientific workflow hash: changing
@@ -99,27 +114,51 @@ bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
 different runtime. Regenerate and revalidate exported code after every VIPP
-upgrade, including 0.12.0a2 to 0.12.0a3.
-Interactive caches, thumbnails, pinned layers, and graph layout remain UI
-state and are not reproduced.
+upgrade, including 0.12.0a3 to 0.13.0a1. Interactive caches, thumbnails, pinned
+layers, and graph layout remain UI state and are not reproduced.
+
+In 0.13, the callable API accepts a complete `compute_request`, a progress
+callback, and a cooperative cancellation token. The generated CLI overlays
+only explicitly supplied `--compute-mode`, `--fallback-policy`, and repeatable
+`--node-preference` values; omitted fields retain the embedded schema-4 request.
+It also supports `--progress` and provenance controls. A runtime override does
+not mutate the embedded workflow.
+
+`PipelineResults` exposes the effective compute request, the formal execution
+report, per-node compute provenance, and output-bound provenance. A successful
+`save_image()` writes an atomic `.vipp-provenance.json` sibling by default. The
+document identifies the output node/port and actual implementation, not merely
+the requested mode. Publication fails when execution cleanup or final
+promotion cannot be established.
 
 ## Batch artifacts
 
-A batch run uses either a standalone versioned `vipp_batch_config.json` or the
+A batch run uses either a standalone version-2 `vipp_batch_config.json` or the
 equivalent validated configuration attached to a workflow. It records
 collection bindings, output policy, resolved output declarations, the workflow
-companion, and the canonical workflow hash. Preview and execution share one
-deterministic sorted positional pairing and output planner. Run always performs
-a fresh plan-only preflight. A new or deliberately edited plan can start in the
-same click without calculating a representative; an unexpectedly changed plan
-that was already reviewed stops for confirmation.
+companion, canonical workflow hash, and configured compute request. Preview and
+execution share one deterministic sorted positional pairing and output planner.
+Run always performs a fresh plan-only preflight. A new or deliberately edited
+plan can start in the same click without calculating a representative; an
+unexpectedly changed plan that was already reviewed stops for confirmation.
 
-Each run writes a latest manifest, a run-id archive, and item sidecars recording
-software versions, source identities/metadata, hashes, planned outputs,
-policies, errors, and status. Output promotion is atomic per file after all
-sources for an item are reverified. These artifacts improve auditability but do
-not form one transaction across every output and sidecar; inspect the recovery
-trail after an interruption.
+The effective request follows explicit precedence: a new Batch workspace
+captures the current toolbar request; a loaded config retains its own request;
+changing a toolbar compute setting after load replaces that request for the
+next preview/save/run; and CLI arguments overlay only fields actually supplied.
+Unknown node IDs or malformed preferences fail before output artifacts are
+produced.
+
+Each run writes a latest version-2 manifest, a run-id archive, and item
+sidecars recording software versions, source identities/metadata, hashes,
+planned outputs, policies, errors, and status. The manifest also records the
+configured/effective requests, whether a run override was used, request/config
+fingerprints, and an execution document plus digest for every calculated item.
+Each published output links to that exact item execution. Output promotion is
+atomic per file after all sources and accelerator cleanup for an item are
+verified. These artifacts improve auditability but do not form one transaction
+across every output and sidecar; inspect the recovery trail after an
+interruption.
 
 An item whose resolved `Skip` destinations all exist is finalized without
 loading source pixels or calculating the graph. Atomic artifact replacement
@@ -129,6 +168,32 @@ whether later items run; final run-manifest persistence remains mandatory.
 
 See [process a folder](../workflows/batch-processing.md) for the complete user
 contract.
+
+## Fallback, progress, and cancellation
+
+Every execution report records the requested policy and actual decision for
+each completed computed node, including pruned intermediates. The record
+includes runtime, array domain, implementation library/ID/version, parity and
+cache-equivalence policy, preference, decision reason, benchmark digest, memory
+estimate, environment fingerprint, classified fallbacks, outcome, and cleanup
+evidence. A custom implementation whose versioned identity is incomplete is
+recorded honestly as incomplete rather than presented as exact reproduction.
+
+**Visible** fallback permits one CPU retry of a complete transactional device
+segment only after a classified, retryable runtime OOM. VIPP synchronizes and
+cleans the GPU attempt first. **Strict** returns the typed memory failure;
+unrelated device defects are not renamed as OOM or silently retried. Eligibility
+or availability decisions made before device work remain visible in node
+decisions and fallback summaries.
+
+Batch exposes overall-item and current-operation progress. The saved runner
+prints both with `--progress`; generated workflow CLI prints operation-level
+progress. Cancellation is cooperative between nodes, device segments,
+iterative/tiled checkpoints, staging, verification, and items. A monolithic
+library call or writer can delay the next update because VIPP does not invent
+internal progress. On normal cancellation the active item is recorded as
+cancelled, later unstarted items as skipped, provenance is finalized, and CLI
+returns `130`.
 
 ## Metadata boundary
 

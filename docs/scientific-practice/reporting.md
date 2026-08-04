@@ -10,6 +10,9 @@ Report:
 - napari-vipp version (and commit for nightly/development builds);
 - Python and important dependency versions or an environment file;
 - workflow JSON and, if used, generated Python;
+- authored compute mode and per-node preferences, plus the actual CPU/CuPy/
+  cuCIM implementation IDs/versions, environment fingerprint, fallback/OOM
+  records, and cleanup outcome from execution provenance;
 - input dataset identifiers, acquisition details, series selection, and axes;
 - channel mapping, physical scale, and any metadata corrections;
 - source checksums/identities and the source revision accepted at calculation;
@@ -27,18 +30,25 @@ Report:
   quantitative metrics;
 - manual calculations, exclusions, retries, and QC criteria;
 - batch source pairing, naming, output formats, overwrite behavior, workflow and
-  config hashes, manifest/run id, item/output statuses, retries, and partial or
-  skipped outputs;
+  config/effective-request hashes, manifest/run id, item execution digests,
+  cancellation, item/output statuses, retries, and partial, skipped, cancelled,
+  or failed outputs;
 - location and license of data, workflows, code, validation artifacts, and
   output tables.
 
 ## Suggested concise wording
 
-> Images were processed with napari-vipp 0.12.0a3 using the archived workflow
+> Images were processed with napari-vipp 0.13.0a1 using the archived workflow
 > JSON [identifier]. The workflow was developed on [development set] and frozen
 > before evaluation on [held-out set]. Intermediate masks and labels were
 > reviewed using predefined criteria [reference], and [metrics] were calculated
 > against [reference annotations/phantoms].
+
+For an accelerated run, add wording such as: “The saved workflow requested
+Auto compute. The archived execution report records CuPy implementation
+`[ID/version]` on `[device/environment]` for `[nodes]`, CPU for `[nodes]`, and
+`[no fallbacks / classified fallback details]`.” Do not report “GPU analysis”
+from toolbar intent alone.
 
 An appropriate threshold detail could read: “The complete `float32` stack was
 segmented with Otsu's method using 1,024 histogram bins; all finite pixels were

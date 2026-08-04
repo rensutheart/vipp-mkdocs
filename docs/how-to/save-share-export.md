@@ -5,12 +5,12 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 3) | Reopen/edit the validated scientific graph in VIPP 0.12; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, Python environment, source bytes |
-| Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor | Interactive UI, caches, a portable runtime environment |
-| Saved image/table | Analysis result or QC artifact | The graph and parameter rationale |
+| Workflow JSON (schema 4) | Reopen/edit the graph and authored compute request in VIPP 0.13; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
+| Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive or arbitrary standalone table provenance |
-| Batch config | Recreate source bindings, output declarations, naming, collision policy, and workflow association | Input bytes, environment, finalized run outcome |
-| Batch manifest/archive/sidecars | Audit planned inputs/outputs, identities, hashes, versions, errors, and per-item/output status | One atomic transaction or proof of biological validity |
+| Batch config (version 2) | Recreate source bindings, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
+| Batch manifest/archive/sidecars (version 2) | Audit planned inputs/outputs, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
 
 ## Save a workflow
 
@@ -44,14 +44,11 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.12.0a3 still writes schema 3 and rejects versions 1 and 2. Valid 0.12.0a1 and
-0.12.0a2 schema-3 workflows load structurally, but cached pixels and tables are
-not serialized in the workflow. Recalculate and revalidate after upgrading.
-For a 0.12.0a2 workflow, follow the
-[0.12.0a2 to 0.12.0a3 procedure](../reference/versioning.md#move-from-0120a2-to-0120a3).
-The earlier
-[0.12.0a1 to 0.12.0a2 procedure](../reference/versioning.md#move-from-0120a1-to-0120a2)
-remains available for older workflows.
+0.13.0a1 writes schema 4 and rejects versions 1 and 2. Valid schema-3 workflows
+load structurally with an explicit CPU request, but cached pixels and tables
+are not serialized. Saving the reviewed duplicate writes schema 4. Follow the
+[0.12.0a3 to 0.13.0a1 procedure](../reference/versioning.md#move-from-0120a3-to-0130a1).
+The earlier release-to-release procedures remain available for older workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-to-0120a1).
 
@@ -75,16 +72,41 @@ duplicate, or unknown sources.
 
 The script records the exact VIPP version that created it and refuses another
 runtime. Regenerate and revalidate it after every upgrade, including alpha
-updates. UI caches, pinned layers,
-and graph layout are presentation state and are intentionally absent.
+updates. UI caches, pinned layers, and graph layout are presentation state and
+are intentionally absent.
+
+In 0.13, Python callers can pass a complete `ComputeRequest`, progress callback,
+and cooperative cancellation token. The generated CLI accepts
+`--compute-mode`, `--fallback-policy`, repeatable `--node-preference`,
+`--progress`, and provenance controls. Omitted CLI fields retain the embedded
+schema-4 request; overrides do not mutate the workflow.
+
+With provenance enabled, a successful saved output receives an atomic sibling
+such as `result.ome.tif.vipp-provenance.json`. The document binds the output
+node/port to the effective request, actual CPU/CuPy/cuCIM implementation,
+fallbacks, environment, outcome, and cleanup evidence. A failed or cancelled
+single-output run also attempts a failure sidecar. Publication fails closed if
+GPU cleanup or final promotion cannot be established.
+
+Use `python generated_pipeline.py --help` for the exact source-binding and
+output arguments emitted for that graph. Add `--progress` for operation updates
+and supply compute overrides only when the run should deliberately differ from
+the embedded schema-4 request.
 
 ## Save a batch configuration and evidence
 
 Use **Batch workspace... → Save config...** to write
 `vipp_batch_config.json`. Keep it with its required workflow companion. After a
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
-`vipp_batch_pipeline.py` is only a thin launcher for that config; it is not a
-substitute for the workflow/config pair.
+`vipp_batch_pipeline.py` is a version-locked launcher for that config and
+workflow; it is not a substitute for the pair.
+
+Version-2 configs store the complete configured compute request. Version-1
+configs load as explicit CPU. The runner uses its saved request by default and
+can overlay explicit compute/fallback/per-node CLI choices. `--progress` prints
+both overall-item and current-operation progress. One `Ctrl+C` requests normal
+cooperative cancellation and allows manifest/sidecar cleanup; a second is an
+emergency interrupt that can bypass finalization.
 
 The standalone config remains the appropriate form for the supplied headless
 batch runner and for workflows/configs managed as separate automation
@@ -95,6 +117,12 @@ that document an actual run.
 Inspect partial, skipped, and failed records as well as successful outputs.
 Sidecars help reconstruct an interrupted run, but outputs and provenance files
 are not one multi-file transaction.
+
+For production collection processing, use the saved runner rather than the
+generated program's simple `batch_process()` folder helper. The helper varies
+one primary source but does not provide multi-source pairing, source-byte
+identities, collision planning, private staging, checkpoints, manifest, or
+durable replay.
 
 ## Share an analysis package
 
@@ -108,6 +136,8 @@ At minimum include:
 - method notes for manual decisions, exclusions, source/grid assumptions, and
   batch pairing;
 - for batch work: the attached or standalone config, manifest archives,
-  sidecars, and the workflow/config hashes reported by the finalized run.
+  sidecars, configured/effective compute requests, actual implementation and
+  fallback records, and workflow/config/execution hashes reported by the
+  finalized run.
 
 For publication, follow the [reporting checklist](../scientific-practice/reporting.md).

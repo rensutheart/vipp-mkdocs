@@ -1,6 +1,6 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.12.0a3 application source.
+This page summarizes the evidence shipped with the 0.13.0a1 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.
 
@@ -25,19 +25,38 @@ every assay.
   rejection of stale contrast/histogram results; and
 - batch tests cover attached-config validation and round-trip, restore without
   preview, direct plan-only execution, complete-item fast skips, transient
-  atomic-write retries, and continuing after a final item-sidecar failure.
+  atomic-write retries, and continuing after a final item-sidecar failure;
+- compute tests cover import-safe CPU-only use, workflow-schema-4 and
+  batch-schema-2 intent, eligibility planning, exact implementation identity,
+  resident device segments, memory admission, classified fallback, optimizer
+  review/apply, progress, cancellation, cleanup, and atomic publication; and
+- opt-in native-Windows RTX tests exercise a real durable GPU batch and an
+  imported generated Python workflow through the same executor.
 
-Release CI covers package/manifest, lint, and test behavior on Linux and
-Windows. A passing CI matrix is not equivalent to a manual GUI smoke pass on
-every operating system, Qt/display environment, filesystem, or microscope
-reader.
+Release CI is configured for package/manifest, lint, and CPython 3.12 and 3.13
+tests on Linux, Windows, and macOS. A passing CI matrix is not equivalent to a manual GUI
+smoke pass on every operating system, Qt/display environment, filesystem,
+microscope reader, or GPU.
 
-A bounded manual Windows acceptance pass for 0.12.0a3 covered direct
+A bounded manual Windows acceptance pass inherited from 0.12.0a3 covered direct
 unpreviewed batch execution, complete `Skip` items, continued processing after
 an item failure, attached-config save/reload, and a representative 3D
 deconvolution batch. It does not establish cross-platform behavior, broad
 filesystem interoperability, large-collection scalability, or restoration
 quality for arbitrary samples.
+
+The 0.13 source-current full local suite passed 3,719 tests with two opt-in CUDA
+tests skipped by default and two documented expected failures. The two final
+real-CUDA durable execution tests passed when enabled. These numbers describe
+one release-candidate checkout and should be paired with the final tagged
+commit's CI and artifact-smoke results before publication.
+
+The source-current native-Windows RTX 5090 evidence records operation-level
+scientific parity, memory, progress/cancellation, cleanup, and timing for the
+declared public GPU regions. Recent large-stack Richardson-Lucy examples ranged
+from about 63x to 88x CPU/GPU speedup and Richardson-Lucy TV examples from about
+60x to 100x on that one machine. These are descriptive machine-local results,
+not portable performance guarantees or durable Auto assignments.
 
 The release's generated calibrated-morphology report records **28/28 checks
 passed**. Its own scope excludes broad numerical equivalence, biological
@@ -65,18 +84,26 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
+| GPU execution | Exact operation-region tests, immutable policy/evidence records, one native-Windows RTX 5090 environment, real durable batch/generated-export smokes, OOM/cancellation/cleanup coverage | Native Linux, RTX 40-series Windows, clean wheel environments, broader drivers/runtimes, Apple-provider study, and cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, and a bounded Windows acceptance pass | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
-| Workflow/export architecture | Schema-3 rejection/round-trip, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor export, multi-source binding, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
+| Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 2, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
 | Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
 ## Release-specific limitations
 
-- Workflow schema 1 and 2 are intentionally rejected; 0.12.0a3 has no automatic
-  migration.
-- Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows load structurally, but cached
-  pixels/tables are not serialized and exported Python is runtime-version
-  pinned. Recalculate, regenerate exports, and validate after upgrading.
+- Workflow schemas 1 and 2 are intentionally rejected. Valid schema-3 workflows
+  load as explicit CPU and save as schema 4; cached pixels/tables are not
+  serialized and exported Python is runtime-version pinned. Recalculate,
+  regenerate exports, and validate after upgrading.
+- Version-1 batch configs load as explicit CPU and save as version 2. A saved
+  Auto/Selective request is intent; actual implementation provenance must be
+  retained from each run.
+- GPU candidates cover only declared operation/dtype/parameter/shape/memory and
+  environment regions. The initial public gate is one exact native-Windows RTX
+  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release.
+- cuCIM's source-built Windows `skimage` wheel is not a general install route
+  and omits Clara I/O. Feature-complete cuCIM packaging remains pending.
 - Batch processing is local-file and sorted-position oriented. It does not
   iterate selected T/C/Z combinations or discover plate/well/field structure.
 - Many operations are eager even when a source format supports lazy/chunked
@@ -87,6 +114,14 @@ same as an external comparison or assay validation. The distinction matters:
   restoration parameter range for a real microscope or assay.
 - Manifest and item sidecar writes improve recovery evidence but are not one
   transaction across all outputs and provenance files.
+- Cooperative progress/cancellation cannot split an opaque library call or file
+  writer into truthful internal percentages.
+- Revised native-intensity colocalization is a source-aligned compatibility
+  implementation targeting Fiji Coloc 2 3.1.0, but independent numerical
+  parity validation is pending. The ImageJ threshold path similarly targets
+  ImageJ 1.54p for scalar `uint8`, `uint16`, and `float32`; Boolean and RGB/RGBA
+  handling are VIPP extensions and are not claimed as ImageJ-exact. Treat both
+  paths as experimental and validate externally before consequential use.
 
 ## For your workflow
 

@@ -41,9 +41,13 @@ inferred-only choice rather than guessing. A trailing dimension of length three
 or four is not, by itself, evidence of RGB/RGBA; a generic `C` axis remains a
 scientific channel axis unless color semantics are declared explicitly.
 
-In workflow schema 3, affected operations persist `channel_axis`. The value
+Since workflow schema 3, affected operations persist `channel_axis`. The value
 `-1` means scalar/no-channel data. It does not ask VIPP to detect RGB from
 shape.
+
+Workflow schema 4 adds authored compute intent without changing these axis and
+metadata semantics. A schema-3 workflow therefore loads into 0.13 with explicit
+CPU execution rather than silently applying the new-session Auto policy.
 
 `Composite → RGB` adds explicit authoring modes around that contract.
 **Channel axis mode = Auto** resolves the carried explicit channel axis and

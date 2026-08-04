@@ -8,10 +8,10 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The current public software baseline is **0.12.0a3**. Its `a3` suffix identifies
-the third alpha build in the 0.12.0 release series; it is a tagged pre-release,
+The current public software baseline is **0.13.0a1**. Its `a1` suffix identifies
+the first alpha build in the 0.13.0 release series; it is a tagged pre-release,
 not a nightly build. See [installation](../getting-started/installation.md) and
-the [0.12.0a3 release notes](../releases/0.12.0a3.md).
+the [0.13.0a1 release notes](../releases/0.13.0a1.md).
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -25,12 +25,53 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.12.0a3 retains schema version 3; versions 1 and 2 are rejected rather
-than migrated automatically. Valid 0.12.0a1 and 0.12.0a2 schema-3 workflows
-load structurally in 0.12.0a3, but workflow JSON contains no cached scientific
+VIPP 0.13.0a1 writes schema version 4; versions 1 and 2 are rejected. Valid
+schema-3 workflows load structurally with an explicit CPU compute request and
+become schema 4 only when saved. Workflow JSON contains no cached scientific
 pixels/tables. Recalculate and compare graph structure, parameters, sources,
-axes, channels, physical grids, dynamic ports, and results on known sample
-data. See the [workflow contract](workflow-contract.md).
+axes, channels, physical grids, dynamic ports, compute request, actual backend,
+and results on known sample data. See the
+[workflow contract](workflow-contract.md).
+
+## Move from 0.12.0a3 to 0.13.0a1
+
+0.13 introduces durable compute intent and can also change calculated
+colocalization values. Treat the upgrade as a scientific review, not only a
+file-format conversion.
+
+1. Keep the original schema-3 workflow, 0.12.0a3 environment, generated Python,
+   batch config, manifests, sidecars, and validated outputs unchanged.
+2. Open a duplicate in 0.13.0a1. Confirm that its migrated compute mode is
+   **CPU**. Inspect graph structure, parameters, dynamic ports, source bindings,
+   axes/channels, physical grids, Batch Output declarations, and optional Batch
+   workspace attachment.
+3. Recalculate on CPU and compare decisive intermediates and final results.
+   Cached arrays/tables were never embedded in the workflow. Give particular
+   attention to colocalization thresholds, native-unit intensity sums, Pearson
+   population fields, Manders fields, cropped masks, and ND2 axis order.
+4. Save the reviewed duplicate as schema 4. The saved `execution.compute`
+   object records `cpu`, `auto`, or `selective` mode and any authored per-node
+   preferences; it does not record a promise about which implementation will
+   actually be available on another machine.
+5. If acceleration is wanted, enable Auto or Selective only after the CPU
+   comparison. Review CPU/CuPy/cuCIM/fallback badges and retain the actual-run
+   execution provenance. Do not add an unplanned `Convert Dtype` merely to make
+   a GPU benchmark faster.
+6. Load or recreate Batch workspace. Version-1 batch configs migrate to an
+   explicit CPU request and save as version 2. Review the configured/effective
+   requests, memory and fallback policy, bindings, paths, collision policy, and
+   fresh preflight before running.
+7. Regenerate and revalidate exported Python and the saved batch runner. A
+   generated 0.12 program refuses a 0.13 runtime by design.
+8. For a consequential batch, test progress, cancellation, and OOM/fallback on
+   non-critical data, then inspect the version-2 manifest's execution documents,
+   digests, output links, cleanup evidence, and
+   partial/skipped/cancelled/failed records.
+
+The colocalization and ImageJ-threshold revisions have frozen automated
+fixtures but still require independent upstream-method review. Treat them as
+experimental and perform an external reference comparison before relying on
+the revised values.
 
 ## Move from 0.12.0a2 to 0.12.0a3
 
@@ -108,8 +149,20 @@ python -m pip install --pre napari-vipp
 To reproduce a specific alpha exactly, specify the version in a fresh environment:
 
 ```text
-python -m pip install "napari[pyqt6]" "napari-vipp==0.12.0a3"
+python -m pip install --pre "napari[pyqt6]" "napari-vipp==0.13.0a1"
 ```
+
+For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
+
+```text
+python -m pip install --pre "napari[pyqt6]" "napari-vipp[gpu-cuda13]==0.13.0a1"
+vipp-compute-doctor --track cuda13
+```
+
+The extra installs a reproducible CUDA/CuPy track; it does not make an
+unqualified GPU, driver, OS, or scientific stack scientifically admitted.
+Never install both CUDA-major extras into one environment. See
+[installation](../getting-started/installation.md#optional-nvidia-cuda-acceleration).
 
 ## Nightly policy
 

@@ -20,17 +20,23 @@ deterministic plan.
    or table to save.
 3. Open **Batch workspace...** and bind each varying `Image Source` to a local
    folder and pattern.
-4. Choose an output folder, formats, naming, and existing-file policy.
-5. Optionally select **Preview batch** to review pairing and collision summaries.
-6. When previewing, navigate several representatives, including difficult and
+4. Choose the intended toolbar compute request. New work defaults to Auto;
+   choose CPU for a portable reference run or Selective for reviewed per-node
+   preferences.
+5. Choose an output folder, formats, naming, existing-file policy, fallback
+   policy, device, and accelerator-memory settings.
+6. Optionally select **Preview batch** to review pairing and collision summaries.
+7. When previewing, navigate several representatives, including difficult and
    boundary cases.
-7. Save the workflow and choose **Yes** to attach the Batch workspace, or use
+8. Save the workflow and choose **Yes** to attach the Batch workspace, or use
    **Save config...** when a separate headless-replay configuration is needed.
-8. Select **Run batch**. It performs its own plan-only preflight and starts
+9. Select **Run batch**. It performs its own plan-only preflight and starts
    directly when no reviewed plan is current. If a displayed plan changed
    unexpectedly, review the refreshed plan and run again only after accepting it.
-9. Inspect outputs, final status, validation text, manifest, archive, and item
-    sidecars before treating the run as complete.
+10. Inspect outputs, final status, validation text, manifest, archive, item
+    sidecars, configured/effective compute requests, actual node
+    implementations, fallbacks, and cleanup evidence before treating the run as
+    complete.
 
 After the first source folder is bound, VIPP suggests its `output` subdirectory
 as the destination. Amber means that this is an unconfirmed suggestion, not an
@@ -58,7 +64,7 @@ items:    (a_01,b_01) (a_02,b_02) (a_03,b_03)
 
 Directory names and filename similarity do not create biological pairing.
 Inspect the preview and retain an independent sample/field map when position is
-not sufficient evidence. Time, channel, and Z remain inside each file; 0.12
+not sufficient evidence. Time, channel, and Z remain inside each file; 0.13
 does not iterate semantic-axis combinations or discover plate/well/field HCS
 structure.
 
@@ -188,8 +194,16 @@ separate, use **Save config...**. It writes a standalone versioned
 - output folder and default image format;
 - filename/output declarations and existing-file policy;
 - continue-after-failure behavior;
+- complete compute mode, per-node preferences, fallback policy,
+  runtime/device selection, and accelerator memory limits;
 - the required workflow companion and optional runner;
 - the canonical scientific workflow hash.
+
+Batch config schema 2 stores this compute request. A version-1 config had no
+compute fields and loads as explicit CPU. Loading a config does not silently
+replace the toolbar request; it retains its saved request until the user changes
+a toolbar compute setting, at which point the current complete toolbar request
+is used for the next preview, save, or run.
 
 **Load config...** validates it against the current workflow. A hash or resolved
 output mismatch fails rather than silently applying stale selections.
@@ -200,6 +214,31 @@ to the same headless batch core as the workspace. It is different from
 **Export Python...**, whose immutable embedded workflow and primary-source
 folder helper serve a different automation use case.
 
+The runner uses the config request by default. Its CLI can overlay explicitly
+supplied `--compute-mode`, `--fallback-policy`, and repeatable
+`--node-preference NODE_ID=PREFERENCE` options without mutating the saved
+config. Use `--progress` to print both overall-item and current-operation
+updates. Exit code `0` means no recorded failures, `1` means a finalized batch
+contains failures, `2` means setup/execution failed before a normal result, and
+`130` means cooperative cancellation.
+
+Run the saved request with:
+
+```text
+python vipp_batch_pipeline.py --progress
+```
+
+Override only a deliberate difference from the saved config, for example:
+
+```text
+python vipp_batch_pipeline.py --progress --compute-mode selective --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
+```
+
+Node IDs come from the reviewed workflow/config. Stable preferences include
+`auto`, `cpu`, `best_gpu`, `library:<library-id>`, and
+`implementation:<implementation-id>`. Prefer a library choice for portability;
+an exact implementation pin can be unavailable on another computer.
+
 ## Execution and publication safety
 
 For each item, VIPP:
@@ -208,8 +247,9 @@ For each item, VIPP:
 2. runs the complete graph through the shared headless executor;
 3. writes all outputs to private staging paths;
 4. reverifies every source identity;
-5. promotes staged outputs to final paths one at a time;
-6. updates provenance status and checkpoints.
+5. synchronizes and verifies accelerator cleanup when device work occurred;
+6. promotes staged outputs to final paths one at a time;
+7. updates provenance status and checkpoints.
 
 If a source changes before publication, none of that item's outputs are
 promoted. A failure during later promotion can leave earlier outputs from the
@@ -217,8 +257,24 @@ same item successfully published; the item is recorded as `partial` rather
 than hidden. Successful earlier items remain available. With **Continue after
 item failures** enabled, later items continue.
 
-Item progress is intentionally item-level. One expensive item can stay at
-`running` for a long time while its graph invocation completes.
+Batch displays two progress levels. **Overall** reports the item number, batch
+ID, and final item status. **Current operation** reports the containing item,
+node/operation, completed checkpoint, total checkpoints, and message. A
+monolithic NumPy, SciPy, CuPy, cuCIM, or writer call can still remain at one
+percentage until it returns because VIPP does not invent internal progress.
+
+**Cancel** requests cooperative cancellation between nodes, device segments,
+iterative/tiled checkpoints, output staging, source verification, and items.
+The active operation may finish its current atomic library call first. On the
+normal cancellation path, the active item and its unpublished outputs become
+`cancelled`, later unstarted items become `skipped`, manifest/archive/checkpoint
+evidence is finalized, and the runner exits `130`. Once the short multi-output
+promotion boundary begins, VIPP completes it to avoid an avoidable partial set.
+
+With **visible** fallback, a complete transactional GPU segment can be retried
+once on CPU only after a classified, retryable OOM and proven GPU cleanup.
+**Strict** returns the typed memory failure. Other device errors are not silently
+renamed or retried. Each later item is replanned independently.
 
 ## Provenance artifacts
 
@@ -229,17 +285,24 @@ Every workspace or headless run writes:
 - a run-id manifest archive — preserves prior finalized runs;
 - a run-id sidecar directory — per-item/output checkpoints during execution.
 
-The manifest records:
+The version-2 manifest records:
 
 - canonical workflow/config and their hashes;
 - VIPP, Python, and relevant runtime package versions;
 - each source identity and available metadata;
 - every planned output path, format, and collision policy;
-- errors and item/output states.
+- errors and item/output states;
+- the configured and effective compute requests, whether a CLI/UI override was
+  used, and their fingerprints;
+- for every calculated item, the formal execution document and digest with
+  actual CPU/CuPy/cuCIM decisions, implementation IDs/versions, memory
+  estimates, fallbacks, outcome, and cleanup; and
+- an execution-provenance digest on every published output record that links it
+  to that exact item execution.
 
-Output states are `pending`, `completed`, `skipped`, or `failed`. Item states
-can also be `running` or `partial`. Final summaries count completed, partial,
-skipped, and failed items separately.
+Output states are `pending`, `completed`, `skipped`, `cancelled`, or `failed`.
+Item states can also be `running` or `partial`. Final summaries count completed,
+partial, skipped, cancelled, and failed items separately.
 
 Sidecars reduce ambiguity after interruption, but there is a small window
 between output promotion and checkpoint replacement. They are a recovery trail,
@@ -277,6 +340,8 @@ not evidence that another assay or naming scheme is valid.
 - Axes, channels, physical scale, origin, and units are appropriate.
 - Output names, formats, subfolders, and collision policy are intentional.
 - The fresh preflight matches the reviewed plan.
-- Completed/partial/skipped/failed counts match expectations.
+- The configured and effective compute requests match the intended run, and
+  actual node badges/provenance explain CPU, GPU, or fallback decisions.
+- Completed/partial/skipped/cancelled/failed counts match expectations.
 - Manifests, archives, sidecars, environment, exclusions, QC, and validation
   evidence are retained with the outputs.
