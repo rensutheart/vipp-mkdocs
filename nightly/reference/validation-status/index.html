@@ -2543,6 +2543,17 @@ durable batch/generated-Python tests. A green CI/package matrix is not
 equivalent to a manual GUI smoke pass on every operating system, Qt/display
 environment, filesystem, microscope reader, or GPU. See the
 <a href="https://github.com/rensutheart/napari-vipp/actions/runs/30945609407">candidate CI run</a>.</p>
+<p>A bounded source-candidate smoke on 4 August 2026 used application commit
+<code>e024409</code> on an Apple M1 Max (<code>arm64</code>) running macOS 26.5.2. Manual checks
+covered launch/basic CPU processing, collection-batch progress and cooperative
+cancellation, and memory presentation as one system-RAM budget without a
+fabricated VRAM total. Four focused tests additionally covered the
+CPU-safe cancel path, worker-token propagation, single-shot UI cancellation,
+retained cancelled state, manifest, and cleanup evidence. The follow-up
+operator record is commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/ff210402629a7d1f790a48d1f2dfc0f86861ddba"><code>ff21040</code></a>.
+This is bounded source-checkout evidence, not a raw test log, clean-wheel Mac
+qualification, broad reader/display/filesystem coverage, or Apple GPU evidence.</p>
 <p>A bounded manual Windows acceptance pass inherited from 0.12.0a3 covered direct
 unpreviewed batch execution, complete <code>Skip</code> items, continued processing after
 an item failure, attached-config save/reload, and a representative 3D
@@ -2611,9 +2622,9 @@ same as an external comparison or assay validation. The distinction matters:</p>
 <td>Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization</td>
 </tr>
 <tr>
-<td>GPU execution</td>
-<td>Exact operation-region tests, immutable policy/evidence records, one installed-wheel native-Windows RTX 5090 environment, real durable batch/generated-export smokes, OOM/cancellation/cleanup coverage, and clean CPU-wheel validation</td>
-<td>Native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and cross-platform manual GUI acceptance</td>
+<td>Compute/GPU execution</td>
+<td>Exact operation-region tests, immutable policy/evidence records, one installed-wheel native-Windows RTX 5090 environment, real durable batch/generated-export smokes, OOM/cancellation/cleanup coverage, clean CPU-wheel validation, and a bounded M1 Max CPU launch/basic-processing/batch-cancel/memory-presentation smoke</td>
+<td>Native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance</td>
 </tr>
 <tr>
 <td>Sources and physical grids</td>
@@ -2622,8 +2633,8 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Large data/batch</td>
-<td>Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, and a bounded Windows acceptance pass</td>
-<td>Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal</td>
+<td>Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence</td>
+<td>Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal</td>
 </tr>
 <tr>
 <td>Workflow/export architecture</td>
@@ -2650,7 +2661,8 @@ same as an external comparison or assay validation. The distinction matters:</p>
   candidates stay CPU; reviewed UI GPU assignments are Selective.</li>
 <li>GPU candidates cover only declared operation/dtype/parameter/shape/memory and
   environment regions. The initial public gate is one exact native-Windows RTX
-  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release.
+  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the
+  bounded M1 Max CPU smoke above does not admit an Apple accelerator.
   The <a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">CPU/GPU matrix</a> is a
   readable summary; the runtime policy/decision remains authoritative.</li>
 <li>cuCIM's source-built Windows <code>skimage</code> wheel is not a general install route
@@ -2698,7 +2710,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 21:10:19 UTC">August 4, 2026</span>
   </span>
 
     

@@ -2658,7 +2658,8 @@ device. Changed hardware, platform, Python ABI, driver, CUDA runtime, or
 scientific-stack versions are not silently generalized from that evidence.
 Native Linux and RTX 40-series Windows qualification remain pending; macOS has
 no CUDA provider and remains CPU-only while Apple-accelerator research is
-pending.</p>
+pending. A bounded M1 Max CPU smoke is recorded below; it does not admit an
+Apple GPU provider.</p>
 <p>cuCIM-backed operation regions are also gated independently. The current native
 Windows evidence uses a checksum-recorded source-built <code>cucim.skimage</code> wheel;
 there is no general public Windows cuCIM install extra, and the wheel does not
@@ -2806,6 +2807,17 @@ lint, and CPython 3.12/3.13 tests passed on Windows, Linux, and macOS in the
 The wheel and source distribution passed Twine checks, clean CPU-wheel
 installation checks, and installed-wheel CUDA diagnostics/durable execution
 smokes within the stated native-Windows evidence boundary.</p>
+<p>On 4 August 2026, the <code>e024409</code> source candidate also received a bounded Apple
+M1 Max (<code>arm64</code>, macOS 26.5.2) CPU smoke. Manual checks covered launch and basic
+processing, collection-batch progress and cooperative cancellation, and memory
+presentation as one system-RAM budget without a fabricated separate VRAM
+total. Four focused tests covered the
+CPU-safe cancellation path, worker token and both progress channels,
+single-shot cancel UI, retained cancelled state, manifest, and cleanup
+evidence. Commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/ff210402629a7d1f790a48d1f2dfc0f86861ddba"><code>ff21040</code></a>
+is the follow-up operator record, not a raw log or an Apple-GPU/broad-macOS
+qualification artifact.</p>
 <p>The locally verified candidate artifacts are:</p>
 <table>
 <thead>
@@ -2827,7 +2839,10 @@ smokes within the stated native-Windows evidence boundary.</p>
 </table>
 <p>These hashes identify the prepared files, not a published release until the
 matching tag and exact artifacts are uploaded. If the application source or
-artifacts change, rebuild, recheck, and replace this evidence before release.</p>
+artifacts change, rebuild, recheck, and replace this evidence before release.
+The hashes above belong to <code>e024409</code>; if the later documentation-only
+<code>ff21040</code> commit becomes the release tag, rebuild and re-hash the artifacts for
+that exact tagged tree.</p>
 <h2 id="upgrade-from-0120a3">Upgrade from 0.12.0a3<a class="headerlink" href="#upgrade-from-0120a3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Preserve the 0.12.0a3 environment, original schema-3 workflow, generated
@@ -2865,7 +2880,10 @@ artifacts change, rebuild, recheck, and replace this evidence before release.</p
   with another or unresolved spatial rank is a typed non-CPU preflight failure
   in this alpha; select CPU for that case.</li>
 <li>Native Linux GPU, RTX 40-series Windows, Apple M1 Max acceleration, and a
-  distributable feature-complete cuCIM/Clara route remain future validation.</li>
+  distributable feature-complete cuCIM/Clara route remain future validation.
+  The bounded M1 Max CPU launch/basic-processing, batch-cancellation, and
+  memory-presentation smoke does not close those accelerator or broad-host
+  gaps.</li>
 <li>Batch pairing remains local-file, sorted-position pairing. VIPP does not yet
   iterate semantic T/C/Z combinations or discover plate/well/field HCS layouts.</li>
 <li>Item checkpoints are a recovery trail, not automatic resume. Artifact
@@ -2878,7 +2896,8 @@ artifacts change, rebuild, recheck, and replace this evidence before release.</p
   generated folder loop is not the durable batch runner.</li>
 <li>Broad reader interoperability, real-assay restoration, colocalization
   equivalence, large-collection stress, and cross-platform manual GUI evidence
-  remain bounded as described in <a href="../../reference/validation-status/">validation status</a>.</li>
+  remain bounded despite the focused Windows and M1 Max CPU passes described in
+  <a href="../../reference/validation-status/">validation status</a>.</li>
 </ul>
 <p>VIPP remains alpha software. Record the application version, workflow, compute
 request, actual implementation provenance, environment, inputs, batch
@@ -2904,7 +2923,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 21:10:19 UTC">August 4, 2026</span>
   </span>
 
     
