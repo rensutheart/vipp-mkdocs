@@ -43,6 +43,18 @@ equivalent to a manual GUI smoke pass on every operating system, Qt/display
 environment, filesystem, microscope reader, or GPU. See the
 [candidate CI run](https://github.com/rensutheart/napari-vipp/actions/runs/30945609407).
 
+A bounded source-candidate smoke on 4 August 2026 used application commit
+`e024409` on an Apple M1 Max (`arm64`) running macOS 26.5.2. Manual checks
+covered launch/basic CPU processing, collection-batch progress and cooperative
+cancellation, and memory presentation as one system-RAM budget without a
+fabricated VRAM total. Four focused tests additionally covered the
+CPU-safe cancel path, worker-token propagation, single-shot UI cancellation,
+retained cancelled state, manifest, and cleanup evidence. The follow-up
+operator record is commit
+[`ff21040`](https://github.com/rensutheart/napari-vipp/commit/ff210402629a7d1f790a48d1f2dfc0f86861ddba).
+This is bounded source-checkout evidence, not a raw test log, clean-wheel Mac
+qualification, broad reader/display/filesystem coverage, or Apple GPU evidence.
+
 A bounded manual Windows acceptance pass inherited from 0.12.0a3 covered direct
 unpreviewed batch execution, complete `Skip` items, continued processing after
 an item failure, attached-config save/reload, and a representative 3D
@@ -89,9 +101,9 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| GPU execution | Exact operation-region tests, immutable policy/evidence records, one installed-wheel native-Windows RTX 5090 environment, real durable batch/generated-export smokes, OOM/cancellation/cleanup coverage, and clean CPU-wheel validation | Native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, one installed-wheel native-Windows RTX 5090 environment, real durable batch/generated-export smokes, OOM/cancellation/cleanup coverage, clean CPU-wheel validation, and a bounded M1 Max CPU launch/basic-processing/batch-cancel/memory-presentation smoke | Native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
-| Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, and a bounded Windows acceptance pass | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
+| Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
 | Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 2, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
 | Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
@@ -108,7 +120,8 @@ same as an external comparison or assay validation. The distinction matters:
   candidates stay CPU; reviewed UI GPU assignments are Selective.
 - GPU candidates cover only declared operation/dtype/parameter/shape/memory and
   environment regions. The initial public gate is one exact native-Windows RTX
-  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release.
+  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the
+  bounded M1 Max CPU smoke above does not admit an Apple accelerator.
   The [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1) is a
   readable summary; the runtime policy/decision remains authoritative.
 - cuCIM's source-built Windows `skimage` wheel is not a general install route

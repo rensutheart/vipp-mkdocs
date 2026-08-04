@@ -57,6 +57,14 @@ Conda or Mamba environments are also suitable; use Python 3.12 or 3.13 and
 activate the environment before running the final
 `python -m pip install ...` command.
 
+!!! note "Bounded M1 Max CPU smoke"
+    The `e024409` source candidate was manually smoke-tested on one Apple M1
+    Max (`arm64`, macOS 26.5.2) for launch, basic processing, batch progress and
+    cancellation, and single-budget system-RAM presentation. Focused
+    cancellation tests were recorded in follow-up commit `ff21040`. This is not
+    a clean-wheel or broad macOS qualification, and it does not provide Apple
+    GPU acceleration.
+
 !!! note "Stable manual versus nightly manual"
     In a numbered/stable manual, the commands above install the documented
     release. In this prepublication nightly, use the immutable candidate commit
@@ -155,7 +163,9 @@ validated source-built wheel omits Clara whole-slide I/O. Do not install an
 arbitrary cuCIM build and assume it is admitted.
 
 macOS has no CUDA path. Use the base CPU installation on Intel or Apple Silicon;
-Metal/MPS/MLX acceleration is a future study, not part of this release.
+the bounded M1 Max source-candidate smoke above supports that CPU path but does
+not generalize to every Mac. Metal/MPS/MLX acceleration is a future study, not
+part of this release.
 
 Continue with [choose and verify CPU or GPU compute](../how-to/choose-compute.md)
 for the per-operation matrix, badge meanings, benchmarks, fallback, and durable

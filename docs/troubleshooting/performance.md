@@ -93,8 +93,9 @@ waits for synchronization and cleanup before output publication.
 VIPP evaluates an operation-specific conservative device-memory estimate
 before launching a GPU segment. **Compute setup and memory…** reports separate
 VRAM on a discrete NVIDIA device; the CPU/cache indicator reports host RAM.
-Future unified-memory providers must report one shared budget rather than
-adding RAM and VRAM as though they were independent.
+The bounded M1 Max CPU smoke showed system RAM once with no fabricated separate
+VRAM. A future unified-memory accelerator provider must report one shared
+CPU/GPU budget rather than adding RAM and nominal VRAM as though independent.
 
 With visible fallback, one complete device segment can retry on CPU after a
 classified runtime OOM only after the GPU attempt synchronizes and cleans up.

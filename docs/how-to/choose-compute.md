@@ -122,7 +122,9 @@ Public admission in this alpha is deliberately narrower than installability:
 the recorded gate is one native-Windows CPython 3.12, CUDA 13, RTX 5090 stack.
 The Linux CUDA command is useful for qualification/development but the current
 public policy still resolves Linux GPU candidates to CPU. CUDA has no macOS
-path; Apple Metal/MPS/MLX work remains a future study.
+path. CPU launch/basic processing, provider-neutral batch progress/cancellation,
+and single-budget RAM presentation received a bounded M1 Max smoke, but Apple
+Metal/MPS/MLX acceleration remains a future study.
 
 See [installation](../getting-started/installation.md) for commands and
 [validation status](../reference/validation-status.md) for the evidence and

@@ -81,9 +81,10 @@ lease prevents unrelated VIPP jobs from interleaving on the same runtime/device
 while allowing separate device keys to proceed independently.
 
 **Compute setup and memory…** distinguishes host RAM from VRAM on a discrete
-NVIDIA GPU. A future Apple or other unified-memory provider must report one
-shared physical budget rather than adding RAM and VRAM as though they were
-independent. macOS remains CPU-only in 0.13.0a1.
+NVIDIA GPU. In the bounded M1 Max CPU smoke, VIPP presented host memory once as
+system RAM and did not fabricate or add a separate VRAM total. A future Apple
+or other accelerator provider that reports unified topology must instead use
+one shared CPU/GPU budget row. macOS remains CPU-only in 0.13.0a1.
 
 With **visible** fallback, one complete device segment may retry once on CPU
 after a classified runtime OOM, but only after synchronization and proven

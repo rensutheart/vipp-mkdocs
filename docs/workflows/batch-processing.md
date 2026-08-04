@@ -283,6 +283,11 @@ normal cancellation path, the active item and its unpublished outputs become
 evidence is finalized, and the runner exits `130`. Once the short multi-output
 promotion boundary begins, VIPP completes it to avoid an avoidable partial set.
 
+This provider-neutral progress/cancellation path received a bounded M1 Max CPU
+smoke in addition to focused cancellation tests. See
+[validation status](../reference/validation-status.md) for the exact evidence
+boundary; it is not an Apple GPU claim.
+
 With **visible** fallback, a complete transactional GPU segment can be retried
 once on CPU only after a classified, retryable OOM and proven GPU cleanup.
 **Strict** returns the typed memory failure. Other device errors are not silently
