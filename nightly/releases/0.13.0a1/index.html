@@ -709,11 +709,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-candidate-verification" class="md-nav__link">
+  <a href="#pre-prefer-gpu-candidate-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Release-candidate verification
+      Pre-Prefer-GPU candidate verification
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Pre-Prefer-GPU candidate verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefer-gpu-automated-candidate-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prefer-GPU automated candidate evidence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refreshed-rtx-5090-deconvolution-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refreshed RTX 5090 deconvolution screen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2523,11 +2547,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-candidate-verification" class="md-nav__link">
+  <a href="#pre-prefer-gpu-candidate-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Release-candidate verification
+      Pre-Prefer-GPU candidate verification
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Pre-Prefer-GPU candidate verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefer-gpu-automated-candidate-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prefer-GPU automated candidate evidence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refreshed-rtx-5090-deconvolution-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refreshed RTX 5090 deconvolution screen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2574,7 +2622,8 @@
 
 
 <h1 id="vipp-0130a1">VIPP 0.13.0a1<a class="headerlink" href="#vipp-0130a1" title="Permanent link">&para;</a></h1>
-<p><strong>Target release date:</strong> 4 August 2026</p>
+<p><strong>Target release:</strong> automated candidate qualified; manual Prefer-GPU UI
+acceptance, tag, and publication pending</p>
 <p><strong>Maturity:</strong> Alpha pre-release</p>
 <p>VIPP 0.13.0a1 is the first substantial GPU-acceleration alpha. It adds an
 evidence-gated CPU/CUDA execution architecture, makes the same compute request
@@ -2601,8 +2650,9 @@ every export under 0.13.0a1.</p>
 </div>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Choose <strong>CPU</strong>, <strong>Auto</strong>, or <strong>Selective</strong> from the main toolbar. Auto is a
-  conservative CPU default in the ordinary 0.13.0a1 interfaces; Selective mode
+<li>Choose <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or <strong>Selective</strong> from the main
+  toolbar. Auto is the conservative default. Prefer GPU uses every reviewed
+  scientifically eligible public GPU candidate regardless of speed. Selective
   exposes one CPU choice and one choice for each declared GPU library on an
   implemented node.</li>
 <li>Read compact CPU, CuPy, cuCIM, or amber CPU-fallback badges on calculated
@@ -2673,11 +2723,28 @@ the evidence boundary.</p>
 a graph. Ordinary interactive, saved-batch, and generated execution does not
 attach local performance evidence in 0.13.0a1, so fresh Auto candidates resolve
 to CPU even on an admitted GPU system. Programmatic callers can explicitly
-supply validated evidence. The normal UI route to GPU is a reviewed Selective
-provider or an applied <strong>Find fastest</strong> proposal; applying a proposal writes
-Selective per-node preferences. Setup diagnostics still offer a copyable
-installation command, and the base application does not import optional GPU
-packages merely to load a workflow.</p>
+supply validated evidence. The normal UI can instead use Prefer GPU for global
+accelerator placement or a reviewed Selective provider/<strong>Find fastest</strong> proposal
+for per-node control and measurement; applying a proposal writes Selective
+per-node preferences. Setup diagnostics still offer a copyable installation
+command, and the base application does not import optional GPU packages merely
+to load a workflow.</p>
+<p><strong>Prefer GPU</strong> is an explicit global placement policy. It considers every
+reviewed public GPU provider, including public Selective candidates that Auto
+does not consider, and does not require the GPU to be faster than CPU. It
+bypasses only that performance gate: scientific parity, dtype, parameter,
+shape, dependency, environment, provider, and memory admission remain
+mandatory, and VIPP never inserts a cast or changes an authored parameter.
+When every eligible GPU has complete comparable timing evidence, the fastest
+GPU is selected; otherwise stable implementation-ID order makes the choice
+deterministic without claiming it is fastest.</p>
+<p>Prefer GPU requires visible fallback. A node with no eligible reviewed GPU
+receives an explained ordinary CPU decision because the policy means GPU where
+possible and CPU elsewhere; strict Prefer-GPU requests are invalid. Saved
+per-node preferences remain dormant until Selective is restored. Node
+benchmarking and <strong>Find fastest</strong> remain Selective-only. Developer-hidden
+providers are excluded unless an advanced request explicitly enables
+experimental admission, which is not a public support claim.</p>
 <p><strong>CPU</strong> forces the reference CPU path. <strong>Selective</strong> exposes per-node authored
 choices and the whole-pipeline optimizer. A loaded exact implementation pin can
 remain visible for compatibility, but the normal UI uses concise CPU and
@@ -2712,6 +2779,13 @@ calculated item. Published output records link to that exact item execution.
 The saved <code>vipp_batch_pipeline.py</code> runner accepts explicit compute overrides,
 prints both progress streams with <code>--progress</code>, and returns exit code <code>130</code>
 after cooperative cancellation.</p>
+<p>Workflow schema 4, batch config schema 2, saved runners, and generated CLIs
+serialize Prefer GPU as <code>prefer_gpu</code>. Per-node preferences are preserved for a
+later return to Selective but do not affect Prefer-GPU planning. A CLI mode
+override to <code>prefer_gpu</code> supplies visible fallback when no fallback override is
+given; an explicit strict combination fails before execution or publication.
+Interactive, batch, and generated paths record the same effective request and
+exact actual implementation provenance.</p>
 <p>Generated workflow programs expose a complete <code>compute_request</code>, progress
 callback, and cancellation token to Python callers. Their CLI accepts
 <code>--compute-mode</code>, <code>--fallback-policy</code>, repeatable <code>--node-preference</code>,
@@ -2726,7 +2800,8 @@ before promotion remains a saved-batch guarantee; arbitrary generated-Python
 array callers provide their own source identity and stability.</p>
 <p>With <strong>visible</strong> fallback, one complete device segment can be retried on CPU
 after a classified, retryable OOM only after GPU synchronization and cleanup.
-<strong>Strict</strong> returns the typed failure instead. Other device defects are never
+Prefer GPU always uses this visible policy. <strong>Strict</strong> Selective intent returns
+the typed failure instead. Other device defects are never
 renamed as OOM or silently retried. A later batch item is planned independently;
 one fallback does not rewrite the saved request for the remaining collection.</p>
 <p>The generated <code>batch_process()</code> folder helper remains a convenience for one
@@ -2798,8 +2873,8 @@ revised values in a consequential analysis. The recorded
 certification; tables separately record
 <code>coloc_validation_status=experimental_source_aligned_golden_parity_pending</code>.</p>
 </div>
-<h2 id="release-candidate-verification">Release-candidate verification<a class="headerlink" href="#release-candidate-verification" title="Permanent link">&para;</a></h2>
-<p>The prepared application candidate is commit
+<h2 id="pre-prefer-gpu-candidate-verification">Pre-Prefer-GPU candidate verification<a class="headerlink" href="#pre-prefer-gpu-candidate-verification" title="Permanent link">&para;</a></h2>
+<p>The earlier prepared application candidate was commit
 <code>e02440989001f05ca17c845e3113ee2537a66c77</code>. Its full local suite completed with
 3,722 passed, 2 skipped, and 2 documented expected failures. Package/manifest,
 lint, and CPython 3.12/3.13 tests passed on Windows, Linux, and macOS in the
@@ -2807,6 +2882,10 @@ lint, and CPython 3.12/3.13 tests passed on Windows, Linux, and macOS in the
 The wheel and source distribution passed Twine checks, clean CPU-wheel
 installation checks, and installed-wheel CUDA diagnostics/durable execution
 smokes within the stated native-Windows evidence boundary.</p>
+<p>These results remain valid evidence for that exact source tree, but they do not
+qualify the eventual 0.13.0a1 tag: the later Prefer-GPU feature changed
+application source, compute serialization, planning, UI, and durable CLI
+behavior. The replacement automated candidate is recorded separately below.</p>
 <p>On 4 August 2026, the <code>e024409</code> source candidate also received a bounded Apple
 M1 Max (<code>arm64</code>, macOS 26.5.2) CPU smoke. Manual checks covered launch and basic
 processing, collection-batch progress and cooperative cancellation, and memory
@@ -2818,7 +2897,16 @@ evidence. Commit
 <a href="https://github.com/rensutheart/napari-vipp/commit/ff210402629a7d1f790a48d1f2dfc0f86861ddba"><code>ff21040</code></a>
 is the follow-up operator record, not a raw log or an Apple-GPU/broad-macOS
 qualification artifact.</p>
-<p>The locally verified candidate artifacts are:</p>
+<p>Also on 4 August 2026, the operator reported a bounded native-Windows napari UI
+smoke pass on the <code>ff21040</code> development checkout. The local schema-4 Selective
+workflow loaded the representative private ND2 acquisition and exercised the
+intended channel, slice navigation and display behavior, and backend-badge
+presentation. The retained last-run JSON was later overwritten by an Auto run,
+so it does not independently preserve the exact mixed-backend assignment or
+cleanup result. This is operator-attested UI regression evidence only; it does
+not qualify Prefer GPU, a final wheel, durable replay, or broad Windows/GPU
+behavior.</p>
+<p>The earlier locally verified artifacts were:</p>
 <table>
 <thead>
 <tr>
@@ -2837,12 +2925,103 @@ qualification artifact.</p>
 </tr>
 </tbody>
 </table>
-<p>These hashes identify the prepared files, not a published release until the
-matching tag and exact artifacts are uploaded. If the application source or
-artifacts change, rebuild, recheck, and replace this evidence before release.
-The hashes above belong to <code>e024409</code>; if the later documentation-only
-<code>ff21040</code> commit becomes the release tag, rebuild and re-hash the artifacts for
-that exact tagged tree.</p>
+<p>These hashes identify files built from <code>e024409</code>; they are not valid artifacts
+for the current Prefer-GPU development tree and must not be uploaded for this
+release. Retain this historical table only as the bounded <code>e024409</code> checkpoint.</p>
+<h3 id="prefer-gpu-automated-candidate-evidence">Prefer-GPU automated candidate evidence<a class="headerlink" href="#prefer-gpu-automated-candidate-evidence" title="Permanent link">&para;</a></h3>
+<p>The pushed replacement candidate is application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5"><code>444f68290fe4359b05c68a027d3ae0a413412fe5</code></a>
+on <code>codex/gpu-cross-platform-support</code>.</p>
+<p>The full local suite completed in 299.65 seconds with <strong>3,754 passed, 2 skipped,
+2 xfailed, 83 warnings, and zero failures</strong>. The skips are the opt-in real-CUDA
+durable batch smokes. The xfails are the documented CuPy
+<code>uint8</code>/<code>uint16</code> integer-parity gaps; they are not unexpected regressions.
+Ruff, source-tree and installed-wheel npe2 manifest validation, package build,
+Twine checks, and the installed-wheel resource smoke all passed.</p>
+<p>The real RTX 5090 Prefer-GPU integration test also passed. Without authored
+per-node choices, planning selected:</p>
+<ul>
+<li>CPU for Extract Channel;</li>
+<li>cuCIM GPU for Subtract Background;</li>
+<li>CPU for native-<code>uint16</code> Gaussian Blur; and</li>
+<li>CuPyX GPU for Median Filter.</li>
+</ul>
+<p>The complete result had exact parity, no fallback, and clean accelerator
+cleanup. This demonstrates the intended global placement rule: reviewed GPUs
+are used wherever scientifically eligible without casting the native-<code>uint16</code>
+Gaussian call or treating its explained CPU decision as a failure.</p>
+<p>Clean wheel and source-distribution artifacts built from the exact candidate
+commit are:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>napari_vipp-0.13.0a1-py3-none-any.whl</code></td>
+<td><code>58b08cbb8396c9fe27d28a69d52b06e160817e58987e6dc3b8c5059f3dae9804</code></td>
+</tr>
+<tr>
+<td><code>napari_vipp-0.13.0a1.tar.gz</code></td>
+<td><code>00fcb15452d3ed71d344859d4306cbcdcc458686959169a2c47485d8f7abec9b</code></td>
+</tr>
+</tbody>
+</table>
+<p>These files are candidate artifacts, not a published release. Manual
+Prefer-GPU UI acceptance on this exact commit, the final release tag, artifact
+upload, GitHub pre-release, documentation snapshot, and post-publication checks
+remain pending.</p>
+<h3 id="refreshed-rtx-5090-deconvolution-screen">Refreshed RTX 5090 deconvolution screen<a class="headerlink" href="#refreshed-rtx-5090-deconvolution-screen" title="Permanent link">&para;</a></h3>
+<p>The same source-candidate refresh recorded these transfer-inclusive timings:</p>
+<table>
+<thead>
+<tr>
+<th>Operation and workload</th>
+<th style="text-align: right;">CPU</th>
+<th style="text-align: right;">GPU</th>
+<th style="text-align: right;">Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Richardson-Lucy, private real-acquisition ND2 volume</td>
+<td style="text-align: right;">24.898 s</td>
+<td style="text-align: right;">0.414 s</td>
+<td style="text-align: right;">60.20x</td>
+</tr>
+<tr>
+<td>Richardson-Lucy, medium synthetic volume</td>
+<td style="text-align: right;">35.997 s</td>
+<td style="text-align: right;">0.455 s</td>
+<td style="text-align: right;">79.14x</td>
+</tr>
+<tr>
+<td>Richardson-Lucy, large synthetic volume</td>
+<td style="text-align: right;">137.820 s</td>
+<td style="text-align: right;">1.517 s</td>
+<td style="text-align: right;">90.87x</td>
+</tr>
+<tr>
+<td>Richardson-Lucy TV, private real-acquisition ND2 volume</td>
+<td style="text-align: right;">34.921 s</td>
+<td style="text-align: right;">0.599 s</td>
+<td style="text-align: right;">58.34x</td>
+</tr>
+<tr>
+<td>Richardson-Lucy TV, medium synthetic volume</td>
+<td style="text-align: right;">55.936 s</td>
+<td style="text-align: right;">0.564 s</td>
+<td style="text-align: right;">98.61x</td>
+</tr>
+</tbody>
+</table>
+<p>Both RL-TV workloads reported parity and clean cleanup. These are bounded
+measurements from one RTX 5090 machine and these exact workloads—not portable
+speed promises, persistent Auto evidence, or a replacement for assay-specific
+validation.</p>
 <h2 id="upgrade-from-0120a3">Upgrade from 0.12.0a3<a class="headerlink" href="#upgrade-from-0120a3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Preserve the 0.12.0a3 environment, original schema-3 workflow, generated
@@ -2874,7 +3053,9 @@ that exact tagged tree.</p>
 <ul>
 <li>GPU support is partial and environment-gated; timing evidence from one RTX
   5090 is not a portable speed promise. Standard execution does not persist or
-  inject it as an Auto choice; reviewed UI assignments are Selective.</li>
+  inject it as an Auto choice. Measured/per-node assignments are Selective;
+  Prefer GPU deliberately requests every eligible reviewed accelerator without
+  using CPU-speed evidence.</li>
 <li>Label Connected Components acceleration requires a Boolean call resolved as
   2D or 3D. Numeric and oversized 2D/3D calls retain CPU, while a Boolean call
   with another or unresolved spatial rank is a typed non-CPU preflight failure
@@ -2923,7 +3104,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 21:10:19 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 23:16:19 UTC">August 4, 2026</span>
   </span>
 
     

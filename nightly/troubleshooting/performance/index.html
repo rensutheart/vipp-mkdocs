@@ -2140,9 +2140,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cpu-auto-and-selective-compute" class="md-nav__link">
+  <a href="#cpu-auto-prefer-gpu-and-selective-compute" class="md-nav__link">
     <span class="md-ellipsis">
-      CPU, Auto, and Selective compute
+      CPU, Auto, Prefer GPU, and Selective compute
     </span>
   </a>
   
@@ -2460,9 +2460,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cpu-auto-and-selective-compute" class="md-nav__link">
+  <a href="#cpu-auto-prefer-gpu-and-selective-compute" class="md-nav__link">
     <span class="md-ellipsis">
-      CPU, Auto, and Selective compute
+      CPU, Auto, Prefer GPU, and Selective compute
     </span>
   </a>
   
@@ -2554,17 +2554,21 @@
 <p>If optional CUDA support is installed, also inspect the toolbar's actual-run
 summary and node badges. In ordinary 0.13.0a1 execution, <strong>Auto</strong> does not carry
 local timing evidence and therefore resolves fresh candidates to CPU. Use
-<strong>Selective</strong> for a reviewed GPU provider or apply a <strong>Find fastest</strong> proposal;
-then use <strong>Compute setup and memory…</strong> and the badge reason to understand any
-call-specific rejection or fallback. Do not infer GPU use from the selected
-mode. For the complete decision sequence and operation matrix, see
+<strong>Prefer GPU</strong> to use every reviewed eligible accelerator regardless of speed,
+or use <strong>Selective</strong> for per-node choices and <strong>Find fastest</strong>. Then use
+<strong>Compute setup and memory…</strong> and the badge reason to understand any call-specific
+CPU decision or fallback. Do not infer GPU use from the selected mode. For the complete decision sequence and operation matrix, see
 <a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a>.</p>
-<h2 id="cpu-auto-and-selective-compute">CPU, Auto, and Selective compute<a class="headerlink" href="#cpu-auto-and-selective-compute" title="Permanent link">&para;</a></h2>
+<h2 id="cpu-auto-prefer-gpu-and-selective-compute">CPU, Auto, Prefer GPU, and Selective compute<a class="headerlink" href="#cpu-auto-prefer-gpu-and-selective-compute" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>CPU</strong> runs the authoritative host implementation everywhere.</li>
 <li><strong>Auto</strong> is conservative and never benchmarks implicitly. Standard 0.13.0a1
   execution supplies no performance evidence, so fresh Auto calls stay on CPU;
   the API can accept validated evidence explicitly.</li>
+<li><strong>Prefer GPU</strong> uses every scientifically eligible reviewed public GPU
+  candidate without requiring it to beat CPU. It still enforces all dtype,
+  parameter, dependency, environment, parity, and memory gates, and unsupported
+  nodes receive explained ordinary CPU decisions.</li>
 <li><strong>Selective</strong> exposes per-node library choices plus node and whole-pipeline
   benchmarking. A separate lock preserves an authored choice during <strong>Find
   fastest pipeline…</strong>.</li>
@@ -2626,8 +2630,8 @@ CPU/GPU budget rather than adding RAM and nominal VRAM as though independent.</p
 classified runtime OOM only after the GPU attempt synchronizes and cleans up.
 The badge turns amber and the execution report retains the attempted segment,
 required/available memory where known, exception, cleanup, and CPU retry result.
-Strict selective fallback returns the typed failure. Other GPU faults are not
-silently treated as OOM.</p>
+Prefer GPU requires this visible policy. Strict selective fallback returns the
+typed failure. Other GPU faults are not silently treated as OOM.</p>
 <h2 id="switching-between-node-results">Switching Between Node Results<a class="headerlink" href="#switching-between-node-results" title="Permanent link">&para;</a></h2>
 <p>When the same logical node/output recalculates, VIPP keeps its compatible
 active <strong>Inspect</strong> layer and swaps only the data reference. The reference is a
@@ -2688,7 +2692,7 @@ temporary allocation made inside NumPy, SciPy, or scikit-image.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 21:10:19 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 23:16:19 UTC">August 4, 2026</span>
   </span>
 
     

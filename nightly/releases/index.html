@@ -2391,13 +2391,18 @@ not a substitute for validating an analysis on representative and held-out
 data.</p>
 <h2 id="release-candidate">Release candidate<a class="headerlink" href="#release-candidate" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="0.13.0a1/">0.13.0a1</a> — evidence-gated CPU/GPU execution, durable compute
-  provenance and cancellation across interactive and automated surfaces,
-  workflow tabs, new scientific nodes, and extensive correctness/UI fixes.</li>
+<li><a href="0.13.0a1/">0.13.0a1</a> — evidence-gated
+  <strong>CPU / Auto / Prefer GPU / Selective</strong> execution, durable compute provenance and
+  cancellation across interactive and automated surfaces, workflow tabs, new
+  scientific nodes, and extensive correctness/UI fixes.</li>
 </ul>
 <p>This nightly entry is the prepared release manual. It becomes the stable,
 numbered release documentation only after the matching application tag/package
-and manual snapshot are published.</p>
+and manual snapshot are published. The earlier <code>e024409</code> artifact checkpoint
+predates Prefer GPU. Replacement automated candidate <code>444f682</code> passed its full
+local suite, package/artifact checks, and real RTX 5090 Prefer-GPU integration
+test. Manual UI acceptance on that exact commit, the final tag, and publication
+remain pending.</p>
 <p>0.13.0a1 writes workflow schema 4 and batch config/manifest schema 2. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;
 VIPP does not infer that an older analysis intended GPU execution. Workflow
@@ -2446,7 +2451,7 @@ an older workflow in a newer release.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 23:16:19 UTC">August 4, 2026</span>
   </span>
 
     
