@@ -55,7 +55,8 @@ The cache estimate is practical, not a full Python heap profile.
 The cache-status display obtains available/total physical memory through an
 operating-system-specific path:
 
-- Windows uses `GlobalMemoryStatusEx` and does not require `os.sysconf`;
+- Windows uses `GlobalMemoryStatusEx`, reports physical RAM and system commit
+  separately, and does not require `os.sysconf`;
 - macOS uses `host_statistics64` plus guarded `sysconf` page-size/physical-page
   queries;
 - other POSIX systems use guarded `sysconf` page counters.
@@ -64,6 +65,13 @@ If a platform API is unavailable, returns an error, or supplies an invalid
 value, VIPP reports memory as unavailable rather than crashing or inventing a
 number. The value is still an operational estimate, and container/VM limits
 can differ from host memory.
+
+Windows `Commit free` is remaining system commit headroom, not merely free
+physical RAM or configured page-file capacity. A large allocation can fail
+when commit is exhausted while some physical RAM remains. VIPP checks both
+reserves before the optional Auto CPU timing comparison; when that evidence run
+would be unsafe, Auto retains its reviewed safe assignment and reports the
+skip. The missing CPU observation can be collected later.
 
 ## Device residency and accelerator memory
 
@@ -152,11 +160,19 @@ Low-memory modes do not retain an otherwise prunable full-volume intermediate
 merely to provide this progress display.
 
 These updates are presentation overlays owned by the active run. They do not
-partially publish results into the live scientific cache. VIPP commits the
-workflow outputs and execution states only after the complete result is
-accepted against the same workflow and source revisions. Cancellation,
-failure, a newer edit, or a superseding run discards the overlays and restores
-the previous coherent cache view.
+by themselves publish results into the live scientific cache. Normal success
+commits the complete accepted result against the same workflow and source
+revisions. Cancellation, a newer edit, or a superseding run discards the
+overlays and restores the previous coherent cache view.
+
+Failure/OOM handling is provenance-aware. A verified source boundary may be
+accepted. A cleanup-failed result may additionally contribute a completed
+processing node only when its matching actual-implementation decision is
+present; an uncomputed or unreported value never replaces an earlier valid
+result. Prior thumbnails and truthful CPU/GPU
+badges remain visible for all other nodes, with previous/pending styling when
+they do not satisfy current intent. A cleanup failure quarantines further
+compute in that process until VIPP is restarted.
 
 This distinction matters when monitoring a long pipeline: a newly grey/current
 card and thumbnail mean that node completed in the active run, but the workflow

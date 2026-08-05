@@ -67,10 +67,12 @@ activate the environment before running the final
 
 !!! note "Stable manual versus nightly manual"
     In a numbered/stable manual, the commands above install the documented
-    release. This prepublication nightly records immutable automated candidate
-    `444f682`; manual Prefer-GPU UI acceptance, tagging, and publication remain
-    pending. Do not install arbitrary newer `main` merely because you are
-    reading nightly. See
+    release. This prepublication nightly retains `444f682` only as a historical
+    automated checkpoint. Later compute-lifecycle, optimizer, source-loading,
+    and generated-CLI hardening superseded its source and artifacts; no new
+    immutable release candidate is recorded here yet. Do not install an old
+    checkpoint or arbitrary newer `main` merely because you are reading
+    nightly. See
     [versions and compatibility](../reference/versioning.md).
 
 ## Confirm the installation
@@ -192,26 +194,26 @@ a file is not proof that every axis, unit, timestamp, or acquisition field was
 interpreted correctly. Check representative files from your facility before
 quantitative use.
 
-## Test the unpublished candidate or development branch
+## Historical checkpoints and development branches
 
 The earlier reviewed commit `e024409` predates the Prefer-GPU source change and
 is no longer the current 0.13.0a1 candidate. Do not use its source archive or
 artifact hashes to qualify the eventual release.
 
-The pushed replacement automated candidate is
-`444f68290fe4359b05c68a027d3ae0a413412fe5`. Install that exact commit rather
-than assuming that `main` points to the same source:
+The later automated checkpoint was
+`444f68290fe4359b05c68a027d3ae0a413412fe5`. Its recorded automated suite,
+build/Twine, manifest, installed-wheel resource, and RTX 5090 Prefer-GPU checks
+passed at the time. Subsequent hardening changed release-relevant behavior, so
+that source and its artifacts are now superseded. Its SHA is retained here for
+audit history, not as an installation recommendation; do not use it to qualify
+or install the eventual release.
 
-```text
-python -m pip install --upgrade "napari[pyqt6]" "napari-vipp @ https://github.com/rensutheart/napari-vipp/archive/444f68290fe4359b05c68a027d3ae0a413412fe5.zip"
-```
-
-Its automated suite, build/Twine, manifest, clean artifact, installed-wheel
-resource, and RTX 5090 Prefer-GPU integration checks passed. Manual Prefer-GPU
-UI acceptance is still pending. Record the full commit with every result;
-source-archive testing is not a PyPI installation or publication claim. Exact
-candidate artifact hashes are in the
-[release notes](../releases/0.13.0a1.md#prefer-gpu-automated-candidate-evidence).
+The checkpoint's artifact hashes remain in the
+[release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
+for audit history only. They must not be uploaded as 0.13.0a1. Wait for a newly
+named immutable candidate when qualifying the release. Record the full commit
+with every development result; source-archive testing is not a PyPI
+installation or publication claim.
 
 For newer unreleased `main` work, use:
 

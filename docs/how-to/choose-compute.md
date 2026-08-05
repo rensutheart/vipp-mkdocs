@@ -15,8 +15,8 @@ failure; some invalid or non-fallback-safe calls fail under either policy.
 
 | Mode | Use it when | What to expect |
 | --- | --- | --- |
-| **CPU** | Establishing a portable reference, diagnosing a provider, or requiring host execution | Every calculated operation uses its authoritative CPU implementation. |
 | **Auto** | The recommended, learning new-session default | With no exact compatible history, use reviewed GPU defaults. Accelerated-only history makes the next global Auto run measure CPU once on the same execution surface; a later matching run applies the 1.20x/20-ms gate to the pair. Auto never silently benchmarks multiple implementations. |
+| **CPU** | Establishing a portable reference, diagnosing a provider, or requiring host execution | Every calculated operation uses its authoritative CPU implementation. |
 | **Prefer GPU** | Placing as much scientifically eligible work on GPU as possible, regardless of speed | Every reviewed public GPU candidate is considered, including providers not admitted to Auto. An eligible GPU is used even when it is only slightly faster, tied, or slower than CPU. Unsupported nodes receive an explained ordinary CPU decision. |
 | **Custom** | Using GPU, comparing providers, or authoring reviewed per-node preferences | Implemented nodes expose CPU and one choice per declared GPU library; node and whole-pipeline benchmarking become available. Applying a measured pipeline assignment records Custom preferences. |
 
@@ -36,6 +36,23 @@ A schema-3 workflow opens in **CPU**, not Auto, because the older file did not
 record compute intent. A schema-4 workflow restores its portable request, but
 not a promise that the same backend exists or is fastest on another machine.
 
+The toolbar presents the modes in default-first order: **Auto**, **CPU**,
+**Prefer GPU**, then **Custom**. Switching to Custom while VIPP is idle does not
+discard or relabel a valid calculation. The existing images and actual
+CPU/GPU provenance remain visible. If those decisions differ from the saved
+Custom choices, VIPP marks the badges and summary as a **previous result**;
+the Custom choices take effect when a node preference changes, you calculate,
+or you apply a reviewed optimizer proposal.
+
+Compute policy cannot change underneath active work. While a pipeline
+calculation, node benchmark, or **Find fastest** analysis is running, the mode
+and applicable per-node controls are disabled until normal completion. To
+select another policy sooner, use the explicit **Cancel calculation**, **Cancel
+benchmark**, or **Cancel analysis** control first. The controls remain locked
+while the worker reaches a cooperative checkpoint,
+synchronizes, and releases CPU/GPU resources. This guarantees that selecting
+CPU cannot leave an earlier GPU calculation or timing comparison running.
+
 ## A safe practical sequence
 
 1. Run a representative item on **CPU** and inspect the decisive images,
@@ -52,7 +69,11 @@ not a promise that the same backend exists or is fastest on another machine.
    execution surface. Once both observations exist, a later matching run uses
    acceleration only when it clears the 1.20x/20-ms gate; otherwise it uses CPU.
    Interactive, batch, and registry-lifecycle timing surfaces are never mixed.
-   Auto never silently benchmarks multiple implementations.
+   Auto never silently benchmarks multiple implementations. Before the optional
+   CPU comparison, VIPP checks conservative host-memory headroom. On Windows it
+   checks both available physical RAM and remaining system commit. If the
+   comparison would consume the reserve, Auto keeps the reviewed safe assignment,
+   explains the skipped evidence, and can try again on a later compatible run.
 4. Switch to **Prefer GPU** when you want every reviewed eligible accelerator
    region without first benchmarking whether it beats CPU. Read the ordinary
    CPU reasons for unsupported nodes; this mixed result is the intended policy.
@@ -64,7 +85,10 @@ not a promise that the same backend exists or is fastest on another machine.
    advanced compatibility choice until replaced.
 6. Benchmark an eligible node for a focused comparison, or choose **Find
    fastest pipeline…** to compare every eligible implementation in the current
-   calculated, writer-free subgraph. Review the proposal before applying it;
+   writer-free subgraph. If the displayed result is stale, Find fastest first
+   establishes a private current-graph baseline after cancellation cleanup; it
+   does not require you to publish an ordinary replacement calculation. Review
+   the proposal before applying it;
    accepted winners become Custom per-node preferences. Raw isolated-node
    timings remain separate from Auto's complete-pipeline history, although a
    later successful, fallback-free completed run of the accepted assignment
@@ -95,6 +119,20 @@ that the current assignment is optimal. The result identifies completed and
 remaining work, and complete records for the exact workload and environment
 can be reused on retry. Editing data, parameters, code/policy identity, or the
 relevant environment invalidates reuse.
+
+When a synchronized GPU candidate has enough repeated measurements to be a
+reliable incumbent, the optimizer may stop a cooperative CPU warm call once its
+elapsed time exceeds the incumbent's one-sided confidence bound plus a material
+margin. The dialog reports a censored lower bound such as **CPU > 10.6 s;
+stopped early**, not an exact CPU timing. Censored results are not reused as
+timing-history samples. Scientific parity is checked independently, required
+CPU/GPU transfers remain in the whole-graph model, and a changed modeled
+assignment must pass final paired end-to-end validation before it can be
+offered. When the already-current assignment wins, VIPP reports its fresh
+baseline, parity, and conservative exact-or-censored comparison evidence; it
+does not claim a redundant paired comparison against itself. GPU candidates are not
+discarded from a one-off transfer-inclusive duration because a resident
+pipeline can amortize those transfers.
 
 Current node benchmarking requires resolved ordered inputs, one output, and no
 writer side effect. Whole-pipeline optimization operates within one supported
@@ -183,6 +221,28 @@ tiles/planes, and publication stages. An opaque call can finish its current
 atomic work before responding. A result is not accepted or published until
 required synchronization and cleanup succeed.
 
+A failed or OOM interactive attempt never replaces an earlier processing result
+with an uncomputed or provenance-unknown value. VIPP may accept a verified
+source boundary. If cleanup itself failed, VIPP may additionally accept a
+completed processing node, but only when matching actual-implementation
+provenance is available for its badge and report. All
+other affected nodes retain prior valid outputs, thumbnails, and badges and
+remain pending. Cancellation retains the prior coherent result.
+
+If accelerator cleanup fails during a calculation, node benchmark, **Find
+fastest**, or collection batch, VIPP cannot prove the runtime safe to reuse. It
+requests cancellation of every other active compute owner and disables new
+calculation, policy changes (including policy-changing undo/redo),
+benchmark/optimizer work, and batch starts for that process. Newly measured
+**Find fastest** evidence from the unsafe analysis is rolled back. If that
+record-level rollback cannot be written, VIPP writes a durable poison marker
+first and moves the complete local timing store to an `.unsafe-*` quarantine
+filename under its cross-process lock. A restart resolves the marker or refuses
+to open the active store; if the marker itself could not be written, the alert
+names the file that must be moved manually. Preserve the error/provenance record
+and restart VIPP; ordinary visible CPU fallback is allowed only after cleanup
+succeeds.
+
 ## Keep interactive and durable execution aligned
 
 Interactive calculation, saved batch runners, and generated Python/CLI use the
@@ -207,5 +267,8 @@ Every surface records the effective request and exact actual implementations in
 the same execution provenance.
 
 The saved batch runner is the production collection route. The generated
-program's simple folder helper does not provide its pairing, collision plan,
-source verification, checkpoints, or durable manifest.
+program's simple folder helper hashes each local primary source before reading,
+verifies it after materialization, and privately stages and transactionally
+commits each requested output/sidecar set. It does not provide multi-source
+pairing, collision planning, a final source recheck immediately before
+publication, checkpoints, a durable manifest, or replay/resume.

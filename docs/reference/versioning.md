@@ -17,12 +17,15 @@ points to the previous public release. See
 [0.13.0a1 release notes](../releases/0.13.0a1.md).
 
 The previously prepared `e024409` candidate predates Prefer GPU and is now a
-historical checkpoint, not the release source. The pushed replacement automated
-candidate is
+historical checkpoint, not the release source. The later automated checkpoint
+is
 [`444f68290fe4359b05c68a027d3ae0a413412fe5`](https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5).
 Its full local suite and package/artifact checks passed, and its exact hashes are
-recorded in the [release notes](../releases/0.13.0a1.md#prefer-gpu-automated-candidate-evidence).
-Manual Prefer-GPU UI acceptance, the final tag, and publication remain pending.
+recorded in the [release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded).
+Later compute-lifecycle, optimizer, source-loading, and generated-CLI hardening
+changed the application, so `444f682` and its artifacts are superseded and must
+not be treated as the current candidate or uploaded for release. A new immutable
+candidate, final tag, and publication checks remain pending.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.

@@ -313,6 +313,17 @@ candidate passes every scientific, dtype, parameter, dependency, environment,
 and memory gate receives an explained ordinary CPU decision; that preflight
 decision is not a failed GPU attempt.
 
+If accelerator cleanup fails while an item is still executing, that item's
+private outputs remain unpublished. If the terminal batch runtime fails to
+close only after completed items were already published, those durable outputs
+remain published and are listed in the manifest; VIPP does not pretend that a
+successful atomic promotion never happened. In either case the originating
+VIPP process requests cooperative cancellation of every other active compute
+owner, preserves its last valid interactive results, and quarantines all
+further calculation, policy changes, benchmarks, optimizer work, and new batch
+starts until restart. This is a process-safety response, not an ordinary
+visible fallback or a request merely to increase a memory budget.
+
 ## Provenance artifacts
 
 A workspace-started run writes the resolved configuration beside its outputs.

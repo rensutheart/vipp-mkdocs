@@ -50,7 +50,7 @@ and the accepted edit is atomic and undoable.
 
 | Control | Effect |
 | --- | --- |
-| **CPU / Auto / Prefer GPU / Custom** | CPU forces authoritative host implementations. Auto is the learning default: it starts from reviewed GPU defaults, measures CPU once after accelerated-only exact compatible history, then applies the 1.20x/20-ms gate to the pair. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Custom exposes authored per-node CPU/GPU choices and benchmarking. |
+| **Auto / CPU / Prefer GPU / Custom** | Auto is the learning default and appears first. CPU forces authoritative host implementations. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Custom exposes authored per-node CPU/GPU choices and benchmarking. |
 | Actual-run compute summary | After an accepted run, summarizes the CPU/GPU mix or fallback state; hover for why the run made those decisions. |
 | **Find fastest pipeline…** | In Custom mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying. |
 | **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
@@ -76,6 +76,14 @@ evidence, VIPP chooses the fastest GPU; otherwise stable implementation-ID order
 provides a deterministic choice without making a speed claim. Per-node
 preferences and both benchmark actions are inactive until Custom is restored.
 
+Entering Custom while idle preserves the last valid output and its actual
+provenance. If it does not satisfy saved Custom choices, its muted badges and
+summary say that it is a previous result rather than relabeling it. Compute mode,
+fallback, per-node preference, and optimizer-lock controls are disabled during
+calculation or benchmarking. They unlock after normal completion; to change
+policy sooner, use the explicit cancellation action and wait for resource
+cleanup.
+
 In Custom mode, an operation with a declared provider shows **Auto for this
 node**, **CPU**, and one **GPU · library** entry for each declared library.
 **Auto for this node** authors no backend pin and uses the reviewed Auto default
@@ -90,7 +98,7 @@ merely choosing a backend—preserves a node during **Find fastest**.
 
 Calculated cards show compact **CPU**, **GPU · CuPy**, **GPU · cuCIM**, or amber
 **CPU fallback** badges. A muted badge belongs to the last accepted run while a
-new result is pending. Hover or inspect the node for the implementation ID and
+new result is pending or current Custom intent differs. Hover or inspect the node for the implementation ID and
 version, runtime/device, preference, decision reason, benchmark evidence,
 memory estimate, and fallback details.
 
@@ -151,18 +159,32 @@ connections or processed data.
 | Keep output cached | Per-node request to retain an important result in Smart/Low-memory modes. |
 | Auto Recalculate | Re-runs a selected manual node when upstream state changes; use cautiously for expensive work. |
 
-Host cache status reports RAM. **Compute setup and memory…** adds accelerator
+Host cache status reports RAM; on Windows it separately shows remaining system
+commit because either physical or commit headroom can limit an allocation.
+**Compute setup and memory…** adds accelerator
 memory: discrete NVIDIA devices report separate VRAM, while a future unified-
 memory provider must report the shared budget rather than double-counting it.
 The executor applies an operation-specific conservative memory estimate before
 device work; the estimate and any typed OOM/fallback are part of execution
 provenance.
 
-**Cancel** prevents queued reruns and ignores the active result. It asks
-cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
+**Cancel calculation** prevents queued reruns and rejects the active result. It
+asks cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
 scikit-image, CuPy, or cuCIM call already executing. GPU progress advances only
 after synchronization at a truthful operation checkpoint, and cancellation
-waits for cleanup before a result can be published.
+waits for cleanup before compute controls unlock. Failed/OOM attempts never
+replace prior processing results with uncomputed or provenance-unknown values.
+A verified source boundary may be accepted. If cleanup itself failed, a
+completed processing node may additionally be accepted, but only with matching
+actual-implementation provenance; all other nodes retain their coherent
+outputs, thumbnails, and badges.
+
+If cleanup fails after calculation, node benchmarking, **Find fastest**, or a
+collection batch, VIPP requests cancellation of other active compute and every
+compute entry point, policy control, and policy-changing undo/redo action is
+disabled for that process. The actionable message asks for a restart because
+an ordinary CPU fallback cannot establish that an incompletely cleaned
+accelerator runtime is safe.
 
 The current adaptive large-input boundary is 4,000,000 elements or 32 MiB,
 whichever is reached first. This applies even when **Run all in BG** is

@@ -174,9 +174,11 @@ failure is `2`, and cooperative cancellation is `130`.
 
 Generated CLI progress is operation-level. The saved batch runner additionally
 has an overall-item stream because it owns a collection plan. Generated inputs
-carry supplied `ImageDataset`/`SourcePayload` identity and metadata; exact
-source-byte reverification before publication is a durable saved-batch
-guarantee, not a promise for every arbitrary generated-Python array caller.
+carry supplied `ImageDataset`/`SourcePayload` identity and metadata. The
+generated local `load_image()` helper hashes before reading and verifies after
+materialization. A second exact source-byte recheck immediately before output
+publication is a durable saved-batch guarantee, not a promise for the folder
+convenience or an arbitrary generated-Python array caller.
 
 ## Batch artifacts
 

@@ -51,6 +51,33 @@ within the active parity, warmup, or timed call. If the time limit is reached,
 the result must say which comparisons completed and remain. Exact completed
 records can be reused on retry.
 
+Find fastest can establish a private fresh baseline when the current graph or
+parameters are newer than the displayed result. If a synchronized GPU
+incumbent has enough repeat evidence, it may stop a cooperative CPU warm call
+after the CPU has exceeded a confidence-adjusted decision bound. A report such
+as `CPU > 10.6 s; stopped early` is a censored lower bound, not an exact timing
+and not reusable timing history. Parity and graph-wide transfer costs still
+apply. A changed modeled assignment must pass final paired pipeline validation;
+when the current assignment wins, its fresh baseline and conservative
+comparison evidence are reported without a redundant paired run against itself.
+
+Compute mode and per-node backend controls are disabled during calculation or
+benchmarking. They unlock after normal completion. To select another policy
+sooner, use the visible cancellation action and wait for synchronization and
+cleanup. A failed, canceled, or OOM worker
+never replaces earlier processing results with uncomputed or
+provenance-unknown values. A verified source boundary may be accepted. Only
+when cleanup itself failed may a completed processing node also be accepted,
+and then only with matching actual-implementation provenance; all other
+outputs, thumbnails, and badges remain coherent.
+
+Cleanup failure is different from ordinary cancellation or visible fallback:
+the accelerator runtime cannot be proven safe. VIPP disables calculation,
+policy changes and policy-changing undo/redo, node benchmarking, **Find
+fastest**, and new batch starts until the application is restarted. It also
+requests cancellation of other compute already running in the process; wait
+for those workers to acknowledge cancellation before closing their dialogs.
+
 Do not change dtype only to win a benchmark unless that conversion is a
 scientifically intended workflow step. Some GPU kernels, especially filtering
 and deconvolution, gain much more on `float32` than on native `uint16`, and a
@@ -113,6 +140,12 @@ The badge turns amber and the execution report retains the attempted segment,
 required/available memory where known, exception, cleanup, and CPU retry result.
 Prefer GPU requires this visible policy. Strict Custom fallback returns the
 typed failure. Other GPU faults are not silently treated as OOM.
+
+On Windows, physical RAM and system commit are separate limits. VIPP reports
+both and preflights the optional Auto CPU timing comparison against both
+reserves. If headroom is unsafe, Auto keeps its reviewed safe assignment and
+explains that the CPU evidence was skipped; this does not mean the existing
+assignment was newly benchmarked or proved optimal.
 
 ## Switching Between Node Results
 

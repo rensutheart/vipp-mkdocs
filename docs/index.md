@@ -37,10 +37,13 @@ hide:
 
 !!! warning "Alpha release: validate before interpreting"
     This nightly manual is prepared for the **napari-vipp 0.13.0a1 release**.
-    Automated candidate `444f682` has passed the full local suite, package and
-    artifact checks, and a real RTX 5090 Prefer-GPU integration test. Manual
-    Prefer-GPU UI acceptance, the final tag, and publication are still pending.
-    Until its tag and packages are published, use the stable manual for the
+    Commit `444f682` and its build artifacts are a historical automated
+    checkpoint: they passed their recorded local, package, and RTX 5090 checks,
+    but subsequent compute-lifecycle, optimizer, source-loading, and generated-
+    CLI hardening changed the application. They are superseded, not the current
+    release candidate. A new immutable candidate, final tag, and publication
+    checks are still pending.
+    Until the tag and packages are published, use the stable manual for the
     current public release. Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the

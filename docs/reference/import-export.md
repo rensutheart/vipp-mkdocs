@@ -109,12 +109,17 @@ archive, item checkpoints, workflow/config pair, and source identities with the
 files.
 
 A generated standalone output remains private until execution cleanup and its
-requested staged publication checks are established. Its source identity is
-only as strong as the `ImageDataset`, `SourcePayload`, or raw-array metadata the
-caller supplied. Saved batch execution additionally captures and reverifies
-source bytes before promoting an item's outputs. OOM fallback is recorded
-rather than hidden, and a cleanup or publication failure prevents a newly
-calculated output from being presented as successfully published.
+requested staged publication checks are established. The generated local
+`load_image()` path hashes the exact source before reading and verifies it after
+materialization; arbitrary `ImageDataset`, `SourcePayload`, and raw-array inputs
+are only as strong as the identity and stability the caller supplies. The
+generated folder helper privately stages and rollback-protects each requested
+output/sidecar set in one destination directory. Saved batch execution
+additionally reverifies source bytes immediately before promoting an item's
+outputs and supplies multi-source planning, checkpoints, and a manifest. OOM
+fallback is recorded rather than hidden, and a cleanup or publication failure
+prevents a newly calculated output from being presented as successfully
+published.
 
 ## Multi-input grid safety
 

@@ -43,6 +43,14 @@ scientific-stack, and policy identity. Run the `real_cuda` selection only on an
 appropriate isolated host; mocks and a successful kernel probe do not establish
 scientific admission.
 
+The test suite must never read or append to a user's machine-local Auto timing
+history. Its autouse fixture sets
+`NAPARI_VIPP_PIPELINE_TIMING_HISTORY_PATH` to a per-test temporary JSON path,
+which test subprocesses inherit. History-specific tests may point the variable
+at another `tmp_path`; do not unset it or use the normal platform application-
+data location. This isolation is a developer safeguard, not a user-facing
+compute option.
+
 Prefer a small parameterized test over many near-identical cases. Keep an
 end-to-end UI test only when it protects behavior that cannot be established at
 a lower layer.

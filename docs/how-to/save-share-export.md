@@ -122,9 +122,11 @@ failure sidecar distinguishes execution failure from publication failure.
 
 Generated CLI progress is operation-level. Exit code `0` means success, `2`
 means setup/execution/publication failure, and `130` means cooperative
-cancellation. Exact source-byte reverification before output promotion belongs
-to the saved batch contract; a generated Python caller is responsible for the
-identity and stability of arbitrary arrays or supplied source payloads.
+cancellation. A local path opened with the generated `load_image()` helper is
+content-hashed before reading and verified again after materialization. The
+saved batch runner adds a final source-byte recheck immediately before output
+promotion. A generated Python caller remains responsible for the identity and
+stability of arbitrary arrays or independently supplied source payloads.
 
 Use `python generated_pipeline.py --help` for the exact source-binding and
 output arguments emitted for that graph. Add `--progress` for operation updates
@@ -158,9 +160,11 @@ are not one multi-file transaction.
 
 For production collection processing, use the saved runner rather than the
 generated program's simple `batch_process()` folder helper. The helper varies
-one primary source but does not provide multi-source pairing, source-byte
-identities, collision planning, private staging, checkpoints, manifest, or
-durable replay.
+one primary source, verifies that local source around materialization, and
+privately stages and rollback-protects the requested output/sidecar set in one
+destination directory. It does not provide multi-source pairing, collision
+planning, a final source recheck immediately before publication, checkpoints,
+a manifest, or durable replay/resume.
 
 ## Share an analysis package
 

@@ -47,31 +47,36 @@ environment, filesystem, microscope reader, or GPU. See the
 Those results remain evidence for that exact tree, but the Prefer-GPU source
 change invalidates it as the final release candidate.
 
-The replacement automated candidate is pushed application commit
+The later automated checkpoint is application commit
 [`444f68290fe4359b05c68a027d3ae0a413412fe5`](https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5)
 on `codex/gpu-cross-platform-support`. Its full local suite completed in 299.65
 seconds with **3,754 passed, 2 skipped, 2 xfailed, 83 warnings, and zero
 failures**. The skips are the opt-in real-CUDA durable batch smokes. The xfails
 are the documented CuPy `uint8`/`uint16` integer-parity gaps. Ruff, source and
 installed-wheel npe2 manifest validation, package build, Twine, and the
-installed-wheel resource smoke passed.
+installed-wheel resource smoke passed. These counts describe that exact
+historical tree only. Subsequent compute-lifecycle, optimizer, source-loading,
+generated-CLI, and cleanup-quarantine hardening changed application behavior,
+so `444f682` is superseded and is not the current release candidate.
 
-The candidate's real RTX 5090 Prefer-GPU integration test passed and selected
+The checkpoint's real RTX 5090 Prefer-GPU integration test passed and selected
 CPU Extract Channel, cuCIM Subtract Background, CPU native-`uint16` Gaussian,
 and CuPyX Median without per-node overrides. The complete pipeline had exact
 parity, no fallback, and clean accelerator cleanup. This verifies the automated
 placement contract for that environment; manual Prefer-GPU UI acceptance is
 still pending.
 
-The exact candidate artifact hashes are:
+The exact historical checkpoint artifact hashes are:
 
 - wheel: `58b08cbb8396c9fe27d28a69d52b06e160817e58987e6dc3b8c5059f3dae9804`;
 - source distribution:
   `00fcb15452d3ed71d344859d4306cbcdcc458686959169a2c47485d8f7abec9b`.
 
-The tag, publication, and post-publication checks remain pending. See the
-[release notes](../releases/0.13.0a1.md#prefer-gpu-automated-candidate-evidence)
-for the separate historical and current artifact tables.
+These artifacts must not be uploaded for 0.13.0a1. A new immutable candidate,
+full verification run, package artifacts, tag, publication, and
+post-publication checks remain pending. See the
+[release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
+for the historical artifact table.
 
 A bounded source-candidate smoke on 4 August 2026 used application commit
 `e024409` on an Apple M1 Max (`arm64`) running macOS 26.5.2. Manual checks
@@ -146,7 +151,7 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, the pushed `444f682` automated candidate with 3,754 passing tests and zero failures, clean wheel/sdist plus manifest/resource checks, a real RTX 5090 Prefer-GPU placement/parity/cleanup test, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Manual Prefer-GPU UI acceptance on the exact candidate, final tag/publication checks, native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, the historical/superseded `444f682` checkpoint with 3,754 passing tests and zero failures, its clean wheel/sdist plus manifest/resource checks, a real RTX 5090 Prefer-GPU placement/parity/cleanup test, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Name and fully verify a new immutable candidate after current hardening; rebuild clean artifacts; repeat release-candidate manual acceptance and tag/publication checks; native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
 | Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 2, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |

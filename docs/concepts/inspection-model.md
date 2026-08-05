@@ -38,11 +38,14 @@ pinning it and opening its table or metadata uses the same newly completed
 run-scoped payload. An otherwise prunable Low-memory intermediate gets the card
 state and thumbnail without forcing VIPP to retain its full-volume payload.
 
-This is a progress view, not a partial scientific commit. VIPP publishes the
-new workflow cache only when the complete run is accepted against the same
-graph and source revisions. Cancellation, failure, a newer edit, or a
+This is a progress view, not by itself a partial scientific commit. Normal
+success publishes the new workflow cache only when the complete run is accepted
+against the same graph and source revisions. Cancellation, a newer edit, or a
 superseding run removes the temporary overlays and restores the last coherent
-inspection state.
+inspection state. On failure, VIPP may accept a verified source boundary; it
+may additionally accept completed processing data from a cleanup-failed result,
+but only with matching actual-implementation provenance. Unreported processing
+overlays are discarded and their earlier coherent inspection state is restored.
 
 ### Reused and replaced Inspect layers
 
