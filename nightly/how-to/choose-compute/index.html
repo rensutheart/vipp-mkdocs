@@ -2558,14 +2558,14 @@ failure; some invalid or non-fallback-safe calls fail under either policy.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>CPU</strong></td>
-<td>Establishing a portable reference, diagnosing a provider, or requiring host execution</td>
-<td>Every calculated operation uses its authoritative CPU implementation.</td>
-</tr>
-<tr>
 <td><strong>Auto</strong></td>
 <td>The recommended, learning new-session default</td>
 <td>With no exact compatible history, use reviewed GPU defaults. Accelerated-only history makes the next global Auto run measure CPU once on the same execution surface; a later matching run applies the 1.20x/20-ms gate to the pair. Auto never silently benchmarks multiple implementations.</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>Establishing a portable reference, diagnosing a provider, or requiring host execution</td>
+<td>Every calculated operation uses its authoritative CPU implementation.</td>
 </tr>
 <tr>
 <td><strong>Prefer GPU</strong></td>
@@ -2592,6 +2592,21 @@ comparison. This stable choice is not a claim that the selected GPU is fastest.<
 <p>A schema-3 workflow opens in <strong>CPU</strong>, not Auto, because the older file did not
 record compute intent. A schema-4 workflow restores its portable request, but
 not a promise that the same backend exists or is fastest on another machine.</p>
+<p>The toolbar presents the modes in default-first order: <strong>Auto</strong>, <strong>CPU</strong>,
+<strong>Prefer GPU</strong>, then <strong>Custom</strong>. Switching to Custom while VIPP is idle does not
+discard or relabel a valid calculation. The existing images and actual
+CPU/GPU provenance remain visible. If those decisions differ from the saved
+Custom choices, VIPP marks the badges and summary as a <strong>previous result</strong>;
+the Custom choices take effect when a node preference changes, you calculate,
+or you apply a reviewed optimizer proposal.</p>
+<p>Compute policy cannot change underneath active work. While a pipeline
+calculation, node benchmark, or <strong>Find fastest</strong> analysis is running, the mode
+and applicable per-node controls are disabled until normal completion. To
+select another policy sooner, use the explicit <strong>Cancel calculation</strong>, <strong>Cancel
+benchmark</strong>, or <strong>Cancel analysis</strong> control first. The controls remain locked
+while the worker reaches a cooperative checkpoint,
+synchronizes, and releases CPU/GPU resources. This guarantees that selecting
+CPU cannot leave an earlier GPU calculation or timing comparison running.</p>
 <h2 id="a-safe-practical-sequence">A safe practical sequence<a class="headerlink" href="#a-safe-practical-sequence" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Run a representative item on <strong>CPU</strong> and inspect the decisive images,
@@ -2608,7 +2623,11 @@ not a promise that the same backend exists or is fastest on another machine.</p>
    execution surface. Once both observations exist, a later matching run uses
    acceleration only when it clears the 1.20x/20-ms gate; otherwise it uses CPU.
    Interactive, batch, and registry-lifecycle timing surfaces are never mixed.
-   Auto never silently benchmarks multiple implementations.</li>
+   Auto never silently benchmarks multiple implementations. Before the optional
+   CPU comparison, VIPP checks conservative host-memory headroom. On Windows it
+   checks both available physical RAM and remaining system commit. If the
+   comparison would consume the reserve, Auto keeps the reviewed safe assignment,
+   explains the skipped evidence, and can try again on a later compatible run.</li>
 <li>Switch to <strong>Prefer GPU</strong> when you want every reviewed eligible accelerator
    region without first benchmarking whether it beats CPU. Read the ordinary
    CPU reasons for unsupported nodes; this mixed result is the intended policy.</li>
@@ -2620,7 +2639,10 @@ not a promise that the same backend exists or is fastest on another machine.</p>
    advanced compatibility choice until replaced.</li>
 <li>Benchmark an eligible node for a focused comparison, or choose <strong>Find
    fastest pipeline…</strong> to compare every eligible implementation in the current
-   calculated, writer-free subgraph. Review the proposal before applying it;
+   writer-free subgraph. If the displayed result is stale, Find fastest first
+   establishes a private current-graph baseline after cancellation cleanup; it
+   does not require you to publish an ordinary replacement calculation. Review
+   the proposal before applying it;
    accepted winners become Custom per-node preferences. Raw isolated-node
    timings remain separate from Auto's complete-pipeline history, although a
    later successful, fallback-free completed run of the accepted assignment
@@ -2649,6 +2671,19 @@ that the current assignment is optimal. The result identifies completed and
 remaining work, and complete records for the exact workload and environment
 can be reused on retry. Editing data, parameters, code/policy identity, or the
 relevant environment invalidates reuse.</p>
+<p>When a synchronized GPU candidate has enough repeated measurements to be a
+reliable incumbent, the optimizer may stop a cooperative CPU warm call once its
+elapsed time exceeds the incumbent's one-sided confidence bound plus a material
+margin. The dialog reports a censored lower bound such as <strong>CPU &gt; 10.6 s;
+stopped early</strong>, not an exact CPU timing. Censored results are not reused as
+timing-history samples. Scientific parity is checked independently, required
+CPU/GPU transfers remain in the whole-graph model, and a changed modeled
+assignment must pass final paired end-to-end validation before it can be
+offered. When the already-current assignment wins, VIPP reports its fresh
+baseline, parity, and conservative exact-or-censored comparison evidence; it
+does not claim a redundant paired comparison against itself. GPU candidates are not
+discarded from a one-off transfer-inclusive duration because a resident
+pipeline can amortize those transfers.</p>
 <p>Current node benchmarking requires resolved ordered inputs, one output, and no
 writer side effect. Whole-pipeline optimization operates within one supported
 accelerator runtime and the calculated writer-free graph frontier. Unsupported
@@ -2795,6 +2830,26 @@ mislabeled as runtime OOM.</p>
 tiles/planes, and publication stages. An opaque call can finish its current
 atomic work before responding. A result is not accepted or published until
 required synchronization and cleanup succeed.</p>
+<p>A failed or OOM interactive attempt never replaces an earlier processing result
+with an uncomputed or provenance-unknown value. VIPP may accept a verified
+source boundary. If cleanup itself failed, VIPP may additionally accept a
+completed processing node, but only when matching actual-implementation
+provenance is available for its badge and report. All
+other affected nodes retain prior valid outputs, thumbnails, and badges and
+remain pending. Cancellation retains the prior coherent result.</p>
+<p>If accelerator cleanup fails during a calculation, node benchmark, <strong>Find
+fastest</strong>, or collection batch, VIPP cannot prove the runtime safe to reuse. It
+requests cancellation of every other active compute owner and disables new
+calculation, policy changes (including policy-changing undo/redo),
+benchmark/optimizer work, and batch starts for that process. Newly measured
+<strong>Find fastest</strong> evidence from the unsafe analysis is rolled back. If that
+record-level rollback cannot be written, VIPP writes a durable poison marker
+first and moves the complete local timing store to an <code>.unsafe-*</code> quarantine
+filename under its cross-process lock. A restart resolves the marker or refuses
+to open the active store; if the marker itself could not be written, the alert
+names the file that must be moved manually. Preserve the error/provenance record
+and restart VIPP; ordinary visible CPU fallback is allowed only after cleanup
+succeeds.</p>
 <h2 id="keep-interactive-and-durable-execution-aligned">Keep interactive and durable execution aligned<a class="headerlink" href="#keep-interactive-and-durable-execution-aligned" title="Permanent link">&para;</a></h2>
 <p>Interactive calculation, saved batch runners, and generated Python/CLI use the
 same execution service. Interactive <strong>Save selected output…</strong> and <strong>Export OME
@@ -2817,8 +2872,11 @@ given, while an explicit strict combination is rejected before calculation.
 Every surface records the effective request and exact actual implementations in
 the same execution provenance.</p>
 <p>The saved batch runner is the production collection route. The generated
-program's simple folder helper does not provide its pairing, collision plan,
-source verification, checkpoints, or durable manifest.</p>
+program's simple folder helper hashes each local primary source before reading,
+verifies it after materialization, and privately stages and transactionally
+commits each requested output/sidecar set. It does not provide multi-source
+pairing, collision planning, a final source recheck immediately before
+publication, checkpoints, a durable manifest, or replay/resume.</p>
 
 
 
@@ -2839,7 +2897,7 @@ source verification, checkpoints, or durable manifest.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 10:04:28 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
   </span>
 
     

@@ -2805,8 +2805,8 @@ and the accepted edit is atomic and undoable.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>CPU / Auto / Prefer GPU / Custom</strong></td>
-<td>CPU forces authoritative host implementations. Auto is the learning default: it starts from reviewed GPU defaults, measures CPU once after accelerated-only exact compatible history, then applies the 1.20x/20-ms gate to the pair. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Custom exposes authored per-node CPU/GPU choices and benchmarking.</td>
+<td><strong>Auto / CPU / Prefer GPU / Custom</strong></td>
+<td>Auto is the learning default and appears first. CPU forces authoritative host implementations. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Custom exposes authored per-node CPU/GPU choices and benchmarking.</td>
 </tr>
 <tr>
 <td>Actual-run compute summary</td>
@@ -2844,6 +2844,13 @@ requires visible fallback. If every eligible GPU has complete comparable timing
 evidence, VIPP chooses the fastest GPU; otherwise stable implementation-ID order
 provides a deterministic choice without making a speed claim. Per-node
 preferences and both benchmark actions are inactive until Custom is restored.</p>
+<p>Entering Custom while idle preserves the last valid output and its actual
+provenance. If it does not satisfy saved Custom choices, its muted badges and
+summary say that it is a previous result rather than relabeling it. Compute mode,
+fallback, per-node preference, and optimizer-lock controls are disabled during
+calculation or benchmarking. They unlock after normal completion; to change
+policy sooner, use the explicit cancellation action and wait for resource
+cleanup.</p>
 <p>In Custom mode, an operation with a declared provider shows <strong>Auto for this
 node</strong>, <strong>CPU</strong>, and one <strong>GPU · library</strong> entry for each declared library.
 <strong>Auto for this node</strong> authors no backend pin and uses the reviewed Auto default
@@ -2857,7 +2864,7 @@ remains visible until deliberately replaced. A separate optimizer lock—not
 merely choosing a backend—preserves a node during <strong>Find fastest</strong>.</p>
 <p>Calculated cards show compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>, <strong>GPU · cuCIM</strong>, or amber
 <strong>CPU fallback</strong> badges. A muted badge belongs to the last accepted run while a
-new result is pending. Hover or inspect the node for the implementation ID and
+new result is pending or current Custom intent differs. Hover or inspect the node for the implementation ID and
 version, runtime/device, preference, decision reason, benchmark evidence,
 memory estimate, and fallback details.</p>
 <p>Node benchmarking and whole-pipeline optimization use the exact current inputs
@@ -2965,17 +2972,30 @@ connections or processed data.</p>
 </tr>
 </tbody>
 </table>
-<p>Host cache status reports RAM. <strong>Compute setup and memory…</strong> adds accelerator
+<p>Host cache status reports RAM; on Windows it separately shows remaining system
+commit because either physical or commit headroom can limit an allocation.
+<strong>Compute setup and memory…</strong> adds accelerator
 memory: discrete NVIDIA devices report separate VRAM, while a future unified-
 memory provider must report the shared budget rather than double-counting it.
 The executor applies an operation-specific conservative memory estimate before
 device work; the estimate and any typed OOM/fallback are part of execution
 provenance.</p>
-<p><strong>Cancel</strong> prevents queued reruns and ignores the active result. It asks
-cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
+<p><strong>Cancel calculation</strong> prevents queued reruns and rejects the active result. It
+asks cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
 scikit-image, CuPy, or cuCIM call already executing. GPU progress advances only
 after synchronization at a truthful operation checkpoint, and cancellation
-waits for cleanup before a result can be published.</p>
+waits for cleanup before compute controls unlock. Failed/OOM attempts never
+replace prior processing results with uncomputed or provenance-unknown values.
+A verified source boundary may be accepted. If cleanup itself failed, a
+completed processing node may additionally be accepted, but only with matching
+actual-implementation provenance; all other nodes retain their coherent
+outputs, thumbnails, and badges.</p>
+<p>If cleanup fails after calculation, node benchmarking, <strong>Find fastest</strong>, or a
+collection batch, VIPP requests cancellation of other active compute and every
+compute entry point, policy control, and policy-changing undo/redo action is
+disabled for that process. The actionable message asks for a restart because
+an ordinary CPU fallback cannot establish that an incompletely cleaned
+accelerator runtime is safe.</p>
 <p>The current adaptive large-input boundary is 4,000,000 elements or 32 MiB,
 whichever is reached first. This applies even when <strong>Run all in BG</strong> is
 unchecked. Exact threshold diagnostics, Auto Contrast, colocalization density,
@@ -3156,7 +3176,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 10:04:28 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
   </span>
 
     

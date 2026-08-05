@@ -719,9 +719,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prefer-gpu-automated-candidate-evidence" class="md-nav__link">
+  <a href="#historical-prefer-gpu-automated-checkpoint-superseded" class="md-nav__link">
     <span class="md-ellipsis">
-      Prefer-GPU automated candidate evidence
+      Historical Prefer-GPU automated checkpoint (superseded)
     </span>
   </a>
   
@@ -2557,9 +2557,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prefer-gpu-automated-candidate-evidence" class="md-nav__link">
+  <a href="#historical-prefer-gpu-automated-checkpoint-superseded" class="md-nav__link">
     <span class="md-ellipsis">
-      Prefer-GPU automated candidate evidence
+      Historical Prefer-GPU automated checkpoint (superseded)
     </span>
   </a>
   
@@ -2650,7 +2650,7 @@ every export under 0.13.0a1.</p>
 </div>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Choose <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or <strong>Custom</strong> from the main
+<li>Choose <strong>Auto</strong>, <strong>CPU</strong>, <strong>Prefer GPU</strong>, or <strong>Custom</strong> from the main
   toolbar. Auto is the learning default. Prefer GPU uses every reviewed
   scientifically eligible public GPU candidate regardless of speed. Custom
   exposes one CPU choice and one choice for each declared GPU library on an
@@ -2660,6 +2660,15 @@ every export under 0.13.0a1.</p>
 <li>Benchmark one eligible node or ask VIPP to find a fastest measured whole-
   pipeline assignment. Results are review-first: the graph does not change
   until the proposed assignment is applied.</li>
+<li>Preserve the last coherent outputs and actual badges when entering Custom or
+  when work is canceled. Failed/OOM runs never replace prior processing values
+  with uncomputed or provenance-unknown data: verified sources may be accepted,
+  and a cleanup-failed result may additionally retain completed nodes only with
+  matching actual-implementation provenance. Every other retained result is
+  visibly identified as previous/pending rather than relabeled as though the
+  new policy produced it.</li>
+<li>Change compute mode or per-node backend only while idle. During calculation
+  or benchmarking, explicitly cancel and wait for CPU/GPU cleanup first.</li>
 <li>Keep compatible arrays resident across GPU nodes while retaining private,
   transactional device values, memory admission, synchronized progress,
   cooperative cancellation, cleanup, and classified OOM behavior.</li>
@@ -2728,7 +2737,10 @@ execution surface. Once both observations exist, a later matching run uses
 acceleration only when it clears the reviewed 1.20x/20-ms benefit margin;
 otherwise it uses CPU. Interactive, batch, and registry-lifecycle timing
 surfaces are never mixed. Auto never silently benchmarks multiple
-implementations. Prefer GPU provides global
+implementations. Its optional CPU evidence run is preflighted against physical
+RAM and, on Windows, remaining system commit; unsafe evidence collection is
+skipped with an explanation while the reviewed safe assignment is retained.
+Prefer GPU provides global
 accelerator placement without a speed requirement, while Custom provider
 choices and <strong>Find fastest</strong> provide per-node control and measurement. Applying
 a proposal writes Custom per-node preferences. Setup diagnostics still offer a
@@ -2763,6 +2775,16 @@ no safe sub-operation checkpoint. Reaching the time limit means the search
 ended before every planned comparison—not that the current assignment was
 proved optimal. Completed exact node results are retained for a retry, and no
 assignment changes until the user reviews and applies it.</p>
+<p>After cancellation cleanup, Find fastest can privately establish a fresh
+baseline for the current graph instead of requiring a stale display to be
+published first. It may stop a cooperative CPU warm call once a sufficiently
+measured synchronized GPU incumbent is decisively faster. That outcome is
+reported as a censored lower bound (<code>CPU &gt; ...; stopped early</code>), never as an
+exact reusable timing. Independent parity, graph-wide transfer modeling, and
+final paired end-to-end validation remain required for a changed modeled
+assignment. If the current assignment wins, its fresh baseline and conservative
+comparison evidence support retention without a redundant paired comparison
+against itself.</p>
 <h2 id="durable-batch-generated-python-cli-and-export">Durable batch, generated Python, CLI, and export<a class="headerlink" href="#durable-batch-generated-python-cli-and-export" title="Permanent link">&para;</a></h2>
 <p>Interactive and durable surfaces now submit the same versioned compute request
 to the shared headless executor. They preserve:</p>
@@ -2801,19 +2823,33 @@ Generated output publication stages the complete requested output/sidecar set,
 rejects duplicate destinations, and commits with rollback for caught promotion
 failures. It returns <code>0</code> on success, <code>2</code> on setup/execution/publication failure,
 and <code>130</code> after cooperative cancellation. Exact source-byte reverification
-before promotion remains a saved-batch guarantee; arbitrary generated-Python
-array callers provide their own source identity and stability.</p>
+immediately before promotion remains a saved-batch guarantee. The generated
+local loader does hash before reading and verify again after materialization;
+arbitrary generated-Python array callers provide their own source identity and
+stability.</p>
 <p>With <strong>visible</strong> fallback, one complete device segment can be retried on CPU
 after a classified, retryable OOM only after GPU synchronization and cleanup.
 Prefer GPU always uses this visible policy. <strong>Strict</strong> Custom intent returns
 the typed failure instead. Other device defects are never
 renamed as OOM or silently retried. A later batch item is planned independently;
 one fallback does not rewrite the saved request for the remaining collection.</p>
+<p>If cleanup fails during interactive execution, node benchmarking, <strong>Find
+fastest</strong>, or a workspace batch, the VIPP process requests cancellation of
+other active compute and quarantines all further calculation, policy changes
+(including policy-changing undo/redo), benchmark/optimizer work, and new batch
+starts until restart. Newly measured optimizer records from an unsafe <strong>Find
+fastest</strong> analysis are rolled back; if record-level rollback fails, the full
+local timing store is poison-marked first and moved under its cross-process
+lock to an <code>.unsafe-*</code> quarantine filename instead. A later process resolves
+the marker or refuses the active store. This is distinct from ordinary visible
+fallback, which requires cleanup to have succeeded.</p>
 <p>The generated <code>batch_process()</code> folder helper remains a convenience for one
-varying primary source. It does not provide the saved runner's multi-source
-pairing, source-byte identities, collision plan, staging, checkpoints,
-manifest, or durable replay guarantees. Use the saved batch runner for
-production collection processing.</p>
+varying primary source. It content-hashes the local source before reading,
+verifies the identity after materialization, and privately stages and
+transactionally commits the requested output/sidecar set. It does not provide
+the saved runner's multi-source pairing, collision plan, final source recheck
+immediately before publication, checkpoints, manifest, or durable replay/resume
+guarantees. Use the saved batch runner for production collection processing.</p>
 <h2 id="workflow-and-interface-changes">Workflow and interface changes<a class="headerlink" href="#workflow-and-interface-changes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Workflow tabs retain independent graphs, results, caches, histories,
@@ -2890,7 +2926,8 @@ smokes within the stated native-Windows evidence boundary.</p>
 <p>These results remain valid evidence for that exact source tree, but they do not
 qualify the eventual 0.13.0a1 tag: the later Prefer-GPU feature changed
 application source, compute serialization, planning, UI, and durable CLI
-behavior. The replacement automated candidate is recorded separately below.</p>
+behavior. The next automated checkpoint is recorded separately below and is
+itself now superseded by later hardening.</p>
 <p>On 4 August 2026, the <code>e024409</code> source candidate also received a bounded Apple
 M1 Max (<code>arm64</code>, macOS 26.5.2) CPU smoke. Manual checks covered launch and basic
 processing, collection-batch progress and cooperative cancellation, and memory
@@ -2931,20 +2968,23 @@ behavior.</p>
 </tbody>
 </table>
 <p>These hashes identify files built from <code>e024409</code>; they are not valid artifacts
-for the current Prefer-GPU development tree and must not be uploaded for this
+for the later Prefer-GPU development tree and must not be uploaded for this
 release. Retain this historical table only as the bounded <code>e024409</code> checkpoint.</p>
-<h3 id="prefer-gpu-automated-candidate-evidence">Prefer-GPU automated candidate evidence<a class="headerlink" href="#prefer-gpu-automated-candidate-evidence" title="Permanent link">&para;</a></h3>
-<p>The pushed replacement candidate is application commit
+<h3 id="historical-prefer-gpu-automated-checkpoint-superseded">Historical Prefer-GPU automated checkpoint (superseded)<a class="headerlink" href="#historical-prefer-gpu-automated-checkpoint-superseded" title="Permanent link">&para;</a></h3>
+<p>Application commit
 <a href="https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5"><code>444f68290fe4359b05c68a027d3ae0a413412fe5</code></a>
-on <code>codex/gpu-cross-platform-support</code>.</p>
+on <code>codex/gpu-cross-platform-support</code> was the next automated checkpoint after
+<code>e024409</code>. It is no longer the current release candidate: later
+compute-lifecycle, optimizer, source-loading, generated-CLI, and cleanup-
+quarantine hardening changed release-relevant application behavior.</p>
 <p>The full local suite completed in 299.65 seconds with <strong>3,754 passed, 2 skipped,
 2 xfailed, 83 warnings, and zero failures</strong>. The skips are the opt-in real-CUDA
 durable batch smokes. The xfails are the documented CuPy
 <code>uint8</code>/<code>uint16</code> integer-parity gaps; they are not unexpected regressions.
 Ruff, source-tree and installed-wheel npe2 manifest validation, package build,
 Twine checks, and the installed-wheel resource smoke all passed.</p>
-<p>The real RTX 5090 Prefer-GPU integration test also passed. Without authored
-per-node choices, planning selected:</p>
+<p>The checkpoint's real RTX 5090 Prefer-GPU integration test also passed. Without
+authored per-node choices, planning selected:</p>
 <ul>
 <li>CPU for Extract Channel;</li>
 <li>cuCIM GPU for Subtract Background;</li>
@@ -2955,8 +2995,8 @@ per-node choices, planning selected:</p>
 cleanup. This demonstrates the intended global placement rule: reviewed GPUs
 are used wherever scientifically eligible without casting the native-<code>uint16</code>
 Gaussian call or treating its explained CPU decision as a failure.</p>
-<p>Clean wheel and source-distribution artifacts built from the exact candidate
-commit are:</p>
+<p>Clean wheel and source-distribution artifacts built from that exact historical
+checkpoint commit are:</p>
 <table>
 <thead>
 <tr>
@@ -2975,12 +3015,13 @@ commit are:</p>
 </tr>
 </tbody>
 </table>
-<p>These files are candidate artifacts, not a published release. Manual
-Prefer-GPU UI acceptance on this exact commit, the final release tag, artifact
-upload, GitHub pre-release, documentation snapshot, and post-publication checks
-remain pending.</p>
+<p>These files are superseded checkpoint artifacts, not release candidates or a
+published release. They must not be uploaded for 0.13.0a1. A new immutable
+candidate must be named and rebuilt from the final source, then pass the full
+suite, packaging, artifact, manual-acceptance, tag, publication, documentation,
+and post-publication checks.</p>
 <h3 id="refreshed-rtx-5090-deconvolution-screen">Refreshed RTX 5090 deconvolution screen<a class="headerlink" href="#refreshed-rtx-5090-deconvolution-screen" title="Permanent link">&para;</a></h3>
-<p>The same source-candidate refresh recorded these transfer-inclusive timings:</p>
+<p>The bounded RTX 5090 refresh recorded these transfer-inclusive timings:</p>
 <table>
 <thead>
 <tr>
@@ -3110,7 +3151,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 10:04:28 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
   </span>
 
     

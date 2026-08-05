@@ -2599,7 +2599,8 @@ and warn the user.</p>
 <p>The cache-status display obtains available/total physical memory through an
 operating-system-specific path:</p>
 <ul>
-<li>Windows uses <code>GlobalMemoryStatusEx</code> and does not require <code>os.sysconf</code>;</li>
+<li>Windows uses <code>GlobalMemoryStatusEx</code>, reports physical RAM and system commit
+  separately, and does not require <code>os.sysconf</code>;</li>
 <li>macOS uses <code>host_statistics64</code> plus guarded <code>sysconf</code> page-size/physical-page
   queries;</li>
 <li>other POSIX systems use guarded <code>sysconf</code> page counters.</li>
@@ -2608,6 +2609,12 @@ operating-system-specific path:</p>
 value, VIPP reports memory as unavailable rather than crashing or inventing a
 number. The value is still an operational estimate, and container/VM limits
 can differ from host memory.</p>
+<p>Windows <code>Commit free</code> is remaining system commit headroom, not merely free
+physical RAM or configured page-file capacity. A large allocation can fail
+when commit is exhausted while some physical RAM remains. VIPP checks both
+reserves before the optional Auto CPU timing comparison; when that evidence run
+would be unsafe, Auto retains its reviewed safe assignment and reports the
+skip. The missing CPU observation can be collected later.</p>
 <h2 id="device-residency-and-accelerator-memory">Device residency and accelerator memory<a class="headerlink" href="#device-residency-and-accelerator-memory" title="Permanent link">&para;</a></h2>
 <p>The interactive scientific cache remains host-owned. During one accepted run,
 eligible adjacent GPU nodes can use a private device-resident segment so VIPP
@@ -2680,11 +2687,18 @@ inspection layer, pinned layer, table preview, and metadata. Smart and
 Low-memory modes do not retain an otherwise prunable full-volume intermediate
 merely to provide this progress display.</p>
 <p>These updates are presentation overlays owned by the active run. They do not
-partially publish results into the live scientific cache. VIPP commits the
-workflow outputs and execution states only after the complete result is
-accepted against the same workflow and source revisions. Cancellation,
-failure, a newer edit, or a superseding run discards the overlays and restores
-the previous coherent cache view.</p>
+by themselves publish results into the live scientific cache. Normal success
+commits the complete accepted result against the same workflow and source
+revisions. Cancellation, a newer edit, or a superseding run discards the
+overlays and restores the previous coherent cache view.</p>
+<p>Failure/OOM handling is provenance-aware. A verified source boundary may be
+accepted. A cleanup-failed result may additionally contribute a completed
+processing node only when its matching actual-implementation decision is
+present; an uncomputed or unreported value never replaces an earlier valid
+result. Prior thumbnails and truthful CPU/GPU
+badges remain visible for all other nodes, with previous/pending styling when
+they do not satisfy current intent. A cleanup failure quarantines further
+compute in that process until VIPP is restarted.</p>
 <p>This distinction matters when monitoring a long pipeline: a newly grey/current
 card and thumbnail mean that node completed in the active run, but the workflow
 as a whole is not committed until the run finishes successfully.</p>
@@ -2724,7 +2738,7 @@ a lazy or lower-cost one.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 21:10:19 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
   </span>
 
     
