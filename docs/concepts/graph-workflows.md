@@ -32,7 +32,7 @@ as thumbnails, napari layers, histograms, labels, or tables.
   space.
 - Zoom out for whole-workflow review, then zoom in for parameter tuning.
 - Add explicit `Batch Output` nodes before running a workflow over a folder.
-- Read actual-run badges before assuming that Auto, Prefer GPU, or Selective
+- Read actual-run badges before assuming that Auto, Prefer GPU, or Custom
   used a GPU.
 - Save workflow snapshots before major parameter sweeps.
 

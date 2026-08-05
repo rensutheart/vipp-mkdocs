@@ -136,13 +136,18 @@ not use `Reorder Axes` as a blind visual repair. If controls remain absent or
 move the wrong content, report a minimal non-sensitive file plus reader and VIPP
 versions.
 
-## Auto, Prefer GPU, Or Selective Still Shows CPU
+## Auto, Prefer GPU, Or Custom Still Shows CPU
 
-For **Auto**, CPU is expected in the standard 0.13.0a1 interfaces: calculation
-does not attach local timing evidence, and Auto does not benchmark implicitly.
-Use Prefer GPU when every reviewed eligible accelerator should run regardless
-of speed. Use Selective and apply a reviewed provider or **Find fastest** when
-you need per-node control or a measured assignment.
+For **Auto**, CPU can mean that no reviewed GPU default is eligible, that a
+completed timing pair selected CPU, or that accelerated-only history triggered
+the one-time same-surface CPU exploration run. With no compatible history, Auto
+uses reviewed defaults. Once both observations exist, a later matching run uses
+acceleration only if it clears the 1.20x/20-ms gate. Interactive, batch, and
+registry-lifecycle timing surfaces are never mixed. Auto never silently
+benchmarks multiple implementations. Use Prefer GPU when every reviewed
+eligible accelerator should run regardless of speed.
+Use Custom and apply a reviewed provider or **Find fastest** when you need
+per-node control or a measured assignment.
 
 For **Prefer GPU**, CPU means that no reviewed accelerator passed every gate for
 that exact call. Read the explained dtype, parameter, shape, dependency,
@@ -150,7 +155,7 @@ environment, or memory reason. Prefer GPU does not cast inputs, alter
 parameters, use developer-hidden providers, or waive scientific admission to
 increase the GPU count.
 
-For **Selective**, CPU can still be the only scientifically admitted result for
+For **Custom**, CPU can still be the only scientifically admitted result for
 the exact dtype, parameters, shape, memory, provider, or environment, or it can
 be an amber visible fallback from a forced GPU choice. Read the node badge and
 decision reason, then run **Compute setup and memory…**. The standard CUDA extra

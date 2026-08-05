@@ -25,11 +25,15 @@ The VIPP dock widget has a workflow tab bar and three main work regions:
 
 The top toolbar opens examples and workflows, saves or exports the graph,
 starts batch processing, and exposes display/execution settings. Its
-**CPU / Auto / Prefer GPU / Selective** control is the authored compute request; new sessions
+**CPU / Auto / Prefer GPU / Custom** control is the authored compute request; new sessions
 default to Auto. After calculation, the toolbar summary and compact node badges
-show what actually ran. Ordinary 0.13.0a1 runs attach no local timing evidence,
-so fresh Auto candidates stay on CPU. Use **Prefer GPU** when every reviewed
-eligible accelerator should run regardless of speed. Use a reviewed Selective
+show what actually ran. Auto uses exact compatible complete-pipeline timing
+history when both CPU and accelerated observations exist; without history it
+uses reviewed safe GPU defaults. Accelerated-only history makes the next global
+Auto run measure CPU once on the same execution surface. Auto never silently
+benchmarks multiple implementations.
+Use **Prefer GPU** when every reviewed eligible accelerator
+should run regardless of speed. Use a reviewed Custom
 choice or apply a **Find fastest** proposal for per-node control and measurement.
 
 VIPP's severity-aware message strip reports graph, workflow, and compute

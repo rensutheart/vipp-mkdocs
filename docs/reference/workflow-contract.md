@@ -35,7 +35,7 @@ A current file identifies itself with:
 
 VIPP 0.13.0a1 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
 an explicit error. Schema 4 adds portable authored compute intent under
-`execution.compute`, including `cpu`, `auto`, `prefer_gpu`, or `selective` mode
+`execution.compute`, including `cpu`, `auto`, `prefer_gpu`, or `custom` mode
 and per-node preferences. It does not store a claim that the same backend will
 be available or fastest on another computer.
 
@@ -63,7 +63,11 @@ library, not a hidden cast or a stored benchmark result. The execution report,
 rather than workflow intent, is the record of the runtime, implementation,
 fallback, and environment that actually produced a result.
 
-Per-node preferences are active only in Selective. CPU, Auto, and Prefer GPU
+Legacy development builds may display **Selective** or serialize `selective`
+for the policy now named **Custom**. Current builds accept that spelling for
+compatibility and write `custom`; the policy behavior is unchanged.
+
+Per-node preferences are active only in Custom. CPU, Auto, and Prefer GPU
 preserve them as dormant authored intent so switching modes is lossless. Prefer
 GPU considers all reviewed public GPU candidates regardless of CPU speed, but
 retains scientific, dtype, parameter, dependency, environment, and memory

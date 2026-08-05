@@ -57,7 +57,7 @@ Prefer GPU compute. The archived execution report records CuPy implementation
 `[no fallbacks / classified fallback details]`.” Do not report “GPU analysis”
 from toolbar intent alone.
 
-If Selective was used, also report the authored per-node choices or applied
+If Custom was used, also report the authored per-node choices or applied
 optimizer assignment. Prefer GPU means accelerator placement regardless of
 speed; it is not a claim that GPU was faster.
 

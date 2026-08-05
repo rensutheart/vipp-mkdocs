@@ -15,25 +15,31 @@ Try these in order:
 7. Mark expensive intermediates with `Keep output cached`.
 
 If optional CUDA support is installed, also inspect the toolbar's actual-run
-summary and node badges. In ordinary 0.13.0a1 execution, **Auto** does not carry
-local timing evidence and therefore resolves fresh candidates to CPU. Use
+summary and node badges. With no exact compatible history, **Auto** uses
+reviewed GPU defaults wherever all safety gates pass. Accelerated-only history
+makes the next global Auto run measure CPU once on the same execution surface;
+once both observations exist, a later matching run applies the 1.20x/20-ms
+gate. Auto never silently benchmarks multiple implementations. Use
 **Prefer GPU** to use every reviewed eligible accelerator regardless of speed,
-or use **Selective** for per-node choices and **Find fastest**. Then use
+or use **Custom** for per-node choices and **Find fastest**. Then use
 **Compute setup and memory…** and the badge reason to understand any call-specific
 CPU decision or fallback. Do not infer GPU use from the selected mode. For the complete decision sequence and operation matrix, see
 [choose and verify CPU or GPU compute](../how-to/choose-compute.md).
 
-## CPU, Auto, Prefer GPU, and Selective compute
+## CPU, Auto, Prefer GPU, and Custom compute
 
 - **CPU** runs the authoritative host implementation everywhere.
-- **Auto** is conservative and never benchmarks implicitly. Standard 0.13.0a1
-  execution supplies no performance evidence, so fresh Auto calls stay on CPU;
-  the API can accept validated evidence explicitly.
+- **Auto** starts with reviewed GPU defaults. Accelerated-only exact compatible
+  history makes the next global Auto run measure CPU once on the same execution
+  surface. A later matching run uses acceleration only if it clears the
+  1.20x/20-ms gate. Only successful, fallback-free completed full-pipeline wall
+  times are retained; interactive, batch, and registry-lifecycle surfaces are
+  never mixed. Auto never silently benchmarks multiple implementations.
 - **Prefer GPU** uses every scientifically eligible reviewed public GPU
   candidate without requiring it to beat CPU. It still enforces all dtype,
   parameter, dependency, environment, parity, and memory gates, and unsupported
   nodes receive explained ordinary CPU decisions.
-- **Selective** exposes per-node library choices plus node and whole-pipeline
+- **Custom** exposes per-node library choices plus node and whole-pipeline
   benchmarking. A separate lock preserves an authored choice during **Find
   fastest pipeline…**.
 
@@ -105,7 +111,7 @@ With visible fallback, one complete device segment can retry on CPU after a
 classified runtime OOM only after the GPU attempt synchronizes and cleans up.
 The badge turns amber and the execution report retains the attempted segment,
 required/available memory where known, exception, cleanup, and CPU retry result.
-Prefer GPU requires this visible policy. Strict selective fallback returns the
+Prefer GPU requires this visible policy. Strict Custom fallback returns the
 typed failure. Other GPU faults are not silently treated as OOM.
 
 ## Switching Between Node Results

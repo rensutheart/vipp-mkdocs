@@ -40,5 +40,5 @@ Optional GPU use is not required for this route. New sessions default to Auto,
 which is a conservative CPU path in the ordinary 0.13.0a1 interfaces. Continue
 to [choose and verify CPU or GPU compute](../how-to/choose-compute.md) only after
 the workflow is scientifically sensible on representative data. **Prefer GPU**
-uses every reviewed eligible accelerator region globally; **Selective** adds
+uses every reviewed eligible accelerator region globally; **Custom** adds
 per-node choices and benchmarking.

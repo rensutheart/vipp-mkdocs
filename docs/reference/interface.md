@@ -50,19 +50,23 @@ and the accepted edit is atomic and undoable.
 
 | Control | Effect |
 | --- | --- |
-| **CPU / Auto / Prefer GPU / Selective** | CPU forces authoritative host implementations. Auto is the conservative default; ordinary UI/batch/generated runs in this alpha supply no local timing evidence, so fresh Auto candidates remain CPU. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Selective exposes authored per-node CPU/GPU choices and benchmarking. |
+| **CPU / Auto / Prefer GPU / Custom** | CPU forces authoritative host implementations. Auto is the learning default: it starts from reviewed GPU defaults, measures CPU once after accelerated-only exact compatible history, then applies the 1.20x/20-ms gate to the pair. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Custom exposes authored per-node CPU/GPU choices and benchmarking. |
 | Actual-run compute summary | After an accepted run, summarizes the CPU/GPU mix or fallback state; hover for why the run made those decisions. |
-| **Find fastest pipeline…** | In Selective mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying. |
-| **Strict selective GPU choices** | Fail when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
+| **Find fastest pipeline…** | In Custom mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying. |
+| **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
 
 New sessions default to **Auto**. A schema-3 workflow loads as **CPU** because
-the old file did not author compute intent. Auto never benchmarks during a
-calculation. Because the standard interactive, saved-batch, and generated paths
-do not attach performance evidence in 0.13.0a1, fresh Auto calls resolve to CPU;
-programmatic callers can provide validated evidence explicitly. To run GPU from
-the normal interface, use **Prefer GPU** for global accelerator placement or a
-reviewed Selective provider/**Find fastest** proposal for per-node control.
+the old file did not author compute intent. With no exact compatible history,
+Auto uses reviewed GPU defaults. Accelerated-only history makes the next global
+Auto run measure CPU once on the same execution surface. Once both observations
+exist, a later matching run uses acceleration only if it clears the reviewed
+1.20x/20-ms gate; otherwise it uses CPU. Only successful, fallback-free
+completed full-pipeline wall times are retained. Interactive, batch, and
+registry-lifecycle timing surfaces are never mixed, and Auto never silently
+benchmarks multiple implementations. Use **Prefer GPU** for global accelerator placement without a speed
+requirement or a reviewed Custom provider/**Find fastest** proposal for per-node
+control.
 
 Prefer GPU bypasses only Auto's CPU-versus-GPU performance gate. Scientific,
 dtype, parameter, dependency, environment, and memory admission remain active,
@@ -70,10 +74,13 @@ and unsupported nodes receive an explained ordinary CPU decision. Prefer GPU
 requires visible fallback. If every eligible GPU has complete comparable timing
 evidence, VIPP chooses the fastest GPU; otherwise stable implementation-ID order
 provides a deterministic choice without making a speed claim. Per-node
-preferences and both benchmark actions are inactive until Selective is restored.
+preferences and both benchmark actions are inactive until Custom is restored.
 
-In Selective mode, an operation with a declared provider shows **Follow pipeline
-policy**, **CPU**, and one **GPU · library** entry for each declared library.
+In Custom mode, an operation with a declared provider shows **Auto for this
+node**, **CPU**, and one **GPU · library** entry for each declared library.
+**Auto for this node** authors no backend pin and uses the reviewed Auto default
+for that node. It does not consume raw benchmark records or Auto's completed-run
+history, which is consulted only when the global mode is Auto.
 The choice remains visible even when the current call or environment will later
 be rejected, fall back, or fail; execution admission is call-specific. **Best
 GPU** appears only when several libraries genuinely compete. Exact

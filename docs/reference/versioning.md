@@ -61,13 +61,15 @@ file-format conversion.
    attention to colocalization thresholds, native-unit intensity sums, Pearson
    population fields, Manders fields, cropped masks, and ND2 axis order.
 4. Save the reviewed duplicate as schema 4. The saved `execution.compute`
-   object records `cpu`, `auto`, `prefer_gpu`, or `selective` mode and any
+   object records `cpu`, `auto`, `prefer_gpu`, or `custom` mode and any
    authored per-node preferences; it does not record a promise about which
    implementation will actually be available on another machine.
 5. If acceleration is wanted after the CPU comparison, use **Prefer GPU** to
    place every reviewed eligible operation on GPU regardless of speed, or use
-   Selective to choose providers per node/apply **Find fastest**. Standard
-   0.13.0a1 Auto runs carry no local timing evidence and remain CPU.
+   Custom to choose providers per node/apply **Find fastest**. Auto uses
+   reviewed safe GPU defaults without compatible history; accelerated-only
+   history schedules one same-surface CPU measurement before later matching
+   runs apply the 1.20x/20-ms gate.
    Review CPU/CuPy/cuCIM/fallback badges and retain the actual-run execution
    provenance. Do not add an unplanned `Convert Dtype` merely to make a GPU
    benchmark faster.

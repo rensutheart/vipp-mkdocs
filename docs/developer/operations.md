@@ -63,10 +63,14 @@ GPU. For each public region:
 8. Carry exact implementation, environment, decision, fallback, memory, and
    cleanup provenance through interactive, batch, generated Python/CLI, and
    export execution.
-9. Promote only the reviewed region as a public provider. Public Selective and
+9. Promote only the reviewed region as a public provider. Public Custom and
    Prefer-GPU visibility require scientific and operational admission; Auto
-   additionally requires explicit validated performance evidence. Standard
-   0.13.0a1 execution does not synthesize or persist that evidence. Prefer GPU
+   may use the reviewed public default without local timing. Normal execution
+   may record successful, fallback-free completed full-pipeline wall time for
+   compatible future Auto decisions. Accelerated-only history schedules one
+   same-surface CPU exploration run; Auto never silently benchmarks multiple
+   implementations or mixes incompatible timing surfaces.
+   Prefer GPU
    bypasses only the CPU-speed gate and must never waive dtype, parameter,
    environment, dependency, or memory gates. Broader CPU behavior remains
    first-class and must not be described as a failed GPU feature.

@@ -97,10 +97,12 @@ Expected for this release:
 ## Optional NVIDIA CUDA acceleration
 
 The base installation is complete and remains the portable recommendation. A
-new session defaults to **Auto**. Standard 0.13.0a1 execution does not attach
-local timing evidence, so fresh Auto candidates remain CPU even after CUDA is
-installed. Select **Prefer GPU** to use every reviewed eligible accelerator
-regardless of speed, or use Selective/**Find fastest** for per-node control and
+new session defaults to **Auto**. With no exact compatible history, Auto uses
+reviewed GPU defaults wherever the installed stack passes every safety gate.
+Accelerated-only history makes the next global Auto run measure CPU once on the
+same execution surface; a later matching run applies the 1.20x/20-ms gate.
+Select **Prefer GPU** to use every reviewed eligible accelerator
+regardless of speed, or use Custom/**Find fastest** for per-node control and
 measurement. GPU packages are optional and are not imported merely to load VIPP
 or run a CPU workflow.
 

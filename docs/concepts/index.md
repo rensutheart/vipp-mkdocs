@@ -15,6 +15,6 @@ an image, mask, label image, table, PSF, or future data type with a specific
 meaning.
 
 In 0.13, apply the same distinction to execution: the workflow stores a
-portable **CPU / Auto / Prefer GPU / Selective** request, while an accepted run records
+portable **CPU / Auto / Prefer GPU / Custom** request, while an accepted run records
 the actual CPU/CuPy/cuCIM implementation and any fallback. See
 [choose and verify compute](../how-to/choose-compute.md).

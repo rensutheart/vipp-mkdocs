@@ -94,7 +94,7 @@ quality for arbitrary samples.
 
 On 4 August 2026, the operator also reported a bounded native-Windows napari UI
 smoke pass on the later `ff21040` development checkout. A local schema-4
-Selective workflow loaded the representative private ND2 acquisition and
+Custom workflow loaded the representative private ND2 acquisition and
 exercised the intended channel, slice navigation/display behavior, and
 backend-badge presentation. The retained last-run JSON was subsequently
 overwritten by an Auto run, so it does not independently preserve the exact
@@ -159,12 +159,13 @@ same as an external comparison or assay validation. The distinction matters:
   serialized and exported Python is runtime-version pinned. Recalculate,
   regenerate exports, and validate after upgrading.
 - Version-1 batch configs load as explicit CPU and save as version 2. A saved
-  Auto, Prefer GPU, or Selective request is intent; actual implementation
-  provenance must be retained from each run. Standard interactive, saved-batch,
-  and generated execution in 0.13.0a1 attaches no local performance evidence, so
-  fresh Auto candidates stay CPU. Prefer GPU instead requests every reviewed
-  eligible accelerator regardless of speed; Selective owns per-node choices
-  and benchmarking.
+  Auto, Prefer GPU, or Custom request is intent; actual implementation
+  provenance must be retained from each run. Auto uses reviewed GPU defaults
+  without compatible history; accelerated-only history schedules one
+  same-surface CPU measurement before a later matching run applies the
+  1.20x/20-ms gate. Prefer GPU instead requests
+  every reviewed eligible accelerator regardless of speed; Custom owns per-node
+  choices and benchmarking.
 - GPU candidates cover only declared operation/dtype/parameter/shape/memory and
   environment regions. The initial public gate is one exact native-Windows RTX
   5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the

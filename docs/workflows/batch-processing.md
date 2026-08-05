@@ -27,11 +27,13 @@ cooperative cancellation completes and final state is persisted.
 3. Open **Batch workspace...** and bind each varying `Image Source` to a local
    folder and pattern.
 4. Choose the intended toolbar compute request. New work defaults to Auto,
-   which remains CPU in ordinary 0.13.0a1 batch execution because no local
-   timing evidence is attached. Choose CPU for an explicit portable reference
-   or Prefer GPU to place every scientifically eligible reviewed operation on
-   GPU regardless of speed. Choose Selective for reviewed CPU/GPU per-node
-   preferences and benchmarking.
+   which uses reviewed safe GPU defaults without compatible history. An
+   accelerated-only batch timing makes the next matching global Auto batch run
+   measure CPU once on the same execution surface; incompatible interactive,
+   batch, and registry-lifecycle surfaces are never mixed. Choose CPU for an
+   explicit portable reference or Prefer GPU to place every scientifically
+   eligible reviewed operation on GPU regardless of speed. Choose Custom for reviewed
+   CPU/GPU per-node preferences and benchmarking.
 5. Choose an output folder, formats, naming, existing-file policy, fallback
    policy, device, and accelerator-memory settings.
 6. Optionally select **Preview batch** to review pairing and collision summaries.
@@ -245,7 +247,7 @@ python vipp_batch_pipeline.py --progress
 Override only a deliberate difference from the saved config, for example:
 
 ```text
-python vipp_batch_pipeline.py --progress --compute-mode selective --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
+python vipp_batch_pipeline.py --progress --compute-mode custom --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
 ```
 
 To use every reviewed eligible GPU implementation without benchmarking first:
@@ -262,7 +264,7 @@ Node IDs come from the reviewed workflow/config. Stable preferences include
 `auto`, `cpu`, `best_gpu`, `library:<library-id>`, and
 `implementation:<implementation-id>`. Prefer a library choice for portability;
 an exact implementation pin can be unavailable on another computer. Saved
-preferences round-trip in every mode but affect planning only in Selective.
+preferences round-trip in every mode but affect planning only in Custom.
 
 ## Execution and publication safety
 

@@ -7,7 +7,7 @@ data.
 ## Release candidate
 
 - [0.13.0a1](0.13.0a1.md) — evidence-gated
-  **CPU / Auto / Prefer GPU / Selective** execution, durable compute provenance and
+  **CPU / Auto / Prefer GPU / Custom** execution, durable compute provenance and
   cancellation across interactive and automated surfaces, workflow tabs, new
   scientific nodes, and extensive correctness/UI fixes.
 

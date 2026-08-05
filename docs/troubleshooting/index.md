@@ -8,7 +8,7 @@ or label image.
 | --- | --- |
 | Wrong objects, counts, channels, units, or stale tables | [Common problems](common-pitfalls.md) |
 | Slow interaction or high RAM use | [Performance and memory](performance.md) |
-| Auto/Prefer GPU/Selective uses CPU, GPU setup fails, or optimizer progress pauses | [Choose and verify CPU or GPU compute](../how-to/choose-compute.md) |
+| Auto/Prefer GPU/Custom uses CPU, GPU setup fails, or optimizer progress pauses | [Choose and verify CPU or GPU compute](../how-to/choose-compute.md) |
 | Installation/plugin discovery problem | [Install VIPP](../getting-started/installation.md) |
 | Question, reproducible bug, or missing behavior | [Get help or report a problem](report-a-problem.md) |
 

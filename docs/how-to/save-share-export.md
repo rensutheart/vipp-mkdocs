@@ -101,7 +101,7 @@ schema-4 request; overrides do not mutate the workflow.
 public GPU implementation regardless of CPU speed. It requires visible
 fallback; when no fallback override is provided, the CLI supplies `visible`,
 while an explicit strict combination is rejected. Stored per-node preferences
-remain in the workflow but are inactive outside Selective. The generated path
+remain in the workflow but are inactive outside Custom. The generated path
 uses the same planner and exact implementation provenance as interactive and
 batch execution.
 

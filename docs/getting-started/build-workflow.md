@@ -45,10 +45,13 @@ correct blur or threshold: tune against the structures your assay intends to
 measure.
 
 New workflows request **Auto** compute. After calculation, read the compact
-badge on Gaussian Blur, Otsu Threshold, and Label Connected Components. A CPU
-badge is expected because ordinary Auto execution in 0.13.0a1 carries no local
-timing evidence; it is not proof that setup failed. Keep this first tutorial
-scientifically focused; use Prefer GPU or Selective with the separate
+badge on Gaussian Blur, Otsu Threshold, and Label Connected Components. Auto
+begins with reviewed safe GPU defaults. Accelerated-only exact compatible
+history makes the next global Auto run measure CPU once on the same execution
+surface; a later matching run applies the 1.20x/20-ms gate. A CPU badge can
+reflect eligibility, the environment, that exploration step, or a learned CPU
+assignment and is not proof that setup failed. Keep this first tutorial
+scientifically focused; use Prefer GPU or Custom with the separate
 [CPU/GPU guide](../how-to/choose-compute.md) before benchmarking providers.
 
 ## 4. Add a measurement branch
