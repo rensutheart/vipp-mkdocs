@@ -2675,8 +2675,21 @@ policy.</p>
   voxel;</li>
 <li>Auto Contrast calculates exact full-input finite percentiles;</li>
 <li>large inspect and pinned layers use an immediate provisional display range,
-  followed by exact full finite limits calculated in the background.</li>
+  followed by exact full finite limits calculated in the background; and</li>
+<li>Stack thumbnail contrast reads the complete node output once and caches its
+  exact limits independently of the selected render detail. Native <code>uint8</code> and
+  <code>uint16</code> Percentile calculations use a bounded exact histogram on CPU or
+  eligible CuPy GPU; Min-max uses an exact native reduction. Float and
+  other-dtype percentiles retain the NumPy-compatible CPU path, which may
+  allocate full-array conversion or finite-filter temporaries and whose active
+  NumPy call may be temporarily non-interruptible. The GPU histogram uploads one
+  complete eligible input and allocates a fixed count table; memory admission
+  includes both plus conservative overhead.</li>
 </ul>
+<p>Slice thumbnail contrast takes the responsiveness tradeoff: it normalizes the
+selected detail's spatially sampled current view rather than reading the full
+slice. Low/Standard/High may therefore change Slice display limits slightly.
+This remains presentation-only and never changes a node output.</p>
 <p>The provisional layer range is display-only. It does not make the node output
 or downstream analysis provisional.</p>
 <h2 id="progressive-display-atomic-scientific-cache">Progressive Display, Atomic Scientific Cache<a class="headerlink" href="#progressive-display-atomic-scientific-cache" title="Permanent link">&para;</a></h2>
@@ -2712,7 +2725,8 @@ a lazy or lower-cost one.</p>
 <h2 id="large-data-direction">Large-Data Direction<a class="headerlink" href="#large-data-direction" title="Permanent link">&para;</a></h2>
 <p>Future large-data work should add:</p>
 <ul>
-<li>preview-resolution controls;</li>
+<li>pyramid-aware source-level selection beyond the current 90 × 55, 180 × 110,
+  and 360 × 220 backing-detail controls;</li>
 <li>more lazy and chunk-native operations;</li>
 <li>operation capability declarations;</li>
 <li>OME-Zarr pyramid export;</li>
@@ -2738,7 +2752,7 @@ a lazy or lower-cost one.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 22:13:06 UTC">August 5, 2026</span>
   </span>
 
     

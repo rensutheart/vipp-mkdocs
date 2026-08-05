@@ -1539,6 +1539,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#thumbnail-detail-scope-and-statistics-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thumbnail detail, scope, and statistics provenance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reused-and-replaced-inspect-layers" class="md-nav__link">
     <span class="md-ellipsis">
       Reused and replaced Inspect layers
@@ -2485,6 +2494,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#thumbnail-detail-scope-and-statistics-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thumbnail detail, scope, and statistics provenance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reused-and-replaced-inspect-layers" class="md-nav__link">
     <span class="md-ellipsis">
       Reused and replaced Inspect layers
@@ -2609,6 +2627,11 @@ required value contributes even though the result is grouped for display.</p>
 </thead>
 <tbody>
 <tr>
+<td>Node thumbnail contrast</td>
+<td>Stack Percentile/Min-max summarizes the complete node output. Native <code>uint8</code>/<code>uint16</code> Percentile uses an exact histogram with identical CPU/CuPy limits; Min-max uses an exact native reduction; float and other-dtype percentiles retain the exact NumPy-compatible CPU path. Slice contrast instead normalizes the spatially sampled current view at the selected detail.</td>
+<td>Low/Standard/High backing detail, Slice versus Stack scope, contrast mode, colormap, and the CPU/GPU statistics backend affect the card image only. Slice limits can change slightly with detail; Stack limits cannot.</td>
+</tr>
+<tr>
 <td>Intensity histogram</td>
 <td>Every finite value in the selected slice or stack is counted.</td>
 <td>Counts are grouped for drawing: two bars for Boolean data, one for a constant image, 256 for non-negative integer data within 0–255, and otherwise 128 display bins. These bins are not the automatic-threshold bin setting.</td>
@@ -2645,6 +2668,41 @@ inspection state. On failure, VIPP may accept a verified source boundary; it
 may additionally accept completed processing data from a cleanup-failed result,
 but only with matching actual-implementation provenance. Unreported processing
 overlays are discarded and their earlier coherent inspection state is restored.</p>
+<h3 id="thumbnail-detail-scope-and-statistics-provenance">Thumbnail detail, scope, and statistics provenance<a class="headerlink" href="#thumbnail-detail-scope-and-statistics-provenance" title="Permanent link">&para;</a></h3>
+<p>VIPP renders cards at <strong>Low (90 × 55)</strong>, <strong>Standard (180 × 110)</strong>, or
+<strong>High (360 × 220)</strong> detail inside the same card viewport. VIPP retains that
+source image and scales from it, so High can improve HiDPI display or
+downsampling; it does not guarantee a larger on-screen card. This is a spatial
+display choice. Changing it rerenders the graph but neither reruns scientific
+nodes nor invalidates cached exact Stack limits.</p>
+<p><strong>Stack</strong> contrast provides a stable, resolution-independent brightness window
+across T/Z/C by summarizing the complete node output once. <strong>Slice</strong> normalizes
+the selected detail's spatially sampled current view on CPU and avoids that
+full-output scan. It is intentionally responsive, but Low/Standard/High can
+change its display limits slightly. Percentile Stack contrast uses
+the 0.5th/99.9th percentiles. Exact native-dtype histograms avoid a full float
+sort for <code>uint8</code> and <code>uint16</code>; Min-max uses a faster exact native reduction.
+Float and other-dtype percentiles stay on the exact NumPy-compatible CPU path
+in this release.</p>
+<p>Presentation statistics have their own local <strong>Auto / CPU / Prefer GPU</strong>
+preference. Auto uses the complete output dtype and byte count. Before the GPU
+histogram path is warm, its conservative crossover is 384 MiB for <code>uint8</code> and
+512 MiB for <code>uint16</code>; both become 32 MiB after a successful GPU calculation.
+These measured defaults are heuristics, not universal fastest guarantees,
+because distribution, hardware, CUDA startup, residency, and competing work can
+move the crossover. Render detail is not part of this decision. <strong>Prefer GPU</strong>
+is the explicit override. Main compute <strong>CPU</strong> always forces statistics CPU;
+main <strong>Prefer GPU</strong> biases statistics Auto to GPU; main <strong>Auto</strong> and <strong>Custom</strong>
+leave it adaptive.</p>
+<p>The preview-local <strong>Stats… (pending) / Stats · CPU / Stats · GPU /
+Stats · CPU fallback / Stats · error</strong> chip reports that work. The separate
+scientific CPU/CuPy/cuCIM
+badge still identifies what produced the node output. Stack scans publish the
+active node/backend/phase through the toolbar without accepting partial limits.
+CPU integer histograms and min-max reductions advance and cancel between bounded
+chunks. An active GPU kernel/synchronization or exact float/other-dtype NumPy
+percentile may contain a non-interruptible inner pass; the UI identifies that
+phase and applies cancellation at the next cooperative boundary.</p>
 <h3 id="reused-and-replaced-inspect-layers">Reused and replaced Inspect layers<a class="headerlink" href="#reused-and-replaced-inspect-layers" title="Permanent link">&para;</a></h3>
 <p>Recalculating the same logical node/output reuses a compatible active VIPP
 <strong>Inspect</strong> layer and replaces only its data reference with a non-writeable view
@@ -2760,7 +2818,7 @@ channel.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 22:13:06 UTC">August 5, 2026</span>
   </span>
 
     

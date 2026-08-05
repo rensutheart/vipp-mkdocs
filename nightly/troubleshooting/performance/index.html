@@ -2158,6 +2158,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#thumbnail-work-after-a-pipeline-finishes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thumbnail Work After A Pipeline Finishes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#gpu-memory-and-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       GPU memory and fallback
@@ -2478,6 +2487,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#thumbnail-work-after-a-pipeline-finishes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thumbnail Work After A Pipeline Finishes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#gpu-memory-and-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       GPU memory and fallback
@@ -2544,8 +2562,10 @@
 <li>Leave <code>Run all in BG</code> off initially so adaptive execution can choose between
    immediate and background work. Turn it on if repeated small recomputes still
    make interaction uncomfortable.</li>
-<li>Disable thumbnails globally.</li>
-<li>Switch preview mode from <code>MIP</code> to <code>Slice</code>.</li>
+<li>Set <strong>Thumbnail detail</strong> to <strong>Low (90 × 55)</strong> while authoring a large graph.</li>
+<li>Switch <strong>Contrast range</strong> from <strong>Stack</strong> to <strong>Slice</strong> when a stable
+   whole-volume brightness window is unnecessary.</li>
+<li>Switch preview mode from <code>MIP</code> to <code>Slice</code>, or disable thumbnails globally.</li>
 <li>Turn <code>Link napari/VIPP sliders</code> off when you need a fixed reference view.</li>
 <li>Reduce graph fan-out while tuning upstream nodes.</li>
 <li>Use <code>Smart interactive cache</code> or <code>Low-memory mode</code>.</li>
@@ -2649,6 +2669,52 @@ published only after stream synchronization at a declared checkpoint, so a
 monolithic plane/volume can appear stationary until that call finishes. This
 is an honest boundary, not a stalled percentage. Cooperative cancellation then
 waits for synchronization and cleanup before output publication.</p>
+<h2 id="thumbnail-work-after-a-pipeline-finishes">Thumbnail Work After A Pipeline Finishes<a class="headerlink" href="#thumbnail-work-after-a-pipeline-finishes" title="Permanent link">&para;</a></h2>
+<p>A completed scientific pipeline can be followed by Stack contrast work for its
+node-card thumbnails. This is a separate presentation calculation: it does not
+mean a node is recalculating or that its CPU/CuPy/cuCIM provenance changed.</p>
+<p>Use the controls independently:</p>
+<ul>
+<li><strong>Thumbnail detail</strong> chooses Low (90 × 55), Standard (180 × 110), or High
+  (360 × 220) backing detail for the fixed card viewport. High can improve
+  HiDPI display or downsampling but does not guarantee a larger on-screen card.
+  Low redraws faster, but it does not reduce the amount of data inspected by
+  Stack contrast.</li>
+<li><strong>Contrast range: Stack</strong> reads each complete result once, caches exact
+  resolution-independent limits, and keeps brightness stable while T/Z/C
+  changes. <strong>Slice</strong> uses CPU-local normalization of the selected detail's
+  spatially sampled current view and avoids the full-output scan. Its limits may
+  therefore change slightly between Low, Standard, and High.</li>
+<li><strong>Settings &gt; Thumbnail statistics</strong> chooses Auto, CPU, or Prefer GPU for this
+  display-only Stack work.</li>
+</ul>
+<p>Native <code>uint8</code> and <code>uint16</code> Stack Percentile calculations use exact dtype-aware
+histograms instead of sorting a float copy; Min-max uses an exact native CPU
+reduction.
+Auto sends eligible cold Percentile work to GPU at 384 MiB for <code>uint8</code> or
+512 MiB for <code>uint16</code>, then at 32 MiB once the histogram path is warm. These
+thresholds use the complete output's native bytes and dtype, not thumbnail
+detail. They are conservative measured heuristics, not universal fastest
+guarantees: data distribution, hardware, CUDA startup, residency, and competing
+work can move the crossover. Float and other-dtype percentiles retain the exact
+NumPy-compatible CPU path. Forcing main compute to CPU also hard-forces these
+statistics to CPU; main Prefer GPU is the explicit override and makes
+presentation Auto prefer an eligible GPU.</p>
+<p>CPU-only micro-workloads (at most 1 MiB total and no more than eight requests
+or aggregate channel lanes) finish inline to avoid worker-queue overhead and
+usually do not show toolbar progress. Larger, high-channel, and GPU work remains
+background and cancellable. A missing progress flash for a tiny result therefore
+does not mean statistics were skipped; confirm the completed Stats chip.</p>
+<p>Read the small card chip—not the scientific badge—to see pending <strong>Stats…</strong>,
+<strong>Stats · CPU</strong>, <strong>Stats · GPU</strong>, <strong>Stats · CPU fallback</strong>, or
+<strong>Stats · error</strong>. Hover it for the algorithm, processed bytes, elapsed time,
+reason, crossover, fallback, and failure. Toolbar progress names the active
+node/backend/phase. CPU integer histogram and min-max paths advance and cancel
+between bounded chunks. An active GPU kernel/synchronization or float/other-dtype
+NumPy percentile may have a non-interruptible inner pass; VIPP identifies the
+phase and applies <code>Cancel</code> at the next cooperative boundary. Cancellation
+retains provisional thumbnails and already cached exact limits; it cannot claim
+a partial result as complete.</p>
 <h2 id="gpu-memory-and-fallback">GPU memory and fallback<a class="headerlink" href="#gpu-memory-and-fallback" title="Permanent link">&para;</a></h2>
 <p>VIPP evaluates an operation-specific conservative device-memory estimate
 before launching a GPU segment. <strong>Compute setup and memory…</strong> reports separate
@@ -2685,10 +2751,10 @@ when their output context changes.</p>
 Boolean mask pinned as a <code>Labels</code> overlay requires a uint8 presentation copy;
 that conversion is limited to the class-changing display path and does not
 replace the original node output used by downstream calculations or saving.</p>
-<p>Card thumbnails are rendered at display resolution. Their downsampling and
-contrast work affect visualization only, never the scientific array. This is
-why thumbnails can update quickly without changing the exact data produced by
-the operation.</p>
+<p>Card thumbnails are rendered at the selected Low, Standard, or High detail.
+Their downsampling and contrast work affect visualization only, never the
+scientific array. Stack contrast can still read the complete output even when
+Low detail is selected; use Slice when that scan is not wanted.</p>
 <h2 id="expensive-node-families">Expensive Node Families<a class="headerlink" href="#expensive-node-families" title="Permanent link">&para;</a></h2>
 <p>Expect heavier computation from:</p>
 <ul>
@@ -2727,7 +2793,7 @@ temporary allocation made inside NumPy, SciPy, or scikit-image.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 22:13:06 UTC">August 5, 2026</span>
   </span>
 
     
