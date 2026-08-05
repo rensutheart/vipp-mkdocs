@@ -2539,13 +2539,13 @@
 
 <h1 id="choose-and-verify-cpu-or-gpu-compute">Choose and verify CPU or GPU compute<a class="headerlink" href="#choose-and-verify-cpu-or-gpu-compute" title="Permanent link">&para;</a></h1>
 <p>VIPP 0.13.0a1 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
-<strong>Selective</strong> compute. The request is not the execution record: the node badge
+<strong>Custom</strong> compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.</p>
 <p>CPU remains the portable scientific reference. GPU implementations are
 considered only inside operation-specific regions that preserve the declared
 CPU contract. An unsupported dtype, parameter, shape, dependency, memory
 budget, or environment normally produces an explained CPU decision. A forced
-Selective GPU choice can instead produce an amber visible fallback or a typed
+Custom GPU choice can instead produce an amber visible fallback or a typed
 failure; some invalid or non-fallback-safe calls fail under either policy.</p>
 <h2 id="choose-a-pipeline-policy">Choose a pipeline policy<a class="headerlink" href="#choose-a-pipeline-policy" title="Permanent link">&para;</a></h2>
 <table>
@@ -2564,8 +2564,8 @@ failure; some invalid or non-fallback-safe calls fail under either policy.</p>
 </tr>
 <tr>
 <td><strong>Auto</strong></td>
-<td>A conservative, portable new-session default</td>
-<td>Auto never benchmarks during calculation. Ordinary interactive, saved-batch, and generated runs in this alpha do not attach local performance evidence, so their fresh Auto candidates resolve to CPU. Programmatic callers can supply validated evidence explicitly.</td>
+<td>The recommended, learning new-session default</td>
+<td>With no exact compatible history, use reviewed GPU defaults. Accelerated-only history makes the next global Auto run measure CPU once on the same execution surface; a later matching run applies the 1.20x/20-ms gate to the pair. Auto never silently benchmarks multiple implementations.</td>
 </tr>
 <tr>
 <td><strong>Prefer GPU</strong></td>
@@ -2573,9 +2573,9 @@ failure; some invalid or non-fallback-safe calls fail under either policy.</p>
 <td>Every reviewed public GPU candidate is considered, including providers not admitted to Auto. An eligible GPU is used even when it is only slightly faster, tied, or slower than CPU. Unsupported nodes receive an explained ordinary CPU decision.</td>
 </tr>
 <tr>
-<td><strong>Selective</strong></td>
+<td><strong>Custom</strong></td>
 <td>Using GPU, comparing providers, or authoring reviewed per-node preferences</td>
-<td>Implemented nodes expose CPU and one choice per declared GPU library; node and whole-pipeline benchmarking become available. Applying a measured pipeline assignment records Selective preferences.</td>
+<td>Implemented nodes expose CPU and one choice per declared GPU library; node and whole-pipeline benchmarking become available. Applying a measured pipeline assignment records Custom preferences.</td>
 </tr>
 </tbody>
 </table>
@@ -2600,24 +2600,31 @@ not a promise that the same backend exists or is fastest on another machine.</p>
    device, eligibility reason, host RAM, and separate VRAM where applicable.
    Copy the proposed fresh-environment command if setup is incomplete; VIPP
    never executes it automatically.</li>
-<li>Keep <strong>Auto</strong> for a conservative calculation and read the actual-run summary
-   and per-node badges. In the normal 0.13.0a1 interfaces, Auto has no attached
-   local timing evidence and therefore resolves fresh candidates to CPU; that
-   CPU result is an ordinary decision, not a fallback.</li>
+<li>Keep <strong>Auto</strong> for normal calculation and read the actual-run summary and
+   per-node badges. Auto starts with reviewed safe GPU defaults. Successful,
+   fallback-free completed full-pipeline runs—whether CPU, GPU, or mixed—add
+   only their wall time to machine-local history. If exact compatible history
+   is accelerated-only, the next global Auto run measures CPU once on the same
+   execution surface. Once both observations exist, a later matching run uses
+   acceleration only when it clears the 1.20x/20-ms gate; otherwise it uses CPU.
+   Interactive, batch, and registry-lifecycle timing surfaces are never mixed.
+   Auto never silently benchmarks multiple implementations.</li>
 <li>Switch to <strong>Prefer GPU</strong> when you want every reviewed eligible accelerator
    region without first benchmarking whether it beats CPU. Read the ordinary
    CPU reasons for unsupported nodes; this mixed result is the intended policy.</li>
-<li>Switch to <strong>Selective</strong> when you want an authored per-node choice or an
-   explicit performance measurement. Normal choices are <strong>Follow pipeline
-   policy</strong>, <strong>CPU</strong>, and one
+<li>Switch to <strong>Custom</strong> when you want an authored per-node choice or an
+   explicit performance measurement. Normal choices are <strong>Auto for this
+   node</strong>, <strong>CPU</strong>, and one
    <strong>GPU · library</strong> entry. <strong>Best GPU</strong> appears only when several GPU libraries
    genuinely compete. A loaded exact implementation pin remains visible as an
    advanced compatibility choice until replaced.</li>
 <li>Benchmark an eligible node for a focused comparison, or choose <strong>Find
    fastest pipeline…</strong> to compare every eligible implementation in the current
    calculated, writer-free subgraph. Review the proposal before applying it;
-   accepted winners become Selective per-node preferences, not an invisible or
-   permanent Auto cache.</li>
+   accepted winners become Custom per-node preferences. Raw isolated-node
+   timings remain separate from Auto's complete-pipeline history, although a
+   later successful, fallback-free completed run of the accepted assignment
+   can add a compatible full-pipeline observation.</li>
 <li>Save the workflow only after accepting the portable preferences. For a real
    run, retain the execution report or batch provenance that records the exact
    implementations, environment, fallbacks, memory decisions, and cleanup.</li>
@@ -2773,11 +2780,12 @@ cap every temporary CPU or GPU workspace.</p>
 invalid because the policy means GPU wherever possible and CPU everywhere else.
 An unsupported node is an explained ordinary CPU planning decision, not an
 attempted-device fallback.</p>
-<p>For a forced Selective GPU choice, <strong>visible</strong> fallback turns a fallback-safe
+<p>For a forced Custom GPU choice, <strong>visible</strong> fallback turns a fallback-safe
 availability or eligibility rejection into an amber CPU decision; <strong>Strict</strong>
 returns a typed preflight failure. A rejection explicitly marked unsafe to
-fall back fails under either setting. Auto and <strong>Follow pipeline policy</strong> use
-ordinary explained CPU decisions for fallback-safe preflight rejections.</p>
+fall back fails under either setting. Global <strong>Auto</strong> and <strong>Auto for this node</strong>
+in Custom use ordinary explained CPU decisions for fallback-safe preflight
+rejections.</p>
 <p>At runtime, <strong>visible</strong> fallback may retry one complete device segment once on
 CPU after a classified OOM, but only after synchronization and proven GPU
 cleanup. Its badge becomes amber and provenance keeps the failed attempt and
@@ -2802,8 +2810,8 @@ or create exact compute-provenance sidecars. Preserve:</p>
 </ul>
 <p>Workflow schema 4, batch config schema 2, saved runners, and generated CLIs use
 the stable value <code>prefer_gpu</code>. Saved per-node preferences remain present but
-dormant outside Selective; switching back to Selective reactivates them.
-<code>Benchmark node…</code> and <strong>Find fastest pipeline…</strong> are Selective-only. A CLI mode
+dormant outside Custom; switching back to Custom reactivates them.
+<code>Benchmark node…</code> and <strong>Find fastest pipeline…</strong> are Custom-only. A CLI mode
 override to <code>prefer_gpu</code> uses visible fallback when no fallback override is
 given, while an explicit strict combination is rejected before calculation.
 Every surface records the effective request and exact actual implementations in
@@ -2831,7 +2839,7 @@ source verification, checkpoints, or durable manifest.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 23:16:19 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 10:04:28 UTC">August 5, 2026</span>
   </span>
 
     

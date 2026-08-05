@@ -2635,11 +2635,13 @@ cooperative cancellation completes and final state is persisted.</p>
 <li>Open <strong>Batch workspace...</strong> and bind each varying <code>Image Source</code> to a local
    folder and pattern.</li>
 <li>Choose the intended toolbar compute request. New work defaults to Auto,
-   which remains CPU in ordinary 0.13.0a1 batch execution because no local
-   timing evidence is attached. Choose CPU for an explicit portable reference
-   or Prefer GPU to place every scientifically eligible reviewed operation on
-   GPU regardless of speed. Choose Selective for reviewed CPU/GPU per-node
-   preferences and benchmarking.</li>
+   which uses reviewed safe GPU defaults without compatible history. An
+   accelerated-only batch timing makes the next matching global Auto batch run
+   measure CPU once on the same execution surface; incompatible interactive,
+   batch, and registry-lifecycle surfaces are never mixed. Choose CPU for an
+   explicit portable reference or Prefer GPU to place every scientifically
+   eligible reviewed operation on GPU regardless of speed. Choose Custom for reviewed
+   CPU/GPU per-node preferences and benchmarking.</li>
 <li>Choose an output folder, formats, naming, existing-file policy, fallback
    policy, device, and accelerator-memory settings.</li>
 <li>Optionally select <strong>Preview batch</strong> to review pairing and collision summaries.</li>
@@ -2827,7 +2829,7 @@ contains failures, <code>2</code> means setup/execution failed before a normal r
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python vipp_batch_pipeline.py --progress
 </span></code></pre></div>
 <p>Override only a deliberate difference from the saved config, for example:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python vipp_batch_pipeline.py --progress --compute-mode selective --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python vipp_batch_pipeline.py --progress --compute-mode custom --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
 </span></code></pre></div>
 <p>To use every reviewed eligible GPU implementation without benchmarking first:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python vipp_batch_pipeline.py --progress --compute-mode prefer_gpu
@@ -2839,7 +2841,7 @@ or publication.</p>
 <code>auto</code>, <code>cpu</code>, <code>best_gpu</code>, <code>library:&lt;library-id&gt;</code>, and
 <code>implementation:&lt;implementation-id&gt;</code>. Prefer a library choice for portability;
 an exact implementation pin can be unavailable on another computer. Saved
-preferences round-trip in every mode but affect planning only in Selective.</p>
+preferences round-trip in every mode but affect planning only in Custom.</p>
 <h2 id="execution-and-publication-safety">Execution and publication safety<a class="headerlink" href="#execution-and-publication-safety" title="Permanent link">&para;</a></h2>
 <p>For each item, VIPP:</p>
 <ol>
@@ -2964,7 +2966,7 @@ not evidence that another assay or naming scheme is valid.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 23:16:19 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 10:04:28 UTC">August 5, 2026</span>
   </span>
 
     

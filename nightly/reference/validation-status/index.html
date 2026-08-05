@@ -2589,7 +2589,7 @@ filesystem interoperability, large-collection scalability, or restoration
 quality for arbitrary samples.</p>
 <p>On 4 August 2026, the operator also reported a bounded native-Windows napari UI
 smoke pass on the later <code>ff21040</code> development checkout. A local schema-4
-Selective workflow loaded the representative private ND2 acquisition and
+Custom workflow loaded the representative private ND2 acquisition and
 exercised the intended channel, slice navigation/display behavior, and
 backend-badge presentation. The retained last-run JSON was subsequently
 overwritten by an Auto run, so it does not independently preserve the exact
@@ -2696,12 +2696,13 @@ same as an external comparison or assay validation. The distinction matters:</p>
   serialized and exported Python is runtime-version pinned. Recalculate,
   regenerate exports, and validate after upgrading.</li>
 <li>Version-1 batch configs load as explicit CPU and save as version 2. A saved
-  Auto, Prefer GPU, or Selective request is intent; actual implementation
-  provenance must be retained from each run. Standard interactive, saved-batch,
-  and generated execution in 0.13.0a1 attaches no local performance evidence, so
-  fresh Auto candidates stay CPU. Prefer GPU instead requests every reviewed
-  eligible accelerator regardless of speed; Selective owns per-node choices
-  and benchmarking.</li>
+  Auto, Prefer GPU, or Custom request is intent; actual implementation
+  provenance must be retained from each run. Auto uses reviewed GPU defaults
+  without compatible history; accelerated-only history schedules one
+  same-surface CPU measurement before a later matching run applies the
+  1.20x/20-ms gate. Prefer GPU instead requests
+  every reviewed eligible accelerator regardless of speed; Custom owns per-node
+  choices and benchmarking.</li>
 <li>GPU candidates cover only declared operation/dtype/parameter/shape/memory and
   environment regions. The initial public gate is one exact native-Windows RTX
   5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the
@@ -2753,7 +2754,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 23:16:19 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 10:04:28 UTC">August 5, 2026</span>
   </span>
 
     
