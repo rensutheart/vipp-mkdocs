@@ -53,6 +53,33 @@ while the worker reaches a cooperative checkpoint,
 synchronizes, and releases CPU/GPU resources. This guarantees that selecting
 CPU cannot leave an earlier GPU calculation or timing comparison running.
 
+## Keep Thumbnail Statistics Separate
+
+The scientific compute policy also establishes safety boundaries for
+presentation work, but a thumbnail-statistics backend is not scientific node
+provenance. **Settings > Thumbnail statistics** provides local **Auto**,
+**CPU**, and **Prefer GPU** control for full-output Stack contrast:
+
+- main compute **CPU** hard-forces presentation CPU and prevents CUDA
+  initialization;
+- main **Prefer GPU** makes presentation Auto prefer every eligible CuPy
+  Percentile histogram;
+- main **Auto** and **Custom** leave presentation Auto adaptive; and
+- an explicit presentation CPU or Prefer GPU choice otherwise controls new
+  statistics results.
+
+Presentation Auto considers native `uint8`/`uint16` Percentile work and uses the
+complete output's byte size. Its conservative cold crossover is 384 MiB for
+`uint8` or 512 MiB for `uint16`; both become 32 MiB after one successful GPU
+histogram. These measured default heuristics are not a universal fastest
+guarantee because data distribution, hardware, CUDA startup, residency, and
+competing work matter. It does not use Low/Standard/High backing resolution.
+Use **Prefer GPU** as the explicit override. Min-max uses an exact native CPU
+reduction. Float and other-dtype percentiles retain the exact NumPy-compatible
+CPU calculation. Read the separate **Stats… (pending) / Stats · CPU /
+Stats · GPU / Stats · CPU fallback / Stats · error** chip for what happened; the ordinary
+CPU/CuPy/cuCIM badge remains the record of what produced the node output.
+
 ## A safe practical sequence
 
 1. Run a representative item on **CPU** and inspect the decisive images,

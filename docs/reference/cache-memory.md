@@ -145,7 +145,21 @@ Several inspector calculations follow the same principle:
   voxel;
 - Auto Contrast calculates exact full-input finite percentiles;
 - large inspect and pinned layers use an immediate provisional display range,
-  followed by exact full finite limits calculated in the background.
+  followed by exact full finite limits calculated in the background; and
+- Stack thumbnail contrast reads the complete node output once and caches its
+  exact limits independently of the selected render detail. Native `uint8` and
+  `uint16` Percentile calculations use a bounded exact histogram on CPU or
+  eligible CuPy GPU; Min-max uses an exact native reduction. Float and
+  other-dtype percentiles retain the NumPy-compatible CPU path, which may
+  allocate full-array conversion or finite-filter temporaries and whose active
+  NumPy call may be temporarily non-interruptible. The GPU histogram uploads one
+  complete eligible input and allocates a fixed count table; memory admission
+  includes both plus conservative overhead.
+
+Slice thumbnail contrast takes the responsiveness tradeoff: it normalizes the
+selected detail's spatially sampled current view rather than reading the full
+slice. Low/Standard/High may therefore change Slice display limits slightly.
+This remains presentation-only and never changes a node output.
 
 The provisional layer range is display-only. It does not make the node output
 or downstream analysis provisional.
@@ -189,7 +203,8 @@ as a whole is not committed until the run finishes successfully.
 
 Future large-data work should add:
 
-- preview-resolution controls;
+- pyramid-aware source-level selection beyond the current 90 × 55, 180 × 110,
+  and 360 × 220 backing-detail controls;
 - more lazy and chunk-native operations;
 - operation capability declarations;
 - OME-Zarr pyramid export;

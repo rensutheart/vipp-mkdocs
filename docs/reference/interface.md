@@ -133,13 +133,65 @@ duplicate that purpose in its message strip.
 | Setting | Choices / meaning |
 | --- | --- |
 | Preview mode | `Slice`, `MIP`, or `Off` for graph/inspector previews. |
+| Thumbnail detail | `Low (90 × 55)`, `Standard (180 × 110)`, or `High (360 × 220)` backing detail. The card keeps the same on-screen size; High can improve HiDPI display or downsampling. |
 | Thumbnail contrast | Controls thumbnail contrast behavior; it does not alter processed data. |
-| Contrast range | Controls how contrast scope is estimated. |
+| Contrast range | `Stack` caches one exact full-output, resolution-independent range; `Slice` normalizes the selected detail's spatially sampled current view and avoids a full-output scan. |
+| Thumbnail statistics | `Auto`, `CPU`, or `Prefer GPU` for presentation-only Stack contrast work. |
 | Monochrome colormap | Changes display of monochrome previews only. |
 | Link napari/VIPP sliders | Synchronizes napari dimensions and VIPP preview sliders. |
 | Save thumbnail visibility in workflows | Includes per-node thumbnail visibility in workflow UI state. |
 | Port labels | `Ambiguous only` (default) labels multi-input or multi-output nodes, `Show all` labels every port, and `Hide all` removes persistent labels. |
 | Graph zoom | Scales graph cards; reset returns to 100%. |
+
+Thumbnail detail and thumbnail statistics are independent. Low/Standard/High
+changes only the retained source image for the fixed card viewport; it neither
+recalculates a node nor changes the complete output population used by Stack
+contrast. High does not guarantee more physical on-screen pixels. Changing
+detail retains cached exact Stack limits, but may slightly change Slice limits
+because Slice normalizes the selected resolution's spatial sample. The choices
+are local presentation settings, not workflow parameters or scientific
+provenance.
+
+For Stack Percentile contrast, native `uint8` and `uint16` results use an exact
+dtype-aware histogram. CPU and CuPy produce the same display limits, including
+the NumPy-linear 0.5th/99.9th-percentile result. Min-max uses an exact native CPU
+reduction rather than constructing a histogram. Float and other-dtype
+percentiles use the exact NumPy-compatible CPU path in this release. Raw integer
+contrast, masks, labels, tables, and other scan-free previews do not launch an
+unnecessary statistics scan.
+
+Presentation **Auto** decides per eligible Percentile result from the full
+output's dtype and byte size, not its backing thumbnail resolution. Before the
+first successful thumbnail GPU calculation, it uses a conservative 384-MiB
+crossover for `uint8` and 512 MiB for `uint16`; both become 32 MiB while that
+path is warm. These measured default heuristics are not a universal fastest
+guarantee because data distribution, hardware, CUDA startup, residency, and
+competing work can move the crossover. Presentation **CPU** never initializes
+CUDA. Presentation **Prefer GPU** is the explicit override: it attempts every
+eligible CuPy histogram and visibly falls back to CPU when safe.
+
+Very small batches that are guaranteed to remain on CPU complete immediately
+without occupying the toolbar progress strip: at most 1 MiB total, eight
+requests, and eight aggregate scalar/channel lanes. Larger work, high-channel
+data, and selected GPU paths stay in the cancellable background worker. This is
+an internal scheduling boundary, not a different contrast algorithm or a
+CPU/GPU speed claim; the Stats chip records the result in the same way.
+
+The main compute policy is authoritative: main **CPU** hard-forces presentation
+CPU; main **Prefer GPU** biases presentation Auto toward GPU; main **Auto** and
+**Custom** leave it adaptive. Each card reports the resulting display work with
+a separate pending **Stats…**, **Stats · CPU**, **Stats · GPU**, amber
+**Stats · CPU fallback**, or red **Stats · error** chip. This never replaces the
+card's scientific **CPU**, **GPU · CuPy**, **GPU · cuCIM**, or **CPU fallback**
+badge. Hover the Stats chip for scope, render detail, algorithm, byte count,
+elapsed time, selection reason, threshold, fallback, and failure information.
+
+The shared toolbar reports the active node, backend, and statistics phase. CPU
+integer histogram and min-max paths advance and cancel between bounded chunks.
+An active GPU kernel/synchronization or exact float/other-dtype NumPy percentile
+may contain a non-interruptible inner call; that phase is identified and
+`Cancel` takes effect at the next cooperative boundary. No partial contrast
+limit is published.
 
 Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
@@ -191,6 +243,16 @@ whichever is reached first. This applies even when **Run all in BG** is
 unchecked. Exact threshold diagnostics, Auto Contrast, colocalization density,
 and generated-layer contrast calculations also leave the user-interface thread
 when their inputs are large.
+
+Stack thumbnail statistics use the same shared toolbar progress and cancellation
+surface. Progress names the node, backend, and active statistics phase. CPU
+integer histogram and min-max work stops at bounded chunk boundaries. An active
+GPU kernel/synchronization or exact float/other-dtype NumPy percentile inner call
+may be indeterminate and non-interruptible; Cancel takes effect at the next
+cooperative boundary. VIPP keeps provisional thumbnails and does not publish a
+partial contrast limit. Completed exact limits remain cached after an ordinary
+successful run or safe fallback. Accelerator cleanup failure instead enters the
+same process-wide compute quarantine as scientific GPU cleanup failure.
 
 Background execution changes *where* work runs, not the method or the values it
 uses. Exact operations still inspect the complete required population. They may

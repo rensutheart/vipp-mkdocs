@@ -7,12 +7,14 @@ Try these in order:
 1. Leave `Run all in BG` off initially so adaptive execution can choose between
    immediate and background work. Turn it on if repeated small recomputes still
    make interaction uncomfortable.
-2. Disable thumbnails globally.
-3. Switch preview mode from `MIP` to `Slice`.
-4. Turn `Link napari/VIPP sliders` off when you need a fixed reference view.
-5. Reduce graph fan-out while tuning upstream nodes.
-6. Use `Smart interactive cache` or `Low-memory mode`.
-7. Mark expensive intermediates with `Keep output cached`.
+2. Set **Thumbnail detail** to **Low (90 × 55)** while authoring a large graph.
+3. Switch **Contrast range** from **Stack** to **Slice** when a stable
+   whole-volume brightness window is unnecessary.
+4. Switch preview mode from `MIP` to `Slice`, or disable thumbnails globally.
+5. Turn `Link napari/VIPP sliders` off when you need a fixed reference view.
+6. Reduce graph fan-out while tuning upstream nodes.
+7. Use `Smart interactive cache` or `Low-memory mode`.
+8. Mark expensive intermediates with `Keep output cached`.
 
 If optional CUDA support is installed, also inspect the toolbar's actual-run
 summary and node badges. With no exact compatible history, **Auto** uses
@@ -125,6 +127,57 @@ monolithic plane/volume can appear stationary until that call finishes. This
 is an honest boundary, not a stalled percentage. Cooperative cancellation then
 waits for synchronization and cleanup before output publication.
 
+## Thumbnail Work After A Pipeline Finishes
+
+A completed scientific pipeline can be followed by Stack contrast work for its
+node-card thumbnails. This is a separate presentation calculation: it does not
+mean a node is recalculating or that its CPU/CuPy/cuCIM provenance changed.
+
+Use the controls independently:
+
+- **Thumbnail detail** chooses Low (90 × 55), Standard (180 × 110), or High
+  (360 × 220) backing detail for the fixed card viewport. High can improve
+  HiDPI display or downsampling but does not guarantee a larger on-screen card.
+  Low redraws faster, but it does not reduce the amount of data inspected by
+  Stack contrast.
+- **Contrast range: Stack** reads each complete result once, caches exact
+  resolution-independent limits, and keeps brightness stable while T/Z/C
+  changes. **Slice** uses CPU-local normalization of the selected detail's
+  spatially sampled current view and avoids the full-output scan. Its limits may
+  therefore change slightly between Low, Standard, and High.
+- **Settings > Thumbnail statistics** chooses Auto, CPU, or Prefer GPU for this
+  display-only Stack work.
+
+Native `uint8` and `uint16` Stack Percentile calculations use exact dtype-aware
+histograms instead of sorting a float copy; Min-max uses an exact native CPU
+reduction.
+Auto sends eligible cold Percentile work to GPU at 384 MiB for `uint8` or
+512 MiB for `uint16`, then at 32 MiB once the histogram path is warm. These
+thresholds use the complete output's native bytes and dtype, not thumbnail
+detail. They are conservative measured heuristics, not universal fastest
+guarantees: data distribution, hardware, CUDA startup, residency, and competing
+work can move the crossover. Float and other-dtype percentiles retain the exact
+NumPy-compatible CPU path. Forcing main compute to CPU also hard-forces these
+statistics to CPU; main Prefer GPU is the explicit override and makes
+presentation Auto prefer an eligible GPU.
+
+CPU-only micro-workloads (at most 1 MiB total and no more than eight requests
+or aggregate channel lanes) finish inline to avoid worker-queue overhead and
+usually do not show toolbar progress. Larger, high-channel, and GPU work remains
+background and cancellable. A missing progress flash for a tiny result therefore
+does not mean statistics were skipped; confirm the completed Stats chip.
+
+Read the small card chip—not the scientific badge—to see pending **Stats…**,
+**Stats · CPU**, **Stats · GPU**, **Stats · CPU fallback**, or
+**Stats · error**. Hover it for the algorithm, processed bytes, elapsed time,
+reason, crossover, fallback, and failure. Toolbar progress names the active
+node/backend/phase. CPU integer histogram and min-max paths advance and cancel
+between bounded chunks. An active GPU kernel/synchronization or float/other-dtype
+NumPy percentile may have a non-interruptible inner pass; VIPP identifies the
+phase and applies `Cancel` at the next cooperative boundary. Cancellation
+retains provisional thumbnails and already cached exact limits; it cannot claim
+a partial result as complete.
+
 ## GPU memory and fallback
 
 VIPP evaluates an operation-specific conservative device-memory estimate
@@ -169,10 +222,10 @@ Boolean mask pinned as a `Labels` overlay requires a uint8 presentation copy;
 that conversion is limited to the class-changing display path and does not
 replace the original node output used by downstream calculations or saving.
 
-Card thumbnails are rendered at display resolution. Their downsampling and
-contrast work affect visualization only, never the scientific array. This is
-why thumbnails can update quickly without changing the exact data produced by
-the operation.
+Card thumbnails are rendered at the selected Low, Standard, or High detail.
+Their downsampling and contrast work affect visualization only, never the
+scientific array. Stack contrast can still read the complete output even when
+Low detail is selected; use Slice when that scan is not wanted.
 
 ## Expensive Node Families
 

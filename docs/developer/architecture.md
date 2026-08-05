@@ -27,6 +27,7 @@ the application; reusable policy should still move to the narrowest owner.
 | Axes, calibration, kind, channels, and history | `core/metadata.py` |
 | Multi-image and image/PSF grid validation | `core/grid.py` |
 | Exact statistics, histograms, percentiles, contrast, and label sizes | `core/diagnostics.py` |
+| Presentation-only thumbnail contrast selection, exact integer histograms, and CuPy execution | `core/thumbnail_statistics.py`, `core/gpu/cupy_thumbnail_statistics.py`, `ui/diagnostic_workers.py` |
 | File/store identities and stable snapshots | `core/source_identity.py`, `core/file_sources.py` |
 | Live napari-layer snapshots and invalidation | `ui/source_adapter.py` |
 | Detached graph/workflow state | `core/snapshots.py`, `core/workflow.py` |

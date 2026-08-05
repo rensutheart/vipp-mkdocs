@@ -34,6 +34,47 @@ exact full finite range when the background calculation completes. A manual
 contrast adjustment made while waiting is preserved. Neither range changes the
 node output or downstream measurements.
 
+## Tune Thumbnail Speed And Detail
+
+Use **Thumbnail detail** for the rendered image and **Contrast range** for the
+statistics workload; they solve different problems.
+
+| Goal | Setting |
+| --- | --- |
+| Fast card redraws while editing | **Low (90 × 55)** detail. |
+| Default balance | **Standard (180 × 110)** detail. |
+| More backing detail for HiDPI display or downsampling | **High (360 × 220)** detail. |
+| Stable brightness across T/Z/C | **Stack** contrast; wait for its cached exact limits. |
+| Avoid a full-output contrast scan | **Slice** contrast; it normalizes the selected detail's sampled current view. |
+
+The card viewport remains fixed, and High retains a larger source image rather
+than guaranteeing a larger on-screen card. Detail can slightly change Slice
+limits because Slice normalizes the selected resolution's spatial sample. Low
+detail does not make Stack statistics cheaper: Stack remains full-output and
+resolution-independent, and Auto routes it from the full output dtype and byte
+size. Eligible `uint8`/`uint16` Stack Percentile uses an exact histogram on
+CPU or CuPy; Min-max uses an exact native CPU reduction. Auto's conservative
+cold GPU crossover is 384 MiB for `uint8` and 512 MiB for `uint16`, becoming
+32 MiB after the histogram path is warm. These measured defaults are heuristics
+rather than universal fastest guarantees. Float and other-dtype percentiles
+remain on the exact NumPy-compatible CPU path.
+
+Choose **Settings > Thumbnail statistics > CPU** to avoid CUDA initialization,
+or **Prefer GPU** to attempt every eligible CuPy histogram with visible CPU
+fallback. Main compute **CPU** always wins and forces statistics to CPU; main
+**Prefer GPU** biases thumbnail-statistics Auto toward GPU. Main Auto and Custom
+use adaptive presentation routing.
+
+Read the preview-local **Stats… (pending) / Stats · CPU / Stats · GPU /
+Stats · CPU fallback / Stats · error** chip for presentation state and hover
+for its algorithm, bytes, time, reason, threshold, fallback, or failure. Do not
+confuse it with the scientific compute badge. While Stack statistics run, the
+shared toolbar shows the active node/backend/phase and `Cancel` keeps the
+provisional thumbnails without publishing partial limits. CPU integer work
+advances and cancels between bounded chunks. An active GPU kernel/synchronization
+or float/other-dtype NumPy percentile may have a non-interruptible inner pass;
+VIPP identifies the phase and cancels at the next cooperative boundary.
+
 Recalculating the same selected node/output preserves its compatible display
 profile and the napari camera, displayed dimensions, slice positions, zoom,
 translation, and rotation. Switching to another output restores that output's
