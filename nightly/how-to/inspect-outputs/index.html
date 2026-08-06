@@ -2641,6 +2641,10 @@ statistics workload; they solve different problems.</p>
 <td><strong>High (360 × 220)</strong> detail.</td>
 </tr>
 <tr>
+<td>Maximum graph zoom still looks pixelated</td>
+<td><strong>Very High (720 × 440)</strong> detail.</td>
+</tr>
+<tr>
 <td>Stable brightness across T/Z/C</td>
 <td><strong>Stack</strong> contrast; wait for its cached exact limits.</td>
 </tr>
@@ -2650,8 +2654,9 @@ statistics workload; they solve different problems.</p>
 </tr>
 </tbody>
 </table>
-<p>The card viewport remains fixed, and High retains a larger source image rather
-than guaranteeing a larger on-screen card. Detail can slightly change Slice
+<p>The card viewport remains fixed, and High/Very High retain larger source images
+rather than guaranteeing a larger on-screen card. Very High uses four times the
+backing pixels of High, so reserve it for maximum zoom or dense displays. Detail can slightly change Slice
 limits because Slice normalizes the selected resolution's spatial sample. Low
 detail does not make Stack statistics cheaper: Stack remains full-output and
 resolution-independent, and Auto routes it from the full output dtype and byte
@@ -2758,7 +2763,7 @@ replacement for them.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 22:13:06 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 05:11:18 UTC">August 6, 2026</span>
   </span>
 
     
