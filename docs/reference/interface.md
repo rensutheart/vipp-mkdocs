@@ -133,7 +133,7 @@ duplicate that purpose in its message strip.
 | Setting | Choices / meaning |
 | --- | --- |
 | Preview mode | `Slice`, `MIP`, or `Off` for graph/inspector previews. |
-| Thumbnail detail | `Low (90 × 55)`, `Standard (180 × 110)`, or `High (360 × 220)` backing detail. The card keeps the same on-screen size; High can improve HiDPI display or downsampling. |
+| Thumbnail detail | `Low (90 × 55)`, `Standard (180 × 110)`, `High (360 × 220)`, or `Very High (720 × 440)` backing detail. The card keeps the same on-screen size; High and Very High can improve HiDPI display, downsampling, or maximum graph zoom. |
 | Thumbnail contrast | Controls thumbnail contrast behavior; it does not alter processed data. |
 | Contrast range | `Stack` caches one exact full-output, resolution-independent range; `Slice` normalizes the selected detail's spatially sampled current view and avoids a full-output scan. |
 | Thumbnail statistics | `Auto`, `CPU`, or `Prefer GPU` for presentation-only Stack contrast work. |
@@ -143,10 +143,11 @@ duplicate that purpose in its message strip.
 | Port labels | `Ambiguous only` (default) labels multi-input or multi-output nodes, `Show all` labels every port, and `Hide all` removes persistent labels. |
 | Graph zoom | Scales graph cards; reset returns to 100%. |
 
-Thumbnail detail and thumbnail statistics are independent. Low/Standard/High
+Thumbnail detail and thumbnail statistics are independent. Low/Standard/High/Very High
 changes only the retained source image for the fixed card viewport; it neither
 recalculates a node nor changes the complete output population used by Stack
-contrast. High does not guarantee more physical on-screen pixels. Changing
+contrast. High and Very High do not guarantee more physical on-screen pixels;
+Very High retains four times the backing pixels of High. Changing
 detail retains cached exact Stack limits, but may slightly change Slice limits
 because Slice normalizes the selected resolution's spatial sample. The choices
 are local presentation settings, not workflow parameters or scientific

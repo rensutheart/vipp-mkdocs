@@ -135,16 +135,19 @@ mean a node is recalculating or that its CPU/CuPy/cuCIM provenance changed.
 
 Use the controls independently:
 
-- **Thumbnail detail** chooses Low (90 × 55), Standard (180 × 110), or High
-  (360 × 220) backing detail for the fixed card viewport. High can improve
-  HiDPI display or downsampling but does not guarantee a larger on-screen card.
+- **Thumbnail detail** chooses Low (90 × 55), Standard (180 × 110), High
+  (360 × 220), or Very High (720 × 440) backing detail for the fixed card
+  viewport. High and Very High can improve HiDPI display, downsampling, or
+  maximum graph zoom but do not guarantee a larger on-screen card. Very High
+  uses four times the backing pixels and approximately four times the pixmap
+  memory of High.
   Low redraws faster, but it does not reduce the amount of data inspected by
   Stack contrast.
 - **Contrast range: Stack** reads each complete result once, caches exact
   resolution-independent limits, and keeps brightness stable while T/Z/C
   changes. **Slice** uses CPU-local normalization of the selected detail's
   spatially sampled current view and avoids the full-output scan. Its limits may
-  therefore change slightly between Low, Standard, and High.
+  therefore change slightly between Low, Standard, High, and Very High.
 - **Settings > Thumbnail statistics** chooses Auto, CPU, or Prefer GPU for this
   display-only Stack work.
 
@@ -222,7 +225,7 @@ Boolean mask pinned as a `Labels` overlay requires a uint8 presentation copy;
 that conversion is limited to the class-changing display path and does not
 replace the original node output used by downstream calculations or saving.
 
-Card thumbnails are rendered at the selected Low, Standard, or High detail.
+Card thumbnails are rendered at the selected Low, Standard, High, or Very High detail.
 Their downsampling and contrast work affect visualization only, never the
 scientific array. Stack contrast can still read the complete output even when
 Low detail is selected; use Slice when that scan is not wanted.

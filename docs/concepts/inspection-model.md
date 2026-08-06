@@ -24,7 +24,7 @@ required value contributes even though the result is grouped for display.
 
 | Inspector item | What is exact | What is display-only |
 | --- | --- | --- |
-| Node thumbnail contrast | Stack Percentile/Min-max summarizes the complete node output. Native `uint8`/`uint16` Percentile uses an exact histogram with identical CPU/CuPy limits; Min-max uses an exact native reduction; float and other-dtype percentiles retain the exact NumPy-compatible CPU path. Slice contrast instead normalizes the spatially sampled current view at the selected detail. | Low/Standard/High backing detail, Slice versus Stack scope, contrast mode, colormap, and the CPU/GPU statistics backend affect the card image only. Slice limits can change slightly with detail; Stack limits cannot. |
+| Node thumbnail contrast | Stack Percentile/Min-max summarizes the complete node output. Native `uint8`/`uint16` Percentile uses an exact histogram with identical CPU/CuPy limits; Min-max uses an exact native reduction; float and other-dtype percentiles retain the exact NumPy-compatible CPU path. Slice contrast instead normalizes the spatially sampled current view at the selected detail. | Low/Standard/High/Very High backing detail, Slice versus Stack scope, contrast mode, colormap, and the CPU/GPU statistics backend affect the card image only. Slice limits can change slightly with detail; Stack limits cannot. |
 | Intensity histogram | Every finite value in the selected slice or stack is counted. | Counts are grouped for drawing: two bars for Boolean data, one for a constant image, 256 for non-negative integer data within 0–255, and otherwise 128 display bins. These bins are not the automatic-threshold bin setting. |
 | Automatic-threshold guide | The guide uses the node's saved scope and scientific method parameters. | Line colour, plot scale, and the chart's display bins do not change the mask. |
 | Colocalization scatter | Every ROI voxel contributes to the configured density; ROI population and the number meeting both thresholds are exact. Threshold-independent density can be reused while an exact recount runs. | Interactive rendering is capped at 1,024 bins per axis; graph scatter nodes can request up to 4,096. Colormap, logarithmic display, guide styling, and rendered output size do not change thresholds or metric tables. |
@@ -50,17 +50,19 @@ overlays are discarded and their earlier coherent inspection state is restored.
 
 ### Thumbnail detail, scope, and statistics provenance
 
-VIPP renders cards at **Low (90 × 55)**, **Standard (180 × 110)**, or
-**High (360 × 220)** detail inside the same card viewport. VIPP retains that
-source image and scales from it, so High can improve HiDPI display or
-downsampling; it does not guarantee a larger on-screen card. This is a spatial
+VIPP renders cards at **Low (90 × 55)**, **Standard (180 × 110)**,
+**High (360 × 220)**, or **Very High (720 × 440)** detail inside the same card
+viewport. VIPP retains that source image and scales from it, so High and Very
+High can improve HiDPI display, downsampling, or maximum graph zoom; they do not
+guarantee a larger on-screen card. Very High uses four times the backing pixels
+of High. This is a spatial
 display choice. Changing it rerenders the graph but neither reruns scientific
 nodes nor invalidates cached exact Stack limits.
 
 **Stack** contrast provides a stable, resolution-independent brightness window
 across T/Z/C by summarizing the complete node output once. **Slice** normalizes
 the selected detail's spatially sampled current view on CPU and avoids that
-full-output scan. It is intentionally responsive, but Low/Standard/High can
+full-output scan. It is intentionally responsive, but Low/Standard/High/Very High can
 change its display limits slightly. Percentile Stack contrast uses
 the 0.5th/99.9th percentiles. Exact native-dtype histograms avoid a full float
 sort for `uint8` and `uint16`; Min-max uses a faster exact native reduction.

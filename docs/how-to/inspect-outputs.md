@@ -44,11 +44,13 @@ statistics workload; they solve different problems.
 | Fast card redraws while editing | **Low (90 × 55)** detail. |
 | Default balance | **Standard (180 × 110)** detail. |
 | More backing detail for HiDPI display or downsampling | **High (360 × 220)** detail. |
+| Maximum graph zoom still looks pixelated | **Very High (720 × 440)** detail. |
 | Stable brightness across T/Z/C | **Stack** contrast; wait for its cached exact limits. |
 | Avoid a full-output contrast scan | **Slice** contrast; it normalizes the selected detail's sampled current view. |
 
-The card viewport remains fixed, and High retains a larger source image rather
-than guaranteeing a larger on-screen card. Detail can slightly change Slice
+The card viewport remains fixed, and High/Very High retain larger source images
+rather than guaranteeing a larger on-screen card. Very High uses four times the
+backing pixels of High, so reserve it for maximum zoom or dense displays. Detail can slightly change Slice
 limits because Slice normalizes the selected resolution's spatial sample. Low
 detail does not make Stack statistics cheaper: Stack remains full-output and
 resolution-independent, and Auto routes it from the full output dtype and byte

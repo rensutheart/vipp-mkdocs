@@ -158,7 +158,8 @@ Several inspector calculations follow the same principle:
 
 Slice thumbnail contrast takes the responsiveness tradeoff: it normalizes the
 selected detail's spatially sampled current view rather than reading the full
-slice. Low/Standard/High may therefore change Slice display limits slightly.
+slice. Low/Standard/High/Very High may therefore change Slice display limits
+slightly.
 This remains presentation-only and never changes a node output.
 
 The provisional layer range is display-only. It does not make the node output
@@ -204,7 +205,8 @@ as a whole is not committed until the run finishes successfully.
 Future large-data work should add:
 
 - pyramid-aware source-level selection beyond the current 90 × 55, 180 × 110,
-  and 360 × 220 backing-detail controls;
+  360 × 220, and 720 × 440 backing-detail controls. Very High uses four times
+  the pixmap memory of High;
 - more lazy and chunk-native operations;
 - operation capability declarations;
 - OME-Zarr pyramid export;

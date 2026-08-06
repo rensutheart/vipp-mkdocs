@@ -73,7 +73,7 @@ complete output's byte size. Its conservative cold crossover is 384 MiB for
 `uint8` or 512 MiB for `uint16`; both become 32 MiB after one successful GPU
 histogram. These measured default heuristics are not a universal fastest
 guarantee because data distribution, hardware, CUDA startup, residency, and
-competing work matter. It does not use Low/Standard/High backing resolution.
+competing work matter. It does not use Low/Standard/High/Very High backing resolution.
 Use **Prefer GPU** as the explicit override. Min-max uses an exact native CPU
 reduction. Float and other-dtype percentiles retain the exact NumPy-compatible
 CPU calculation. Read the separate **Stats… (pending) / Stats · CPU /
