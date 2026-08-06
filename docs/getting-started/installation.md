@@ -1,9 +1,9 @@
 # Install VIPP
 
-VIPP 0.13.0a1 supports **CPython 3.12 and 3.13**. After the candidate is
-published, pip needs the `--pre` flag to select this alpha from PyPI. Before the
-tag/package exists, use the immutable-candidate instructions below for release
-candidate testing; do not treat that checkout as a published release.
+VIPP 0.13.0a1 supports **CPython 3.12 and 3.13**. The commands below select that
+exact alpha with `==0.13.0a1`, so pip's `--pre` option is neither needed nor
+desirable: `--pre` affects dependency resolution globally. Use `--pre` only
+when asking pip to choose the latest **unpinned** VIPP alpha.
 
 !!! info "Platform and Python verification for 0.13.0a1"
     The base CPU application is intended for Windows, macOS, and Linux. Release
@@ -23,12 +23,10 @@ napari with PyQt6 and that tagged release.
 === "Windows"
 
     ```powershell
-    py -3.12 -m venv vipp-env
-    .\vipp-env\Scripts\Activate.ps1
-    python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]"
-    python -m pip install --pre "napari-vipp==0.13.0a1"
-    vipp
+    py -3.12 -m venv ".venv-vipp"
+    & ".\.venv-vipp\Scripts\python.exe" -m pip install --upgrade pip
+    & ".\.venv-vipp\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
+    & ".\.venv-vipp\Scripts\vipp.exe"
     ```
 
 === "macOS"
@@ -37,8 +35,7 @@ napari with PyQt6 and that tagged release.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]"
-    python -m pip install --pre "napari-vipp==0.13.0a1"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
     vipp
     ```
 
@@ -48,8 +45,7 @@ napari with PyQt6 and that tagged release.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]"
-    python -m pip install --pre "napari-vipp==0.13.0a1"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
     vipp
     ```
 
@@ -67,12 +63,8 @@ activate the environment before running the final
 
 !!! note "Stable manual versus nightly manual"
     In a numbered/stable manual, the commands above install the documented
-    release. This prepublication nightly retains `444f682` only as a historical
-    automated checkpoint. Later compute-lifecycle, optimizer, source-loading,
-    and generated-CLI hardening superseded its source and artifacts; no new
-    immutable release candidate is recorded here yet. Do not install an old
-    checkpoint or arbitrary newer `main` merely because you are reading
-    nightly. See
+    release. Nightly documentation can describe newer, unreleased work; do not
+    replace the exact version with an arbitrary `main` checkout. See
     [versions and compatibility](../reference/versioning.md).
 
 ## Confirm the installation
@@ -120,22 +112,27 @@ or run a CPU workflow.
 
     The standard CUDA extra installs the pinned CuPy/CuPyX stack. It does not
     include the separately reviewed cuCIM build used by the background and
-    basic measurement candidates, so those nodes normally remain CPU after the
-    public install below.
+    basic measurement candidates. Those nodes remain CPU after the public
+    install below unless the user completes the optional pinned local-build
+    route.
 
 Use a **new** environment and install exactly one CUDA-major extra. For the
-current CUDA 13 track:
+current CUDA 13 track, Windows users should first read the complete
+[driver, Python, installation, diagnosis, and cuCIM guide](windows-cuda.md).
 
 === "Windows · CUDA 13"
 
     ```powershell
-    py -3.12 -m venv vipp-gpu-env
-    .\vipp-gpu-env\Scripts\Activate.ps1
-    python -m pip install --upgrade pip
-    python -m pip install --pre "napari[pyqt6]" "napari-vipp[gpu-cuda13]==0.13.0a1"
-    vipp-compute-doctor --track cuda13
-    vipp
+    py -3.12 -m venv ".venv-vipp-gpu-cu13"
+    & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
+    & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a1"
+    & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
+    & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
     ```
+
+    Only an NVIDIA display driver is a machine-wide prerequisite. The extra
+    installs the pinned CUDA user-space libraries; do not separately install a
+    CUDA Toolkit, `nvcc`, Visual Studio, or CMake for this standard route.
 
 === "Linux · CUDA 13 qualification"
 
@@ -143,7 +140,7 @@ current CUDA 13 track:
     python3.12 -m venv vipp-gpu-env
     source vipp-gpu-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install --pre "napari[pyqt6]" "napari-vipp[gpu-cuda13]==0.13.0a1"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a1"
     vipp-compute-doctor --track cuda13
     vipp
     ```
@@ -158,15 +155,22 @@ current public policy does not admit it. Do not install `gpu-cuda12` and
 does not by itself establish scientific admission for an operation.
 
 `vipp-compute-doctor` reports the selected track, installed packages, runtime
-probe, device, and current policy eligibility without asking the GUI to import
-a broken accelerator stack. VIPP's **Compute setup and memory…** dialog exposes
-the same diagnosis and a copyable fresh-environment repair command. VIPP never
-runs that command without the user's action.
+probe, and device without asking the GUI to import a broken accelerator stack.
+It does not by itself grant scientific-policy admission. VIPP's **Compute setup
+and memory…** dialog exposes the diagnosis and a copyable fresh-environment
+repair command, while the operation decision applies the exact environment and
+workload gates. VIPP never runs that command without the user's action.
 
-cuCIM-backed candidates require a separately reviewed, checksum-recorded build.
-There is no general public native-Windows cuCIM extra in 0.13.0a1, and the
-validated source-built wheel omits Clara whole-slide I/O. Do not install an
-arbitrary cuCIM build and assume it is admitted.
+!!! info "cuCIM is an optional local build on Windows"
+
+    VIPP does not distribute or require cuCIM. A Windows user may build exact
+    cuCIM 26.6.0 tag `v26.06.00` at the release-pinned commit with VIPP's fixed
+    recipe, then use the generated manifest and setup helper to install it into
+    this released environment. The helper verifies the archive and canonical
+    wheel payload before recording the completed setup; VIPP then independently
+    rehashes the installed files before admitting cuCIM for use. The build omits
+    Clara whole-slide I/O. Read the
+    complete [Windows local-build instructions](windows-cuda.md#build-and-add-the-pinned-cucim-release).
 
 macOS has no CUDA path. Use the base CPU installation on Intel or Apple Silicon;
 the bounded M1 Max source-candidate smoke above supports that CPU path but does
@@ -184,36 +188,22 @@ raster routes. Install only the reader family you need, then restart napari.
 
 | File family | Command |
 | --- | --- |
-| Nikon ND2 | `python -m pip install --pre "napari-vipp[nd2]==0.13.0a1"` |
-| Zeiss CZI | `python -m pip install --pre "napari-vipp[czi]==0.13.0a1"` |
-| Mixed microscope formats | `python -m pip install --pre "napari-vipp[microscope]==0.13.0a1"` |
-| BioIO/Bio-Formats fallback | `python -m pip install --pre "napari-vipp[bioformats]==0.13.0a1"` |
+| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.13.0a1"` |
+| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.13.0a1"` |
+| Mixed microscope formats | `python -m pip install "napari-vipp[microscope]==0.13.0a1"` |
+| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.13.0a1"` |
 
 Support for optional readers is an experimental foundation. A reader exposing
 a file is not proof that every axis, unit, timestamp, or acquisition field was
 interpreted correctly. Check representative files from your facility before
 quantitative use.
 
-## Historical checkpoints and development branches
+## Development branches
 
-The earlier reviewed commit `e024409` predates the Prefer-GPU source change and
-is no longer the current 0.13.0a1 candidate. Do not use its source archive or
-artifact hashes to qualify the eventual release.
-
-The later automated checkpoint was
-`444f68290fe4359b05c68a027d3ae0a413412fe5`. Its recorded automated suite,
-build/Twine, manifest, installed-wheel resource, and RTX 5090 Prefer-GPU checks
-passed at the time. Subsequent hardening changed release-relevant behavior, so
-that source and its artifacts are now superseded. Its SHA is retained here for
-audit history, not as an installation recommendation; do not use it to qualify
-or install the eventual release.
-
-The checkpoint's artifact hashes remain in the
-[release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
-for audit history only. They must not be uploaded as 0.13.0a1. Wait for a newly
-named immutable candidate when qualifying the release. Record the full commit
-with every development result; source-archive testing is not a PyPI
-installation or publication claim.
+Historical candidate commits and artifact hashes are retained in the
+[release notes](../releases/0.13.0a1.md) for audit history. They are not
+installation targets and must not be uploaded or represented as the final
+0.13.0a1 artifacts.
 
 For newer unreleased `main` work, use:
 

@@ -37,8 +37,11 @@ If any of those are unfamiliar, the [concepts](../concepts/index.md) and
 necessary background without assuming Python knowledge.
 
 Optional GPU use is not required for this route. New sessions default to Auto,
-which is a conservative CPU path in the ordinary 0.13.0a1 interfaces. Continue
-to [choose and verify CPU or GPU compute](../how-to/choose-compute.md) only after
+which can use a reviewed GPU default only when the installed environment and
+exact workload pass every gate; otherwise it gives an explained CPU decision.
+Windows users should follow the dedicated
+[CUDA installation guide](windows-cuda.md). Continue to
+[choose and verify CPU or GPU compute](../how-to/choose-compute.md) only after
 the workflow is scientifically sensible on representative data. **Prefer GPU**
 uses every reviewed eligible accelerator region globally; **Custom** adds
 per-node choices and benchmarking.

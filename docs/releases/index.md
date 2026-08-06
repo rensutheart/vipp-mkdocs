@@ -13,12 +13,14 @@ data.
 
 This nightly entry is the prepared release manual. It becomes the stable,
 numbered release documentation only after the matching application tag/package
-and manual snapshot are published. The earlier `e024409` artifact checkpoint
-predates Prefer GPU. The later `444f682` checkpoint passed its recorded local,
-package/artifact, and RTX 5090 Prefer-GPU checks, but subsequent lifecycle,
-optimizer, source-loading, and generated-CLI hardening superseded both its
-source and artifacts. It is historical evidence, not the current release
-candidate. A new immutable candidate, final tag, and publication checks remain
+and manual snapshot are published. Application commit
+[`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1)
+is the prepared source candidate and passed the complete package and
+cross-platform test
+[matrix](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727).
+The earlier `e024409` and `444f682` checkpoints remain historical evidence;
+their artifacts must not be uploaded. The final tag, fresh release artifacts,
+publication, numbered documentation, and post-publication checks remain
 pending.
 
 0.13.0a1 writes workflow schema 4 and batch config/manifest schema 2. Valid

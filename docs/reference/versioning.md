@@ -16,16 +16,17 @@ points to the previous public release. See
 [installation](../getting-started/installation.md) and the
 [0.13.0a1 release notes](../releases/0.13.0a1.md).
 
-The previously prepared `e024409` candidate predates Prefer GPU and is now a
-historical checkpoint, not the release source. The later automated checkpoint
-is
-[`444f68290fe4359b05c68a027d3ae0a413412fe5`](https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5).
-Its full local suite and package/artifact checks passed, and its exact hashes are
-recorded in the [release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded).
-Later compute-lifecycle, optimizer, source-loading, and generated-CLI hardening
-changed the application, so `444f682` and its artifacts are superseded and must
-not be treated as the current candidate or uploaded for release. A new immutable
-candidate, final tag, and publication checks remain pending.
+The prepared application source candidate is
+[`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1).
+Its package checks and CPython 3.12/3.13 tests on Windows, Linux, and macOS
+passed in the exact-source
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727).
+The previously prepared `e024409` and `444f682` checkpoints are historical,
+not release sources; their hashes remain in the
+[release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
+only to prevent accidental reuse. The final tag, freshly built and hashed
+release artifacts, publication, numbered manual snapshot, and post-publication
+checks remain pending.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -158,30 +159,32 @@ without testing it.
 
 ## Install a release
 
-Because alpha releases are pre-releases, use:
+To ask pip to choose the latest unpinned alpha, use:
 
 ```text
 python -m pip install "napari[pyqt6]"
 python -m pip install --pre napari-vipp
 ```
 
-To reproduce a specific alpha exactly, specify the version in a fresh environment:
+To reproduce a specific alpha exactly, specify the version in a fresh
+environment. An exact prerelease does not need `--pre`:
 
 ```text
-python -m pip install --pre "napari[pyqt6]" "napari-vipp==0.13.0a1"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
 ```
 
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install --pre "napari[pyqt6]" "napari-vipp[gpu-cuda13]==0.13.0a1"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a1"
 vipp-compute-doctor --track cuda13
 ```
 
 The extra installs a reproducible CUDA/CuPy track; it does not make an
 unqualified GPU, driver, OS, or scientific stack scientifically admitted.
 Never install both CUDA-major extras into one environment. See
-[installation](../getting-started/installation.md#optional-nvidia-cuda-acceleration).
+[installation](../getting-started/installation.md#optional-nvidia-cuda-acceleration)
+and the [64-bit Windows CUDA guide](../getting-started/windows-cuda.md).
 
 ## Nightly policy
 

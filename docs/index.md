@@ -37,12 +37,12 @@ hide:
 
 !!! warning "Alpha release: validate before interpreting"
     This nightly manual is prepared for the **napari-vipp 0.13.0a1 release**.
-    Commit `444f682` and its build artifacts are a historical automated
-    checkpoint: they passed their recorded local, package, and RTX 5090 checks,
-    but subsequent compute-lifecycle, optimizer, source-loading, and generated-
-    CLI hardening changed the application. They are superseded, not the current
-    release candidate. A new immutable candidate, final tag, and publication
-    checks are still pending.
+    The prepared application source is
+    [`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1),
+    which passed the complete package and cross-platform test
+    [matrix](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727).
+    The final tag, freshly hashed upload artifacts, PyPI/GitHub publication,
+    numbered manual snapshot, and post-publication checks are still pending.
     Until the tag and packages are published, use the stable manual for the
     current public release. Interfaces,
     workflow files, and parameter defaults may change between alpha releases.

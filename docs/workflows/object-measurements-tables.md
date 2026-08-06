@@ -49,7 +49,10 @@ semantics.
 
 The standard `gpu-cuda13` extra does not distribute the separately reviewed
 cuCIM Windows build, so these nodes normally remain CPU after an ordinary GPU
-install. See [choose and verify compute](../how-to/choose-compute.md).
+install. Windows users may add their own manifest-verified build of the exact
+pinned cuCIM 26.6.0 source. See the
+[Windows CUDA guide](../getting-started/windows-cuda.md) and
+[choose and verify compute](../how-to/choose-compute.md).
 
 ## 3D Mesh Morphology
 

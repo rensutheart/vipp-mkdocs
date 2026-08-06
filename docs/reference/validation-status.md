@@ -34,6 +34,48 @@ every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
+## Prepared 0.13.0a1 source candidate
+
+The source prepared for publication is application commit
+[`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1)
+on `main`. Its exact-source
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727)
+passed package, manifest, lint, distribution-metadata, installed-wheel smoke,
+and CPython 3.12 and 3.13 tests on Windows, Linux, and macOS. The CI-built
+distributions are qualification outputs, not publication artifacts.
+
+On native Windows, the last complete local suite before the final queued-work
+synchronization hardening passed **3,999 tests**, with **2 skipped** and **2
+documented expected failures**. The complete 622-test widget module and focused
+debounce, queued-output, axis, save/export, packaging, setup-helper, and
+benchmark-evidence tests passed after the scoped changes. The exact current
+source was then covered by the cross-platform CI matrix above.
+
+The bundled synthetic-volume example was launched from a clean, non-editable,
+release-style Windows environment, and the operator explicitly accepted its
+appearance. A separate headless Prefer-GPU smoke selected
+`cucim-subtract_background-v2` for Subtract Background without fallback,
+returned a `(31, 37)` native-`uint16` result, and reported clean accelerator
+cleanup. This is bounded evidence for one example and one declared cuCIM
+operation region, not broad manual GUI, reader, filesystem, hardware, or assay
+qualification.
+
+The pinned private Windows cuCIM route was exercised against upstream tag
+`v26.06.00` at commit
+`3c15781c207eab93a317dd9803a6e726fe01f7c4`. Two clean builds from the exact
+41-distribution no-dependency lock produced byte-identical wheel files and the
+policy-pinned canonical payload
+`d640d1e17bcce15d32d03841997252bf915b63da855e406c35f0d70c5a5ea667`.
+Metadata, licenses, exact file inventory, install-helper admission, `pip check`,
+and a real GPU import/runtime probe passed. This locally built wheel remains
+private: VIPP neither ships nor hosts it, and each user must repeat the pinned
+build for their own environment.
+
+The final tag, fresh release wheel and source distribution with recorded
+hashes, manual Twine upload, GitHub pre-release, numbered documentation
+snapshot, and post-publication installation checks remain pending. Historical
+artifacts below must not be uploaded.
+
 The earlier pre-Prefer-GPU candidate at application commit `e024409` passed
 package/manifest, lint, and CPython 3.12 and 3.13 CI on Linux, Windows, and
 macOS. The candidate
@@ -72,9 +114,10 @@ The exact historical checkpoint artifact hashes are:
 - source distribution:
   `00fcb15452d3ed71d344859d4306cbcdcc458686959169a2c47485d8f7abec9b`.
 
-These artifacts must not be uploaded for 0.13.0a1. A new immutable candidate,
-full verification run, package artifacts, tag, publication, and
-post-publication checks remain pending. See the
+These artifacts must not be uploaded for 0.13.0a1. They are superseded by the
+prepared `c2e88f8` source candidate above. The final tag, freshly built and
+hashed release artifacts, publication, and post-publication checks remain
+pending. See the
 [release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
 for the historical artifact table.
 
@@ -111,8 +154,9 @@ The `e024409` full local suite passed **3,722 tests**, with **2
 skipped**, **2 documented expected failures**, and 83 warnings. The two final
 real-CUDA durable execution tests passed when enabled. These numbers describe
 that earlier candidate checkout. Preserve them as historical evidence, but do
-not use them as final-release counts; add the final tagged commit's CI and
-artifact-smoke results before publication.
+not use them as final-release counts. Use the prepared-candidate results above
+for source qualification, then record exact tagged-artifact smokes before
+publication.
 
 The recorded native-Windows RTX 5090 evidence records operation-level
 scientific parity, memory, progress/cancellation, cleanup, and timing for the
@@ -151,7 +195,7 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, the historical/superseded `444f682` checkpoint with 3,754 passing tests and zero failures, its clean wheel/sdist plus manifest/resource checks, a real RTX 5090 Prefer-GPU placement/parity/cleanup test, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Name and fully verify a new immutable candidate after current hardening; rebuild clean artifacts; repeat release-candidate manual acceptance and tag/publication checks; native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, prepared source candidate `c2e88f8` with a green package/cross-platform CI matrix, a qualified private local cuCIM rebuild, real RTX 5090 Prefer-GPU placement/parity/cleanup and performance checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Build and hash exact tagged artifacts; complete publication and post-publication checks; qualify native Linux GPU, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
 | Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 2, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
@@ -177,8 +221,14 @@ same as an external comparison or assay validation. The distinction matters:
   bounded M1 Max CPU smoke above does not admit an Apple accelerator.
   The [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1) is a
   readable summary; the runtime policy/decision remains authoritative.
-- cuCIM's source-built Windows `skimage` wheel is not a general install route
-  and omits Clara I/O. Feature-complete cuCIM packaging remains pending.
+- cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
+  wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
+  recipe. Admission verifies that build's wheel-file hash, the policy-pinned
+  canonical installed payload, source/recipe provenance, and the existing
+  scientific environment/workload gates. This private per-user rebuild is the
+  settled 0.13.0a1 route; VIPP will not host or redistribute the wheel. Clara
+  whole-slide I/O remains outside that build. See the
+  [Windows CUDA guide](../getting-started/windows-cuda.md).
 - Batch processing is local-file and sorted-position oriented. It does not
   iterate selected T/C/Z combinations or discover plate/well/field structure.
 - Many operations are eager even when a source format supports lazy/chunked

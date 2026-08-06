@@ -205,7 +205,9 @@ make a benchmark look faster.
 The `gpu-cuda13` extra installs the pinned CuPy/CuPyX CUDA track. It does not
 include the separately reviewed cuCIM build used by the background and basic
 measurement candidates, so those nodes normally remain CPU after a standard
-public GPU install.
+public GPU install. Windows users can optionally build the pinned cuCIM 26.6.0
+source locally and approve it with its generated manifest; see the
+[Windows CUDA and cuCIM guide](../getting-started/windows-cuda.md).
 
 Public admission in this alpha is deliberately narrower than installability:
 the recorded gate is one native-Windows CPython 3.12, CUDA 13, RTX 5090 stack.

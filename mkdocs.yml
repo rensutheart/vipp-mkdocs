@@ -127,6 +127,7 @@ nav:
   - Start here:
       - Start here: getting-started/index.md
       - Install VIPP: getting-started/installation.md
+      - Install CUDA on Windows: getting-started/windows-cuda.md
       - Launch VIPP: getting-started/launching.md
       - Tour a finished workflow: getting-started/example-tour.md
       - Build your first workflow: getting-started/build-workflow.md
