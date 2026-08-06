@@ -67,15 +67,17 @@ fallback. Main compute **CPU** always wins and forces statistics to CPU; main
 **Prefer GPU** biases thumbnail-statistics Auto toward GPU. Main Auto and Custom
 use adaptive presentation routing.
 
-Read the preview-local **Stats… (pending) / Stats · CPU / Stats · GPU /
-Stats · CPU fallback / Stats · error** chip for presentation state and hover
-for its algorithm, bytes, time, reason, threshold, fallback, or failure. Do not
+Read the slim footer below the image—**Contrast · Calculating… / Contrast · CPU /
+Contrast · GPU / Contrast · CPU fallback / Contrast · error**—for presentation
+state and hover it or the thumbnail for algorithm, bytes, time, reason,
+threshold, fallback, or failure. The footer never covers the image. Do not
 confuse it with the scientific compute badge. While Stack statistics run, the
 shared toolbar shows the active node/backend/phase and `Cancel` keeps the
 provisional thumbnails without publishing partial limits. CPU integer work
-advances and cancels between bounded chunks. An active GPU kernel/synchronization
-or float/other-dtype NumPy percentile may have a non-interruptible inner pass;
-VIPP identifies the phase and cancels at the next cooperative boundary.
+advances and cancels between bounded chunks. An active GPU
+kernel/synchronization or float/other-dtype NumPy percentile may have a
+non-interruptible inner pass; VIPP identifies the phase and cancels at the next
+cooperative boundary.
 
 Recalculating the same selected node/output preserves its compatible display
 profile and the napari camera, displayed dimensions, slice positions, zoom,

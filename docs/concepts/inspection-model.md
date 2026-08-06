@@ -80,15 +80,16 @@ is the explicit override. Main compute **CPU** always forces statistics CPU;
 main **Prefer GPU** biases statistics Auto to GPU; main **Auto** and **Custom**
 leave it adaptive.
 
-The preview-local **Stats… (pending) / Stats · CPU / Stats · GPU /
-Stats · CPU fallback / Stats · error** chip reports that work. The separate
-scientific CPU/CuPy/cuCIM
-badge still identifies what produced the node output. Stack scans publish the
-active node/backend/phase through the toolbar without accepting partial limits.
-CPU integer histograms and min-max reductions advance and cancel between bounded
-chunks. An active GPU kernel/synchronization or exact float/other-dtype NumPy
-percentile may contain a non-interruptible inner pass; the UI identifies that
-phase and applies cancellation at the next cooperative boundary.
+The slim footer below the thumbnail reports that work as
+**Contrast · Calculating… / Contrast · CPU / Contrast · GPU /
+Contrast · CPU fallback / Contrast · error** without obscuring the image. The
+separate scientific CPU/CuPy/cuCIM badge still identifies what produced the
+node output. Stack scans publish the active node/backend/phase through the
+toolbar without accepting partial limits. CPU integer histograms and min-max
+reductions advance and cancel between bounded chunks. An active GPU
+kernel/synchronization or exact float/other-dtype NumPy percentile may contain a
+non-interruptible inner pass; the UI identifies that phase and applies
+cancellation at the next cooperative boundary.
 
 ### Reused and replaced Inspect layers
 

@@ -176,16 +176,19 @@ without occupying the toolbar progress strip: at most 1 MiB total, eight
 requests, and eight aggregate scalar/channel lanes. Larger work, high-channel
 data, and selected GPU paths stay in the cancellable background worker. This is
 an internal scheduling boundary, not a different contrast algorithm or a
-CPU/GPU speed claim; the Stats chip records the result in the same way.
+CPU/GPU speed claim; the contrast-status footer records the result in the same
+way.
 
 The main compute policy is authoritative: main **CPU** hard-forces presentation
 CPU; main **Prefer GPU** biases presentation Auto toward GPU; main **Auto** and
-**Custom** leave it adaptive. Each card reports the resulting display work with
-a separate pending **Stats…**, **Stats · CPU**, **Stats · GPU**, amber
-**Stats · CPU fallback**, or red **Stats · error** chip. This never replaces the
-card's scientific **CPU**, **GPU · CuPy**, **GPU · cuCIM**, or **CPU fallback**
-badge. Hover the Stats chip for scope, render detail, algorithm, byte count,
-elapsed time, selection reason, threshold, fallback, and failure information.
+**Custom** leave it adaptive. Each card reports the resulting display work in a
+slim footer below the thumbnail: **Contrast · Calculating…**, **Contrast · CPU**,
+**Contrast · GPU**, amber **Contrast · CPU fallback**, or red
+**Contrast · error**. Ordinary success is muted and no status covers the image.
+This never replaces the card's scientific **CPU**, **GPU · CuPy**,
+**GPU · cuCIM**, or **CPU fallback** badge. Hover the footer or thumbnail for
+scope, render detail, algorithm, byte count, elapsed time, selection reason,
+threshold, fallback, and failure information.
 
 The shared toolbar reports the active node, backend, and statistics phase. CPU
 integer histogram and min-max paths advance and cancel between bounded chunks.
