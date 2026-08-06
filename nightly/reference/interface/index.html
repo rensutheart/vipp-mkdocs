@@ -1993,6 +1993,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#batch-image-stack-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Image stack control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#batch-representative-strip" class="md-nav__link">
     <span class="md-ellipsis">
       Batch representative strip
@@ -2698,6 +2707,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#batch-image-stack-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Image stack control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#batch-representative-strip" class="md-nav__link">
     <span class="md-ellipsis">
       Batch representative strip
@@ -3236,6 +3254,38 @@ size up to 4,096, native populated axis ranges, optional symmetric percentile
 clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
 at its current display resolution; use a graph node when the scatter image must
 be part of the durable workflow.</p>
+<h2 id="batch-image-stack-control">Batch Image stack control<a class="headerlink" href="#batch-image-stack-control" title="Permanent link">&para;</a></h2>
+<p>Each collection source in Batch workspace has an <strong>Image stack</strong> chooser:</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Automatic (recommended)</strong></td>
+<td>Default for a new unsaved row. VIPP changes it only when an ordinary TIFF reports exactly <code>QYX</code> and the representative reaches a demonstrated <code>ZYX</code> workflow requirement.</td>
+</tr>
+<tr>
+<td><strong>Use the file's labels unchanged</strong></td>
+<td>Trust the reader labels and reject the automatic Z-stack interpretation for this source. Loaded blank declarations use this conservative choice.</td>
+</tr>
+<tr>
+<td><strong>Pages are depth slices (Z stack)</strong></td>
+<td>Save the guarded <code>QYX -&gt; ZYX</code> interpretation. Axis names change in place; pixels are not transposed.</td>
+</tr>
+<tr>
+<td><strong>Something else (advanced)...</strong></td>
+<td>Enter an uncommon reviewed source-to-effective axis declaration.</td>
+</tr>
+</tbody>
+</table>
+<p>When Automatic can resolve the exact case, VIPP visibly selects the Z-stack
+choice and shows why it changed, that it will be saved, and that pixel order is
+unchanged. Verify the page meaning and Z calibration independently. Preview and
+Run use the same check; headless execution never invents a missing declaration.</p>
 <h2 id="batch-representative-strip">Batch representative strip<a class="headerlink" href="#batch-representative-strip" title="Permanent link">&para;</a></h2>
 <p>After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired
@@ -3266,7 +3316,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 07:04:55 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

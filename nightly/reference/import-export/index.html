@@ -2829,11 +2829,13 @@ node/port to the effective compute request, actual CPU/CuPy/cuCIM
 implementation, environment, fallback records, outcome, and cleanup evidence.
 Failed or cancelled single-output publication attempts a failure sidecar at
 the requested destination name.</p>
-<p>Batch uses its authoritative version-2 manifest instead of duplicating one
+<p>Batch uses its authoritative version-3 manifest instead of duplicating one
 sidecar per output. Every published output record carries an execution digest
-link to that item's complete execution document. Preserve the manifest,
-archive, item checkpoints, workflow/config pair, and source identities with the
-files.</p>
+link to that item's complete execution document. Successfully read source
+records include their raw axes, effective axes, and applied declaration. The
+embedded config preserves an intended declaration even when an item was skipped
+or failed before source reading. Preserve the manifest, archive, item
+checkpoints, workflow/config pair, and source identities with the files.</p>
 <p>A generated standalone output remains private until execution cleanup and its
 requested staged publication checks are established. The generated local
 <code>load_image()</code> path hashes the exact source before reading and verifies it after
@@ -2874,7 +2876,7 @@ silently resample, register, reorder, or repair a transform.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

@@ -2590,24 +2590,22 @@
 </tr>
 </tbody>
 </table>
-<p>This <code>main</code>/nightly manual is being prepared for the <strong>0.13.0a1 release</strong>. Its
-<code>a1</code> suffix identifies the first alpha build in the 0.13.0 release series.
-It becomes a release-numbered public manual only after the matching application
-tag/package and documentation snapshot are published. Until then, stable still
-points to the previous public release. See
+<p>The numbered <strong>0.13.0a1</strong> snapshot documents the first alpha build in the
+0.13.0 release series. The package is available from
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1">GitHub</a> and
+<a href="https://pypi.org/project/napari-vipp/0.13.0a1/">PyPI</a>. See
 <a href="../../getting-started/installation/">installation</a> and the
 <a href="../../releases/0.13.0a1/">0.13.0a1 release notes</a>.</p>
-<p>The prepared application source candidate is
-<a href="https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1"><code>c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1</code></a>.
+<p>The immutable <code>v0.13.0a1</code> tag resolves to
+<a href="https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6"><code>7520a5bb3ea9fe296bb231c63d1598b833ac10f6</code></a>.
 Its package checks and CPython 3.12/3.13 tests on Windows, Linux, and macOS
 passed in the exact-source
-<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31094506727">CI run</a>.
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31112153743">CI run</a>.
 The previously prepared <code>e024409</code> and <code>444f682</code> checkpoints are historical,
 not release sources; their hashes remain in the
 <a href="../../releases/0.13.0a1/#historical-prefer-gpu-automated-checkpoint-superseded">release notes</a>
-only to prevent accidental reuse. The final tag, freshly built and hashed
-release artifacts, publication, numbered manual snapshot, and post-publication
-checks remain pending.</p>
+only to prevent accidental reuse. The final tagged artifact hashes are recorded
+in <a href="../../releases/0.13.0a1/#release-verification">release verification</a>.</p>
 <p>The <code>main</code>/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.</p>
 <h2 id="match-software-and-manual">Match software and manual<a class="headerlink" href="#match-software-and-manual" title="Permanent link">&para;</a></h2>
@@ -2626,9 +2624,9 @@ axes, channels, physical grids, dynamic ports, compute request, actual backend,
 and results on known sample data. See the
 <a href="../workflow-contract/">workflow contract</a>.</p>
 <h2 id="move-from-0120a3-to-0130a1">Move from 0.12.0a3 to 0.13.0a1<a class="headerlink" href="#move-from-0120a3-to-0130a1" title="Permanent link">&para;</a></h2>
-<p>0.13 introduces durable compute intent and can also change calculated
-colocalization values. Treat the upgrade as a scientific review, not only a
-file-format conversion.</p>
+<p>0.13 introduces durable compute intent and guarded source-axis declarations,
+and can also change calculated colocalization values. Treat the upgrade as a
+scientific review, not only a file-format conversion.</p>
 <ol>
 <li>Keep the original schema-3 workflow, 0.12.0a3 environment, generated Python,
    batch config, manifests, sidecars, and validated outputs unchanged.</li>
@@ -2654,15 +2652,17 @@ file-format conversion.</p>
    provenance. Do not add an unplanned <code>Convert Dtype</code> merely to make a GPU
    benchmark faster.</li>
 <li>Load or recreate Batch workspace. Version-1 batch configs migrate to an
-   explicit CPU request and save as version 2. Review the configured/effective
-   requests, memory and fallback policy, bindings, paths, collision policy, and
-   fresh preflight before running.</li>
+   explicit CPU request; version-2 configs retain their saved compute request.
+   Neither older version contains a source-axis declaration. Review the
+   source-specific <strong>Image stack</strong> choice, configured/effective requests,
+   memory and fallback policy, bindings, paths, collision policy, and fresh
+   preflight, then save the reviewed configuration as version 3.</li>
 <li>Regenerate and revalidate exported Python and the saved batch runner. A
    generated 0.12 program refuses a 0.13 runtime by design.</li>
 <li>For a consequential batch, test progress, cancellation, and OOM/fallback on
-   non-critical data, then inspect the version-2 manifest's execution documents,
-   digests, output links, cleanup evidence, and
-   partial/skipped/cancelled/failed records.</li>
+   non-critical data, then inspect the version-3 manifest's raw/effective source
+   axes, applied declarations, execution documents, digests, output links,
+   cleanup evidence, and partial/skipped/cancelled/failed records.</li>
 </ol>
 <p>The colocalization and ImageJ-threshold revisions have frozen automated
 fixtures but still require independent upstream-method review. Treat them as
@@ -2772,7 +2772,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 10:54:03 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

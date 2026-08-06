@@ -1172,6 +1172,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tell-vipp-what-tiff-pages-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tell VIPP what TIFF pages mean
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mark-outputs-explicitly" class="md-nav__link">
     <span class="md-ellipsis">
       Mark outputs explicitly
@@ -2530,6 +2539,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tell-vipp-what-tiff-pages-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tell VIPP what TIFF pages mean
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mark-outputs-explicitly" class="md-nav__link">
     <span class="md-ellipsis">
       Mark outputs explicitly
@@ -2659,6 +2677,10 @@ cooperative cancellation completes and final state is persisted.</p>
    or table to save.</li>
 <li>Open <strong>Batch workspace...</strong> and bind each varying <code>Image Source</code> to a local
    folder and pattern.</li>
+<li>Leave <strong>Image stack</strong> at <strong>Automatic (recommended)</strong> for a new source unless
+   you already know what its TIFF pages mean. If VIPP suggests <strong>Pages are depth
+   slices (Z stack)</strong>, keep that choice only after confirming the pages really
+   are depth slices.</li>
 <li>Choose the intended toolbar compute request. New work defaults to Auto,
    which uses reviewed safe GPU defaults without compatible history. An
    accelerated-only batch timing makes the next matching global Auto batch run
@@ -2709,6 +2731,31 @@ structure.</p>
 <p>The first bound source is the primary source used by default naming. Fixed
 file-path Image Sources can remain unbound; napari-layer and bundled-sample
 sources must be replaced by collection bindings for a headless batch.</p>
+<h2 id="tell-vipp-what-tiff-pages-mean">Tell VIPP what TIFF pages mean<a class="headerlink" href="#tell-vipp-what-tiff-pages-mean" title="Permanent link">&para;</a></h2>
+<p>For a new source, <strong>Image stack</strong> begins at <strong>Automatic (recommended)</strong>. Most
+users can leave it there. On Preview or Run, VIPP checks one representative and
+changes the choice only in one narrow case: an ordinary TIFF reports exactly
+<code>QYX</code>, and the workflow then proves that it needs <code>ZYX</code> for 3D processing. VIPP
+visibly selects <strong>Pages are depth slices (Z stack)</strong>, explains the change, and
+retries the check once.</p>
+<p>That suggestion is useful, but it is not proof that the pages are depth slices.
+Confirm it from the acquisition or another trusted source. If the pages are not
+Z, choose <strong>Use the file's labels unchanged</strong>; VIPP respects that opt-out.
+<strong>Something else (advanced)...</strong> exposes uncommon mappings without making
+novices type an axis expression for the ordinary Z-stack case.</p>
+<p>Once accepted, the friendly choice is saved as the guarded declaration
+<code>QYX -&gt; ZYX</code>. Every item must report the exact same source axes and rank before
+VIPP can apply it. The declaration changes axis names in place: pixel order and
+array shape do not change. <code>Reorder Axes</code> solves a different problem by
+transposing pixels and their metadata; moving Q cannot rename it to Z.</p>
+<p>The declaration also cannot discover the physical distance between slices.
+Verify Z spacing, unit, and origin in <strong>Output Metadata</strong>, and use <code>Set Pixel
+Size / Units</code> when calibration is missing or wrong.</p>
+<p>Automatic is a conservative GUI convenience, not a headless guess. If no
+suggestion was needed, saving stores no declaration and reopening shows <strong>Use
+the file's labels unchanged</strong>. Historic and headless blank configurations behave
+the same way. Once the visible Z-stack suggestion has been accepted, saving and
+headless replay use the concrete <code>QYX -&gt; ZYX</code> decision.</p>
 <h2 id="mark-outputs-explicitly">Mark outputs explicitly<a class="headerlink" href="#mark-outputs-explicitly" title="Permanent link">&para;</a></h2>
 <p><code>Batch Output</code> passes data through during interactive execution and marks one
 specific output for batch saving. It can define a tag, subfolder, filename
@@ -2801,6 +2848,13 @@ again only after confirming the new plan. When there is no current reviewed
 plan - for example, immediately after loading a config or deliberately editing
 a setting - the same Run click uses the fresh plan and starts execution. It does
 not calculate a graph representative first; <strong>Preview batch</strong> remains optional.</p>
+<p>That fresh preflight inspects one representative through the same source-axis
+declarations and scientific axis checks used during execution. The guarded
+<code>QYX</code> to <code>ZYX</code> suggestion can therefore appear from either Preview or Run.
+Other deterministic axis mismatches stop with one concise setup message before
+VIPP creates the output directory, writes run artifacts, or initializes CPU or
+GPU devices. Every later item is still checked when read; one representative is
+not evidence that a collection is uniform.</p>
 <h2 id="save-and-replay-a-configuration">Save and replay a configuration<a class="headerlink" href="#save-and-replay-a-configuration" title="Permanent link">&para;</a></h2>
 <p>When Batch workspace is active, <strong>Save workflow...</strong> offers three choices:</p>
 <ul>
@@ -2823,6 +2877,7 @@ separate, use <strong>Save config...</strong>. It writes a standalone versioned
 <code>vipp_batch_config.json</code> containing:</p>
 <ul>
 <li>source-node bindings, folders, and patterns;</li>
+<li>reviewed source-axis declarations, when present;</li>
 <li>output folder and default image format;</li>
 <li>filename/output declarations and existing-file policy;</li>
 <li>continue-after-failure behavior;</li>
@@ -2831,11 +2886,15 @@ separate, use <strong>Save config...</strong>. It writes a standalone versioned
 <li>the required workflow companion and optional runner;</li>
 <li>the canonical scientific workflow hash.</li>
 </ul>
-<p>Batch config schema 2 stores this compute request. A version-1 config had no
-compute fields and loads as explicit CPU. Loading a config does not silently
-replace the toolbar request; it retains its saved request until the user changes
-a toolbar compute setting, at which point the current complete toolbar request
-is used for the next preview, save, or run.</p>
+<p>Batch config schema 3 stores the compute request and guarded source-axis
+declarations. A version-1 config had no compute fields and loads as explicit
+CPU; a version-2 config retains its saved compute request. Neither older version
+contains an axis declaration, and both are written as version 3 after review and
+save. Their blank declaration displays as <strong>Use the file's labels unchanged</strong>,
+not the automatic policy of a new unsaved row. Loading a config does not
+silently replace the toolbar request; it retains its saved request until the
+user changes a toolbar compute setting, at which point the current complete
+toolbar request is used for the next preview, save, or run.</p>
 <p><strong>Load config...</strong> validates it against the current workflow. A hash or resolved
 output mismatch fails rather than silently applying stale selections.</p>
 <p>The optional <code>vipp_batch_pipeline.py</code> is a thin command-line launcher. It
@@ -2925,11 +2984,14 @@ Every workspace or headless run writes:</p>
 <li>a run-id manifest archive — preserves prior finalized runs;</li>
 <li>a run-id sidecar directory — per-item/output checkpoints during execution.</li>
 </ul>
-<p>The version-2 manifest records:</p>
+<p>The version-3 manifest records:</p>
 <ul>
 <li>canonical workflow/config and their hashes;</li>
 <li>VIPP, Python, and relevant runtime package versions;</li>
 <li>each source identity and available metadata;</li>
+<li>for each source successfully read, its raw axes, effective axes, and applied
+  declaration; the embedded config retains an intended declaration when an item
+  is skipped or fails before reading;</li>
 <li>every planned output path, format, and collision policy;</li>
 <li>errors and item/output states;</li>
 <li>the configured and effective compute requests, whether a CLI/UI override was
@@ -2974,7 +3036,7 @@ not evidence that another assay or naming scheme is valid.</p>
 <li>Output names, formats, subfolders, and collision policy are intentional.</li>
 <li>The fresh preflight matches the reviewed plan.</li>
 <li>The configured and effective compute requests match the intended run, and
-  the version-2 manifest and item execution provenance explain the actual CPU,
+  the version-3 manifest and item execution provenance explain the actual CPU,
   GPU, and fallback decisions. Interactive node badges describe the last
   accepted interactive calculation, not every detached batch item.</li>
 <li>Completed/partial/skipped/cancelled/failed counts match expectations.</li>
@@ -3001,7 +3063,7 @@ not evidence that another assay or naming scheme is valid.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

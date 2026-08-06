@@ -2675,13 +2675,17 @@ changes. Preserve the original file and exact VIPP version, and test a duplicate
 before using it in a consequential analysis.</p>
 <h3 id="optional-batch-workspace-attachment">Optional Batch workspace attachment<a class="headerlink" href="#optional-batch-workspace-attachment" title="Permanent link">&para;</a></h3>
 <p>A 0.13.0a1 workflow can carry an optional top-level <code>batch_config</code>. The
-version-2 attachment contains source bindings, local input/output paths,
-patterns, formats, output policy, run settings, and a complete compute request,
-including runtime/device and accelerator-memory settings. It contains no source
-pixels, calculated arrays, output files, manifests, or item sidecars.</p>
+version-3 attachment contains source bindings, local input/output paths,
+patterns, guarded source-axis declarations, formats, output policy, run
+settings, and a complete compute request, including runtime/device and
+accelerator-memory settings. It contains no source pixels, calculated arrays,
+output files, manifests, or item sidecars.</p>
 <p>A version-1 batch config had no compute request and loads as explicit CPU. It
-saves as version 2 only after validation. VIPP never guesses that an older
-collection run intended to use an accelerator.</p>
+saves as version 3 only after validation. A version-2 config retains its saved
+compute request. Neither older version contains a source-axis declaration, and
+both are written as version 3 only after review and save. VIPP never guesses
+that an older collection run intended to use an accelerator or a different
+axis interpretation.</p>
 <p>The attachment is validated against the containing graph when it is saved and
 loaded. It is deliberately excluded from the scientific workflow hash: changing
 where or how a graph is applied must not create a self-referential hash or imply
@@ -2760,11 +2764,12 @@ materialization. A second exact source-byte recheck immediately before output
 publication is a durable saved-batch guarantee, not a promise for the folder
 convenience or an arbitrary generated-Python array caller.</p>
 <h2 id="batch-artifacts">Batch artifacts<a class="headerlink" href="#batch-artifacts" title="Permanent link">&para;</a></h2>
-<p>A batch run uses either a standalone version-2 <code>vipp_batch_config.json</code> or the
+<p>A batch run uses either a standalone version-3 <code>vipp_batch_config.json</code> or the
 equivalent validated configuration attached to a workflow. It records
-collection bindings, output policy, resolved output declarations, the workflow
-companion, canonical workflow hash, and configured compute request. Preview and
-execution share one deterministic sorted positional pairing and output planner.
+collection bindings, any reviewed source-axis declarations, output policy,
+resolved output declarations, the workflow companion, canonical workflow hash,
+and configured compute request. Preview and execution share one deterministic
+sorted positional pairing and output planner.
 Run always performs a fresh plan-only preflight. A new or deliberately edited
 plan can start in the same click without calculating a representative; an
 unexpectedly changed plan that was already reviewed stops for confirmation.</p>
@@ -2774,9 +2779,27 @@ changing a toolbar compute setting after load replaces that request for the
 next preview/save/run; and CLI arguments overlay only fields actually supplied.
 Unknown node IDs or malformed preferences fail before output artifacts are
 produced.</p>
-<p>Each run writes a latest version-2 manifest, a run-id archive, and item
-sidecars recording software versions, source identities/metadata, hashes,
-planned outputs, policies, errors, and status. The manifest also records the
+<p>The Batch workspace's friendly <strong>Image stack</strong> chooser is a front end to one
+durable declaration. A new unsaved row starts at <strong>Automatic (recommended)</strong>.
+If an ordinary TIFF reports exactly <code>QYX</code> and the representative reaches a
+workflow requirement for <code>ZYX</code>, the GUI can visibly select <strong>Pages are depth
+slices (Z stack)</strong> and retry with <code>QYX -&gt; ZYX</code>. Once resolved, the config stores
+<code>"source_axes": "QYX"</code> and <code>"effective_axes": "ZYX"</code>. An unresolved
+automatic choice stores no declaration; loading that blank value shows <strong>Use
+the file's labels unchanged</strong>, and headless execution does not invent a
+declaration. This keeps old, headless, and deliberately opted-out configs
+conservative.</p>
+<p>The declaration must match the reader-reported axes and rank exactly. It
+changes semantic names in place without moving pixels or changing shape.
+<code>Reorder Axes</code> is separate: it transposes pixels and complete axis records but
+does not rename Q to Z. Existing calibration stays attached by position, so a
+declaration cannot discover a missing Z step, unit, or origin.</p>
+<p>Each run writes a latest version-3 manifest, a run-id archive, and item sidecars
+recording software versions, source identities/metadata, hashes, planned
+outputs, policies, errors, and status. For every source successfully read, the
+manifest records the reader-reported raw axes, the effective axes, and the
+applied declaration; its embedded config retains an intended declaration when
+an item is skipped or fails before reading. The manifest also records the
 configured/effective requests, whether a run override was used, request/config
 fingerprints, and an execution document plus digest for every calculated item.
 Each published output links to that exact item execution. Output promotion is
@@ -2849,7 +2872,7 @@ source identities and calibration evidence with the workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

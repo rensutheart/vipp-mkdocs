@@ -2577,13 +2577,13 @@ interchangeable.</p>
 <td>A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar</td>
 </tr>
 <tr>
-<td>Batch config (version 2)</td>
-<td>Recreate source bindings, output declarations, naming, collision policy, workflow association, and configured compute request</td>
+<td>Batch config (version 3)</td>
+<td>Recreate source bindings, guarded source-axis declarations, output declarations, naming, collision policy, workflow association, and configured compute request</td>
 <td>Input bytes, actual run decisions, finalized outcome</td>
 </tr>
 <tr>
-<td>Batch manifest/archive/sidecars (version 2)</td>
-<td>Audit planned inputs/outputs, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status</td>
+<td>Batch manifest/archive (version 3) and sidecars</td>
+<td>Audit planned inputs/outputs, raw and effective source axes, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status</td>
 <td>One atomic transaction or proof of biological validity</td>
 </tr>
 </tbody>
@@ -2696,12 +2696,15 @@ the embedded schema-4 request.</p>
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 <code>vipp_batch_pipeline.py</code> is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.</p>
-<p>Version-2 configs store the complete configured compute request. Version-1
-configs load as explicit CPU. The runner uses its saved request by default and
-can overlay explicit compute/fallback/per-node CLI choices. <code>--progress</code> prints
-both overall-item and current-operation progress. One <code>Ctrl+C</code> requests normal
-cooperative cancellation and allows manifest/sidecar cleanup; a second is an
-emergency interrupt that can bypass finalization.</p>
+<p>Version-3 configs store the complete configured compute request and any reviewed
+source-axis declarations. Version-1 configs load as explicit CPU; version-2
+configs retain their saved compute request. Both older versions load without
+axis declarations and are written as version 3 after review and save. The runner
+uses its saved request by default and can overlay explicit
+compute/fallback/per-node CLI choices. <code>--progress</code> prints both overall-item and
+current-operation progress. One <code>Ctrl+C</code> requests normal cooperative
+cancellation and allows manifest/sidecar cleanup; a second is an emergency
+interrupt that can bypass finalization.</p>
 <p>The standalone config remains the appropriate form for the supplied headless
 batch runner and for workflows/configs managed as separate automation
 artifacts. An attached config is convenient for reopening the interactive
@@ -2753,7 +2756,7 @@ a manifest, or durable replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

@@ -2369,9 +2369,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#release-candidate" class="md-nav__link">
+  <a href="#current-alpha-release" class="md-nav__link">
     <span class="md-ellipsis">
-      Release candidate
+      Current alpha release
     </span>
   </a>
   
@@ -2414,30 +2414,33 @@
 <p>Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.</p>
-<h2 id="release-candidate">Release candidate<a class="headerlink" href="#release-candidate" title="Permanent link">&para;</a></h2>
+<h2 id="current-alpha-release">Current alpha release<a class="headerlink" href="#current-alpha-release" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="0.13.0a1/">0.13.0a1</a> — evidence-gated
   <strong>Auto / CPU / Prefer GPU / Custom</strong> execution, durable compute provenance and
   cancellation across interactive and automated surfaces, workflow tabs, new
   scientific nodes, and extensive correctness/UI fixes.</li>
 </ul>
-<p>This nightly entry is the prepared release manual. It becomes the stable,
-numbered release documentation only after the matching application tag/package
-and manual snapshot are published. Application commit
-<a href="https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1"><code>c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1</code></a>
-is the prepared source candidate and passed the complete package and
-cross-platform test
-<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31094506727">matrix</a>.
+<p>The alpha is published on
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1">GitHub</a> and
+<a href="https://pypi.org/project/napari-vipp/0.13.0a1/">PyPI</a>. Its immutable
+<code>v0.13.0a1</code> tag resolves to application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6"><code>7520a5bb3ea9fe296bb231c63d1598b833ac10f6</code></a>,
+which passed the complete package and cross-platform test
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31112153743">matrix</a>.
 The earlier <code>e024409</code> and <code>444f682</code> checkpoints remain historical evidence;
-their artifacts must not be uploaded. The final tag, fresh release artifacts,
-publication, numbered documentation, and post-publication checks remain
-pending.</p>
-<p>0.13.0a1 writes workflow schema 4 and batch config/manifest schema 2. Valid
+their artifacts must not be uploaded. The exact final artifact hashes are in
+the <a href="0.13.0a1/#release-verification">0.13.0a1 release verification</a>.</p>
+<p>0.13.0a1 writes workflow schema 4 and batch config/manifest schema 3. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;
-VIPP does not infer that an older analysis intended GPU execution. Workflow
-files do not contain cached results. Recalculate and validate after upgrading,
-and regenerate any Python export because generated programs require the exact
-VIPP runtime version that created them.</p>
+version-2 batch configs retain their saved compute request. Neither older batch
+version contains source-axis declarations until reviewed and saved as version
+3. The new Batch workspace <strong>Image stack</strong> choice can make one guarded,
+visible <code>QYX -&gt; ZYX</code> suggestion when the workflow proves that a generic TIFF
+page dimension must be Z; it never moves pixels or invents calibration.
+Workflow files do not contain cached results. Recalculate and validate after
+upgrading, and regenerate any Python export because generated programs require
+the exact VIPP runtime version that created them.</p>
 <h2 id="previous-releases">Previous releases<a class="headerlink" href="#previous-releases" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
@@ -2480,7 +2483,7 @@ an older workflow in a newer release.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 10:54:03 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     

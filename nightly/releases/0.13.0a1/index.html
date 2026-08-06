@@ -691,6 +691,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#clear-tiff-page-interpretation-for-batches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear TIFF page interpretation for batches
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#workflow-and-interface-changes" class="md-nav__link">
     <span class="md-ellipsis">
       Workflow and interface changes
@@ -709,9 +718,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prepared-release-candidate-verification" class="md-nav__link">
+  <a href="#release-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Prepared release-candidate verification
+      Release verification
     </span>
   </a>
   
@@ -2563,6 +2572,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#clear-tiff-page-interpretation-for-batches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear TIFF page interpretation for batches
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#workflow-and-interface-changes" class="md-nav__link">
     <span class="md-ellipsis">
       Workflow and interface changes
@@ -2581,9 +2599,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prepared-release-candidate-verification" class="md-nav__link">
+  <a href="#release-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Prepared release-candidate verification
+      Release verification
     </span>
   </a>
   
@@ -2665,9 +2683,8 @@
 
 
 <h1 id="vipp-0130a1">VIPP 0.13.0a1<a class="headerlink" href="#vipp-0130a1" title="Permanent link">&para;</a></h1>
-<p><strong>Release preparation:</strong> source candidate and bounded Windows acceptance
-complete; final tag, upload artifacts, publication, numbered documentation,
-and post-publication checks pending</p>
+<p><strong>Release:</strong> <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1">GitHub alpha pre-release</a>
+and <a href="https://pypi.org/project/napari-vipp/0.13.0a1/">PyPI package</a></p>
 <p><strong>Maturity:</strong> Alpha pre-release</p>
 <p>VIPP 0.13.0a1 is the first substantial GPU-acceleration alpha. It adds an
 evidence-gated CPU/CUDA execution architecture, makes the same compute request
@@ -2687,10 +2704,12 @@ choice, or a typed failure according to the exact rejection and policy.</p>
 schema-3 workflow loads with an explicit <strong>CPU</strong> request so upgrading cannot
 silently move an older analysis to a GPU. Saving it in 0.13 writes schema 4.
 Schemas 1 and 2 remain rejected.</p>
-<p>Batch configuration and manifest schemas are now version 2. A version-1
-batch config loads as an explicit CPU request. Generated Python remains
-locked to the exact VIPP version that created it; regenerate and revalidate
-every export under 0.13.0a1.</p>
+<p>Batch configuration and manifest schemas are now version 3. A version-1
+batch config loads with an explicit CPU request; a version-2 config keeps
+its saved compute request. Both older versions load without source-axis
+declarations and become version 3 only when reviewed and saved. Generated
+Python remains locked to the exact VIPP version that created it; regenerate
+and revalidate every export under 0.13.0a1.</p>
 </div>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2719,6 +2738,9 @@ every export under 0.13.0a1.</p>
 <li>Carry compute intent and exact actual-run provenance through Batch workspace,
   the saved batch runner, generated Python/CLI, and generated-CLI output
   publication.</li>
+<li>Review ordinary TIFF page meaning through a source-specific <strong>Image stack</strong>
+  choice. A narrow automatic <code>QYX -&gt; ZYX</code> suggestion replaces repeated
+  technical errors when the graph proves that those pages must be depth slices.</li>
 <li>Work with several independent live workflows through movable tabs without
   replacing another graph or its caches, undo history, inspector state, or
   Batch workspace.</li>
@@ -2854,13 +2876,14 @@ to the shared headless executor. They preserve:</p>
   progress for collection batch runs; and</li>
 <li>cooperative cancellation, synchronization, cleanup, and publication status.</li>
 </ul>
-<p>A version-2 batch manifest stores the configured and effective requests, the
-override status and fingerprints, and an execution document/digest for every
-calculated item. Published output records link to that exact item execution.
+<p>A version-3 batch manifest stores the configured and effective requests, the
+override status and fingerprints, raw and effective source axes, the applied
+axis declaration, and an execution document/digest for every calculated item.
+Published output records link to that exact item execution.
 The saved <code>vipp_batch_pipeline.py</code> runner accepts explicit compute overrides,
 prints both progress streams with <code>--progress</code>, and returns exit code <code>130</code>
 after cooperative cancellation.</p>
-<p>Workflow schema 4, batch config schema 2, saved runners, and generated CLIs
+<p>Workflow schema 4, batch config schema 3, saved runners, and generated CLIs
 serialize Prefer GPU as <code>prefer_gpu</code>. Per-node preferences are preserved for a
 later return to Custom but do not affect Prefer-GPU planning. A CLI mode
 override to <code>prefer_gpu</code> supplies visible fallback when no fallback override is
@@ -2904,6 +2927,28 @@ transactionally commits the requested output/sidecar set. It does not provide
 the saved runner's multi-source pairing, collision plan, final source recheck
 immediately before publication, checkpoints, manifest, or durable replay/resume
 guarantees. Use the saved batch runner for production collection processing.</p>
+<h2 id="clear-tiff-page-interpretation-for-batches">Clear TIFF page interpretation for batches<a class="headerlink" href="#clear-tiff-page-interpretation-for-batches" title="Permanent link">&para;</a></h2>
+<p>Some ordinary TIFF files call their page dimension the generic <code>Q</code> without
+saying whether those pages are depth slices, time points, or something else.
+Each collection source in Batch workspace now has a plain-language <strong>Image
+stack</strong> choice. A new unsaved source begins at <strong>Automatic (recommended)</strong>;
+<strong>Something else (advanced)...</strong> remains out of the way unless deliberately
+selected.</p>
+<p>VIPP does not blindly rename Q as Z. Only when a representative reports exactly
+<code>QYX</code> and a workflow step explicitly requires <code>ZYX</code> does the workspace select
+<strong>Pages are depth slices (Z stack)</strong>, retry the check, and show one short notice
+explaining the change. Choose <strong>Use the file's labels unchanged</strong> to opt out;
+that decision is respected for the source instead of suggesting Z again.</p>
+<p>The resulting <code>QYX -&gt; ZYX</code> declaration changes semantic labels in place. It
+does not transpose pixels and does not discover a missing Z spacing. Before a
+run creates its output folder, artifacts, or GPU context, a representative
+scientific preflight applies the declaration and checks the graph's axis
+contract. Every later item must still match the declaration when read.</p>
+<p>Saving after the guarded suggestion resolves records the exact declaration in
+version-3 config. Saving a source for which Automatic needed no change records
+no declaration. Historic version-1 and version-2 configs also load without a
+declaration and are never automatically reinterpreted; review and save them as
+version 3 to record an intentional choice.</p>
 <h2 id="workflow-and-interface-changes">Workflow and interface changes<a class="headerlink" href="#workflow-and-interface-changes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Workflow tabs retain independent graphs, results, caches, histories,
@@ -2996,13 +3041,39 @@ revised values in a consequential analysis. The recorded
 certification; tables separately record
 <code>coloc_validation_status=experimental_source_aligned_golden_parity_pending</code>.</p>
 </div>
-<h2 id="prepared-release-candidate-verification">Prepared release-candidate verification<a class="headerlink" href="#prepared-release-candidate-verification" title="Permanent link">&para;</a></h2>
-<p>The source prepared for publication is application commit
-<a href="https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1"><code>c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1</code></a>
+<h2 id="release-verification">Release verification<a class="headerlink" href="#release-verification" title="Permanent link">&para;</a></h2>
+<p>The immutable
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1"><code>v0.13.0a1</code></a>
+tag resolves to application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6"><code>7520a5bb3ea9fe296bb231c63d1598b833ac10f6</code></a>
 on <code>main</code>. Its exact-source
-<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31094506727">CI run</a>
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31112153743">CI run</a>
 passed package, manifest, lint, distribution-metadata, installed-wheel smoke,
 and CPython 3.12 and 3.13 tests on Windows, Linux, and macOS.</p>
+<p>The exact source's complete native-Windows local suite completed with <strong>4,077
+passed, 2 skipped, 2 documented expected failures, 83 warnings, and zero
+failures</strong>. The skips are the opt-in real-CUDA tests and the expected failures
+are the documented CuPy integer-parity gaps.</p>
+<p>The final tagged artifacts published through PyPI and attached to the GitHub
+pre-release are:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>napari_vipp-0.13.0a1-py3-none-any.whl</code></td>
+<td><code>C157D2D0E5909A76A1A6093493AB17A245682DF53D83DD0A23FAA0FDF7A3BE02</code></td>
+</tr>
+<tr>
+<td><code>napari_vipp-0.13.0a1.tar.gz</code></td>
+<td><code>E3231CF22EA2907C3FE05F73477E5E3CD3B10FF2A053BBA92A8045D140E7F7E0</code></td>
+</tr>
+</tbody>
+</table>
 <p>The bundled synthetic-volume example was also launched from a clean,
 non-editable, release-style Windows environment, and the operator explicitly
 accepted its appearance. A separate headless Prefer-GPU smoke selected
@@ -3010,11 +3081,10 @@ accepted its appearance. A separate headless Prefer-GPU smoke selected
 returned a <code>(31, 37)</code> native-<code>uint16</code> result, and reported clean accelerator
 cleanup. These are bounded checks of one example and one declared cuCIM region,
 not broad manual GUI, reader, filesystem, hardware, or assay qualification.</p>
-<p>The source-candidate CI distributions are qualification outputs, not the files
-to upload. The final tag, fresh wheel and source distribution with recorded
-hashes, manual Twine upload, GitHub pre-release, numbered documentation
-snapshot, and post-publication installation checks remain deliberately
-pending. Historical artifacts listed below must not be reused.</p>
+<p>The source-candidate CI distributions were qualification outputs, not the files
+published above. The final wheel and source distribution were built afresh from
+the immutable tagged source. Historical artifacts listed below must not be
+reused.</p>
 <h2 id="historical-pre-prefer-gpu-candidate-verification">Historical pre-Prefer-GPU candidate verification<a class="headerlink" href="#historical-pre-prefer-gpu-candidate-verification" title="Permanent link">&para;</a></h2>
 <p>The earlier prepared application candidate was commit
 <code>e02440989001f05ca17c845e3113ee2537a66c77</code>. Its full local suite completed with
@@ -3117,11 +3187,10 @@ checkpoint commit are:</p>
 </tbody>
 </table>
 <p>These files are superseded checkpoint artifacts, not release candidates or a
-published release. They must not be uploaded for 0.13.0a1. The prepared source
-candidate is <code>c2e88f8</code>, as recorded above; its final tagged artifacts must be
-built afresh, hashed, qualified, and used for Twine/GitHub publication. The
-tag, numbered documentation, publication, and post-publication checks remain
-pending.</p>
+published release. They must not be uploaded for 0.13.0a1. The selected release
+source is <code>7520a5b</code>, and its final tagged artifacts and hashes are recorded in
+<a href="#release-verification">release verification</a>. Only those final files belong on
+PyPI and the GitHub pre-release.</p>
 <h3 id="refreshed-rtx-5090-deconvolution-screen">Refreshed RTX 5090 deconvolution screen<a class="headerlink" href="#refreshed-rtx-5090-deconvolution-screen" title="Permanent link">&para;</a></h3>
 <p>The bounded RTX 5090 refresh recorded these transfer-inclusive timings:</p>
 <table>
@@ -3186,8 +3255,10 @@ validation.</p>
 <li>Save only after review; the duplicate becomes schema 4. Keep the original
    schema-3 file unchanged for provenance.</li>
 <li>Recreate or load the Batch workspace. A version-1 batch config becomes an
-   explicit CPU request; review and save it as version 2 before using GPU
-   execution.</li>
+   explicit CPU request and a version-2 config retains its saved compute
+   request. Both lack source-axis declarations. Review <strong>Image stack</strong> for each
+   collection source and save as version 3 before relying on a <code>QYX -&gt; ZYX</code>
+   interpretation or GPU execution.</li>
 <li>Regenerate exported Python and the saved batch runner under 0.13.0a1. An old
    generated program refuses the new runtime by design.</li>
 <li>Run a fresh batch preflight, exercise cancellation on non-critical data,
@@ -3257,7 +3328,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 10:54:03 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
   </span>
 
     
