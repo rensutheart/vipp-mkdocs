@@ -713,6 +713,8 @@
       
         
       
+        
+      
     
     
     
@@ -771,6 +773,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install CUDA on Windows
     
   </span>
   
@@ -2572,16 +2597,17 @@ tag/package and documentation snapshot are published. Until then, stable still
 points to the previous public release. See
 <a href="../../getting-started/installation/">installation</a> and the
 <a href="../../releases/0.13.0a1/">0.13.0a1 release notes</a>.</p>
-<p>The previously prepared <code>e024409</code> candidate predates Prefer GPU and is now a
-historical checkpoint, not the release source. The later automated checkpoint
-is
-<a href="https://github.com/rensutheart/napari-vipp/commit/444f68290fe4359b05c68a027d3ae0a413412fe5"><code>444f68290fe4359b05c68a027d3ae0a413412fe5</code></a>.
-Its full local suite and package/artifact checks passed, and its exact hashes are
-recorded in the <a href="../../releases/0.13.0a1/#historical-prefer-gpu-automated-checkpoint-superseded">release notes</a>.
-Later compute-lifecycle, optimizer, source-loading, and generated-CLI hardening
-changed the application, so <code>444f682</code> and its artifacts are superseded and must
-not be treated as the current candidate or uploaded for release. A new immutable
-candidate, final tag, and publication checks remain pending.</p>
+<p>The prepared application source candidate is
+<a href="https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1"><code>c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1</code></a>.
+Its package checks and CPython 3.12/3.13 tests on Windows, Linux, and macOS
+passed in the exact-source
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31094506727">CI run</a>.
+The previously prepared <code>e024409</code> and <code>444f682</code> checkpoints are historical,
+not release sources; their hashes remain in the
+<a href="../../releases/0.13.0a1/#historical-prefer-gpu-automated-checkpoint-superseded">release notes</a>
+only to prevent accidental reuse. The final tag, freshly built and hashed
+release artifacts, publication, numbered manual snapshot, and post-publication
+checks remain pending.</p>
 <p>The <code>main</code>/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.</p>
 <h2 id="match-software-and-manual">Match software and manual<a class="headerlink" href="#match-software-and-manual" title="Permanent link">&para;</a></h2>
@@ -2704,21 +2730,23 @@ mapping choices for affected operations and strengthens source/grid behavior.</p
 reference for manual reconstruction, but do not claim numerical equivalence
 without testing it.</p>
 <h2 id="install-a-release">Install a release<a class="headerlink" href="#install-a-release" title="Permanent link">&para;</a></h2>
-<p>Because alpha releases are pre-releases, use:</p>
+<p>To ask pip to choose the latest unpinned alpha, use:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install &quot;napari[pyqt6]&quot;
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python -m pip install --pre napari-vipp
 </span></code></pre></div>
-<p>To reproduce a specific alpha exactly, specify the version in a fresh environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install --pre &quot;napari[pyqt6]&quot; &quot;napari-vipp==0.13.0a1&quot;
+<p>To reproduce a specific alpha exactly, specify the version in a fresh
+environment. An exact prerelease does not need <code>--pre</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp==0.13.0a1&quot;
 </span></code></pre></div>
 <p>For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install --pre &quot;napari[pyqt6]&quot; &quot;napari-vipp[gpu-cuda13]==0.13.0a1&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp[gpu-cuda13]==0.13.0a1&quot;
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vipp-compute-doctor --track cuda13
 </span></code></pre></div>
 <p>The extra installs a reproducible CUDA/CuPy track; it does not make an
 unqualified GPU, driver, OS, or scientific stack scientifically admitted.
 Never install both CUDA-major extras into one environment. See
-<a href="../../getting-started/installation/#optional-nvidia-cuda-acceleration">installation</a>.</p>
+<a href="../../getting-started/installation/#optional-nvidia-cuda-acceleration">installation</a>
+and the <a href="../../getting-started/windows-cuda/">64-bit Windows CUDA guide</a>.</p>
 <h2 id="nightly-policy">Nightly policy<a class="headerlink" href="#nightly-policy" title="Permanent link">&para;</a></h2>
 <p>Nightly documentation may describe work not yet available from PyPI and can
 change without migration support. If unreleased behavior contributes to an
@@ -2744,7 +2772,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 10:54:03 UTC">August 6, 2026</span>
   </span>
 
     

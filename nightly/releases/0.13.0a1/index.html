@@ -709,13 +709,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pre-prefer-gpu-candidate-verification" class="md-nav__link">
+  <a href="#prepared-release-candidate-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Pre-Prefer-GPU candidate verification
+      Prepared release-candidate verification
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pre-Prefer-GPU candidate verification">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-pre-prefer-gpu-candidate-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical pre-Prefer-GPU candidate verification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Historical pre-Prefer-GPU candidate verification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -867,6 +876,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +936,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install CUDA on Windows
     
   </span>
   
@@ -2547,13 +2581,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pre-prefer-gpu-candidate-verification" class="md-nav__link">
+  <a href="#prepared-release-candidate-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Pre-Prefer-GPU candidate verification
+      Prepared release-candidate verification
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pre-Prefer-GPU candidate verification">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-pre-prefer-gpu-candidate-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical pre-Prefer-GPU candidate verification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Historical pre-Prefer-GPU candidate verification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2622,8 +2665,9 @@
 
 
 <h1 id="vipp-0130a1">VIPP 0.13.0a1<a class="headerlink" href="#vipp-0130a1" title="Permanent link">&para;</a></h1>
-<p><strong>Target release:</strong> automated candidate qualified; manual Prefer-GPU UI
-acceptance, tag, and publication pending</p>
+<p><strong>Release preparation:</strong> source candidate and bounded Windows acceptance
+complete; final tag, upload artifacts, publication, numbered documentation,
+and post-publication checks pending</p>
 <p><strong>Maturity:</strong> Alpha pre-release</p>
 <p>VIPP 0.13.0a1 is the first substantial GPU-acceleration alpha. It adds an
 evidence-gated CPU/CUDA execution architecture, makes the same compute request
@@ -2711,8 +2755,9 @@ workloads, but an explicit <code>Convert Dtype</code> node remains a scientific 
 decision—not an optimizer rewrite.</p>
 <p>The standard <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX track. It does
 not distribute the separately reviewed cuCIM build, so Rolling-Ball/Subtract
-Background and the basic measurement candidates normally remain CPU after the
-ordinary public GPU install. See the
+Background and the basic measurement candidates remain CPU after the ordinary
+public GPU install unless the user completes the pinned local-build route. See
+the <a href="../../getting-started/windows-cuda/">Windows CUDA and cuCIM guide</a> and the
 <a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">readable first-region summary</a>
 for dtypes, dimensionalities, parameter profiles, and common CPU decisions.</p>
 <p>The first public CUDA admission record is intentionally exact: native Windows,
@@ -2724,11 +2769,15 @@ Native Linux and RTX 40-series Windows qualification remain pending; macOS has
 no CUDA provider and remains CPU-only while Apple-accelerator research is
 pending. A bounded M1 Max CPU smoke is recorded below; it does not admit an
 Apple GPU provider.</p>
-<p>cuCIM-backed operation regions are also gated independently. The current native
-Windows evidence uses a checksum-recorded source-built <code>cucim.skimage</code> wheel;
-there is no general public Windows cuCIM install extra, and the wheel does not
-contain Clara whole-slide I/O. A feature-complete, maintainable cuCIM/Clara
-route remains planned work.</p>
+<p>cuCIM-backed operation regions are also gated independently. VIPP distributes
+no cuCIM wheel. Windows users may instead build the exact cuCIM 26.6.0
+tag/commit with the release's fixed recipe and install their private artifact
+through the manifest-verifying existing-environment helper. Each locally built
+wheel receives its own verified file digest, while policy pins the installed
+payload and source/recipe provenance. The build omits Clara whole-slide I/O.
+For 0.13.0a1 this private per-user rebuild is the settled distribution route;
+VIPP does not host or redistribute the wheel. See the
+<a href="../../getting-started/windows-cuda/">Windows CUDA and cuCIM guide</a>.</p>
 <p>See <a href="../../getting-started/installation/">installation</a> for the base and optional
 CUDA commands, and <a href="../../reference/validation-status/">validation status</a> for
 the evidence boundary.</p>
@@ -2947,7 +2996,26 @@ revised values in a consequential analysis. The recorded
 certification; tables separately record
 <code>coloc_validation_status=experimental_source_aligned_golden_parity_pending</code>.</p>
 </div>
-<h2 id="pre-prefer-gpu-candidate-verification">Pre-Prefer-GPU candidate verification<a class="headerlink" href="#pre-prefer-gpu-candidate-verification" title="Permanent link">&para;</a></h2>
+<h2 id="prepared-release-candidate-verification">Prepared release-candidate verification<a class="headerlink" href="#prepared-release-candidate-verification" title="Permanent link">&para;</a></h2>
+<p>The source prepared for publication is application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1"><code>c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1</code></a>
+on <code>main</code>. Its exact-source
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31094506727">CI run</a>
+passed package, manifest, lint, distribution-metadata, installed-wheel smoke,
+and CPython 3.12 and 3.13 tests on Windows, Linux, and macOS.</p>
+<p>The bundled synthetic-volume example was also launched from a clean,
+non-editable, release-style Windows environment, and the operator explicitly
+accepted its appearance. A separate headless Prefer-GPU smoke selected
+<code>cucim-subtract_background-v2</code> for Subtract Background without fallback,
+returned a <code>(31, 37)</code> native-<code>uint16</code> result, and reported clean accelerator
+cleanup. These are bounded checks of one example and one declared cuCIM region,
+not broad manual GUI, reader, filesystem, hardware, or assay qualification.</p>
+<p>The source-candidate CI distributions are qualification outputs, not the files
+to upload. The final tag, fresh wheel and source distribution with recorded
+hashes, manual Twine upload, GitHub pre-release, numbered documentation
+snapshot, and post-publication installation checks remain deliberately
+pending. Historical artifacts listed below must not be reused.</p>
+<h2 id="historical-pre-prefer-gpu-candidate-verification">Historical pre-Prefer-GPU candidate verification<a class="headerlink" href="#historical-pre-prefer-gpu-candidate-verification" title="Permanent link">&para;</a></h2>
 <p>The earlier prepared application candidate was commit
 <code>e02440989001f05ca17c845e3113ee2537a66c77</code>. Its full local suite completed with
 3,722 passed, 2 skipped, and 2 documented expected failures. Package/manifest,
@@ -3049,10 +3117,11 @@ checkpoint commit are:</p>
 </tbody>
 </table>
 <p>These files are superseded checkpoint artifacts, not release candidates or a
-published release. They must not be uploaded for 0.13.0a1. A new immutable
-candidate must be named and rebuilt from the final source, then pass the full
-suite, packaging, artifact, manual-acceptance, tag, publication, documentation,
-and post-publication checks.</p>
+published release. They must not be uploaded for 0.13.0a1. The prepared source
+candidate is <code>c2e88f8</code>, as recorded above; its final tagged artifacts must be
+built afresh, hashed, qualified, and used for Twine/GitHub publication. The
+tag, numbered documentation, publication, and post-publication checks remain
+pending.</p>
 <h3 id="refreshed-rtx-5090-deconvolution-screen">Refreshed RTX 5090 deconvolution screen<a class="headerlink" href="#refreshed-rtx-5090-deconvolution-screen" title="Permanent link">&para;</a></h3>
 <p>The bounded RTX 5090 refresh recorded these transfer-inclusive timings:</p>
 <table>
@@ -3140,11 +3209,15 @@ validation.</p>
   2D or 3D. Numeric and oversized 2D/3D calls retain CPU, while a Boolean call
   with another or unresolved spatial rank is a typed non-CPU preflight failure
   in this alpha; select CPU for that case.</li>
-<li>Native Linux GPU, RTX 40-series Windows, Apple M1 Max acceleration, and a
-  distributable feature-complete cuCIM/Clara route remain future validation.
-  The bounded M1 Max CPU launch/basic-processing, batch-cancellation, and
-  memory-presentation smoke does not close those accelerator or broad-host
-  gaps.</li>
+<li>Native Linux GPU, RTX 40-series Windows, and Apple M1 Max acceleration remain
+  future validation. Clara whole-slide I/O is outside the private Windows cuCIM
+  build and no feature-complete cuCIM/Clara distribution is provided. The
+  bounded M1 Max CPU launch/basic-processing, batch-cancellation, and memory-
+  presentation smoke does not close those accelerator or broad-host gaps.</li>
+<li>The cuCIM provider is an optional pinned local build, not a distributed
+  Windows dependency. Users who do not complete its manifest-verified setup
+  intentionally leave the affected background and basic-measurement nodes on
+  CPU.</li>
 <li>Batch pairing remains local-file, sorted-position pairing. VIPP does not yet
   iterate semantic T/C/Z combinations or discover plate/well/field HCS layouts.</li>
 <li>Item checkpoints are a recovery trail, not automatic resume. Artifact
@@ -3184,7 +3257,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 07:04:55 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 10:54:03 UTC">August 6, 2026</span>
   </span>
 
     

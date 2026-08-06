@@ -713,6 +713,8 @@
       
         
       
+        
+      
     
     
     
@@ -771,6 +773,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install CUDA on Windows
     
   </span>
   
@@ -1954,6 +1979,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prepared-0130a1-source-candidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepared 0.13.0a1 source candidate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#do-not-generalize-this-evidence-into" class="md-nav__link">
     <span class="md-ellipsis">
       Do not generalize this evidence into
@@ -2442,6 +2476,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prepared-0130a1-source-candidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepared 0.13.0a1 source candidate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#do-not-generalize-this-evidence-into" class="md-nav__link">
     <span class="md-ellipsis">
       Do not generalize this evidence into
@@ -2535,6 +2578,42 @@ every assay.</p>
 <li>opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.</li>
 </ul>
+<h2 id="prepared-0130a1-source-candidate">Prepared 0.13.0a1 source candidate<a class="headerlink" href="#prepared-0130a1-source-candidate" title="Permanent link">&para;</a></h2>
+<p>The source prepared for publication is application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1"><code>c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1</code></a>
+on <code>main</code>. Its exact-source
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31094506727">CI run</a>
+passed package, manifest, lint, distribution-metadata, installed-wheel smoke,
+and CPython 3.12 and 3.13 tests on Windows, Linux, and macOS. The CI-built
+distributions are qualification outputs, not publication artifacts.</p>
+<p>On native Windows, the last complete local suite before the final queued-work
+synchronization hardening passed <strong>3,999 tests</strong>, with <strong>2 skipped</strong> and <strong>2
+documented expected failures</strong>. The complete 622-test widget module and focused
+debounce, queued-output, axis, save/export, packaging, setup-helper, and
+benchmark-evidence tests passed after the scoped changes. The exact current
+source was then covered by the cross-platform CI matrix above.</p>
+<p>The bundled synthetic-volume example was launched from a clean, non-editable,
+release-style Windows environment, and the operator explicitly accepted its
+appearance. A separate headless Prefer-GPU smoke selected
+<code>cucim-subtract_background-v2</code> for Subtract Background without fallback,
+returned a <code>(31, 37)</code> native-<code>uint16</code> result, and reported clean accelerator
+cleanup. This is bounded evidence for one example and one declared cuCIM
+operation region, not broad manual GUI, reader, filesystem, hardware, or assay
+qualification.</p>
+<p>The pinned private Windows cuCIM route was exercised against upstream tag
+<code>v26.06.00</code> at commit
+<code>3c15781c207eab93a317dd9803a6e726fe01f7c4</code>. Two clean builds from the exact
+41-distribution no-dependency lock produced byte-identical wheel files and the
+policy-pinned canonical payload
+<code>d640d1e17bcce15d32d03841997252bf915b63da855e406c35f0d70c5a5ea667</code>.
+Metadata, licenses, exact file inventory, install-helper admission, <code>pip check</code>,
+and a real GPU import/runtime probe passed. This locally built wheel remains
+private: VIPP neither ships nor hosts it, and each user must repeat the pinned
+build for their own environment.</p>
+<p>The final tag, fresh release wheel and source distribution with recorded
+hashes, manual Twine upload, GitHub pre-release, numbered documentation
+snapshot, and post-publication installation checks remain pending. Historical
+artifacts below must not be uploaded.</p>
 <p>The earlier pre-Prefer-GPU candidate at application commit <code>e024409</code> passed
 package/manifest, lint, and CPython 3.12 and 3.13 CI on Linux, Windows, and
 macOS. The candidate
@@ -2570,9 +2649,10 @@ still pending.</p>
 <li>source distribution:
   <code>00fcb15452d3ed71d344859d4306cbcdcc458686959169a2c47485d8f7abec9b</code>.</li>
 </ul>
-<p>These artifacts must not be uploaded for 0.13.0a1. A new immutable candidate,
-full verification run, package artifacts, tag, publication, and
-post-publication checks remain pending. See the
+<p>These artifacts must not be uploaded for 0.13.0a1. They are superseded by the
+prepared <code>c2e88f8</code> source candidate above. The final tag, freshly built and
+hashed release artifacts, publication, and post-publication checks remain
+pending. See the
 <a href="../../releases/0.13.0a1/#historical-prefer-gpu-automated-checkpoint-superseded">release notes</a>
 for the historical artifact table.</p>
 <p>A bounded source-candidate smoke on 4 August 2026 used application commit
@@ -2605,8 +2685,9 @@ broad Windows/GPU qualification.</p>
 skipped</strong>, <strong>2 documented expected failures</strong>, and 83 warnings. The two final
 real-CUDA durable execution tests passed when enabled. These numbers describe
 that earlier candidate checkout. Preserve them as historical evidence, but do
-not use them as final-release counts; add the final tagged commit's CI and
-artifact-smoke results before publication.</p>
+not use them as final-release counts. Use the prepared-candidate results above
+for source qualification, then record exact tagged-artifact smokes before
+publication.</p>
 <p>The recorded native-Windows RTX 5090 evidence records operation-level
 scientific parity, memory, progress/cancellation, cleanup, and timing for the
 declared public GPU regions. The source-candidate timing refresh measured
@@ -2669,8 +2750,8 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Compute/GPU execution</td>
-<td>Exact operation-region tests, immutable policy/evidence records, the historical/superseded <code>444f682</code> checkpoint with 3,754 passing tests and zero failures, its clean wheel/sdist plus manifest/resource checks, a real RTX 5090 Prefer-GPU placement/parity/cleanup test, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes</td>
-<td>Name and fully verify a new immutable candidate after current hardening; rebuild clean artifacts; repeat release-candidate manual acceptance and tag/publication checks; native Linux, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, Apple-provider study, and broader cross-platform manual GUI acceptance</td>
+<td>Exact operation-region tests, immutable policy/evidence records, prepared source candidate <code>c2e88f8</code> with a green package/cross-platform CI matrix, a qualified private local cuCIM rebuild, real RTX 5090 Prefer-GPU placement/parity/cleanup and performance checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes</td>
+<td>Build and hash exact tagged artifacts; complete publication and post-publication checks; qualify native Linux GPU, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, an Apple provider if pursued, and broader cross-platform manual GUI acceptance</td>
 </tr>
 <tr>
 <td>Sources and physical grids</td>
@@ -2714,8 +2795,14 @@ same as an external comparison or assay validation. The distinction matters:</p>
   bounded M1 Max CPU smoke above does not admit an Apple accelerator.
   The <a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">CPU/GPU matrix</a> is a
   readable summary; the runtime policy/decision remains authoritative.</li>
-<li>cuCIM's source-built Windows <code>skimage</code> wheel is not a general install route
-  and omits Clara I/O. Feature-complete cuCIM packaging remains pending.</li>
+<li>cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
+  wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
+  recipe. Admission verifies that build's wheel-file hash, the policy-pinned
+  canonical installed payload, source/recipe provenance, and the existing
+  scientific environment/workload gates. This private per-user rebuild is the
+  settled 0.13.0a1 route; VIPP will not host or redistribute the wheel. Clara
+  whole-slide I/O remains outside that build. See the
+  <a href="../../getting-started/windows-cuda/">Windows CUDA guide</a>.</li>
 <li>Batch processing is local-file and sorted-position oriented. It does not
   iterate selected T/C/Z combinations or discover plate/well/field structure.</li>
 <li>Many operations are eager even when a source format supports lazy/chunked
@@ -2759,7 +2846,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 5, 2026 18:10:58 UTC">August 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 10:54:03 UTC">August 6, 2026</span>
   </span>
 
     
