@@ -2681,7 +2681,7 @@ every export under 0.13.0a1.</p>
 <li>Choose Low, Standard, High, or Very High thumbnail backing detail independently of exact
   Stack contrast scope; use exact integer Percentile histograms and native
   Min-max reductions with conservative adaptive CPU/CuPy routing, separate
-  per-node contrast-status footers, truthful progress, cooperative cancellation,
+  selected-node inspector status, truthful progress, cooperative cancellation,
   and visible presentation fallback.</li>
 <li>Use new <strong>Sigma Filter</strong>, <strong>ImageJ Auto Threshold (8-bit)</strong>,
   <strong>Colocalization Scatter Plot</strong>, and <strong>Masked Colocalization Scatter Plot</strong>
@@ -2879,9 +2879,9 @@ guarantees. Use the saved batch runner for production collection processing.</p>
   Stack remains full-output and resolution-independent: <code>uint8</code>/<code>uint16</code>
   Percentile uses an exact native-dtype histogram instead of sorting a float
   copy, while Min-max uses an exact native reduction.</li>
-<li>Presentation statistics have separate Auto/CPU/Prefer-GPU control and slim
-  preview-local contrast-status footers. Auto routes per result by full output
-  dtype/bytes
+<li>Presentation statistics have separate Auto/CPU/Prefer-GPU control and a
+  compact selected-node <code>Thumbnail contrast</code> inspector row. Auto routes per
+  result by full output dtype/bytes
   at conservative cold crossovers of 384 MiB for <code>uint8</code> and 512 MiB for
   <code>uint16</code>, or 32 MiB once warm—not thumbnail resolution. These measured
   defaults are heuristics rather than universal fastest guarantees. Main CPU
@@ -2892,10 +2892,11 @@ guarantees. Use the saved batch runner for production collection processing.</p>
   the shared toolbar and support cooperative cancellation. CPU integer work
   stops between bounded chunks; an active GPU kernel/synchronization or exact
   float/other-dtype NumPy percentile can contain a non-interruptible inner pass.
-  Safe GPU failure is shown as <code>Contrast · CPU fallback</code>, failure of both paths
-  as <code>Contrast · error</code>, and presentation decisions never overwrite the
-  scientific CPU/CuPy/cuCIM badge or provenance. These muted status footers sit
-  below rather than over the thumbnail.</li>
+  Safe GPU failure is shown as <code>CPU fallback</code>, and failure of both paths as
+  <code>Error</code>, in the selected node's compact <code>Thumbnail contrast</code> inspector row.
+  Presentation decisions never overwrite the scientific CPU/CuPy/cuCIM badge
+  or provenance, and graph cards no longer reserve space for presentation
+  status.</li>
 <li>The pipeline optimizer reports overall and current-operation progress and
   explains time-limit exhaustion in terms of completed and remaining work.</li>
 <li>The active VIPP <strong>Inspect</strong> layer retains a compatible user's camera, slice,
@@ -3183,7 +3184,7 @@ work.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 05:43:23 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 07:04:55 UTC">August 6, 2026</span>
   </span>
 
     
