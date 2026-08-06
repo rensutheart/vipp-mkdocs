@@ -102,11 +102,13 @@ implementation, environment, fallback records, outcome, and cleanup evidence.
 Failed or cancelled single-output publication attempts a failure sidecar at
 the requested destination name.
 
-Batch uses its authoritative version-2 manifest instead of duplicating one
+Batch uses its authoritative version-3 manifest instead of duplicating one
 sidecar per output. Every published output record carries an execution digest
-link to that item's complete execution document. Preserve the manifest,
-archive, item checkpoints, workflow/config pair, and source identities with the
-files.
+link to that item's complete execution document. Successfully read source
+records include their raw axes, effective axes, and applied declaration. The
+embedded config preserves an intended declaration even when an item was skipped
+or failed before source reading. Preserve the manifest, archive, item
+checkpoints, workflow/config pair, and source identities with the files.
 
 A generated standalone output remains private until execution cleanup and its
 requested staged publication checks are established. The generated local

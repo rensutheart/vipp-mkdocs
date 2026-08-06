@@ -23,33 +23,44 @@ every assay.
 - focused UI/execution tests cover isolated-tuning boundaries, actionable and
   waiting stale states, progressive node previews, compatible layer reuse, and
   rejection of stale contrast/histogram results;
-- batch tests cover attached-config validation and round-trip, restore without
+- batch tests cover attached-config validation and round-trip, guarded source-
+  axis declarations, representative scientific preflight, restore without
   preview, direct plan-only execution, complete-item fast skips, transient
   atomic-write retries, and continuing after a final item-sidecar failure;
 - compute tests cover import-safe CPU-only use, workflow-schema-4 and
-  batch-schema-2 intent, eligibility planning, exact implementation identity,
+  batch-schema-3 intent, eligibility planning, exact implementation identity,
   resident device segments, memory admission, classified fallback, optimizer
   review/apply, Prefer-GPU selection/serialization/UI/durable behavior,
   progress, cancellation, cleanup, and atomic publication; and
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## Prepared 0.13.0a1 source candidate
+## 0.13.0a1 release source and artifacts
 
-The source prepared for publication is application commit
-[`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1)
+The immutable
+[`v0.13.0a1`](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1)
+tag resolves to application commit
+[`7520a5bb3ea9fe296bb231c63d1598b833ac10f6`](https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6)
 on `main`. Its exact-source
-[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727)
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31112153743)
 passed package, manifest, lint, distribution-metadata, installed-wheel smoke,
 and CPython 3.12 and 3.13 tests on Windows, Linux, and macOS. The CI-built
 distributions are qualification outputs, not publication artifacts.
 
-On native Windows, the last complete local suite before the final queued-work
-synchronization hardening passed **3,999 tests**, with **2 skipped** and **2
-documented expected failures**. The complete 622-test widget module and focused
-debounce, queued-output, axis, save/export, packaging, setup-helper, and
-benchmark-evidence tests passed after the scoped changes. The exact current
-source was then covered by the cross-platform CI matrix above.
+On native Windows, the exact selected source's complete local suite completed
+with **4,077 passed**, **2 skipped**, **2 documented expected failures**, 83
+warnings, and zero failures. The skips are the opt-in real-CUDA tests and the
+expected failures are the documented CuPy integer-parity gaps. The exact source
+was then covered by the cross-platform CI matrix above.
+
+The final tagged artifacts published through
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a1/) and attached to the
+GitHub pre-release are:
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `napari_vipp-0.13.0a1-py3-none-any.whl` | `C157D2D0E5909A76A1A6093493AB17A245682DF53D83DD0A23FAA0FDF7A3BE02` |
+| `napari_vipp-0.13.0a1.tar.gz` | `E3231CF22EA2907C3FE05F73477E5E3CD3B10FF2A053BBA92A8045D140E7F7E0` |
 
 The bundled synthetic-volume example was launched from a clean, non-editable,
 release-style Windows environment, and the operator explicitly accepted its
@@ -71,10 +82,8 @@ and a real GPU import/runtime probe passed. This locally built wheel remains
 private: VIPP neither ships nor hosts it, and each user must repeat the pinned
 build for their own environment.
 
-The final tag, fresh release wheel and source distribution with recorded
-hashes, manual Twine upload, GitHub pre-release, numbered documentation
-snapshot, and post-publication installation checks remain pending. Historical
-artifacts below must not be uploaded.
+These are the release files. The historical artifacts below must not be
+uploaded or substituted for them.
 
 The earlier pre-Prefer-GPU candidate at application commit `e024409` passed
 package/manifest, lint, and CPython 3.12 and 3.13 CI on Linux, Windows, and
@@ -115,9 +124,7 @@ The exact historical checkpoint artifact hashes are:
   `00fcb15452d3ed71d344859d4306cbcdcc458686959169a2c47485d8f7abec9b`.
 
 These artifacts must not be uploaded for 0.13.0a1. They are superseded by the
-prepared `c2e88f8` source candidate above. The final tag, freshly built and
-hashed release artifacts, publication, and post-publication checks remain
-pending. See the
+tagged `7520a5b` release source and final hashes above. See the
 [release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
 for the historical artifact table.
 
@@ -154,9 +161,8 @@ The `e024409` full local suite passed **3,722 tests**, with **2
 skipped**, **2 documented expected failures**, and 83 warnings. The two final
 real-CUDA durable execution tests passed when enabled. These numbers describe
 that earlier candidate checkout. Preserve them as historical evidence, but do
-not use them as final-release counts. Use the prepared-candidate results above
-for source qualification, then record exact tagged-artifact smokes before
-publication.
+not use them as final-release counts. Use the release-source and final-artifact
+results above for 0.13.0a1 qualification.
 
 The recorded native-Windows RTX 5090 evidence records operation-level
 scientific parity, memory, progress/cancellation, cleanup, and timing for the
@@ -195,10 +201,10 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, prepared source candidate `c2e88f8` with a green package/cross-platform CI matrix, a qualified private local cuCIM rebuild, real RTX 5090 Prefer-GPU placement/parity/cleanup and performance checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Build and hash exact tagged artifacts; complete publication and post-publication checks; qualify native Linux GPU, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, tagged release source `7520a5b` with a green package/cross-platform CI matrix and recorded final artifact hashes, a qualified private local cuCIM rebuild, real RTX 5090 Prefer-GPU placement/parity/cleanup and performance checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Qualify native Linux GPU, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
-| Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 2, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
+| Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 3, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
 | Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
 ## Release-specific limitations
@@ -207,8 +213,10 @@ same as an external comparison or assay validation. The distinction matters:
   load as explicit CPU and save as schema 4; cached pixels/tables are not
   serialized and exported Python is runtime-version pinned. Recalculate,
   regenerate exports, and validate after upgrading.
-- Version-1 batch configs load as explicit CPU and save as version 2. A saved
-  Auto, Prefer GPU, or Custom request is intent; actual implementation
+- Version-1 batch configs load as explicit CPU; version-2 configs retain their
+  saved compute request. Both older versions have no source-axis declaration
+  until reviewed and saved as version 3. A saved Auto, Prefer GPU, or Custom
+  request is intent; actual implementation
   provenance must be retained from each run. Auto uses reviewed GPU defaults
   without compatible history; accelerated-only history schedules one
   same-surface CPU measurement before a later matching run applies the

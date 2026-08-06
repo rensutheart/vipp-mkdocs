@@ -8,25 +8,23 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-This `main`/nightly manual is being prepared for the **0.13.0a1 release**. Its
-`a1` suffix identifies the first alpha build in the 0.13.0 release series.
-It becomes a release-numbered public manual only after the matching application
-tag/package and documentation snapshot are published. Until then, stable still
-points to the previous public release. See
+The numbered **0.13.0a1** snapshot documents the first alpha build in the
+0.13.0 release series. The package is available from
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a1/). See
 [installation](../getting-started/installation.md) and the
 [0.13.0a1 release notes](../releases/0.13.0a1.md).
 
-The prepared application source candidate is
-[`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1).
+The immutable `v0.13.0a1` tag resolves to
+[`7520a5bb3ea9fe296bb231c63d1598b833ac10f6`](https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6).
 Its package checks and CPython 3.12/3.13 tests on Windows, Linux, and macOS
 passed in the exact-source
-[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727).
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31112153743).
 The previously prepared `e024409` and `444f682` checkpoints are historical,
 not release sources; their hashes remain in the
 [release notes](../releases/0.13.0a1.md#historical-prefer-gpu-automated-checkpoint-superseded)
-only to prevent accidental reuse. The final tag, freshly built and hashed
-release artifacts, publication, numbered manual snapshot, and post-publication
-checks remain pending.
+only to prevent accidental reuse. The final tagged artifact hashes are recorded
+in [release verification](../releases/0.13.0a1.md#release-verification).
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -50,9 +48,9 @@ and results on known sample data. See the
 
 ## Move from 0.12.0a3 to 0.13.0a1
 
-0.13 introduces durable compute intent and can also change calculated
-colocalization values. Treat the upgrade as a scientific review, not only a
-file-format conversion.
+0.13 introduces durable compute intent and guarded source-axis declarations,
+and can also change calculated colocalization values. Treat the upgrade as a
+scientific review, not only a file-format conversion.
 
 1. Keep the original schema-3 workflow, 0.12.0a3 environment, generated Python,
    batch config, manifests, sidecars, and validated outputs unchanged.
@@ -78,15 +76,17 @@ file-format conversion.
    provenance. Do not add an unplanned `Convert Dtype` merely to make a GPU
    benchmark faster.
 6. Load or recreate Batch workspace. Version-1 batch configs migrate to an
-   explicit CPU request and save as version 2. Review the configured/effective
-   requests, memory and fallback policy, bindings, paths, collision policy, and
-   fresh preflight before running.
+   explicit CPU request; version-2 configs retain their saved compute request.
+   Neither older version contains a source-axis declaration. Review the
+   source-specific **Image stack** choice, configured/effective requests,
+   memory and fallback policy, bindings, paths, collision policy, and fresh
+   preflight, then save the reviewed configuration as version 3.
 7. Regenerate and revalidate exported Python and the saved batch runner. A
    generated 0.12 program refuses a 0.13 runtime by design.
 8. For a consequential batch, test progress, cancellation, and OOM/fallback on
-   non-critical data, then inspect the version-2 manifest's execution documents,
-   digests, output links, cleanup evidence, and
-   partial/skipped/cancelled/failed records.
+   non-critical data, then inspect the version-3 manifest's raw/effective source
+   axes, applied declarations, execution documents, digests, output links,
+   cleanup evidence, and partial/skipped/cancelled/failed records.
 
 The colocalization and ImageJ-threshold revisions have frozen automated
 fixtures but still require independent upstream-method review. Treat them as

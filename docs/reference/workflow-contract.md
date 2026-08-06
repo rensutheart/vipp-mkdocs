@@ -81,14 +81,18 @@ before using it in a consequential analysis.
 ### Optional Batch workspace attachment
 
 A 0.13.0a1 workflow can carry an optional top-level `batch_config`. The
-version-2 attachment contains source bindings, local input/output paths,
-patterns, formats, output policy, run settings, and a complete compute request,
-including runtime/device and accelerator-memory settings. It contains no source
-pixels, calculated arrays, output files, manifests, or item sidecars.
+version-3 attachment contains source bindings, local input/output paths,
+patterns, guarded source-axis declarations, formats, output policy, run
+settings, and a complete compute request, including runtime/device and
+accelerator-memory settings. It contains no source pixels, calculated arrays,
+output files, manifests, or item sidecars.
 
 A version-1 batch config had no compute request and loads as explicit CPU. It
-saves as version 2 only after validation. VIPP never guesses that an older
-collection run intended to use an accelerator.
+saves as version 3 only after validation. A version-2 config retains its saved
+compute request. Neither older version contains a source-axis declaration, and
+both are written as version 3 only after review and save. VIPP never guesses
+that an older collection run intended to use an accelerator or a different
+axis interpretation.
 
 The attachment is validated against the containing graph when it is saved and
 loaded. It is deliberately excluded from the scientific workflow hash: changing
@@ -182,11 +186,12 @@ convenience or an arbitrary generated-Python array caller.
 
 ## Batch artifacts
 
-A batch run uses either a standalone version-2 `vipp_batch_config.json` or the
+A batch run uses either a standalone version-3 `vipp_batch_config.json` or the
 equivalent validated configuration attached to a workflow. It records
-collection bindings, output policy, resolved output declarations, the workflow
-companion, canonical workflow hash, and configured compute request. Preview and
-execution share one deterministic sorted positional pairing and output planner.
+collection bindings, any reviewed source-axis declarations, output policy,
+resolved output declarations, the workflow companion, canonical workflow hash,
+and configured compute request. Preview and execution share one deterministic
+sorted positional pairing and output planner.
 Run always performs a fresh plan-only preflight. A new or deliberately edited
 plan can start in the same click without calculating a representative; an
 unexpectedly changed plan that was already reviewed stops for confirmation.
@@ -198,9 +203,29 @@ next preview/save/run; and CLI arguments overlay only fields actually supplied.
 Unknown node IDs or malformed preferences fail before output artifacts are
 produced.
 
-Each run writes a latest version-2 manifest, a run-id archive, and item
-sidecars recording software versions, source identities/metadata, hashes,
-planned outputs, policies, errors, and status. The manifest also records the
+The Batch workspace's friendly **Image stack** chooser is a front end to one
+durable declaration. A new unsaved row starts at **Automatic (recommended)**.
+If an ordinary TIFF reports exactly `QYX` and the representative reaches a
+workflow requirement for `ZYX`, the GUI can visibly select **Pages are depth
+slices (Z stack)** and retry with `QYX -> ZYX`. Once resolved, the config stores
+`"source_axes": "QYX"` and `"effective_axes": "ZYX"`. An unresolved
+automatic choice stores no declaration; loading that blank value shows **Use
+the file's labels unchanged**, and headless execution does not invent a
+declaration. This keeps old, headless, and deliberately opted-out configs
+conservative.
+
+The declaration must match the reader-reported axes and rank exactly. It
+changes semantic names in place without moving pixels or changing shape.
+`Reorder Axes` is separate: it transposes pixels and complete axis records but
+does not rename Q to Z. Existing calibration stays attached by position, so a
+declaration cannot discover a missing Z step, unit, or origin.
+
+Each run writes a latest version-3 manifest, a run-id archive, and item sidecars
+recording software versions, source identities/metadata, hashes, planned
+outputs, policies, errors, and status. For every source successfully read, the
+manifest records the reader-reported raw axes, the effective axes, and the
+applied declaration; its embedded config retains an intended declaration when
+an item is skipped or fails before reading. The manifest also records the
 configured/effective requests, whether a run override was used, request/config
 fingerprints, and an execution document plus digest for every calculated item.
 Each published output links to that exact item execution. Output promotion is

@@ -21,8 +21,12 @@ x/y pixel size, and units refer to the same physical space. Anisotropic pixels
 are common and affect distance, surface, rescaling, and visual interpretation.
 
 Do not repair axes or scale by trial and error. Use acquisition records or a
-known calibration source, then document the correction with
-`Set Pixel Size / Units` or `Reorder Axes`.
+known calibration source. In Batch workspace, a reviewed **Image stack** choice
+can declare that ordinary TIFF pages reported as `QYX` are actually a `ZYX`
+stack; this renames axes in place and does not move pixels. Use `Reorder Axes`
+only when the stored pixel order itself must be transposed. Use
+`Set Pixel Size / Units` for known calibration, because neither an axis
+declaration nor a reorder can discover a missing Z step.
 
 ## Keep processing dimensionality consistent
 

@@ -4,12 +4,12 @@ This page is the Windows-specific companion to the main
 [installation guide](installation.md). VIPP remains fully usable on CPU without
 any NVIDIA packages.
 
-!!! note "If you are reading the nightly manual before publication"
+!!! note "Use the manual for your installed release"
 
-    The pinned install and source-build commands require the 0.13.0a1 package
-    and tag to have been published. Wait for the numbered `0.13.0a1` manual and
-    release announcement; a nightly page can appear before those public
-    artifacts exist.
+    The commands on this page are pinned to the 0.13.0a1 package and immutable
+    `v0.13.0a1` tag. Select the numbered `0.13.0a1` manual when installing this
+    release; the nightly manual can describe changes intended for a later
+    version.
 
 ## Choose the installation you need
 

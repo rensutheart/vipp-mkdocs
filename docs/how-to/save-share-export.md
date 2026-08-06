@@ -9,8 +9,8 @@ interchangeable.
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
-| Batch config (version 2) | Recreate source bindings, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
-| Batch manifest/archive/sidecars (version 2) | Audit planned inputs/outputs, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
+| Batch config (version 3) | Recreate source bindings, guarded source-axis declarations, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
+| Batch manifest/archive (version 3) and sidecars | Audit planned inputs/outputs, raw and effective source axes, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
 
 ## Save a workflow
 
@@ -141,12 +141,15 @@ run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
 
-Version-2 configs store the complete configured compute request. Version-1
-configs load as explicit CPU. The runner uses its saved request by default and
-can overlay explicit compute/fallback/per-node CLI choices. `--progress` prints
-both overall-item and current-operation progress. One `Ctrl+C` requests normal
-cooperative cancellation and allows manifest/sidecar cleanup; a second is an
-emergency interrupt that can bypass finalization.
+Version-3 configs store the complete configured compute request and any reviewed
+source-axis declarations. Version-1 configs load as explicit CPU; version-2
+configs retain their saved compute request. Both older versions load without
+axis declarations and are written as version 3 after review and save. The runner
+uses its saved request by default and can overlay explicit
+compute/fallback/per-node CLI choices. `--progress` prints both overall-item and
+current-operation progress. One `Ctrl+C` requests normal cooperative
+cancellation and allows manifest/sidecar cleanup; a second is an emergency
+interrupt that can bypass finalization.
 
 The standalone config remains the appropriate form for the supplied headless
 batch runner and for workflows/configs managed as separate automation

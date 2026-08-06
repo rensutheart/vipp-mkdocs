@@ -26,7 +26,11 @@ cooperative cancellation completes and final state is persisted.
    or table to save.
 3. Open **Batch workspace...** and bind each varying `Image Source` to a local
    folder and pattern.
-4. Choose the intended toolbar compute request. New work defaults to Auto,
+4. Leave **Image stack** at **Automatic (recommended)** for a new source unless
+   you already know what its TIFF pages mean. If VIPP suggests **Pages are depth
+   slices (Z stack)**, keep that choice only after confirming the pages really
+   are depth slices.
+5. Choose the intended toolbar compute request. New work defaults to Auto,
    which uses reviewed safe GPU defaults without compatible history. An
    accelerated-only batch timing makes the next matching global Auto batch run
    measure CPU once on the same execution surface; incompatible interactive,
@@ -34,17 +38,17 @@ cooperative cancellation completes and final state is persisted.
    explicit portable reference or Prefer GPU to place every scientifically
    eligible reviewed operation on GPU regardless of speed. Choose Custom for reviewed
    CPU/GPU per-node preferences and benchmarking.
-5. Choose an output folder, formats, naming, existing-file policy, fallback
+6. Choose an output folder, formats, naming, existing-file policy, fallback
    policy, device, and accelerator-memory settings.
-6. Optionally select **Preview batch** to review pairing and collision summaries.
-7. When previewing, navigate several representatives, including difficult and
+7. Optionally select **Preview batch** to review pairing and collision summaries.
+8. When previewing, navigate several representatives, including difficult and
    boundary cases.
-8. Save the workflow and choose **Yes** to attach the Batch workspace, or use
+9. Save the workflow and choose **Yes** to attach the Batch workspace, or use
    **Save config...** when a separate headless-replay configuration is needed.
-9. Select **Run batch**. It performs its own plan-only preflight and starts
+10. Select **Run batch**. It performs its own plan-only preflight and starts
    directly when no reviewed plan is current. If a displayed plan changed
    unexpectedly, review the refreshed plan and run again only after accepting it.
-10. Inspect outputs, final status, validation text, manifest, archive, item
+11. Inspect outputs, final status, validation text, manifest, archive, item
     sidecars, configured/effective compute requests, actual node
     implementations, fallbacks, and cleanup evidence before treating the run as
     complete.
@@ -82,6 +86,37 @@ structure.
 The first bound source is the primary source used by default naming. Fixed
 file-path Image Sources can remain unbound; napari-layer and bundled-sample
 sources must be replaced by collection bindings for a headless batch.
+
+## Tell VIPP what TIFF pages mean
+
+For a new source, **Image stack** begins at **Automatic (recommended)**. Most
+users can leave it there. On Preview or Run, VIPP checks one representative and
+changes the choice only in one narrow case: an ordinary TIFF reports exactly
+`QYX`, and the workflow then proves that it needs `ZYX` for 3D processing. VIPP
+visibly selects **Pages are depth slices (Z stack)**, explains the change, and
+retries the check once.
+
+That suggestion is useful, but it is not proof that the pages are depth slices.
+Confirm it from the acquisition or another trusted source. If the pages are not
+Z, choose **Use the file's labels unchanged**; VIPP respects that opt-out.
+**Something else (advanced)...** exposes uncommon mappings without making
+novices type an axis expression for the ordinary Z-stack case.
+
+Once accepted, the friendly choice is saved as the guarded declaration
+`QYX -> ZYX`. Every item must report the exact same source axes and rank before
+VIPP can apply it. The declaration changes axis names in place: pixel order and
+array shape do not change. `Reorder Axes` solves a different problem by
+transposing pixels and their metadata; moving Q cannot rename it to Z.
+
+The declaration also cannot discover the physical distance between slices.
+Verify Z spacing, unit, and origin in **Output Metadata**, and use `Set Pixel
+Size / Units` when calibration is missing or wrong.
+
+Automatic is a conservative GUI convenience, not a headless guess. If no
+suggestion was needed, saving stores no declaration and reopening shows **Use
+the file's labels unchanged**. Historic and headless blank configurations behave
+the same way. Once the visible Z-stack suggestion has been accepted, saving and
+headless replay use the concrete `QYX -> ZYX` decision.
 
 ## Mark outputs explicitly
 
@@ -183,6 +218,14 @@ plan - for example, immediately after loading a config or deliberately editing
 a setting - the same Run click uses the fresh plan and starts execution. It does
 not calculate a graph representative first; **Preview batch** remains optional.
 
+That fresh preflight inspects one representative through the same source-axis
+declarations and scientific axis checks used during execution. The guarded
+`QYX` to `ZYX` suggestion can therefore appear from either Preview or Run.
+Other deterministic axis mismatches stop with one concise setup message before
+VIPP creates the output directory, writes run artifacts, or initializes CPU or
+GPU devices. Every later item is still checked when read; one representative is
+not evidence that a collection is uniform.
+
 ## Save and replay a configuration
 
 When Batch workspace is active, **Save workflow...** offers three choices:
@@ -207,6 +250,7 @@ separate, use **Save config...**. It writes a standalone versioned
 `vipp_batch_config.json` containing:
 
 - source-node bindings, folders, and patterns;
+- reviewed source-axis declarations, when present;
 - output folder and default image format;
 - filename/output declarations and existing-file policy;
 - continue-after-failure behavior;
@@ -215,11 +259,15 @@ separate, use **Save config...**. It writes a standalone versioned
 - the required workflow companion and optional runner;
 - the canonical scientific workflow hash.
 
-Batch config schema 2 stores this compute request. A version-1 config had no
-compute fields and loads as explicit CPU. Loading a config does not silently
-replace the toolbar request; it retains its saved request until the user changes
-a toolbar compute setting, at which point the current complete toolbar request
-is used for the next preview, save, or run.
+Batch config schema 3 stores the compute request and guarded source-axis
+declarations. A version-1 config had no compute fields and loads as explicit
+CPU; a version-2 config retains its saved compute request. Neither older version
+contains an axis declaration, and both are written as version 3 after review and
+save. Their blank declaration displays as **Use the file's labels unchanged**,
+not the automatic policy of a new unsaved row. Loading a config does not
+silently replace the toolbar request; it retains its saved request until the
+user changes a toolbar compute setting, at which point the current complete
+toolbar request is used for the next preview, save, or run.
 
 **Load config...** validates it against the current workflow. A hash or resolved
 output mismatch fails rather than silently applying stale selections.
@@ -333,11 +381,14 @@ Every workspace or headless run writes:
 - a run-id manifest archive — preserves prior finalized runs;
 - a run-id sidecar directory — per-item/output checkpoints during execution.
 
-The version-2 manifest records:
+The version-3 manifest records:
 
 - canonical workflow/config and their hashes;
 - VIPP, Python, and relevant runtime package versions;
 - each source identity and available metadata;
+- for each source successfully read, its raw axes, effective axes, and applied
+  declaration; the embedded config retains an intended declaration when an item
+  is skipped or fails before reading;
 - every planned output path, format, and collision policy;
 - errors and item/output states;
 - the configured and effective compute requests, whether a CLI/UI override was
@@ -389,7 +440,7 @@ not evidence that another assay or naming scheme is valid.
 - Output names, formats, subfolders, and collision policy are intentional.
 - The fresh preflight matches the reviewed plan.
 - The configured and effective compute requests match the intended run, and
-  the version-2 manifest and item execution provenance explain the actual CPU,
+  the version-3 manifest and item execution provenance explain the actual CPU,
   GPU, and fallback decisions. Interactive node badges describe the last
   accepted interactive calculation, not every detached batch item.
 - Completed/partial/skipped/cancelled/failed counts match expectations.

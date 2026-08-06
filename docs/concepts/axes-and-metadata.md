@@ -49,6 +49,41 @@ Workflow schema 4 adds authored compute intent without changing these axis and
 metadata semantics. A schema-3 workflow therefore loads into 0.13 with explicit
 CPU execution rather than silently applying the new-session Auto policy.
 
+## TIFF page labels in a batch
+
+Some ordinary TIFF files report a page dimension as generic `Q` because the
+file does not say what those pages mean. VIPP does not assume that Q is Z for
+every TIFF.
+
+In a new Batch workspace source, **Image stack** starts at **Automatic
+(recommended)**. If one representative reports exactly `QYX` and the workflow
+demonstrates that it requires `ZYX`, VIPP visibly selects **Pages are depth
+slices (Z stack)** and retries with this guarded declaration:
+
+```text
+QYX -> ZYX
+```
+
+Keep that suggestion only when independent acquisition information confirms
+that the pages are depth slices. **Use the file's labels unchanged** rejects the
+interpretation, and VIPP does not choose it again for that source. Uncommon
+reviewed mappings remain under **Something else (advanced)...**.
+
+An axis declaration assigns new semantic names by position. The source side
+must match exactly, including rank and order. It does not transpose pixels or
+change shape. `Reorder Axes` is separate: it transposes pixels and moves each
+complete axis record, but it cannot rename Q to Z.
+
+Scale, unit, and origin stay attached to their existing positions when an axis
+is declared. Relabelling Q as Z therefore does not discover a missing Z step or
+prove that the saved calibration is correct. Verify **Output Metadata** and use
+`Set Pixel Size / Units` before calibration-dependent analysis.
+
+The Automatic suggestion is applied only by the visible GUI. A resolved choice
+is saved as the concrete declaration and is reproduced by headless execution.
+An unresolved or historic blank value stores no declaration, reloads as **Use
+the file's labels unchanged**, and remains strict in headless runs.
+
 `Composite → RGB` adds explicit authoring modes around that contract.
 **Channel axis mode = Auto** resolves the carried explicit channel axis and
 shows it read-only; **Manual** enables the axis selector and permits any valid

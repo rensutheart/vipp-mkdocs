@@ -281,13 +281,13 @@ dataset…** serialize accepted cached values instead; they do not rerun the gra
 or create exact compute-provenance sidecars. Preserve:
 
 - the schema-4 workflow and complete compute request;
-- for batch, the version-2 config, finalized manifest/archive, and item
+- for batch, the version-3 config, finalized manifest/archive, and item
   sidecars;
 - for generated outputs, requested `.vipp-provenance.json` sidecars;
 - the actual implementation IDs/versions and environment fingerprint; and
 - CPU decisions, classified fallbacks/OOM, cancellation, and cleanup outcome.
 
-Workflow schema 4, batch config schema 2, saved runners, and generated CLIs use
+Workflow schema 4, batch config schema 3, saved runners, and generated CLIs use
 the stable value `prefer_gpu`. Saved per-node preferences remain present but
 dormant outside Custom; switching back to Custom reactivates them.
 `Benchmark node…` and **Find fastest pipeline…** are Custom-only. A CLI mode

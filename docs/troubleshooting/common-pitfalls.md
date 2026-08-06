@@ -43,6 +43,24 @@ Check:
 - axes shown in metadata;
 - whether the input is `YX`, `ZYX`, `CZYX`, or `TCZYX`.
 
+## A 3D Batch Says TIFF Axes Are QYX
+
+Symptom:
+
+- Preview or Run stops because an ordinary TIFF reports `QYX`, while the
+  workflow needs a `ZYX` volume.
+
+Fix:
+
+- review that source's **Image stack** choice;
+- keep **Pages are depth slices (Z stack)** only if the TIFF pages really are
+  depth slices;
+- otherwise choose **Use the file's labels unchanged** and correct the workflow
+  or source metadata deliberately;
+- do not use `Reorder Axes` to rename Q to Z—it moves pixels instead; and
+- verify the physical Z spacing separately, because interpreting Q as Z does
+  not create calibration.
+
 ## Missing Or Wrong Pixel Size
 
 Symptom:

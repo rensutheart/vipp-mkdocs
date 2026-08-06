@@ -415,6 +415,22 @@ clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
 at its current display resolution; use a graph node when the scatter image must
 be part of the durable workflow.
 
+## Batch Image stack control
+
+Each collection source in Batch workspace has an **Image stack** chooser:
+
+| Choice | Effect |
+| --- | --- |
+| **Automatic (recommended)** | Default for a new unsaved row. VIPP changes it only when an ordinary TIFF reports exactly `QYX` and the representative reaches a demonstrated `ZYX` workflow requirement. |
+| **Use the file's labels unchanged** | Trust the reader labels and reject the automatic Z-stack interpretation for this source. Loaded blank declarations use this conservative choice. |
+| **Pages are depth slices (Z stack)** | Save the guarded `QYX -> ZYX` interpretation. Axis names change in place; pixels are not transposed. |
+| **Something else (advanced)...** | Enter an uncommon reviewed source-to-effective axis declaration. |
+
+When Automatic can resolve the exact case, VIPP visibly selects the Z-stack
+choice and shows why it changed, that it will be saved, and that pixel order is
+unchanged. Verify the page meaning and Z calibration independently. Preview and
+Run use the same check; headless execution never invents a missing declaration.
+
 ## Batch representative strip
 
 After a successful batch preview, a persistent strip above the graph exposes

@@ -59,7 +59,7 @@ for the accelerated node families and their first public regions.
 | `Crop Stack` | image, mask, or labels | same as input | Crop spatial edges while preserving graph-port type, including ROI masks. |
 | `Select Axis Slice` | array | any | Keep or select an index/range along an axis. |
 | `Split Axis` | array | dynamic outputs | Split time, z, or other non-channel axes. |
-| `Reorder Axes` | array | same as input | Reinterpret and transpose axis order. |
+| `Reorder Axes` | array | same as input | Transpose pixels and their existing axis records into a reviewed order; does not rename axes. |
 | `Set Pixel Size / Units` | array | same as input | Repair or define physical calibration. |
 | `Rescale Axes` | array | same as input | Resample X/Y/Z and update physical scale. |
 

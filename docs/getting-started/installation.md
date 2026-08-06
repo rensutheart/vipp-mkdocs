@@ -17,8 +17,8 @@ when asking pip to choose the latest **unpinned** VIPP alpha.
 ## Recommended: a dedicated environment
 
 A separate environment prevents unrelated scientific packages from changing
-VIPP's dependencies. Once 0.13.0a1 is published, the commands below install
-napari with PyQt6 and that tagged release.
+VIPP's dependencies. The commands below install napari with PyQt6 and the
+tagged 0.13.0a1 alpha release.
 
 === "Windows"
 
@@ -220,9 +220,11 @@ Before upgrading an existing workflow, read
 environment. Schema-1/2 workflows do not open in 0.13.0a1. Valid schema-3
 workflows load structurally with an explicit CPU compute request; saving writes
 schema 4. Cached results are not serialized, so recalculate and validate after
-upgrading. Version-1 batch configs similarly load as CPU and save as version 2.
-Regenerate exported Python too, because it requires the exact VIPP runtime
-version that created it.
+upgrading. Version-1 batch configs load as CPU, while version-2 configs retain
+their saved compute request. Neither older version contains source-axis
+declarations; after review, saving writes batch config version 3. Regenerate
+exported Python too, because it requires the exact VIPP runtime version that
+created it.
 
 ## Developer installation
 

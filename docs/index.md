@@ -36,15 +36,15 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This nightly manual is prepared for the **napari-vipp 0.13.0a1 release**.
-    The prepared application source is
-    [`c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1`](https://github.com/rensutheart/napari-vipp/commit/c2e88f8a8a9fd5638e4890fba8e8800e1b2450f1),
+    This manual documents **napari-vipp 0.13.0a1**, available as an alpha
+    pre-release from [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1)
+    and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a1/). Its immutable
+    `v0.13.0a1` tag resolves to
+    [`7520a5bb3ea9fe296bb231c63d1598b833ac10f6`](https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6),
     which passed the complete package and cross-platform test
-    [matrix](https://github.com/rensutheart/napari-vipp/actions/runs/31094506727).
-    The final tag, freshly hashed upload artifacts, PyPI/GitHub publication,
-    numbered manual snapshot, and post-publication checks are still pending.
-    Until the tag and packages are published, use the stable manual for the
-    current public release. Interfaces,
+    [matrix](https://github.com/rensutheart/napari-vipp/actions/runs/31112153743).
+    Final artifact hashes are recorded in the
+    [release notes](releases/0.13.0a1.md#release-verification). Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
@@ -56,6 +56,12 @@ hide:
     its creator version. Read the
     [0.13.0a1 release notes](releases/0.13.0a1.md) before upgrading and
     revalidate calculated results afterward.
+
+    Batch configs and manifests are version 3. Version-1 configs load with an
+    explicit CPU request; version-2 configs keep their saved compute request.
+    Both older versions have no source-axis declaration until reviewed and
+    saved as version 3. For ordinary TIFF collections, review the Batch
+    workspace's **Image stack** choice before treating generic pages as Z.
 
 ## Choose your path
 
