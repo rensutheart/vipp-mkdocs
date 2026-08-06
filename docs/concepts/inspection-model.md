@@ -80,12 +80,14 @@ is the explicit override. Main compute **CPU** always forces statistics CPU;
 main **Prefer GPU** biases statistics Auto to GPU; main **Auto** and **Custom**
 leave it adaptive.
 
-The slim footer below the thumbnail reports that work as
-**Contrast · Calculating… / Contrast · CPU / Contrast · GPU /
-Contrast · CPU fallback / Contrast · error** without obscuring the image. The
-separate scientific CPU/CuPy/cuCIM badge still identifies what produced the
-node output. Stack scans publish the active node/backend/phase through the
-toolbar without accepting partial limits. CPU integer histograms and min-max
+Select a node to see that work in the compact **Thumbnail contrast** row near
+the top of its inspector: **Calculating… / CPU · NumPy / GPU · CuPy / CPU
+fallback / Error**. The separate scientific CPU/CuPy/cuCIM badge remains in the
+node title row and still identifies what produced the node output. Hover the
+inspector row or thumbnail for the detailed presentation decision; keyboard
+What's This help and screen readers receive the same text. Stack scans publish
+the active node/backend/phase through the toolbar
+without accepting partial limits. CPU integer histograms and min-max
 reductions advance and cancel between bounded chunks. An active GPU
 kernel/synchronization or exact float/other-dtype NumPy percentile may contain a
 non-interruptible inner pass; the UI identifies that phase and applies

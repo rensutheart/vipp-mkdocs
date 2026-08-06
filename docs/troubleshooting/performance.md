@@ -168,14 +168,16 @@ CPU-only micro-workloads (at most 1 MiB total and no more than eight requests
 or aggregate channel lanes) finish inline to avoid worker-queue overhead and
 usually do not show toolbar progress. Larger, high-channel, and GPU work remains
 background and cancellable. A missing progress flash for a tiny result therefore
-does not mean statistics were skipped; confirm the completed contrast footer.
+does not mean statistics were skipped; select the node and confirm its completed
+**Thumbnail contrast** status.
 
-Read the slim footer below the thumbnail—not the scientific badge—to see
-**Contrast · Calculating…**, **Contrast · CPU**, **Contrast · GPU**,
-**Contrast · CPU fallback**, or **Contrast · error**. It no longer obscures the
-image. Hover the footer or thumbnail for the algorithm, processed bytes, elapsed
-time, reason, crossover, fallback, and failure. Toolbar progress names the
-active node/backend/phase. CPU integer histogram and min-max paths advance and
+Read the selected node's compact **Thumbnail contrast** inspector row—not the
+scientific badge—to see **Calculating…**, **CPU · NumPy**, **GPU · CuPy**,
+**CPU fallback**, or **Error**. Hover the row or thumbnail for the algorithm,
+processed bytes, elapsed time, reason, crossover, fallback, and failure;
+keyboard What's This help and screen readers receive the same text. Toolbar
+progress names the active node/backend/phase. CPU integer
+histogram and min-max paths advance and
 cancel between bounded chunks. An active GPU kernel/synchronization or
 float/other-dtype NumPy percentile may have a non-interruptible inner pass; VIPP
 identifies the phase and applies `Cancel` at the next cooperative boundary.

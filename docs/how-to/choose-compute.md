@@ -76,10 +76,10 @@ guarantee because data distribution, hardware, CUDA startup, residency, and
 competing work matter. It does not use Low/Standard/High/Very High backing resolution.
 Use **Prefer GPU** as the explicit override. Min-max uses an exact native CPU
 reduction. Float and other-dtype percentiles retain the exact NumPy-compatible
-CPU calculation. Read the separate **Contrast · Calculating… / Contrast · CPU /
-Contrast · GPU / Contrast · CPU fallback / Contrast · error** footer below the
-thumbnail for what happened; the ordinary CPU/CuPy/cuCIM badge remains the
-record of what produced the node output.
+CPU calculation. Select a node and read its separate **Thumbnail contrast**
+inspector row—**Calculating… / CPU · NumPy / GPU · CuPy / CPU fallback /
+Error**—for what happened; the ordinary CPU/CuPy/cuCIM badge remains in the node
+title row as the record of what produced the node output.
 
 ## A safe practical sequence
 
