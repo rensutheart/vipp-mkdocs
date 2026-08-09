@@ -1,6 +1,6 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.13.0a1 application source.
+This page summarizes the evidence shipped with the 0.13.0a4 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.
 
@@ -35,7 +35,46 @@ every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a1 release source and artifacts
+## 0.13.0a4 release source and artifacts
+
+The immutable annotated
+[`v0.13.0a4`](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a4)
+tag resolves to application commit
+[`4bec1e8145b31e161beaf44a290bff24aea36f5e`](https://github.com/rensutheart/napari-vipp/commit/4bec1e8145b31e161beaf44a290bff24aea36f5e)
+on `main`. Its exact-source
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31300028320)
+passed package, manifest, lint, wheel smoke, and CPython 3.12 and 3.13 tests on
+Windows, Linux, and macOS.
+
+The final local source suite completed with **4,018 passed**, **109 expected
+skips**, **2 documented expected failures**, and zero failures. The clean
+tagged wheel and source distribution passed Twine and content inspection. The
+publication artifacts are:
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `napari_vipp-0.13.0a4-py3-none-any.whl` | `5FA75FC48955E2CA9AD7D5BC13218AD83EF14C23F0B72F74D8A7486CA8453085` |
+| `napari_vipp-0.13.0a4.tar.gz` | `B99B829C45BE734B705DEE17829886EF91DEAABC3C3D3C5F76C164DB87A617AF` |
+
+The exact tagged wheel was installed into an isolated overlay over the pinned
+native-Windows CUDA 13 environment. On an NVIDIA GeForce RTX 4050 Laptop GPU
+(compute capability 8.9), Auto and Prefer GPU selected eligible
+CuPy/CuPyX/cuCIM implementations. All 13 bundled examples completed as fresh
+CPU, Auto, and Prefer-GPU graphs; every selected GPU node passed its declared
+production parity contract, no fallback record was emitted, and cleanup
+succeeded. Provider probes also passed for CuPy, CuPyX, and the approved local
+cuCIM build.
+
+This complements the retained RTX 5090 evidence rather than turning either
+machine into a model allowlist. Public a4 admission accepts a probed NVIDIA CUDA
+device with compute capability 7.5 or newer and driver API 13.3 or newer while
+retaining the exact supported native-Windows, CPython 3.12, CUDA runtime 13.2,
+scientific-stack, provider-provenance, workload, memory, fallback, and cleanup
+gates. Minor floating-point differences can occur across GPU models, drivers,
+compiler paths, and reduction order within a provider's declared tolerance;
+record the full environment and validate consequential work against CPU.
+
+## Historical 0.13.0a1 release source and artifacts
 
 The immutable
 [`v0.13.0a1`](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1)
@@ -201,7 +240,7 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests | A release-pinned field matrix and licensed corpus of representative microscope files |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy/evidence records, tagged release source `7520a5b` with a green package/cross-platform CI matrix and recorded final artifact hashes, a qualified private local cuCIM rebuild, real RTX 5090 Prefer-GPU placement/parity/cleanup and performance checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes | Qualify native Linux GPU, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy v8, tagged a4 source/artifacts, green cross-platform CI, a qualified private local cuCIM build, real RTX 5090 reference evidence, exact tagged-wheel RTX 4050 Auto/Prefer/all-example parity and cleanup, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI smokes | Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
 | Workflow/export architecture | Schema-4/schema-3 migration, batch-config/manifest schema 3, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
@@ -224,17 +263,19 @@ same as an external comparison or assay validation. The distinction matters:
   every reviewed eligible accelerator regardless of speed; Custom owns per-node
   choices and benchmarking.
 - GPU candidates cover only declared operation/dtype/parameter/shape/memory and
-  environment regions. The initial public gate is one exact native-Windows RTX
-  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the
-  bounded M1 Max CPU smoke above does not admit an Apple accelerator.
-  The [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1) is a
+  environment regions. Public admission requires native Windows, CPython 3.12,
+  the pinned CUDA 13.2/scientific/provider stack, driver API 13.3 or newer, and
+  a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
+  CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
+  Apple accelerator. The
+  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a4) is a
   readable summary; the runtime policy/decision remains authoritative.
 - cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
   wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
   recipe. Admission verifies that build's wheel-file hash, the policy-pinned
   canonical installed payload, source/recipe provenance, and the existing
   scientific environment/workload gates. This private per-user rebuild is the
-  settled 0.13.0a1 route; VIPP will not host or redistribute the wheel. Clara
+  settled 0.13.0a4 route; VIPP will not host or redistribute the wheel. Clara
   whole-slide I/O remains outside that build. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).
 - Batch processing is local-file and sorted-position oriented. It does not

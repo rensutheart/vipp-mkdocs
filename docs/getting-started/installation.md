@@ -1,11 +1,11 @@
 # Install VIPP
 
-VIPP 0.13.0a1 supports **CPython 3.12 and 3.13**. The commands below select that
-exact alpha with `==0.13.0a1`, so pip's `--pre` option is neither needed nor
+VIPP 0.13.0a4 supports **CPython 3.12 and 3.13**. The commands below select that
+exact alpha with `==0.13.0a4`, so pip's `--pre` option is neither needed nor
 desirable: `--pre` affects dependency resolution globally. Use `--pre` only
 when asking pip to choose the latest **unpinned** VIPP alpha.
 
-!!! info "Platform and Python verification for 0.13.0a1"
+!!! info "Platform and Python verification for 0.13.0a4"
     The base CPU application is intended for Windows, macOS, and Linux. Release
     CI targets CPython 3.12 and 3.13 on all three operating systems;
     package metadata deliberately excludes unqualified Python 3.14 and newer.
@@ -18,14 +18,14 @@ when asking pip to choose the latest **unpinned** VIPP alpha.
 
 A separate environment prevents unrelated scientific packages from changing
 VIPP's dependencies. The commands below install napari with PyQt6 and the
-tagged 0.13.0a1 alpha release.
+tagged 0.13.0a4 alpha release.
 
 === "Windows"
 
     ```powershell
     py -3.12 -m venv ".venv-vipp"
     & ".\.venv-vipp\Scripts\python.exe" -m pip install --upgrade pip
-    & ".\.venv-vipp\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
+    & ".\.venv-vipp\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a4"
     & ".\.venv-vipp\Scripts\vipp.exe"
     ```
 
@@ -35,7 +35,7 @@ tagged 0.13.0a1 alpha release.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a4"
     vipp
     ```
 
@@ -45,7 +45,7 @@ tagged 0.13.0a1 alpha release.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a1"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a4"
     vipp
     ```
 
@@ -85,7 +85,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.13.0a1
+0.13.0a4
 ```
 
 ## Optional NVIDIA CUDA acceleration
@@ -100,15 +100,20 @@ regardless of speed, or use Custom/**Find fastest** for per-node control and
 measurement. GPU packages are optional and are not imported merely to load VIPP
 or run a CPU workflow.
 
-!!! warning "The first public GPU gate is deliberately narrow"
+!!! warning "GPU admission remains exact even though the model allowlist is gone"
 
-    The 0.13.0a1 admission evidence covers one exact native-Windows stack:
-    64-bit CPython 3.12, NumPy 2.5.1, SciPy 1.18.0, scikit-image 0.26.0,
-    CuPy/CuPyX 14.1.1, CUDA runtime API 13.2, driver API 13.3, and the recorded
-    RTX 5090/compute-capability-12.0 device. A different GPU, OS, driver,
-    runtime, or package set can install successfully and still resolve every
-    GPU candidate to CPU because that environment has not passed the release's
-    evidence gate. Native Linux and RTX 40-series qualification are pending.
+    The 0.13.0a4 public gate accepts a successfully probed NVIDIA CUDA device
+    with compute capability 7.5 or newer and driver API 13.3 or newer. It still
+    requires native Windows, 64-bit CPython 3.12, NumPy 2.5.1, SciPy 1.18.0,
+    scikit-image 0.26.0, CuPy/CuPyX 14.1.1, and CUDA runtime API 13.2. A changed
+    operating system, Python ABI, runtime, package set, failed provider probe,
+    unsupported workload, or insufficient memory remains on CPU with a visible
+    reason. Native Linux GPU qualification remains pending.
+
+    Compatible GPUs can show minor device-, driver-, compiler-, or
+    reduction-order-dependent floating-point differences within a provider's
+    declared tolerance. Preserve the exact GPU and software environment and
+    validate consequential work against the CPU reference.
 
     The standard CUDA extra installs the pinned CuPy/CuPyX stack. It does not
     include the separately reviewed cuCIM build used by the background and
@@ -125,7 +130,7 @@ current CUDA 13 track, Windows users should first read the complete
     ```powershell
     py -3.12 -m venv ".venv-vipp-gpu-cu13"
     & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
-    & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a1"
+    & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a4"
     & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
     & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
     ```
@@ -140,13 +145,13 @@ current CUDA 13 track, Windows users should first read the complete
     python3.12 -m venv vipp-gpu-env
     source vipp-gpu-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a1"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a4"
     vipp-compute-doctor --track cuda13
     vipp
     ```
 
     This creates the intended qualification/development environment, but the
-    0.13.0a1 public policy does not yet admit Linux GPU execution. Expect visible
+    0.13.0a4 public policy does not yet admit Linux GPU execution. Expect visible
     CPU decisions until native-Linux evidence is promoted in a future policy.
 
 The `gpu-cuda12` extra is a qualification/development track in this alpha; the
@@ -188,10 +193,10 @@ raster routes. Install only the reader family you need, then restart napari.
 
 | File family | Command |
 | --- | --- |
-| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.13.0a1"` |
-| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.13.0a1"` |
-| Mixed microscope formats | `python -m pip install "napari-vipp[microscope]==0.13.0a1"` |
-| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.13.0a1"` |
+| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.13.0a4"` |
+| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.13.0a4"` |
+| Mixed microscope formats | `python -m pip install "napari-vipp[microscope]==0.13.0a4"` |
+| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.13.0a4"` |
 
 Support for optional readers is an experimental foundation. A reader exposing
 a file is not proof that every axis, unit, timestamp, or acquisition field was
@@ -201,9 +206,9 @@ quantitative use.
 ## Development branches
 
 Historical candidate commits and artifact hashes are retained in the
-[release notes](../releases/0.13.0a1.md) for audit history. They are not
+[release notes](../releases/0.13.0a4.md) for audit history. They are not
 installation targets and must not be uploaded or represented as the final
-0.13.0a1 artifacts.
+0.13.0a4 artifacts.
 
 For newer unreleased `main` work, use:
 
@@ -217,7 +222,7 @@ build.
 
 Before upgrading an existing workflow, read
 [versions and compatibility](../reference/versioning.md) and preserve the old
-environment. Schema-1/2 workflows do not open in 0.13.0a1. Valid schema-3
+environment. Schema-1/2 workflows do not open in 0.13.0a4. Valid schema-3
 workflows load structurally with an explicit CPU compute request; saving writes
 schema 4. Cached results are not serialized, so recalculate and validate after
 upgrading. Version-1 batch configs load as CPU, while version-2 configs retain

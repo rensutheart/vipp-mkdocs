@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.13.0a1 |
+| Source | Behavior in 0.13.0a4 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 13 deterministic VIPP samples. |
@@ -89,7 +89,7 @@ shared executor or create an exact compute-provenance sidecar.
   infer biological correspondence or perform registration.
 - Local batch processing pairs sorted file collections by position. Semantic
   axis iteration, remote collection input, and plate/well/field HCS traversal
-  are outside 0.13.0a1.
+  are outside 0.13.0a4.
 
 ## Execution provenance for saved outputs
 

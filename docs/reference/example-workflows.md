@@ -45,7 +45,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.13.0a1 they are:
+Use `--list` to print the release's exact IDs. In 0.13.0a4 they are:
 
 | ID | Example title |
 | --- | --- |

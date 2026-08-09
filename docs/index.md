@@ -36,25 +36,25 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual documents **napari-vipp 0.13.0a1**, available as an alpha
-    pre-release from [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1)
-    and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a1/). Its immutable
-    `v0.13.0a1` tag resolves to
-    [`7520a5bb3ea9fe296bb231c63d1598b833ac10f6`](https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6),
+    This manual documents **napari-vipp 0.13.0a4**, available as an alpha
+    pre-release from [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a4)
+    and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a4/). Its immutable
+    `v0.13.0a4` tag resolves to
+    [`4bec1e8145b31e161beaf44a290bff24aea36f5e`](https://github.com/rensutheart/napari-vipp/commit/4bec1e8145b31e161beaf44a290bff24aea36f5e),
     which passed the complete package and cross-platform test
-    [matrix](https://github.com/rensutheart/napari-vipp/actions/runs/31112153743).
+    [matrix](https://github.com/rensutheart/napari-vipp/actions/runs/31300028320).
     Final artifact hashes are recorded in the
-    [release notes](releases/0.13.0a1.md#release-verification). Interfaces,
+    [release notes](releases/0.13.0a4.md#release-verification). Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
 !!! important "0.13 workflow and compute compatibility"
-    0.13.0a1 writes workflow schema 4. A valid schema-3 workflow loads with an
+    0.13.0a4 writes workflow schema 4. A valid schema-3 workflow loads with an
     explicit CPU compute request, while schemas 1 and 2 remain rejected. Cached
     results are not saved in workflow JSON and generated Python is pinned to
     its creator version. Read the
-    [0.13.0a1 release notes](releases/0.13.0a1.md) before upgrading and
+    [0.13.0a4 release notes](releases/0.13.0a4.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 3. Version-1 configs load with an
@@ -103,7 +103,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in 0.13 | [0.13.0a1 release notes](releases/0.13.0a1.md) |
+| Review everything changed in 0.13 | [0.13.0a4 release notes](releases/0.13.0a4.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

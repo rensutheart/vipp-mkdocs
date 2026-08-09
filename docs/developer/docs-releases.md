@@ -31,17 +31,19 @@ Before moving `stable`:
    portable performance promise.
 6. Run `mkdocs build --strict` and visually review key pages, navigation,
    internal links, tables, and both themes.
-7. Publish and verify the matching application tag and packages before moving
-   the documentation's `stable` alias.
-8. In GitHub Actions, run **Deploy versioned documentation** with a version such
-   as `0.13.0a1` and `make_stable=true`.
-9. Open the public site, select both the numbered release and `stable`, then
+7. After the application tag is public, deploy the numbered manual with
+   `make_stable=false` and verify it before the irreversible package upload.
+8. Publish and verify the matching application packages and GitHub prerelease.
+9. Run **Deploy versioned documentation** again for `0.13.0a4` with
+   `make_stable=true` so the already-reviewed snapshot becomes the default.
+10. Open the public site, select both the numbered release and `stable`, then
    verify installation, search, code highlighting, redirects, and images.
 
 The workflow executes the equivalent of:
 
 ```text
-mike deploy --push --update-aliases 0.13.0a1 stable
+mike deploy --push 0.13.0a4
+mike deploy --push --update-aliases 0.13.0a4 stable
 mike set-default --push stable
 ```
 
@@ -52,7 +54,7 @@ record it in the repository history.
 ## Preview versioned output locally
 
 ```text
-mike deploy 0.13.0a1 stable
+mike deploy 0.13.0a4 stable
 mike deploy nightly
 mike serve
 ```

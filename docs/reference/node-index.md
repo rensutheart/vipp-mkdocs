@@ -12,7 +12,7 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-In 0.13.0a1, manual/cached nodes and nodes selected for isolated tuning use the
+In 0.13.0a4, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. **Tune node in isolation** recalculates only the selected node until
@@ -157,7 +157,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes are public in 0.13.0a1. They have synthetic examples and automated
+These nodes are public in 0.13.0a4. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 

@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a1 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.13.0a4 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -168,7 +168,9 @@ accelerator runtime and the calculated writer-free graph frontier. Unsupported
 nodes remain CPU candidates; manual barriers do not justify benchmarking an
 unrunnable descendant.
 
-## GPU regions in 0.13.0a1
+<a id="gpu-regions-in-0130a1"></a>
+
+## GPU regions in 0.13.0a4
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
@@ -209,13 +211,21 @@ public GPU install. Windows users can optionally build the pinned cuCIM 26.6.0
 source locally and approve it with its generated manifest; see the
 [Windows CUDA and cuCIM guide](../getting-started/windows-cuda.md).
 
-Public admission in this alpha is deliberately narrower than installability:
-the recorded gate is one native-Windows CPython 3.12, CUDA 13, RTX 5090 stack.
-The Linux CUDA command is useful for qualification/development but the current
-public policy still resolves Linux GPU candidates to CPU. CUDA has no macOS
-path. CPU launch/basic processing, provider-neutral batch progress/cancellation,
-and single-budget RAM presentation received a bounded M1 Max smoke, but Apple
-Metal/MPS/MLX acceleration remains a future study.
+Public admission requires native Windows, CPython 3.12, the pinned CUDA 13.2
+runtime and scientific/provider stack, driver API 13.3 or newer, and a probed
+NVIDIA CUDA device with compute capability 7.5 or newer. The GPU model is
+recorded in provenance rather than used as an allowlist. Auto, Prefer GPU, and
+Custom use the same device gate; each operation still has its own exact
+workload, memory, dependency, and cleanup requirements. The Linux CUDA command
+is useful for qualification/development but the current public policy resolves
+Linux GPU candidates to CPU. CUDA has no macOS path.
+
+Hardware, driver, compiler, and reduction-order differences can produce minor
+floating-point variation across otherwise compatible GPUs within a provider's
+declared tolerance. Record the GPU model, compute capability, driver, CUDA
+stack, Python and scientific-package versions, actual implementation IDs, and
+execution report. Validate consequential work against the CPU reference before
+combining results from different environments.
 
 See [installation](../getting-started/installation.md) for commands and
 [validation status](../reference/validation-status.md) for the evidence and

@@ -1,7 +1,7 @@
 # Restore with a PSF
 
 Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.13.0a1. The
+RL with total-variation regularization (RL-TV) are public in 0.13.0a4. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
 stale, its descendants wait and retain their last coherent cached results when

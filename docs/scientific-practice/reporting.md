@@ -8,6 +8,9 @@ the data, and understand which decisions or exclusions were manual.
 Report:
 
 - napari-vipp version (and commit for nightly/development builds);
+- exact GPU model and compute capability, NVIDIA driver, CUDA driver/runtime
+  and toolkit-package versions, and compiler/JIT-relevant provider versions
+  whenever acceleration was used;
 - Python and important dependency versions or an environment file;
 - workflow JSON and, if used, generated Python;
 - authored compute mode and per-node preferences, plus the actual CPU/CuPy/
@@ -45,7 +48,7 @@ Report:
 
 ## Suggested concise wording
 
-> Images were processed with napari-vipp 0.13.0a1 using the archived workflow
+> Images were processed with napari-vipp 0.13.0a4 using the archived workflow
 > JSON [identifier]. The workflow was developed on [development set] and frozen
 > before evaluation on [held-out set]. Intermediate masks and labels were
 > reviewed using predefined criteria [reference], and [metrics] were calculated
@@ -56,6 +59,12 @@ Prefer GPU compute. The archived execution report records CuPy implementation
 `[ID/version]` on `[device/environment]` for `[nodes]`, CPU for `[nodes]`, and
 `[no fallbacks / classified fallback details]`.” Do not report “GPU analysis”
 from toolbar intent alone.
+
+Compatible GPU models can produce minor floating-point differences because of
+hardware, driver, compiler-path, or reduction-order changes. Report the exact
+environment, preserve the execution report, and state how the accelerated
+result was compared with the CPU reference on representative data. Bitwise
+contracts remain bitwise where the implementation explicitly promises them.
 
 If Custom was used, also report the authored per-node choices or applied
 optimizer assignment. Prefer GPU means accelerator placement regardless of
