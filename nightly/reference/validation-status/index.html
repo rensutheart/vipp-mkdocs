@@ -546,6 +546,8 @@
       
         
       
+        
+      
     
     
     
@@ -589,6 +591,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1979,9 +2004,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#0130a1-release-source-and-artifacts" class="md-nav__link">
+  <a href="#0130a4-release-source-and-artifacts" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a1 release source and artifacts
+      0.13.0a4 release source and artifacts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-0130a1-release-source-and-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical 0.13.0a1 release source and artifacts
     </span>
   </a>
   
@@ -2476,9 +2510,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#0130a1-release-source-and-artifacts" class="md-nav__link">
+  <a href="#0130a4-release-source-and-artifacts" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a1 release source and artifacts
+      0.13.0a4 release source and artifacts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-0130a1-release-source-and-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical 0.13.0a1 release source and artifacts
     </span>
   </a>
   
@@ -2545,7 +2588,7 @@
 
 
 <h1 id="validation-status">Validation status<a class="headerlink" href="#validation-status" title="Permanent link">&para;</a></h1>
-<p>This page summarizes the evidence shipped with the 0.13.0a1 application source.
+<p>This page summarizes the evidence shipped with the 0.13.0a4 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.</p>
 <h2 id="evidence-available-now">Evidence available now<a class="headerlink" href="#evidence-available-now" title="Permanent link">&para;</a></h2>
@@ -2579,7 +2622,54 @@ every assay.</p>
 <li>opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.</li>
 </ul>
-<h2 id="0130a1-release-source-and-artifacts">0.13.0a1 release source and artifacts<a class="headerlink" href="#0130a1-release-source-and-artifacts" title="Permanent link">&para;</a></h2>
+<h2 id="0130a4-release-source-and-artifacts">0.13.0a4 release source and artifacts<a class="headerlink" href="#0130a4-release-source-and-artifacts" title="Permanent link">&para;</a></h2>
+<p>The immutable annotated
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a4"><code>v0.13.0a4</code></a>
+tag resolves to application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/4bec1e8145b31e161beaf44a290bff24aea36f5e"><code>4bec1e8145b31e161beaf44a290bff24aea36f5e</code></a>
+on <code>main</code>. Its exact-source
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31300028320">CI run</a>
+passed package, manifest, lint, wheel smoke, and CPython 3.12 and 3.13 tests on
+Windows, Linux, and macOS.</p>
+<p>The final local source suite completed with <strong>4,018 passed</strong>, <strong>109 expected
+skips</strong>, <strong>2 documented expected failures</strong>, and zero failures. The clean
+tagged wheel and source distribution passed Twine and content inspection. The
+publication artifacts are:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>napari_vipp-0.13.0a4-py3-none-any.whl</code></td>
+<td><code>5FA75FC48955E2CA9AD7D5BC13218AD83EF14C23F0B72F74D8A7486CA8453085</code></td>
+</tr>
+<tr>
+<td><code>napari_vipp-0.13.0a4.tar.gz</code></td>
+<td><code>B99B829C45BE734B705DEE17829886EF91DEAABC3C3D3C5F76C164DB87A617AF</code></td>
+</tr>
+</tbody>
+</table>
+<p>The exact tagged wheel was installed into an isolated overlay over the pinned
+native-Windows CUDA 13 environment. On an NVIDIA GeForce RTX 4050 Laptop GPU
+(compute capability 8.9), Auto and Prefer GPU selected eligible
+CuPy/CuPyX/cuCIM implementations. All 13 bundled examples completed as fresh
+CPU, Auto, and Prefer-GPU graphs; every selected GPU node passed its declared
+production parity contract, no fallback record was emitted, and cleanup
+succeeded. Provider probes also passed for CuPy, CuPyX, and the approved local
+cuCIM build.</p>
+<p>This complements the retained RTX 5090 evidence rather than turning either
+machine into a model allowlist. Public a4 admission accepts a probed NVIDIA CUDA
+device with compute capability 7.5 or newer and driver API 13.3 or newer while
+retaining the exact supported native-Windows, CPython 3.12, CUDA runtime 13.2,
+scientific-stack, provider-provenance, workload, memory, fallback, and cleanup
+gates. Minor floating-point differences can occur across GPU models, drivers,
+compiler paths, and reduction order within a provider's declared tolerance;
+record the full environment and validate consequential work against CPU.</p>
+<h2 id="historical-0130a1-release-source-and-artifacts">Historical 0.13.0a1 release source and artifacts<a class="headerlink" href="#historical-0130a1-release-source-and-artifacts" title="Permanent link">&para;</a></h2>
 <p>The immutable
 <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1"><code>v0.13.0a1</code></a>
 tag resolves to application commit
@@ -2768,8 +2858,8 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Compute/GPU execution</td>
-<td>Exact operation-region tests, immutable policy/evidence records, tagged release source <code>7520a5b</code> with a green package/cross-platform CI matrix and recorded final artifact hashes, a qualified private local cuCIM rebuild, real RTX 5090 Prefer-GPU placement/parity/cleanup and performance checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI operator smokes</td>
-<td>Qualify native Linux GPU, RTX 40-series Windows, broader clean-host GPU/wheel environments and drivers/runtimes, an Apple provider if pursued, and broader cross-platform manual GUI acceptance</td>
+<td>Exact operation-region tests, immutable policy v8, tagged a4 source/artifacts, green cross-platform CI, a qualified private local cuCIM build, real RTX 5090 reference evidence, exact tagged-wheel RTX 4050 Auto/Prefer/all-example parity and cleanup, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI smokes</td>
+<td>Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance</td>
 </tr>
 <tr>
 <td>Sources and physical grids</td>
@@ -2810,17 +2900,19 @@ same as an external comparison or assay validation. The distinction matters:</p>
   every reviewed eligible accelerator regardless of speed; Custom owns per-node
   choices and benchmarking.</li>
 <li>GPU candidates cover only declared operation/dtype/parameter/shape/memory and
-  environment regions. The initial public gate is one exact native-Windows RTX
-  5090/CUDA 13/CPython 3.12 stack. macOS is CPU-only in this release; the
-  bounded M1 Max CPU smoke above does not admit an Apple accelerator.
-  The <a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">CPU/GPU matrix</a> is a
+  environment regions. Public admission requires native Windows, CPython 3.12,
+  the pinned CUDA 13.2/scientific/provider stack, driver API 13.3 or newer, and
+  a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
+  CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
+  Apple accelerator. The
+  <a href="../../how-to/choose-compute/#gpu-regions-in-0130a4">CPU/GPU matrix</a> is a
   readable summary; the runtime policy/decision remains authoritative.</li>
 <li>cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
   wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
   recipe. Admission verifies that build's wheel-file hash, the policy-pinned
   canonical installed payload, source/recipe provenance, and the existing
   scientific environment/workload gates. This private per-user rebuild is the
-  settled 0.13.0a1 route; VIPP will not host or redistribute the wheel. Clara
+  settled 0.13.0a4 route; VIPP will not host or redistribute the wheel. Clara
   whole-slide I/O remains outside that build. See the
   <a href="../../getting-started/windows-cuda/">Windows CUDA guide</a>.</li>
 <li>Batch processing is local-file and sorted-position oriented. It does not
@@ -2866,7 +2958,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 9, 2026 07:46:48 UTC">August 9, 2026</span>
   </span>
 
     

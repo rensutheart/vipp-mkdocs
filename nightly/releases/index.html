@@ -18,7 +18,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="0.13.0a1/">
+        <link rel="next" href="0.13.0a4/">
       
       
       <link rel="icon" href="../assets/branding/vipp-mark.svg">
@@ -548,6 +548,8 @@
       
         
       
+        
+      
     
     
     
@@ -594,6 +596,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="0.13.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2416,22 +2441,20 @@ not a substitute for validating an analysis on representative and held-out
 data.</p>
 <h2 id="current-alpha-release">Current alpha release<a class="headerlink" href="#current-alpha-release" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="0.13.0a1/">0.13.0a1</a> — evidence-gated
-  <strong>Auto / CPU / Prefer GPU / Custom</strong> execution, durable compute provenance and
-  cancellation across interactive and automated surfaces, workflow tabs, new
-  scientific nodes, and extensive correctness/UI fixes.</li>
+<li><a href="0.13.0a4/">0.13.0a4</a> — compatible NVIDIA CUDA 13 admission for
+  <strong>Auto / CPU / Prefer GPU / Custom</strong>, with cross-device reproducibility
+  guidance and the retained a2/a3 planning, qualification, and Sigma fixes.</li>
 </ul>
 <p>The alpha is published on
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a1">GitHub</a> and
-<a href="https://pypi.org/project/napari-vipp/0.13.0a1/">PyPI</a>. Its immutable
-<code>v0.13.0a1</code> tag resolves to application commit
-<a href="https://github.com/rensutheart/napari-vipp/commit/7520a5bb3ea9fe296bb231c63d1598b833ac10f6"><code>7520a5bb3ea9fe296bb231c63d1598b833ac10f6</code></a>,
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a4">GitHub</a> and
+<a href="https://pypi.org/project/napari-vipp/0.13.0a4/">PyPI</a>. Its immutable
+<code>v0.13.0a4</code> tag resolves to application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/4bec1e8145b31e161beaf44a290bff24aea36f5e"><code>4bec1e8145b31e161beaf44a290bff24aea36f5e</code></a>,
 which passed the complete package and cross-platform test
-<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31112153743">matrix</a>.
-The earlier <code>e024409</code> and <code>444f682</code> checkpoints remain historical evidence;
-their artifacts must not be uploaded. The exact final artifact hashes are in
-the <a href="0.13.0a1/#release-verification">0.13.0a1 release verification</a>.</p>
-<p>0.13.0a1 writes workflow schema 4 and batch config/manifest schema 3. Valid
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31300028320">matrix</a>.
+The exact final artifact hashes are in the
+<a href="0.13.0a4/#release-verification">0.13.0a4 release verification</a>.</p>
+<p>0.13.0a4 writes workflow schema 4 and batch config/manifest schema 3. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;
 version-2 batch configs retain their saved compute request. Neither older batch
 version contains source-axis declarations until reviewed and saved as version
@@ -2443,6 +2466,10 @@ upgrading, and regenerate any Python export because generated programs require
 the exact VIPP runtime version that created them.</p>
 <h2 id="previous-releases">Previous releases<a class="headerlink" href="#previous-releases" title="Permanent link">&para;</a></h2>
 <ul>
+<li>
+<p><a href="0.13.0a1/">0.13.0a1</a> — first evidence-gated GPU alpha with durable
+  compute provenance, workflow tabs, and the current schema-4 foundation.</p>
+</li>
 <li>
 <p><a href="0.12.0a3/">0.12.0a3</a> — direct batch execution, faster complete skips,
   more resilient provenance writes, suggested output destinations, and optional
@@ -2483,7 +2510,7 @@ an older workflow in a newer release.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 9, 2026 07:46:48 UTC">August 9, 2026</span>
   </span>
 
     
@@ -2538,13 +2565,13 @@ an older workflow in a newer release.</p>
         
         
           
-          <a href="0.13.0a1/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.13.0a1">
+          <a href="0.13.0a4/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.13.0a4">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                0.13.0a1
+                0.13.0a4
               </div>
             </div>
             <div class="md-footer__button md-icon">
