@@ -5,7 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.13.0a4 release notes](../releases/0.13.0a4.md) | Review compatible NVIDIA GPU admission, reproducibility guidance, durable automation, upgrade steps, and limitations. |
+| [0.13.0a5 release notes](../releases/0.13.0a5.md) | Review the Windows installer, compatible NVIDIA GPU admission, reproducibility guidance, durable automation, upgrade steps, and limitations. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
 | [All 112 nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
 | [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |

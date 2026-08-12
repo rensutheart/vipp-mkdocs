@@ -6,18 +6,18 @@ any NVIDIA packages.
 
 !!! note "Use the manual for your installed release"
 
-    The commands on this page are pinned to the 0.13.0a4 package and immutable
-    `v0.13.0a4` tag. Select the numbered `0.13.0a4` manual when installing this
+    The commands on this page are pinned to the 0.13.0a5 package and immutable
+    `v0.13.0a5` tag. Select the numbered `0.13.0a5` manual when installing this
     release; the nightly manual can describe changes intended for a later
     version.
 
 ## Choose the installation you need
 
-| Goal | 0.13.0a4 route |
+| Goal | 0.13.0a5 route |
 | --- | --- |
-| Run VIPP on CPU | Install the base package from the main installation guide. |
-| Use the reviewed CuPy/CuPyX operations | Install the `gpu-cuda13` extra below. This is the normal Windows GPU route. |
-| Use cuCIM-backed background or basic-measurement operations | First install the standard CUDA route, then [build and add the pinned cuCIM release](#build-and-add-the-pinned-cucim-release). VIPP does not distribute the wheel. |
+| Run VIPP on CPU | Use the checksum-verified unsigned installer from the main installation guide and keep its CPU recommendation. |
+| Use the reviewed CuPy/CuPyX operations | Use that installer and keep Automatic, or explicitly select NVIDIA GPU under Advanced details. The manual `gpu-cuda13` route below remains available. |
+| Use cuCIM-backed background or basic-measurement operations | First complete the standard CUDA installation, then use the separate no-wheel cuCIM bundle or [build and add the pinned cuCIM release](#build-and-add-the-pinned-cucim-release). VIPP does not distribute the wheel. |
 
 ## Requirements for the standard CUDA 13 route
 
@@ -56,7 +56,7 @@ is not the CUDA runtime installed in the VIPP environment.
 
 !!! warning "Scientific admission remains narrower than installability"
 
-    VIPP 0.13.0a4 admits a successfully probed NVIDIA CUDA device with compute
+    VIPP 0.13.0a5 admits a successfully probed NVIDIA CUDA device with compute
     capability 7.5 or newer and driver API 13.3 or newer. Public GPU execution
     still requires native Windows, CPython 3.12, NumPy 2.5.1, SciPy 1.18.0,
     scikit-image 0.26.0, CuPy/CuPyX 14.1.1, and CUDA runtime API 13.2. A failed
@@ -77,19 +77,19 @@ directly, so PowerShell script-activation policy cannot interfere.
 ```powershell
 py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
-& ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a4"
+& ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a5"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
 
-An exact prerelease such as `==0.13.0a4` does not need pip's `--pre` option.
+An exact prerelease such as `==0.13.0a5` does not need pip's `--pre` option.
 Use `--pre` only when asking pip to choose the latest unpinned VIPP alpha.
 
 Do not add the `gpu-cuda12` extra to this environment. CUDA 12 is a separate
-developer-qualification track in 0.13.0a4, and CuPy's CUDA 12 and CUDA 13
+developer-qualification track in 0.13.0a5, and CuPy's CUDA 12 and CUDA 13
 distributions must never share one environment.
 
-### Upgrade an existing 0.13 alpha CUDA environment
+### Upgrade an existing manually managed 0.13 alpha CUDA environment
 
 Close VIPP and napari first. Keep the existing environment directory name;
 renaming a virtual environment can break its launcher paths. Resolve its Python
@@ -99,19 +99,19 @@ and upgrade only the pinned CUDA 13 package set:
 $installRoot = Join-Path $env:USERPROFILE "VIPP-0.13.0a1"
 $vippPython = (Resolve-Path (Join-Path $installRoot ".venv-vipp-gpu-cu13\Scripts\python.exe")).Path
 
-& $vippPython -m pip install --upgrade --upgrade-strategy only-if-needed "napari-vipp[gpu-cuda13]==0.13.0a4"
+& $vippPython -m pip install --upgrade --upgrade-strategy only-if-needed "napari-vipp[gpu-cuda13]==0.13.0a5"
 & $vippPython -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 & $vippPython -m pip check
 & (Join-Path $installRoot ".venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe") --track cuda13 --refresh
 ```
 
-An a1 private cuCIM wheel and manifest remain compatible with a4 because the
+An earlier private cuCIM wheel and manifest remain compatible with a5 because the
 cuCIM source, build recipe, payload digest, and approval schema did not change.
 Keep those files. If the refreshed cuCIM probe succeeds, do not rebuild or
-reinstall it. If it fails, obtain the immutable a4 source and use its
+reinstall it. If it fails, obtain the immutable a5 source and use its
 `setup_gpu_dev.py --existing-environment ... --plan-only` command with the
 retained wheel and manifest. Reinstall through that helper only when the plan
-passes; never copy an old approval JSON back manually. Rebuild from the a4 tag
+passes; never copy an old approval JSON back manually. Rebuild from the a5 tag
 only when the retained artifact pair is missing, damaged, or rejected.
 
 ## Read the compute-doctor result
@@ -212,8 +212,8 @@ The build and approval scripts are deliberately release-source tools rather
 than a bundled cuCIM dependency:
 
 ```powershell
-$sourceRoot = Join-Path $env:USERPROFILE "napari-vipp-0.13.0a4-source"
-git clone --branch v0.13.0a4 --depth 1 https://github.com/rensutheart/napari-vipp.git $sourceRoot
+$sourceRoot = Join-Path $env:USERPROFILE "napari-vipp-0.13.0a5-source"
+git clone --branch v0.13.0a5 --depth 1 https://github.com/rensutheart/napari-vipp.git $sourceRoot
 Set-Location $sourceRoot
 ```
 
@@ -223,7 +223,7 @@ Choose a private output directory that does not already contain artifacts:
 
 ```powershell
 $python312 = py -3.12 -c "import sys; print(sys.executable)"
-$artifactDir = Join-Path $env:USERPROFILE "vipp-cucim-local\0.13.0a4"
+$artifactDir = Join-Path $env:USERPROFILE "vipp-cucim-local\0.13.0a5"
 New-Item -ItemType Directory -Path $artifactDir -Force | Out-Null
 
 powershell -ExecutionPolicy Bypass -File .\scripts\build_cucim_windows.ps1 `
@@ -303,14 +303,14 @@ silence that upstream message.
 Keep the wheel and manifest private. They are local build records, not files to
 upload, email to other users, or place on a shared package index.
 
-## Distribution decision for 0.13.0a4
+## Distribution decision for 0.13.0a5
 
 Every user who wants the optional Windows cuCIM provider builds and keeps their
 own wheel and manifest using the fixed procedure above. VIPP will not host or
 redistribute those wheels on `rensu.co.za`, GitHub Releases, PyPI, or a shared
 package index. Do not reuse another user's wheel: rebuild it locally so its
 manifest and per-build wheel hash describe the artifact you install. This
-private local-build boundary is part of the 0.13.0a4 release contract.
+private local-build boundary is part of the 0.13.0a5 release contract.
 
 Continue with [choose and verify CPU or GPU compute](../how-to/choose-compute.md)
 for operation regions, fallback reasons, badges, and provenance.
