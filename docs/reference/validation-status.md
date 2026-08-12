@@ -38,7 +38,7 @@ every assay.
 ## 0.13.0a5 installer acceptance and release boundary
 
 The release candidate is application commit
-[`927ed0adb9dccf01b1e8ab68a14a120724ef72bf`](https://github.com/rensutheart/napari-vipp/commit/927ed0adb9dccf01b1e8ab68a14a120724ef72bf)
+[`183104482f50e13b078a8190592246df13ba8d64`](https://github.com/rensutheart/napari-vipp/commit/183104482f50e13b078a8190592246df13ba8d64)
 on [release PR #16](https://github.com/rensutheart/napari-vipp/pull/16).
 
 The development installer passed fresh managed CPU and CUDA installation, real
