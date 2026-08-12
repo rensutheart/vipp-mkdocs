@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a4 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.13.0a5 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -170,7 +170,7 @@ unrunnable descendant.
 
 <a id="gpu-regions-in-0130a1"></a>
 
-## GPU regions in 0.13.0a4
+## GPU regions in 0.13.0a5
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.

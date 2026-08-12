@@ -1,5 +1,19 @@
 # Launch VIPP
 
+## Use the installed shortcut on Windows
+
+The signed Windows installer creates launchers for the managed installation:
+
+- a CPU installation provides **VIPP**;
+- a CUDA installation provides **VIPP Automatic**, **VIPP CPU**, and
+  **VIPP Prefer GPU**.
+
+Begin with **VIPP Automatic** after a CUDA installation. Startup shows the VIPP
+brand, real progress milestones, elapsed time, and retained diagnostics. A
+Prefer-GPU session requests every scientifically and operationally eligible GPU
+implementation, but operations outside the reviewed region still use CPU with
+an explanation.
+
 ## Open the napari widget
 
 Activate the environment used for installation and run:

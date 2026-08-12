@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.13.0a5: releases/0.13.0a5.md
       - 0.13.0a4: releases/0.13.0a4.md
       - 0.13.0a1: releases/0.13.0a1.md
       - 0.12.0a3: releases/0.12.0a3.md
@@ -128,7 +129,7 @@ nav:
   - Start here:
       - Start here: getting-started/index.md
       - Install VIPP: getting-started/installation.md
-      - Install CUDA on Windows: getting-started/windows-cuda.md
+      - Windows CUDA and cuCIM: getting-started/windows-cuda.md
       - Launch VIPP: getting-started/launching.md
       - Tour a finished workflow: getting-started/example-tour.md
       - Build your first workflow: getting-started/build-workflow.md

@@ -1,6 +1,6 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.13.0a4 application source.
+This page summarizes the evidence shipped with the 0.13.0a5 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.
 
@@ -35,7 +35,24 @@ every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a4 release source and artifacts
+## 0.13.0a5 installer acceptance and release boundary
+
+The release candidate is application commit
+[`b7428993831afafab25a64d5d0b363d0e16f6075`](https://github.com/rensutheart/napari-vipp/commit/b7428993831afafab25a64d5d0b363d0e16f6075)
+on [release PR #16](https://github.com/rensutheart/napari-vipp/pull/16).
+
+The development installer passed fresh managed CPU and CUDA installation, real
+Auto and Prefer-GPU execution with CPU parity and clean accelerator release,
+optional cuCIM installation and execution, update and repair, and independent
+CPU/CUDA removal on the Windows reference system. The DEVELOPMENT file is not a
+release artifact. The official filename is created only from the immutable
+tag's exact wheel after a timestamped Authenticode signature passes independent
+verification and the signed candidate passes final clean-machine acceptance.
+
+Final CI, tag, signer, and artifact hashes are recorded in
+[0.13.0a5 release verification](../releases/0.13.0a5.md#release-verification).
+
+## Historical 0.13.0a4 release source and artifacts
 
 The immutable annotated
 [`v0.13.0a4`](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a4)
@@ -268,14 +285,14 @@ same as an external comparison or assay validation. The distinction matters:
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a4) is a
+  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a5) is a
   readable summary; the runtime policy/decision remains authoritative.
 - cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
   wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
   recipe. Admission verifies that build's wheel-file hash, the policy-pinned
   canonical installed payload, source/recipe provenance, and the existing
   scientific environment/workload gates. This private per-user rebuild is the
-  settled 0.13.0a4 route; VIPP will not host or redistribute the wheel. Clara
+  settled 0.13.0a5 route; VIPP will not host or redistribute the wheel. Clara
   whole-slide I/O remains outside that build. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).
 - Batch processing is local-file and sorted-position oriented. It does not
