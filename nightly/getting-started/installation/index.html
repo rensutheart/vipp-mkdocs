@@ -548,6 +548,8 @@
       
         
       
+        
+      
     
     
     
@@ -591,6 +593,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -849,9 +874,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#recommended-a-dedicated-environment" class="md-nav__link">
+  <a href="#windows-installer-recommended" class="md-nav__link">
     <span class="md-ellipsis">
-      Recommended: a dedicated environment
+      Windows installer — recommended
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows installer — recommended">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-download-and-pass-the-windows-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify the download and pass the Windows warning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#before-you-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before you start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-repair-or-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update, repair, or remove
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux-macos-and-advanced-manual-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux, macOS, and advanced manual installation
     </span>
   </a>
   
@@ -885,18 +961,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#development-branches" class="md-nav__link">
+  <a href="#development-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Development branches
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#developer-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Developer installation
+      Development installation
     </span>
   </a>
   
@@ -923,7 +990,7 @@
   
   
   <span class="md-ellipsis">
-    Install CUDA on Windows
+    Windows CUDA and cuCIM
     
   </span>
   
@@ -2492,9 +2559,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#recommended-a-dedicated-environment" class="md-nav__link">
+  <a href="#windows-installer-recommended" class="md-nav__link">
     <span class="md-ellipsis">
-      Recommended: a dedicated environment
+      Windows installer — recommended
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows installer — recommended">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-download-and-pass-the-windows-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify the download and pass the Windows warning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#before-you-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before you start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-repair-or-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update, repair, or remove
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux-macos-and-advanced-manual-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux, macOS, and advanced manual installation
     </span>
   </a>
   
@@ -2528,18 +2646,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#development-branches" class="md-nav__link">
+  <a href="#development-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Development branches
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#developer-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Developer installation
+      Development installation
     </span>
   </a>
   
@@ -2570,174 +2679,163 @@
 
 
 <h1 id="install-vipp">Install VIPP<a class="headerlink" href="#install-vipp" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.13.0a4 supports <strong>CPython 3.12 and 3.13</strong>. The commands below select that
-exact alpha with <code>==0.13.0a4</code>, so pip's <code>--pre</code> option is neither needed nor
-desirable: <code>--pre</code> affects dependency resolution globally. Use <code>--pre</code> only
-when asking pip to choose the latest <strong>unpinned</strong> VIPP alpha.</p>
-<div class="admonition info">
-<p class="admonition-title">Platform and Python verification for 0.13.0a4</p>
-<p>The base CPU application is intended for Windows, macOS, and Linux. Release
-CI targets CPython 3.12 and 3.13 on all three operating systems;
-package metadata deliberately excludes unqualified Python 3.14 and newer.
-CUDA extras are limited to 64-bit CPython 3.12 on native Windows/Linux.
-Treat the commands below as installation paths, not evidence that every
-reader, dataset, display server, GPU, driver, or scientific stack has been
-validated.</p>
+<h2 id="windows-installer-recommended">Windows installer — recommended<a class="headerlink" href="#windows-installer-recommended" title="Permanent link">&para;</a></h2>
+<p>For Windows, use the VIPP installer. It creates and maintains a private
+VIPP environment, so you do not need to activate Python or choose individual
+packages.</p>
+<p><strong><a href="https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a5/VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe">Download VIPP 0.13.0a5 for Windows (unsigned alpha)</a></strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Unsigned alpha — verify before running</p>
+<p>Download <code>VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe</code> only from the
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a5">official v0.13.0a5 GitHub release</a>.
+This alpha is intentionally not Authenticode-signed, so Windows will report
+<strong>Unknown publisher</strong>. The <code>-UNSIGNED</code> filename is intentional. Do
+not use a similarly named file from another site.</p>
 </div>
-<h2 id="recommended-a-dedicated-environment">Recommended: a dedicated environment<a class="headerlink" href="#recommended-a-dedicated-environment" title="Permanent link">&para;</a></h2>
-<p>A separate environment prevents unrelated scientific packages from changing
-VIPP's dependencies. The commands below install napari with PyQt6 and the
-tagged 0.13.0a4 alpha release.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">macOS</label><label for="__tabbed_1_3">Linux</label></div>
+<h3 id="verify-the-download-and-pass-the-windows-warning">Verify the download and pass the Windows warning<a class="headerlink" href="#verify-the-download-and-pass-the-windows-warning" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Download the installer and <code>SHA256SUMS-Windows-0.13.0a5.txt</code> from the same
+   official GitHub release.</li>
+<li>
+<p>Open PowerShell in the download folder and run:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Get-FileHash</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="p">`</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="p">.\</span><span class="n">VIPP-Setup</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a5-Windows-x86_64-UNSIGNED</span><span class="p">.</span><span class="n">exe</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Compare the full 64-character result with the line for the installer in
+   <code>SHA256SUMS-Windows-0.13.0a5.txt</code>. If it differs, stop and delete the file.</p>
+</li>
+<li>Double-click the installer. At <strong>Windows protected your PC</strong>, choose <strong>More
+   info</strong>, check that the app name ends in <code>-UNSIGNED.exe</code> and the publisher is
+   <strong>Unknown publisher</strong>, then choose <strong>Run anyway</strong>.</li>
+</ol>
+<p>Do not continue if Microsoft Defender or another antivirus identifies a
+threat, and never disable Windows security. Work/school policy or Windows 11
+Smart App Control may block unsigned applications without a <strong>Run anyway</strong>
+choice; use the manual installation below in that case.</p>
+<h3 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use 64-bit Windows.</li>
+<li>Install a supported 64-bit Python. CPython 3.12.10 works for both CPU and
+  NVIDIA GPU setup; CPython 3.13 is also supported for CPU.</li>
+<li>Keep an internet connection available during the first installation.</li>
+<li>For NVIDIA GPU use, install a sufficiently recent NVIDIA display driver.
+  A separate CUDA Toolkit, Visual Studio, CMake, and <code>nvcc</code> are not required.</li>
+</ul>
+<p>If Python is missing, setup links to the official
+<a href="https://www.python.org/downloads/release/python-31210/">Python 3.12.10 Windows release</a>
+and lets you check again after installing it.</p>
+<h3 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Keep <strong>Automatic</strong> for the simplest choice. Setup recommends CPU or a
+   qualified NVIDIA CUDA 13 installation from the computer it finds.</li>
+<li>To choose manually, expand <strong>Advanced details</strong>, then use <strong>Computer use</strong>
+   to select <strong>CPU</strong> or <strong>NVIDIA GPU</strong>. An unavailable GPU route stays blocked
+   and explains what is missing.</li>
+<li>Under <strong>Reviewed settings</strong>, confirm the installation location, compute
+   route, and whether to add a Desktop shortcut.</li>
+<li>Select <strong>Install</strong> and wait for setup and its final acceptance checks.</li>
+<li>Open <strong>VIPP</strong> for a CPU installation. A CUDA installation provides
+   <strong>VIPP Automatic</strong>, <strong>VIPP CPU</strong>, and <strong>VIPP Prefer GPU</strong> shortcuts; begin
+   with <strong>VIPP Automatic</strong>.</li>
+</ol>
+<p>Changing the compute choice, location, or Desktop-shortcut choice requires
+<strong>Check these settings</strong> again. Setup never enables <strong>Install</strong> for settings it
+has not checked.</p>
+<p>GPU setup is a large download. It currently needs at least 15 GiB free on the
+installation drive while setup runs; that is disk storage, not GPU memory
+(VRAM). It also needs at least 5 GiB free on every drive used for Windows
+temporary files and VIPP installer records. CPU setup needs at least 1 GiB in
+those temporary/record locations. Setup identifies the exact location when a
+check fails.</p>
+<p>The network-idle timeout is 120 seconds, not a total installation-time limit.
+After a temporary connection failure, the incomplete candidate is rolled back
+and any previous working VIPP remains active. Choose <strong>Try again</strong> after the
+connection recovers, review the current settings, and install again.</p>
+<h3 id="update-repair-or-remove">Update, repair, or remove<a class="headerlink" href="#update-repair-or-remove" title="Permanent link">&para;</a></h3>
+<p>The installer does not silently replace an existing installation:</p>
+<ul>
+<li>an older installer-owned copy is offered as <strong>Update</strong> and remains usable
+  until the replacement passes acceptance;</li>
+<li>rerunning the same version offers <strong>Open VIPP</strong> and <strong>Repair</strong>;</li>
+<li>a newer version is not downgraded;</li>
+<li>unrelated folders and manually managed napari environments are never
+  overwritten; and</li>
+<li>managed CPU and CUDA installations can coexist.</li>
+</ul>
+<p>Remove either installation from <strong>Windows Settings → Apps → Installed apps</strong>.
+Each entry has its own ownership-bound uninstaller, so removing CPU does not
+remove CUDA and removing CUDA does not remove CPU.</p>
+<h2 id="linux-macos-and-advanced-manual-installation">Linux, macOS, and advanced manual installation<a class="headerlink" href="#linux-macos-and-advanced-manual-installation" title="Permanent link">&para;</a></h2>
+<p>VIPP 0.13.0a5 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
+environment, then install the exact alpha. An exact prerelease pin does not
+need pip's <code>--pre</code> option.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows manual</label><label for="__tabbed_1_2">macOS</label><label for="__tabbed_1_3">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp&quot;</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp==0.13.0a4&quot;</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp\Scripts\vipp.exe&quot;</span>
-</span></code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>vipp-env
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>vipp-env/bin/activate
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span><span class="w"> </span><span class="s2">&quot;napari-vipp==0.13.0a4&quot;</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>vipp
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp==0.13.0a5&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp\Scripts\vipp.exe&quot;</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>vipp-env
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">source</span><span class="w"> </span>vipp-env/bin/activate
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span><span class="w"> </span><span class="s2">&quot;napari-vipp==0.13.0a4&quot;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span><span class="w"> </span><span class="s2">&quot;napari-vipp==0.13.0a5&quot;</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>vipp
 </span></code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>vipp-env
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">source</span><span class="w"> </span>vipp-env/bin/activate
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span><span class="w"> </span><span class="s2">&quot;napari-vipp==0.13.0a5&quot;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>vipp
+</span></code></pre></div>
 </div>
 </div>
-<p>Conda or Mamba environments are also suitable; use Python 3.12 or 3.13 and
-activate the environment before running the final
-<code>python -m pip install ...</code> command.</p>
-<div class="admonition note">
-<p class="admonition-title">Bounded M1 Max CPU smoke</p>
-<p>The <code>e024409</code> source candidate was manually smoke-tested on one Apple M1
-Max (<code>arm64</code>, macOS 26.5.2) for launch, basic processing, batch progress and
-cancellation, and single-budget system-RAM presentation. Focused
-cancellation tests were recorded in follow-up commit <code>ff21040</code>. This is not
-a clean-wheel or broad macOS qualification, and it does not provide Apple
-GPU acceleration.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Stable manual versus nightly manual</p>
-<p>In a numbered/stable manual, the commands above install the documented
-release. Nightly documentation can describe newer, unreleased work; do not
-replace the exact version with an arbitrary <code>main</code> checkout. See
-<a href="../../reference/versioning/">versions and compatibility</a>.</p>
-</div>
+<p>macOS is CPU-only in this alpha. Native Linux GPU qualification is not yet
+public; Linux remains on the CPU path even if CUDA packages import.</p>
+<p>Installing into an existing napari environment is an advanced route. Use that
+environment's Python explicitly and keep the VIPP version pinned. Do not use a
+global Python, an environment that exposes system site-packages, an editable
+VIPP checkout, or an environment with multiple Qt bindings.</p>
 <h2 id="confirm-the-installation">Confirm the installation<a class="headerlink" href="#confirm-the-installation" title="Permanent link">&para;</a></h2>
-<p>After napari opens:</p>
-<ol>
-<li>Choose <strong>Plugins → VIPP Workflow (napari-vipp)</strong>.</li>
-<li>In VIPP, choose <strong>Open example…</strong>.</li>
-<li>Confirm that the example chooser appears.</li>
-<li>Compare the version shown by VIPP with the version selector in this manual.</li>
-</ol>
-<p>For a command-line check:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python -c &quot;import importlib.metadata as m; print(m.version(&#39;napari-vipp&#39;))&quot;
+<p>For an installer-managed copy, open the created VIPP shortcut and choose
+<strong>Open example…</strong>. For a manually managed environment, you can also run:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python -c &quot;import importlib.metadata as m; print(m.version(&#39;napari-vipp&#39;))&quot;
 </span></code></pre></div>
 <p>Expected for this release:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>0.13.0a4
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>0.13.0a5
 </span></code></pre></div>
+<p>Inside napari, choose <strong>Plugins → VIPP Workflow (napari-vipp)</strong>.</p>
 <h2 id="optional-nvidia-cuda-acceleration">Optional NVIDIA CUDA acceleration<a class="headerlink" href="#optional-nvidia-cuda-acceleration" title="Permanent link">&para;</a></h2>
-<p>The base installation is complete and remains the portable recommendation. A
-new session defaults to <strong>Auto</strong>. With no exact compatible history, Auto uses
-reviewed GPU defaults wherever the installed stack passes every safety gate.
-Accelerated-only history makes the next global Auto run measure CPU once on the
-same execution surface; a later matching run applies the 1.20x/20-ms gate.
-Select <strong>Prefer GPU</strong> to use every reviewed eligible accelerator
-regardless of speed, or use Custom/<strong>Find fastest</strong> for per-node control and
-measurement. GPU packages are optional and are not imported merely to load VIPP
-or run a CPU workflow.</p>
-<div class="admonition warning">
-<p class="admonition-title">GPU admission remains exact even though the model allowlist is gone</p>
-<p>The 0.13.0a4 public gate accepts a successfully probed NVIDIA CUDA device
-with compute capability 7.5 or newer and driver API 13.3 or newer. It still
-requires native Windows, 64-bit CPython 3.12, NumPy 2.5.1, SciPy 1.18.0,
-scikit-image 0.26.0, CuPy/CuPyX 14.1.1, and CUDA runtime API 13.2. A changed
-operating system, Python ABI, runtime, package set, failed provider probe,
-unsupported workload, or insufficient memory remains on CPU with a visible
-reason. Native Linux GPU qualification remains pending.</p>
-<p>Compatible GPUs can show minor device-, driver-, compiler-, or
-reduction-order-dependent floating-point differences within a provider's
-declared tolerance. Preserve the exact GPU and software environment and
-validate consequential work against the CPU reference.</p>
-<p>The standard CUDA extra installs the pinned CuPy/CuPyX stack. It does not
-include the separately reviewed cuCIM build used by the background and
-basic measurement candidates. Those nodes remain CPU after the public
-install below unless the user completes the optional pinned local-build
-route.</p>
-</div>
-<p>Use a <strong>new</strong> environment and install exactly one CUDA-major extra. For the
-current CUDA 13 track, Windows users should first read the complete
-<a href="../windows-cuda/">driver, Python, installation, diagnosis, and cuCIM guide</a>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows · CUDA 13</label><label for="__tabbed_2_2">Linux · CUDA 13 qualification</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp-gpu-cu13&quot;</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a4&quot;</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp.exe&quot;</span>
+<p>The Windows installer is the recommended GPU path. The standard CUDA setup
+installs its pinned CUDA libraries inside the managed VIPP environment and
+works without cuCIM.</p>
+<p>VIPP admits a successfully probed NVIDIA CUDA device only when every released
+gate passes: native 64-bit Windows, CPython 3.12, compute capability 7.5 or
+newer, driver API 13.3 or newer, CUDA runtime API 13.2, the pinned scientific
+and CuPy/CuPyX packages, provider probes, memory, workload, and scientific
+parity. GPU names are recorded for provenance rather than used as an allowlist.
+Unsupported work stays on CPU with an explanation.</p>
+<p>For a manual CUDA environment:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp-gpu-cu13&quot;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a5&quot;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp.exe&quot;</span>
 </span></code></pre></div>
-<p>Only an NVIDIA display driver is a machine-wide prerequisite. The extra
-installs the pinned CUDA user-space libraries; do not separately install a
-CUDA Toolkit, <code>nvcc</code>, Visual Studio, or CMake for this standard route.</p>
-</div>
-<div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>vipp-gpu-env
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">source</span><span class="w"> </span>vipp-gpu-env/bin/activate
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span><span class="w"> </span><span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a4&quot;</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>vipp-compute-doctor<span class="w"> </span>--track<span class="w"> </span>cuda13
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>vipp
-</span></code></pre></div>
-<p>This creates the intended qualification/development environment, but the
-0.13.0a4 public policy does not yet admit Linux GPU execution. Expect visible
-CPU decisions until native-Linux evidence is promoted in a future policy.</p>
-</div>
-</div>
-</div>
-<p>The <code>gpu-cuda12</code> extra is a qualification/development track in this alpha; the
-current public policy does not admit it. Do not install <code>gpu-cuda12</code> and
-<code>gpu-cuda13</code> into the same environment. A passing import or CUDA kernel probe
-does not by itself establish scientific admission for an operation.</p>
-<p><code>vipp-compute-doctor</code> reports the selected track, installed packages, runtime
-probe, and device without asking the GUI to import a broken accelerator stack.
-It does not by itself grant scientific-policy admission. VIPP's <strong>Compute setup
-and memory…</strong> dialog exposes the diagnosis and a copyable fresh-environment
-repair command, while the operation decision applies the exact environment and
-workload gates. VIPP never runs that command without the user's action.</p>
-<div class="admonition info">
-<p class="admonition-title">cuCIM is an optional local build on Windows</p>
-<p>VIPP does not distribute or require cuCIM. A Windows user may build exact
-cuCIM 26.6.0 tag <code>v26.06.00</code> at the release-pinned commit with VIPP's fixed
-recipe, then use the generated manifest and setup helper to install it into
-this released environment. The helper verifies the archive and canonical
-wheel payload before recording the completed setup; VIPP then independently
-rehashes the installed files before admitting cuCIM for use. The build omits
-Clara whole-slide I/O. Read the
-complete <a href="../windows-cuda/#build-and-add-the-pinned-cucim-release">Windows local-build instructions</a>.</p>
-</div>
-<p>macOS has no CUDA path. Use the base CPU installation on Intel or Apple Silicon;
-the bounded M1 Max source-candidate smoke above supports that CPU path but does
-not generalize to every Mac. Metal/MPS/MLX acceleration is a future study, not
-part of this release.</p>
-<p>Continue with <a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a>
-for the per-operation matrix, badge meanings, benchmarks, fallback, and durable
-provenance.</p>
+<p>Read the complete <a href="../windows-cuda/">Windows CUDA and optional cuCIM guide</a>
+before adding GPU packages manually. The separate cuCIM release bundle builds
+the pinned source locally and contains no redistributable cuCIM wheel.</p>
 <h2 id="optional-microscope-readers">Optional microscope readers<a class="headerlink" href="#optional-microscope-readers" title="Permanent link">&para;</a></h2>
-<p>The base package supports the documented TIFF, OME-Zarr, NumPy, and ordinary
-raster routes. Install only the reader family you need, then restart napari.</p>
+<p>Install an optional reader with the Python from the exact environment that
+launches VIPP, then restart napari.</p>
 <table>
 <thead>
 <tr>
@@ -2748,56 +2846,36 @@ raster routes. Install only the reader family you need, then restart napari.</p>
 <tbody>
 <tr>
 <td>Nikon ND2</td>
-<td><code>python -m pip install "napari-vipp[nd2]==0.13.0a4"</code></td>
+<td><code>python -m pip install "napari-vipp[nd2]==0.13.0a5"</code></td>
 </tr>
 <tr>
 <td>Zeiss CZI</td>
-<td><code>python -m pip install "napari-vipp[czi]==0.13.0a4"</code></td>
+<td><code>python -m pip install "napari-vipp[czi]==0.13.0a5"</code></td>
 </tr>
 <tr>
 <td>Mixed microscope formats</td>
-<td><code>python -m pip install "napari-vipp[microscope]==0.13.0a4"</code></td>
+<td><code>python -m pip install "napari-vipp[microscope]==0.13.0a5"</code></td>
 </tr>
 <tr>
 <td>BioIO/Bio-Formats fallback</td>
-<td><code>python -m pip install "napari-vipp[bioformats]==0.13.0a4"</code></td>
+<td><code>python -m pip install "napari-vipp[bioformats]==0.13.0a5"</code></td>
 </tr>
 </tbody>
 </table>
-<p>Support for optional readers is an experimental foundation. A reader exposing
-a file is not proof that every axis, unit, timestamp, or acquisition field was
-interpreted correctly. Check representative files from your facility before
-quantitative use.</p>
-<h2 id="development-branches">Development branches<a class="headerlink" href="#development-branches" title="Permanent link">&para;</a></h2>
-<p>Historical candidate commits and artifact hashes are retained in the
-<a href="../../releases/0.13.0a4/">release notes</a> for audit history. They are not
-installation targets and must not be uploaded or represented as the final
-0.13.0a4 artifacts.</p>
-<p>For newer unreleased <code>main</code> work, use:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&quot; &quot;https://github.com/rensutheart/napari-vipp/archive/refs/heads/main.zip&quot;
-</span></code></pre></div>
-<p>Development workflows may not reopen in a stable alpha release. Record the
-commit hash as well as the package version if results depend on an unreleased
-build.</p>
-<p>Before upgrading an existing workflow, read
-<a href="../../reference/versioning/">versions and compatibility</a> and preserve the old
-environment. Schema-1/2 workflows do not open in 0.13.0a4. Valid schema-3
-workflows load structurally with an explicit CPU compute request; saving writes
-schema 4. Cached results are not serialized, so recalculate and validate after
-upgrading. Version-1 batch configs load as CPU, while version-2 configs retain
-their saved compute request. Neither older version contains source-axis
-declarations; after review, saving writes batch config version 3. Regenerate
-exported Python too, because it requires the exact VIPP runtime version that
-created it.</p>
-<h2 id="developer-installation">Developer installation<a class="headerlink" href="#developer-installation" title="Permanent link">&para;</a></h2>
+<p>A reader opening a file is not proof that every axis, unit, timestamp, or
+acquisition field was interpreted correctly. Check representative facility
+files before quantitative use.</p>
+<h2 id="development-installation">Development installation<a class="headerlink" href="#development-installation" title="Permanent link">&para;</a></h2>
 <p>Contributors should clone the application repository and install it editable:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">cd </span><span class="n">napari-vipp</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-e</span> <span class="s2">&quot;.[dev]&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd </span><span class="n">napari-vipp</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-e</span> <span class="s2">&quot;.[dev]&quot;</span>
 </span></code></pre></div>
-<p>Continue with the <a href="../../developer/development-setup/">development setup</a>.</p>
+<p>Development workflows may not reopen in a stable alpha. Record the application
+commit as well as the package version, and continue with the
+<a href="../../developer/development-setup/">development setup</a>.</p>
 
 
 
@@ -2818,7 +2896,7 @@ created it.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 9, 2026 07:46:48 UTC">August 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 12, 2026 10:33:13 UTC">August 12, 2026</span>
   </span>
 
     
@@ -2873,13 +2951,13 @@ created it.</p>
         
         
           
-          <a href="../windows-cuda/" class="md-footer__link md-footer__link--next" aria-label="Next: Install CUDA on Windows">
+          <a href="../windows-cuda/" class="md-footer__link md-footer__link--next" aria-label="Next: Windows CUDA and cuCIM">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Install CUDA on Windows
+                Windows CUDA and cuCIM
               </div>
             </div>
             <div class="md-footer__button md-icon">
