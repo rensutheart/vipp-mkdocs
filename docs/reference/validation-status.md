@@ -45,12 +45,20 @@ The development installer passed fresh managed CPU and CUDA installation, real
 Auto and Prefer-GPU execution with CPU parity and clean accelerator release,
 optional cuCIM installation and execution, update and repair, and independent
 CPU/CUDA removal on the Windows reference system. The DEVELOPMENT file is not a
-release artifact. The selected release route creates only an explicit
+release artifact. The final tagged release route created only the explicit
 `-UNSIGNED` filename from the immutable tag's exact wheel after build bytes,
-frozen payload, `NotSigned` status, release manifest, and SHA-256 checks pass.
-The final candidate must then pass clean-machine acceptance including the
-documented Windows warning. The filename without `-UNSIGNED` remains reserved
-for a future valid Authenticode-signed and timestamped installer.
+frozen payload, `NotSigned` status, release manifest, and SHA-256 checks passed.
+
+The exact tagged release EXE then passed a clean installer-owned CPU lifecycle:
+reviewed/hash-locked resolution, install, package health, shortcuts, responsive
+first launch, transactional same-version repair, safe refusal while one DLL was
+temporarily locked, and complete removal after the application closed. A local
+build has no browser Mark-of-the-Web, so acceptance did not synthesize a
+SmartScreen page. The user guide documents the expected **Unknown publisher**
+and **Windows protected your PC** warning for browser downloads, the safe
+**More info** → **Run anyway** path, checksum verification, and managed-device
+fallback. The filename without `-UNSIGNED` remains reserved for a future valid
+Authenticode-signed and timestamped installer.
 
 Final CI, tag, signing status, and artifact hashes are recorded in
 [0.13.0a5 release verification](../releases/0.13.0a5.md#release-verification).
