@@ -1,0 +1,3144 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Visual workflows for reproducible bioimage analysis.">
+      
+      
+        <meta name="author" content="Rensu P. Theart">
+      
+      
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/0.13.0a5/how-to/choose-compute/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../edit-graph/">
+      
+      
+      <link rel="icon" href="../../assets/branding/vipp-mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Choose CPU or GPU compute - VIPP — Visual Image Processing Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#choose-and-verify-cpu-or-gpu-compute" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            
+            
+  VIPP is alpha software. Confirm that this manual's version matches the plugin version shown in VIPP before following release-specific instructions.
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="VIPP — Visual Image Processing Platform" class="md-header__button md-logo" aria-label="VIPP — Visual Image Processing Platform" data-md-component="logo">
+      
+  <img src="../../assets/branding/vipp-mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VIPP — Visual Image Processing Platform
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Choose CPU or GPU compute
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rensutheart/vipp-mkdocs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rensutheart/vipp-mkdocs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../releases/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Release notes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start here
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../workflows/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  How-to guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../scientific-practice/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scientific practice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshooting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributors
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VIPP — Visual Image Processing Platform" class="md-nav__button md-logo" aria-label="VIPP — Visual Image Processing Platform" data-md-component="logo">
+      
+  <img src="../../assets/branding/vipp-mark.svg" alt="logo">
+
+    </a>
+    VIPP — Visual Image Processing Platform
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rensutheart/vipp-mkdocs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rensutheart/vipp-mkdocs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../releases/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Release notes
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Release notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Start here
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Start here
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows CUDA and cuCIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/launching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Launch VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/example-tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour a finished workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/build-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build your first workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/own-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use your own images
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../workflows/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/segmentation-label-cleanup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/object-measurements-tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measure objects and tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/skeleton-network-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analyze skeleton networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/colocalization-association/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measure colocalization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/psf-deconvolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Restore with a PSF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/batch-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Process a folder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    How-to guides
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-pipeline-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose a pipeline policy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-thumbnail-statistics-separate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep Thumbnail Statistics Separate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-safe-practical-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      A safe practical sequence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-benchmark-progress-honestly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read benchmark progress honestly
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu-regions-in-0130a5" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU regions in 0.13.0a5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-platform-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation and platform boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-fallback-progress-and-cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory, fallback, progress, and cancellation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-interactive-and-durable-execution-aligned" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep interactive and durable execution aligned
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edit-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Edit and organize a graph
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inspect-outputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../save-share-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Save, share, and export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/import-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with files and stores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cache-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manage memory and speed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../concepts/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Concepts
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/graph-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Images, masks, labels, tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/axes-and-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Axes, scale, and metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/inspection-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspection and calculation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/examples-and-samples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples and examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../scientific-practice/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Scientific practice
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Scientific practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/choosing-dimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose 2D or 3D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/parameter-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tune without fooling yourself
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Validate a workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/reporting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Report a VIPP analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/node-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    All 112 nodes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toolbar and settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/example-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Example workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/sample-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bundled sample data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/workflow-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflow and export contract
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/import-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with files and stores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/validation-status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Validation status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versions and compatibility
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Privacy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Licence and reuse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../troubleshooting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Troubleshooting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/common-pitfalls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Common problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance and memory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/report-a-problem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get help or report a problem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../developer/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Contributors
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Contributors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture and scientific boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/development-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Set up a development environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add or change an operation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/testing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test and document changes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/docs-releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-pipeline-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose a pipeline policy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-thumbnail-statistics-separate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep Thumbnail Statistics Separate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-safe-practical-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      A safe practical sequence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-benchmark-progress-honestly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read benchmark progress honestly
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu-regions-in-0130a5" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU regions in 0.13.0a5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-platform-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation and platform boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-fallback-progress-and-cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory, fallback, progress, and cancellation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-interactive-and-durable-execution-aligned" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep interactive and durable execution aligned
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/how-to/choose-compute.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="choose-and-verify-cpu-or-gpu-compute">Choose and verify CPU or GPU compute<a class="headerlink" href="#choose-and-verify-cpu-or-gpu-compute" title="Permanent link">&para;</a></h1>
+<p>VIPP 0.13.0a5 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
+<strong>Custom</strong> compute. The request is not the execution record: the node badge
+and accepted run provenance say what actually ran.</p>
+<p>CPU remains the portable scientific reference. GPU implementations are
+considered only inside operation-specific regions that preserve the declared
+CPU contract. An unsupported dtype, parameter, shape, dependency, memory
+budget, or environment normally produces an explained CPU decision. A forced
+Custom GPU choice can instead produce an amber visible fallback or a typed
+failure; some invalid or non-fallback-safe calls fail under either policy.</p>
+<h2 id="choose-a-pipeline-policy">Choose a pipeline policy<a class="headerlink" href="#choose-a-pipeline-policy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Use it when</th>
+<th>What to expect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auto</strong></td>
+<td>The recommended, learning new-session default</td>
+<td>With no exact compatible history, use reviewed GPU defaults. Accelerated-only history makes the next global Auto run measure CPU once on the same execution surface; a later matching run applies the 1.20x/20-ms gate to the pair. Auto never silently benchmarks multiple implementations.</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>Establishing a portable reference, diagnosing a provider, or requiring host execution</td>
+<td>Every calculated operation uses its authoritative CPU implementation.</td>
+</tr>
+<tr>
+<td><strong>Prefer GPU</strong></td>
+<td>Placing as much scientifically eligible work on GPU as possible, regardless of speed</td>
+<td>Every reviewed public GPU candidate is considered, including providers not admitted to Auto. An eligible GPU is used even when it is only slightly faster, tied, or slower than CPU. Unsupported nodes receive an explained ordinary CPU decision.</td>
+</tr>
+<tr>
+<td><strong>Custom</strong></td>
+<td>Using GPU, comparing providers, or authoring reviewed per-node preferences</td>
+<td>Implemented nodes expose CPU and one choice per declared GPU library; node and whole-pipeline benchmarking become available. Applying a measured pipeline assignment records Custom preferences.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Prefer GPU bypasses only the CPU-versus-GPU speed gate.</strong> Scientific parity,
+dtype, parameter, shape, optional dependency, environment, provider, and memory
+admission remain mandatory. VIPP never inserts a cast or changes an authored
+parameter to place more work on GPU. Developer-hidden implementations remain
+excluded unless an advanced request explicitly enables experimental admission;
+that does not turn them into public support.</p>
+<p>If every eligible GPU candidate has complete comparable timing evidence,
+Prefer GPU chooses the fastest GPU. If that evidence is incomplete, it chooses
+deterministically by stable implementation ID rather than requiring a CPU-speed
+comparison. This stable choice is not a claim that the selected GPU is fastest.</p>
+<p>A schema-3 workflow opens in <strong>CPU</strong>, not Auto, because the older file did not
+record compute intent. A schema-4 workflow restores its portable request, but
+not a promise that the same backend exists or is fastest on another machine.</p>
+<p>The toolbar presents the modes in default-first order: <strong>Auto</strong>, <strong>CPU</strong>,
+<strong>Prefer GPU</strong>, then <strong>Custom</strong>. Switching to Custom while VIPP is idle does not
+discard or relabel a valid calculation. The existing images and actual
+CPU/GPU provenance remain visible. If those decisions differ from the saved
+Custom choices, VIPP marks the badges and summary as a <strong>previous result</strong>;
+the Custom choices take effect when a node preference changes, you calculate,
+or you apply a reviewed optimizer proposal.</p>
+<p>Compute policy cannot change underneath active work. While a pipeline
+calculation, node benchmark, or <strong>Find fastest</strong> analysis is running, the mode
+and applicable per-node controls are disabled until normal completion. To
+select another policy sooner, use the explicit <strong>Cancel calculation</strong>, <strong>Cancel
+benchmark</strong>, or <strong>Cancel analysis</strong> control first. The controls remain locked
+while the worker reaches a cooperative checkpoint,
+synchronizes, and releases CPU/GPU resources. This guarantees that selecting
+CPU cannot leave an earlier GPU calculation or timing comparison running.</p>
+<h2 id="keep-thumbnail-statistics-separate">Keep Thumbnail Statistics Separate<a class="headerlink" href="#keep-thumbnail-statistics-separate" title="Permanent link">&para;</a></h2>
+<p>The scientific compute policy also establishes safety boundaries for
+presentation work, but a thumbnail-statistics backend is not scientific node
+provenance. <strong>Settings &gt; Thumbnail statistics</strong> provides local <strong>Auto</strong>,
+<strong>CPU</strong>, and <strong>Prefer GPU</strong> control for full-output Stack contrast:</p>
+<ul>
+<li>main compute <strong>CPU</strong> hard-forces presentation CPU and prevents CUDA
+  initialization;</li>
+<li>main <strong>Prefer GPU</strong> makes presentation Auto prefer every eligible CuPy
+  Percentile histogram;</li>
+<li>main <strong>Auto</strong> and <strong>Custom</strong> leave presentation Auto adaptive; and</li>
+<li>an explicit presentation CPU or Prefer GPU choice otherwise controls new
+  statistics results.</li>
+</ul>
+<p>Presentation Auto considers native <code>uint8</code>/<code>uint16</code> Percentile work and uses the
+complete output's byte size. Its conservative cold crossover is 384 MiB for
+<code>uint8</code> or 512 MiB for <code>uint16</code>; both become 32 MiB after one successful GPU
+histogram. These measured default heuristics are not a universal fastest
+guarantee because data distribution, hardware, CUDA startup, residency, and
+competing work matter. It does not use Low/Standard/High/Very High backing resolution.
+Use <strong>Prefer GPU</strong> as the explicit override. Min-max uses an exact native CPU
+reduction. Float and other-dtype percentiles retain the exact NumPy-compatible
+CPU calculation. Select a node and read its separate <strong>Thumbnail contrast</strong>
+inspector row—<strong>Calculating… / CPU · NumPy / GPU · CuPy / CPU fallback /
+Error</strong>—for what happened; the ordinary CPU/CuPy/cuCIM badge remains in the node
+title row as the record of what produced the node output.</p>
+<h2 id="a-safe-practical-sequence">A safe practical sequence<a class="headerlink" href="#a-safe-practical-sequence" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Run a representative item on <strong>CPU</strong> and inspect the decisive images,
+   masks, labels, and tables. Retain this result when CPU/GPU parity matters.</li>
+<li>Open <strong>Compute setup and memory…</strong>. Check the installed scientific stack,
+   device, eligibility reason, host RAM, and separate VRAM where applicable.
+   Copy the proposed fresh-environment command if setup is incomplete; VIPP
+   never executes it automatically.</li>
+<li>Keep <strong>Auto</strong> for normal calculation and read the actual-run summary and
+   per-node badges. Auto starts with reviewed safe GPU defaults. Successful,
+   fallback-free completed full-pipeline runs—whether CPU, GPU, or mixed—add
+   only their wall time to machine-local history. If exact compatible history
+   is accelerated-only, the next global Auto run measures CPU once on the same
+   execution surface. Once both observations exist, a later matching run uses
+   acceleration only when it clears the 1.20x/20-ms gate; otherwise it uses CPU.
+   Interactive, batch, and registry-lifecycle timing surfaces are never mixed.
+   Auto never silently benchmarks multiple implementations. Before the optional
+   CPU comparison, VIPP checks conservative host-memory headroom. On Windows it
+   checks both available physical RAM and remaining system commit. If the
+   comparison would consume the reserve, Auto keeps the reviewed safe assignment,
+   explains the skipped evidence, and can try again on a later compatible run.</li>
+<li>Switch to <strong>Prefer GPU</strong> when you want every reviewed eligible accelerator
+   region without first benchmarking whether it beats CPU. Read the ordinary
+   CPU reasons for unsupported nodes; this mixed result is the intended policy.</li>
+<li>Switch to <strong>Custom</strong> when you want an authored per-node choice or an
+   explicit performance measurement. Normal choices are <strong>Auto for this
+   node</strong>, <strong>CPU</strong>, and one
+   <strong>GPU · library</strong> entry. <strong>Best GPU</strong> appears only when several GPU libraries
+   genuinely compete. A loaded exact implementation pin remains visible as an
+   advanced compatibility choice until replaced.</li>
+<li>Benchmark an eligible node for a focused comparison, or choose <strong>Find
+   fastest pipeline…</strong> to compare every eligible implementation in the current
+   writer-free subgraph. If the displayed result is stale, Find fastest first
+   establishes a private current-graph baseline after cancellation cleanup; it
+   does not require you to publish an ordinary replacement calculation. Review
+   the proposal before applying it;
+   accepted winners become Custom per-node preferences. Raw isolated-node
+   timings remain separate from Auto's complete-pipeline history, although a
+   later successful, fallback-free completed run of the accepted assignment
+   can add a compatible full-pipeline observation.</li>
+<li>Save the workflow only after accepting the portable preferences. For a real
+   run, retain the execution report or batch provenance that records the exact
+   implementations, environment, fallbacks, memory decisions, and cleanup.</li>
+</ol>
+<p>Choosing a backend does not lock it against optimization. Use the separate
+optimizer lock only when a node must be excluded from the search. The optimizer
+can evaluate a detached manual node without overwriting its live cached result;
+it changes no node preference until the final assignment is reviewed and
+applied.</p>
+<h2 id="read-benchmark-progress-honestly">Read benchmark progress honestly<a class="headerlink" href="#read-benchmark-progress-honestly" title="Permanent link">&para;</a></h2>
+<p>Whole-pipeline optimization shows two progress streams:</p>
+<ul>
+<li><strong>Overall pipeline</strong> tracks completed node/provider comparisons and final
+  assignment validation.</li>
+<li><strong>Current operation</strong> tracks truthful checkpoints inside the active parity,
+  cold-call, warmup, or timed call.</li>
+</ul>
+<p>A single NumPy, SciPy, CuPy, CuPyX, or cuCIM call can remain at one percentage
+until it returns because VIPP cannot observe a scientifically safe subdivision.
+A reached time limit means planned comparisons remain; it does <strong>not</strong> prove
+that the current assignment is optimal. The result identifies completed and
+remaining work, and complete records for the exact workload and environment
+can be reused on retry. Editing data, parameters, code/policy identity, or the
+relevant environment invalidates reuse.</p>
+<p>When a synchronized GPU candidate has enough repeated measurements to be a
+reliable incumbent, the optimizer may stop a cooperative CPU warm call once its
+elapsed time exceeds the incumbent's one-sided confidence bound plus a material
+margin. The dialog reports a censored lower bound such as <strong>CPU &gt; 10.6 s;
+stopped early</strong>, not an exact CPU timing. Censored results are not reused as
+timing-history samples. Scientific parity is checked independently, required
+CPU/GPU transfers remain in the whole-graph model, and a changed modeled
+assignment must pass final paired end-to-end validation before it can be
+offered. When the already-current assignment wins, VIPP reports its fresh
+baseline, parity, and conservative exact-or-censored comparison evidence; it
+does not claim a redundant paired comparison against itself. GPU candidates are not
+discarded from a one-off transfer-inclusive duration because a resident
+pipeline can amortize those transfers.</p>
+<p>Current node benchmarking requires resolved ordered inputs, one output, and no
+writer side effect. Whole-pipeline optimization operates within one supported
+accelerator runtime and the calculated writer-free graph frontier. Unsupported
+nodes remain CPU candidates; manual barriers do not justify benchmarking an
+unrunnable descendant.</p>
+<p><a id="gpu-regions-in-0130a1"></a></p>
+<h2 id="gpu-regions-in-0130a5">GPU regions in 0.13.0a5<a class="headerlink" href="#gpu-regions-in-0130a5" title="Permanent link">&para;</a></h2>
+<p>The table is a readable summary, not a substitute for the executable policy.
+VIPP's eligibility explanation is authoritative for the exact call.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>GPU library</th>
+<th>Broad admitted data/shape</th>
+<th>Important first-region limits and common CPU decisions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rolling-Ball Background</td>
+<td>cuCIM</td>
+<td><code>uint8</code>, <code>uint16</code>, or <code>float32</code>; 2D slice-wise or 3D</td>
+<td>Radius 1–500 in 2D and 1–50 in 3D. Other dtypes/radii use CPU. The declared float32 parity region is not finite-only.</td>
+</tr>
+<tr>
+<td>Subtract Background</td>
+<td>cuCIM</td>
+<td><code>uint8</code>, <code>uint16</code>, or <code>float32</code>; 2D slice-wise or 3D</td>
+<td>Same reviewed radius limits as Rolling-Ball. The declared float32 parity region is not finite-only.</td>
+</tr>
+<tr>
+<td>Median Filter</td>
+<td>CuPyX</td>
+<td><code>uint8</code>, <code>uint16</code>, or finite <code>float32</code> with complete facts proving no negative zero; independent <code>YX</code> planes</td>
+<td>Canonical odd footprint 1–51; unsupported float facts or footprint use CPU.</td>
+</tr>
+<tr>
+<td>Gaussian Blur</td>
+<td>CuPyX</td>
+<td>finite <code>float32</code>; independent <code>YX</code> planes</td>
+<td>Sigma 0–12. Native integer and <code>float64</code> Gaussian calls remain CPU.</td>
+</tr>
+<tr>
+<td>Gaussian Blur 3D</td>
+<td>CuPyX</td>
+<td>finite <code>float32</code>; resolved <code>ZYX</code> volumes</td>
+<td>Each spatial sigma 0–12. Native integer and <code>float64</code> calls remain CPU.</td>
+</tr>
+<tr>
+<td>Richardson-Lucy Deconvolution</td>
+<td>CuPy/CuPyX</td>
+<td>finite <code>float32</code> Image and PSF; 2D or 3D</td>
+<td>Odd PSF extents, default-safe options, <code>filter_epsilon=1e-8</code>, and 1–25 iterations. The CPU default epsilon remains CPU.</td>
+</tr>
+<tr>
+<td>Richardson-Lucy TV Deconvolution</td>
+<td>CuPy/CuPyX</td>
+<td>finite <code>float32</code> Image and PSF; 2D or 3D</td>
+<td>Lambda zero inherits ordinary RL. Positive TV admits the shipped tuple (<code>lambda=0.002</code>, TV epsilon <code>1e-6</code>, filter epsilon <code>1e-12</code>, denominator floor <code>0.05</code>) at 10 or 25 iterations.</td>
+</tr>
+<tr>
+<td>Canny Edges</td>
+<td>CuPy/CuPyX</td>
+<td>Boolean, <code>uint8</code>, or <code>uint16</code>; independent <code>YX</code> planes</td>
+<td>Sigma 0–12 and finite ordered quantile thresholds. Floating-point input remains CPU in this exact-mask region.</td>
+</tr>
+<tr>
+<td>Otsu Threshold</td>
+<td>CuPy/CuPyX</td>
+<td>Boolean, signed/unsigned integers, and <code>float16</code>/<code>float32</code>/<code>float64</code></td>
+<td>Integer occupied span must be at most 65,536 levels; wide integers and per-slice cases need sufficient exact facts. Float histograms use 2–65,536 saved bins.</td>
+</tr>
+<tr>
+<td>Sigma Filter</td>
+<td>CuPy</td>
+<td>native-endian <code>uint8</code>, <code>uint16</code>, or finite <code>float32</code>; independent <code>YX</code> planes</td>
+<td>Radius 0.5–10 and reviewed finite value/parameter facts. ROI/mask behavior is outside version 1.</td>
+</tr>
+<tr>
+<td>Label Connected Components</td>
+<td>CuPyX</td>
+<td>Boolean mask; resolved 2D or 3D</td>
+<td>Preserves exact deterministic <code>int32</code> label numbering. Numeric masks and oversized 2D/3D blocks use CPU. In non-CPU planning, a Boolean call not resolved as 2D or 3D is a typed preflight failure in this alpha.</td>
+</tr>
+<tr>
+<td>Measure Objects</td>
+<td>cuCIM</td>
+<td>native-endian, non-negative <code>int32</code> labels; 2D or 3D</td>
+<td>Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU.</td>
+</tr>
+<tr>
+<td>Measure Objects + Intensity</td>
+<td>cuCIM</td>
+<td>the same labels plus native-endian Boolean, <code>uint8</code>, <code>uint16</code>, or finite <code>float32</code> intensity</td>
+<td>Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU.</td>
+</tr>
+</tbody>
+</table>
+<p>Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
+handling where the underlying dtype/profile is admitted. An ambiguous or
+invalid channel axis remains on the CPU/error path rather than being guessed.</p>
+<p>VIPP never inserts a cast to enter this table. If converting an image or PSF to
+<code>float32</code> is scientifically appropriate, add an explicit <code>Convert Dtype</code> node,
+review its scaling mode, inspect downstream thresholds/writers, and report it.
+This can unlock much larger GPU gains for Gaussian and deconvolution workloads,
+but it also changes the authored data representation. Never convert only to
+make a benchmark look faster.</p>
+<h2 id="installation-and-platform-boundary">Installation and platform boundary<a class="headerlink" href="#installation-and-platform-boundary" title="Permanent link">&para;</a></h2>
+<p>The <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX CUDA track. It does not
+include the separately reviewed cuCIM build used by the background and basic
+measurement candidates, so those nodes normally remain CPU after a standard
+public GPU install. Windows users can optionally build the pinned cuCIM 26.6.0
+source locally and approve it with its generated manifest; see the
+<a href="../../getting-started/windows-cuda/">Windows CUDA and cuCIM guide</a>.</p>
+<p>Public admission requires native Windows, CPython 3.12, the pinned CUDA 13.2
+runtime and scientific/provider stack, driver API 13.3 or newer, and a probed
+NVIDIA CUDA device with compute capability 7.5 or newer. The GPU model is
+recorded in provenance rather than used as an allowlist. Auto, Prefer GPU, and
+Custom use the same device gate; each operation still has its own exact
+workload, memory, dependency, and cleanup requirements. The Linux CUDA command
+is useful for qualification/development but the current public policy resolves
+Linux GPU candidates to CPU. CUDA has no macOS path.</p>
+<p>Hardware, driver, compiler, and reduction-order differences can produce minor
+floating-point variation across otherwise compatible GPUs within a provider's
+declared tolerance. Record the GPU model, compute capability, driver, CUDA
+stack, Python and scientific-package versions, actual implementation IDs, and
+execution report. Validate consequential work against the CPU reference before
+combining results from different environments.</p>
+<p>See <a href="../../getting-started/installation/">installation</a> for commands and
+<a href="../../reference/validation-status/">validation status</a> for the evidence and
+remaining platform gaps.</p>
+<h2 id="memory-fallback-progress-and-cancellation">Memory, fallback, progress, and cancellation<a class="headerlink" href="#memory-fallback-progress-and-cancellation" title="Permanent link">&para;</a></h2>
+<p>VIPP keeps eligible adjacent operations in a private device-resident segment,
+then crosses to host memory only at a planned boundary. Before launch it applies
+an operation-specific conservative memory estimate. Host cache limits do not
+cap every temporary CPU or GPU workspace.</p>
+<p><strong>Prefer GPU always requires visible fallback.</strong> A strict Prefer-GPU request is
+invalid because the policy means GPU wherever possible and CPU everywhere else.
+An unsupported node is an explained ordinary CPU planning decision, not an
+attempted-device fallback.</p>
+<p>For a forced Custom GPU choice, <strong>visible</strong> fallback turns a fallback-safe
+availability or eligibility rejection into an amber CPU decision; <strong>Strict</strong>
+returns a typed preflight failure. A rejection explicitly marked unsafe to
+fall back fails under either setting. Global <strong>Auto</strong> and <strong>Auto for this node</strong>
+in Custom use ordinary explained CPU decisions for fallback-safe preflight
+rejections.</p>
+<p>At runtime, <strong>visible</strong> fallback may retry one complete device segment once on
+CPU after a classified OOM, but only after synchronization and proven GPU
+cleanup. Its badge becomes amber and provenance keeps the failed attempt and
+CPU retry. <strong>Strict</strong> returns the typed failure. Preflight CPU decisions are not
+mislabeled as runtime OOM.</p>
+<p>Cancellation is cooperative between nodes, resident segments, iterations,
+tiles/planes, and publication stages. An opaque call can finish its current
+atomic work before responding. A result is not accepted or published until
+required synchronization and cleanup succeed.</p>
+<p>A failed or OOM interactive attempt never replaces an earlier processing result
+with an uncomputed or provenance-unknown value. VIPP may accept a verified
+source boundary. If cleanup itself failed, VIPP may additionally accept a
+completed processing node, but only when matching actual-implementation
+provenance is available for its badge and report. All
+other affected nodes retain prior valid outputs, thumbnails, and badges and
+remain pending. Cancellation retains the prior coherent result.</p>
+<p>If accelerator cleanup fails during a calculation, node benchmark, <strong>Find
+fastest</strong>, or collection batch, VIPP cannot prove the runtime safe to reuse. It
+requests cancellation of every other active compute owner and disables new
+calculation, policy changes (including policy-changing undo/redo),
+benchmark/optimizer work, and batch starts for that process. Newly measured
+<strong>Find fastest</strong> evidence from the unsafe analysis is rolled back. If that
+record-level rollback cannot be written, VIPP writes a durable poison marker
+first and moves the complete local timing store to an <code>.unsafe-*</code> quarantine
+filename under its cross-process lock. A restart resolves the marker or refuses
+to open the active store; if the marker itself could not be written, the alert
+names the file that must be moved manually. Preserve the error/provenance record
+and restart VIPP; ordinary visible CPU fallback is allowed only after cleanup
+succeeds.</p>
+<h2 id="keep-interactive-and-durable-execution-aligned">Keep interactive and durable execution aligned<a class="headerlink" href="#keep-interactive-and-durable-execution-aligned" title="Permanent link">&para;</a></h2>
+<p>Interactive calculation, saved batch runners, and generated Python/CLI use the
+same execution service. Interactive <strong>Save selected output…</strong> and <strong>Export OME
+dataset…</strong> serialize accepted cached values instead; they do not rerun the graph
+or create exact compute-provenance sidecars. Preserve:</p>
+<ul>
+<li>the schema-4 workflow and complete compute request;</li>
+<li>for batch, the version-3 config, finalized manifest/archive, and item
+  sidecars;</li>
+<li>for generated outputs, requested <code>.vipp-provenance.json</code> sidecars;</li>
+<li>the actual implementation IDs/versions and environment fingerprint; and</li>
+<li>CPU decisions, classified fallbacks/OOM, cancellation, and cleanup outcome.</li>
+</ul>
+<p>Workflow schema 4, batch config schema 3, saved runners, and generated CLIs use
+the stable value <code>prefer_gpu</code>. Saved per-node preferences remain present but
+dormant outside Custom; switching back to Custom reactivates them.
+<code>Benchmark node…</code> and <strong>Find fastest pipeline…</strong> are Custom-only. A CLI mode
+override to <code>prefer_gpu</code> uses visible fallback when no fallback override is
+given, while an explicit strict combination is rejected before calculation.
+Every surface records the effective request and exact actual implementations in
+the same execution provenance.</p>
+<p>The saved batch runner is the production collection route. The generated
+program's simple folder helper hashes each local primary source before reading,
+verifies it after materialization, and privately stages and transactionally
+commits each requested output/sidecar set. It does not provide multi-source
+pairing, collision planning, a final source recheck immediately before
+publication, checkpoints, a durable manifest, or replay/resume.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 12, 2026 09:31:42 UTC">August 12, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: How-to guides">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How-to guides
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../edit-graph/" class="md-footer__link md-footer__link--next" aria-label="Next: Edit and organize a graph">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Edit and organize a graph
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Rensu P. Theart. Documentation text and original screenshots are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rensutheart/napari-vipp" target="_blank" rel="noopener" title="napari-vipp source code" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "stable", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
