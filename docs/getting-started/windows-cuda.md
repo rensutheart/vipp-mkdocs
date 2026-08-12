@@ -15,8 +15,8 @@ any NVIDIA packages.
 
 | Goal | 0.13.0a5 route |
 | --- | --- |
-| Run VIPP on CPU | Use the signed installer from the main installation guide and keep its CPU recommendation. |
-| Use the reviewed CuPy/CuPyX operations | Use the signed installer and keep Automatic, or explicitly select NVIDIA GPU under Advanced details. The manual `gpu-cuda13` route below remains available. |
+| Run VIPP on CPU | Use the checksum-verified unsigned installer from the main installation guide and keep its CPU recommendation. |
+| Use the reviewed CuPy/CuPyX operations | Use that installer and keep Automatic, or explicitly select NVIDIA GPU under Advanced details. The manual `gpu-cuda13` route below remains available. |
 | Use cuCIM-backed background or basic-measurement operations | First complete the standard CUDA installation, then use the separate no-wheel cuCIM bundle or [build and add the pinned cuCIM release](#build-and-add-the-pinned-cucim-release). VIPP does not distribute the wheel. |
 
 ## Requirements for the standard CUDA 13 route

@@ -2,18 +2,40 @@
 
 ## Windows installer — recommended
 
-For Windows, use the signed VIPP installer. It creates and maintains a private
+For Windows, use the VIPP installer. It creates and maintains a private
 VIPP environment, so you do not need to activate Python or choose individual
 packages.
 
-**[Download VIPP 0.13.0a5 for Windows](https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a5/VIPP-Setup-0.13.0a5-Windows-x86_64.exe)**
+**[Download VIPP 0.13.0a5 for Windows (unsigned alpha)](https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a5/VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe)**
 
-!!! warning "Use only the official signed file"
-    Download `VIPP-Setup-0.13.0a5-Windows-x86_64.exe` only from the
+!!! warning "Unsigned alpha — verify before running"
+    Download `VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe` only from the
     [official v0.13.0a5 GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a5).
-    Windows should report a valid VIPP publisher signature. The release also
-    includes its SHA-256 checksum and release manifest. Do not use a similarly
-    named file from another site.
+    This alpha is intentionally not Authenticode-signed, so Windows will report
+    **Unknown publisher**. The `-UNSIGNED` filename is intentional. Do
+    not use a similarly named file from another site.
+
+### Verify the download and pass the Windows warning
+
+1. Download the installer and `SHA256SUMS-Windows-0.13.0a5.txt` from the same
+   official GitHub release.
+2. Open PowerShell in the download folder and run:
+
+    ```powershell
+    Get-FileHash -Algorithm SHA256 `
+      .\VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe
+    ```
+
+3. Compare the full 64-character result with the line for the installer in
+   `SHA256SUMS-Windows-0.13.0a5.txt`. If it differs, stop and delete the file.
+4. Double-click the installer. At **Windows protected your PC**, choose **More
+   info**, check that the app name ends in `-UNSIGNED.exe` and the publisher is
+   **Unknown publisher**, then choose **Run anyway**.
+
+Do not continue if Microsoft Defender or another antivirus identifies a
+threat, and never disable Windows security. Work/school policy or Windows 11
+Smart App Control may block unsigned applications without a **Run anyway**
+choice; use the manual installation below in that case.
 
 ### Before you start
 
@@ -30,16 +52,15 @@ and lets you check again after installing it.
 
 ### Install
 
-1. Double-click the downloaded `.exe`.
-2. Keep **Automatic** for the simplest choice. Setup recommends CPU or a
+1. Keep **Automatic** for the simplest choice. Setup recommends CPU or a
    qualified NVIDIA CUDA 13 installation from the computer it finds.
-3. To choose manually, expand **Advanced details**, then use **Computer use**
+2. To choose manually, expand **Advanced details**, then use **Computer use**
    to select **CPU** or **NVIDIA GPU**. An unavailable GPU route stays blocked
    and explains what is missing.
-4. Under **Reviewed settings**, confirm the installation location, compute
+3. Under **Reviewed settings**, confirm the installation location, compute
    route, and whether to add a Desktop shortcut.
-5. Select **Install** and wait for setup and its final acceptance checks.
-6. Open **VIPP** for a CPU installation. A CUDA installation provides
+4. Select **Install** and wait for setup and its final acceptance checks.
+5. Open **VIPP** for a CPU installation. A CUDA installation provides
    **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** shortcuts; begin
    with **VIPP Automatic**.
 

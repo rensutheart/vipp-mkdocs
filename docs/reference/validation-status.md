@@ -38,18 +38,21 @@ every assay.
 ## 0.13.0a5 installer acceptance and release boundary
 
 The release candidate is application commit
-[`b7428993831afafab25a64d5d0b363d0e16f6075`](https://github.com/rensutheart/napari-vipp/commit/b7428993831afafab25a64d5d0b363d0e16f6075)
+[`927ed0adb9dccf01b1e8ab68a14a120724ef72bf`](https://github.com/rensutheart/napari-vipp/commit/927ed0adb9dccf01b1e8ab68a14a120724ef72bf)
 on [release PR #16](https://github.com/rensutheart/napari-vipp/pull/16).
 
 The development installer passed fresh managed CPU and CUDA installation, real
 Auto and Prefer-GPU execution with CPU parity and clean accelerator release,
 optional cuCIM installation and execution, update and repair, and independent
 CPU/CUDA removal on the Windows reference system. The DEVELOPMENT file is not a
-release artifact. The official filename is created only from the immutable
-tag's exact wheel after a timestamped Authenticode signature passes independent
-verification and the signed candidate passes final clean-machine acceptance.
+release artifact. The selected release route creates only an explicit
+`-UNSIGNED` filename from the immutable tag's exact wheel after build bytes,
+frozen payload, `NotSigned` status, release manifest, and SHA-256 checks pass.
+The final candidate must then pass clean-machine acceptance including the
+documented Windows warning. The filename without `-UNSIGNED` remains reserved
+for a future valid Authenticode-signed and timestamped installer.
 
-Final CI, tag, signer, and artifact hashes are recorded in
+Final CI, tag, signing status, and artifact hashes are recorded in
 [0.13.0a5 release verification](../releases/0.13.0a5.md#release-verification).
 
 ## Historical 0.13.0a4 release source and artifacts

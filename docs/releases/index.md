@@ -6,7 +6,7 @@ data.
 
 ## Current alpha release
 
-- [0.13.0a5](0.13.0a5.md) — signed installer-first Windows setup, branded
+- [0.13.0a5](0.13.0a5.md) — checksum-first unsigned Windows setup, branded
   launchers, transactional install/update/repair, independently removable CPU
   and CUDA installations, and a separate optional cuCIM local-build bundle.
 

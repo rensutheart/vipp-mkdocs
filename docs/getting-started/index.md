@@ -1,8 +1,8 @@
 # Start here
 
 If VIPP is not installed yet, begin with [Install VIPP](installation.md). On
-Windows, the signed installer is the recommended route and creates the launch
-shortcuts for you.
+Windows, the checksum-verified unsigned installer is the recommended route and
+creates the launch shortcuts for you.
 
 You do not need to write code to use VIPP. Start by opening a complete workflow
 on synthetic data, learn how to inspect each stage, and only then build or adapt

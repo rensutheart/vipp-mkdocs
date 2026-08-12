@@ -40,8 +40,9 @@ hide:
     This manual documents **napari-vipp 0.13.0a5**, distributed as an alpha
     pre-release through [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a5)
     and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a5/). Windows users
-    should begin with the signed installer; Linux, macOS, and advanced users
-    can use the version-pinned pip route. Exact release-source, CI, signature,
+    should begin with the explicitly unsigned, checksum-verified installer;
+    Linux, macOS, blocked Windows computers, and advanced users can use the
+    version-pinned pip route. Exact release-source, CI, signing status,
     and artifact hashes are recorded in the
     [release notes](releases/0.13.0a5.md#release-verification). Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
@@ -65,7 +66,7 @@ hide:
 ## Choose your path
 
 <div class="vipp-card-grid">
-<a class="vipp-card" href="getting-started/installation/"><strong>Install VIPP</strong><span>Use the signed Windows installer, or follow the pinned Linux, macOS, and advanced routes.</span></a>
+<a class="vipp-card" href="getting-started/installation/"><strong>Install VIPP</strong><span>Verify and run the unsigned Windows alpha, or follow the pinned manual routes.</span></a>
 <a class="vipp-card" href="getting-started/"><strong>New to VIPP</strong><span>Tour a finished graph and build a small segmentation workflow.</span></a>
 <a class="vipp-card" href="workflows/"><strong>I have an analysis task</strong><span>Follow recipes for segmentation, measurements, networks, colocalization, restoration, or batch runs.</span></a>
 <a class="vipp-card" href="how-to/choose-compute/"><strong>I want to use my GPU</strong><span>Install the optional stack, choose a compute policy, benchmark safely, and verify what actually ran.</span></a>

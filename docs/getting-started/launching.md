@@ -2,7 +2,7 @@
 
 ## Use the installed shortcut on Windows
 
-The signed Windows installer creates launchers for the managed installation:
+The Windows installer creates launchers for the managed installation:
 
 - a CPU installation provides **VIPP**;
 - a CUDA installation provides **VIPP Automatic**, **VIPP CPU**, and

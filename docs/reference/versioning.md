@@ -46,7 +46,8 @@ but generated programs are version-locked and installation ownership changed.
 
 1. Preserve the earlier environment, workflows, outputs, execution reports,
    batch artifacts, and any private cuCIM wheel and build manifest.
-2. Install `0.13.0a5` separately with the signed Windows installer, or upgrade
+2. Install `0.13.0a5` separately with the checksum-verified unsigned Windows
+   installer, or upgrade
    a dedicated manual environment with an exact `napari-vipp==0.13.0a5` or
    `napari-vipp[gpu-cuda13]==0.13.0a5` pin. Do not mix CUDA-major extras.
 3. Run `pip check` and, for CUDA, `vipp-compute-doctor --track cuda13 --refresh`.
