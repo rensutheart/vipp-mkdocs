@@ -8,17 +8,19 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The numbered **0.13.0a6** snapshot documents the current alpha build in the
-0.13.0 release series. The package is available from
+The numbered **0.13.0a6** snapshot documents the immutable alpha build in the
+0.13.0 release series, prepared for
 [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). See
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Confirm that the linked
+release is publicly available before installing. See
 [installation](../getting-started/installation.md) and the
 [0.13.0a6 release notes](../releases/0.13.0a6.md).
 
 The [release verification](../releases/0.13.0a6.md#release-verification)
-records the source-candidate evidence now. The immutable tag, exact application
-commit, tagged CI run, installer signing status, and final artifact hashes
-remain explicitly pending until the final release artifacts exist.
+records the exact application commit, immutable tag, successful cross-platform
+CI run, explicit unsigned-installer status, and qualified artifact hashes.
+Public GitHub/PyPI publication and downloaded-installer field acceptance are
+separate checks and must not be inferred from artifact qualification.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
