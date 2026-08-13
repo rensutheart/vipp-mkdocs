@@ -2693,11 +2693,9 @@
 
 
 <h1 id="vipp-0130a6">VIPP 0.13.0a6<a class="headerlink" href="#vipp-0130a6" title="Permanent link">&para;</a></h1>
-<p><strong>Release:</strong> prepared as the immutable
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6"><code>v0.13.0a6</code></a>
-alpha for GitHub and
-<a href="https://pypi.org/project/napari-vipp/0.13.0a6/">PyPI</a>. Public publication is
-verified separately from the artifact qualification recorded below.</p>
+<p><strong>Release:</strong> public
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6"><code>v0.13.0a6</code> GitHub alpha pre-release</a>
+and <a href="https://pypi.org/project/napari-vipp/0.13.0a6/">PyPI package</a></p>
 <p>VIPP 0.13.0a6 makes everyday workflow editing much less laborious and makes
 GPU readiness much easier to understand. You can reuse nodes and connected
 parts of a graph, place a processing step before an existing tunnel without
@@ -2803,6 +2801,11 @@ Windows RTX 5090 reference environment, Compute Doctor admitted all <strong>13 o
 reviewed GPU regions and the strict quick admission run passed <strong>130 of 130</strong>
 checks across all 16 executable implementation owners. Clean wheel and source
 archive installs also passed on fresh local environments.</p>
+<p>The final clean-tag RTX 5090 run then passed the strict <code>full</code> GPU admission
+profile for <strong>16 of 16</strong> executable owners, spanning <strong>13</strong> public
+implementations and all <strong>10</strong> contract facets. Its aggregate evidence SHA-256
+is
+<code>44bd66033afedcbece8d8746e1779d833af2897ac230adc4e8a98d7847f7f56c</code>.</p>
 <p>These checks qualify the source candidate; they do not replace testing the
 downloaded release on another computer. Fresh-account CUDA installation,
 account paths containing spaces or non-ASCII characters, interrupted/network
@@ -2823,7 +2826,9 @@ passed package quality and the full CPython 3.12/3.13 matrix on Windows, Linux,
 and macOS.</p>
 <p>The clean tagged wheel and source archive passed Twine inspection. The Windows
 finalizer's fail-closed source, wheel, frozen-payload, byte-identity, manifest,
-signature, and checksum checks qualified these exact files:</p>
+signature, and checksum checks qualified these exact files. The public GitHub
+pre-release contains exactly these seven assets, and every published SHA-256
+digest matches this table:</p>
 <table>
 <thead>
 <tr>
@@ -2867,13 +2872,21 @@ Windows inspection returned <code>NotSigned</code>, with no signer or timestamp
 certificate. The release manifest binds the installer to the exact tag,
 application commit, and wheel above. The filename without <code>-UNSIGNED</code> remains
 reserved for a future valid, timestamped Authenticode build.</p>
-<div class="admonition note">
-<p class="admonition-title">Publication and outside-machine acceptance</p>
-<p>Artifact qualification does not itself prove that every file is publicly
-downloadable or that PyPI has accepted the package. Confirm the official
-GitHub release and PyPI page before installing. The downloaded a6 installer
-also still requires the separate Windows field checks listed above; no
-unperformed fresh-machine check is counted as a pass.</p>
+<div class="admonition success">
+<p class="admonition-title">Publication verified</p>
+<p>The <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6">GitHub pre-release</a>
+is public with exactly seven assets and matching digests. The
+<a href="https://pypi.org/project/napari-vipp/0.13.0a6/">PyPI release</a> is public;
+its wheel and source-archive SHA-256 values match the corresponding GitHub
+assets. The numbered-manual
+<a href="https://github.com/rensutheart/vipp-mkdocs/actions/runs/31678254836">deployment workflow</a>
+succeeded, and the
+<a href="https://rensutheart.github.io/vipp-mkdocs/0.13.0a6/">0.13.0a6 home page</a>,
+<a href="https://rensutheart.github.io/vipp-mkdocs/0.13.0a6/getting-started/installation/">installation page</a>,
+and <a href="https://rensutheart.github.io/vipp-mkdocs/0.13.0a6/getting-started/windows-field-acceptance/">Windows field checklist</a>
+returned HTTP 200.</p>
+<p>Publication does not replace the separate Windows field checks. No
+unperformed external fresh-machine or novice check is counted as a pass.</p>
 </div>
 <p>Historical <code>0.13.0a5</code> source, installer, and artifact evidence remains recorded
 unchanged in the <a href="../0.13.0a5/#release-verification">a5 release notes</a>.</p>
@@ -2897,7 +2910,7 @@ unchanged in the <a href="../0.13.0a5/#release-verification">a5 release notes</a
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 06:49:41 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 07:40:03 UTC">August 13, 2026</span>
   </span>
 
     
