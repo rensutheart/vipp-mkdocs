@@ -6,28 +6,28 @@ For Windows, use the VIPP installer. It creates and maintains a private
 VIPP environment, so you do not need to activate Python or choose individual
 packages.
 
-**[Download VIPP 0.13.0a5 for Windows (unsigned alpha)](https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a5/VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe)**
+**[Download VIPP 0.13.0a6 for Windows (unsigned alpha)](https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a6/VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED.exe)**
 
 !!! warning "Unsigned alpha — verify before running"
-    Download `VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe` only from the
-    [official v0.13.0a5 GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a5).
+    Download `VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED.exe` only from the
+    [official v0.13.0a6 GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6).
     This alpha is intentionally not Authenticode-signed, so Windows will report
     **Unknown publisher**. The `-UNSIGNED` filename is intentional. Do
     not use a similarly named file from another site.
 
 ### Verify the download and pass the Windows warning
 
-1. Download the installer and `SHA256SUMS-Windows-0.13.0a5.txt` from the same
+1. Download the installer and `SHA256SUMS-Windows-0.13.0a6.txt` from the same
    official GitHub release.
 2. Open PowerShell in the download folder and run:
 
     ```powershell
     Get-FileHash -Algorithm SHA256 `
-      .\VIPP-Setup-0.13.0a5-Windows-x86_64-UNSIGNED.exe
+      .\VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED.exe
     ```
 
 3. Compare the full 64-character result with the line for the installer in
-   `SHA256SUMS-Windows-0.13.0a5.txt`. If it differs, stop and delete the file.
+   `SHA256SUMS-Windows-0.13.0a6.txt`. If it differs, stop and delete the file.
 4. Double-click the installer. At **Windows protected your PC**, choose **More
    info**, check that the app name ends in `-UNSIGNED.exe` and the publisher is
    **Unknown publisher**, then choose **Run anyway**.
@@ -98,7 +98,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ## Linux, macOS, and advanced manual installation
 
-VIPP 0.13.0a5 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
+VIPP 0.13.0a6 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
 environment, then install the exact alpha. An exact prerelease pin does not
 need pip's `--pre` option.
 
@@ -107,7 +107,7 @@ need pip's `--pre` option.
     ```powershell
     py -3.12 -m venv ".venv-vipp"
     & ".\.venv-vipp\Scripts\python.exe" -m pip install --upgrade pip
-    & ".\.venv-vipp\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a5"
+    & ".\.venv-vipp\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a6"
     & ".\.venv-vipp\Scripts\vipp.exe"
     ```
 
@@ -117,7 +117,7 @@ need pip's `--pre` option.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a5"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a6"
     vipp
     ```
 
@@ -127,7 +127,7 @@ need pip's `--pre` option.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a5"
+    python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a6"
     vipp
     ```
 
@@ -151,7 +151,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.13.0a5
+0.13.0a6
 ```
 
 Inside napari, choose **Plugins → VIPP Workflow (napari-vipp)**.
@@ -174,14 +174,23 @@ For a manual CUDA environment:
 ```powershell
 py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
-& ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a5"
+& ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a6"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
 
 Read the complete [Windows CUDA and optional cuCIM guide](windows-cuda.md)
-before adding GPU packages manually. The separate cuCIM release bundle builds
-the pinned source locally and contains no redistributable cuCIM wheel.
+before adding GPU packages manually. To add optional cuCIM after CUDA passes,
+download the exact
+[`0.13.0a6` no-wheel add-on](https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a6/napari-vipp-cucim-installer-0.13.0a6-windows.zip),
+verify it against `SHA256SUMS-Windows-0.13.0a6.txt`, choose **Extract All**,
+and run **Install VIPP cuCIM.cmd** from the extracted folder. It builds the
+pinned source locally and contains no redistributable cuCIM wheel.
+
+If you are evaluating this alpha for the project, use the short
+[Windows installer field checklist](windows-field-acceptance.md). It records
+what was actually tried without turning an unperformed CPU, CUDA, rollback, or
+novice check into a pass.
 
 ## Optional microscope readers
 
@@ -190,10 +199,10 @@ launches VIPP, then restart napari.
 
 | File family | Command |
 | --- | --- |
-| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.13.0a5"` |
-| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.13.0a5"` |
-| Mixed microscope formats | `python -m pip install "napari-vipp[microscope]==0.13.0a5"` |
-| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.13.0a5"` |
+| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.13.0a6"` |
+| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.13.0a6"` |
+| Mixed microscope formats, including Imaris IMS | `python -m pip install "napari-vipp[microscope]==0.13.0a6"` |
+| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.13.0a6"` |
 
 A reader opening a file is not proof that every axis, unit, timestamp, or
 acquisition field was interpreted correctly. Check representative facility

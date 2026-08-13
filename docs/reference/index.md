@@ -5,11 +5,11 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.13.0a5 release notes](../releases/0.13.0a5.md) | Review the Windows installer, compatible NVIDIA GPU admission, reproducibility guidance, durable automation, upgrade steps, and limitations. |
+| [0.13.0a6 release notes](../releases/0.13.0a6.md) | Review graph editing and reuse, Compute Doctor 2.0, GPU qualification, multi-series and microscope support, installation checks, and limitations. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
-| [All 112 nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
+| [All 113 nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
 | [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |
-| [Example workflows](example-workflows.md) | Choose one of 13 runnable graph templates, including the deterministic batch bundle. |
+| [Example workflows](example-workflows.md) | Choose one of 14 runnable graph templates, including the graph-editing acceptance check and deterministic batch bundle. |
 | [Bundled sample data](sample-data.md) | Choose one of 13 deterministic samples. |
 | [Workflow and export contract](workflow-contract.md) | Understand schema 4 compute intent, shared-executor Python/CLI, stable sources, and version-3 batch artifacts. |
 | [Supported input and output](import-export.md) | Select a format and review metadata/dtype limitations. |

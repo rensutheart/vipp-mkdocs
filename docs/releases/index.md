@@ -6,17 +6,18 @@ data.
 
 ## Current alpha release
 
-- [0.13.0a5](0.13.0a5.md) — checksum-first unsigned Windows setup, branded
-  launchers, transactional install/update/repair, independently removable CPU
-  and CUDA installations, and a separate optional cuCIM local-build bundle.
+- [0.13.0a6](0.13.0a6.md) — graph-fragment reuse and tunnel insertion,
+  Compute Doctor 2.0, complete public-GPU admission checks, multi-series and
+  Imaris sources, microscope metadata editing, and a public field checklist.
 
 The alpha is published on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a5) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a5/). Exact release-source,
-CI, signed-installer, and artifact hashes are recorded in
-[0.13.0a5 release verification](0.13.0a5.md#release-verification).
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Source-candidate
+evidence and the explicit pending boundary for the immutable commit, tagged CI,
+installer signing status, and final artifact hashes are recorded in
+[0.13.0a6 release verification](0.13.0a6.md#release-verification).
 
-0.13.0a5 writes workflow schema 4 and batch config/manifest schema 3. Valid
+0.13.0a6 writes workflow schema 4 and batch config/manifest schema 3. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;
 version-2 batch configs retain their saved compute request. Neither older batch
 version contains source-axis declarations until reviewed and saved as version
@@ -25,6 +26,10 @@ upgrading, and regenerate Python exports because generated programs require the
 exact VIPP runtime version that created them.
 
 ## Previous releases
+
+- [0.13.0a5](0.13.0a5.md) — checksum-first unsigned Windows setup, branded
+  launchers, transactional install/update/repair, independently removable CPU
+  and CUDA installations, and a separate optional cuCIM local-build bundle.
 
 - [0.13.0a4](0.13.0a4.md) — compatible NVIDIA CUDA 13 admission across GPU
   models meeting the released technical and scientific gates.

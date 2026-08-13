@@ -4,6 +4,10 @@ If VIPP is not installed yet, begin with [Install VIPP](installation.md). On
 Windows, the checksum-verified unsigned installer is the recommended route and
 creates the launch shortcuts for you.
 
+If someone has asked you to evaluate the alpha on a new Windows computer, use
+the [short field checklist](windows-field-acceptance.md) and leave anything you
+did not try marked **not run**.
+
 You do not need to write code to use VIPP. Start by opening a complete workflow
 on synthetic data, learn how to inspect each stage, and only then build or adapt
 a graph.

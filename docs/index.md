@@ -37,24 +37,25 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual documents **napari-vipp 0.13.0a5**, distributed as an alpha
-    pre-release through [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a5)
-    and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a5/). Windows users
+    This manual documents **napari-vipp 0.13.0a6**, distributed as an alpha
+    pre-release through [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6)
+    and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Windows users
     should begin with the explicitly unsigned, checksum-verified installer;
     Linux, macOS, blocked Windows computers, and advanced users can use the
     version-pinned pip route. Exact release-source, CI, signing status,
-    and artifact hashes are recorded in the
-    [release notes](releases/0.13.0a5.md#release-verification). Interfaces,
+    and release-verification status are recorded in the
+    [release notes](releases/0.13.0a6.md#release-verification). Immutable commit,
+    CI, signing-status, and hash fields remain pending until the release exists. Interfaces,
     workflow files, and parameter defaults may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
 !!! important "0.13 workflow and compute compatibility"
-    0.13.0a5 writes workflow schema 4. A valid schema-3 workflow loads with an
+    0.13.0a6 writes workflow schema 4. A valid schema-3 workflow loads with an
     explicit CPU compute request, while schemas 1 and 2 remain rejected. Cached
     results are not saved in workflow JSON and generated Python is pinned to
     its creator version. Read the
-    [0.13.0a5 release notes](releases/0.13.0a5.md) before upgrading and
+    [0.13.0a6 release notes](releases/0.13.0a6.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 3. Version-1 configs load with an
@@ -71,7 +72,7 @@ hide:
 <a class="vipp-card" href="workflows/"><strong>I have an analysis task</strong><span>Follow recipes for segmentation, measurements, networks, colocalization, restoration, or batch runs.</span></a>
 <a class="vipp-card" href="how-to/choose-compute/"><strong>I want to use my GPU</strong><span>Install the optional stack, choose a compute policy, benchmark safely, and verify what actually ran.</span></a>
 <a class="vipp-card" href="scientific-practice/"><strong>I need defensible results</strong><span>Choose dimensionality, tune on representative data, validate, and record what must be reported.</span></a>
-<a class="vipp-card" href="reference/"><strong>I know what I need</strong><span>Search all 112 nodes, bundled samples, example workflows, settings, formats, and compatibility notes.</span></a>
+<a class="vipp-card" href="reference/"><strong>I know what I need</strong><span>Search all 113 nodes, bundled samples, example workflows, settings, formats, and compatibility notes.</span></a>
 </div>
 
 ## What VIPP records—and what it does not
@@ -104,7 +105,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in 0.13 | [0.13.0a5 release notes](releases/0.13.0a5.md) |
+| Review everything changed in 0.13 | [0.13.0a6 release notes](releases/0.13.0a6.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

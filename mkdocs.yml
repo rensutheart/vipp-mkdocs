@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.13.0a6: releases/0.13.0a6.md
       - 0.13.0a5: releases/0.13.0a5.md
       - 0.13.0a4: releases/0.13.0a4.md
       - 0.13.0a1: releases/0.13.0a1.md
@@ -130,6 +131,7 @@ nav:
       - Start here: getting-started/index.md
       - Install VIPP: getting-started/installation.md
       - Windows CUDA and cuCIM: getting-started/windows-cuda.md
+      - Test a Windows install: getting-started/windows-field-acceptance.md
       - Launch VIPP: getting-started/launching.md
       - Tour a finished workflow: getting-started/example-tour.md
       - Build your first workflow: getting-started/build-workflow.md
@@ -165,7 +167,7 @@ nav:
       - Report a VIPP analysis: scientific-practice/reporting.md
   - Reference:
       - Reference: reference/index.md
-      - All 112 nodes: reference/node-index.md
+      - All 113 nodes: reference/node-index.md
       - Toolbar and settings: reference/interface.md
       - Example workflows: reference/example-workflows.md
       - Bundled sample data: reference/sample-data.md

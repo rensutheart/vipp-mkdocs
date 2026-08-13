@@ -33,7 +33,7 @@ Use this when you want measurements such as:
 
 ## CPU and GPU measurement coverage
 
-The 0.13.0a5 cuCIM candidates cover only the basic `Measure Objects` and
+The 0.13.0a6 cuCIM candidates cover only the basic `Measure Objects` and
 `Measure Objects + Intensity` schemas. They require native-endian,
 non-negative `int32` labels in resolved 2D/3D leading blocks. The intensity
 variant additionally accepts matching Boolean, `uint8`, `uint16`, or finite
