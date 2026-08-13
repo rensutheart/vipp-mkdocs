@@ -2753,12 +2753,20 @@ therefore retains fresh-account CPU/CUDA installation, spaces and non-ASCII
 account paths, cancellation and network rollback, repair/update/uninstall, an
 RTX 40-series machine, and a novice first workflow as explicit field checks.
 Anything not performed remains <strong>not run</strong>.</p>
-<p>The exact a6 release commit, tagged CI run, unsigned-installer status, and final
-artifact hashes are pending creation of the immutable tag and release. Do not
-use development-build hashes or the historical a5 hashes for an a6 download.
-They will be recorded in
-<a href="../../releases/0.13.0a6/#release-verification">0.13.0a6 release verification</a>
-after the final artifacts exist.</p>
+<p>The immutable <code>v0.13.0a6</code> tag resolves to application commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/859738a28354981ba784d9e49a04cb6e1158a79f"><code>859738a28354981ba784d9e49a04cb6e1158a79f</code></a>.
+Its exact-source
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31673890530">CI run</a>
+passed on Windows, Linux, and macOS. The tagged wheel, source archive, cuCIM
+local-build bundle, and Windows sidecars passed the release qualification
+gates. Independent Windows inspection confirmed that the explicitly unsigned
+installer is <code>NotSigned</code>, with no signer or timestamp certificate. Exact
+artifact hashes are recorded in
+<a href="../../releases/0.13.0a6/#release-verification">0.13.0a6 release verification</a>.</p>
+<p>These immutable engineering facts do not claim public GitHub/PyPI availability
+before those services are checked, and they do not replace the downloaded
+installer field checklist. Fresh-machine and novice acceptance remain <strong>not
+run</strong> unless a tester records them explicitly.</p>
 <h2 id="historical-0130a5-installer-acceptance-and-release-boundary">Historical 0.13.0a5 installer acceptance and release boundary<a class="headerlink" href="#historical-0130a5-installer-acceptance-and-release-boundary" title="Permanent link">&para;</a></h2>
 <p>The release application commit is
 <a href="https://github.com/rensutheart/napari-vipp/commit/067c89559072fbbb101e9d63b91514345e5896e6"><code>067c89559072fbbb101e9d63b91514345e5896e6</code></a>,
@@ -3118,7 +3126,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 06:49:41 UTC">August 13, 2026</span>
   </span>
 
     

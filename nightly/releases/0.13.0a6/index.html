@@ -2693,8 +2693,11 @@
 
 
 <h1 id="vipp-0130a6">VIPP 0.13.0a6<a class="headerlink" href="#vipp-0130a6" title="Permanent link">&para;</a></h1>
-<p><strong>Release:</strong> <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6">GitHub alpha pre-release</a>
-and <a href="https://pypi.org/project/napari-vipp/0.13.0a6/">PyPI package</a></p>
+<p><strong>Release:</strong> prepared as the immutable
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6"><code>v0.13.0a6</code></a>
+alpha for GitHub and
+<a href="https://pypi.org/project/napari-vipp/0.13.0a6/">PyPI</a>. Public publication is
+verified separately from the artifact qualification recorded below.</p>
 <p>VIPP 0.13.0a6 makes everyday workflow editing much less laborious and makes
 GPU readiness much easier to understand. You can reuse nodes and connected
 parts of a graph, place a processing step before an existing tunnel without
@@ -2806,13 +2809,71 @@ account paths containing spaces or non-ASCII characters, interrupted/network
 rollback, an RTX 40-series system, native Linux CUDA, and a novice installation
 remain field evidence to collect. Use the checklist above and leave anything
 not tried as <strong>not run</strong>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Immutable release identity pending</p>
-<p>The exact release commit, tagged CI run, unsigned-installer status, and
-final SHA-256 hashes cannot be recorded until the immutable <code>v0.13.0a6</code>
-release and its artifacts exist. Do not substitute development-build hashes
-or an earlier a5 artifact. Verify the downloaded filenames and checksums
-against the official a6 GitHub release before running them.</p>
+<p>The release application commit is
+<a href="https://github.com/rensutheart/napari-vipp/commit/859738a28354981ba784d9e49a04cb6e1158a79f"><code>859738a28354981ba784d9e49a04cb6e1158a79f</code></a>.
+The graph-editing and Priority 1 work reached <code>main</code> through
+<a href="https://github.com/rensutheart/napari-vipp/pull/18">pull request #18</a>, and the
+immutable release finalization followed through
+<a href="https://github.com/rensutheart/napari-vipp/pull/19">pull request #19</a>. The
+annotated
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6"><code>v0.13.0a6</code></a>
+tag resolves to the final application commit. The exact-source
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31673890530">CI run</a>
+passed package quality and the full CPython 3.12/3.13 matrix on Windows, Linux,
+and macOS.</p>
+<p>The clean tagged wheel and source archive passed Twine inspection. The Windows
+finalizer's fail-closed source, wheel, frozen-payload, byte-identity, manifest,
+signature, and checksum checks qualified these exact files:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>napari_vipp-0.13.0a6-py3-none-any.whl</code></td>
+<td><code>cfd90d096199899077729e55051b0b904cd4393ae66a183521665567ff1ff1f3</code></td>
+</tr>
+<tr>
+<td><code>napari_vipp-0.13.0a6.tar.gz</code></td>
+<td><code>21b0ea3e40bcbc203be2604176332c14370458866cd019edf6f2729a88fdf25b</code></td>
+</tr>
+<tr>
+<td><code>napari-vipp-cucim-installer-0.13.0a6-windows.zip</code></td>
+<td><code>65d6cff2944c61d0850e091af3d8fe81a9866214d5d19b06d6a1af33f2b6bc47</code></td>
+</tr>
+<tr>
+<td><code>VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED.exe</code></td>
+<td><code>12cca5260314ed6d5371849e47df61738f067976471fb8a05b81b900b96921bc</code></td>
+</tr>
+<tr>
+<td><code>VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED-release.json</code></td>
+<td><code>152f252dc5bc87ef1ab31d90e20f4007f6d7e3284f6cb5ce10523740852a0035</code></td>
+</tr>
+<tr>
+<td><code>VIPP-Setup-0.13.0a6-Windows-x86_64-THIRD-PARTY-NOTICES.txt</code></td>
+<td><code>95ca668d0977be347ab39af820f97652ed3565ed7ea4218205bb3a716a847e2d</code></td>
+</tr>
+<tr>
+<td><code>SHA256SUMS-Windows-0.13.0a6.txt</code></td>
+<td><code>b45e739d28c0b6e29074db2e02dcc1e450bb7a0d25a302dbd4ee8babbbb369b8</code></td>
+</tr>
+</tbody>
+</table>
+<p>The Windows executable is deliberately <strong>not Authenticode-signed</strong>. Independent
+Windows inspection returned <code>NotSigned</code>, with no signer or timestamp
+certificate. The release manifest binds the installer to the exact tag,
+application commit, and wheel above. The filename without <code>-UNSIGNED</code> remains
+reserved for a future valid, timestamped Authenticode build.</p>
+<div class="admonition note">
+<p class="admonition-title">Publication and outside-machine acceptance</p>
+<p>Artifact qualification does not itself prove that every file is publicly
+downloadable or that PyPI has accepted the package. Confirm the official
+GitHub release and PyPI page before installing. The downloaded a6 installer
+also still requires the separate Windows field checks listed above; no
+unperformed fresh-machine check is counted as a pass.</p>
 </div>
 <p>Historical <code>0.13.0a5</code> source, installer, and artifact evidence remains recorded
 unchanged in the <a href="../0.13.0a5/#release-verification">a5 release notes</a>.</p>
@@ -2836,7 +2897,7 @@ unchanged in the <a href="../0.13.0a5/#release-verification">a5 release notes</a
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 06:49:41 UTC">August 13, 2026</span>
   </span>
 
     
