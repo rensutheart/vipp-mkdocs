@@ -51,6 +51,11 @@ implementation owners, including parity, difficult inputs, metadata, unchanged
 inputs, memory, cancellation, cleanup, fallback, provenance, and
 transfer-inclusive timing evidence.
 
+The final clean-tag RTX 5090 run also passed the strict `full` admission
+profile for **16 of 16** executable owners, **13** public implementations, and
+all **10** contract facets. Its aggregate evidence SHA-256 is
+`44bd66033afedcbece8d8746e1779d833af2897ac230adc4e8a98d7847f7f56c`.
+
 This is strong engineering evidence for the source candidate, not a substitute
 for testing the downloaded installer elsewhere. The
 [Windows field checklist](../getting-started/windows-field-acceptance.md)
@@ -70,10 +75,17 @@ installer is `NotSigned`, with no signer or timestamp certificate. Exact
 artifact hashes are recorded in
 [0.13.0a6 release verification](../releases/0.13.0a6.md#release-verification).
 
-These immutable engineering facts do not claim public GitHub/PyPI availability
-before those services are checked, and they do not replace the downloaded
-installer field checklist. Fresh-machine and novice acceptance remain **not
-run** unless a tester records them explicitly.
+The public
+[GitHub pre-release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6)
+contains exactly seven assets whose published SHA-256 digests match the release
+table. The public [PyPI release](https://pypi.org/project/napari-vipp/0.13.0a6/)
+has matching wheel and source-archive hashes. The numbered-manual
+[deployment workflow](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31678254836)
+succeeded, and its required numbered pages returned HTTP 200.
+
+Publication and clean-tag GPU qualification do not replace the downloaded
+installer field checklist. External fresh-machine and novice acceptance remain
+**not run** unless a tester records them explicitly.
 
 ## Historical 0.13.0a5 installer acceptance and release boundary
 
