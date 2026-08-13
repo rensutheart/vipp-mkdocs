@@ -26,7 +26,7 @@
     
     
       
-        <title>All 112 nodes - VIPP — Visual Image Processing Platform</title>
+        <title>All 113 nodes - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              All 112 nodes
+              All 113 nodes
             
           </span>
         </div>
@@ -550,6 +550,8 @@
       
         
       
+        
+      
     
     
     
@@ -593,6 +595,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -765,6 +790,8 @@
       
         
       
+        
+      
     
     
     
@@ -846,6 +873,29 @@
   
   <span class="md-ellipsis">
     Windows CUDA and cuCIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-field-acceptance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test a Windows install
     
   </span>
   
@@ -1844,7 +1894,7 @@
   
   
   <span class="md-ellipsis">
-    All 112 nodes
+    All 113 nodes
     
   </span>
   
@@ -1857,7 +1907,7 @@
   
   
   <span class="md-ellipsis">
-    All 112 nodes
+    All 113 nodes
     
   </span>
   
@@ -2979,7 +3029,7 @@
 
 
 <h1 id="node-index">Node Index<a class="headerlink" href="#node-index" title="Permanent link">&para;</a></h1>
-<p>This page lists all <strong>112 operation specifications</strong> registered by
+<p>This page lists all <strong>113 operation specifications</strong> registered by
 <code>NODE_LIBRARY</code> in the current manual track. Nightly parameter behavior can be
 newer than the latest tagged alpha.</p>
 <div class="admonition info">
@@ -2991,7 +3041,7 @@ from runtime data. Parameter widgets, defaults, and bounds in the installed
 release remain the source of truth until a generated parameter reference is
 published.</p>
 </div>
-<p>In 0.13.0a5, manual/cached nodes and nodes selected for isolated tuning use the
+<p>In 0.13.0a6, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. <strong>Tune node in isolation</strong> recalculates only the selected node until
@@ -3004,7 +3054,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">0.13 CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0130a6">0.13 CPU/GPU operation matrix</a>
 for the accelerated node families and their first public regions.</p>
 <table>
 <thead>
@@ -3016,7 +3066,7 @@ for the accelerated node families and their first public regions.</p>
 <tbody>
 <tr>
 <td>Image Data</td>
-<td style="text-align: right;">24</td>
+<td style="text-align: right;">25</td>
 </tr>
 <tr>
 <td>Filtering</td>
@@ -3052,7 +3102,7 @@ for the accelerated node families and their first public regions.</p>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
-<td style="text-align: right;"><strong>112</strong></td>
+<td style="text-align: right;"><strong>113</strong></td>
 </tr>
 </tbody>
 </table>
@@ -3128,6 +3178,12 @@ for the accelerated node families and their first public regions.</p>
 <td>array</td>
 <td>same as input</td>
 <td>Repair or define physical calibration.</td>
+</tr>
+<tr>
+<td><code>Set Microscope Metadata</code></td>
+<td>array</td>
+<td>same as input</td>
+<td>Record missing channel emission wavelengths, objective numerical aperture, or immersion refractive index without changing pixels.</td>
 </tr>
 <tr>
 <td><code>Rescale Axes</code></td>
@@ -3430,7 +3486,7 @@ and is not merely a display adjustment. See
 </tbody>
 </table>
 <h3 id="restoration-and-psf">Restoration And PSF<a class="headerlink" href="#restoration-and-psf" title="Permanent link">&para;</a></h3>
-<p>These nodes are public in 0.13.0a5. They have synthetic examples and automated
+<p>These nodes are public in 0.13.0a6. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see <a href="../validation-status/">validation status</a>.</p>
 <table>
@@ -3993,7 +4049,7 @@ it cannot identify a valid two-peak histogram. See
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 12, 2026 09:31:42 UTC">August 12, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
   </span>
 
     

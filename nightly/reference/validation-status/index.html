@@ -550,6 +550,8 @@
       
         
       
+        
+      
     
     
     
@@ -593,6 +595,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -765,6 +790,8 @@
       
         
       
+        
+      
     
     
     
@@ -846,6 +873,29 @@
   
   <span class="md-ellipsis">
     Windows CUDA and cuCIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-field-acceptance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test a Windows install
     
   </span>
   
@@ -1835,7 +1885,7 @@
   
   
   <span class="md-ellipsis">
-    All 112 nodes
+    All 113 nodes
     
   </span>
   
@@ -2029,9 +2079,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#0130a5-installer-acceptance-and-release-boundary" class="md-nav__link">
+  <a href="#0130a6-qualification-and-field-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a5 installer acceptance and release boundary
+      0.13.0a6 qualification and field boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-0130a5-installer-acceptance-and-release-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical 0.13.0a5 installer acceptance and release boundary
     </span>
   </a>
   
@@ -2544,9 +2603,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#0130a5-installer-acceptance-and-release-boundary" class="md-nav__link">
+  <a href="#0130a6-qualification-and-field-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a5 installer acceptance and release boundary
+      0.13.0a6 qualification and field boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-0130a5-installer-acceptance-and-release-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical 0.13.0a5 installer acceptance and release boundary
     </span>
   </a>
   
@@ -2631,7 +2699,7 @@
 
 
 <h1 id="validation-status">Validation status<a class="headerlink" href="#validation-status" title="Permanent link">&para;</a></h1>
-<p>This page summarizes the evidence shipped with the 0.13.0a5 application source.
+<p>This page summarizes the evidence shipped with the 0.13.0a6 application source.
 It is a claim boundary, not a certificate that every node is validated for
 every assay.</p>
 <h2 id="evidence-available-now">Evidence available now<a class="headerlink" href="#evidence-available-now" title="Permanent link">&para;</a></h2>
@@ -2641,7 +2709,7 @@ every assay.</p>
 <li>architecture tests enforce the Qt-free <code>core/</code> dependency boundary, and
   focused tests cover stable source revisions, physical grids, detached
   snapshots, atomic persistence, typed execution, and stale-result rejection;</li>
-<li>13 deterministic synthetic samples and 13 checked-in workflows support
+<li>13 deterministic synthetic samples and 14 checked-in workflows support
   regression checks and inspection;</li>
 <li>a generated two-source batch bundle exercises three paired items, nine exact
   NPY/TIFF/TSV outputs, workflow/config hashes, source identities, manifests,
@@ -2655,7 +2723,8 @@ every assay.</p>
   rejection of stale contrast/histogram results;</li>
 <li>batch tests cover attached-config validation and round-trip, guarded source-
   axis declarations, representative scientific preflight, restore without
-  preview, direct plan-only execution, complete-item fast skips, transient
+  preview, inspected multi-series expansion and identity retention, direct
+  plan-only execution, complete-item fast skips, transient
   atomic-write retries, and continuing after a final item-sidecar failure;</li>
 <li>compute tests cover import-safe CPU-only use, workflow-schema-4 and
   batch-schema-3 intent, eligibility planning, exact implementation identity,
@@ -2665,7 +2734,32 @@ every assay.</p>
 <li>opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.</li>
 </ul>
-<h2 id="0130a5-installer-acceptance-and-release-boundary">0.13.0a5 installer acceptance and release boundary<a class="headerlink" href="#0130a5-installer-acceptance-and-release-boundary" title="Permanent link">&para;</a></h2>
+<h2 id="0130a6-qualification-and-field-boundary">0.13.0a6 qualification and field boundary<a class="headerlink" href="#0130a6-qualification-and-field-boundary" title="Permanent link">&para;</a></h2>
+<p>The source candidate's complete local suite passed <strong>4,572 tests</strong>, with <strong>5
+documented skips</strong>, <strong>2 documented expected failures</strong>, and zero failures.
+Clean wheel and source-archive installations passed in fresh environments, and
+the cross-platform workflow now checks both distribution forms across Windows,
+Linux, and macOS on the supported Python versions.</p>
+<p>On the native-Windows RTX 5090 reference environment, Compute Doctor 2.0
+admitted all <strong>13 of 13</strong> current public GPU regions. The strict quick admission
+profile passed <strong>130 of 130</strong> mapped checks across all 16 executable
+implementation owners, including parity, difficult inputs, metadata, unchanged
+inputs, memory, cancellation, cleanup, fallback, provenance, and
+transfer-inclusive timing evidence.</p>
+<p>This is strong engineering evidence for the source candidate, not a substitute
+for testing the downloaded installer elsewhere. The
+<a href="../../getting-started/windows-field-acceptance/">Windows field checklist</a>
+therefore retains fresh-account CPU/CUDA installation, spaces and non-ASCII
+account paths, cancellation and network rollback, repair/update/uninstall, an
+RTX 40-series machine, and a novice first workflow as explicit field checks.
+Anything not performed remains <strong>not run</strong>.</p>
+<p>The exact a6 release commit, tagged CI run, unsigned-installer status, and final
+artifact hashes are pending creation of the immutable tag and release. Do not
+use development-build hashes or the historical a5 hashes for an a6 download.
+They will be recorded in
+<a href="../../releases/0.13.0a6/#release-verification">0.13.0a6 release verification</a>
+after the final artifacts exist.</p>
+<h2 id="historical-0130a5-installer-acceptance-and-release-boundary">Historical 0.13.0a5 installer acceptance and release boundary<a class="headerlink" href="#historical-0130a5-installer-acceptance-and-release-boundary" title="Permanent link">&para;</a></h2>
 <p>The release application commit is
 <a href="https://github.com/rensutheart/napari-vipp/commit/067c89559072fbbb101e9d63b91514345e5896e6"><code>067c89559072fbbb101e9d63b91514345e5896e6</code></a>,
 merged through <a href="https://github.com/rensutheart/napari-vipp/pull/16">release PR #16</a>.</p>
@@ -2971,14 +3065,14 @@ same as an external comparison or assay validation. The distinction matters:</p>
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  <a href="../../how-to/choose-compute/#gpu-regions-in-0130a5">CPU/GPU matrix</a> is a
+  <a href="../../how-to/choose-compute/#gpu-regions-in-0130a6">CPU/GPU matrix</a> is a
   readable summary; the runtime policy/decision remains authoritative.</li>
 <li>cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
   wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
   recipe. Admission verifies that build's wheel-file hash, the policy-pinned
   canonical installed payload, source/recipe provenance, and the existing
   scientific environment/workload gates. This private per-user rebuild is the
-  settled 0.13.0a5 route; VIPP will not host or redistribute the wheel. Clara
+  settled 0.13.0a6 route; VIPP will not host or redistribute the wheel. Clara
   whole-slide I/O remains outside that build. See the
   <a href="../../getting-started/windows-cuda/">Windows CUDA guide</a>.</li>
 <li>Batch processing is local-file and sorted-position oriented. It does not
@@ -3024,7 +3118,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 12, 2026 11:51:33 UTC">August 12, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
   </span>
 
     
