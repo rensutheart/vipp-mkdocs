@@ -10,12 +10,14 @@ data.
   Compute Doctor 2.0, complete public-GPU admission checks, multi-series and
   Imaris sources, microscope metadata editing, and a public field checklist.
 
-The alpha is published on
+The immutable alpha is prepared for
 [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Source-candidate
-evidence and the explicit pending boundary for the immutable commit, tagged CI,
-installer signing status, and final artifact hashes are recorded in
-[0.13.0a6 release verification](0.13.0a6.md#release-verification).
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Its exact application
+commit, successful cross-platform CI run, explicit unsigned-installer status,
+and qualified artifact hashes are recorded in
+[0.13.0a6 release verification](0.13.0a6.md#release-verification). Public
+availability remains a separate publication check, and downloaded-installer
+field acceptance remains separate from artifact qualification.
 
 0.13.0a6 writes workflow schema 4 and batch config/manifest schema 3. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;

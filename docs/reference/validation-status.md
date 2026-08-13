@@ -59,12 +59,21 @@ account paths, cancellation and network rollback, repair/update/uninstall, an
 RTX 40-series machine, and a novice first workflow as explicit field checks.
 Anything not performed remains **not run**.
 
-The exact a6 release commit, tagged CI run, unsigned-installer status, and final
-artifact hashes are pending creation of the immutable tag and release. Do not
-use development-build hashes or the historical a5 hashes for an a6 download.
-They will be recorded in
-[0.13.0a6 release verification](../releases/0.13.0a6.md#release-verification)
-after the final artifacts exist.
+The immutable `v0.13.0a6` tag resolves to application commit
+[`859738a28354981ba784d9e49a04cb6e1158a79f`](https://github.com/rensutheart/napari-vipp/commit/859738a28354981ba784d9e49a04cb6e1158a79f).
+Its exact-source
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31673890530)
+passed on Windows, Linux, and macOS. The tagged wheel, source archive, cuCIM
+local-build bundle, and Windows sidecars passed the release qualification
+gates. Independent Windows inspection confirmed that the explicitly unsigned
+installer is `NotSigned`, with no signer or timestamp certificate. Exact
+artifact hashes are recorded in
+[0.13.0a6 release verification](../releases/0.13.0a6.md#release-verification).
+
+These immutable engineering facts do not claim public GitHub/PyPI availability
+before those services are checked, and they do not replace the downloaded
+installer field checklist. Fresh-machine and novice acceptance remain **not
+run** unless a tester records them explicitly.
 
 ## Historical 0.13.0a5 installer acceptance and release boundary
 

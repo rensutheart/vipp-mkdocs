@@ -44,9 +44,12 @@ hide:
     Linux, macOS, blocked Windows computers, and advanced users can use the
     version-pinned pip route. Exact release-source, CI, signing status,
     and release-verification status are recorded in the
-    [release notes](releases/0.13.0a6.md#release-verification). Immutable commit,
-    CI, signing-status, and hash fields remain pending until the release exists. Interfaces,
-    workflow files, and parameter defaults may change between alpha releases.
+    [release notes](releases/0.13.0a6.md#release-verification). The immutable
+    commit, successful cross-platform CI run, explicit unsigned status, and
+    qualified artifact hashes are recorded there. Confirm public GitHub/PyPI
+    availability separately, and do not treat unperformed fresh-machine checks
+    as passes. Interfaces, workflow files, and parameter defaults may change
+    between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
