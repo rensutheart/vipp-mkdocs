@@ -1,6 +1,6 @@
 # Node Index
 
-This page lists all **112 operation specifications** registered by
+This page lists all **113 operation specifications** registered by
 `NODE_LIBRARY` in the current manual track. Nightly parameter behavior can be
 newer than the latest tagged alpha.
 
@@ -12,7 +12,7 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-In 0.13.0a5, manual/cached nodes and nodes selected for isolated tuning use the
+In 0.13.0a6, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. **Tune node in isolation** recalculates only the selected node until
@@ -26,12 +26,12 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1)
+[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a6)
 for the accelerated node families and their first public regions.
 
 | Family | Nodes |
 | --- | ---: |
-| Image Data | 24 |
+| Image Data | 25 |
 | Filtering | 18 |
 | Segmentation | 18 |
 | Morphology | 13 |
@@ -40,7 +40,7 @@ for the accelerated node families and their first public regions.
 | Label Operations | 7 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **112** |
+| **Total** | **113** |
 
 ## Image Data
 
@@ -61,6 +61,7 @@ for the accelerated node families and their first public regions.
 | `Split Axis` | array | dynamic outputs | Split time, z, or other non-channel axes. |
 | `Reorder Axes` | array | same as input | Transpose pixels and their existing axis records into a reviewed order; does not rename axes. |
 | `Set Pixel Size / Units` | array | same as input | Repair or define physical calibration. |
+| `Set Microscope Metadata` | array | same as input | Record missing channel emission wavelengths, objective numerical aperture, or immersion refractive index without changing pixels. |
 | `Rescale Axes` | array | same as input | Resample X/Y/Z and update physical scale. |
 
 ### Channels And Composites
@@ -157,7 +158,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes are public in 0.13.0a5. They have synthetic examples and automated
+These nodes are public in 0.13.0a6. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 

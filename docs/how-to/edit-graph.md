@@ -3,9 +3,8 @@
 ## Add or insert a node
 
 Search the node library by title or operation ID, then add a node to the
-canvas. Connect an output port to a compatible input. When inserting into an
-existing branch, use the connection insertion affordance if the candidate node
-accepts the upstream type and can produce the downstream type.
+canvas. Connect an output port to a compatible input. Drop a compatible palette
+item onto an existing wire to insert it without rebuilding the branch.
 
 An `Image Source` card shows its current layer, sample, file, or collection
 representative as a live subtitle. Hover for the complete binding. The subtitle
@@ -16,12 +15,52 @@ If no node is compatible, inspect both port types. Converting a mask to labels
 usually needs `Label Connected Components`; applying an image as if it were a
 mask is not an acceptable type conversion.
 
+## Insert processing before a tunnel
+
+To add a step before an existing named tunnel, right-click the tunnel and choose
+**Insert node before tunnel**. You can also drop a compatible palette item on
+the tunnel or drag a loose compatible node onto it. VIPP shows only operations
+that accept the tunnel source and can still supply its subscribers.
+
+The original subscribers keep the same named tunnel. The inserted node becomes
+the tunnel's new source, so review whether the tunnel name still describes the
+processed data. The complete insertion is one undoable edit.
+
+## Select and move several nodes
+
+On Windows, hold **Shift** while clicking to add nodes to the selection. Hold
+**Ctrl** while clicking to add or remove an individual node. Drag any selected
+node to move the group together. Group deletion and movement are single
+undoable edits; tunnels or external wires are changed only when the chosen
+action explicitly requires it.
+
+## Copy nodes, fragments, or values
+
+- Right-click a node and choose **Copy**, or use **Ctrl+C**.
+- Copying several selected nodes includes their connections to one another,
+  relevant tunnels, notes, authored settings, and relative layout.
+- Right-click blank canvas space and choose **Paste here** to choose the
+  location. **Ctrl+V** pastes the copied node or fragment near the center of
+  the visible canvas.
+- To copy settings without creating another node, copy one node, right-click a
+  node for the exact same operation, and choose **Paste Values**. VIPP validates
+  all values first and changes the destination once; incompatible operation
+  types are refused.
+
+Pasted graph nodes receive fresh identities. Connections to nodes outside the
+copied selection are not silently recreated. Inspect the pasted fragment before
+using it for a consequential calculation.
+
+Open **Graph Editing Acceptance Check** from **Open example...** for numbered
+notes that exercise tunnel insertion, value transfer, fragment copy/paste,
+group movement, and undo/redo.
+
 ## Undo, duplicate, and delete
 
-Use undo/redo for graph edits and parameter changes. Duplicate a configured
-node when comparing two parameter choices, then branch both from the same
-upstream output. Delete a branch only after confirming that no output, tunnel,
-or table merge still depends on it.
+Use undo/redo for graph edits and parameter changes. Copy or duplicate a
+configured node when comparing two parameter choices, then branch both from the
+same upstream output. Delete a branch only after confirming that no output,
+tunnel, or table merge still depends on it.
 
 ## Keep long graphs readable
 

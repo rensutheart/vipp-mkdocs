@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a5 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.13.0a6 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -85,10 +85,12 @@ title row as the record of what produced the node output.
 
 1. Run a representative item on **CPU** and inspect the decisive images,
    masks, labels, and tables. Retain this result when CPU/GPU parity matters.
-2. Open **Compute setup and memory…**. Check the installed scientific stack,
-   device, eligibility reason, host RAM, and separate VRAM where applicable.
-   Copy the proposed fresh-environment command if setup is incomplete; VIPP
-   never executes it automatically.
+2. Open **Compute setup and memory…**. Read its three short rows—**CUDA and
+   GPU**, **Optional cuCIM**, and **VIPP GPU coverage**—then follow the one
+   recommended next step. Open **Show advanced details** only when you need the
+   scientific stack, device, eligibility, RAM/VRAM, and provider evidence. The
+   window can save a privacy-redacted support report; VIPP never executes a
+   repair command automatically.
 3. Keep **Auto** for normal calculation and read the actual-run summary and
    per-node badges. Auto starts with reviewed safe GPU defaults. Successful,
    fallback-free completed full-pipeline runs—whether CPU, GPU, or mixed—add
@@ -170,7 +172,7 @@ unrunnable descendant.
 
 <a id="gpu-regions-in-0130a1"></a>
 
-## GPU regions in 0.13.0a5
+## GPU regions in 0.13.0a6
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.

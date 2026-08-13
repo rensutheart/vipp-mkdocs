@@ -66,10 +66,12 @@ multiple sources, the suggestion follows the first bound (primary) source.
     folder outside the input tree. Otherwise, files from an earlier run could
     match the next input search.
 
-## Deterministic pairing
+## Deterministic source-item pairing
 
-VIPP sorts matched paths independently for every bound source and pairs them by
-position. Every bound source must match the same number of files.
+VIPP sorts matched paths independently for every bound source, inspects formats
+that can contain several image series, expands each path into source items, and
+pairs those items by position. Every bound source must produce the same number
+of source items.
 
 ```text
 source A: a_01.npy  a_02.npy  a_03.npy
@@ -79,9 +81,12 @@ items:    (a_01,b_01) (a_02,b_02) (a_03,b_03)
 
 Directory names and filename similarity do not create biological pairing.
 Inspect the preview and retain an independent sample/field map when position is
-not sufficient evidence. Time, channel, and Z remain inside each file; 0.13
-does not iterate semantic-axis combinations or discover plate/well/field HCS
-structure.
+not sufficient evidence. A multi-series TIFF, NPZ, Zarr, LIF, IMS, or other
+inspectable container can therefore contribute several clearly labelled rows.
+The selected series index/name is retained in the representative view, output
+stem, manifest, and provenance. Time, channel, and Z remain inside each selected
+series; 0.13 does not iterate semantic-axis combinations or discover
+plate/well/field HCS structure.
 
 The first bound source is the primary source used by default naming. Fixed
 file-path Image Sources can remain unbound; napari-layer and bundled-sample
@@ -180,9 +185,10 @@ the batch default.
 ## Review representatives
 
 After preview, the retained strip above the graph shows `Item N of M`, the
-batch ID, paired filenames, Previous/Next buttons, and a full-plan slider. The
-table displays a limited row sample for large plans, but its selected-row
-preview and the slider control the same complete representative session.
+batch ID, paired filenames and selected series where applicable, Previous/Next
+buttons, and a full-plan slider. The table displays a limited row sample for
+large plans, but its selected-row preview and the slider control the same
+complete representative session.
 
 VIPP atomically replaces every collection-bound source path and calculates the
 selected item with the ordinary verified source/execution path. Fixed sources

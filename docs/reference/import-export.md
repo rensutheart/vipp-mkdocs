@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.13.0a5 |
+| Source | Behavior in 0.13.0a6 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 13 deterministic VIPP samples. |
@@ -17,11 +17,16 @@ support does not imply lossless preservation of every source metadata field.
 | Local OME-Zarr 0.4/0.5 | Discovers supported image/label groups and reads analysis level 0; label groups are marked as labels. |
 | NPY / NPZ | Reads one NPY array or a selected NPZ member; semantic microscopy metadata is not inherent. |
 | PNG, JPEG, BMP, GIF, WebP, TGA, PNM | Reads ordinary raster images; animated rasters use a leading time axis. |
-| Optional microscope readers | Uses an installed format-specific/BioIO route and normalizes fields the reader exposes. Coverage varies by format. |
+| Optional microscope readers | Uses an installed format-specific/BioIO route for CZI, ND2, Imaris IMS, Leica LIF/LOF/XLIF, and other supported containers, then normalizes fields the reader exposes. Coverage varies by format. |
 
 Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
 as acquisition metadata.
+
+For an inspectable multi-series TIFF, NPZ, Zarr, LIF, IMS, or similar
+container, collection batch creates one clearly named item per image series.
+Interactive representative browsing, collision-safe output names, manifests,
+and provenance retain both the container and selected series identity.
 
 For ND2, actively move the T, Z, and C sliders on a representative acquisition
 and verify that the expected content changes. Ordered-axis normalization fixes
@@ -87,9 +92,10 @@ shared executor or create an exact compute-provenance sidecar.
 - Same-shape inputs can still be scientifically misregistered even when their
   declared grids match. VIPP validates declared axes/calibration; it does not
   infer biological correspondence or perform registration.
-- Local batch processing pairs sorted file collections by position. Semantic
-  axis iteration, remote collection input, and plate/well/field HCS traversal
-  are outside 0.13.0a5.
+- Local batch processing pairs sorted source items by position. It expands
+  inspectable multi-series containers, but selected semantic-axis iteration,
+  remote collection input, and plate/well/field HCS traversal remain outside
+  0.13.0a6.
 
 ## Execution provenance for saved outputs
 

@@ -47,7 +47,7 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.13.0a5 writes schema 4 and rejects versions 1 and 2. Valid schema-3 workflows
+0.13.0a6 writes schema 4 and rejects versions 1 and 2. Valid schema-3 workflows
 load structurally with an explicit CPU request, but cached pixels and tables
 are not serialized. Saving the reviewed duplicate writes schema 4. Follow the
 [0.12.0a3 to 0.13.0a1 procedure](../reference/versioning.md#move-from-0120a3-to-0130a1).
