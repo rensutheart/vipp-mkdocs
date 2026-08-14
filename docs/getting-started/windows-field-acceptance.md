@@ -15,6 +15,15 @@ Start with the normal [Windows installation instructions](installation.md).
 If you have a suitable NVIDIA GPU and were asked to test acceleration, also use
 the [Windows CUDA and cuCIM instructions](windows-cuda.md).
 
+!!! important "What to expect from unusual paths"
+    Windows supplies canonical Local App Data through
+    `SHGetKnownFolderPath(FOLDERID_LocalAppData)`. Managed setup accepts only
+    `VIPP\environments\cpu` or `VIPP\environments\cuda13` beneath it; custom
+    managed roots are rejected. The fixed CPU root supports spaces and
+    non-ASCII characters. CUDA supports spaces but requires the complete
+    canonical path to be ASCII. If it is not, one-click CUDA should be
+    unavailable before download and setup should offer CPU.
+
 !!! warning "Keep private information private"
     Do not post your Windows username, computer name, local paths, unpublished
     images, support reports, or screenshots publicly. Send the completed notes
@@ -28,7 +37,7 @@ Record these facts without including your account or computer name:
 - Windows version:
 - Standard or administrator account:
 - Does the account path contain a space? yes / no / unsure
-- Does it contain a non-English character? yes / no / unsure
+- Does it contain a non-ASCII character? yes / no / unsure
 - GPU model, if testing CUDA:
 - Start time:
 
@@ -67,6 +76,19 @@ What was confusing or did not work:
 
 Complete this only if the installer offered the NVIDIA CUDA route.
 
+- [ ] The CUDA installation location exactly matched canonical Local App Data
+      plus `VIPP\environments\cuda13`; spaces did not prevent setup.
+- [ ] Supplying any other managed root was rejected before resolution or
+      download; setup did not expose a custom-location chooser.
+- [ ] If canonical Local App Data contained a non-ASCII character, one-click
+      CUDA was unavailable and setup offered the fixed CPU route instead.
+- [ ] Selecting an expert existing CUDA environment remained a separate
+      non-mutating review and never suggested moving, editing, or adopting it.
+- [ ] For an installer-owned CUDA copy under a non-ASCII root, setup separately
+      reported any recovery from a prior interrupted transaction; after that
+      recovery, the newly blocked selection performed no new mutation. Setup
+      opened Installed apps for ownership-bound removal; it did not offer a
+      second or custom managed CUDA copy or an in-place/fallback migration.
 - [ ] **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** all opened.
 - [ ] Compute Doctor separately showed **CUDA and GPU**, **Optional cuCIM**,
       and **VIPP GPU coverage**.
@@ -98,6 +120,9 @@ previous working installation and research data are safely preserved.
       repaired installation still worked.
 - [ ] If updating, the previous working version remained usable until the new
       version passed its checks.
+- [ ] For an installer-owned CUDA copy already under a non-ASCII root, any
+      prior-transaction recovery was recorded separately and the newly blocked
+      selection caused no new mutation, with clear fixed-root/CPU guidance.
 - [ ] If setup was cancelled, it reached a clear end state and did not present
       a half-created installation as ready.
 - [ ] If the network failed, setup explained what to do and preserved the
@@ -112,7 +137,9 @@ What was confusing or did not work:
 
 - CPU fresh installation: pass / fail / not run
 - CUDA fresh installation: pass / fail / not run
-- Spaces or non-English account path: pass / fail / not run
+- Spaces path: pass / fail / not run
+- CPU non-ASCII path: pass / fail / not run
+- CUDA non-ASCII-path guidance: pass / fail / not run
 - Cancellation rollback: pass / fail / not run
 - Network-failure rollback: pass / fail / not run
 - Repair/update/uninstall: pass / fail / not run
