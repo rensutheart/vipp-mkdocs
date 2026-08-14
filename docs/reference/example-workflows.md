@@ -1,6 +1,6 @@
 # Example Workflows
 
-The release contains **14** example workflows under:
+The release contains **15** example workflows under:
 
 ```text
 examples/
@@ -23,9 +23,10 @@ custom or external workflow JSON files.
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
-| `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, and one-step undo/redo. Its deliberately loose demonstration fragments are not calculated. |
+| `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, one-step undo/redo, and a qualified GPU dtype repair. Its deliberately loose demonstration fragments are not calculated. |
 | `synthetic-batch-provenance.json` | generated two-source NumPy collection | Three paired items, explicit NPY/TIFF/TSV outputs, representative navigation, saved config/runner, exact ground truth, manifests, archives, and item sidecars. Open it through the chooser and create a writable working copy. |
 | `otsu-red-channel-labels.json` | synthetic multichannel volume | Label cleanup: split the red/TRITC-like channel, blur, Otsu threshold, mask cleanup, connected components, border clearing, and volume filtering. |
+| `synthetic-gpu-segmentation-bridge.json` | synthetic GPU segmentation cleanup | Annotated portable path through Extract Channel, exact float32 Preserve conversion, Gaussian Blur, fixed Binary Threshold, Boolean Remove Small Objects and Fill Holes, and 3D Connected Components. Unsupported GPU regions fall back visibly to CPU. |
 | `red-channel-object-intensity-measurements.json` | synthetic multichannel volume | Multi-input object measurement using labels plus matching intensity image. |
 | `red-channel-merged-measurement-table.json` | synthetic multichannel volume | Morphology, intensity, table merge, and metadata columns. |
 | `synthetic-measurement-summary.json` | synthetic measurement summary | Grouped object-count and area summaries. |
@@ -36,7 +37,7 @@ custom or external workflow JSON files.
 | `synthetic-colocalization-racc.json` | synthetic colocalization | Pixel and ROI-masked colocalization, scatter thresholds, colocalized voxels, and RACC-like output. |
 | `synthetic-object-colocalization-association.json` | synthetic colocalization | Object colocalization, label overlap, nearest distance, event localization, and merged tables. |
 | `synthetic-deconvolution-rl-tv.json` | 2D deconvolution image plus measured PSF | 2D measured-PSF restoration with ordinary RL and RL-TV. |
-| `synthetic-3d-deconvolution-rl-tv.json` | 3D deconvolution volume plus 3D measured PSF | Volumetric PSF-aware restoration. |
+| `synthetic-3d-deconvolution-rl-tv.json` | 3D deconvolution volume plus 3D measured PSF | Volumetric PSF-aware restoration with one shared visible float32 Preserve conversion feeding both 25-iteration branches at the authored `1e-12` filter epsilon. |
 
 ## Launcher Names
 
@@ -46,13 +47,14 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.13.0a6 they are:
+Use `--list` to print the release's exact IDs. In 0.13.0a7 they are:
 
 | ID | Example title |
 | --- | --- |
 | `graph-authoring` | Graph Editing Acceptance Check |
 | `batch-provenance` | Deterministic Batch & Provenance |
 | `label-cleanup` | Red-Channel Label Cleanup |
+| `gpu-segmentation` | Portable GPU Segmentation Bridge |
 | `object-intensity` | Object Intensity Measurements |
 | `merged-measurements` | Merged Measurement Table |
 | `summary-table` | Grouped Measurement Summary |

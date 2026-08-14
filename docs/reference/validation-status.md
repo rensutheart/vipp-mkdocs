@@ -1,8 +1,8 @@
 # Validation status
 
-This page summarizes the evidence shipped with the 0.13.0a6 application source.
-It is a claim boundary, not a certificate that every node is validated for
-every assay.
+This page summarizes the source-current evidence prepared for 0.13.0a7 and
+keeps earlier release evidence separate. It is a claim boundary, not a
+certificate that every node is validated for every assay.
 
 ## Evidence available now
 
@@ -11,7 +11,7 @@ every assay.
 - architecture tests enforce the Qt-free `core/` dependency boundary, and
   focused tests cover stable source revisions, physical grids, detached
   snapshots, atomic persistence, typed execution, and stale-result rejection;
-- 13 deterministic synthetic samples and 14 checked-in workflows support
+- 14 deterministic synthetic samples and 15 checked-in workflows support
   regression checks and inspection;
 - a generated two-source batch bundle exercises three paired items, nine exact
   NPY/TIFF/TSV outputs, workflow/config hashes, source identities, manifests,
@@ -31,12 +31,40 @@ every assay.
 - compute tests cover import-safe CPU-only use, workflow-schema-4 and
   batch-schema-3 intent, eligibility planning, exact implementation identity,
   resident device segments, memory admission, classified fallback, optimizer
-  review/apply, Prefer-GPU selection/serialization/UI/durable behavior,
-  progress, cancellation, cleanup, and atomic publication; and
+  review/apply and grouped result inspection, visible dtype-repair proposals,
+  Prefer-GPU selection/serialization/UI/durable behavior, progress,
+  cancellation, cleanup, and atomic publication; and
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a6 qualification and field boundary
+## 0.13.0a7 source-candidate boundary
+
+The merged a7 feature validation completed **5,021 tests**, with **5 documented
+skips**, **2 documented expected failures**, and zero failures. The strict GPU
+admission catalogue now contains **18 public implementations** and **23
+executable evidence owners**. The new evidence covers exact dtype conversion,
+Binary Threshold, Extract Channel, Boolean Remove Small Objects, and Boolean
+Fill Holes across parity, difficult inputs, metadata, unchanged inputs, memory,
+cancellation, cleanup, fallback, provenance, and end-to-end timing contracts.
+
+Source-current native-Windows RTX 5090 checks exercised a single resident path
+from the visible dtype conversion through filtering, thresholding, Boolean
+cleanup, and Connected Components. One retained terminal output used one upload
+and one final download; retaining an intermediate deliberately added another
+download. These are bounded development/reference-system results, not a support
+claim for every GPU or the eventual published artifact.
+
+The feature branch merged through
+[pull request #20](https://github.com/rensutheart/napari-vipp/pull/20) at
+candidate integration commit
+[`64b95a1ba01d6dbffe0a055ab9a993f6c0b5e328`](https://github.com/rensutheart/napari-vipp/commit/64b95a1ba01d6dbffe0a055ab9a993f6c0b5e328).
+The final release commit, immutable `v0.13.0a7` tag, exact-source release CI,
+wheel, source archive, Windows installer, cuCIM bundle, artifact hashes, public
+GitHub/PyPI pages, and numbered manual are all **pending**. See the
+[a7 release-verification table](../releases/0.13.0a7.md#release-verification).
+No a6 artifact, hash, URL, or qualification record is reused as a7 evidence.
+
+## Historical 0.13.0a6 qualification and field boundary
 
 The source candidate's complete local suite passed **4,572 tests**, with **5
 documented skips**, **2 documented expected failures**, and zero failures.
@@ -348,14 +376,15 @@ same as an external comparison or assay validation. The distinction matters:
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a6) is a
+  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0130a7) is a
   readable summary; the runtime policy/decision remains authoritative.
 - cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
   wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
   recipe. Admission verifies that build's wheel-file hash, the policy-pinned
   canonical installed payload, source/recipe provenance, and the existing
-  scientific environment/workload gates. This private per-user rebuild is the
-  settled 0.13.0a6 route; VIPP will not host or redistribute the wheel. Clara
+  scientific environment/workload gates. This private per-user rebuild remains
+  the planned 0.13.0a7 route, using only its matching bundle after publication;
+  VIPP will not host or redistribute the wheel. Clara
   whole-slide I/O remains outside that build. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).
 - Batch processing is local-file and sorted-position oriented. It does not

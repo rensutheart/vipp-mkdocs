@@ -12,7 +12,7 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-In 0.13.0a6, manual/cached nodes and nodes selected for isolated tuning use the
+In 0.13.0a7, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. **Tune node in isolation** recalculates only the selected node until
@@ -26,7 +26,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a6)
+[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a7)
 for the accelerated node families and their first public regions.
 
 | Family | Nodes |
@@ -158,7 +158,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes are public in 0.13.0a6. They have synthetic examples and automated
+These nodes are public in 0.13.0a7. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 

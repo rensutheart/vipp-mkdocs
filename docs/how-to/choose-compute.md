@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a6 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.13.0a7 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -133,6 +133,27 @@ can evaluate a detached manual node without overwriting its live cached result;
 it changes no node preference until the final assignment is reviewed and
 applied.
 
+## Use a dtype repair only after reviewing it
+
+When `uint8` or `uint16` is the only blocker between a node and a reviewed
+finite-`float32` GPU region, the node can show a small **GPU tip**. Select the
+node to see the affected input, exact proposed conversion, and memory trade-off.
+The tip remains available in Prefer GPU after calculation while that same
+blocker is still present.
+
+**Add conversion** inserts an ordinary visible **Convert Dtype** node on that
+one input. The proposed `float32` **Preserve** conversion changes storage dtype
+without rescaling pixel values, and the graph edit has one-step Undo. Shared
+branches remain connected to the original source unless they already use the
+affected input path. VIPP revalidates the suggestion before applying it and
+does nothing if the input, candidate, or explicit Custom choice changed.
+
+This button edits the authored workflow; calculation itself still never casts
+silently. Review downstream thresholds, memory, output dtype, and scientific
+meaning before accepting it. A visible conversion can remain resident with
+eligible downstream GPU work, but eligibility is not proof that conversion is
+appropriate for the analysis.
+
 ## Read benchmark progress honestly
 
 Whole-pipeline optimization shows two progress streams:
@@ -149,6 +170,14 @@ that the current assignment is optimal. The result identifies completed and
 remaining work, and complete records for the exact workload and environment
 can be reused on retry. Editing data, parameters, code/policy identity, or the
 relevant environment invalidates reuse.
+
+A completed comparison remains inspectable when the speed evidence is too
+close to recommend a winner. The result groups one heading per workflow node
+with a separate row for every tested CPU, CuPy-family, or cuCIM implementation.
+The compact columns show total execution time, scientific agreement, and the
+outcome; expanded details separate resident compute, transfers, first-run or
+warmup cost, memory, and evidence provenance. An inconclusive outcome leaves
+the authored assignment unchanged. It is not a GPU eligibility failure.
 
 When a synchronized GPU candidate has enough repeated measurements to be a
 reliable incumbent, the optimizer may stop a cooperative CPU warm call once its
@@ -171,8 +200,9 @@ nodes remain CPU candidates; manual barriers do not justify benchmarking an
 unrunnable descendant.
 
 <a id="gpu-regions-in-0130a1"></a>
+<a id="gpu-regions-in-0130a7"></a>
 
-## GPU regions in 0.13.0a6
+## GPU regions in 0.13.0a7
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
@@ -181,14 +211,19 @@ VIPP's eligibility explanation is authoritative for the exact call.
 | --- | --- | --- | --- |
 | Rolling-Ball Background | cuCIM | `uint8`, `uint16`, or `float32`; 2D slice-wise or 3D | Radius 1–500 in 2D and 1–50 in 3D. Other dtypes/radii use CPU. The declared float32 parity region is not finite-only. |
 | Subtract Background | cuCIM | `uint8`, `uint16`, or `float32`; 2D slice-wise or 3D | Same reviewed radius limits as Rolling-Ball. The declared float32 parity region is not finite-only. |
+| Extract Channel | CuPy | Explicit channel axis | Prefer GPU keeps a host-entry extraction on CPU so only the selected channel is uploaded. An explicit Custom GPU choice can expose a resident allocation-sharing view. Ambiguous axes use CPU or fail rather than being guessed. |
+| Convert Dtype | CuPy | `uint8` or `uint16` to `float32` | Exact **Preserve** mode only: pixel values are not rescaled. Other dtype/mode combinations use CPU. |
 | Median Filter | CuPyX | `uint8`, `uint16`, or finite `float32` with complete facts proving no negative zero; independent `YX` planes | Canonical odd footprint 1–51; unsupported float facts or footprint use CPU. |
 | Gaussian Blur | CuPyX | finite `float32`; independent `YX` planes | Sigma 0–12. Native integer and `float64` Gaussian calls remain CPU. |
 | Gaussian Blur 3D | CuPyX | finite `float32`; resolved `ZYX` volumes | Each spatial sigma 0–12. Native integer and `float64` calls remain CPU. |
-| Richardson-Lucy Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Odd PSF extents, default-safe options, `filter_epsilon=1e-8`, and 1–25 iterations. The CPU default epsilon remains CPU. |
-| Richardson-Lucy TV Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Lambda zero inherits ordinary RL. Positive TV admits the shipped tuple (`lambda=0.002`, TV epsilon `1e-6`, filter epsilon `1e-12`, denominator floor `0.05`) at 10 or 25 iterations. |
+| Richardson-Lucy Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Odd PSF extents, default-safe options, authored `filter_epsilon` from `1e-12` through `1e-6`, and 1–100 iterations. The v2 backend-agreement gate does not validate restoration quality. |
+| Richardson-Lucy TV Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Lambda zero inherits ordinary RL's expanded region. Positive TV retains the shipped tuple (`lambda=0.002`, TV epsilon `1e-6`, filter epsilon `1e-12`, denominator floor `0.05`) at 10 or 25 iterations. |
 | Canny Edges | CuPy/CuPyX | Boolean, `uint8`, or `uint16`; independent `YX` planes | Sigma 0–12 and finite ordered quantile thresholds. Floating-point input remains CPU in this exact-mask region. |
 | Otsu Threshold | CuPy/CuPyX | Boolean, signed/unsigned integers, and `float16`/`float32`/`float64` | Integer occupied span must be at most 65,536 levels; wide integers and per-slice cases need sufficient exact facts. Float histograms use 2–65,536 saved bins. |
+| Binary Threshold | CuPy | scalar finite `float32` images | Uses the exact authored finite threshold and returns a resident Boolean mask. Unsupported dtype/channel semantics use CPU; VIPP does not round or replace the threshold. |
 | Sigma Filter | CuPy | native-endian `uint8`, `uint16`, or finite `float32`; independent `YX` planes | Radius 0.5–10 and reviewed finite value/parameter facts. ROI/mask behavior is outside version 1. |
+| Remove Small Objects | CuPyX | Boolean mask; resolved 2D or 3D | Face or Full connectivity. Integer-label cleanup remains CPU. |
+| Fill Holes | CuPyX | Boolean mask; resolved 2D or 3D | Face or Full connectivity with `Maximum hole size = 0` (fill every enclosed hole). Positive bounded-hole-size cleanup remains CPU. |
 | Label Connected Components | CuPyX | Boolean mask; resolved 2D or 3D | Preserves exact deterministic `int32` label numbering. Numeric masks and oversized 2D/3D blocks use CPU. In non-CPU planning, a Boolean call not resolved as 2D or 3D is a typed preflight failure in this alpha. |
 | Measure Objects | cuCIM | native-endian, non-negative `int32` labels; 2D or 3D | Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU. |
 | Measure Objects + Intensity | cuCIM | the same labels plus native-endian Boolean, `uint8`, `uint16`, or finite `float32` intensity | Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU. |
@@ -197,12 +232,13 @@ Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
 handling where the underlying dtype/profile is admitted. An ambiguous or
 invalid channel axis remains on the CPU/error path rather than being guessed.
 
-VIPP never inserts a cast to enter this table. If converting an image or PSF to
-`float32` is scientifically appropriate, add an explicit `Convert Dtype` node,
-review its scaling mode, inspect downstream thresholds/writers, and report it.
-This can unlock much larger GPU gains for Gaussian and deconvolution workloads,
-but it also changes the authored data representation. Never convert only to
-make a benchmark look faster.
+VIPP never inserts a cast while calculating. If `uint8`/`uint16` dtype is the
+only blocker, it may offer the reviewed **Add conversion** graph edit described
+above. Otherwise add **Convert Dtype** yourself. In both cases, review its mode,
+inspect downstream thresholds/writers, and report it. Conversion can unlock
+larger GPU gains across filtering, deconvolution, and segmentation, but it
+changes the authored data representation. Never convert only to make a
+benchmark look faster.
 
 ## Installation and platform boundary
 

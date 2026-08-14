@@ -1,8 +1,15 @@
 # Try the VIPP Windows installer
 
-Use this checklist when someone asks you to test the tagged VIPP `0.13.0a6`
+Use this checklist when someone asks you to test the tagged VIPP `0.13.0a7`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
+
+!!! warning "Wait for the exact tagged installer"
+    The a7 tag, installer URL, and SHA-256 are pending. Do not use this
+    checklist with an untagged build or a file that merely has the anticipated
+    release name. Start only after
+    [release verification](../releases/0.13.0a7.md#release-verification)
+    identifies the exact public installer and checksum file.
 
 Start with the normal [Windows installation instructions](installation.md).
 If you have a suitable NVIDIA GPU and were asked to test acceleration, also use
@@ -25,18 +32,19 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-Download the installer and checksum file only from the
-[official `v0.13.0a6` release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6).
+After publication, download the installer and checksum file only from the
+official `v0.13.0a7` entry on the
+[VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
-`VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
+`VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 `
-  .\VIPP-Setup-0.13.0a6-Windows-x86_64-UNSIGNED.exe
+  .\VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe
 ```
 
 Compare all 64 characters with the installer line in
-`SHA256SUMS-Windows-0.13.0a6.txt`. Stop and delete the file if they differ. This
+`SHA256SUMS-Windows-0.13.0a7.txt`. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so **Unknown publisher** is expected; an
 antivirus threat warning is not expected and must not be bypassed.
 
@@ -66,10 +74,14 @@ Complete this only if the installer offered the NVIDIA CUDA route.
 - [ ] A CPU-selected or unsupported step explained its CPU fallback and still
       produced the expected result.
 - [ ] The same small workflow completed with Automatic and CPU-only shortcuts.
+- [ ] **Portable GPU Segmentation Bridge** completed in Prefer GPU and CPU,
+      retained four final objects, and showed an explanation for any CPU step.
+- [ ] If a node showed a dtype-only **GPU tip**, **Add conversion** inserted one
+      visible Convert Dtype node in the expected place and Undo removed it.
 
 If you were specifically asked to test optional cuCIM:
 
-- [ ] I verified the official cuCIM ZIP against the a6 checksum file.
+- [ ] I verified the official cuCIM ZIP against the a7 checksum file.
 - [ ] I used **Extract All** before running **Install VIPP cuCIM.cmd**.
 - [ ] The helper built cuCIM locally for this VIPP CUDA environment.
 - [ ] Compute Doctor changed only the optional cuCIM and genuinely enabled
@@ -110,4 +122,4 @@ What was confusing or did not work:
 - Most important remaining problem:
 
 Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded `0.13.0a6` installer.
+version do not count as a pass for this downloaded `0.13.0a7` installer.

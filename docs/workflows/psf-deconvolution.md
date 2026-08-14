@@ -1,7 +1,7 @@
 # Restore with a PSF
 
 Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.13.0a6. The
+RL with total-variation regularization (RL-TV) are public in 0.13.0a7. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
 stale, its descendants wait and retain their last coherent cached results when
@@ -16,21 +16,25 @@ positive PSF mass, odd PSF sizes, and the reviewed normalization/clipping/scale
 options. VIPP never converts the inputs or changes restoration parameters to
 enter that region.
 
-For ordinary RL, the first GPU region requires `filter_epsilon=1e-8` and 1–25
-iterations. The authoritative CPU default is `1e-12`; keeping that default, any
-other epsilon, or more than 25 iterations deliberately stays on CPU. This is a
-scientific eligibility decision, not an error.
+For ordinary RL, the reviewed GPU region accepts finite authored
+`filter_epsilon` values from `1e-12` through `1e-6` and 1–100 iterations. The
+authoritative CPU default `1e-12` is therefore eligible when the remaining
+image, PSF, option, environment, and memory gates pass. Values outside the
+region remain CPU; VIPP does not round epsilon or shorten the run.
 
-For RL-TV, lambda zero inherits ordinary RL's region. Positive TV is initially
+For RL-TV, lambda zero inherits ordinary RL's expanded region. Positive TV is
 admitted only for `TV regularization=0.002`, `TV epsilon=1e-6`,
 `filter epsilon=1e-12`, `denominator floor=0.05`, and exactly 10 or 25
 iterations. Other authored profiles remain CPU and are never rounded or
 truncated to make them eligible.
 
-If finite `float32` is appropriate for both the image and PSF, add explicit
-`Convert Dtype` nodes and review their scaling mode; this can produce major GPU
-gains on large stacks. Converting only to win a benchmark is not scientifically
-neutral. Read the badge/provenance and the
+If finite `float32` is appropriate, add explicit `Convert Dtype` nodes and
+review their scaling mode; this can produce major GPU gains on large stacks.
+When `uint8`/`uint16` dtype is the only reviewed blocker, the inspector may
+offer **Add conversion**. It inserts a normal visible `float32` **Preserve**
+node without rescaling pixel values and with one-step Undo; it does not silently
+change the authored calculation. Converting only to win a benchmark is not
+scientifically neutral. Read the badge/provenance and the
 [CPU/GPU guide](../how-to/choose-compute.md) rather than assuming that Auto used
 the GPU. Prefer GPU deliberately ignores speed, but still uses CPU when this
 scientific region or environment gate is not satisfied.
@@ -40,6 +44,14 @@ scientific region or environment gate is not satisfied.
     not establish broad restoration quality on real microscopes, acquisition
     settings, or biological targets. Review noise, ringing, edges, and apparent
     structures against an appropriate reference.
+
+!!! note "Backend agreement is not restoration validity"
+    The a7 RL/RL-TV v2 policy requires equal shape and `float32` dtype,
+    identical finite masks, finite non-negative clipped outputs, NRMSE no
+    greater than `0.005`, and maximum absolute error no greater than
+    `1e-6 + 0.005 × the CPU-reference peak`. These limits test GPU agreement
+    with VIPP's CPU implementation. They do not prove that the PSF, iteration
+    count, recovered resolution, or biological interpretation is valid.
 
 ## Read the PSF preflight
 
@@ -275,7 +287,7 @@ treat the ends of a slider as validated parameter limits.
 | Example | Purpose |
 | --- | --- |
 | `deconvolution-2d` | 2D measured PSF with RL and RL-TV parallel branches. |
-| `deconvolution-3d` | `ZYX` measured PSF and volumetric restoration branches. |
+| `deconvolution-3d` | `ZYX` measured PSF and volumetric restoration branches sharing one visible `float32` Preserve conversion, with 25 authored iterations and `filter_epsilon=1e-12`. |
 
 Real bead-PSF and representative microscopy validation remains a high-priority
 evidence gap; see [validation status](../reference/validation-status.md).

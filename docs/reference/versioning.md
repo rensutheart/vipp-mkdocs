@@ -8,19 +8,19 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The numbered **0.13.0a6** snapshot documents the immutable alpha build in the
-0.13.0 release series, published on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). See
-[installation](../getting-started/installation.md) and the
-[0.13.0a6 release notes](../releases/0.13.0a6.md).
+The nightly manual is currently prepared for **0.13.0a7**, but the immutable
+a7 tag, public package, installer, hashes, and numbered snapshot are pending.
+Its [release verification](../releases/0.13.0a7.md#release-verification) lists
+those unresolved items explicitly. Do not interpret the nightly version label
+as evidence that a release artifact exists.
 
-The [release verification](../releases/0.13.0a6.md#release-verification)
-records the exact application commit, immutable tag, successful cross-platform
-CI run, explicit unsigned-installer status, qualified artifact hashes, public
-GitHub/PyPI verification, and numbered-manual deployment. Downloaded-installer
-field acceptance remains a separate check and must not be inferred from
-artifact or publication qualification.
+The numbered **0.13.0a6** snapshot remains the latest verified public alpha,
+published on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Its
+[historical release verification](../releases/0.13.0a6.md#release-verification)
+retains the exact application commit, tag, CI, unsigned-installer status,
+artifact hashes, and numbered-manual publication.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -34,7 +34,7 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.13.0a6 writes schema version 4; versions 1 and 2 are rejected. Valid
+VIPP 0.13.0a7 writes schema version 4; versions 1 and 2 are rejected. Valid
 schema-3 workflows load structurally with an explicit CPU compute request and
 become schema 4 only when saved. Workflow JSON contains no cached scientific
 pixels/tables. Recalculate and compare graph structure, parameters, sources,
@@ -42,27 +42,29 @@ axes, channels, physical grids, dynamic ports, compute request, actual backend,
 and results on known sample data. See the
 [workflow contract](workflow-contract.md).
 
-## Move from an earlier 0.13 alpha to 0.13.0a6
+## Move from an earlier 0.13 alpha to 0.13.0a7
 
-The workflow and batch schemas do not change between 0.13.0a1 and 0.13.0a6,
-but generated programs are version-locked and installation ownership changed.
+The workflow and batch schemas do not change between 0.13.0a1 and 0.13.0a7,
+but generated programs are version-locked, GPU regions changed, and accepted
+dtype conversions are now ordinary visible graph edits.
 
 1. Preserve the earlier environment, workflows, outputs, execution reports,
    batch artifacts, and any private cuCIM wheel and build manifest.
-2. Install `0.13.0a6` separately with the checksum-verified unsigned Windows
-   installer, or upgrade
-   a dedicated manual environment with an exact `napari-vipp==0.13.0a6` or
-   `napari-vipp[gpu-cuda13]==0.13.0a6` pin. Do not mix CUDA-major extras.
+2. After publication, install `0.13.0a7` separately with the
+   checksum-verified unsigned Windows installer, or upgrade a dedicated manual
+   environment with an exact `napari-vipp==0.13.0a7` or
+   `napari-vipp[gpu-cuda13]==0.13.0a7` pin. The a7 artifacts and hashes are
+   currently pending; do not substitute an untagged build. Do not mix
+   CUDA-major extras.
 3. Run `pip check` and, for CUDA, `vipp-compute-doctor --track cuda13 --refresh`.
-   A retained approved cuCIM artifact can be revalidated with the a6-tagged
-   `setup_gpu_dev.py --existing-environment ... --plan-only` helper; never copy
-   an old approval record back manually.
+   Use only the matching a7-tagged cuCIM bundle/helper after it is published;
+   never reuse an a6 bundle or copy an old approval record back manually.
 4. Open a duplicate workflow, run it on CPU, and compare decisive intermediate
    and final results before enabling Auto or Prefer GPU.
 5. Record the exact GPU model, compute capability, driver, CUDA and scientific
    package versions, and actual implementation IDs. Minor floating-point
    differences can occur across otherwise compatible devices.
-6. Regenerate and revalidate exported Python and saved batch runners under a6.
+6. Regenerate and revalidate exported Python and saved batch runners under a7.
 
 ## Move from 0.12.0a3 to 0.13.0a1
 
@@ -185,16 +187,17 @@ python -m pip install --pre napari-vipp
 ```
 
 To reproduce a specific alpha exactly, specify the version in a fresh
-environment. An exact prerelease does not need `--pre`:
+environment. An exact prerelease does not need `--pre`. The a7 examples below
+apply only after PyPI publicly lists that version:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a6"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a7"
 ```
 
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a6"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a7"
 vipp-compute-doctor --track cuda13
 ```
 

@@ -37,28 +37,25 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual documents **napari-vipp 0.13.0a6**, distributed as an alpha
-    pre-release through [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6)
-    and [PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Windows users
-    should begin with the explicitly unsigned, checksum-verified installer;
-    Linux, macOS, blocked Windows computers, and advanced users can use the
-    version-pinned pip route. Exact release-source, CI, signing status,
-    and release-verification status are recorded in the
-    [release notes](releases/0.13.0a6.md#release-verification). The immutable
-    commit, successful cross-platform CI run, explicit unsigned status, and
-    qualified artifact hashes are recorded there. GitHub, PyPI, and the
-    numbered manual are public and verified. Do not treat unperformed external
-    fresh-machine or novice checks as passes. Interfaces, workflow files, and
-    parameter defaults may change between alpha releases.
+    This manual is being prepared for **napari-vipp 0.13.0a7**. Its immutable
+    tag, PyPI package, Windows installer, checksum file, artifact hashes, and
+    numbered manual are still pending. Do not construct an anticipated download
+    URL or treat an untagged development build as the release. The
+    [a7 release-verification table](releases/0.13.0a7.md#release-verification)
+    records every item that must be replaced with exact public evidence. Until
+    that table is complete, [0.13.0a6](releases/0.13.0a6.md) remains the last
+    verified public alpha. Do not treat unperformed external fresh-machine or
+    novice checks as passes. Interfaces, workflow files, and parameter defaults
+    may change between alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
 !!! important "0.13 workflow and compute compatibility"
-    0.13.0a6 writes workflow schema 4. A valid schema-3 workflow loads with an
+    0.13.0a7 writes workflow schema 4. A valid schema-3 workflow loads with an
     explicit CPU compute request, while schemas 1 and 2 remain rejected. Cached
     results are not saved in workflow JSON and generated Python is pinned to
     its creator version. Read the
-    [0.13.0a6 release notes](releases/0.13.0a6.md) before upgrading and
+    [0.13.0a7 release notes](releases/0.13.0a7.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 3. Version-1 configs load with an
@@ -108,7 +105,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in 0.13 | [0.13.0a6 release notes](releases/0.13.0a6.md) |
+| Review everything changed in the prepared alpha | [0.13.0a7 release notes](releases/0.13.0a7.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

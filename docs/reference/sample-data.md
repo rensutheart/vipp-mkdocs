@@ -1,6 +1,6 @@
 # Sample Data
 
-VIPP 0.13.0a6 ships **13** deterministic microscopy-style samples that are
+VIPP 0.13.0a7 ships **14** deterministic microscopy-style samples that are
 available inside
 `Image Source`:
 
@@ -35,6 +35,7 @@ File > Open Sample > VIPP synthetic microscopy samples
 | `VIPP synthetic measured PSF` | `YX` | 2D measured-PSF-like kernel for PSF preparation. |
 | `VIPP synthetic 3D deconvolution volume` | `ZYX` | 3D blurred/noisy volume for volumetric restoration review. |
 | `VIPP synthetic 3D measured PSF` | `ZYX` | 3D measured-PSF-like kernel for volumetric deconvolution. |
+| `VIPP synthetic GPU segmentation cleanup` | `CZYX` | Four 3D objects, one removable 19-voxel speck, and one enclosed 31-voxel cavity for the portable GPU segmentation and Boolean mask-cleanup example. |
 
 ## Documentation Samples Versus Core Samples
 
