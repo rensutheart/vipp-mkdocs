@@ -175,8 +175,8 @@ A completed comparison remains inspectable when the speed evidence is too
 close to recommend a winner. The result groups one heading per workflow node
 with a separate row for every tested CPU, CuPy-family, or cuCIM implementation.
 The compact columns show total execution time, scientific agreement, and the
-outcome; expanded details separate resident compute, transfers, first-run or
-warmup cost, memory, and evidence provenance. An inconclusive outcome leaves
+outcome; expanded details separate resident compute, transfers, **First run**
+cost, memory, and evidence provenance. An inconclusive outcome leaves
 the authored assignment unchanged. It is not a GPU eligibility failure.
 
 When a synchronized GPU candidate has enough repeated measurements to be a
