@@ -10,8 +10,9 @@ packages.
 
 !!! danger "0.13.0a7 downloads are pending"
     Do not install a file merely because it uses the anticipated a7 filename.
-    The `v0.13.0a7` release page, installer link, checksum, and artifact hashes
-    are not public yet. Wait until the
+    The `v0.13.0a7` release page, installer link, checksum, and artifacts are
+    not public yet. Final local artifact hashes are recorded, but they do not
+    prove that a public download exists. Wait until the
     [a7 release-verification table](../releases/0.13.0a7.md#release-verification)
     records the exact public files. Until then, 0.13.0a6 remains the last
     verified public installer.

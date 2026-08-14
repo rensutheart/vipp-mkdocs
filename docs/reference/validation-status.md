@@ -37,12 +37,24 @@ certificate that every node is validated for every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a7 source-candidate boundary
+## 0.13.0a7 prepublication qualification boundary
 
-The merged a7 feature validation completed **5,021 tests**, with **5 documented
-skips**, **2 documented expected failures**, and zero failures. The strict GPU
-admission catalogue now contains **18 public implementations** and **23
-executable evidence owners**. The new evidence covers exact dtype conversion,
+Final a7 application source merged to `main` through
+[pull request #23](https://github.com/rensutheart/napari-vipp/pull/23) at
+[`dc8a63912110a75ab1daad0e7f81c2b20e5001e6`](https://github.com/rensutheart/napari-vipp/commit/dc8a63912110a75ab1daad0e7f81c2b20e5001e6).
+Its exact-main
+[CI run](https://github.com/rensutheart/napari-vipp/actions/runs/31830397900)
+passed on Windows, Linux, and macOS. The complete local suite passed **5,084
+tests**, with **5 documented skips**, **2 documented expected failures**, and
+zero failures.
+
+The clean-source native-Windows RTX 5090 `full` GPU admission profile passed
+all **23 executable evidence owners** across **18 public implementations**.
+The aggregate evidence SHA-256 is
+`3ad655f7d3e36055449bda3e8bb41c914e010fd7607ced26763e23045dcee7ae`,
+and its admission-manifest SHA-256 is
+`3b6081b0aec45f81227bd86d86bc0f2df1aa4fe6b28752aa4e96aaee3d8e0ce7`.
+The new evidence covers exact dtype conversion,
 Binary Threshold, Extract Channel, Boolean Remove Small Objects, and Boolean
 Fill Holes across parity, difficult inputs, metadata, unchanged inputs, memory,
 cancellation, cleanup, fallback, provenance, and end-to-end timing contracts.
@@ -52,17 +64,41 @@ from the visible dtype conversion through filtering, thresholding, Boolean
 cleanup, and Connected Components. One retained terminal output used one upload
 and one final download; retaining an intermediate deliberately added another
 download. These are bounded development/reference-system results, not a support
-claim for every GPU or the eventual published artifact.
+claim for every GPU or a downloaded public artifact.
 
-The feature branch merged through
-[pull request #20](https://github.com/rensutheart/napari-vipp/pull/20) at
-candidate integration commit
-[`64b95a1ba01d6dbffe0a055ab9a993f6c0b5e328`](https://github.com/rensutheart/napari-vipp/commit/64b95a1ba01d6dbffe0a055ab9a993f6c0b5e328).
-The final release commit, immutable `v0.13.0a7` tag, exact-source release CI,
-wheel, source archive, Windows installer, cuCIM bundle, artifact hashes, public
-GitHub/PyPI pages, and numbered manual are all **pending**. See the
+The exact-source wheel, source archive, unsigned Windows installer and
+sidecars, and no-wheel cuCIM bundle were finalized and hash-locked locally.
+Their filenames and SHA-256 values are recorded in the
 [a7 release-verification table](../releases/0.13.0a7.md#release-verification).
-No a6 artifact, hash, URL, or qualification record is reused as a7 evidence.
+Twine accepted both Python archives; deterministic-wheel and byte-reproducible
+cuCIM-bundle checks passed; isolated wheel and source-archive installations
+passed package, resource, entry-point, manifest, and headless checks; and
+unsigned installer finalization plus native `NotSigned` inspection passed.
+
+A display-independent exact-artifact acceptance exercised the production
+Windows installer engine and registration/removal services from the final a7
+wheel, bound to the finalized unsigned EXE. CPU and CUDA each completed a new
+install, installed-package scientific checks, repair, and ownership-safe
+uninstall. The CUDA route additionally passed Compute Doctor with **14 of 18**
+public regions admitted, the portable segmentation corridor, 3D RL and RL-TV,
+and the non-ASCII effective-TEMP compiler regression. Both routes removed their
+owned environments, registry entries, shortcuts, cached a7 setup, and
+transaction residue.
+
+That result is production-backend lifecycle evidence, not acceptance of the
+frozen EXE's visible setup window or a fresh/public-download installation. The
+field checklist therefore leaves visual choices, shortcut launch presentation,
+the GPU-tip Add conversion/Undo and post-calculation persistence checks,
+Find-fastest grouped/readability inspection, SmartScreen, novice comprehension,
+unusual account paths, cancellation, network rollback, and visible update
+behavior as **not run**.
+
+The local annotated tag has not been pushed. GitHub/PyPI publication, public
+asset verification, the numbered manual, its live URL, and the updated stable
+alias all remain **pending**. Fresh-account Unicode Known Folder,
+public-download SmartScreen, novice-pilot, RTX 40-series Windows, and native
+Linux CUDA field evidence remain **not run**. No a6 artifact, hash, URL, or
+qualification record is reused as a7 evidence.
 
 ## Historical 0.13.0a6 qualification and field boundary
 

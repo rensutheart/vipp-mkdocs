@@ -8,11 +8,14 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The nightly manual is currently prepared for **0.13.0a7**, but the immutable
-a7 tag, public package, installer, hashes, and numbered snapshot are pending.
-Its [release verification](../releases/0.13.0a7.md#release-verification) lists
+The nightly manual is currently prepared for **0.13.0a7**. Final source,
+exact-main CI, full RTX 5090 admission, and locally finalized artifact hashes
+are recorded, but the a7 tag has not been pushed and the public package,
+installer downloads, numbered snapshot, live release URLs, and stable alias
+are pending. Its
+[release verification](../releases/0.13.0a7.md#release-verification) lists
 those unresolved items explicitly. Do not interpret the nightly version label
-as evidence that a release artifact exists.
+or a local artifact hash as evidence that a public release asset exists.
 
 The numbered **0.13.0a6** snapshot remains the latest verified public alpha,
 published on
@@ -53,9 +56,9 @@ dtype conversions are now ordinary visible graph edits.
 2. After publication, install `0.13.0a7` separately with the
    checksum-verified unsigned Windows installer, or upgrade a dedicated manual
    environment with an exact `napari-vipp==0.13.0a7` or
-   `napari-vipp[gpu-cuda13]==0.13.0a7` pin. The a7 artifacts and hashes are
-   currently pending; do not substitute an untagged build. Do not mix
-   CUDA-major extras.
+   `napari-vipp[gpu-cuda13]==0.13.0a7` pin. The intended local artifact hashes
+   are recorded, but their public assets and public-download verification are
+   pending; do not substitute an untagged build. Do not mix CUDA-major extras.
 3. Run `pip check` and, for CUDA, `vipp-compute-doctor --track cuda13 --refresh`.
    Use only the matching a7-tagged cuCIM bundle/helper after it is published;
    never reuse an a6 bundle or copy an old approval record back manually.
