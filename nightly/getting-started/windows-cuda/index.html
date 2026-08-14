@@ -552,6 +552,8 @@
       
         
       
+        
+      
     
     
     
@@ -595,6 +597,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1062,9 +1087,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#distribution-decision-for-0130a6" class="md-nav__link">
+  <a href="#distribution-decision-for-0130a7" class="md-nav__link">
     <span class="md-ellipsis">
-      Distribution decision for 0.13.0a6
+      Distribution decision for 0.13.0a7
     </span>
   </a>
   
@@ -2798,9 +2823,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#distribution-decision-for-0130a6" class="md-nav__link">
+  <a href="#distribution-decision-for-0130a7" class="md-nav__link">
     <span class="md-ellipsis">
-      Distribution decision for 0.13.0a6
+      Distribution decision for 0.13.0a7
     </span>
   </a>
   
@@ -2836,17 +2861,19 @@
 any NVIDIA packages.</p>
 <div class="admonition note">
 <p class="admonition-title">Use the manual for your installed release</p>
-<p>The commands on this page are pinned to the 0.13.0a6 package and immutable
-<code>v0.13.0a6</code> tag. Select the numbered <code>0.13.0a6</code> manual when installing this
-release; the nightly manual can describe changes intended for a later
-version.</p>
+<p>The commands on this page are prepared for the 0.13.0a7 package. Its
+immutable tag, public package, cuCIM bundle URL, and hashes are pending.
+Do not run the a7 commands until the
+<a href="../../releases/0.13.0a7/#release-verification">release-verification table</a>
+confirms those exact artifacts. Select the numbered manual matching the
+version already installed.</p>
 </div>
 <h2 id="choose-the-installation-you-need">Choose the installation you need<a class="headerlink" href="#choose-the-installation-you-need" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Goal</th>
-<th>0.13.0a6 route</th>
+<th>0.13.0a7 route after publication</th>
 </tr>
 </thead>
 <tbody>
@@ -2891,7 +2918,7 @@ printed by <code>nvidia-smi</code> is the newest CUDA version supported by the d
 is not the CUDA runtime installed in the VIPP environment.</p>
 <div class="admonition warning">
 <p class="admonition-title">Scientific admission remains narrower than installability</p>
-<p>VIPP 0.13.0a6 admits a successfully probed NVIDIA CUDA device with compute
+<p>VIPP 0.13.0a7 admits a successfully probed NVIDIA CUDA device with compute
 capability 7.5 or newer and driver API 13.3 or newer. Public GPU execution
 still requires native Windows, CPython 3.12, NumPy 2.5.1, SciPy 1.18.0,
 scikit-image 0.26.0, CuPy/CuPyX 14.1.1, and CUDA runtime API 13.2. A failed
@@ -2908,14 +2935,14 @@ validate consequential analyses against the CPU reference.</p>
 directly, so PowerShell script-activation policy cannot interfere.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp-gpu-cu13&quot;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a6&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp.exe&quot;</span>
 </span></code></pre></div>
-<p>An exact prerelease such as <code>==0.13.0a6</code> does not need pip's <code>--pre</code> option.
+<p>An exact prerelease such as <code>==0.13.0a7</code> does not need pip's <code>--pre</code> option.
 Use <code>--pre</code> only when asking pip to choose the latest unpinned VIPP alpha.</p>
 <p>Do not add the <code>gpu-cuda12</code> extra to this environment. CUDA 12 is a separate
-developer-qualification track in 0.13.0a6, and CuPy's CUDA 12 and CUDA 13
+developer-qualification track in 0.13.0a7, and CuPy's CUDA 12 and CUDA 13
 distributions must never share one environment.</p>
 <h3 id="upgrade-an-existing-manually-managed-013-alpha-cuda-environment">Upgrade an existing manually managed 0.13 alpha CUDA environment<a class="headerlink" href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" title="Permanent link">&para;</a></h3>
 <p>Close VIPP and napari first. Keep the existing environment directory name;
@@ -2924,19 +2951,20 @@ and upgrade only the pinned CUDA 13 package set:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$installRoot</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;VIPP-0.13.0a1&quot;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">$vippPython</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Resolve-Path</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$installRoot</span> <span class="s2">&quot;.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span><span class="p">)).</span><span class="n">Path</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="p">-</span><span class="n">-upgrade-strategy</span> <span class="n">only-if-needed</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a6&quot;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="p">-</span><span class="n">-upgrade-strategy</span> <span class="n">only-if-needed</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-c</span> <span class="s2">&quot;import importlib.metadata as m; print(m.version(&#39;napari-vipp&#39;))&quot;</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">check</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">&amp;</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$installRoot</span> <span class="s2">&quot;.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span><span class="p">)</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">-</span><span class="n">-refresh</span>
 </span></code></pre></div>
-<p>An earlier private cuCIM wheel and manifest remain compatible with a6 because the
-cuCIM source, build recipe, payload digest, and approval schema did not change.
-Keep those files. If the refreshed cuCIM probe succeeds, do not rebuild or
-reinstall it. If it fails, obtain the immutable a6 source and use its
-<code>setup_gpu_dev.py --existing-environment ... --plan-only</code> command with the
+<p>An earlier private cuCIM wheel and manifest can remain compatible with a7
+because the cuCIM source, build recipe, payload digest, and approval schema did
+not change. Keep those files. If the refreshed cuCIM probe succeeds, do not
+rebuild or reinstall it. If it fails, wait for the immutable a7 source and use
+its <code>setup_gpu_dev.py --existing-environment ... --plan-only</code> command with the
 retained wheel and manifest. Reinstall through that helper only when the plan
-passes; never copy an old approval JSON back manually. Rebuild from the a6 tag
-only when the retained artifact pair is missing, damaged, or rejected.</p>
+passes; never copy an old approval JSON back manually or use an a6 installer
+bundle against the a7 environment. Rebuild from the a7 tag only when the
+retained artifact pair is missing, damaged, or rejected.</p>
 <h2 id="read-the-compute-doctor-result">Read the compute-doctor result<a class="headerlink" href="#read-the-compute-doctor-result" title="Permanent link">&para;</a></h2>
 <p>Compute Doctor answers three separate questions:</p>
 <ol>
@@ -2944,7 +2972,7 @@ only when the retained artifact pair is missing, damaged, or rejected.</p>
    synchronized CuPy kernel?</li>
 <li><strong>Optional cuCIM</strong> — is the separately built add-on present, unchanged, and
    usable?</li>
-<li><strong>VIPP GPU coverage</strong> — how many of the 13 reviewed public GPU regions this
+<li><strong>VIPP GPU coverage</strong> — how many of the 18 reviewed public GPU regions this
    exact installation can admit now?</li>
 </ol>
 <p>Read the single recommended next step first. <strong>Show advanced details</strong> contains
@@ -3025,14 +3053,16 @@ acceleration remains available independently.</p>
 <h2 id="add-cucim-using-the-release-bundle-recommended">Add cuCIM using the release bundle (recommended)<a class="headerlink" href="#add-cucim-using-the-release-bundle-recommended" title="Permanent link">&para;</a></h2>
 <p>Do this only after the standard CUDA installation and Compute Doctor pass.</p>
 <ol>
-<li>Download
-   <a href="https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a6/napari-vipp-cucim-installer-0.13.0a6-windows.zip"><code>napari-vipp-cucim-installer-0.13.0a6-windows.zip</code></a>
-   and <code>SHA256SUMS-Windows-0.13.0a6.txt</code> from the
-   <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6">official v0.13.0a6 release</a>.</li>
+<li>After a7 publication, download
+   <code>napari-vipp-cucim-installer-0.13.0a7-windows.zip</code> and
+   <code>SHA256SUMS-Windows-0.13.0a7.txt</code> from the
+   <a href="https://github.com/rensutheart/napari-vipp/releases">official VIPP releases page</a>.
+   The exact a7 URL and hash are currently pending; do not substitute an
+   anticipated URL or an a6 bundle.</li>
 <li>
 <p>Open PowerShell in the download folder and run:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Get-FileHash</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="p">`</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="p">.\</span><span class="n">napari-vipp-cucim-installer</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a6-windows</span><span class="p">.</span><span class="n">zip</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="p">.\</span><span class="n">napari-vipp-cucim-installer</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a7-windows</span><span class="p">.</span><span class="n">zip</span>
 </span></code></pre></div>
 </li>
 <li>
@@ -3075,14 +3105,14 @@ wheel recorded by that manifest.</p>
 <h3 id="2-get-the-matching-vipp-release-source">2. Get the matching VIPP release source<a class="headerlink" href="#2-get-the-matching-vipp-release-source" title="Permanent link">&para;</a></h3>
 <p>The build and approval scripts are deliberately release-source tools rather
 than a bundled cuCIM dependency:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">$sourceRoot</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;napari-vipp-0.13.0a6-source&quot;</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-branch</span> <span class="n">v0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a6</span> <span class="p">-</span><span class="n">-depth</span> <span class="n">1</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span> <span class="nv">$sourceRoot</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">$sourceRoot</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;napari-vipp-0.13.0a7-source&quot;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-branch</span> <span class="n">v0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a7</span> <span class="p">-</span><span class="n">-depth</span> <span class="n">1</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span> <span class="nv">$sourceRoot</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">Set-Location</span> <span class="nv">$sourceRoot</span>
 </span></code></pre></div>
 <h3 id="3-build-twice-and-create-the-manifest">3. Build twice and create the manifest<a class="headerlink" href="#3-build-twice-and-create-the-manifest" title="Permanent link">&para;</a></h3>
 <p>Choose a private output directory that does not already contain artifacts:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">$python312</span> <span class="p">=</span> <span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-c</span> <span class="s2">&quot;import sys; print(sys.executable)&quot;</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">$artifactDir</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;vipp-cucim-local\0.13.0a6&quot;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">$artifactDir</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;vipp-cucim-local\0.13.0a7&quot;</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Path</span> <span class="nv">$artifactDir</span> <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">powershell</span> <span class="n">-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="o">-File</span> <span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">build_cucim_windows</span><span class="p">.</span><span class="n">ps1</span> <span class="p">`</span>
@@ -3146,13 +3176,13 @@ the relevant success signals. Do not add an unpinned cuVS package merely to
 silence that upstream message.</p>
 <p>Keep the wheel and manifest private. They are local build records, not files to
 upload, email to other users, or place on a shared package index.</p>
-<h2 id="distribution-decision-for-0130a6">Distribution decision for 0.13.0a6<a class="headerlink" href="#distribution-decision-for-0130a6" title="Permanent link">&para;</a></h2>
+<h2 id="distribution-decision-for-0130a7">Distribution decision for 0.13.0a7<a class="headerlink" href="#distribution-decision-for-0130a7" title="Permanent link">&para;</a></h2>
 <p>Every user who wants the optional Windows cuCIM provider builds and keeps their
 own wheel and manifest using the fixed procedure above. VIPP will not host or
 redistribute those wheels on <code>rensu.co.za</code>, GitHub Releases, PyPI, or a shared
 package index. Do not reuse another user's wheel: rebuild it locally so its
 manifest and per-build wheel hash describe the artifact you install. This
-private local-build boundary is part of the 0.13.0a6 release contract.</p>
+private local-build boundary remains the planned 0.13.0a7 release contract.</p>
 <p>Continue with <a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a>
 for operation regions, fallback reasons, badges, and provenance.</p>
 
@@ -3175,7 +3205,7 @@ for operation regions, fallback reasons, badges, and provenance.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
   </span>
 
     

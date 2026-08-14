@@ -552,6 +552,8 @@
       
         
       
+        
+      
     
     
     
@@ -595,6 +597,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1381,6 +1406,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#use-a-dtype-repair-only-after-reviewing-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use a dtype repair only after reviewing it
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#read-benchmark-progress-honestly" class="md-nav__link">
     <span class="md-ellipsis">
       Read benchmark progress honestly
@@ -1390,9 +1424,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-regions-in-0130a6" class="md-nav__link">
+  <a href="#gpu-regions-in-0130a7" class="md-nav__link">
     <span class="md-ellipsis">
-      GPU regions in 0.13.0a6
+      GPU regions in 0.13.0a7
     </span>
   </a>
   
@@ -2612,6 +2646,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#use-a-dtype-repair-only-after-reviewing-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use a dtype repair only after reviewing it
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#read-benchmark-progress-honestly" class="md-nav__link">
     <span class="md-ellipsis">
       Read benchmark progress honestly
@@ -2621,9 +2664,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-regions-in-0130a6" class="md-nav__link">
+  <a href="#gpu-regions-in-0130a7" class="md-nav__link">
     <span class="md-ellipsis">
-      GPU regions in 0.13.0a6
+      GPU regions in 0.13.0a7
     </span>
   </a>
   
@@ -2681,7 +2724,7 @@
 
 
 <h1 id="choose-and-verify-cpu-or-gpu-compute">Choose and verify CPU or GPU compute<a class="headerlink" href="#choose-and-verify-cpu-or-gpu-compute" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.13.0a6 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
+<p>VIPP 0.13.0a7 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
 <strong>Custom</strong> compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.</p>
 <p>CPU remains the portable scientific reference. GPU implementations are
@@ -2827,6 +2870,23 @@ optimizer lock only when a node must be excluded from the search. The optimizer
 can evaluate a detached manual node without overwriting its live cached result;
 it changes no node preference until the final assignment is reviewed and
 applied.</p>
+<h2 id="use-a-dtype-repair-only-after-reviewing-it">Use a dtype repair only after reviewing it<a class="headerlink" href="#use-a-dtype-repair-only-after-reviewing-it" title="Permanent link">&para;</a></h2>
+<p>When <code>uint8</code> or <code>uint16</code> is the only blocker between a node and a reviewed
+finite-<code>float32</code> GPU region, the node can show a small <strong>GPU tip</strong>. Select the
+node to see the affected input, exact proposed conversion, and memory trade-off.
+The tip remains available in Prefer GPU after calculation while that same
+blocker is still present.</p>
+<p><strong>Add conversion</strong> inserts an ordinary visible <strong>Convert Dtype</strong> node on that
+one input. The proposed <code>float32</code> <strong>Preserve</strong> conversion changes storage dtype
+without rescaling pixel values, and the graph edit has one-step Undo. Shared
+branches remain connected to the original source unless they already use the
+affected input path. VIPP revalidates the suggestion before applying it and
+does nothing if the input, candidate, or explicit Custom choice changed.</p>
+<p>This button edits the authored workflow; calculation itself still never casts
+silently. Review downstream thresholds, memory, output dtype, and scientific
+meaning before accepting it. A visible conversion can remain resident with
+eligible downstream GPU work, but eligibility is not proof that conversion is
+appropriate for the analysis.</p>
 <h2 id="read-benchmark-progress-honestly">Read benchmark progress honestly<a class="headerlink" href="#read-benchmark-progress-honestly" title="Permanent link">&para;</a></h2>
 <p>Whole-pipeline optimization shows two progress streams:</p>
 <ul>
@@ -2842,6 +2902,13 @@ that the current assignment is optimal. The result identifies completed and
 remaining work, and complete records for the exact workload and environment
 can be reused on retry. Editing data, parameters, code/policy identity, or the
 relevant environment invalidates reuse.</p>
+<p>A completed comparison remains inspectable when the speed evidence is too
+close to recommend a winner. The result groups one heading per workflow node
+with a separate row for every tested CPU, CuPy-family, or cuCIM implementation.
+The compact columns show total execution time, scientific agreement, and the
+outcome; expanded details separate resident compute, transfers, first-run or
+warmup cost, memory, and evidence provenance. An inconclusive outcome leaves
+the authored assignment unchanged. It is not a GPU eligibility failure.</p>
 <p>When a synchronized GPU candidate has enough repeated measurements to be a
 reliable incumbent, the optimizer may stop a cooperative CPU warm call once its
 elapsed time exceeds the incumbent's one-sided confidence bound plus a material
@@ -2860,8 +2927,9 @@ writer side effect. Whole-pipeline optimization operates within one supported
 accelerator runtime and the calculated writer-free graph frontier. Unsupported
 nodes remain CPU candidates; manual barriers do not justify benchmarking an
 unrunnable descendant.</p>
-<p><a id="gpu-regions-in-0130a1"></a></p>
-<h2 id="gpu-regions-in-0130a6">GPU regions in 0.13.0a6<a class="headerlink" href="#gpu-regions-in-0130a6" title="Permanent link">&para;</a></h2>
+<p><a id="gpu-regions-in-0130a1"></a>
+<a id="gpu-regions-in-0130a7"></a></p>
+<h2 id="gpu-regions-in-0130a7">GPU regions in 0.13.0a7<a class="headerlink" href="#gpu-regions-in-0130a7" title="Permanent link">&para;</a></h2>
 <p>The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.</p>
 <table>
@@ -2887,6 +2955,18 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <td>Same reviewed radius limits as Rolling-Ball. The declared float32 parity region is not finite-only.</td>
 </tr>
 <tr>
+<td>Extract Channel</td>
+<td>CuPy</td>
+<td>Explicit channel axis</td>
+<td>Prefer GPU keeps a host-entry extraction on CPU so only the selected channel is uploaded. An explicit Custom GPU choice can expose a resident allocation-sharing view. Ambiguous axes use CPU or fail rather than being guessed.</td>
+</tr>
+<tr>
+<td>Convert Dtype</td>
+<td>CuPy</td>
+<td><code>uint8</code> or <code>uint16</code> to <code>float32</code></td>
+<td>Exact <strong>Preserve</strong> mode only: pixel values are not rescaled. Other dtype/mode combinations use CPU.</td>
+</tr>
+<tr>
 <td>Median Filter</td>
 <td>CuPyX</td>
 <td><code>uint8</code>, <code>uint16</code>, or finite <code>float32</code> with complete facts proving no negative zero; independent <code>YX</code> planes</td>
@@ -2908,13 +2988,13 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <td>Richardson-Lucy Deconvolution</td>
 <td>CuPy/CuPyX</td>
 <td>finite <code>float32</code> Image and PSF; 2D or 3D</td>
-<td>Odd PSF extents, default-safe options, <code>filter_epsilon=1e-8</code>, and 1–25 iterations. The CPU default epsilon remains CPU.</td>
+<td>Odd PSF extents, default-safe options, authored <code>filter_epsilon</code> from <code>1e-12</code> through <code>1e-6</code>, and 1–100 iterations. The v2 backend-agreement gate does not validate restoration quality.</td>
 </tr>
 <tr>
 <td>Richardson-Lucy TV Deconvolution</td>
 <td>CuPy/CuPyX</td>
 <td>finite <code>float32</code> Image and PSF; 2D or 3D</td>
-<td>Lambda zero inherits ordinary RL. Positive TV admits the shipped tuple (<code>lambda=0.002</code>, TV epsilon <code>1e-6</code>, filter epsilon <code>1e-12</code>, denominator floor <code>0.05</code>) at 10 or 25 iterations.</td>
+<td>Lambda zero inherits ordinary RL's expanded region. Positive TV retains the shipped tuple (<code>lambda=0.002</code>, TV epsilon <code>1e-6</code>, filter epsilon <code>1e-12</code>, denominator floor <code>0.05</code>) at 10 or 25 iterations.</td>
 </tr>
 <tr>
 <td>Canny Edges</td>
@@ -2929,10 +3009,28 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <td>Integer occupied span must be at most 65,536 levels; wide integers and per-slice cases need sufficient exact facts. Float histograms use 2–65,536 saved bins.</td>
 </tr>
 <tr>
+<td>Binary Threshold</td>
+<td>CuPy</td>
+<td>scalar finite <code>float32</code> images</td>
+<td>Uses the exact authored finite threshold and returns a resident Boolean mask. Unsupported dtype/channel semantics use CPU; VIPP does not round or replace the threshold.</td>
+</tr>
+<tr>
 <td>Sigma Filter</td>
 <td>CuPy</td>
 <td>native-endian <code>uint8</code>, <code>uint16</code>, or finite <code>float32</code>; independent <code>YX</code> planes</td>
 <td>Radius 0.5–10 and reviewed finite value/parameter facts. ROI/mask behavior is outside version 1.</td>
+</tr>
+<tr>
+<td>Remove Small Objects</td>
+<td>CuPyX</td>
+<td>Boolean mask; resolved 2D or 3D</td>
+<td>Face or Full connectivity. Integer-label cleanup remains CPU.</td>
+</tr>
+<tr>
+<td>Fill Holes</td>
+<td>CuPyX</td>
+<td>Boolean mask; resolved 2D or 3D</td>
+<td>Face or Full connectivity with <code>Maximum hole size = 0</code> (fill every enclosed hole). Positive bounded-hole-size cleanup remains CPU.</td>
 </tr>
 <tr>
 <td>Label Connected Components</td>
@@ -2957,12 +3055,13 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <p>Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
 handling where the underlying dtype/profile is admitted. An ambiguous or
 invalid channel axis remains on the CPU/error path rather than being guessed.</p>
-<p>VIPP never inserts a cast to enter this table. If converting an image or PSF to
-<code>float32</code> is scientifically appropriate, add an explicit <code>Convert Dtype</code> node,
-review its scaling mode, inspect downstream thresholds/writers, and report it.
-This can unlock much larger GPU gains for Gaussian and deconvolution workloads,
-but it also changes the authored data representation. Never convert only to
-make a benchmark look faster.</p>
+<p>VIPP never inserts a cast while calculating. If <code>uint8</code>/<code>uint16</code> dtype is the
+only blocker, it may offer the reviewed <strong>Add conversion</strong> graph edit described
+above. Otherwise add <strong>Convert Dtype</strong> yourself. In both cases, review its mode,
+inspect downstream thresholds/writers, and report it. Conversion can unlock
+larger GPU gains across filtering, deconvolution, and segmentation, but it
+changes the authored data representation. Never convert only to make a
+benchmark look faster.</p>
 <h2 id="installation-and-platform-boundary">Installation and platform boundary<a class="headerlink" href="#installation-and-platform-boundary" title="Permanent link">&para;</a></h2>
 <p>The <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX CUDA track. It does not
 include the separately reviewed cuCIM build used by the background and basic
@@ -3078,7 +3177,7 @@ publication, checkpoints, a durable manifest, or replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
   </span>
 
     

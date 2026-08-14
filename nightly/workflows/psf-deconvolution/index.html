@@ -552,6 +552,8 @@
       
         
       
+        
+      
     
     
     
@@ -595,6 +597,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2778,7 +2803,7 @@
 
 <h1 id="restore-with-a-psf">Restore with a PSF<a class="headerlink" href="#restore-with-a-psf" title="Permanent link">&para;</a></h1>
 <p>Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.13.0a6. The
+RL with total-variation regularization (RL-TV) are public in 0.13.0a7. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
 stale, its descendants wait and retain their last coherent cached results when
@@ -2790,19 +2815,23 @@ Image and PSF inputs in resolved 2D or 3D, with compatible non-empty extents,
 positive PSF mass, odd PSF sizes, and the reviewed normalization/clipping/scale
 options. VIPP never converts the inputs or changes restoration parameters to
 enter that region.</p>
-<p>For ordinary RL, the first GPU region requires <code>filter_epsilon=1e-8</code> and 1–25
-iterations. The authoritative CPU default is <code>1e-12</code>; keeping that default, any
-other epsilon, or more than 25 iterations deliberately stays on CPU. This is a
-scientific eligibility decision, not an error.</p>
-<p>For RL-TV, lambda zero inherits ordinary RL's region. Positive TV is initially
+<p>For ordinary RL, the reviewed GPU region accepts finite authored
+<code>filter_epsilon</code> values from <code>1e-12</code> through <code>1e-6</code> and 1–100 iterations. The
+authoritative CPU default <code>1e-12</code> is therefore eligible when the remaining
+image, PSF, option, environment, and memory gates pass. Values outside the
+region remain CPU; VIPP does not round epsilon or shorten the run.</p>
+<p>For RL-TV, lambda zero inherits ordinary RL's expanded region. Positive TV is
 admitted only for <code>TV regularization=0.002</code>, <code>TV epsilon=1e-6</code>,
 <code>filter epsilon=1e-12</code>, <code>denominator floor=0.05</code>, and exactly 10 or 25
 iterations. Other authored profiles remain CPU and are never rounded or
 truncated to make them eligible.</p>
-<p>If finite <code>float32</code> is appropriate for both the image and PSF, add explicit
-<code>Convert Dtype</code> nodes and review their scaling mode; this can produce major GPU
-gains on large stacks. Converting only to win a benchmark is not scientifically
-neutral. Read the badge/provenance and the
+<p>If finite <code>float32</code> is appropriate, add explicit <code>Convert Dtype</code> nodes and
+review their scaling mode; this can produce major GPU gains on large stacks.
+When <code>uint8</code>/<code>uint16</code> dtype is the only reviewed blocker, the inspector may
+offer <strong>Add conversion</strong>. It inserts a normal visible <code>float32</code> <strong>Preserve</strong>
+node without rescaling pixel values and with one-step Undo; it does not silently
+change the authored calculation. Converting only to win a benchmark is not
+scientifically neutral. Read the badge/provenance and the
 <a href="../../how-to/choose-compute/">CPU/GPU guide</a> rather than assuming that Auto used
 the GPU. Prefer GPU deliberately ignores speed, but still uses CPU when this
 scientific region or environment gate is not satisfied.</p>
@@ -2812,6 +2841,15 @@ scientific region or environment gate is not satisfied.</p>
 not establish broad restoration quality on real microscopes, acquisition
 settings, or biological targets. Review noise, ringing, edges, and apparent
 structures against an appropriate reference.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Backend agreement is not restoration validity</p>
+<p>The a7 RL/RL-TV v2 policy requires equal shape and <code>float32</code> dtype,
+identical finite masks, finite non-negative clipped outputs, NRMSE no
+greater than <code>0.005</code>, and maximum absolute error no greater than
+<code>1e-6 + 0.005 × the CPU-reference peak</code>. These limits test GPU agreement
+with VIPP's CPU implementation. They do not prove that the PSF, iteration
+count, recovered resolution, or biological interpretation is valid.</p>
 </div>
 <h2 id="read-the-psf-preflight">Read the PSF preflight<a class="headerlink" href="#read-the-psf-preflight" title="Permanent link">&para;</a></h2>
 <p>The RL and RL-TV inspector presents a read-only PSF preflight before expensive
@@ -3117,7 +3155,7 @@ treat the ends of a slider as validated parameter limits.</p>
 </tr>
 <tr>
 <td><code>deconvolution-3d</code></td>
-<td><code>ZYX</code> measured PSF and volumetric restoration branches.</td>
+<td><code>ZYX</code> measured PSF and volumetric restoration branches sharing one visible <code>float32</code> Preserve conversion, with 25 authored iterations and <code>filter_epsilon=1e-12</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3143,7 +3181,7 @@ evidence gap; see <a href="../../reference/validation-status/">validation status
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 05:12:44 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
   </span>
 
     

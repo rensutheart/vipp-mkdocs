@@ -552,6 +552,8 @@
       
         
       
+        
+      
     
     
     
@@ -595,6 +597,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2897,17 +2922,26 @@ claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Independen
 ImageJ-generated golden parity is pending, so record the node explicitly and
 compare against the intended ImageJ reference before consequential use.</p>
 <h2 id="cpu-and-gpu-boundaries-in-this-workflow">CPU and GPU boundaries in this workflow<a class="headerlink" href="#cpu-and-gpu-boundaries-in-this-workflow" title="Permanent link">&para;</a></h2>
-<p>Otsu, Canny, Gaussian, median, Sigma Filter, background correction, and
-connected components have GPU candidates only inside declared regions. Common
-examples are finite <code>float32</code> for Gaussian, Boolean masks for connected
-components, and Boolean/<code>uint8</code>/<code>uint16</code> for the exact Canny region. Otsu covers
-more real dtypes but retains its exact 65,536-level integer-span and float-bin
-rules. Fallback-safe unsupported calls use an explained CPU decision; invalid
-or explicitly non-fallback-safe calls fail planning. In particular, non-CPU
-planning requires a Boolean connected-components call resolved as 2D or 3D.
-VIPP never inserts a cast.</p>
+<p>Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
+Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
+Canny, median, Sigma Filter, and background correction have GPU candidates only
+inside declared regions. A portable a7 corridor can use an explicitly described
+channel, convert <code>uint8</code>/<code>uint16</code> to <code>float32</code> without rescaling, apply Gaussian
+Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
+without an intermediate host transfer.</p>
+<p>Prefer GPU keeps a first-step Extract Channel on CPU so only the selected
+channel is uploaded. Remove Small Objects supports Boolean masks in resolved
+2D/3D Face or Full connectivity; integer-label cleanup remains CPU. Fill Holes
+supports those Boolean connectivity regions only when <code>Maximum hole size = 0</code>;
+a positive bounded size remains CPU. Connected Components still requires a
+Boolean call resolved as 2D or 3D. Unsupported calls receive an explained CPU
+decision, while invalid or explicitly non-fallback-safe calls fail planning.</p>
+<p>VIPP never inserts a cast during calculation. When dtype is the only reviewed
+blocker, the node may show a <strong>GPU tip</strong> and an <strong>Add conversion</strong> button. That
+button inserts a visible, undoable Convert Dtype node; review its memory,
+threshold, and scientific consequences before accepting it.</p>
 <p>Read each node badge after calculation and see the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0130a1">CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0130a7">CPU/GPU operation matrix</a>
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.</p>
@@ -2938,11 +2972,19 @@ method is unsuitable for that input or that preprocessing needs review.</p>
 </span></code></pre></div>
 <p>For a compact single-node starting point, use <code>Auto Watershed From Mask</code>.</p>
 <h2 id="reference-workflow">Reference Workflow<a class="headerlink" href="#reference-workflow" title="Permanent link">&para;</a></h2>
-<p>Use:</p>
+<p>Use the general cleanup example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>examples/otsu-red-channel-labels.json
 </span></code></pre></div>
 <p>This demonstrates red/TRITC-like channel segmentation, mask cleanup, labels,
 border clearing, volume filtering, and inspectable outputs.</p>
+<p>To inspect the coherent Prefer-GPU corridor and its CPU fallbacks, open
+<strong>Portable GPU Segmentation Bridge</strong> or use:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>examples/synthetic-gpu-segmentation-bridge.json
+</span></code></pre></div>
+<p>Its deterministic sample contains four retained 3D objects, one 19-voxel
+speck removed by the authored 22-voxel cutoff, and one 31-voxel enclosed cavity
+restored by Fill Holes. Those facts make each cleanup step independently
+inspectable; they do not validate the thresholds for another dataset.</p>
 <h2 id="what-to-check">What To Check<a class="headerlink" href="#what-to-check" title="Permanent link">&para;</a></h2>
 <p><img alt="A threshold-mask intermediate output shown at full resolution above its VIPP graph" src="../../assets/screenshots/workflows/inspect-intermediate-result.png" /></p>
 <p><em>Inspect a decisive intermediate at full resolution. Here the threshold mask is
@@ -2974,7 +3016,7 @@ pinned in napari while its graph node and input histogram remain visible.</em></
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 20:55:24 UTC">August 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
   </span>
 
     
