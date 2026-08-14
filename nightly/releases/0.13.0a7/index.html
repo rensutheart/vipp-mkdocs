@@ -2724,12 +2724,16 @@ restoration operations into a visible segmentation-and-mask-cleanup corridor.
 It also makes GPU eligibility repairs and whole-pipeline timing results much
 easier to understand without silently changing the scientific workflow.</p>
 <div class="admonition warning">
-<p class="admonition-title">The immutable release does not exist yet</p>
-<p>The <code>v0.13.0a7</code> tag, PyPI package, Windows installer, checksum file,
-public release URLs, artifact hashes, and numbered manual have <strong>not</strong> been
-published or verified. Do not construct a download URL or treat an
-untagged development build as the release. The last verified public alpha
-remains <a href="../0.13.0a6/">0.13.0a6</a> until every pending item in
+<p class="admonition-title">Automated qualification is complete; publication is pending</p>
+<p>Final application source, exact-main CI, full RTX 5090 GPU admission,
+locally finalized artifact bytes, and a bounded production-backend Windows
+lifecycle are recorded below. The frozen installer's visible setup window
+and public-download operator checks have <strong>not</strong> been accepted. The
+<code>v0.13.0a7</code> tag has not been pushed, and no a7 GitHub release, PyPI package,
+public download, numbered manual, or stable-manual update exists yet. Do
+not construct a download URL or treat a local artifact hash as proof of a
+public asset. The last verified public alpha remains
+<a href="../0.13.0a6/">0.13.0a6</a> until every pending publication item in
 <a href="#release-verification">release verification</a> is completed.</p>
 </div>
 <h2 id="features-added">Features added<a class="headerlink" href="#features-added" title="Permanent link">&para;</a></h2>
@@ -2833,7 +2837,7 @@ eligibility failure and does not hide the completed measurements.</p>
 <h2 id="install-or-upgrade">Install or upgrade<a class="headerlink" href="#install-or-upgrade" title="Permanent link">&para;</a></h2>
 <p>The commands and filenames below describe the intended 0.13.0a7 release, but
 they must not be used until the exact version appears on the official GitHub
-and PyPI project pages and its hashes are added to this page.</p>
+and PyPI project pages and the downloaded bytes match the hashes on this page.</p>
 <p>For a dedicated CPU environment after publication:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp==0.13.0a7&quot;
 </span></code></pre></div>
@@ -2841,11 +2845,12 @@ and PyPI project pages and its hashes are added to this page.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">vipp-compute-doctor</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">-</span><span class="n">-refresh</span>
 </span></code></pre></div>
-<p>The anticipated Windows filenames are
+<p>The locally finalized Windows filenames are
 <code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe</code> and
-<code>SHA256SUMS-Windows-0.13.0a7.txt</code>. Their public download links and SHA-256
-values are pending. The optional cuCIM route will require the matching a7
-no-wheel bundle; do not reuse an a6 bundle or move another user's private wheel.</p>
+<code>SHA256SUMS-Windows-0.13.0a7.txt</code>. Their exact local SHA-256 values are recorded
+below, but their public download links and public-asset verification remain
+pending. The optional cuCIM route will require the matching a7 no-wheel bundle;
+do not reuse an a6 bundle or move another user's private wheel.</p>
 <p>For this release, one-click setup uses only the exact per-track roots beneath
 the canonical Windows Local App Data directory. The managed CUDA path must be
 ASCII-only because CuPy 14.1.1 cannot reliably compile CUDA kernels from a
@@ -2874,20 +2879,84 @@ their creator version and should be regenerated and revalidated.</p>
 remain version 3. No migration invents a dtype conversion or changes an RL,
 threshold, or cleanup parameter.</p>
 <h2 id="release-verification">Release verification<a class="headerlink" href="#release-verification" title="Permanent link">&para;</a></h2>
-<p>The feature branch merged to application <code>main</code> through
-<a href="https://github.com/rensutheart/napari-vipp/pull/20">pull request #20</a> at
-candidate integration commit
-<a href="https://github.com/rensutheart/napari-vipp/commit/64b95a1ba01d6dbffe0a055ab9a993f6c0b5e328"><code>64b95a1ba01d6dbffe0a055ab9a993f6c0b5e328</code></a>.
-This is a reviewable source checkpoint, <strong>not</strong> the immutable a7 release commit
-or tag.</p>
-<p>The merged feature validation completed <strong>5,021 tests</strong>, with <strong>5 documented
-skips</strong>, <strong>2 documented expected failures</strong>, and no failures. The strict
-admission catalogue contains <strong>18 public GPU implementations</strong> and <strong>23
-executable evidence owners</strong>, with parity, difficult-input, metadata,
-input-integrity, memory, cancellation, cleanup, fallback, provenance, and
-end-to-end timing coverage for the new corridor. These source-current results
-do not replace an exact-tag build, final cross-platform CI, published-artifact
-inspection, or a downloaded-installer field test.</p>
+<p>Final application source merged to <code>main</code> through
+<a href="https://github.com/rensutheart/napari-vipp/pull/23">pull request #23</a> at
+<a href="https://github.com/rensutheart/napari-vipp/commit/dc8a63912110a75ab1daad0e7f81c2b20e5001e6"><code>dc8a63912110a75ab1daad0e7f81c2b20e5001e6</code></a>.
+The exact-main
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/31830397900">CI run</a>
+passed on Windows, Linux, and macOS. The complete local suite passed <strong>5,084
+tests</strong>, with <strong>5 documented skips</strong>, <strong>2 documented expected failures</strong>, and
+no failures.</p>
+<p>The clean-source native-Windows RTX 5090 <code>full</code> GPU admission profile passed
+all <strong>23 executable evidence owners</strong> across <strong>18 public implementations</strong>.
+The aggregate evidence SHA-256 is
+<code>3ad655f7d3e36055449bda3e8bb41c914e010fd7607ced26763e23045dcee7ae</code>;
+the admission-manifest SHA-256 is
+<code>3b6081b0aec45f81227bd86d86bc0f2df1aa4fe6b28752aa4e96aaee3d8e0ce7</code>.
+This is bounded reference-system evidence, not a claim for every compatible
+GPU.</p>
+<p>The exact-source artifact set intended for publication was finalized locally.
+These hashes identify those frozen local bytes; they are <strong>not</strong> public URLs or
+evidence that an asset downloaded from GitHub or PyPI matches them.</p>
+<table>
+<thead>
+<tr>
+<th>Locally finalized artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>napari_vipp-0.13.0a7-py3-none-any.whl</code></td>
+<td><code>bcffb0e45eeac75bd15ba969be337400a2db77d63ad7c024ecad2f904f4da01a</code></td>
+</tr>
+<tr>
+<td><code>napari_vipp-0.13.0a7.tar.gz</code></td>
+<td><code>09c15fa1520ae2da097bcde0bd67bf6d1d23bb37067b7af76e4bf9c94c73c9e3</code></td>
+</tr>
+<tr>
+<td><code>napari-vipp-cucim-installer-0.13.0a7-windows.zip</code></td>
+<td><code>c09c697ebedd6f39574be316c76e58419a881971381f38cd617df7648b9faf21</code></td>
+</tr>
+<tr>
+<td><code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe</code></td>
+<td><code>b62c715152447c4b1f8db878996b776ef2bfb0cdc6656df72d3ec94e7818c12f</code></td>
+</tr>
+<tr>
+<td><code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED-release.json</code></td>
+<td><code>bdcd0fa8c545d50a7ebbe3118d75bd1f0a31a0c01c0f52b8a4f0789fd7dcff16</code></td>
+</tr>
+<tr>
+<td><code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED-THIRD-PARTY-NOTICES.txt</code></td>
+<td><code>95ca668d0977be347ab39af820f97652ed3565ed7ea4218205bb3a716a847e2d</code></td>
+</tr>
+<tr>
+<td><code>SHA256SUMS-Windows-0.13.0a7.txt</code></td>
+<td><code>37f0f7c69b8fe270b6b485d54f08bf742b1006867b359e7e3db4843ed079a4d9</code></td>
+</tr>
+</tbody>
+</table>
+<p>Archive and installer artifact gates also passed: Twine accepted the wheel and
+source archive; the wheel was deterministic; the no-wheel cuCIM ZIP reproduced
+byte-for-byte; isolated wheel and source-archive installations passed package,
+resource, entry-point, manifest, and headless checks; and unsigned installer
+finalization plus native <code>NotSigned</code> inspection passed.</p>
+<p>A display-independent acceptance then exercised the production Windows
+installer engine and registration/removal services from the exact hash-locked
+a7 wheel, bound to the finalized unsigned EXE above. The CPU route completed a
+new install, packaged-workflow and segmentation checks, a repair, and an
+ownership-safe uninstall. The Automatic route selected CUDA 13 on the RTX 5090
+system; Compute Doctor admitted <strong>14 of 18</strong> public regions, with only the four
+optional-cuCIM regions unavailable. The installed package completed the
+portable segmentation corridor, 3D RL and RL-TV, a non-ASCII effective-TEMP
+compiler regression, repair, and ownership-safe uninstall. Both routes removed
+their managed environments, registry entries, shortcuts, cached a7 setup, and
+transaction residue.</p>
+<p>This is exact-artifact production-backend lifecycle evidence. It did <strong>not</strong>
+operate the frozen EXE's setup window and was not a fresh-account or
+public-download test. Visual setup choices, visible shortcut launches,
+SmartScreen, novice comprehension, unusual account paths, cancellation, and
+network rollback therefore remain <strong>not run</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -2898,31 +2967,55 @@ inspection, or a downloaded-installer field test.</p>
 <tbody>
 <tr>
 <td>Final application release commit</td>
-<td><strong>Pending</strong></td>
+<td><strong>Passed:</strong> <code>dc8a63912110a75ab1daad0e7f81c2b20e5001e6</code> via PR #23</td>
 </tr>
 <tr>
 <td>Annotated immutable <code>v0.13.0a7</code> tag</td>
-<td><strong>Pending</strong></td>
+<td><strong>Local only at the final commit; remote tag push pending</strong></td>
 </tr>
 <tr>
 <td>Exact-source Windows/Linux/macOS CI</td>
-<td><strong>Pending</strong></td>
+<td><strong>Passed:</strong> run 31830397900</td>
+</tr>
+<tr>
+<td>Complete local automated suite</td>
+<td><strong>Passed:</strong> 5,084 tests; 5 skipped; 2 expected failures</td>
+</tr>
+<tr>
+<td>Full RTX 5090 GPU admission</td>
+<td><strong>Passed:</strong> 18 implementations; 23 evidence owners; aggregate hash above</td>
+</tr>
+<tr>
+<td>Archive and installer artifact gates</td>
+<td><strong>Passed:</strong> Twine, reproducibility, isolated installs, packaged-content checks, finalization, and native unsigned inspection</td>
+</tr>
+<tr>
+<td>Exact-artifact CPU production-backend lifecycle</td>
+<td><strong>Passed:</strong> new install, packaged scientific smoke, same-version repair, and ownership-safe uninstall</td>
+</tr>
+<tr>
+<td>Exact-artifact CUDA production-backend lifecycle</td>
+<td><strong>Passed:</strong> Automatic CUDA selection, Doctor, segmentation, RL/RL-TV, Unicode-TEMP regression, repair/re-smoke, and ownership-safe uninstall</td>
+</tr>
+<tr>
+<td>Frozen EXE setup-window and public-download operator acceptance</td>
+<td><strong>Not run; blocks installer publication under the strict runbook</strong></td>
 </tr>
 <tr>
 <td>PyPI wheel and source archive</td>
-<td><strong>Pending; no public URL or SHA-256 yet</strong></td>
+<td><strong>Built and hash-locked locally; publication and public verification pending</strong></td>
 </tr>
 <tr>
 <td>Unsigned Windows installer and release manifest</td>
-<td><strong>Pending; no public URL or SHA-256 yet</strong></td>
+<td><strong>Finalized and hash-locked locally; publication and downloaded-installer acceptance pending</strong></td>
 </tr>
 <tr>
-<td>Windows checksum and third-party-notice files</td>
-<td><strong>Pending; no public URL or SHA-256 yet</strong></td>
+<td>Windows checksum and <code>-UNSIGNED-THIRD-PARTY-NOTICES</code> files</td>
+<td><strong>Built and hash-locked locally; publication pending</strong></td>
 </tr>
 <tr>
 <td>Matching optional cuCIM no-wheel bundle</td>
-<td><strong>Pending; no public URL or SHA-256 yet</strong></td>
+<td><strong>Built and hash-locked locally; publication pending</strong></td>
 </tr>
 <tr>
 <td>Public GitHub alpha pre-release</td>
@@ -2942,11 +3035,12 @@ inspection, or a downloaded-installer field test.</p>
 </tr>
 </tbody>
 </table>
-<p>Fresh-account CPU/CUDA installation, spaces on both routes, Unicode CPU paths,
-the CUDA ASCII-only Automatic/existing/owned-installation guidance,
-interrupted/network rollback, RTX 40-series Windows, native Linux CUDA, and a
-timed novice path remain separate field evidence. Anything not performed must
-remain <strong>not run</strong>.</p>
+<p>Fresh-account CPU/CUDA installation through the frozen setup window, a fresh
+account whose canonical Windows Known Folder contains non-ASCII characters,
+spaces and Unicode CPU paths, interrupted/network rollback, visible
+repair/update/uninstall, public-download SmartScreen behavior, RTX 40-series
+Windows, native Linux CUDA, and a timed novice path remain <strong>not run</strong> unless
+separately recorded after publication.</p>
 <p>Historical 0.13.0a6 source, CI, installer, artifact hashes, and publication
 evidence remain unchanged in the
 <a href="../0.13.0a6/#release-verification">0.13.0a6 release verification</a>.</p>
@@ -2970,7 +3064,7 @@ evidence remain unchanged in the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 18:38:44 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 22:20:42 UTC">August 14, 2026</span>
   </span>
 
     
