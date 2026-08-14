@@ -6,9 +6,10 @@ any NVIDIA packages.
 
 !!! note "Use the manual for your installed release"
 
-    The commands on this page are prepared for the 0.13.0a7 package. Its
-    immutable tag, public package, cuCIM bundle URL, and hashes are pending.
-    Do not run the a7 commands until the
+    The commands on this page are prepared for the 0.13.0a7 package. Its local
+    artifact hashes are recorded, but its tag has not been pushed and the
+    public package and cuCIM bundle URL are pending. Do not run the a7 commands
+    until the
     [release-verification table](../releases/0.13.0a7.md#release-verification)
     confirms those exact artifacts. Select the numbered manual matching the
     version already installed.
@@ -256,7 +257,8 @@ Do this only after the standard CUDA installation and Compute Doctor pass.
    `napari-vipp-cucim-installer-0.13.0a7-windows.zip` and
    `SHA256SUMS-Windows-0.13.0a7.txt` from the
    [official VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
-   The exact a7 URL and hash are currently pending; do not substitute an
+   The intended local bundle hash is recorded in release verification, but its
+   public URL and public-asset verification are pending; do not substitute an
    anticipated URL or an a6 bundle.
 2. Open PowerShell in the download folder and run:
 

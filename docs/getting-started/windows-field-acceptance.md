@@ -5,11 +5,18 @@ installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Wait for the exact tagged installer"
-    The a7 tag, installer URL, and SHA-256 are pending. Do not use this
-    checklist with an untagged build or a file that merely has the anticipated
-    release name. Start only after
+    The locally finalized installer SHA-256 is
+    `b62c715152447c4b1f8db878996b776ef2bfb0cdc6656df72d3ec94e7818c12f`,
+    but the a7 tag, public installer URL, and public-download verification are
+    pending. A local hash does not prove that a public asset exists. Do not use
+    this checklist with an untagged build or a file that merely has the
+    anticipated release name. Start only after
     [release verification](../releases/0.13.0a7.md#release-verification)
     identifies the exact public installer and checksum file.
+
+    A display-independent production-backend install, repair, scientific
+    smoke, and uninstall does not count as a pass for the downloaded
+    installer's visible setup window or operator experience.
 
 Start with the normal [Windows installation instructions](installation.md).
 If you have a suitable NVIDIA GPU and were asked to test acceleration, also use
@@ -100,6 +107,9 @@ Complete this only if the installer offered the NVIDIA CUDA route.
       retained four final objects, and showed an explanation for any CPU step.
 - [ ] If a node showed a dtype-only **GPU tip**, **Add conversion** inserted one
       visible Convert Dtype node in the expected place and Undo removed it.
+- [ ] A relevant GPU tip remained visible after a Prefer GPU calculation.
+- [ ] **Find fastest** kept grouped results readable and inspectable, including
+      when it could not choose a winner.
 
 If you were specifically asked to test optional cuCIM:
 
