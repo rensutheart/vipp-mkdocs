@@ -68,14 +68,25 @@ and lets you check again after installing it.
 2. To choose manually, expand **Advanced details**, then use **Computer use**
    to select **CPU** or **NVIDIA GPU**. An unavailable GPU route stays blocked
    and explains what is missing.
-3. Under **Reviewed settings**, confirm the installation location, compute
+3. Under **Reviewed settings**, confirm the fixed installation location, compute
    route, and whether to add a Desktop shortcut.
 4. Select **Install** and wait for setup and its final acceptance checks.
 5. Open **VIPP** for a CPU installation. A CUDA installation provides
    **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** shortcuts; begin
    with **VIPP Automatic**.
 
-Changing the compute choice, location, or Desktop-shortcut choice requires
+!!! important "CUDA location in 0.13.0a7"
+    One-click setup obtains canonical Windows Local App Data through
+    `SHGetKnownFolderPath(FOLDERID_LocalAppData)` and accepts only
+    `VIPP\environments\cpu` or `VIPP\environments\cuda13` beneath it. A custom
+    managed root is not accepted. CuPy 14.1.1 requires the complete CUDA path
+    to contain ASCII characters in this release; spaces are supported. If
+    canonical Local App Data contains a non-ASCII character, one-click CUDA is
+    unavailable before environment creation or download and setup offers CPU.
+    The fixed CPU root remains Unicode-safe. Expert-selected existing
+    environments are inspected separately and remain unchanged.
+
+Changing the compute choice or Desktop-shortcut choice requires
 **Check these settings** again. Setup never enables **Install** for settings it
 has not checked.
 
@@ -102,6 +113,18 @@ The installer does not silently replace an existing installation:
 - unrelated folders and manually managed napari environments are never
   overwritten; and
 - managed CPU and CUDA installations can coexist.
+
+An installer-owned CUDA copy already stored under a non-ASCII path cannot be
+updated or repaired in place by 0.13.0a7. Setup may first complete and record
+recovery from an earlier interrupted transaction; after that separate
+recovery, the newly blocked selection performs no new mutation of the old
+environment, shortcuts, or ownership record. Do not move or rename that
+virtual environment or start a second managed CUDA installation: the CUDA
+track has one Windows Apps entry and shared shortcut names. Select **Open
+Installed apps**, uninstall **VIPP (GPU)**, and wait for the ownership-bound
+removal to finish. If canonical Local App Data is non-ASCII, this account still
+cannot use one-click CUDA and setup offers CPU. This is an explicit release
+boundary, not an in-place or fallback migration.
 
 Remove either installation from **Windows Settings → Apps → Installed apps**.
 Each entry has its own ownership-bound uninstaller, so removing CPU does not
@@ -183,6 +206,8 @@ Unsupported work stays on CPU with an explanation.
 
 For a manual CUDA environment:
 
+Run these commands from an ASCII-only working directory:
+
 ```powershell
 py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
@@ -190,6 +215,10 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
+
+This advanced manual environment is separate from one-click management. The
+installer does not move or edit it. Create a fresh manual environment rather
+than moving or renaming one whose complete path is incompatible.
 
 Read the complete [Windows CUDA and optional cuCIM guide](windows-cuda.md)
 before adding GPU packages manually. To add optional cuCIM after CUDA passes,
