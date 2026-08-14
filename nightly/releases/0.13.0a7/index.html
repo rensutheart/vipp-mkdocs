@@ -2799,6 +2799,27 @@ result leaves the authored settings unchanged; it is not presented as a GPU
 eligibility failure and does not hide the completed measurements.</p>
 <h2 id="bug-fixes">Bug fixes<a class="headerlink" href="#bug-fixes" title="Permanent link">&para;</a></h2>
 <ul>
+<li>The Windows installer makes CUDA one-click unavailable before environment
+  creation or download when canonical Local App Data contains non-ASCII
+  characters. It obtains that directory through
+  <code>SHGetKnownFolderPath(FOLDERID_LocalAppData)</code> and accepts only the exact
+  <code>VIPP\environments\cpu</code> and <code>VIPP\environments\cuda13</code> track roots beneath
+  it. Custom managed roots are not accepted. If the canonical directory is
+  non-ASCII, CUDA one-click is unavailable and the UI offers CPU; the fixed CPU
+  root remains Unicode-safe. Expert-selected existing environments remain a
+  separate non-mutating route. An installer-owned CUDA copy already under an
+  incompatible root is not updated or repaired in place, and setup does not
+  claim that a second managed CUDA copy can coexist. Spaces remain supported.</li>
+<li>When Python's effective Windows temporary directory contains a non-ASCII
+  character, VIPP forces <code>CUPY_CACHE_IN_MEMORY=1</code>. This avoids the affected
+  NVRTC temporary-source filename operation but disables CuPy's disk kernel
+  cache for that process, so Doctor or the first GPU work can compile again in
+  each new process. An RTX 5090 development observation was about 52 seconds
+  cold versus 0.87 seconds for a same-process refresh; it is reference evidence,
+  not a guarantee. The scientific kernels and results are unchanged.</li>
+<li>A failed CuPy kernel compilation now preserves the real <code>CompileException</code>
+  rather than being masked by a false 512-byte private-pool leak report caused
+  by traceback-held probe arrays.</li>
 <li>A valid finite decimal <strong>Binary Threshold</strong> value no longer appears to lose
   GPU eligibility merely because whole-pipeline timing cannot establish a safe
   performance winner.</li>
@@ -2825,11 +2846,30 @@ and PyPI project pages and its hashes are added to this page.</p>
 <code>SHA256SUMS-Windows-0.13.0a7.txt</code>. Their public download links and SHA-256
 values are pending. The optional cuCIM route will require the matching a7
 no-wheel bundle; do not reuse an a6 bundle or move another user's private wheel.</p>
-<p>Preserve the previous environment and original workflow, batch, output, and
-provenance files. Open a duplicate, recalculate it on CPU, compare the results
-that matter, and only then re-enable Auto or Prefer GPU. Generated Python and
-saved batch runners remain tied to their creator version and should be
-regenerated and revalidated.</p>
+<p>For this release, one-click setup uses only the exact per-track roots beneath
+the canonical Windows Local App Data directory. The managed CUDA path must be
+ASCII-only because CuPy 14.1.1 cannot reliably compile CUDA kernels from a
+Windows environment path containing non-ASCII characters. Spaces are
+supported. If canonical Local App Data is non-ASCII, CUDA one-click is
+unavailable before environment creation or download and the UI offers CPU.
+The fixed CPU root remains Unicode-safe. The installer never relocates, edits,
+or adopts an expert-selected existing environment.</p>
+<p>If an older installer-owned CUDA copy is already under a non-ASCII root, do
+not start a fresh managed installation first. Setup may first complete and
+record recovery from an earlier interrupted transaction; after that separate
+recovery, the newly blocked selection performs no new mutation of the old copy
+and opens <strong>Windows Installed apps</strong>. Uninstall <strong>VIPP (GPU)</strong> only through its
+ownership-bound remover. Setup does not offer a custom managed replacement; if
+canonical Local App Data is non-ASCII, one-click CUDA remains unavailable and
+the UI offers CPU. The CUDA track has one Apps entry and shared shortcut names,
+so this release does not support side-by-side managed CUDA migration.</p>
+<p>Preserve the original workflow, batch, output, and provenance files. Preserve
+the previous environment for ordinary updates and manually managed migrations;
+the installer-owned Unicode CUDA case above is the explicit exception because
+that managed copy must be removed first. Open a duplicate workflow,
+recalculate it on CPU, compare the results that matter, and only then re-enable
+Auto or Prefer GPU. Generated Python and saved batch runners remain tied to
+their creator version and should be regenerated and revalidated.</p>
 <p>Workflow schema remains version 4. Batch configuration and manifest schema
 remain version 3. No migration invents a dtype conversion or changes an RL,
 threshold, or cleanup parameter.</p>
@@ -2902,7 +2942,8 @@ inspection, or a downloaded-installer field test.</p>
 </tr>
 </tbody>
 </table>
-<p>Fresh-account CPU/CUDA installation, spaces and non-ASCII account paths,
+<p>Fresh-account CPU/CUDA installation, spaces on both routes, Unicode CPU paths,
+the CUDA ASCII-only Automatic/existing/owned-installation guidance,
 interrupted/network rollback, RTX 40-series Windows, native Linux CUDA, and a
 timed novice path remain separate field evidence. Anything not performed must
 remain <strong>not run</strong>.</p>
@@ -2929,7 +2970,7 @@ evidence remain unchanged in the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:36:52 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 18:38:44 UTC">August 14, 2026</span>
   </span>
 
     

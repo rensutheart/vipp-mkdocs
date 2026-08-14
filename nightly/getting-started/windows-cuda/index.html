@@ -977,6 +977,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#non-ascii-windows-temporary-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-ASCII Windows temporary directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade an existing manually managed 0.13 alpha CUDA environment
@@ -2713,6 +2722,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#non-ascii-windows-temporary-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-ASCII Windows temporary directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade an existing manually managed 0.13 alpha CUDA environment
@@ -2896,7 +2914,8 @@ version already installed.</p>
 <ul>
 <li>native x86-64 Windows and 64-bit CPython 3.12;</li>
 <li>an NVIDIA CUDA-capable GPU; and</li>
-<li>an NVIDIA display driver new enough for CUDA 13.</li>
+<li>an NVIDIA display driver new enough for CUDA 13; and</li>
+<li>an ASCII-only CUDA environment location. Spaces are supported.</li>
 </ul>
 <p>You do <strong>not</strong> need to install a system-wide CUDA Toolkit, <code>nvcc</code>, Visual
 Studio, CMake, or cuDNN. The <code>gpu-cuda13</code> extra installs VIPP's pinned CUDA
@@ -2933,12 +2952,36 @@ validate consequential analyses against the CPU reference.</p>
 <h2 id="install-vipp-with-cuda-13">Install VIPP with CUDA 13<a class="headerlink" href="#install-vipp-with-cuda-13" title="Permanent link">&para;</a></h2>
 <p>Use a new environment. The commands call that environment's executables
 directly, so PowerShell script-activation policy cannot interfere.</p>
+<p>CuPy 14.1.1 cannot reliably compile CUDA kernels when its Windows environment
+path contains non-ASCII characters. One-click setup obtains canonical Windows
+Local App Data through <code>SHGetKnownFolderPath(FOLDERID_LocalAppData)</code> and accepts
+only <code>VIPP\environments\cuda13</code> beneath it for the managed CUDA track. Custom
+managed roots are not accepted. If the complete canonical path is non-ASCII,
+CUDA one-click is unavailable before environment creation or download and the
+UI offers the fixed CPU route, which remains Unicode-safe. The manual example
+below is an expert-managed environment and must be run from an ASCII-only
+working directory.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp-gpu-cu13&quot;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp.exe&quot;</span>
 </span></code></pre></div>
+<p>The installer does not move, edit, or adopt this expert-managed environment.</p>
+<h3 id="non-ascii-windows-temporary-directories">Non-ASCII Windows temporary directories<a class="headerlink" href="#non-ascii-windows-temporary-directories" title="Permanent link">&para;</a></h3>
+<p>The CUDA environment root and Python's effective temporary directory are
+separate paths. If the effective temporary directory contains a non-ASCII
+character, VIPP sets <code>CUPY_CACHE_IN_MEMORY=1</code> before CuPy compiles kernels.
+This avoids the affected NVRTC temporary-source filename operation, but turns
+off CuPy's disk kernel cache for that process. Compute Doctor or the first GPU
+work can therefore incur compilation again in each new VIPP process.</p>
+<p>On the development RTX 5090, one reference run took about 52 seconds from a
+cold process and about 0.87 seconds for a refresh in that same process. Those
+times describe that machine and workload and are not a performance guarantee.
+Only where compiled kernels are cached changes; the scientific kernels and
+results do not. If compilation fails, Compute Doctor now preserves the real
+CuPy <code>CompileException</code> instead of masking it with a false 512-byte
+private-pool leak caused by traceback-held probe arrays.</p>
 <p>An exact prerelease such as <code>==0.13.0a7</code> does not need pip's <code>--pre</code> option.
 Use <code>--pre</code> only when asking pip to choose the latest unpinned VIPP alpha.</p>
 <p>Do not add the <code>gpu-cuda12</code> extra to this environment. CUDA 12 is a separate
@@ -2947,8 +2990,16 @@ distributions must never share one environment.</p>
 <h3 id="upgrade-an-existing-manually-managed-013-alpha-cuda-environment">Upgrade an existing manually managed 0.13 alpha CUDA environment<a class="headerlink" href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" title="Permanent link">&para;</a></h3>
 <p>Close VIPP and napari first. Keep the existing environment directory name;
 renaming a virtual environment can break its launcher paths. Resolve its Python
-and upgrade only the pinned CUDA 13 package set:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$installRoot</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;VIPP-0.13.0a1&quot;</span>
+and upgrade only the pinned CUDA 13 package set. If that environment path
+contains a non-ASCII character, create a fresh environment under an ASCII-only
+root with the commands in <a href="#install-vipp-with-cuda-13">Install VIPP with CUDA 13</a>
+instead of upgrading it in place. For a manually managed environment, the old
+and fresh environments can remain separate during verification. One-click
+setup may inspect a selected existing environment, but that remains a separate
+non-mutating route; it does not relocate, edit, or adopt the environment.</p>
+<p>For an existing environment whose complete path is already ASCII-only, set
+<code>$installRoot</code> to its real parent directory:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$installRoot</span> <span class="p">=</span> <span class="s2">&quot;C:\Path\To\Existing-VIPP-0.13-Environment&quot;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">$vippPython</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Resolve-Path</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$installRoot</span> <span class="s2">&quot;.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span><span class="p">)).</span><span class="n">Path</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="p">-</span><span class="n">-upgrade-strategy</span> <span class="n">only-if-needed</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
@@ -2956,6 +3007,20 @@ and upgrade only the pinned CUDA 13 package set:</p>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">check</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">&amp;</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$installRoot</span> <span class="s2">&quot;.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span><span class="p">)</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">-</span><span class="n">-refresh</span>
 </span></code></pre></div>
+<p>Do not run that in-place upgrade block against a non-ASCII environment path.
+For a manually managed old environment, keep it unchanged until the fresh
+ASCII-path environment has passed Compute Doctor, then delete it only after
+reviewing its contents.</p>
+<p>An old <strong>installer-owned</strong> CUDA copy is different. It cannot safely coexist
+with a second managed CUDA copy because the track has one Windows Apps entry
+and shared shortcut names. When setup finds an owned copy under a non-ASCII
+root, it may first complete and record recovery from a prior interrupted
+transaction. After that separate recovery, the newly blocked selection
+performs no new mutation of the old copy and offers <strong>Open Installed apps</strong>.
+Uninstall <strong>VIPP (GPU)</strong> only through its ownership-bound remover. Setup does
+not offer a custom managed replacement; if canonical Local App Data is
+non-ASCII, one-click CUDA remains unavailable and the UI offers CPU. Do not
+move the old virtual environment or attempt an in-place/fallback migration.</p>
 <p>An earlier private cuCIM wheel and manifest can remain compatible with a7
 because the cuCIM source, build recipe, payload digest, and approval schema did
 not change. Keep those files. If the refreshed cuCIM probe succeeds, do not
@@ -3205,7 +3270,7 @@ for operation regions, fallback reasons, badges, and provenance.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 18:38:44 UTC">August 14, 2026</span>
   </span>
 
     

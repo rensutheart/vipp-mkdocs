@@ -2820,14 +2820,26 @@ and lets you check again after installing it.</p>
 <li>To choose manually, expand <strong>Advanced details</strong>, then use <strong>Computer use</strong>
    to select <strong>CPU</strong> or <strong>NVIDIA GPU</strong>. An unavailable GPU route stays blocked
    and explains what is missing.</li>
-<li>Under <strong>Reviewed settings</strong>, confirm the installation location, compute
+<li>Under <strong>Reviewed settings</strong>, confirm the fixed installation location, compute
    route, and whether to add a Desktop shortcut.</li>
 <li>Select <strong>Install</strong> and wait for setup and its final acceptance checks.</li>
 <li>Open <strong>VIPP</strong> for a CPU installation. A CUDA installation provides
    <strong>VIPP Automatic</strong>, <strong>VIPP CPU</strong>, and <strong>VIPP Prefer GPU</strong> shortcuts; begin
    with <strong>VIPP Automatic</strong>.</li>
 </ol>
-<p>Changing the compute choice, location, or Desktop-shortcut choice requires
+<div class="admonition important">
+<p class="admonition-title">CUDA location in 0.13.0a7</p>
+<p>One-click setup obtains canonical Windows Local App Data through
+<code>SHGetKnownFolderPath(FOLDERID_LocalAppData)</code> and accepts only
+<code>VIPP\environments\cpu</code> or <code>VIPP\environments\cuda13</code> beneath it. A custom
+managed root is not accepted. CuPy 14.1.1 requires the complete CUDA path
+to contain ASCII characters in this release; spaces are supported. If
+canonical Local App Data contains a non-ASCII character, one-click CUDA is
+unavailable before environment creation or download and setup offers CPU.
+The fixed CPU root remains Unicode-safe. Expert-selected existing
+environments are inspected separately and remain unchanged.</p>
+</div>
+<p>Changing the compute choice or Desktop-shortcut choice requires
 <strong>Check these settings</strong> again. Setup never enables <strong>Install</strong> for settings it
 has not checked.</p>
 <p>GPU setup is a large download. It currently needs at least 15 GiB free on the
@@ -2851,6 +2863,17 @@ connection recovers, review the current settings, and install again.</p>
   overwritten; and</li>
 <li>managed CPU and CUDA installations can coexist.</li>
 </ul>
+<p>An installer-owned CUDA copy already stored under a non-ASCII path cannot be
+updated or repaired in place by 0.13.0a7. Setup may first complete and record
+recovery from an earlier interrupted transaction; after that separate
+recovery, the newly blocked selection performs no new mutation of the old
+environment, shortcuts, or ownership record. Do not move or rename that
+virtual environment or start a second managed CUDA installation: the CUDA
+track has one Windows Apps entry and shared shortcut names. Select <strong>Open
+Installed apps</strong>, uninstall <strong>VIPP (GPU)</strong>, and wait for the ownership-bound
+removal to finish. If canonical Local App Data is non-ASCII, this account still
+cannot use one-click CUDA and setup offers CPU. This is an explicit release
+boundary, not an in-place or fallback migration.</p>
 <p>Remove either installation from <strong>Windows Settings → Apps → Installed apps</strong>.
 Each entry has its own ownership-bound uninstaller, so removing CPU does not
 remove CUDA and removing CUDA does not remove CPU.</p>
@@ -2912,12 +2935,16 @@ and CuPy/CuPyX packages, provider probes, memory, workload, and scientific
 parity. GPU names are recorded for provenance rather than used as an allowlist.
 Unsupported work stays on CPU with an explanation.</p>
 <p>For a manual CUDA environment:</p>
+<p>Run these commands from an ASCII-only working directory:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp-gpu-cu13&quot;</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp.exe&quot;</span>
 </span></code></pre></div>
+<p>This advanced manual environment is separate from one-click management. The
+installer does not move or edit it. Create a fresh manual environment rather
+than moving or renaming one whose complete path is incompatible.</p>
 <p>Read the complete <a href="../windows-cuda/">Windows CUDA and optional cuCIM guide</a>
 before adding GPU packages manually. To add optional cuCIM after CUDA passes,
 download the exact <code>napari-vipp-cucim-installer-0.13.0a7-windows.zip</code> from the
@@ -2993,7 +3020,7 @@ commit as well as the package version, and continue with the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 18:38:44 UTC">August 14, 2026</span>
   </span>
 
     
