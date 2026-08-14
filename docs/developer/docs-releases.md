@@ -31,9 +31,10 @@ Before moving `stable`:
    portable performance promise.
 6. Run `mkdocs build --strict` and visually review key pages, navigation,
    internal links, tables, and both themes.
-7. After the application tag is public, deploy the numbered manual with
-   `make_stable=false` and verify it before the irreversible package upload.
-8. Publish and verify the matching application packages and GitHub prerelease.
+7. After the application tag, GitHub prerelease, and exact release assets are
+   public, deploy the numbered manual with `make_stable=false` and verify it
+   before the irreversible PyPI upload.
+8. Publish and verify the matching wheel and source archive on PyPI.
 9. Run **Deploy versioned documentation** again for `0.13.0a7` with
    `make_stable=true` so the already-reviewed snapshot becomes the default.
 10. Open the public site, select both the numbered release and `stable`, then
