@@ -34,7 +34,7 @@ Before moving `stable`:
 7. After the application tag is public, deploy the numbered manual with
    `make_stable=false` and verify it before the irreversible package upload.
 8. Publish and verify the matching application packages and GitHub prerelease.
-9. Run **Deploy versioned documentation** again for `0.13.0a6` with
+9. Run **Deploy versioned documentation** again for `0.13.0a7` with
    `make_stable=true` so the already-reviewed snapshot becomes the default.
 10. Open the public site, select both the numbered release and `stable`, then
    verify installation, search, code highlighting, redirects, and images.
@@ -42,8 +42,8 @@ Before moving `stable`:
 The workflow executes the equivalent of:
 
 ```text
-mike deploy --push 0.13.0a6
-mike deploy --push --update-aliases 0.13.0a6 stable
+mike deploy --push 0.13.0a7
+mike deploy --push --update-aliases 0.13.0a7 stable
 mike set-default --push stable
 ```
 
@@ -54,7 +54,7 @@ record it in the repository history.
 ## Preview versioned output locally
 
 ```text
-mike deploy 0.13.0a6 stable
+mike deploy 0.13.0a7 stable
 mike deploy nightly
 mike serve
 ```

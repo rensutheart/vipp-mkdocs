@@ -6,10 +6,10 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.13.0a6 |
+| Source | Behavior in 0.13.0a7 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
-| Bundled sample | Loads one of 13 deterministic VIPP samples. |
+| Bundled sample | Loads one of 14 deterministic VIPP samples. |
 | OME-TIFF | Reads image series and supported semantic axes, scale, channel, and selected acquisition fields from OME metadata. |
 | ImageJ TIFF | Reads supported hyperstack axes, XY resolution, z spacing, frame interval, and unit fields where present. |
 | Conventional TIFF | Reads TIFF series and infers basic axes where explicit semantic metadata is absent. |
@@ -95,7 +95,7 @@ shared executor or create an exact compute-provenance sidecar.
 - Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.13.0a6.
+  0.13.0a7.
 
 ## Execution provenance for saved outputs
 

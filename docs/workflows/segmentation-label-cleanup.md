@@ -102,18 +102,29 @@ compare against the intended ImageJ reference before consequential use.
 
 ## CPU and GPU boundaries in this workflow
 
-Otsu, Canny, Gaussian, median, Sigma Filter, background correction, and
-connected components have GPU candidates only inside declared regions. Common
-examples are finite `float32` for Gaussian, Boolean masks for connected
-components, and Boolean/`uint8`/`uint16` for the exact Canny region. Otsu covers
-more real dtypes but retains its exact 65,536-level integer-span and float-bin
-rules. Fallback-safe unsupported calls use an explained CPU decision; invalid
-or explicitly non-fallback-safe calls fail planning. In particular, non-CPU
-planning requires a Boolean connected-components call resolved as 2D or 3D.
-VIPP never inserts a cast.
+Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
+Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
+Canny, median, Sigma Filter, and background correction have GPU candidates only
+inside declared regions. A portable a7 corridor can use an explicitly described
+channel, convert `uint8`/`uint16` to `float32` without rescaling, apply Gaussian
+Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
+without an intermediate host transfer.
+
+Prefer GPU keeps a first-step Extract Channel on CPU so only the selected
+channel is uploaded. Remove Small Objects supports Boolean masks in resolved
+2D/3D Face or Full connectivity; integer-label cleanup remains CPU. Fill Holes
+supports those Boolean connectivity regions only when `Maximum hole size = 0`;
+a positive bounded size remains CPU. Connected Components still requires a
+Boolean call resolved as 2D or 3D. Unsupported calls receive an explained CPU
+decision, while invalid or explicitly non-fallback-safe calls fail planning.
+
+VIPP never inserts a cast during calculation. When dtype is the only reviewed
+blocker, the node may show a **GPU tip** and an **Add conversion** button. That
+button inserts a visible, undoable Convert Dtype node; review its memory,
+threshold, and scientific consequences before accepting it.
 
 Read each node badge after calculation and see the
-[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a1)
+[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a7)
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.
@@ -155,7 +166,7 @@ For a compact single-node starting point, use `Auto Watershed From Mask`.
 
 ## Reference Workflow
 
-Use:
+Use the general cleanup example:
 
 ```text
 examples/otsu-red-channel-labels.json
@@ -163,6 +174,18 @@ examples/otsu-red-channel-labels.json
 
 This demonstrates red/TRITC-like channel segmentation, mask cleanup, labels,
 border clearing, volume filtering, and inspectable outputs.
+
+To inspect the coherent Prefer-GPU corridor and its CPU fallbacks, open
+**Portable GPU Segmentation Bridge** or use:
+
+```text
+examples/synthetic-gpu-segmentation-bridge.json
+```
+
+Its deterministic sample contains four retained 3D objects, one 19-voxel
+speck removed by the authored 22-voxel cutoff, and one 31-voxel enclosed cavity
+restored by Fill Holes. Those facts make each cleanup step independently
+inspectable; they do not validate the thresholds for another dataset.
 
 ## What To Check
 

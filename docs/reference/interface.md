@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.13.0a6. Controls can collapse into
+Labels below match napari-vipp 0.13.0a7. Controls can collapse into
 **Settings** when the window is narrow.
 
 ## Workflow tabs
@@ -25,7 +25,7 @@ the active run finishes or cooperatively cancels.
 | Control | Effect |
 | --- | --- |
 | **New workflow…** | Create a new tab containing one unbound `Image Source` on an otherwise empty graph. |
-| **Open example…** | Open one of 13 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
+| **Open example…** | Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
 | **Load workflow…** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores and opens Batch workspace without running a preview. |
 | **Save workflow…** | Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
 | **Batch workspace…** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
@@ -52,7 +52,7 @@ and the accepted edit is atomic and undoable.
 | --- | --- |
 | **Auto / CPU / Prefer GPU / Custom** | Auto is the learning default and appears first. CPU forces authoritative host implementations. Prefer GPU uses every reviewed eligible public GPU candidate without requiring a CPU-speed win. Custom exposes authored per-node CPU/GPU choices and benchmarking. |
 | Actual-run compute summary | After an accepted run, summarizes the CPU/GPU mix or fallback state; hover for why the run made those decisions. |
-| **Find fastest pipeline…** | In Custom mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present it for review before applying. |
+| **Find fastest pipeline…** | In Custom mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present grouped per-node/per-implementation evidence for review. A scientifically successful but speed-inconclusive result remains inspectable and changes nothing. |
 | **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
 
@@ -110,6 +110,12 @@ current-operation progress. A monolithic library call can remain at one
 percentage until it returns; a reached time limit means comparisons remain, not
 that the current graph was proved optimal. Completed exact benchmark records
 are reused on retry.
+
+When dtype is the only remaining blocker for a reviewed GPU region, an affected
+node may show a subtle **GPU tip**. Its inspector explains the exact conversion
+and memory trade-off. **Add conversion** inserts a visible Convert Dtype node on
+that input as one undoable graph edit; calculation never performs the cast
+silently. Prefer GPU continues to show the applicable tip after calculation.
 
 For the practical sequence, first-release GPU-region summary, dtype caveats,
 and platform/install boundary, see
