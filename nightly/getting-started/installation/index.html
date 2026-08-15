@@ -2759,19 +2759,17 @@
 VIPP environment, so you do not need to activate Python or choose individual
 packages.</p>
 <p><strong><a href="https://github.com/rensutheart/napari-vipp/releases">Check the official VIPP releases</a></strong></p>
-<div class="admonition danger">
-<p class="admonition-title">0.13.0a7 downloads are pending</p>
-<p>Do not install a file merely because it uses the anticipated a7 filename.
-The <code>v0.13.0a7</code> release page, installer link, checksum, and artifacts are
-not public yet. Final local artifact hashes are recorded, but they do not
-prove that a public download exists. Wait until the
-<a href="../../releases/0.13.0a7/#release-verification">a7 release-verification table</a>
-records the exact public files. Until then, 0.13.0a6 remains the last
-verified public installer.</p>
+<div class="admonition warning">
+<p class="admonition-title">Use only the official 0.13.0a7 files</p>
+<p>The public <code>v0.13.0a7</code> prerelease, installer, checksum, wheel, source
+archive, and optional cuCIM bundle are available from the official release
+page. Their downloaded hashes were checked against the
+<a href="../../releases/0.13.0a7/#release-verification">a7 release-verification table</a>.
+Do not use a similarly named file from another site.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Unsigned alpha — verify before running</p>
-<p>After publication, download
+<p>Download
 <code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe</code> only from the official
 <code>v0.13.0a7</code> entry on the
 <a href="https://github.com/rensutheart/napari-vipp/releases">VIPP GitHub releases page</a>.
@@ -2781,7 +2779,7 @@ not use a similarly named file from another site.</p>
 </div>
 <h3 id="verify-the-download-and-pass-the-windows-warning">Verify the download and pass the Windows warning<a class="headerlink" href="#verify-the-download-and-pass-the-windows-warning" title="Permanent link">&para;</a></h3>
 <ol>
-<li>After publication, download the installer and
+<li>Download the installer and
    <code>SHA256SUMS-Windows-0.13.0a7.txt</code> from the same
    official GitHub release.</li>
 <li>
@@ -2880,9 +2878,10 @@ Each entry has its own ownership-bound uninstaller, so removing CPU does not
 remove CUDA and removing CUDA does not remove CPU.</p>
 <h2 id="linux-macos-and-advanced-manual-installation">Linux, macOS, and advanced manual installation<a class="headerlink" href="#linux-macos-and-advanced-manual-installation" title="Permanent link">&para;</a></h2>
 <p>VIPP 0.13.0a7 supports CPython 3.12 and 3.13 for CPU use. The commands below
-apply only after PyPI publicly lists that exact version. Create a dedicated
-environment, then install the exact alpha. An exact prerelease pin does not
-need pip's <code>--pre</code> option.</p>
+install the exact version now listed on
+<a href="https://pypi.org/project/napari-vipp/0.13.0a7/">PyPI</a>. Create a dedicated
+environment, then install the exact alpha. An exact prerelease pin does not need
+pip's <code>--pre</code> option.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows manual</label><label for="__tabbed_1_2">macOS</label><label for="__tabbed_1_3">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2910,8 +2909,8 @@ need pip's <code>--pre</code> option.</p>
 </div>
 </div>
 </div>
-<p>macOS is CPU-only in this alpha. Native Linux GPU qualification is not yet
-public; Linux remains on the CPU path even if CUDA packages import.</p>
+<p>macOS is CPU-only in this alpha. Native Linux GPU qualification is <strong>not run</strong>;
+Linux remains on the CPU path even if CUDA packages import.</p>
 <p>Installing into an existing napari environment is an advanced route. Use that
 environment's Python explicitly and keep the VIPP version pinned. Do not use a
 global Python, an environment that exposes system site-packages, an editable
@@ -2949,8 +2948,8 @@ than moving or renaming one whose complete path is incompatible.</p>
 <p>Read the complete <a href="../windows-cuda/">Windows CUDA and optional cuCIM guide</a>
 before adding GPU packages manually. To add optional cuCIM after CUDA passes,
 download the exact <code>napari-vipp-cucim-installer-0.13.0a7-windows.zip</code> from the
-<a href="https://github.com/rensutheart/napari-vipp/releases">official releases page</a>
-after its a7 URL and hash are published. Verify it against
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a7">official a7 release</a>.
+Verify it against
 <code>SHA256SUMS-Windows-0.13.0a7.txt</code>, choose <strong>Extract All</strong>,
 and run <strong>Install VIPP cuCIM.cmd</strong> from the extracted folder. It builds the
 pinned source locally and contains no redistributable cuCIM wheel.</p>
@@ -3021,7 +3020,7 @@ commit as well as the package version, and continue with the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 22:20:42 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:22:26 UTC">August 15, 2026</span>
   </span>
 
     
