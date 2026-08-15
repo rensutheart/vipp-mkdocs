@@ -4,18 +4,18 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Prepared alpha release
+## Current verified public alpha
 
 - [0.13.0a7](0.13.0a7.md) — visible one-click dtype repairs, readable
   per-implementation optimizer results, broader RL backend agreement, and a
   connected GPU segmentation/mask-cleanup example.
 
-The a7 feature branch is merged, but its immutable tag, PyPI package, Windows
-installer, checksums, artifact hashes, exact public URLs, and numbered manual
-are not yet published. The
-[a7 release-verification table](0.13.0a7.md#release-verification) marks each
-item as pending rather than borrowing a6 evidence. Do not install a development
-artifact under an anticipated release filename.
+The immutable a7 alpha is public on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a7) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a7/). Its exact source, CI,
+GPU admission, intentionally unsigned installer, seven release assets, hashes,
+and numbered-manual publication are recorded in the
+[a7 release-verification table](0.13.0a7.md#release-verification).
 
 0.13.0a7 writes workflow schema 4 and batch config/manifest schema 3. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;
@@ -25,7 +25,7 @@ version contains source-axis declarations until reviewed and saved as version
 upgrading, and regenerate Python exports because generated programs require the
 exact VIPP runtime version that created them.
 
-## Current verified public alpha
+## Earlier releases
 
 - [0.13.0a6](0.13.0a6.md) — graph-fragment reuse and tunnel insertion,
   Compute Doctor 2.0, complete public-GPU admission checks, multi-series and
@@ -37,8 +37,6 @@ The immutable a6 alpha is public on
 unsigned-installer status, artifact hashes, and numbered-manual publication
 remain recorded in
 [0.13.0a6 release verification](0.13.0a6.md#release-verification).
-
-## Earlier releases
 
 - [0.13.0a5](0.13.0a5.md) — checksum-first unsigned Windows setup, branded
   launchers, transactional install/update/repair, independently removable CPU

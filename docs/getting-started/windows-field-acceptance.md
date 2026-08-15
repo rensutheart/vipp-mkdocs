@@ -4,15 +4,13 @@ Use this checklist when someone asks you to test the tagged VIPP `0.13.0a7`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
-!!! warning "Wait for the exact tagged installer"
-    The locally finalized installer SHA-256 is
+!!! warning "Use the exact public tagged installer"
+    The official public installer SHA-256 is
     `b62c715152447c4b1f8db878996b776ef2bfb0cdc6656df72d3ec94e7818c12f`,
-    but the a7 tag, public installer URL, and public-download verification are
-    pending. A local hash does not prove that a public asset exists. Do not use
-    this checklist with an untagged build or a file that merely has the
-    anticipated release name. Start only after
-    [release verification](../releases/0.13.0a7.md#release-verification)
-    identifies the exact public installer and checksum file.
+    and a fresh download from the public release matched it. Use this checklist
+    only with the exact `v0.13.0a7` GitHub asset and checksum identified by
+    [release verification](../releases/0.13.0a7.md#release-verification). Do not
+    use an untagged build or a similarly named file from another site.
 
     A display-independent production-backend install, repair, scientific
     smoke, and uninstall does not count as a pass for the downloaded
@@ -48,8 +46,8 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-After publication, download the installer and checksum file only from the
-official `v0.13.0a7` entry on the
+Download the installer and checksum file only from the official `v0.13.0a7`
+entry on the
 [VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
 `VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:

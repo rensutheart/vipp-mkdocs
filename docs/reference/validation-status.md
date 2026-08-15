@@ -1,8 +1,8 @@
 # Validation status
 
-This page summarizes the source-current evidence prepared for 0.13.0a7 and
-keeps earlier release evidence separate. It is a claim boundary, not a
-certificate that every node is validated for every assay.
+This page summarizes evidence for the public 0.13.0a7 release and keeps earlier
+release evidence separate. It is a claim boundary, not a certificate that every
+node is validated for every assay.
 
 ## Evidence available now
 
@@ -37,7 +37,7 @@ certificate that every node is validated for every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a7 prepublication qualification boundary
+## 0.13.0a7 published qualification boundary
 
 Final a7 application source merged to `main` through
 [pull request #23](https://github.com/rensutheart/napari-vipp/pull/23) at
@@ -97,12 +97,19 @@ installation. The field checklist therefore leaves public-download
 SmartScreen, novice comprehension, unusual account paths, cancellation,
 network rollback, and update from an older release as **not run**.
 
-The local annotated tag has not been pushed. GitHub/PyPI publication, public
-asset verification, the numbered manual, its live URL, and the updated stable
-alias all remain **pending**. Fresh-account Unicode Known Folder,
-public-download SmartScreen, novice-pilot, RTX 40-series Windows, and native
-Linux CUDA field evidence remain **not run**. No a6 artifact, hash, URL, or
-qualification record is reused as a7 evidence.
+The public `v0.13.0a7` tag peels to the exact qualified commit. The official
+GitHub prerelease contains exactly seven assets; a fresh download of every asset
+matched the recorded SHA-256. The protected
+[PyPI workflow](https://github.com/rensutheart/napari-vipp/actions/runs/31871324192)
+published only the already-qualified wheel and source archive, and both public
+PyPI digests matched. The
+[numbered-manual workflow](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871275481)
+succeeded and all required 0.13.0a7 URLs returned HTTP 200. Stable-alias
+promotion follows this final verified documentation update.
+
+Fresh-account Unicode Known Folder, public-download SmartScreen, novice-pilot,
+RTX 40-series Windows, and native Linux CUDA field evidence remain **not run**.
+No a6 artifact, hash, URL, or qualification record is reused as a7 evidence.
 
 ## Historical 0.13.0a6 qualification and field boundary
 
@@ -422,9 +429,9 @@ same as an external comparison or assay validation. The distinction matters:
   wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
   recipe. Admission verifies that build's wheel-file hash, the policy-pinned
   canonical installed payload, source/recipe provenance, and the existing
-  scientific environment/workload gates. This private per-user rebuild remains
-  the planned 0.13.0a7 route, using only its matching bundle after publication;
-  VIPP will not host or redistribute the wheel. Clara
+  scientific environment/workload gates. This private per-user rebuild is the
+  0.13.0a7 route, using only its matching published bundle; VIPP will not host
+  or redistribute the wheel. Clara
   whole-slide I/O remains outside that build. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).
 - Batch processing is local-file and sorted-position oriented. It does not

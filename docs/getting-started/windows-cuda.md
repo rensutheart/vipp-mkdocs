@@ -6,17 +6,15 @@ any NVIDIA packages.
 
 !!! note "Use the manual for your installed release"
 
-    The commands on this page are prepared for the 0.13.0a7 package. Its local
-    artifact hashes are recorded, but its tag has not been pushed and the
-    public package and cuCIM bundle URL are pending. Do not run the a7 commands
-    until the
-    [release-verification table](../releases/0.13.0a7.md#release-verification)
-    confirms those exact artifacts. Select the numbered manual matching the
-    version already installed.
+    The commands on this page match the public 0.13.0a7 package. Its tag, PyPI
+    files, standard installer, optional cuCIM bundle, and downloaded hashes are
+    recorded in the
+    [release-verification table](../releases/0.13.0a7.md#release-verification).
+    Select the numbered manual matching the version already installed.
 
 ## Choose the installation you need
 
-| Goal | 0.13.0a7 route after publication |
+| Goal | 0.13.0a7 route |
 | --- | --- |
 | Run VIPP on CPU | Use the checksum-verified unsigned installer from the main installation guide and keep its CPU recommendation. |
 | Use the reviewed CuPy/CuPyX operations | Use that installer and keep Automatic, or explicitly select NVIDIA GPU under Advanced details. The manual `gpu-cuda13` route below remains available. |
@@ -66,7 +64,7 @@ is not the CUDA runtime installed in the VIPP environment.
     scikit-image 0.26.0, CuPy/CuPyX 14.1.1, and CUDA runtime API 13.2. A failed
     provider probe, changed runtime or scientific package, unsupported
     operation region, or insufficient memory produces an explained CPU
-    decision. Native Linux GPU qualification remains pending.
+    decision. Native Linux GPU qualification is **not run**.
 
     Minor floating-point differences can occur across GPU models, drivers,
     compiler paths, and reduction order within a provider's declared parity
@@ -253,13 +251,12 @@ Python/GPU environment; renaming or retagging the existing wheel is not valid.
 
 Do this only after the standard CUDA installation and Compute Doctor pass.
 
-1. After a7 publication, download
+1. Download
    `napari-vipp-cucim-installer-0.13.0a7-windows.zip` and
    `SHA256SUMS-Windows-0.13.0a7.txt` from the
    [official VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
-   The intended local bundle hash is recorded in release verification, but its
-   public URL and public-asset verification are pending; do not substitute an
-   anticipated URL or an a6 bundle.
+   The public bundle hash was verified after download and is recorded in
+   release verification; do not substitute an a6 bundle.
 2. Open PowerShell in the download folder and run:
 
     ```powershell
@@ -415,7 +412,7 @@ own wheel and manifest using the fixed procedure above. VIPP will not host or
 redistribute those wheels on `rensu.co.za`, GitHub Releases, PyPI, or a shared
 package index. Do not reuse another user's wheel: rebuild it locally so its
 manifest and per-build wheel hash describe the artifact you install. This
-private local-build boundary remains the planned 0.13.0a7 release contract.
+private local-build boundary is the 0.13.0a7 release contract.
 
 Continue with [choose and verify CPU or GPU compute](../how-to/choose-compute.md)
 for operation regions, fallback reasons, badges, and provenance.

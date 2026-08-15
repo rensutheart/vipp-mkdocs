@@ -8,22 +8,15 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The nightly manual is currently prepared for **0.13.0a7**. Final source,
-exact-main CI, full RTX 5090 admission, and locally finalized artifact hashes
-are recorded, but the a7 tag has not been pushed and the public package,
-installer downloads, numbered snapshot, live release URLs, and stable alias
-are pending. Its
-[release verification](../releases/0.13.0a7.md#release-verification) lists
-those unresolved items explicitly. Do not interpret the nightly version label
-or a local artifact hash as evidence that a public release asset exists.
-
-The numbered **0.13.0a6** snapshot remains the latest verified public alpha,
+The numbered **0.13.0a7** snapshot is the current verified public alpha,
 published on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a6) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a6/). Its
-[historical release verification](../releases/0.13.0a6.md#release-verification)
-retains the exact application commit, tag, CI, unsigned-installer status,
-artifact hashes, and numbered-manual publication.
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a7) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a7/). Its
+[release verification](../releases/0.13.0a7.md#release-verification) records the
+exact application commit, tag, CI, GPU admission, intentionally unsigned
+installer, artifact hashes, public artifact-download hash checks, and
+numbered-manual publication. The nightly manual may describe later unreleased
+work.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -53,15 +46,15 @@ dtype conversions are now ordinary visible graph edits.
 
 1. Preserve the earlier environment, workflows, outputs, execution reports,
    batch artifacts, and any private cuCIM wheel and build manifest.
-2. After publication, install `0.13.0a7` separately with the
+2. Install `0.13.0a7` separately with the
    checksum-verified unsigned Windows installer, or upgrade a dedicated manual
    environment with an exact `napari-vipp==0.13.0a7` or
-   `napari-vipp[gpu-cuda13]==0.13.0a7` pin. The intended local artifact hashes
-   are recorded, but their public assets and public-download verification are
-   pending; do not substitute an untagged build. Do not mix CUDA-major extras.
+   `napari-vipp[gpu-cuda13]==0.13.0a7` pin. Use the official public assets and
+   recorded hashes; do not substitute an untagged build. Do not mix CUDA-major
+   extras.
 3. Run `pip check` and, for CUDA, `vipp-compute-doctor --track cuda13 --refresh`.
-   Use only the matching a7-tagged cuCIM bundle/helper after it is published;
-   never reuse an a6 bundle or copy an old approval record back manually.
+   Use only the matching public a7-tagged cuCIM bundle/helper; never reuse an a6
+   bundle or copy an old approval record back manually.
 4. Open a duplicate workflow, run it on CPU, and compare decisive intermediate
    and final results before enabling Auto or Prefer GPU.
 5. Record the exact GPU model, compute capability, driver, CUDA and scientific
@@ -191,7 +184,7 @@ python -m pip install --pre napari-vipp
 
 To reproduce a specific alpha exactly, specify the version in a fresh
 environment. An exact prerelease does not need `--pre`. The a7 examples below
-apply only after PyPI publicly lists that version:
+use the public PyPI release:
 
 ```text
 python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a7"

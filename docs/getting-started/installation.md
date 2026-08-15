@@ -8,17 +8,15 @@ packages.
 
 **[Check the official VIPP releases](https://github.com/rensutheart/napari-vipp/releases)**
 
-!!! danger "0.13.0a7 downloads are pending"
-    Do not install a file merely because it uses the anticipated a7 filename.
-    The `v0.13.0a7` release page, installer link, checksum, and artifacts are
-    not public yet. Final local artifact hashes are recorded, but they do not
-    prove that a public download exists. Wait until the
-    [a7 release-verification table](../releases/0.13.0a7.md#release-verification)
-    records the exact public files. Until then, 0.13.0a6 remains the last
-    verified public installer.
+!!! warning "Use only the official 0.13.0a7 files"
+    The public `v0.13.0a7` prerelease, installer, checksum, wheel, source
+    archive, and optional cuCIM bundle are available from the official release
+    page. Their downloaded hashes were checked against the
+    [a7 release-verification table](../releases/0.13.0a7.md#release-verification).
+    Do not use a similarly named file from another site.
 
 !!! warning "Unsigned alpha — verify before running"
-    After publication, download
+    Download
     `VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe` only from the official
     `v0.13.0a7` entry on the
     [VIPP GitHub releases page](https://github.com/rensutheart/napari-vipp/releases).
@@ -28,7 +26,7 @@ packages.
 
 ### Verify the download and pass the Windows warning
 
-1. After publication, download the installer and
+1. Download the installer and
    `SHA256SUMS-Windows-0.13.0a7.txt` from the same
    official GitHub release.
 2. Open PowerShell in the download folder and run:
@@ -134,9 +132,10 @@ remove CUDA and removing CUDA does not remove CPU.
 ## Linux, macOS, and advanced manual installation
 
 VIPP 0.13.0a7 supports CPython 3.12 and 3.13 for CPU use. The commands below
-apply only after PyPI publicly lists that exact version. Create a dedicated
-environment, then install the exact alpha. An exact prerelease pin does not
-need pip's `--pre` option.
+install the exact version now listed on
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a7/). Create a dedicated
+environment, then install the exact alpha. An exact prerelease pin does not need
+pip's `--pre` option.
 
 === "Windows manual"
 
@@ -167,8 +166,8 @@ need pip's `--pre` option.
     vipp
     ```
 
-macOS is CPU-only in this alpha. Native Linux GPU qualification is not yet
-public; Linux remains on the CPU path even if CUDA packages import.
+macOS is CPU-only in this alpha. Native Linux GPU qualification is **not run**;
+Linux remains on the CPU path even if CUDA packages import.
 
 Installing into an existing napari environment is an advanced route. Use that
 environment's Python explicitly and keep the VIPP version pinned. Do not use a
@@ -224,8 +223,8 @@ than moving or renaming one whose complete path is incompatible.
 Read the complete [Windows CUDA and optional cuCIM guide](windows-cuda.md)
 before adding GPU packages manually. To add optional cuCIM after CUDA passes,
 download the exact `napari-vipp-cucim-installer-0.13.0a7-windows.zip` from the
-[official releases page](https://github.com/rensutheart/napari-vipp/releases)
-after its a7 URL and hash are published. Verify it against
+[official a7 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a7).
+Verify it against
 `SHA256SUMS-Windows-0.13.0a7.txt`, choose **Extract All**,
 and run **Install VIPP cuCIM.cmd** from the extracted folder. It builds the
 pinned source locally and contains no redistributable cuCIM wheel.
