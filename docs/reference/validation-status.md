@@ -85,13 +85,17 @@ and the non-ASCII effective-TEMP compiler regression. Both routes removed their
 owned environments, registry entries, shortcuts, cached a7 setup, and
 transaction residue.
 
-That result is production-backend lifecycle evidence, not acceptance of the
-frozen EXE's visible setup window or a fresh/public-download installation. The
-field checklist therefore leaves visual choices, shortcut launch presentation,
-the GPU-tip Add conversion/Undo and post-calculation persistence checks,
-Find-fastest grouped/readability inspection, SmartScreen, novice comprehension,
-unusual account paths, cancellation, network rollback, and visible update
-behavior as **not run**.
+That result is production-backend lifecycle evidence; by itself, it did not
+operate the frozen EXE's setup window. Separately, on 2026-08-15, the operator
+attested that the exact locally finalized EXE's visible setup and installed-UI
+checks passed. The attestation covered visible shortcut launch, the GPU-tip Add
+conversion/Undo and post-calculation persistence checks, and grouped
+Find-fastest result readability.
+
+The local operator pass was not a fresh-account or public-download
+installation. The field checklist therefore leaves public-download
+SmartScreen, novice comprehension, unusual account paths, cancellation,
+network rollback, and update from an older release as **not run**.
 
 The local annotated tag has not been pushed. GitHub/PyPI publication, public
 asset verification, the numbered manual, its live URL, and the updated stable
