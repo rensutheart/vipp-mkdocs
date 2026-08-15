@@ -1,64 +1,94 @@
 # Documentation releases
 
-The manual uses `mike` to publish several versions to the `gh-pages` branch.
-GitHub Pages must be configured once to deploy from that branch at `/`.
+The manual uses `mike` to publish `nightly`, numbered versions, and the
+`stable` alias from the `gh-pages` branch.
+
+## Principle
+
+Documentation follows the same risk-based release model as the application:
+
+- inspect pages whose behavior or instructions changed;
+- rely on the strict documentation CI build for the whole site;
+- publish one timeless release page rather than a sequence of “pending”,
+  “now public”, and “stable promoted” status edits; and
+- keep workflow run IDs, transient test counts, and duplicated asset hashes in
+  machine-readable release evidence rather than prose.
+
+A version-only change does not require recapturing unchanged screenshots,
+rechecking every guide, or replaying installer/GPU qualification.
 
 ## Automated channels
 
 - A pull request or push to `main` runs `mkdocs build --strict`; pull requests
-  retain the rendered `site/` as a seven-day preview artifact.
-- A push to `main` deploys the **nightly** manual.
-- A manual **Deploy versioned documentation** run publishes a numbered release
-  and can move the **stable** alias/default.
+  retain the rendered site as a short-lived preview artifact.
+- A push to `main` deploys the `nightly` manual.
+- A manual **Deploy versioned documentation** run publishes a numbered version
+  and can move the `stable` alias/default in the same run.
 
-The deployment job uses the exact versions in `requirements.txt` and the full
-Git history needed by the revision-date plugin.
+## Iterative alpha
 
-## Publish a release
+Use one documentation PR and one post-package deployment:
 
-Before moving `stable`:
+1. Update the release page, current-version installation examples, and only
+   the guides affected by the release.
+2. Use timeless wording. Link the canonical GitHub release, PyPI page, assets
+   actually shipped, and validation boundary; do not say that a tag or
+   publication is “pending”. The page is not deployed as a numbered version
+   until those links are live.
+3. Let the pull-request build validate all navigation and internal links.
+   Manually inspect the changed pages and any changed screenshots.
+4. Merge the documentation PR before or with the application release.
+5. After the GitHub release and PyPI version are public, run **Deploy versioned
+   documentation** once with the target version and `make_stable=true` when
+   that alpha should be the default manual.
+6. Verify the numbered home page, `stable`, and the changed pages. Stop; do not
+   create a second evidence-only PR to record the deployment that just ran.
 
-1. Check out the manual content that matches the application release.
-2. Update all explicit version facts, install commands, counts, examples,
-   validation status, compatibility notes, the CPU/GPU operation matrix, and
-   the distinction between installable and publicly admitted environments.
-3. Replace screenshots with captures from the same release.
-4. Re-run the documented installation check on each platform whose status will
-   be labelled verified; state other platforms as pending.
-5. Confirm the release-candidate application commit, full CI/test counts,
-   package/Twine/clean-wheel results, real-device evidence boundary, and final
-   wheel/sdist hashes. Do not copy timing from a development report as a
-   portable performance promise.
-6. Run `mkdocs build --strict` and visually review key pages, navigation,
-   internal links, tables, and both themes.
-7. After the application tag, GitHub prerelease, and exact release assets are
-   public, deploy the numbered manual with `make_stable=false` and verify it
-   before the irreversible PyPI upload.
-8. Publish and verify the matching wheel and source archive on PyPI.
-9. Run **Deploy versioned documentation** again for `0.13.0a7` with
-   `make_stable=true` so the already-reviewed snapshot becomes the default.
-10. Open the public site, select both the numbered release and `stable`, then
-   verify installation, search, code highlighting, redirects, and images.
+If an alpha should not become the default manual, use `make_stable=false`.
+
+## Release candidate and stable production
+
+An RC receives broader review of installation, upgrade, compatibility, and the
+combined user journey. It may first deploy with `make_stable=false` when users
+need a preview without changing the default manual.
+
+For a production release, promote an unchanged, reviewed RC snapshot where
+possible. Deploy the final numbered version and move `stable` only after the
+matching package is public. If production behavior or documentation changes
+after the RC, review those changed pages and publish another candidate rather
+than silently editing the final snapshot.
+
+Never overwrite an old numbered manual with content for a different software
+release. Correct a serious documentation error with a transparent follow-up
+commit and redeployment.
+
+## Deployment
+
+```text
+gh workflow run docs-deploy.yml \
+  --repo rensutheart/vipp-mkdocs \
+  --ref main \
+  -f version="<version>" \
+  -f make_stable=true
+```
 
 The workflow executes the equivalent of:
 
 ```text
-mike deploy --push 0.13.0a7
-mike deploy --push --update-aliases 0.13.0a7 stable
+mike deploy --push --update-aliases <version> stable
 mike set-default --push stable
 ```
 
-Never overwrite an old numbered manual with content for a different software
-release. Correct a serious documentation error with a transparent follow-up and
-record it in the repository history.
+For a numbered preview without alias promotion, use `make_stable=false`, which
+executes `mike deploy --push <version>`.
 
-## Preview versioned output locally
+## Local preview
 
 ```text
-mike deploy 0.13.0a7 stable
+mike deploy <version> stable
 mike deploy nightly
 mike serve
 ```
 
-Do not push the generated `site/` directory; `mike` manages versioned content in
-the deployment branch.
+Do not push the generated `site/` directory; `mike` manages versioned content
+in the deployment branch.
