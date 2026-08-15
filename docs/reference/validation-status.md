@@ -105,7 +105,9 @@ published only the already-qualified wheel and source archive, and both public
 PyPI digests matched. The
 [numbered-manual workflow](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871275481)
 succeeded and all required 0.13.0a7 URLs returned HTTP 200. Stable-alias
-promotion follows this final verified documentation update.
+[workflow 31871941473](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871941473)
+succeeded; public `versions.json` maps `stable` to `0.13.0a7`, and the required
+stable URLs returned HTTP 200 with no stale prepublication wording.
 
 Fresh-account Unicode Known Folder, public-download SmartScreen, novice-pilot,
 RTX 40-series Windows, and native Linux CUDA field evidence remain **not run**.
