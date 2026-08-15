@@ -2492,6 +2492,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#automated-channels" class="md-nav__link">
     <span class="md-ellipsis">
       Automated channels
@@ -2501,18 +2510,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publish-a-release" class="md-nav__link">
+  <a href="#iterative-alpha" class="md-nav__link">
     <span class="md-ellipsis">
-      Publish a release
+      Iterative alpha
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#preview-versioned-output-locally" class="md-nav__link">
+  <a href="#release-candidate-and-stable-production" class="md-nav__link">
     <span class="md-ellipsis">
-      Preview versioned output locally
+      Release candidate and stable production
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local preview
     </span>
   </a>
   
@@ -2563,6 +2590,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#automated-channels" class="md-nav__link">
     <span class="md-ellipsis">
       Automated channels
@@ -2572,18 +2608,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publish-a-release" class="md-nav__link">
+  <a href="#iterative-alpha" class="md-nav__link">
     <span class="md-ellipsis">
-      Publish a release
+      Iterative alpha
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#preview-versioned-output-locally" class="md-nav__link">
+  <a href="#release-candidate-and-stable-production" class="md-nav__link">
     <span class="md-ellipsis">
-      Preview versioned output locally
+      Release candidate and stable production
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local preview
     </span>
   </a>
   
@@ -2614,58 +2668,79 @@
 
 
 <h1 id="documentation-releases">Documentation releases<a class="headerlink" href="#documentation-releases" title="Permanent link">&para;</a></h1>
-<p>The manual uses <code>mike</code> to publish several versions to the <code>gh-pages</code> branch.
-GitHub Pages must be configured once to deploy from that branch at <code>/</code>.</p>
+<p>The manual uses <code>mike</code> to publish <code>nightly</code>, numbered versions, and the
+<code>stable</code> alias from the <code>gh-pages</code> branch.</p>
+<h2 id="principle">Principle<a class="headerlink" href="#principle" title="Permanent link">&para;</a></h2>
+<p>Documentation follows the same risk-based release model as the application:</p>
+<ul>
+<li>inspect pages whose behavior or instructions changed;</li>
+<li>rely on the strict documentation CI build for the whole site;</li>
+<li>publish one timeless release page rather than a sequence of “pending”,
+  “now public”, and “stable promoted” status edits; and</li>
+<li>keep workflow run IDs, transient test counts, and duplicated asset hashes in
+  machine-readable release evidence rather than prose.</li>
+</ul>
+<p>A version-only change does not require recapturing unchanged screenshots,
+rechecking every guide, or replaying installer/GPU qualification.</p>
 <h2 id="automated-channels">Automated channels<a class="headerlink" href="#automated-channels" title="Permanent link">&para;</a></h2>
 <ul>
 <li>A pull request or push to <code>main</code> runs <code>mkdocs build --strict</code>; pull requests
-  retain the rendered <code>site/</code> as a seven-day preview artifact.</li>
-<li>A push to <code>main</code> deploys the <strong>nightly</strong> manual.</li>
-<li>A manual <strong>Deploy versioned documentation</strong> run publishes a numbered release
-  and can move the <strong>stable</strong> alias/default.</li>
+  retain the rendered site as a short-lived preview artifact.</li>
+<li>A push to <code>main</code> deploys the <code>nightly</code> manual.</li>
+<li>A manual <strong>Deploy versioned documentation</strong> run publishes a numbered version
+  and can move the <code>stable</code> alias/default in the same run.</li>
 </ul>
-<p>The deployment job uses the exact versions in <code>requirements.txt</code> and the full
-Git history needed by the revision-date plugin.</p>
-<h2 id="publish-a-release">Publish a release<a class="headerlink" href="#publish-a-release" title="Permanent link">&para;</a></h2>
-<p>Before moving <code>stable</code>:</p>
+<h2 id="iterative-alpha">Iterative alpha<a class="headerlink" href="#iterative-alpha" title="Permanent link">&para;</a></h2>
+<p>Use one documentation PR and one post-package deployment:</p>
 <ol>
-<li>Check out the manual content that matches the application release.</li>
-<li>Update all explicit version facts, install commands, counts, examples,
-   validation status, compatibility notes, the CPU/GPU operation matrix, and
-   the distinction between installable and publicly admitted environments.</li>
-<li>Replace screenshots with captures from the same release.</li>
-<li>Re-run the documented installation check on each platform whose status will
-   be labelled verified; state other platforms as pending.</li>
-<li>Confirm the release-candidate application commit, full CI/test counts,
-   package/Twine/clean-wheel results, real-device evidence boundary, and final
-   wheel/sdist hashes. Do not copy timing from a development report as a
-   portable performance promise.</li>
-<li>Run <code>mkdocs build --strict</code> and visually review key pages, navigation,
-   internal links, tables, and both themes.</li>
-<li>After the application tag, GitHub prerelease, and exact release assets are
-   public, deploy the numbered manual with <code>make_stable=false</code> and verify it
-   before the irreversible PyPI upload.</li>
-<li>Publish and verify the matching wheel and source archive on PyPI.</li>
-<li>Run <strong>Deploy versioned documentation</strong> again for <code>0.13.0a7</code> with
-   <code>make_stable=true</code> so the already-reviewed snapshot becomes the default.</li>
-<li>Open the public site, select both the numbered release and <code>stable</code>, then
-   verify installation, search, code highlighting, redirects, and images.</li>
+<li>Update the release page, current-version installation examples, and only
+   the guides affected by the release.</li>
+<li>Use timeless wording. Link the canonical GitHub release, PyPI page, assets
+   actually shipped, and validation boundary; do not say that a tag or
+   publication is “pending”. The page is not deployed as a numbered version
+   until those links are live.</li>
+<li>Let the pull-request build validate all navigation and internal links.
+   Manually inspect the changed pages and any changed screenshots.</li>
+<li>Merge the documentation PR before or with the application release.</li>
+<li>After the GitHub release and PyPI version are public, run <strong>Deploy versioned
+   documentation</strong> once with the target version and <code>make_stable=true</code> when
+   that alpha should be the default manual.</li>
+<li>Verify the numbered home page, <code>stable</code>, and the changed pages. Stop; do not
+   create a second evidence-only PR to record the deployment that just ran.</li>
 </ol>
-<p>The workflow executes the equivalent of:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mike deploy --push 0.13.0a7
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mike deploy --push --update-aliases 0.13.0a7 stable
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>mike set-default --push stable
-</span></code></pre></div>
+<p>If an alpha should not become the default manual, use <code>make_stable=false</code>.</p>
+<h2 id="release-candidate-and-stable-production">Release candidate and stable production<a class="headerlink" href="#release-candidate-and-stable-production" title="Permanent link">&para;</a></h2>
+<p>An RC receives broader review of installation, upgrade, compatibility, and the
+combined user journey. It may first deploy with <code>make_stable=false</code> when users
+need a preview without changing the default manual.</p>
+<p>For a production release, promote an unchanged, reviewed RC snapshot where
+possible. Deploy the final numbered version and move <code>stable</code> only after the
+matching package is public. If production behavior or documentation changes
+after the RC, review those changed pages and publish another candidate rather
+than silently editing the final snapshot.</p>
 <p>Never overwrite an old numbered manual with content for a different software
-release. Correct a serious documentation error with a transparent follow-up and
-record it in the repository history.</p>
-<h2 id="preview-versioned-output-locally">Preview versioned output locally<a class="headerlink" href="#preview-versioned-output-locally" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mike deploy 0.13.0a7 stable
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mike deploy nightly
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>mike serve
+release. Correct a serious documentation error with a transparent follow-up
+commit and redeployment.</p>
+<h2 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>gh workflow run docs-deploy.yml \
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  --repo rensutheart/vipp-mkdocs \
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  --ref main \
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  -f version=&quot;&lt;version&gt;&quot; \
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  -f make_stable=true
 </span></code></pre></div>
-<p>Do not push the generated <code>site/</code> directory; <code>mike</code> manages versioned content in
-the deployment branch.</p>
+<p>The workflow executes the equivalent of:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mike deploy --push --update-aliases &lt;version&gt; stable
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mike set-default --push stable
+</span></code></pre></div>
+<p>For a numbered preview without alias promotion, use <code>make_stable=false</code>, which
+executes <code>mike deploy --push &lt;version&gt;</code>.</p>
+<h2 id="local-preview">Local preview<a class="headerlink" href="#local-preview" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mike deploy &lt;version&gt; stable
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>mike deploy nightly
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>mike serve
+</span></code></pre></div>
+<p>Do not push the generated <code>site/</code> directory; <code>mike</code> manages versioned content
+in the deployment branch.</p>
 
 
 
@@ -2686,7 +2761,7 @@ the deployment branch.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:36:52 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 10:01:30 UTC">August 15, 2026</span>
   </span>
 
     
