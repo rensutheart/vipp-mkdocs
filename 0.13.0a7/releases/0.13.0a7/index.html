@@ -2718,24 +2718,20 @@
 
 
 <h1 id="vipp-0130a7">VIPP 0.13.0a7<a class="headerlink" href="#vipp-0130a7" title="Permanent link">&para;</a></h1>
-<p><strong>Status:</strong> release-candidate documentation; publication is pending</p>
+<p><strong>Status:</strong> published alpha</p>
 <p>VIPP 0.13.0a7 extends the reviewed GPU path from isolated filtering and
 restoration operations into a visible segmentation-and-mask-cleanup corridor.
 It also makes GPU eligibility repairs and whole-pipeline timing results much
 easier to understand without silently changing the scientific workflow.</p>
 <div class="admonition warning">
-<p class="admonition-title">Local qualification is complete; publication is pending</p>
-<p>Final application source, exact-main CI, full RTX 5090 GPU admission,
-locally finalized artifact bytes, and a bounded production-backend Windows
-lifecycle are recorded below. A local operator pass of the exact frozen
-installer's visible setup and installed UI is also recorded. The
-<code>v0.13.0a7</code> tag has not been pushed, and no a7 GitHub release, PyPI package,
-public download, numbered manual, or stable-manual update exists yet.
-Public-download and fresh-account field checks remain separate. Do not
-construct a download URL or treat a local artifact hash as proof of a public
-asset. The last verified public alpha remains
-<a href="../0.13.0a6/">0.13.0a6</a> until every pending publication item in
-<a href="#release-verification">release verification</a> is completed.</p>
+<p class="admonition-title">Published alpha — verify exact downloads</p>
+<p>The immutable <code>v0.13.0a7</code> tag, GitHub prerelease, PyPI package, seven
+GitHub assets, and numbered manual are public. The release verification
+below records their exact hashes and workflow evidence. The Windows
+installer is intentionally unsigned: download it only from the official
+release and verify its checksum before accepting <strong>Unknown publisher</strong>.
+Public-download SmartScreen and broader fresh-account field checks remain
+separate from the completed local operator pass.</p>
 </div>
 <h2 id="features-added">Features added<a class="headerlink" href="#features-added" title="Permanent link">&para;</a></h2>
 <h3 id="a-visible-one-click-route-to-an-eligible-dtype">A visible one-click route to an eligible dtype<a class="headerlink" href="#a-visible-one-click-route-to-an-eligible-dtype" title="Permanent link">&para;</a></h3>
@@ -2836,22 +2832,23 @@ eligibility failure and does not hide the completed measurements.</p>
   current input still has the same reviewed dtype-only blocker.</li>
 </ul>
 <h2 id="install-or-upgrade">Install or upgrade<a class="headerlink" href="#install-or-upgrade" title="Permanent link">&para;</a></h2>
-<p>The commands and filenames below describe the intended 0.13.0a7 release, but
-they must not be used until the exact version appears on the official GitHub
-and PyPI project pages and the downloaded bytes match the hashes on this page.</p>
-<p>For a dedicated CPU environment after publication:</p>
+<p>The exact 0.13.0a7 release is public on
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a7">GitHub</a>
+and <a href="https://pypi.org/project/napari-vipp/0.13.0a7/">PyPI</a>. Use only those
+official pages and verify downloaded bytes against the hashes below.</p>
+<p>For a dedicated CPU environment:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp==0.13.0a7&quot;
 </span></code></pre></div>
-<p>For the separate native-Windows CUDA 13 environment after publication:</p>
+<p>For the separate native-Windows CUDA 13 environment:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">vipp-compute-doctor</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">-</span><span class="n">-refresh</span>
 </span></code></pre></div>
-<p>The locally finalized Windows filenames are
+<p>The published Windows filenames are
 <code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe</code> and
-<code>SHA256SUMS-Windows-0.13.0a7.txt</code>. Their exact local SHA-256 values are recorded
-below, but their public download links and public-asset verification remain
-pending. The optional cuCIM route will require the matching a7 no-wheel bundle;
-do not reuse an a6 bundle or move another user's private wheel.</p>
+<code>SHA256SUMS-Windows-0.13.0a7.txt</code>. Their public downloads were rehashed against
+the exact SHA-256 values below. The optional cuCIM route uses the matching a7
+no-wheel bundle from the same release; do not reuse an a6 bundle or move another
+user's private wheel.</p>
 <p>For this release, one-click setup uses only the exact per-track roots beneath
 the canonical Windows Local App Data directory. The managed CUDA path must be
 ASCII-only because CuPy 14.1.1 cannot reliably compile CUDA kernels from a
@@ -2896,13 +2893,13 @@ the admission-manifest SHA-256 is
 <code>3b6081b0aec45f81227bd86d86bc0f2df1aa4fe6b28752aa4e96aaee3d8e0ce7</code>.
 This is bounded reference-system evidence, not a claim for every compatible
 GPU.</p>
-<p>The exact-source artifact set intended for publication was finalized locally.
-These hashes identify those frozen local bytes; they are <strong>not</strong> public URLs or
-evidence that an asset downloaded from GitHub or PyPI matches them.</p>
+<p>The exact-source artifact set was finalized locally, published on the official
+GitHub prerelease, downloaded again, and rehashed. The PyPI wheel and source
+archive digests were independently checked against the same frozen bytes.</p>
 <table>
 <thead>
 <tr>
-<th>Locally finalized artifact</th>
+<th>Published artifact</th>
 <th>SHA-256</th>
 </tr>
 </thead>
@@ -2967,7 +2964,7 @@ remain <strong>not run</strong>.</p>
 <thead>
 <tr>
 <th>Release item</th>
-<th>Status before publication</th>
+<th>Verified status</th>
 </tr>
 </thead>
 <tbody>
@@ -2977,7 +2974,7 @@ remain <strong>not run</strong>.</p>
 </tr>
 <tr>
 <td>Annotated immutable <code>v0.13.0a7</code> tag</td>
-<td><strong>Local only at the final commit; remote tag push pending</strong></td>
+<td><strong>Passed:</strong> public tag peels to <code>dc8a63912110a75ab1daad0e7f81c2b20e5001e6</code></td>
 </tr>
 <tr>
 <td>Exact-source Windows/Linux/macOS CI</td>
@@ -3008,40 +3005,32 @@ remain <strong>not run</strong>.</p>
 <td><strong>Passed:</strong> operator attested the visible checklist on 2026-08-15</td>
 </tr>
 <tr>
-<td>Public-download, SmartScreen, and fresh-account field acceptance</td>
+<td>Downloaded-installer execution, SmartScreen, and fresh-account field acceptance</td>
 <td><strong>Not run; remains post-publication field evidence</strong></td>
 </tr>
 <tr>
-<td>PyPI wheel and source archive</td>
-<td><strong>Built and hash-locked locally; publication and public verification pending</strong></td>
+<td>Public GitHub alpha prerelease</td>
+<td><strong>Passed:</strong> seven exact assets published and downloaded hashes matched</td>
 </tr>
 <tr>
-<td>Unsigned Windows installer and release manifest</td>
-<td><strong>Finalized and hash-locked locally; local operator acceptance passed; publication and public-download verification pending</strong></td>
+<td>Public PyPI wheel and source archive</td>
+<td><strong>Passed:</strong> <a href="https://github.com/rensutheart/napari-vipp/actions/runs/31871324192">workflow 31871324192</a>; both public digests matched</td>
 </tr>
 <tr>
-<td>Windows checksum and <code>-UNSIGNED-THIRD-PARTY-NOTICES</code> files</td>
-<td><strong>Built and hash-locked locally; publication pending</strong></td>
+<td>Unsigned Windows installer, release manifest, notices, and checksum</td>
+<td><strong>Passed:</strong> public GitHub assets rehashed exactly; Windows status remains <code>NotSigned</code></td>
 </tr>
 <tr>
 <td>Matching optional cuCIM no-wheel bundle</td>
-<td><strong>Built and hash-locked locally; publication pending</strong></td>
-</tr>
-<tr>
-<td>Public GitHub alpha pre-release</td>
-<td><strong>Pending</strong></td>
-</tr>
-<tr>
-<td>Public PyPI 0.13.0a7 page</td>
-<td><strong>Pending</strong></td>
+<td><strong>Passed:</strong> public GitHub asset rehashed exactly and contains no wheel</td>
 </tr>
 <tr>
 <td>Numbered 0.13.0a7 manual</td>
-<td><strong>Pending</strong></td>
+<td><strong>Passed:</strong> <a href="https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871275481">workflow 31871275481</a> and required URLs returned 200</td>
 </tr>
 <tr>
 <td>Updated <code>stable</code> alias after PyPI verification</td>
-<td><strong>Pending</strong></td>
+<td><strong>Final promotion follows this verified documentation update</strong></td>
 </tr>
 </tbody>
 </table>
@@ -3073,7 +3062,7 @@ evidence remain unchanged in the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:08:12 UTC">August 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:22:26 UTC">August 15, 2026</span>
   </span>
 
     
