@@ -37,19 +37,15 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual is being prepared for **napari-vipp 0.13.0a7**. Final source,
-    exact-main CI, full RTX 5090 admission, and local artifact hashes are
-    recorded, but its tag has not been pushed and its GitHub/PyPI assets,
-    public downloads, numbered manual, and stable alias are still pending. Do
-    not construct an anticipated download URL or treat a local build as a
-    public release. The
+    This manual describes the public **napari-vipp 0.13.0a7** alpha. Its exact
+    tag, GitHub prerelease, PyPI files, seven release assets, numbered manual,
+    and hashes are recorded in the
     [a7 release-verification table](releases/0.13.0a7.md#release-verification)
-    separates completed local gates from items that still need exact public
-    evidence. Until that table is complete,
-    [0.13.0a6](releases/0.13.0a6.md) remains the last verified public alpha. Do
-    not treat unperformed external fresh-machine or novice checks as passes.
-    Interfaces, workflow files, and parameter defaults may change between alpha
-    releases.
+    and were independently checked after publication. Verify the intentionally
+    unsigned Windows installer against the official checksum before opening it.
+    Do not treat unperformed external fresh-machine or novice checks as passes.
+    Interfaces, workflow files, and parameter defaults may change between
+    alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
@@ -108,7 +104,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in the prepared alpha | [0.13.0a7 release notes](releases/0.13.0a7.md) |
+| Review everything changed in the public alpha | [0.13.0a7 release notes](releases/0.13.0a7.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the
