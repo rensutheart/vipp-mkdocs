@@ -341,7 +341,7 @@ item failures** enabled, later items continue.
 Batch displays two progress levels. **Overall** reports the item number, batch
 ID, and final item status. **Current operation** reports the containing item,
 node/operation, completed checkpoint, total checkpoints, and message. A
-monolithic NumPy, SciPy, CuPy, cuCIM, or writer call can still remain at one
+monolithic NumPy, SciPy, CuPy, CuPyX, or writer call can still remain at one
 percentage until it returns because VIPP does not invent internal progress.
 
 **Cancel** requests cooperative cancellation between nodes, device segments,
@@ -400,7 +400,7 @@ The version-3 manifest records:
 - the configured and effective compute requests, whether a CLI/UI override was
   used, and their fingerprints;
 - for every calculated item, the formal execution document and digest with
-  actual CPU/CuPy/cuCIM decisions, implementation IDs/versions, memory
+  actual CPU/CuPy decisions, implementation IDs/versions, memory
   estimates, fallbacks, outcome, and cleanup; and
 - an execution-provenance digest on every published output record that links it
   to that exact item execution.

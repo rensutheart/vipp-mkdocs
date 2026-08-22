@@ -5,6 +5,10 @@
 Search the node library by title or operation ID, then add a node to the
 canvas. Connect an output port to a compatible input. Drop a compatible palette
 item onto an existing wire to insert it without rebuilding the branch.
+A compatible loose node—including one pasted into open space—can also be
+dragged onto a wire. The wire highlights green when insertion is valid; release
+the node while it is highlighted to split the connection and insert the node.
+The insertion is one undoable graph edit.
 
 An `Image Source` card shows its current layer, sample, file, or collection
 representative as a live subtitle. Hover for the complete binding. The subtitle

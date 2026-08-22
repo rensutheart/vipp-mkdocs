@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a7 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.13.0a8 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -78,15 +78,15 @@ Use **Prefer GPU** as the explicit override. Min-max uses an exact native CPU
 reduction. Float and other-dtype percentiles retain the exact NumPy-compatible
 CPU calculation. Select a node and read its separate **Thumbnail contrast**
 inspector row—**Calculating… / CPU · NumPy / GPU · CuPy / CPU fallback /
-Error**—for what happened; the ordinary CPU/CuPy/cuCIM badge remains in the node
+Error**—for what happened; the ordinary CPU/CuPy badge remains in the node
 title row as the record of what produced the node output.
 
 ## A safe practical sequence
 
 1. Run a representative item on **CPU** and inspect the decisive images,
    masks, labels, and tables. Retain this result when CPU/GPU parity matters.
-2. Open **Compute setup and memory…**. Read its three short rows—**CUDA and
-   GPU**, **Optional cuCIM**, and **VIPP GPU coverage**—then follow the one
+2. Open **Compute setup and memory…**. Read its two short rows—**CUDA and
+   GPU** and **VIPP GPU coverage**—then follow the one
    recommended next step. Open **Show advanced details** only when you need the
    scientific stack, device, eligibility, RAM/VRAM, and provider evidence. The
    window can save a privacy-redacted support report; VIPP never executes a
@@ -163,7 +163,7 @@ Whole-pipeline optimization shows two progress streams:
 - **Current operation** tracks truthful checkpoints inside the active parity,
   cold-call, warmup, or timed call.
 
-A single NumPy, SciPy, CuPy, CuPyX, or cuCIM call can remain at one percentage
+A single NumPy, SciPy, CuPy, or CuPyX call can remain at one percentage
 until it returns because VIPP cannot observe a scientifically safe subdivision.
 A reached time limit means planned comparisons remain; it does **not** prove
 that the current assignment is optimal. The result identifies completed and
@@ -173,7 +173,7 @@ relevant environment invalidates reuse.
 
 A completed comparison remains inspectable when the speed evidence is too
 close to recommend a winner. The result groups one heading per workflow node
-with a separate row for every tested CPU, CuPy-family, or cuCIM implementation.
+with a separate row for every tested CPU or CuPy-family implementation.
 The compact columns show total execution time, scientific agreement, and the
 outcome; expanded details separate resident compute, transfers, **First run**
 cost, memory, and evidence provenance. An inconclusive outcome leaves
@@ -201,16 +201,17 @@ unrunnable descendant.
 
 <a id="gpu-regions-in-0130a1"></a>
 <a id="gpu-regions-in-0130a7"></a>
+<a id="gpu-regions-in-0130a8"></a>
 
-## GPU regions in 0.13.0a7
+## GPU regions in 0.13.0a8
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
 
 | Operation | GPU library | Broad admitted data/shape | Important first-region limits and common CPU decisions |
 | --- | --- | --- | --- |
-| Rolling-Ball Background | cuCIM | `uint8`, `uint16`, or `float32`; 2D slice-wise or 3D | Radius 1–500 in 2D and 1–50 in 3D. Other dtypes/radii use CPU. The declared float32 parity region is not finite-only. |
-| Subtract Background | cuCIM | `uint8`, `uint16`, or `float32`; 2D slice-wise or 3D | Same reviewed radius limits as Rolling-Ball. The declared float32 parity region is not finite-only. |
+| Rolling-Ball Background | CuPy | `uint8`, `uint16`, or `float32`; 2D slice-wise or 3D | Radius 1–500 in 2D and 1–50 in 3D. Other dtypes/radii use CPU. The declared float32 parity region is not finite-only. |
+| Subtract Background | CuPy | `uint8`, `uint16`, or `float32`; 2D slice-wise or 3D | Same reviewed radius limits as Rolling-Ball. The declared float32 parity region is not finite-only. |
 | Extract Channel | CuPy | Explicit channel axis | Prefer GPU keeps a host-entry extraction on CPU so only the selected channel is uploaded. An explicit Custom GPU choice can expose a resident allocation-sharing view. Ambiguous axes use CPU or fail rather than being guessed. |
 | Convert Dtype | CuPy | `uint8` or `uint16` to `float32` | Exact **Preserve** mode only: pixel values are not rescaled. Other dtype/mode combinations use CPU. |
 | Median Filter | CuPyX | `uint8`, `uint16`, or finite `float32` with complete facts proving no negative zero; independent `YX` planes | Canonical odd footprint 1–51; unsupported float facts or footprint use CPU. |
@@ -224,9 +225,10 @@ VIPP's eligibility explanation is authoritative for the exact call.
 | Sigma Filter | CuPy | native-endian `uint8`, `uint16`, or finite `float32`; independent `YX` planes | Radius 0.5–10 and reviewed finite value/parameter facts. ROI/mask behavior is outside version 1. |
 | Remove Small Objects | CuPyX | Boolean mask; resolved 2D or 3D | Face or Full connectivity. Integer-label cleanup remains CPU. |
 | Fill Holes | CuPyX | Boolean mask; resolved 2D or 3D | Face or Full connectivity with `Maximum hole size = 0` (fill every enclosed hole). Positive bounded-hole-size cleanup remains CPU. |
+| Remove Outliers (Binary) | CuPy | Boolean mask; independent trailing `YX` planes | Fiji-compatible foreground removal or background filling with nearest-edge neighborhoods. The public GPU region covers radius 0.5–25; canonical `uint8` and larger valid radii remain CPU. |
 | Label Connected Components | CuPyX | Boolean mask; resolved 2D or 3D | Preserves exact deterministic `int32` label numbering. Numeric masks and oversized 2D/3D blocks use CPU. In non-CPU planning, a Boolean call not resolved as 2D or 3D is a typed preflight failure in this alpha. |
-| Measure Objects | cuCIM | native-endian, non-negative `int32` labels; 2D or 3D | Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU. |
-| Measure Objects + Intensity | cuCIM | the same labels plus native-endian Boolean, `uint8`, `uint16`, or finite `float32` intensity | Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU. |
+| Measure Objects | CuPy | native-endian, non-negative `int32` labels; 2D or 3D | Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU. |
+| Measure Objects + Intensity | CuPy | the same labels plus native-endian Boolean, `uint8`, `uint16`, or finite `float32` intensity | Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU. |
 
 Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
 handling where the underlying dtype/profile is admitted. An ambiguous or
@@ -242,12 +244,10 @@ benchmark look faster.
 
 ## Installation and platform boundary
 
-The `gpu-cuda13` extra installs the pinned CuPy/CuPyX CUDA track. It does not
-include the separately reviewed cuCIM build used by the background and basic
-measurement candidates, so those nodes normally remain CPU after a standard
-public GPU install. Windows users can optionally build the pinned cuCIM 26.6.0
-source locally and approve it with its generated manifest; see the
-[Windows CUDA and cuCIM guide](../getting-started/windows-cuda.md).
+The `gpu-cuda13` extra installs the pinned CuPy/CuPyX CUDA track and every
+current reviewed GPU provider, including background processing and basic
+measurements. No separate provider bundle or local source build is required;
+see the [Windows NVIDIA GPU guide](../getting-started/windows-cuda.md).
 
 Public admission requires native Windows, CPython 3.12, the pinned CUDA 13.2
 runtime and scientific/provider stack, driver API 13.3 or newer, and a probed

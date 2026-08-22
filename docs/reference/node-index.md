@@ -1,6 +1,6 @@
 # Node Index
 
-This page lists all **113 operation specifications** registered by
+This page lists all **114 operation specifications** registered by
 `NODE_LIBRARY` in the current manual track. Nightly parameter behavior can be
 newer than the latest tagged alpha.
 
@@ -12,21 +12,21 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-In 0.13.0a7, manual/cached nodes and nodes selected for isolated tuning use the
+In 0.13.0a8, manual/cached nodes and nodes selected for isolated tuning use the
 same graph-wide execution language. Bright amber identifies the node that needs
 action; dark amber identifies downstream nodes that are stale but waiting for
 that action. **Tune node in isolation** recalculates only the selected node until
 the session is applied or cancelled. This changes execution and presentation,
 not the operation's scientific definition.
 
-Implemented nodes can also show an actual-run **CPU**, **GPU · CuPy**, **GPU ·
-cuCIM**, or amber **CPU fallback** badge. The badge is execution provenance for
+Implemented nodes can also show an actual-run **CPU**, **GPU · CuPy**, or amber
+**CPU fallback** badge. The badge is execution provenance for
 the accepted result, not part of the operation's scientific definition. A GPU
 choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a7)
+[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a8)
 for the accelerated node families and their first public regions.
 
 | Family | Nodes |
@@ -34,13 +34,13 @@ for the accelerated node families and their first public regions.
 | Image Data | 25 |
 | Filtering | 18 |
 | Segmentation | 18 |
-| Morphology | 13 |
+| Morphology | 14 |
 | Measurements | 12 |
 | Colocalization & Spatial Analysis | 12 |
 | Label Operations | 7 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **113** |
+| **Total** | **114** |
 
 ## Image Data
 
@@ -158,7 +158,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes are public in 0.13.0a7. They have synthetic examples and automated
+These nodes are public in 0.13.0a8. They have synthetic examples and automated
 coverage, but broad real-image restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
 
@@ -232,6 +232,7 @@ it cannot identify a valid two-peak histogram. See
 | `Morphological Gradient` | array | mask | Boundary-like morphology response. |
 | `Fill Holes` | mask | mask | Fill enclosed holes by area/volume. |
 | `Remove Small Objects` | mask or labels | same type | Remove connected objects below size threshold. |
+| `Remove Outliers (Binary)` | mask | mask | Remove foreground specks or fill background notches with Fiji-compatible circular YX neighborhoods. |
 
 ### Skeleton / Network QC
 

@@ -1,8 +1,44 @@
 # Validation status
 
-This page summarizes evidence for the public 0.13.0a7 release and keeps earlier
-release evidence separate. It is a claim boundary, not a certificate that every
-node is validated for every assay.
+This page summarizes the 0.13.0a8 evidence boundary and keeps earlier release
+evidence separate. It is a claim boundary, not a certificate that every node
+is validated for every assay.
+
+## 0.13.0a8 qualification boundary
+
+Final a8 application source is commit
+[`5a66ae9d1098ca5a8d409a4075c585692e3c3638`](https://github.com/rensutheart/napari-vipp/commit/5a66ae9d1098ca5a8d409a4075c585692e3c3638).
+Its
+[exact-main CI run](https://github.com/rensutheart/napari-vipp/actions/runs/32584690313)
+passed all 13 jobs: quality/package checks, the full tests on Windows, Linux,
+and macOS with CPython 3.12 and 3.13, and clean wheel/source-archive
+installation lanes. The
+[Windows installer smoke](https://github.com/rensutheart/napari-vipp/actions/runs/32585512509)
+also passed against that commit.
+
+The public GPU catalogue declares **19 implementations** and **24 executable
+evidence owners**. The full native-Windows RTX 5090 `cuda:0` qualification
+passed all of them. Its aggregate evidence SHA-256 is
+`0365366dc23750e000c6e9c4f8b384cdf706afdcb338ae3a9f80cfad3d1d8506`.
+The evidence source was candidate commit
+`7189cf40280d895b61b061f1468767164ccfbcf4`; the only subsequent
+executable-code change was the packaging canonicalizer. Other changes recorded
+evidence and documentation and did not alter production GPU code.
+
+Risk-based installer acceptance exercised the a8 behavior affected by this
+release. Updating the existing managed CUDA installation from a7 to a8 left
+zero cuCIM, `nvimgcodec`, or retired-provider residue in active a8
+`site-packages`; `pip check` was clean; Compute Doctor passed **19 of 19**
+implementations; and the visible application reported VIPP 0.13.0a8. Both new
+CuPy measurement implementations passed parity, cancellation, reuse, and
+zero-private-pool-residue checks. The a7 rollback was deliberately preserved.
+
+The separate cuCIM installer, source-build coordinator, private-wheel approval
+path, and hosted provider asset were removed. The redundant fresh CPU,
+installer-cancellation, same-version repair, and uninstall matrix was not
+repeated for this minor alpha; those unperformed paths are not claimed as a8
+passes. Exact public artifacts and publication evidence are recorded in the
+[a8 release-verification table](../releases/0.13.0a8.md#release-verification).
 
 ## Evidence available now
 
@@ -37,7 +73,7 @@ node is validated for every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a7 published qualification boundary
+## Historical 0.13.0a7 published qualification boundary
 
 Final a7 application source merged to `main` through
 [pull request #23](https://github.com/rensutheart/napari-vipp/pull/23) at
@@ -106,8 +142,9 @@ PyPI digests matched. The
 [numbered-manual workflow](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871275481)
 succeeded and all required 0.13.0a7 URLs returned HTTP 200. Stable-alias
 [workflow 31871941473](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871941473)
-succeeded; public `versions.json` maps `stable` to `0.13.0a7`, and the required
-stable URLs returned HTTP 200 with no stale prepublication wording.
+succeeded; at that deployment, public `versions.json` mapped `stable` to
+`0.13.0a7`, and the required stable URLs returned HTTP 200 with no stale
+prepublication wording.
 
 Fresh-account Unicode Known Folder, public-download SmartScreen, novice-pilot,
 RTX 40-series Windows, and native Linux CUDA field evidence remain **not run**.

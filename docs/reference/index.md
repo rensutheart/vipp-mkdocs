@@ -5,9 +5,9 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.13.0a7 release notes](../releases/0.13.0a7.md) | Review visible GPU dtype repairs, readable optimizer evidence, expanded RL agreement, the segmentation/mask-cleanup corridor, release status, and limitations. |
+| [0.13.0a8 release notes](../releases/0.13.0a8.md) | Review the standard CuPy-only GPU installation, background/basic-measurement migration, Remove Outliers, graph insertion, source-axis controls, release status, and limitations. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
-| [All 113 nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
+| [All nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
 | [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |
 | [Example workflows](example-workflows.md) | Choose one of 15 runnable graph templates, including the portable GPU segmentation bridge, graph-editing acceptance check, and deterministic batch bundle. |
 | [Bundled sample data](sample-data.md) | Choose one of 14 deterministic samples. |

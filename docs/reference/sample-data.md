@@ -1,6 +1,6 @@
 # Sample Data
 
-VIPP 0.13.0a7 ships **14** deterministic microscopy-style samples that are
+VIPP 0.13.0a8 ships **14** deterministic microscopy-style samples that are
 available inside
 `Image Source`:
 

@@ -1,15 +1,15 @@
 # Try the VIPP Windows installer
 
-Use this checklist when someone asks you to test the tagged VIPP `0.13.0a7`
+Use this checklist when someone asks you to test the tagged VIPP `0.13.0a8`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Use the exact public tagged installer"
     The official public installer SHA-256 is
-    `b62c715152447c4b1f8db878996b776ef2bfb0cdc6656df72d3ec94e7818c12f`,
-    and a fresh download from the public release matched it. Use this checklist
-    only with the exact `v0.13.0a7` GitHub asset and checksum identified by
-    [release verification](../releases/0.13.0a7.md#release-verification). Do not
+    `5b8233a05696efbf8fea7557012934385021ea3e9018befdd7789bf624740528`.
+    Use this checklist only with the exact `v0.13.0a8` GitHub asset and
+    checksum identified by
+    [release verification](../releases/0.13.0a8.md#release-verification). Do not
     use an untagged build or a similarly named file from another site.
 
     A display-independent production-backend install, repair, scientific
@@ -18,7 +18,7 @@ actually tried; leave everything else as **not run**.
 
 Start with the normal [Windows installation instructions](installation.md).
 If you have a suitable NVIDIA GPU and were asked to test acceleration, also use
-the [Windows CUDA and cuCIM instructions](windows-cuda.md).
+the [Windows NVIDIA GPU instructions](windows-cuda.md).
 
 !!! important "What to expect from unusual paths"
     Windows supplies canonical Local App Data through
@@ -46,19 +46,19 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-Download the installer and checksum file only from the official `v0.13.0a7`
+Download the installer and checksum file only from the official `v0.13.0a8`
 entry on the
 [VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
-`VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
+`VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 `
-  .\VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe
+  .\VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe
 ```
 
 Compare all 64 characters with the installer line in
-`SHA256SUMS-Windows-0.13.0a7.txt`. Stop and delete the file if they differ. This
+`SHA256SUMS-Windows-0.13.0a8.txt`. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so **Unknown publisher** is expected; an
 antivirus threat warning is not expected and must not be bypassed.
 
@@ -95,8 +95,11 @@ Complete this only if the installer offered the NVIDIA CUDA route.
       opened Installed apps for ownership-bound removal; it did not offer a
       second or custom managed CUDA copy or an in-place/fallback migration.
 - [ ] **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** all opened.
-- [ ] Compute Doctor separately showed **CUDA and GPU**, **Optional cuCIM**,
-      and **VIPP GPU coverage**.
+- [ ] Compute Doctor separately showed **CUDA and GPU** and **VIPP GPU
+      coverage** without asking for a second provider installation.
+- [ ] Rolling-Ball/Subtract Background and basic object measurements were
+      available through the standard CuPy installation when their input and
+      parameter gates passed.
 - [ ] At least one reviewed operation showed that it actually ran on GPU.
 - [ ] A CPU-selected or unsupported step explained its CPU fallback and still
       produced the expected result.
@@ -109,13 +112,8 @@ Complete this only if the installer offered the NVIDIA CUDA route.
 - [ ] **Find fastest** kept grouped results readable and inspectable, including
       when it could not choose a winner.
 
-If you were specifically asked to test optional cuCIM:
-
-- [ ] I verified the official cuCIM ZIP against the a7 checksum file.
-- [ ] I used **Extract All** before running **Install VIPP cuCIM.cmd**.
-- [ ] The helper built cuCIM locally for this VIPP CUDA environment.
-- [ ] Compute Doctor changed only the optional cuCIM and genuinely enabled
-      coverage results.
+- [ ] The release contained no separate cuCIM ZIP, source-build helper, or
+      provider-install step.
 
 What was confusing or did not work:
 
@@ -157,4 +155,4 @@ What was confusing or did not work:
 - Most important remaining problem:
 
 Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded `0.13.0a7` installer.
+version do not count as a pass for this downloaded `0.13.0a8` installer.

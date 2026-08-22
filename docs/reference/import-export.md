@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.13.0a7 |
+| Source | Behavior in 0.13.0a8 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 14 deterministic VIPP samples. |
@@ -95,7 +95,7 @@ shared executor or create an exact compute-provenance sidecar.
 - Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.13.0a7.
+  0.13.0a8.
 
 ## Execution provenance for saved outputs
 
@@ -103,7 +103,7 @@ The interactive **Save selected output…** action writes the selected cached
 result directly. It does not rerun the graph or write exact execution
 provenance, so it is not a complete analysis archive. Generated Python/CLI can
 instead write an atomic `.vipp-provenance.json` sibling that binds the output
-node/port to the effective compute request, actual CPU/CuPy/cuCIM
+node/port to the effective compute request, actual CPU/CuPy
 implementation, environment, fallback records, outcome, and cleanup evidence.
 Failed or cancelled single-output publication attempts a failure sidecar at
 the requested destination name.

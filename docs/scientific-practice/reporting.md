@@ -14,7 +14,7 @@ Report:
 - Python and important dependency versions or an environment file;
 - workflow JSON and, if used, generated Python;
 - authored compute mode and per-node preferences, plus the actual CPU/CuPy/
-  cuCIM implementation IDs/versions, environment fingerprint, fallback/OOM
+  CuPy/CuPyX implementation IDs/versions, environment fingerprint, fallback/OOM
   records, and cleanup outcome from execution provenance;
 - any explicit optimizer locks, exact-workload benchmark/assignment used, and
   whether a time limit left alternatives unmeasured;
@@ -48,7 +48,7 @@ Report:
 
 ## Suggested concise wording
 
-> Images were processed with napari-vipp 0.13.0a7 using the archived workflow
+> Images were processed with napari-vipp 0.13.0a8 using the archived workflow
 > JSON [identifier]. The workflow was developed on [development set] and frozen
 > before evaluation on [held-out set]. Intermediate masks and labels were
 > reviewed using predefined criteria [reference], and [metrics] were calculated
