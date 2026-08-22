@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -897,7 +922,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1910,7 +1935,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2095,6 +2120,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0130a8-qualification-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.0a8 qualification boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#evidence-available-now" class="md-nav__link">
     <span class="md-ellipsis">
       Evidence available now
@@ -2104,9 +2138,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#0130a7-published-qualification-boundary" class="md-nav__link">
+  <a href="#historical-0130a7-published-qualification-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a7 published qualification boundary
+      Historical 0.13.0a7 published qualification boundary
     </span>
   </a>
   
@@ -2628,6 +2662,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0130a8-qualification-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.0a8 qualification boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#evidence-available-now" class="md-nav__link">
     <span class="md-ellipsis">
       Evidence available now
@@ -2637,9 +2680,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#0130a7-published-qualification-boundary" class="md-nav__link">
+  <a href="#historical-0130a7-published-qualification-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a7 published qualification boundary
+      Historical 0.13.0a7 published qualification boundary
     </span>
   </a>
   
@@ -2742,9 +2785,40 @@
 
 
 <h1 id="validation-status">Validation status<a class="headerlink" href="#validation-status" title="Permanent link">&para;</a></h1>
-<p>This page summarizes evidence for the public 0.13.0a7 release and keeps earlier
-release evidence separate. It is a claim boundary, not a certificate that every
-node is validated for every assay.</p>
+<p>This page summarizes the 0.13.0a8 evidence boundary and keeps earlier release
+evidence separate. It is a claim boundary, not a certificate that every node
+is validated for every assay.</p>
+<h2 id="0130a8-qualification-boundary">0.13.0a8 qualification boundary<a class="headerlink" href="#0130a8-qualification-boundary" title="Permanent link">&para;</a></h2>
+<p>Final a8 application source is commit
+<a href="https://github.com/rensutheart/napari-vipp/commit/5a66ae9d1098ca5a8d409a4075c585692e3c3638"><code>5a66ae9d1098ca5a8d409a4075c585692e3c3638</code></a>.
+Its
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/32584690313">exact-main CI run</a>
+passed all 13 jobs: quality/package checks, the full tests on Windows, Linux,
+and macOS with CPython 3.12 and 3.13, and clean wheel/source-archive
+installation lanes. The
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/32585512509">Windows installer smoke</a>
+also passed against that commit.</p>
+<p>The public GPU catalogue declares <strong>19 implementations</strong> and <strong>24 executable
+evidence owners</strong>. The full native-Windows RTX 5090 <code>cuda:0</code> qualification
+passed all of them. Its aggregate evidence SHA-256 is
+<code>0365366dc23750e000c6e9c4f8b384cdf706afdcb338ae3a9f80cfad3d1d8506</code>.
+The evidence source was candidate commit
+<code>7189cf40280d895b61b061f1468767164ccfbcf4</code>; the only subsequent
+executable-code change was the packaging canonicalizer. Other changes recorded
+evidence and documentation and did not alter production GPU code.</p>
+<p>Risk-based installer acceptance exercised the a8 behavior affected by this
+release. Updating the existing managed CUDA installation from a7 to a8 left
+zero cuCIM, <code>nvimgcodec</code>, or retired-provider residue in active a8
+<code>site-packages</code>; <code>pip check</code> was clean; Compute Doctor passed <strong>19 of 19</strong>
+implementations; and the visible application reported VIPP 0.13.0a8. Both new
+CuPy measurement implementations passed parity, cancellation, reuse, and
+zero-private-pool-residue checks. The a7 rollback was deliberately preserved.</p>
+<p>The separate cuCIM installer, source-build coordinator, private-wheel approval
+path, and hosted provider asset were removed. The redundant fresh CPU,
+installer-cancellation, same-version repair, and uninstall matrix was not
+repeated for this minor alpha; those unperformed paths are not claimed as a8
+passes. Exact public artifacts and publication evidence are recorded in the
+<a href="../../releases/0.13.0a8/#release-verification">a8 release-verification table</a>.</p>
 <h2 id="evidence-available-now">Evidence available now<a class="headerlink" href="#evidence-available-now" title="Permanent link">&para;</a></h2>
 <ul>
 <li>automated tests cover graph behavior, persistence, previews, export,
@@ -2778,7 +2852,7 @@ node is validated for every assay.</p>
 <li>opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.</li>
 </ul>
-<h2 id="0130a7-published-qualification-boundary">0.13.0a7 published qualification boundary<a class="headerlink" href="#0130a7-published-qualification-boundary" title="Permanent link">&para;</a></h2>
+<h2 id="historical-0130a7-published-qualification-boundary">Historical 0.13.0a7 published qualification boundary<a class="headerlink" href="#historical-0130a7-published-qualification-boundary" title="Permanent link">&para;</a></h2>
 <p>Final a7 application source merged to <code>main</code> through
 <a href="https://github.com/rensutheart/napari-vipp/pull/23">pull request #23</a> at
 <a href="https://github.com/rensutheart/napari-vipp/commit/dc8a63912110a75ab1daad0e7f81c2b20e5001e6"><code>dc8a63912110a75ab1daad0e7f81c2b20e5001e6</code></a>.
@@ -2839,8 +2913,9 @@ PyPI digests matched. The
 <a href="https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871275481">numbered-manual workflow</a>
 succeeded and all required 0.13.0a7 URLs returned HTTP 200. Stable-alias
 <a href="https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871941473">workflow 31871941473</a>
-succeeded; public <code>versions.json</code> maps <code>stable</code> to <code>0.13.0a7</code>, and the required
-stable URLs returned HTTP 200 with no stale prepublication wording.</p>
+succeeded; at that deployment, public <code>versions.json</code> mapped <code>stable</code> to
+<code>0.13.0a7</code>, and the required stable URLs returned HTTP 200 with no stale
+prepublication wording.</p>
 <p>Fresh-account Unicode Known Folder, public-download SmartScreen, novice-pilot,
 RTX 40-series Windows, and native Linux CUDA field evidence remain <strong>not run</strong>.
 No a6 artifact, hash, URL, or qualification record is reused as a7 evidence.</p>
@@ -3247,7 +3322,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:29:57 UTC">August 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 18:59:21 UTC">August 22, 2026</span>
   </span>
 
     

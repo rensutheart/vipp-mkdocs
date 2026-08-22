@@ -625,6 +625,8 @@
       
         
       
+        
+      
     
     
     
@@ -668,6 +670,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -968,7 +993,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1976,7 +2001,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2638,11 +2663,11 @@
 
 <div class="admonition warning">
 <p class="admonition-title">Alpha release: validate before interpreting</p>
-<p>This manual describes the public <strong>napari-vipp 0.13.0a7</strong> alpha. Its exact
-tag, GitHub prerelease, PyPI files, seven release assets, numbered manual,
-and hashes are recorded in the
-<a href="releases/0.13.0a7/#release-verification">a7 release-verification table</a>
-and were independently checked after publication. Verify the intentionally
+<p>This manual describes the public <strong>napari-vipp 0.13.0a8</strong> alpha. Its exact
+tag, GitHub prerelease, PyPI files, release assets, and hashes are recorded
+in the
+<a href="releases/0.13.0a8/#release-verification">a8 release-verification table</a>.
+Verify the intentionally
 unsigned Windows installer against the official checksum before opening it.
 Do not treat unperformed external fresh-machine or novice checks as passes.
 Interfaces, workflow files, and parameter defaults may change between
@@ -2652,11 +2677,11 @@ analysis—not as optional cleanup after it.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">0.13 workflow and compute compatibility</p>
-<p>0.13.0a7 writes workflow schema 4. A valid schema-3 workflow loads with an
+<p>0.13.0a8 writes workflow schema 4. A valid schema-3 workflow loads with an
 explicit CPU compute request, while schemas 1 and 2 remain rejected. Cached
 results are not saved in workflow JSON and generated Python is pinned to
 its creator version. Read the
-<a href="releases/0.13.0a7/">0.13.0a7 release notes</a> before upgrading and
+<a href="releases/0.13.0a8/">0.13.0a8 release notes</a> before upgrading and
 revalidate calculated results afterward.</p>
 <p>Batch configs and manifests are version 3. Version-1 configs load with an
 explicit CPU request; version-2 configs keep their saved compute request.
@@ -2669,9 +2694,9 @@ workspace's <strong>Image stack</strong> choice before treating generic pages as
 <a class="vipp-card" href="getting-started/installation/"><strong>Install VIPP</strong><span>Verify and run the unsigned Windows alpha, or follow the pinned manual routes.</span></a>
 <a class="vipp-card" href="getting-started/"><strong>New to VIPP</strong><span>Tour a finished graph and build a small segmentation workflow.</span></a>
 <a class="vipp-card" href="workflows/"><strong>I have an analysis task</strong><span>Follow recipes for segmentation, measurements, networks, colocalization, restoration, or batch runs.</span></a>
-<a class="vipp-card" href="how-to/choose-compute/"><strong>I want to use my GPU</strong><span>Install the optional stack, choose a compute policy, benchmark safely, and verify what actually ran.</span></a>
+<a class="vipp-card" href="how-to/choose-compute/"><strong>I want to use my GPU</strong><span>Install the standard CUDA choice, choose a compute policy, benchmark safely, and verify what actually ran.</span></a>
 <a class="vipp-card" href="scientific-practice/"><strong>I need defensible results</strong><span>Choose dimensionality, tune on representative data, validate, and record what must be reported.</span></a>
-<a class="vipp-card" href="reference/"><strong>I know what I need</strong><span>Search all 113 nodes, bundled samples, example workflows, settings, formats, and compatibility notes.</span></a>
+<a class="vipp-card" href="reference/"><strong>I know what I need</strong><span>Search all nodes, bundled samples, example workflows, settings, formats, and compatibility notes.</span></a>
 </div>
 
 <h2 id="what-vipp-recordsand-what-it-does-not">What VIPP records—and what it does not<a class="headerlink" href="#what-vipp-recordsand-what-it-does-not" title="Permanent link">&para;</a></h2>
@@ -2727,7 +2752,7 @@ also be retained.</p>
 </tr>
 <tr>
 <td>Review everything changed in the public alpha</td>
-<td><a href="releases/0.13.0a7/">0.13.0a7 release notes</a></td>
+<td><a href="releases/0.13.0a8/">0.13.0a8 release notes</a></td>
 </tr>
 <tr>
 <td>Contribute a node or documentation fix</td>
@@ -2759,7 +2784,7 @@ separate course or book.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:22:26 UTC">August 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 18:59:21 UTC">August 22, 2026</span>
   </span>
 
     

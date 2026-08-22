@@ -556,6 +556,8 @@
       
         
       
+        
+      
     
     
     
@@ -602,6 +604,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1024,7 +1049,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -2032,7 +2057,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2805,10 +2830,10 @@ Tom Naber in pull requests 8, 10, and 13.</p>
 <p>For most Windows testers, use the checksum-verified unsigned installer from the
 <a href="../../getting-started/installation/">installation guide</a>. To upgrade a dedicated
 manual environment instead:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install --upgrade &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp==0.13.0a6&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install --upgrade "napari[pyqt6]&gt;=0.6" "napari-vipp==0.13.0a6"
 </span></code></pre></div>
 <p>For the separate native-Windows CUDA 13 environment:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a6&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="s2">"napari[pyqt6]&gt;=0.6"</span> <span class="s2">"napari-vipp[gpu-cuda13]==0.13.0a6"</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">vipp-compute-doctor</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span></code></pre></div>
 <p>Preserve the previous environment and original workflow, batch, output, and

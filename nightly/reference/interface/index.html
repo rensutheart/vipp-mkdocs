@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -897,7 +922,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1910,7 +1935,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2118,9 +2143,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#batch-image-stack-control" class="md-nav__link">
+  <a href="#image-source-and-batch-image-stack-controls" class="md-nav__link">
     <span class="md-ellipsis">
-      Batch Image stack control
+      Image Source and Batch Image stack controls
     </span>
   </a>
   
@@ -2832,9 +2857,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#batch-image-stack-control" class="md-nav__link">
+  <a href="#image-source-and-batch-image-stack-controls" class="md-nav__link">
     <span class="md-ellipsis">
-      Batch Image stack control
+      Image Source and Batch Image stack controls
     </span>
   </a>
   
@@ -2874,7 +2899,7 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.13.0a7. Controls can collapse into
+<p>Labels below match napari-vipp 0.13.0a8. Controls can collapse into
 <strong>Settings</strong> when the window is narrow.</p>
 <h2 id="workflow-tabs">Workflow tabs<a class="headerlink" href="#workflow-tabs" title="Permanent link">&para;</a></h2>
 <p>The movable tab bar holds independent live workflow sessions. Each tab retains
@@ -3030,7 +3055,7 @@ GPU</strong> appears only when several libraries genuinely compete. Exact
 implementation pins are an advanced persistence/API feature; a loaded pin
 remains visible until deliberately replaced. A separate optimizer lock—not
 merely choosing a backend—preserves a node during <strong>Find fastest</strong>.</p>
-<p>Calculated cards show compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>, <strong>GPU · cuCIM</strong>, or amber
+<p>Calculated cards show compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>, or amber
 <strong>CPU fallback</strong> badges. A muted badge belongs to the last accepted run while a
 new result is pending or current Custom intent differs. Hover or inspect the node for the implementation ID and
 version, runtime/device, preference, decision reason, benchmark evidence,
@@ -3150,7 +3175,7 @@ CPU; main <strong>Prefer GPU</strong> biases presentation Auto toward GPU; main 
 contrast</strong> row near the top of its inspector: <strong>Calculating…</strong>, <strong>CPU · NumPy</strong>,
 <strong>GPU · CuPy</strong>, amber <strong>CPU fallback</strong>, or red <strong>Error</strong>. Ordinary success is
 muted, and the graph card stays compact. This never replaces the card's
-scientific <strong>CPU</strong>, <strong>GPU · CuPy</strong>, <strong>GPU · cuCIM</strong>, or <strong>CPU fallback</strong> badge.
+scientific <strong>CPU</strong>, <strong>GPU · CuPy</strong>, or <strong>CPU fallback</strong> badge.
 Hover the inspector row or thumbnail for scope, render detail, algorithm, byte
 count, elapsed time, selection reason, threshold, fallback, and failure
 information; keyboard What's This help and screen readers receive the same text.</p>
@@ -3211,7 +3236,7 @@ device work; the estimate and any typed OOM/fallback are part of execution
 provenance.</p>
 <p><strong>Cancel calculation</strong> prevents queued reruns and rejects the active result. It
 asks cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
-scikit-image, CuPy, or cuCIM call already executing. GPU progress advances only
+scikit-image, CuPy, or CuPyX call already executing. GPU progress advances only
 after synchronization at a truthful operation checkpoint, and cancellation
 waits for cleanup before compute controls unlock. Failed/OOM attempts never
 replace prior processing results with uncomputed or provenance-unknown values.
@@ -3279,6 +3304,12 @@ scientific notation such as <code>2e-4</code>; sufficiently small non-zero value
 displayed in scientific notation. A slider is an exploration window, not
 necessarily the full valid entry range. Right-click a numeric field and choose
 <strong>Reset to default</strong> to restore that operation's declared default.</p>
+<p>When an image-dependent bound acts on integer data, the corresponding slider
+and spinner use whole-number steps and values. Floating-point input restores
+decimal entry. This prevents controls such as explicit Clip bounds from
+authoring a fractional value that the integer operation cannot represent.
+Sliders keep a practical tuning window even when the spinner accepts a wider
+validated range; Sigma Filter radius is one example.</p>
 <h3 id="manual-execution-colors">Manual execution colors<a class="headerlink" href="#manual-execution-colors" title="Permanent link">&para;</a></h3>
 <p>Manual/cached execution barriers apply to every VIPP operation that uses the
 manual policy, including measurements, graph analysis, colocalization, and
@@ -3361,6 +3392,10 @@ layer contrast changes downstream arrays, masks, thresholds, or measurements.</p
 <p>The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved <strong>Float histogram bins</strong> parameter.</p>
+<p>Every node in the <strong>Intensity And Contrast</strong> palette family shows both its input
+and output histogram when an array result is available. Input and output scope
+controls remain independent, so changing a histogram from the current slice to
+the full stack changes only the display summary, not workflow data.</p>
 <h2 id="draggable-histogram-guides">Draggable histogram guides<a class="headerlink" href="#draggable-histogram-guides" title="Permanent link">&para;</a></h2>
 <p>Input-histogram markers for Binary Threshold, Hysteresis Threshold, explicit
 Rescale Intensity/Clip cutoffs, and supported colocalization thresholds are
@@ -3384,7 +3419,13 @@ size up to 4,096, native populated axis ranges, optional symmetric percentile
 clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
 at its current display resolution; use a graph node when the scatter image must
 be part of the durable workflow.</p>
-<h2 id="batch-image-stack-control">Batch Image stack control<a class="headerlink" href="#batch-image-stack-control" title="Permanent link">&para;</a></h2>
+<h2 id="image-source-and-batch-image-stack-controls">Image Source and Batch Image stack controls<a class="headerlink" href="#image-source-and-batch-image-stack-controls" title="Permanent link">&para;</a></h2>
+<p>The <code>Image Source</code> inspector has an <strong>Image stack</strong> chooser for a file, store,
+sample, or napari-layer binding. It defaults to <strong>Use the file's labels
+unchanged</strong>. A reviewed <strong>Pages are depth slices (Z stack)</strong> choice saves
+<code>QYX -&gt; ZYX</code> with the workflow; <strong>Something else (advanced)...</strong> accepts a
+complete reviewed source-to-effective declaration. All choices relabel axes by
+position without transposing pixels.</p>
 <p>Each collection source in Batch workspace has an <strong>Image stack</strong> chooser:</p>
 <table>
 <thead>
@@ -3415,7 +3456,9 @@ be part of the durable workflow.</p>
 <p>When Automatic can resolve the exact case, VIPP visibly selects the Z-stack
 choice and shows why it changed, that it will be saved, and that pixel order is
 unchanged. Verify the page meaning and Z calibration independently. Preview and
-Run use the same check; headless execution never invents a missing declaration.</p>
+Run use the same check; headless execution never invents a missing declaration.
+The Image Source and Batch controls share the same declaration parser,
+validation, metadata application, and headless execution infrastructure.</p>
 <h2 id="batch-representative-strip">Batch representative strip<a class="headerlink" href="#batch-representative-strip" title="Permanent link">&para;</a></h2>
 <p>After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired
@@ -3446,7 +3489,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
   </span>
 
     
@@ -3484,7 +3527,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../node-index/" class="md-footer__link md-footer__link--prev" aria-label="Previous: All 113 nodes">
+          <a href="../node-index/" class="md-footer__link md-footer__link--prev" aria-label="Previous: All nodes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3494,7 +3537,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
                 Previous
               </span>
               <div class="md-ellipsis">
-                All 113 nodes
+                All nodes
               </div>
             </div>
           </a>

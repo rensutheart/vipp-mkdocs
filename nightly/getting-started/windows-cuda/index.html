@@ -26,7 +26,7 @@
     
     
       
-        <title>Windows CUDA and cuCIM - VIPP — Visual Image Processing Platform</title>
+        <title>Windows NVIDIA GPU - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#install-cuda-acceleration-on-64-bit-windows" class="md-skip">
+        <a href="#windows-nvidia-gpu-setup" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Windows CUDA and cuCIM
+              Windows NVIDIA GPU
             
           </span>
         </div>
@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -911,7 +936,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -924,7 +949,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -949,46 +974,109 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#choose-the-installation-you-need" class="md-nav__link">
+  <a href="#choose-the-standard-nvidia-route" class="md-nav__link">
     <span class="md-ellipsis">
-      Choose the installation you need
+      Choose the standard NVIDIA route
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements-for-the-standard-cuda-13-route" class="md-nav__link">
+  <a href="#managed-location-and-temporary-files" class="md-nav__link">
     <span class="md-ellipsis">
-      Requirements for the standard CUDA 13 route
+      Managed location and temporary files
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-vipp-with-cuda-13" class="md-nav__link">
+  <a href="#verify-the-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Install VIPP with CUDA 13
+      Verify the installation
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Install VIPP with CUDA 13">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-dedicated-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual dedicated environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-standard-installation-accelerates" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the standard installation accelerates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-and-basic-measurements-are-cupy-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background and basic measurements are CuPy-only
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-behavior-and-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime behavior and provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#non-ascii-windows-temporary-directories" class="md-nav__link">
+  <a href="#cuda-imports-but-a-node-uses-cpu" class="md-nav__link">
     <span class="md-ellipsis">
-      Non-ASCII Windows temporary directories
+      CUDA imports but a node uses CPU
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" class="md-nav__link">
+  <a href="#first-gpu-run-is-slow" class="md-nav__link">
     <span class="md-ellipsis">
-      Upgrade an existing manually managed 0.13 alpha CUDA environment
+      First GPU run is slow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-selected-assignment-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      The selected assignment changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#need-the-previous-cucim-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Need the previous cuCIM procedure
     </span>
   </a>
   
@@ -996,111 +1084,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-the-compute-doctor-result" class="md-nav__link">
-    <span class="md-ellipsis">
-      Read the compute-doctor result
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-standard-extra-does-not-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      What the standard extra does not install
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cucim-status-on-windows" class="md-nav__link">
-    <span class="md-ellipsis">
-      cuCIM status on Windows
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#add-cucim-using-the-release-bundle-recommended" class="md-nav__link">
-    <span class="md-ellipsis">
-      Add cuCIM using the release bundle (recommended)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-and-add-the-pinned-cucim-release-advanced" class="md-nav__link">
-    <span class="md-ellipsis">
-      Build and add the pinned cuCIM release (advanced)
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Build and add the pinned cuCIM release (advanced)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-record-the-installed-vipp-interpreter" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Record the installed VIPP interpreter
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-get-the-matching-vipp-release-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Get the matching VIPP release source
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-build-twice-and-create-the-manifest" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Build twice and create the manifest
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-inspect-the-plan-then-add-cucim-to-the-released-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Inspect the plan, then add cuCIM to the released environment
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-verify-vipp-can-probe-cucim" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Verify VIPP can probe cuCIM
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#distribution-decision-for-0130a7" class="md-nav__link">
-    <span class="md-ellipsis">
-      Distribution decision for 0.13.0a7
-    </span>
-  </a>
   
 </li>
       
@@ -2110,7 +2093,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2694,46 +2677,109 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#choose-the-installation-you-need" class="md-nav__link">
+  <a href="#choose-the-standard-nvidia-route" class="md-nav__link">
     <span class="md-ellipsis">
-      Choose the installation you need
+      Choose the standard NVIDIA route
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements-for-the-standard-cuda-13-route" class="md-nav__link">
+  <a href="#managed-location-and-temporary-files" class="md-nav__link">
     <span class="md-ellipsis">
-      Requirements for the standard CUDA 13 route
+      Managed location and temporary files
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-vipp-with-cuda-13" class="md-nav__link">
+  <a href="#verify-the-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Install VIPP with CUDA 13
+      Verify the installation
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Install VIPP with CUDA 13">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-dedicated-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual dedicated environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-standard-installation-accelerates" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the standard installation accelerates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-and-basic-measurements-are-cupy-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background and basic measurements are CuPy-only
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-behavior-and-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime behavior and provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#non-ascii-windows-temporary-directories" class="md-nav__link">
+  <a href="#cuda-imports-but-a-node-uses-cpu" class="md-nav__link">
     <span class="md-ellipsis">
-      Non-ASCII Windows temporary directories
+      CUDA imports but a node uses CPU
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" class="md-nav__link">
+  <a href="#first-gpu-run-is-slow" class="md-nav__link">
     <span class="md-ellipsis">
-      Upgrade an existing manually managed 0.13 alpha CUDA environment
+      First GPU run is slow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-selected-assignment-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      The selected assignment changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#need-the-previous-cucim-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Need the previous cuCIM procedure
     </span>
   </a>
   
@@ -2741,111 +2787,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-the-compute-doctor-result" class="md-nav__link">
-    <span class="md-ellipsis">
-      Read the compute-doctor result
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-standard-extra-does-not-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      What the standard extra does not install
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cucim-status-on-windows" class="md-nav__link">
-    <span class="md-ellipsis">
-      cuCIM status on Windows
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#add-cucim-using-the-release-bundle-recommended" class="md-nav__link">
-    <span class="md-ellipsis">
-      Add cuCIM using the release bundle (recommended)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-and-add-the-pinned-cucim-release-advanced" class="md-nav__link">
-    <span class="md-ellipsis">
-      Build and add the pinned cuCIM release (advanced)
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Build and add the pinned cuCIM release (advanced)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-record-the-installed-vipp-interpreter" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Record the installed VIPP interpreter
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-get-the-matching-vipp-release-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Get the matching VIPP release source
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-build-twice-and-create-the-manifest" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Build twice and create the manifest
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-inspect-the-plan-then-add-cucim-to-the-released-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Inspect the plan, then add cuCIM to the released environment
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-verify-vipp-can-probe-cucim" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Verify VIPP can probe cuCIM
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#distribution-decision-for-0130a7" class="md-nav__link">
-    <span class="md-ellipsis">
-      Distribution decision for 0.13.0a7
-    </span>
-  </a>
   
 </li>
       
@@ -2873,382 +2814,207 @@
   
 
 
-<h1 id="install-cuda-acceleration-on-64-bit-windows">Install CUDA acceleration on 64-bit Windows<a class="headerlink" href="#install-cuda-acceleration-on-64-bit-windows" title="Permanent link">&para;</a></h1>
-<p>This page is the Windows-specific companion to the main
-<a href="../installation/">installation guide</a>. VIPP remains fully usable on CPU without
-any NVIDIA packages.</p>
-<div class="admonition note">
-<p class="admonition-title">Use the manual for your installed release</p>
-<p>The commands on this page match the public 0.13.0a7 package. Its tag, PyPI
-files, standard installer, optional cuCIM bundle, and downloaded hashes are
-recorded in the
-<a href="../../releases/0.13.0a7/#release-verification">release-verification table</a>.
-Select the numbered manual matching the version already installed.</p>
-</div>
-<h2 id="choose-the-installation-you-need">Choose the installation you need<a class="headerlink" href="#choose-the-installation-you-need" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Goal</th>
-<th>0.13.0a7 route</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Run VIPP on CPU</td>
-<td>Use the checksum-verified unsigned installer from the main installation guide and keep its CPU recommendation.</td>
-</tr>
-<tr>
-<td>Use the reviewed CuPy/CuPyX operations</td>
-<td>Use that installer and keep Automatic, or explicitly select NVIDIA GPU under Advanced details. The manual <code>gpu-cuda13</code> route below remains available.</td>
-</tr>
-<tr>
-<td>Use cuCIM-backed background or basic-measurement operations</td>
-<td>First complete the standard CUDA installation, then use the <a href="#add-cucim-using-the-release-bundle-recommended">no-wheel cuCIM add-on</a>. The advanced source route remains available, but VIPP does not distribute the resulting wheel.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="requirements-for-the-standard-cuda-13-route">Requirements for the standard CUDA 13 route<a class="headerlink" href="#requirements-for-the-standard-cuda-13-route" title="Permanent link">&para;</a></h2>
-<p>You need:</p>
-<ul>
-<li>native x86-64 Windows and 64-bit CPython 3.12;</li>
-<li>an NVIDIA CUDA-capable GPU; and</li>
-<li>an NVIDIA display driver new enough for CUDA 13; and</li>
-<li>an ASCII-only CUDA environment location. Spaces are supported.</li>
-</ul>
-<p>You do <strong>not</strong> need to install a system-wide CUDA Toolkit, <code>nvcc</code>, Visual
-Studio, CMake, or cuDNN. The <code>gpu-cuda13</code> extra installs VIPP's pinned CUDA
-13.2 user-space libraries and CuPy inside its virtual environment. The NVIDIA
-driver remains a machine-wide prerequisite and must be installed separately.</p>
-<p>Check Python before creating the environment:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-c</span> <span class="s2">&quot;import platform, struct; print(platform.python_implementation(), platform.python_version(), struct.calcsize(&#39;P&#39;) * 8)&quot;</span>
-</span></code></pre></div>
-<p>The result must begin with <code>CPython 3.12</code> and end with <code>64</code>.</p>
-<p>Check that Windows can see the NVIDIA driver and GPU:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">nvidia-smi</span>
-</span></code></pre></div>
-<p>If that command is missing or reports a driver problem, install or update the
-<a href="https://www.nvidia.com/Download/index.aspx">NVIDIA driver</a> before installing
-VIPP's GPU extra. NVIDIA documents driver 580 or newer as the CUDA 13.x
-<a href="https://docs.nvidia.com/cuda/archive/13.2.0/cuda-toolkit-release-notes/index.html#cuda-driver">minor-version compatibility minimum</a>,
-although VIPP's scientific admission gate below is narrower. The CUDA value
-printed by <code>nvidia-smi</code> is the newest CUDA version supported by the driver; it
-is not the CUDA runtime installed in the VIPP environment.</p>
+<h1 id="windows-nvidia-gpu-setup">Windows NVIDIA GPU setup<a class="headerlink" href="#windows-nvidia-gpu-setup" title="Permanent link">&para;</a></h1>
+<p>VIPP 0.13.0a8 uses one standard CUDA 13 installation for every current
+reviewed GPU implementation. The normal Windows installer is the recommended
+route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
+private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, <code>nvcc</code>, cuCIM
+bundle, or locally built provider wheel is required.</p>
 <div class="admonition warning">
-<p class="admonition-title">Scientific admission remains narrower than installability</p>
-<p>VIPP 0.13.0a7 admits a successfully probed NVIDIA CUDA device with compute
-capability 7.5 or newer and driver API 13.3 or newer. Public GPU execution
-still requires native Windows, CPython 3.12, NumPy 2.5.1, SciPy 1.18.0,
-scikit-image 0.26.0, CuPy/CuPyX 14.1.1, and CUDA runtime API 13.2. A failed
-provider probe, changed runtime or scientific package, unsupported
-operation region, or insufficient memory produces an explained CPU
-decision. Native Linux GPU qualification is <strong>not run</strong>.</p>
-<p>Minor floating-point differences can occur across GPU models, drivers,
-compiler paths, and reduction order within a provider's declared parity
-tolerance. Record the complete hardware and software environment and
-validate consequential analyses against the CPU reference.</p>
+<p class="admonition-title">Use the exact a8 release</p>
+<p>Download the installer and checksum only from the
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8">official v0.13.0a8 release</a>.
+Verify <code>VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe</code> against
+<code>SHA256SUMS-Windows-0.13.0a8.txt</code> before opening it. This alpha is
+intentionally unsigned, so <strong>Unknown publisher</strong> is expected.</p>
 </div>
-<h2 id="install-vipp-with-cuda-13">Install VIPP with CUDA 13<a class="headerlink" href="#install-vipp-with-cuda-13" title="Permanent link">&para;</a></h2>
-<p>Use a new environment. The commands call that environment's executables
-directly, so PowerShell script-activation policy cannot interfere.</p>
-<p>CuPy 14.1.1 cannot reliably compile CUDA kernels when its Windows environment
-path contains non-ASCII characters. One-click setup obtains canonical Windows
-Local App Data through <code>SHGetKnownFolderPath(FOLDERID_LocalAppData)</code> and accepts
-only <code>VIPP\environments\cuda13</code> beneath it for the managed CUDA track. Custom
-managed roots are not accepted. If the complete canonical path is non-ASCII,
-CUDA one-click is unavailable before environment creation or download and the
-UI offers the fixed CPU route, which remains Unicode-safe. The manual example
-below is an expert-managed environment and must be run from an ASCII-only
-working directory.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">&quot;.venv-vipp-gpu-cu13&quot;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[pyqt6]&gt;=0.6&quot;</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp.exe&quot;</span>
-</span></code></pre></div>
-<p>The installer does not move, edit, or adopt this expert-managed environment.</p>
-<h3 id="non-ascii-windows-temporary-directories">Non-ASCII Windows temporary directories<a class="headerlink" href="#non-ascii-windows-temporary-directories" title="Permanent link">&para;</a></h3>
-<p>The CUDA environment root and Python's effective temporary directory are
-separate paths. If the effective temporary directory contains a non-ASCII
-character, VIPP sets <code>CUPY_CACHE_IN_MEMORY=1</code> before CuPy compiles kernels.
-This avoids the affected NVRTC temporary-source filename operation, but turns
-off CuPy's disk kernel cache for that process. Compute Doctor or the first GPU
-work can therefore incur compilation again in each new VIPP process.</p>
-<p>On the development RTX 5090, one reference run took about 52 seconds from a
-cold process and about 0.87 seconds for a refresh in that same process. Those
-times describe that machine and workload and are not a performance guarantee.
-Only where compiled kernels are cached changes; the scientific kernels and
-results do not. If compilation fails, Compute Doctor now preserves the real
-CuPy <code>CompileException</code> instead of masking it with a false 512-byte
-private-pool leak caused by traceback-held probe arrays.</p>
-<p>An exact prerelease such as <code>==0.13.0a7</code> does not need pip's <code>--pre</code> option.
-Use <code>--pre</code> only when asking pip to choose the latest unpinned VIPP alpha.</p>
-<p>Do not add the <code>gpu-cuda12</code> extra to this environment. CUDA 12 is a separate
-developer-qualification track in 0.13.0a7, and CuPy's CUDA 12 and CUDA 13
-distributions must never share one environment.</p>
-<h3 id="upgrade-an-existing-manually-managed-013-alpha-cuda-environment">Upgrade an existing manually managed 0.13 alpha CUDA environment<a class="headerlink" href="#upgrade-an-existing-manually-managed-013-alpha-cuda-environment" title="Permanent link">&para;</a></h3>
-<p>Close VIPP and napari first. Keep the existing environment directory name;
-renaming a virtual environment can break its launcher paths. Resolve its Python
-and upgrade only the pinned CUDA 13 package set. If that environment path
-contains a non-ASCII character, create a fresh environment under an ASCII-only
-root with the commands in <a href="#install-vipp-with-cuda-13">Install VIPP with CUDA 13</a>
-instead of upgrading it in place. For a manually managed environment, the old
-and fresh environments can remain separate during verification. One-click
-setup may inspect a selected existing environment, but that remains a separate
-non-mutating route; it does not relocate, edit, or adopt the environment.</p>
-<p>For an existing environment whose complete path is already ASCII-only, set
-<code>$installRoot</code> to its real parent directory:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$installRoot</span> <span class="p">=</span> <span class="s2">&quot;C:\Path\To\Existing-VIPP-0.13-Environment&quot;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">$vippPython</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Resolve-Path</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$installRoot</span> <span class="s2">&quot;.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span><span class="p">)).</span><span class="n">Path</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="p">-</span><span class="n">-upgrade-strategy</span> <span class="n">only-if-needed</span> <span class="s2">&quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-c</span> <span class="s2">&quot;import importlib.metadata as m; print(m.version(&#39;napari-vipp&#39;))&quot;</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">check</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">&amp;</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$installRoot</span> <span class="s2">&quot;.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span><span class="p">)</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">-</span><span class="n">-refresh</span>
-</span></code></pre></div>
-<p>Do not run that in-place upgrade block against a non-ASCII environment path.
-For a manually managed old environment, keep it unchanged until the fresh
-ASCII-path environment has passed Compute Doctor, then delete it only after
-reviewing its contents.</p>
-<p>An old <strong>installer-owned</strong> CUDA copy is different. It cannot safely coexist
-with a second managed CUDA copy because the track has one Windows Apps entry
-and shared shortcut names. When setup finds an owned copy under a non-ASCII
-root, it may first complete and record recovery from a prior interrupted
-transaction. After that separate recovery, the newly blocked selection
-performs no new mutation of the old copy and offers <strong>Open Installed apps</strong>.
-Uninstall <strong>VIPP (GPU)</strong> only through its ownership-bound remover. Setup does
-not offer a custom managed replacement; if canonical Local App Data is
-non-ASCII, one-click CUDA remains unavailable and the UI offers CPU. Do not
-move the old virtual environment or attempt an in-place/fallback migration.</p>
-<p>An earlier private cuCIM wheel and manifest can remain compatible with a7
-because the cuCIM source, build recipe, payload digest, and approval schema did
-not change. Keep those files. If the refreshed cuCIM probe succeeds, do not
-rebuild or reinstall it. If it fails, wait for the immutable a7 source and use
-its <code>setup_gpu_dev.py --existing-environment ... --plan-only</code> command with the
-retained wheel and manifest. Reinstall through that helper only when the plan
-passes; never copy an old approval JSON back manually or use an a6 installer
-bundle against the a7 environment. Rebuild from the a7 tag only when the
-retained artifact pair is missing, damaged, or rejected.</p>
-<h2 id="read-the-compute-doctor-result">Read the compute-doctor result<a class="headerlink" href="#read-the-compute-doctor-result" title="Permanent link">&para;</a></h2>
-<p>Compute Doctor answers three separate questions:</p>
-<ol>
-<li><strong>CUDA and GPU</strong> — can this computer really allocate GPU memory and run a
-   synchronized CuPy kernel?</li>
-<li><strong>Optional cuCIM</strong> — is the separately built add-on present, unchanged, and
-   usable?</li>
-<li><strong>VIPP GPU coverage</strong> — how many of the 18 reviewed public GPU regions this
-   exact installation can admit now?</li>
-</ol>
-<p>Read the single recommended next step first. <strong>Show advanced details</strong> contains
-the Python, package, driver, runtime, device, provider, memory, and admission
-evidence when troubleshooting requires it. A successful CUDA row does not mean
-every workload is GPU-eligible: operation-specific dtype, shape, parameter,
-memory, and scientific gates still apply when a workflow runs.</p>
-<p>Inside VIPP, open <strong>Compute setup and memory...</strong> for the same short view. After
-a calculation, the node badge records what actually ran: <strong>CPU</strong>, <strong>GPU ·
-CuPy</strong>, <strong>GPU · cuCIM</strong>, or amber <strong>CPU fallback</strong>.</p>
-<p>For a support request, save the privacy-redacted report from that window or run:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&amp;</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe&quot;</span> <span class="p">`</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">`</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="p">-</span><span class="n">-support-bundle</span> <span class="s2">&quot;.\vipp-compute-support.json&quot;</span>
-</span></code></pre></div>
-<p>The support report excludes local paths, credentials, workflow/node names, and
-raw environment fingerprints. The separate <code>--json</code> output is a detailed local
-diagnostic and can include machine-local provenance; review it before sharing.</p>
-<h2 id="what-the-standard-extra-does-not-install">What the standard extra does not install<a class="headerlink" href="#what-the-standard-extra-does-not-install" title="Permanent link">&para;</a></h2>
-<p>The <code>gpu-cuda13</code> extra installs CuPy/CuPyX and the pinned CUDA runtime. It does
-not install cuCIM. Consequently, Rolling-Ball/Subtract Background and the
-cuCIM-backed basic measurement candidates remain on CPU after the standard
-installation unless the user completes the optional local-build route below.
-Other reviewed CuPy/CuPyX regions can still accelerate when every admission
-gate passes.</p>
-<h2 id="cucim-status-on-windows">cuCIM status on Windows<a class="headerlink" href="#cucim-status-on-windows" title="Permanent link">&para;</a></h2>
-<p>cuCIM 26.6.0 has no official native-Windows wheel. Its PyPI files are Linux
-wheels, and the upstream
-<a href="https://github.com/rapidsai/cucim/issues/454">Windows-support request</a> remains
-open. VIPP's research build packages <code>cucim.core</code> and <code>cucim.skimage</code>, including
-runtime-compiled CUDA kernels, but deliberately omits the native
-<code>cucim.clara</code> whole-slide I/O library.</p>
-<p>The local recipe produces
-<code>cucim_cu13-26.6.0-cp312-cp312-win_amd64.whl</code>. That tag means only:</p>
+<h2 id="choose-the-standard-nvidia-route">Choose the standard NVIDIA route<a class="headerlink" href="#choose-the-standard-nvidia-route" title="Permanent link">&para;</a></h2>
+<p>In setup, keep <strong>Automatic</strong> or expand <strong>Advanced details</strong> and select
+<strong>NVIDIA GPU</strong>. Setup checks the computer before enabling <strong>Install</strong> and
+explains any failed requirement. A blocked GPU choice never silently becomes a
+different managed installation.</p>
 <table>
 <thead>
 <tr>
-<th>Dimension</th>
-<th>Scope of the recorded wheel</th>
+<th>Requirement</th>
+<th>0.13.0a8 boundary</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Operating system / CPU</td>
-<td>native 64-bit Windows on x86-64</td>
+<td>Operating system</td>
+<td>Native 64-bit Windows</td>
 </tr>
 <tr>
 <td>Python</td>
-<td>CPython 3.12 ABI only</td>
+<td>64-bit CPython 3.12; 3.12.10 is the installer reference</td>
 </tr>
 <tr>
-<td>CUDA package family</td>
-<td>CUDA 13 / <code>cupy-cuda13x</code></td>
+<td>GPU</td>
+<td>NVIDIA CUDA device with compute capability 7.5 or newer</td>
 </tr>
 <tr>
-<td>cuCIM surface</td>
-<td><code>core</code> and <code>skimage</code>; no Clara/CuImage I/O</td>
+<td>Driver/runtime</td>
+<td>Driver API 13.3 and CUDA runtime API 13.2 or newer</td>
 </tr>
 <tr>
-<td>VIPP public admission</td>
-<td>qualifying NVIDIA CUDA device, compute capability 7.5 or newer; exact software and provider gates still apply</td>
+<td>Scientific stack</td>
+<td>Pinned NumPy, SciPy, scikit-image, CuPy/CuPyX, and CUDA 13 components</td>
+</tr>
+<tr>
+<td>Managed location</td>
+<td>Canonical Local App Data <code>VIPP\environments\cuda13</code> with an ASCII-only complete path</td>
+</tr>
+<tr>
+<td>Admission</td>
+<td>Runtime/provider probes, device memory, operation region, workload, and scientific parity must all pass</td>
 </tr>
 </tbody>
 </table>
-<p>It is therefore <strong>not</strong> a universal Windows 64-bit wheel. The payload contains
-Python, data files, and CUDA sources that CuPy compiles for the current GPU at
-runtime, so a broader ABI-independent wheel may be technically possible. It
-must first be rebuilt with corrected metadata and validated on each advertised
-Python/GPU environment; renaming or retagging the existing wheel is not valid.</p>
-<div class="admonition info">
-<p class="admonition-title">Optional and fail-closed</p>
-<p>VIPP neither distributes nor requires cuCIM. The build/install steps below
-are opt-in. If cuCIM is absent, its recorded payload is altered, it comes
-from a different source/recipe, or it fails a real probe, VIPP does not
-approve it and the affected operation uses CPU. Other CuPy/CuPyX
-acceleration remains available independently.</p>
-</div>
-<h2 id="add-cucim-using-the-release-bundle-recommended">Add cuCIM using the release bundle (recommended)<a class="headerlink" href="#add-cucim-using-the-release-bundle-recommended" title="Permanent link">&para;</a></h2>
-<p>Do this only after the standard CUDA installation and Compute Doctor pass.</p>
+<p>The public policy does not use a GPU-model allowlist. Device names and ordinals
+are recorded for provenance. Every currently visible CUDA device must satisfy
+the architecture floor because this release probes all visible ordinals before
+choosing its default. A mixed workstation with one older visible device is
+therefore blocked even if another device qualifies.</p>
+<p>Only the NVIDIA display driver is a system-wide CUDA prerequisite. The VIPP
+installer supplies the user-space CUDA libraries inside its environment.</p>
+<h2 id="managed-location-and-temporary-files">Managed location and temporary files<a class="headerlink" href="#managed-location-and-temporary-files" title="Permanent link">&para;</a></h2>
+<p>One-click setup obtains canonical Windows Local App Data through
+<code>SHGetKnownFolderPath(FOLDERID_LocalAppData)</code> and accepts only
+<code>VIPP\environments\cuda13</code> beneath it for the managed GPU track. Spaces are
+supported. CuPy 14.1.1 requires this complete environment path to contain ASCII
+characters. If canonical Local App Data contains a non-ASCII character, setup
+blocks one-click CUDA before creating an environment or downloading packages
+and offers CPU instead.</p>
+<p>Python's effective temporary directory is a separate path. When it contains a
+non-ASCII character, VIPP uses CuPy's process-local in-memory compilation cache.
+This preserves the scientific kernels and results but can make Compute Doctor
+or the first GPU work compile again after VIPP restarts.</p>
+<p>GPU setup is a large download and currently needs at least 15 GiB free on the
+installation drive while setup runs. It also needs at least 5 GiB free on each
+drive used for Windows temporary files and VIPP installer records. These are
+disk-space requirements, not GPU memory requirements.</p>
+<h2 id="verify-the-installation">Verify the installation<a class="headerlink" href="#verify-the-installation" title="Permanent link">&para;</a></h2>
+<p>A managed CUDA installation creates <strong>VIPP Automatic</strong>, <strong>VIPP CPU</strong>, and
+<strong>VIPP Prefer GPU</strong> shortcuts. Start with <strong>VIPP Automatic</strong>. Open <strong>Compute
+setup and memory</strong> to refresh the concise qualification rows:</p>
 <ol>
-<li>Download
-   <code>napari-vipp-cucim-installer-0.13.0a7-windows.zip</code> and
-   <code>SHA256SUMS-Windows-0.13.0a7.txt</code> from the
-   <a href="https://github.com/rensutheart/napari-vipp/releases">official VIPP releases page</a>.
-   The public bundle hash was verified after download and is recorded in
-   release verification; do not substitute an a6 bundle.</li>
-<li>
-<p>Open PowerShell in the download folder and run:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Get-FileHash</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="p">`</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="p">.\</span><span class="n">napari-vipp-cucim-installer</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a7-windows</span><span class="p">.</span><span class="n">zip</span>
-</span></code></pre></div>
-</li>
-<li>
-<p>Compare the complete value with the ZIP's line in the checksum file. Stop
-   and delete the ZIP if they differ.</p>
-</li>
-<li>In File Explorer, right-click the ZIP, choose <strong>Extract All</strong>, and open the
-   extracted folder. Do not run the helper from inside the compressed ZIP view.</li>
-<li>Double-click <strong>Install VIPP cuCIM.cmd</strong>. When asked, choose
-   <code>Scripts\python.exe</code> inside the released VIPP CUDA 13 environment.</li>
-<li>Let the build finish. The first build and CUDA-kernel warm-up can take a long
-   time. Reopen Compute Doctor afterward; only the optional cuCIM and genuinely
-   enabled coverage results should change.</li>
+<li><strong>CUDA and GPU</strong> — can the pinned CUDA/CuPy runtime allocate and execute;</li>
+<li><strong>VIPP GPU coverage</strong> — which reviewed operation regions are available.</li>
 </ol>
-<p>The download contains source and a verified build coordinator, not a cuCIM
-wheel. It builds the fixed upstream release on that computer, verifies the
-result and its provenance, runs real CUDA/cuCIM probes, and keeps the private
-wheel and manifest locally. Do not email or reuse that wheel on another
-computer.</p>
-<h2 id="build-and-add-the-pinned-cucim-release-advanced">Build and add the pinned cuCIM release (advanced)<a class="headerlink" href="#build-and-add-the-pinned-cucim-release-advanced" title="Permanent link">&para;</a></h2>
-<p>Complete the standard CUDA 13 installation above first. This route additionally
-requires Git for Windows, internet access, and enough temporary disk space for
-an isolated CUDA build environment. It does <strong>not</strong> require a machine-wide CUDA
-Toolkit, Visual Studio, CMake, or a compiler installation.</p>
-<p>The recipe is fixed to cuCIM tag <code>v26.06.00</code>, version <code>26.6.0</code>, upstream commit
-<code>3c15781c207eab93a317dd9803a6e726fe01f7c4</code>, and VIPP recipe
-<code>napari-vipp-cucim-windows-v1</code>. Do not substitute another tag or wheel.</p>
-<p>The fixed canonical installed-payload SHA-256 is
-<code>d640d1e17bcce15d32d03841997252bf915b63da855e406c35f0d70c5a5ea667</code>.
-Each locally produced wheel file has its own SHA-256, recorded in its manifest,
-and that file hash may differ between users or builds even when
-the canonical installed payload is identical. VIPP admits only the fixed
-canonical payload and source/recipe identity after also verifying the local
-wheel recorded by that manifest.</p>
-<h3 id="1-record-the-installed-vipp-interpreter">1. Record the installed VIPP interpreter<a class="headerlink" href="#1-record-the-installed-vipp-interpreter" title="Permanent link">&para;</a></h3>
-<p>Run this from the directory containing the environment created above:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">$vippPython</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Resolve-Path</span> <span class="s2">&quot;.\.venv-vipp-gpu-cu13\Scripts\python.exe&quot;</span><span class="p">).</span><span class="n">Path</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-c</span> <span class="s2">&quot;import sys; print(sys.executable)&quot;</span>
+<p>Advanced technical detail remains under <strong>Show advanced details</strong>. A
+privacy-redacted report suitable for support can be saved from the window or
+created with <code>vipp-compute-doctor --track cuda13 --support-bundle
+".\vipp-compute-support.json"</code> from the active CUDA environment.</p>
+<p>The exact internal managed environment path can change after update or repair,
+so the shortcut and graphical command are preferable to guessing a nested
+Python path. For a manually created environment, run its own command directly:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe"</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span></code></pre></div>
-<h3 id="2-get-the-matching-vipp-release-source">2. Get the matching VIPP release source<a class="headerlink" href="#2-get-the-matching-vipp-release-source" title="Permanent link">&para;</a></h3>
-<p>The build and approval scripts are deliberately release-source tools rather
-than a bundled cuCIM dependency:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">$sourceRoot</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;napari-vipp-0.13.0a7-source&quot;</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-branch</span> <span class="n">v0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a7</span> <span class="p">-</span><span class="n">-depth</span> <span class="n">1</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">rensutheart</span><span class="p">/</span><span class="n">napari-vipp</span><span class="p">.</span><span class="n">git</span> <span class="nv">$sourceRoot</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">Set-Location</span> <span class="nv">$sourceRoot</span>
+<p><code>python -m pip check</code> must also report no broken requirements.</p>
+<h2 id="manual-dedicated-environment">Manual dedicated environment<a class="headerlink" href="#manual-dedicated-environment" title="Permanent link">&para;</a></h2>
+<p>Use this only when terminal-level control is required. Run from an ASCII-only
+working directory:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">".venv-vipp-gpu-cu13"</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">`</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="s2">"napari[pyqt6]&gt;=0.6"</span> <span class="s2">"napari-vipp[gpu-cuda13]==0.13.0a8"</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe"</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"</span>
 </span></code></pre></div>
-<h3 id="3-build-twice-and-create-the-manifest">3. Build twice and create the manifest<a class="headerlink" href="#3-build-twice-and-create-the-manifest" title="Permanent link">&para;</a></h3>
-<p>Choose a private output directory that does not already contain artifacts:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">$python312</span> <span class="p">=</span> <span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-c</span> <span class="s2">&quot;import sys; print(sys.executable)&quot;</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">$artifactDir</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$env:USERPROFILE</span> <span class="s2">&quot;vipp-cucim-local\0.13.0a7&quot;</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Path</span> <span class="nv">$artifactDir</span> <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">powershell</span> <span class="n">-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="o">-File</span> <span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">build_cucim_windows</span><span class="p">.</span><span class="n">ps1</span> <span class="p">`</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>  <span class="n">-Python</span> <span class="nv">$python312</span> <span class="p">`</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>  <span class="n">-OutputDirectory</span> <span class="nv">$artifactDir</span>
-</span></code></pre></div>
-<p>The script verifies the exact upstream commit and installs its complete
-41-distribution build environment at exact versions with dependency resolution
-disabled. It rejects any missing, extra, duplicate, or changed distribution,
-performs two clean builds, requires identical canonical payloads, checks
-materialized licences and metadata, and runs real cuCIM GPU operations.
-It writes exactly one wheel and one <code>*.build-manifest.json</code> file to
-<code>$artifactDir</code> and refuses to overwrite them.</p>
-<h3 id="4-inspect-the-plan-then-add-cucim-to-the-released-environment">4. Inspect the plan, then add cuCIM to the released environment<a class="headerlink" href="#4-inspect-the-plan-then-add-cucim-to-the-released-environment" title="Permanent link">&para;</a></h3>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$wheel</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$artifactDir</span> <span class="s2">&quot;cucim_cu13-26.6.0-cp312-cp312-win_amd64.whl&quot;</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">$manifest</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$artifactDir</span> <span class="s2">&quot;cucim_cu13-26.6.0-cp312-cp312-win_amd64.build-manifest.json&quot;</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">setup_gpu_dev</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  <span class="p">-</span><span class="n">-existing-environment</span> <span class="p">`</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">`</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  <span class="p">-</span><span class="n">-python</span> <span class="nv">$vippPython</span> <span class="p">`</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  <span class="p">-</span><span class="n">-cucim-wheel</span> <span class="nv">$wheel</span> <span class="p">`</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  <span class="p">-</span><span class="n">-cucim-manifest</span> <span class="nv">$manifest</span> <span class="p">`</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  <span class="p">-</span><span class="n">-plan-only</span>
-</span></code></pre></div>
-<p>Check that every displayed path targets the intended <code>.venv-vipp-gpu-cu13</code>
-environment. Then repeat without <code>--plan-only</code>:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">setup_gpu_dev</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  <span class="p">-</span><span class="n">-existing-environment</span> <span class="p">`</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span> <span class="p">`</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  <span class="p">-</span><span class="n">-python</span> <span class="nv">$vippPython</span> <span class="p">`</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  <span class="p">-</span><span class="n">-cucim-wheel</span> <span class="nv">$wheel</span> <span class="p">`</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  <span class="p">-</span><span class="n">-cucim-manifest</span> <span class="nv">$manifest</span>
-</span></code></pre></div>
-<p>This mode does not upgrade <code>pip</code>, <code>setuptools</code>, or <code>wheel</code>, install development
-dependencies, or replace the released VIPP package with an editable checkout.
-It installs only <code>click==8.4.2</code>, <code>lazy-loader==0.5</code>,
-<code>nvidia-nvimgcodec-cu13==0.8.0.22</code>, and the local cuCIM wheel. It verifies the
-manifest, wheel-file SHA-256, canonical wheel payload, installed PEP 610
-provenance, exact CUDA stack, real CUDA/cuCIM kernels, and <code>pip check</code>. It
-removes any earlier approval before changing packages and writes a new record
-atomically only after every check succeeds. Before admitting cuCIM for use,
-VIPP independently recomputes that canonical payload from the installed files.</p>
-<p>These checks detect build or installed-payload drift in a user-controlled
-environment; they are not a security boundary against someone who can add
-unrecorded importable files or otherwise modify that environment. If the
-environment is no longer trusted, delete it and repeat the installation rather
-than relying on the approval record.</p>
-<h3 id="5-verify-vipp-can-probe-cucim">5. Verify VIPP can probe cuCIM<a class="headerlink" href="#5-verify-vipp-can-probe-cucim" title="Permanent link">&para;</a></h3>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">&amp;</span> <span class="nv">$vippPython</span> <span class="n">-c</span> <span class="s2">&quot;from napari_vipp.core.compute_registry import ComputeRegistry; r = ComputeRegistry().probe_library(&#39;cucim&#39;, refresh=True); print(r.available, r.version, r.reason_code, r.message); raise SystemExit(0 if r.available else 2)&quot;</span>
-</span></code></pre></div>
-<p>An available library is still subject to VIPP's exact hardware, scientific
-stack, parameter, dtype, shape, memory, and cleanup gates. Run a representative
-Subtract Background workflow and inspect its node badge: <strong>GPU · cuCIM</strong> proves
-that invocation used cuCIM; <strong>CPU</strong> or <strong>CPU fallback</strong> remains a valid result
-and includes the reason.</p>
-<p>cuCIM 26.6.0 can print one line saying its optional CuPy distance test needs
-cuVS and that it is falling back. The admitted VIPP operations do not use that
-distance feature; <code>True 26.06.00</code> from the probe and a <strong>GPU · cuCIM</strong> badge are
-the relevant success signals. Do not add an unpinned cuVS package merely to
-silence that upstream message.</p>
-<p>Keep the wheel and manifest private. They are local build records, not files to
-upload, email to other users, or place on a shared package index.</p>
-<h2 id="distribution-decision-for-0130a7">Distribution decision for 0.13.0a7<a class="headerlink" href="#distribution-decision-for-0130a7" title="Permanent link">&para;</a></h2>
-<p>Every user who wants the optional Windows cuCIM provider builds and keeps their
-own wheel and manifest using the fixed procedure above. VIPP will not host or
-redistribute those wheels on <code>rensu.co.za</code>, GitHub Releases, PyPI, or a shared
-package index. Do not reuse another user's wheel: rebuild it locally so its
-manifest and per-build wheel hash describe the artifact you install. This
-private local-build boundary is the 0.13.0a7 release contract.</p>
-<p>Continue with <a href="../../how-to/choose-compute/">choose and verify CPU or GPU compute</a>
-for operation regions, fallback reasons, badges, and provenance.</p>
+<p>This environment is separate from installer management. Do not move or rename
+it after CuPy has compiled kernels, and do not mix CUDA 12 and CUDA 13 packages
+in one environment.</p>
+<h2 id="what-the-standard-installation-accelerates">What the standard installation accelerates<a class="headerlink" href="#what-the-standard-installation-accelerates" title="Permanent link">&para;</a></h2>
+<p>Reviewed GPU candidates cover operation-specific regions of:</p>
+<ul>
+<li>Rolling-Ball Background and Subtract Background through CuPy;</li>
+<li>Extract Channel and exact Preserve conversion to <code>float32</code>;</li>
+<li>Gaussian, median, and Sigma filtering;</li>
+<li>Richardson-Lucy and Richardson-Lucy TV deconvolution;</li>
+<li>fixed Binary, Canny, and Otsu thresholding;</li>
+<li>boolean Remove Small Objects, Fill Holes, and Remove Outliers;</li>
+<li>Connected Components; and</li>
+<li>the basic <strong>Measure Objects</strong> and <strong>Measure Objects + Intensity</strong> schemas.</li>
+</ul>
+<p>Coverage is region-specific, not node-wide. Unsupported dtypes, dimensionality,
+parameters, extended measurement columns, scientific parity, or memory needs
+remain on CPU with an explanation. <strong>Auto</strong> can correctly select CPU when the
+complete workload is faster there. <strong>Prefer GPU</strong> still allows visible CPU
+fallback.</p>
+<p>The completed-node badge reports what actually ran. Current a8 GPU providers
+appear as <strong>GPU · CuPy</strong>; an amber <strong>CPU fallback</strong> badge identifies a failed or
+ineligible accelerator request. Old workflows or provenance can still contain
+historical cuCIM identities, but a8 does not install or execute that provider.</p>
+<h2 id="background-and-basic-measurements-are-cupy-only">Background and basic measurements are CuPy-only<a class="headerlink" href="#background-and-basic-measurements-are-cupy-only" title="Permanent link">&para;</a></h2>
+<p>Rolling-Ball Background and Subtract Background no longer need a separately
+built provider. <strong>Measure Objects</strong> and <strong>Measure Objects + Intensity</strong> also use
+the standard CuPy installation. Their reviewed evidence covers 2D and 3D label
+tables, leading blocks, reordered/calibrated axes, sparse and repeated IDs,
+zero-row tables, supported intensity dtypes, cancellation, deterministic
+repeats, and zero private-pool residue.</p>
+<p>Exact saved basic-measurement pins migrate automatically:</p>
+<table>
+<thead>
+<tr>
+<th>Former saved identity</th>
+<th>Current identity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cucim-measure-objects-basic-v1</code></td>
+<td><code>cupy-measure-objects-basic-v1</code></td>
+</tr>
+<tr>
+<td><code>cucim-measure-objects-intensity-basic-v1</code></td>
+<td><code>cupy-measure-objects-intensity-basic-v1</code></td>
+</tr>
+</tbody>
+</table>
+<p>A broad saved <code>library:cucim</code> preference is not one unambiguous operation and
+therefore remains visibly unavailable. Choose a current implementation or
+compute mode explicitly rather than expecting VIPP to guess.</p>
+<div class="admonition danger">
+<p class="admonition-title">Do not reuse an old provider add-on</p>
+<p>Do not install a cuCIM ZIP, private wheel, or source-build helper from an
+earlier VIPP release into 0.13.0a8. Those assets describe an older release
+boundary and are not required by the current application.</p>
+</div>
+<h2 id="runtime-behavior-and-provenance">Runtime behavior and provenance<a class="headerlink" href="#runtime-behavior-and-provenance" title="Permanent link">&para;</a></h2>
+<p>VIPP checks RAM, Windows commit headroom, VRAM, transfers, workspaces, and
+retained outputs before admitting work. Cancellation completes only after
+synchronized cleanup. A runtime failure may retry on CPU when the fallback
+contract permits; a cleanup failure disables new compute until VIPP restarts.</p>
+<p>Compatible GPUs can produce small floating-point differences because hardware,
+drivers, JIT compilation, and reduction order differ. VIPP still applies each
+implementation's declared parity contract, but that is not a promise of
+bitwise identity across devices. Preserve:</p>
+<ul>
+<li>the VIPP version and workflow/input identities;</li>
+<li>actual implementation IDs and fallback decisions;</li>
+<li>GPU model, ordinal, compute capability, driver/runtime, and VRAM;</li>
+<li>Python, CuPy/CuPyX, NumPy, SciPy, and scikit-image versions; and</li>
+<li>authored parameters and validation against the CPU reference.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="cuda-imports-but-a-node-uses-cpu">CUDA imports but a node uses CPU<a class="headerlink" href="#cuda-imports-but-a-node-uses-cpu" title="Permanent link">&para;</a></h3>
+<p>This is often correct. Inspect the node's compute explanation for a dtype,
+rank, parameter, memory, workload, or parity exclusion. Do not change a
+scientific parameter merely to unlock GPU execution.</p>
+<h3 id="first-gpu-run-is-slow">First GPU run is slow<a class="headerlink" href="#first-gpu-run-is-slow" title="Permanent link">&para;</a></h3>
+<p>CuPy compiles kernels lazily. Compare warmed repeated runs and include transfer
+and result-finalization time. A cold first run is not a stable speed claim.</p>
+<h3 id="the-selected-assignment-changed">The selected assignment changed<a class="headerlink" href="#the-selected-assignment-changed" title="Permanent link">&para;</a></h3>
+<p>Machine-local evidence is invalidated when the graph, source revision,
+parameters, compute intent, implementation catalogue, environment, or device
+changes. Run <strong>Find fastest pipeline…</strong> again and review the new evidence.</p>
+<h3 id="need-the-previous-cucim-procedure">Need the previous cuCIM procedure<a class="headerlink" href="#need-the-previous-cucim-procedure" title="Permanent link">&para;</a></h3>
+<p>Use the matching archived release page for the old environment. Do not apply
+that procedure to a8. The <a href="../../releases/0.13.0a7/">0.13.0a7 release page</a> is
+preserved as the historical record.</p>
+<p>Continue with <a href="../../how-to/choose-compute/">Choose CPU or GPU compute</a> and the
+<a href="../../releases/0.13.0a8/">0.13.0a8 release notes</a>.</p>
 
 
 
@@ -3269,7 +3035,7 @@ for operation regions, fallback reasons, badges, and provenance.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:22:26 UTC">August 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
   </span>
 
     

@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -902,7 +927,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1999,7 +2024,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2652,16 +2677,16 @@
 
 
 <h1 id="try-the-vipp-windows-installer">Try the VIPP Windows installer<a class="headerlink" href="#try-the-vipp-windows-installer" title="Permanent link">&para;</a></h1>
-<p>Use this checklist when someone asks you to test the tagged VIPP <code>0.13.0a7</code>
+<p>Use this checklist when someone asks you to test the tagged VIPP <code>0.13.0a8</code>
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as <strong>not run</strong>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Use the exact public tagged installer</p>
 <p>The official public installer SHA-256 is
-<code>b62c715152447c4b1f8db878996b776ef2bfb0cdc6656df72d3ec94e7818c12f</code>,
-and a fresh download from the public release matched it. Use this checklist
-only with the exact <code>v0.13.0a7</code> GitHub asset and checksum identified by
-<a href="../../releases/0.13.0a7/#release-verification">release verification</a>. Do not
+<code>5b8233a05696efbf8fea7557012934385021ea3e9018befdd7789bf624740528</code>.
+Use this checklist only with the exact <code>v0.13.0a8</code> GitHub asset and
+checksum identified by
+<a href="../../releases/0.13.0a8/#release-verification">release verification</a>. Do not
 use an untagged build or a similarly named file from another site.</p>
 <p>A display-independent production-backend install, repair, scientific
 smoke, and uninstall does not count as a pass for the downloaded
@@ -2669,7 +2694,7 @@ installer's visible setup window or operator experience.</p>
 </div>
 <p>Start with the normal <a href="../installation/">Windows installation instructions</a>.
 If you have a suitable NVIDIA GPU and were asked to test acceleration, also use
-the <a href="../windows-cuda/">Windows CUDA and cuCIM instructions</a>.</p>
+the <a href="../windows-cuda/">Windows NVIDIA GPU instructions</a>.</p>
 <div class="admonition important">
 <p class="admonition-title">What to expect from unusual paths</p>
 <p>Windows supplies canonical Local App Data through
@@ -2697,16 +2722,16 @@ Compute Doctor support report before sharing it.</p>
 <li>GPU model, if testing CUDA:</li>
 <li>Start time:</li>
 </ul>
-<p>Download the installer and checksum file only from the official <code>v0.13.0a7</code>
+<p>Download the installer and checksum file only from the official <code>v0.13.0a8</code>
 entry on the
 <a href="https://github.com/rensutheart/napari-vipp/releases">VIPP releases page</a>.
 The filename should be
-<code>VIPP-Setup-0.13.0a7-Windows-x86_64-UNSIGNED.exe</code>. In PowerShell, run:</p>
+<code>VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe</code>. In PowerShell, run:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Get-FileHash</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="p">`</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="p">.\</span><span class="n">VIPP-Setup</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a7-Windows-x86_64-UNSIGNED</span><span class="p">.</span><span class="n">exe</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="p">.\</span><span class="n">VIPP-Setup</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">13</span><span class="p">.</span><span class="n">0a8-Windows-x86_64-UNSIGNED</span><span class="p">.</span><span class="n">exe</span>
 </span></code></pre></div>
 <p>Compare all 64 characters with the installer line in
-<code>SHA256SUMS-Windows-0.13.0a7.txt</code>. Stop and delete the file if they differ. This
+<code>SHA256SUMS-Windows-0.13.0a8.txt</code>. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so <strong>Unknown publisher</strong> is expected; an
 antivirus threat warning is not expected and must not be bypassed.</p>
 <h2 id="the-short-test">The short test<a class="headerlink" href="#the-short-test" title="Permanent link">&para;</a></h2>
@@ -2740,8 +2765,11 @@ antivirus threat warning is not expected and must not be bypassed.</p>
       opened Installed apps for ownership-bound removal; it did not offer a
       second or custom managed CUDA copy or an in-place/fallback migration.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>VIPP Automatic</strong>, <strong>VIPP CPU</strong>, and <strong>VIPP Prefer GPU</strong> all opened.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compute Doctor separately showed <strong>CUDA and GPU</strong>, <strong>Optional cuCIM</strong>,
-      and <strong>VIPP GPU coverage</strong>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compute Doctor separately showed <strong>CUDA and GPU</strong> and <strong>VIPP GPU
+      coverage</strong> without asking for a second provider installation.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Rolling-Ball/Subtract Background and basic object measurements were
+      available through the standard CuPy installation when their input and
+      parameter gates passed.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> At least one reviewed operation showed that it actually ran on GPU.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> A CPU-selected or unsupported step explained its CPU fallback and still
       produced the expected result.</li>
@@ -2751,16 +2779,14 @@ antivirus threat warning is not expected and must not be bypassed.</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> If a node showed a dtype-only <strong>GPU tip</strong>, <strong>Add conversion</strong> inserted one
       visible Convert Dtype node in the expected place and Undo removed it.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> A relevant GPU tip remained visible after a Prefer GPU calculation.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Find fastest</strong> kept grouped results readable and inspectable, including
-      when it could not choose a winner.</li>
-</ul>
-<p>If you were specifically asked to test optional cuCIM:</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I verified the official cuCIM ZIP against the a7 checksum file.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I used <strong>Extract All</strong> before running <strong>Install VIPP cuCIM.cmd</strong>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The helper built cuCIM locally for this VIPP CUDA environment.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compute Doctor changed only the optional cuCIM and genuinely enabled
-      coverage results.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Find fastest</strong> kept grouped results readable and inspectable, including
+      when it could not choose a winner.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The release contained no separate cuCIM ZIP, source-build helper, or
+      provider-install step.</p>
+</li>
 </ul>
 <p>What was confusing or did not work:</p>
 <h2 id="repair-rollback-and-removal">Repair, rollback, and removal<a class="headerlink" href="#repair-rollback-and-removal" title="Permanent link">&para;</a></h2>
@@ -2799,7 +2825,7 @@ previous working installation and research data are safely preserved.</p>
 <li>Most important remaining problem:</li>
 </ul>
 <p>Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded <code>0.13.0a7</code> installer.</p>
+version do not count as a pass for this downloaded <code>0.13.0a8</code> installer.</p>
 
 
 
@@ -2820,7 +2846,7 @@ version do not count as a pass for this downloaded <code>0.13.0a7</code> install
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:22:26 UTC">August 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 18:57:25 UTC">August 22, 2026</span>
   </span>
 
     
@@ -2858,7 +2884,7 @@ version do not count as a pass for this downloaded <code>0.13.0a7</code> install
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../windows-cuda/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Windows CUDA and cuCIM">
+          <a href="../windows-cuda/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Windows NVIDIA GPU">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2868,7 +2894,7 @@ version do not count as a pass for this downloaded <code>0.13.0a7</code> install
                 Previous
               </span>
               <div class="md-ellipsis">
-                Windows CUDA and cuCIM
+                Windows NVIDIA GPU
               </div>
             </div>
           </a>

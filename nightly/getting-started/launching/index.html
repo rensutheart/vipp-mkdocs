@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -902,7 +927,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -2008,7 +2033,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2748,8 +2773,8 @@ graph zoom for overview; use napari layers for full-resolution image comparison.
 <h2 id="if-vipp-is-missing-from-the-plugins-menu">If VIPP is missing from the Plugins menu<a class="headerlink" href="#if-vipp-is-missing-from-the-plugins-menu" title="Permanent link">&para;</a></h2>
 <p>Check that napari is running from the same environment into which VIPP was
 installed:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python -c &quot;import sys; print(sys.executable)&quot;
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python -c &quot;import napari_vipp; print(napari_vipp.__file__)&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python -c "import sys; print(sys.executable)"
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python -c "import napari_vipp; print(napari_vipp.__file__)"
 </span></code></pre></div>
 <p>If either command uses a different environment, close napari, activate the
 correct environment, and launch it again. See <a href="../../troubleshooting/report-a-problem/">report a problem</a>

@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -897,7 +922,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1656,9 +1681,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tiff-page-labels-in-a-batch" class="md-nav__link">
+  <a href="#tiff-page-labels-at-an-image-source" class="md-nav__link">
     <span class="md-ellipsis">
-      TIFF page labels in a batch
+      TIFF page labels at an image source
     </span>
   </a>
   
@@ -2017,7 +2042,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2619,9 +2644,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tiff-page-labels-in-a-batch" class="md-nav__link">
+  <a href="#tiff-page-labels-at-an-image-source" class="md-nav__link">
     <span class="md-ellipsis">
-      TIFF page labels in a batch
+      TIFF page labels at an image source
     </span>
   </a>
   
@@ -2770,14 +2795,19 @@ shape.</p>
 <p>Workflow schema 4 adds authored compute intent without changing these axis and
 metadata semantics. A schema-3 workflow therefore loads into 0.13 with explicit
 CPU execution rather than silently applying the new-session Auto policy.</p>
-<h2 id="tiff-page-labels-in-a-batch">TIFF page labels in a batch<a class="headerlink" href="#tiff-page-labels-in-a-batch" title="Permanent link">&para;</a></h2>
+<h2 id="tiff-page-labels-at-an-image-source">TIFF page labels at an image source<a class="headerlink" href="#tiff-page-labels-at-an-image-source" title="Permanent link">&para;</a></h2>
 <p>Some ordinary TIFF files report a page dimension as generic <code>Q</code> because the
 file does not say what those pages mean. VIPP does not assume that Q is Z for
 every TIFF.</p>
+<p>The <code>Image Source</code> inspector and each Batch workspace source use the same
+<strong>Image stack</strong> interpretation control. On an ordinary Image Source, the
+conservative default is <strong>Use the file's labels unchanged</strong>. Choose <strong>Pages are
+depth slices (Z stack)</strong> only after confirming that a reported <code>QYX</code> source is
+really a Z stack. The reviewed choice is saved with the workflow.</p>
 <p>In a new Batch workspace source, <strong>Image stack</strong> starts at <strong>Automatic
 (recommended)</strong>. If one representative reports exactly <code>QYX</code> and the workflow
 demonstrates that it requires <code>ZYX</code>, VIPP visibly selects <strong>Pages are depth
-slices (Z stack)</strong> and retries with this guarded declaration:</p>
+slices (Z stack)</strong> and retries with the same guarded declaration:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>QYX -&gt; ZYX
 </span></code></pre></div>
 <p>Keep that suggestion only when independent acquisition information confirms
@@ -2792,10 +2822,17 @@ complete axis record, but it cannot rename Q to Z.</p>
 is declared. Relabelling Q as Z therefore does not discover a missing Z step or
 prove that the saved calibration is correct. Verify <strong>Output Metadata</strong> and use
 <code>Set Pixel Size / Units</code> before calibration-dependent analysis.</p>
-<p>The Automatic suggestion is applied only by the visible GUI. A resolved choice
-is saved as the concrete declaration and is reproduced by headless execution.
-An unresolved or historic blank value stores no declaration, reloads as <strong>Use
-the file's labels unchanged</strong>, and remains strict in headless runs.</p>
+<p>An Image Source declaration and a Batch source declaration use the same parser,
+validation, positional relabelling, metadata record, and execution path. The
+Automatic suggestion is applied only by the visible Batch GUI. A resolved
+choice is saved as the concrete declaration and is reproduced by headless
+execution. An unresolved or historic blank value stores no declaration,
+reloads as <strong>Use the file's labels unchanged</strong>, and remains strict in headless
+runs.</p>
+<p>After <code>QYX -&gt; ZYX</code>, <strong>Rescale Axes</strong> exposes Z alongside Y and X. Without a
+reviewed declaration, a node that only needs a 2D spatial interpretation can
+use inferred trailing Y/X and displays that inference; it does not silently
+promote Q to Z.</p>
 <p><code>Composite → RGB</code> adds explicit authoring modes around that contract.
 <strong>Channel axis mode = Auto</strong> resolves the carried explicit channel axis and
 shows it read-only; <strong>Manual</strong> enables the axis selector and permits any valid
@@ -2878,7 +2915,7 @@ triggers for replacement guesses.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 6, 2026 15:18:53 UTC">August 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
   </span>
 
     

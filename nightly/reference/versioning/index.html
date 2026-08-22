@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -897,7 +922,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1910,7 +1935,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2127,9 +2152,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#move-from-an-earlier-013-alpha-to-0130a7" class="md-nav__link">
+  <a href="#move-from-an-earlier-013-alpha-to-0130a8" class="md-nav__link">
     <span class="md-ellipsis">
-      Move from an earlier 0.13 alpha to 0.13.0a7
+      Move from an earlier 0.13 alpha to 0.13.0a8
     </span>
   </a>
   
@@ -2619,9 +2644,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#move-from-an-earlier-013-alpha-to-0130a7" class="md-nav__link">
+  <a href="#move-from-an-earlier-013-alpha-to-0130a8" class="md-nav__link">
     <span class="md-ellipsis">
-      Move from an earlier 0.13 alpha to 0.13.0a7
+      Move from an earlier 0.13 alpha to 0.13.0a8
     </span>
   </a>
   
@@ -2733,14 +2758,14 @@
 </tr>
 </tbody>
 </table>
-<p>The numbered <strong>0.13.0a7</strong> snapshot is the current verified public alpha,
+<p>The numbered <strong>0.13.0a8</strong> snapshot is the current verified public alpha,
 published on
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a7">GitHub</a> and
-<a href="https://pypi.org/project/napari-vipp/0.13.0a7/">PyPI</a>. Its
-<a href="../../releases/0.13.0a7/#release-verification">release verification</a> records the
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8">GitHub</a> and
+<a href="https://pypi.org/project/napari-vipp/0.13.0a8/">PyPI</a>. Its
+<a href="../../releases/0.13.0a8/#release-verification">release verification</a> records the
 exact application commit, tag, CI, GPU admission, intentionally unsigned
 installer, artifact hashes, public artifact-download hash checks, and
-numbered-manual publication. The nightly manual may describe later unreleased
+public package publication. The nightly manual may describe later unreleased
 work.</p>
 <p>The <code>main</code>/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.</p>
@@ -2752,35 +2777,42 @@ selector in the site header. If they differ:</p>
 <li>install the release described by the manual in a separate environment.</li>
 </ul>
 <p>Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.13.0a7 writes schema version 4; versions 1 and 2 are rejected. Valid
+VIPP 0.13.0a8 writes schema version 4; versions 1 and 2 are rejected. Valid
 schema-3 workflows load structurally with an explicit CPU compute request and
 become schema 4 only when saved. Workflow JSON contains no cached scientific
 pixels/tables. Recalculate and compare graph structure, parameters, sources,
 axes, channels, physical grids, dynamic ports, compute request, actual backend,
 and results on known sample data. See the
 <a href="../workflow-contract/">workflow contract</a>.</p>
-<h2 id="move-from-an-earlier-013-alpha-to-0130a7">Move from an earlier 0.13 alpha to 0.13.0a7<a class="headerlink" href="#move-from-an-earlier-013-alpha-to-0130a7" title="Permanent link">&para;</a></h2>
-<p>The workflow and batch schemas do not change between 0.13.0a1 and 0.13.0a7,
-but generated programs are version-locked, GPU regions changed, and accepted
-dtype conversions are now ordinary visible graph edits.</p>
+<h2 id="move-from-an-earlier-013-alpha-to-0130a8">Move from an earlier 0.13 alpha to 0.13.0a8<a class="headerlink" href="#move-from-an-earlier-013-alpha-to-0130a8" title="Permanent link">&para;</a></h2>
+<p>The workflow and batch schema numbers do not change between 0.13.0a1 and
+0.13.0a8, but generated programs are version-locked, GPU identities and regions
+changed, Image Source gained a durable axis declaration, and new graph edits
+and nodes can affect calculation.</p>
 <ol>
 <li>Preserve the earlier environment, workflows, outputs, execution reports,
-   batch artifacts, and any private cuCIM wheel and build manifest.</li>
-<li>Install <code>0.13.0a7</code> separately with the
+   batch artifacts, and any private cuCIM wheel and build manifest as historical
+   evidence. Do not install the old provider into a8.</li>
+<li>Install <code>0.13.0a8</code> separately with the
    checksum-verified unsigned Windows installer, or upgrade a dedicated manual
-   environment with an exact <code>napari-vipp==0.13.0a7</code> or
-   <code>napari-vipp[gpu-cuda13]==0.13.0a7</code> pin. Use the official public assets and
+   environment with an exact <code>napari-vipp==0.13.0a8</code> or
+   <code>napari-vipp[gpu-cuda13]==0.13.0a8</code> pin. Use the official public assets and
    recorded hashes; do not substitute an untagged build. Do not mix CUDA-major
    extras.</li>
 <li>Run <code>pip check</code> and, for CUDA, <code>vipp-compute-doctor --track cuda13 --refresh</code>.
-   Use only the matching public a7-tagged cuCIM bundle/helper; never reuse an a6
-   bundle or copy an old approval record back manually.</li>
+   The normal CuPy/CuPyX installation now contains every current provider. Do
+   not reuse a cuCIM bundle, private wheel, or approval record from an earlier
+   release.</li>
 <li>Open a duplicate workflow, run it on CPU, and compare decisive intermediate
    and final results before enabling Auto or Prefer GPU.</li>
 <li>Record the exact GPU model, compute capability, driver, CUDA and scientific
    package versions, and actual implementation IDs. Minor floating-point
    differences can occur across otherwise compatible devices.</li>
-<li>Regenerate and revalidate exported Python and saved batch runners under a7.</li>
+<li>Review each Image Source and Batch <strong>Image stack</strong> choice. A saved exact
+   basic-measurement cuCIM pin migrates to its CuPy replacement; a broad
+   <code>library:cucim</code> preference remains unavailable and needs an explicit current
+   choice.</li>
+<li>Regenerate and revalidate exported Python and saved batch runners under a8.</li>
 </ol>
 <h2 id="move-from-0120a3-to-0130a1">Move from 0.12.0a3 to 0.13.0a1<a class="headerlink" href="#move-from-0120a3-to-0130a1" title="Permanent link">&para;</a></h2>
 <p>0.13 introduces durable compute intent and guarded source-axis declarations,
@@ -2890,16 +2922,16 @@ reference for manual reconstruction, but do not claim numerical equivalence
 without testing it.</p>
 <h2 id="install-a-release">Install a release<a class="headerlink" href="#install-a-release" title="Permanent link">&para;</a></h2>
 <p>To ask pip to choose the latest unpinned alpha, use:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install &quot;napari[pyqt6]&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install "napari[pyqt6]"
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python -m pip install --pre napari-vipp
 </span></code></pre></div>
 <p>To reproduce a specific alpha exactly, specify the version in a fresh
-environment. An exact prerelease does not need <code>--pre</code>. The a7 examples below
+environment. An exact prerelease does not need <code>--pre</code>. The a8 examples below
 use the public PyPI release:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp==0.13.0a7&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp==0.13.0a8"
 </span></code></pre></div>
 <p>For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install &quot;napari[pyqt6]&gt;=0.6&quot; &quot;napari-vipp[gpu-cuda13]==0.13.0a7&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp[gpu-cuda13]==0.13.0a8"
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vipp-compute-doctor --track cuda13
 </span></code></pre></div>
 <p>The extra installs a reproducible CUDA/CuPy track; it does not make an
@@ -2932,7 +2964,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 15, 2026 07:22:26 UTC">August 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 18:59:21 UTC">August 22, 2026</span>
   </span>
 
     

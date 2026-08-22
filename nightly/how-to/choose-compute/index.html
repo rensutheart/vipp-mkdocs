@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -897,7 +922,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -1424,9 +1449,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-regions-in-0130a7" class="md-nav__link">
+  <a href="#gpu-regions-in-0130a8" class="md-nav__link">
     <span class="md-ellipsis">
-      GPU regions in 0.13.0a7
+      GPU regions in 0.13.0a8
     </span>
   </a>
   
@@ -2035,7 +2060,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2664,9 +2689,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-regions-in-0130a7" class="md-nav__link">
+  <a href="#gpu-regions-in-0130a8" class="md-nav__link">
     <span class="md-ellipsis">
-      GPU regions in 0.13.0a7
+      GPU regions in 0.13.0a8
     </span>
   </a>
   
@@ -2724,7 +2749,7 @@
 
 
 <h1 id="choose-and-verify-cpu-or-gpu-compute">Choose and verify CPU or GPU compute<a class="headerlink" href="#choose-and-verify-cpu-or-gpu-compute" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.13.0a7 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
+<p>VIPP 0.13.0a8 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
 <strong>Custom</strong> compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.</p>
 <p>CPU remains the portable scientific reference. GPU implementations are
@@ -2817,14 +2842,14 @@ Use <strong>Prefer GPU</strong> as the explicit override. Min-max uses an exact 
 reduction. Float and other-dtype percentiles retain the exact NumPy-compatible
 CPU calculation. Select a node and read its separate <strong>Thumbnail contrast</strong>
 inspector row—<strong>Calculating… / CPU · NumPy / GPU · CuPy / CPU fallback /
-Error</strong>—for what happened; the ordinary CPU/CuPy/cuCIM badge remains in the node
+Error</strong>—for what happened; the ordinary CPU/CuPy badge remains in the node
 title row as the record of what produced the node output.</p>
 <h2 id="a-safe-practical-sequence">A safe practical sequence<a class="headerlink" href="#a-safe-practical-sequence" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Run a representative item on <strong>CPU</strong> and inspect the decisive images,
    masks, labels, and tables. Retain this result when CPU/GPU parity matters.</li>
-<li>Open <strong>Compute setup and memory…</strong>. Read its three short rows—<strong>CUDA and
-   GPU</strong>, <strong>Optional cuCIM</strong>, and <strong>VIPP GPU coverage</strong>—then follow the one
+<li>Open <strong>Compute setup and memory…</strong>. Read its two short rows—<strong>CUDA and
+   GPU</strong> and <strong>VIPP GPU coverage</strong>—then follow the one
    recommended next step. Open <strong>Show advanced details</strong> only when you need the
    scientific stack, device, eligibility, RAM/VRAM, and provider evidence. The
    window can save a privacy-redacted support report; VIPP never executes a
@@ -2895,7 +2920,7 @@ appropriate for the analysis.</p>
 <li><strong>Current operation</strong> tracks truthful checkpoints inside the active parity,
   cold-call, warmup, or timed call.</li>
 </ul>
-<p>A single NumPy, SciPy, CuPy, CuPyX, or cuCIM call can remain at one percentage
+<p>A single NumPy, SciPy, CuPy, or CuPyX call can remain at one percentage
 until it returns because VIPP cannot observe a scientifically safe subdivision.
 A reached time limit means planned comparisons remain; it does <strong>not</strong> prove
 that the current assignment is optimal. The result identifies completed and
@@ -2904,7 +2929,7 @@ can be reused on retry. Editing data, parameters, code/policy identity, or the
 relevant environment invalidates reuse.</p>
 <p>A completed comparison remains inspectable when the speed evidence is too
 close to recommend a winner. The result groups one heading per workflow node
-with a separate row for every tested CPU, CuPy-family, or cuCIM implementation.
+with a separate row for every tested CPU or CuPy-family implementation.
 The compact columns show total execution time, scientific agreement, and the
 outcome; expanded details separate resident compute, transfers, <strong>First run</strong>
 cost, memory, and evidence provenance. An inconclusive outcome leaves
@@ -2928,8 +2953,9 @@ accelerator runtime and the calculated writer-free graph frontier. Unsupported
 nodes remain CPU candidates; manual barriers do not justify benchmarking an
 unrunnable descendant.</p>
 <p><a id="gpu-regions-in-0130a1"></a>
-<a id="gpu-regions-in-0130a7"></a></p>
-<h2 id="gpu-regions-in-0130a7">GPU regions in 0.13.0a7<a class="headerlink" href="#gpu-regions-in-0130a7" title="Permanent link">&para;</a></h2>
+<a id="gpu-regions-in-0130a7"></a>
+<a id="gpu-regions-in-0130a8"></a></p>
+<h2 id="gpu-regions-in-0130a8">GPU regions in 0.13.0a8<a class="headerlink" href="#gpu-regions-in-0130a8" title="Permanent link">&para;</a></h2>
 <p>The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.</p>
 <table>
@@ -2944,13 +2970,13 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <tbody>
 <tr>
 <td>Rolling-Ball Background</td>
-<td>cuCIM</td>
+<td>CuPy</td>
 <td><code>uint8</code>, <code>uint16</code>, or <code>float32</code>; 2D slice-wise or 3D</td>
 <td>Radius 1–500 in 2D and 1–50 in 3D. Other dtypes/radii use CPU. The declared float32 parity region is not finite-only.</td>
 </tr>
 <tr>
 <td>Subtract Background</td>
-<td>cuCIM</td>
+<td>CuPy</td>
 <td><code>uint8</code>, <code>uint16</code>, or <code>float32</code>; 2D slice-wise or 3D</td>
 <td>Same reviewed radius limits as Rolling-Ball. The declared float32 parity region is not finite-only.</td>
 </tr>
@@ -3033,6 +3059,12 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <td>Face or Full connectivity with <code>Maximum hole size = 0</code> (fill every enclosed hole). Positive bounded-hole-size cleanup remains CPU.</td>
 </tr>
 <tr>
+<td>Remove Outliers (Binary)</td>
+<td>CuPy</td>
+<td>Boolean mask; independent trailing <code>YX</code> planes</td>
+<td>Fiji-compatible foreground removal or background filling with nearest-edge neighborhoods. The public GPU region covers radius 0.5–25; canonical <code>uint8</code> and larger valid radii remain CPU.</td>
+</tr>
+<tr>
 <td>Label Connected Components</td>
 <td>CuPyX</td>
 <td>Boolean mask; resolved 2D or 3D</td>
@@ -3040,13 +3072,13 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 </tr>
 <tr>
 <td>Measure Objects</td>
-<td>cuCIM</td>
+<td>CuPy</td>
 <td>native-endian, non-negative <code>int32</code> labels; 2D or 3D</td>
 <td>Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU.</td>
 </tr>
 <tr>
 <td>Measure Objects + Intensity</td>
-<td>cuCIM</td>
+<td>CuPy</td>
 <td>the same labels plus native-endian Boolean, <code>uint8</code>, <code>uint16</code>, or finite <code>float32</code> intensity</td>
 <td>Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU.</td>
 </tr>
@@ -3063,12 +3095,10 @@ larger GPU gains across filtering, deconvolution, and segmentation, but it
 changes the authored data representation. Never convert only to make a
 benchmark look faster.</p>
 <h2 id="installation-and-platform-boundary">Installation and platform boundary<a class="headerlink" href="#installation-and-platform-boundary" title="Permanent link">&para;</a></h2>
-<p>The <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX CUDA track. It does not
-include the separately reviewed cuCIM build used by the background and basic
-measurement candidates, so those nodes normally remain CPU after a standard
-public GPU install. Windows users can optionally build the pinned cuCIM 26.6.0
-source locally and approve it with its generated manifest; see the
-<a href="../../getting-started/windows-cuda/">Windows CUDA and cuCIM guide</a>.</p>
+<p>The <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX CUDA track and every
+current reviewed GPU provider, including background processing and basic
+measurements. No separate provider bundle or local source build is required;
+see the <a href="../../getting-started/windows-cuda/">Windows NVIDIA GPU guide</a>.</p>
 <p>Public admission requires native Windows, CPython 3.12, the pinned CUDA 13.2
 runtime and scientific/provider stack, driver API 13.3 or newer, and a probed
 NVIDIA CUDA device with compute capability 7.5 or newer. The GPU model is
@@ -3177,7 +3207,7 @@ publication, checkpoints, a durable manifest, or replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:36:52 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
   </span>
 
     

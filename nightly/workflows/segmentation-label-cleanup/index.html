@@ -554,6 +554,8 @@
       
         
       
+        
+      
     
     
     
@@ -597,6 +599,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -897,7 +922,7 @@
   
   
   <span class="md-ellipsis">
-    Windows CUDA and cuCIM
+    Windows NVIDIA GPU
     
   </span>
   
@@ -2068,7 +2093,7 @@
   
   
   <span class="md-ellipsis">
-    All 113 nodes
+    All nodes
     
   </span>
   
@@ -2807,9 +2832,10 @@ labels.</p>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  -&gt; Gaussian Blur
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  -&gt; Otsu Threshold
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  -&gt; Fill Holes
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  -&gt; Remove Small Objects
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  -&gt; Label Connected Components
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  -&gt; Filter Labels By Volume
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  -&gt; Remove Outliers (Binary)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  -&gt; Remove Small Objects
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  -&gt; Label Connected Components
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  -&gt; Filter Labels By Volume
 </span></code></pre></div>
 <h2 id="key-nodes">Key Nodes<a class="headerlink" href="#key-nodes" title="Permanent link">&para;</a></h2>
 <table>
@@ -2838,7 +2864,7 @@ labels.</p>
 </tr>
 <tr>
 <td>Mask cleanup</td>
-<td><code>Fill Holes</code>, <code>Remove Small Objects</code>, morphology nodes</td>
+<td><code>Fill Holes</code>, <code>Remove Outliers (Binary)</code>, <code>Remove Small Objects</code>, morphology nodes</td>
 </tr>
 <tr>
 <td>Label creation</td>
@@ -2924,8 +2950,8 @@ compare against the intended ImageJ reference before consequential use.</p>
 <h2 id="cpu-and-gpu-boundaries-in-this-workflow">CPU and GPU boundaries in this workflow<a class="headerlink" href="#cpu-and-gpu-boundaries-in-this-workflow" title="Permanent link">&para;</a></h2>
 <p>Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
 Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
-Canny, median, Sigma Filter, and background correction have GPU candidates only
-inside declared regions. A portable a7 corridor can use an explicitly described
+Canny, median, Sigma Filter, Remove Outliers (Binary), and background correction
+have GPU candidates only inside declared regions. A portable a8 corridor can use an explicitly described
 channel, convert <code>uint8</code>/<code>uint16</code> to <code>float32</code> without rescaling, apply Gaussian
 Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
 without an intermediate host transfer.</p>
@@ -2936,12 +2962,18 @@ supports those Boolean connectivity regions only when <code>Maximum hole size = 
 a positive bounded size remains CPU. Connected Components still requires a
 Boolean call resolved as 2D or 3D. Unsupported calls receive an explained CPU
 decision, while invalid or explicitly non-fallback-safe calls fail planning.</p>
+<p>Remove Outliers (Binary) processes each trailing YX plane independently using
+Fiji-compatible circular neighborhoods. Choose foreground removal to clean
+bright specks or background filling to close dark notches. The public CuPy
+region accepts Boolean masks and radius 0.5–25; canonical <code>uint8</code> masks and
+larger valid radii use CPU. Review fine boundaries at the intended zoom because
+this majority cleanup can remove real thin structures.</p>
 <p>VIPP never inserts a cast during calculation. When dtype is the only reviewed
 blocker, the node may show a <strong>GPU tip</strong> and an <strong>Add conversion</strong> button. That
 button inserts a visible, undoable Convert Dtype node; review its memory,
 threshold, and scientific consequences before accepting it.</p>
 <p>Read each node badge after calculation and see the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0130a7">CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0130a8">CPU/GPU operation matrix</a>
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.</p>
@@ -3016,7 +3048,7 @@ pinned in napari while its graph node and input histogram remain visible.</em></
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 14, 2026 10:30:46 UTC">August 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
   </span>
 
     
