@@ -1,8 +1,39 @@
 # Validation status
 
-This page summarizes evidence for the public 0.13.0a7 release and keeps earlier
-release evidence separate. It is a claim boundary, not a certificate that every
-node is validated for every assay.
+This page summarizes the 0.13.0a8 evidence boundary and keeps earlier release
+evidence separate. It is a claim boundary, not a certificate that every node
+is validated for every assay.
+
+## 0.13.0a8 qualification boundary
+
+The CuPy-only provider migration reached application `main` at merge commit
+`db61a1996014967cd8a752e853b555987a0e94ef`. Its
+[exact-main CI run](https://github.com/rensutheart/napari-vipp/actions/runs/32567020754)
+passed all 13 jobs: quality/package checks, the full tests on Windows, Linux,
+and macOS with CPython 3.12 and 3.13, and clean wheel/source-archive
+installation lanes.
+
+That migration CI is development evidence, not the final a8 release record.
+The exact release tag, final-main CI, installer workflow, distribution hashes,
+and documentation workflow remain recorded as placeholders in the
+[a8 release-verification table](../releases/0.13.0a8.md#release-verification)
+until the final artifacts exist. This manual must not be deployed as the
+numbered a8 snapshot before those placeholders are replaced.
+
+The current public GPU catalogue declares **19 implementations** and **24
+executable evidence owners**. Focused RTX 5090 evidence for the replacement
+CuPy basic-measurement providers passed 11 admission cases, 11 deliberate
+rejections, two cancellation/lifecycle cases, and 15 performance cases, with
+zero private-pool residue. A final full-catalogue admission run against the
+exact a8 candidate remains a release gate; this page does not claim that it has
+already passed.
+
+The standard Windows CUDA installation is now CuPy/CuPyX-only and includes
+background processing and basic measurements. The separate cuCIM installer,
+source-build coordinator, private-wheel approval path, and hosted provider
+asset were removed. The exact a8 normal-installer build smoke and affected
+CPU/CUDA lifecycle checks remain final-release gates, not carried-forward a7
+passes.
 
 ## Evidence available now
 
@@ -37,7 +68,7 @@ node is validated for every assay.
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.
 
-## 0.13.0a7 published qualification boundary
+## Historical 0.13.0a7 published qualification boundary
 
 Final a7 application source merged to `main` through
 [pull request #23](https://github.com/rensutheart/napari-vipp/pull/23) at

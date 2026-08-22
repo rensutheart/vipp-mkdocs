@@ -53,11 +53,13 @@ Use `Reorder Axes` only when you understand the actual stored order. Use
 `Set Pixel Size / Units` to repair missing or known-wrong calibration, and
 record where the corrected values came from.
 
-For an ordinary TIFF batch that reports generic `QYX`, use the source's
+For an ordinary TIFF that reports generic `QYX`, use the Image Source node's
 **Image stack** chooser instead of trying to rename Q with `Reorder Axes`.
-VIPP can visibly suggest **Pages are depth slices (Z stack)** only when the
-workflow demonstrates a `ZYX` requirement. Keep it only after confirming the
-page meaning, and verify Z spacing separately.
+Choose **Pages are depth slices (Z stack)** only after confirming the page
+meaning; the resulting `QYX -> ZYX` declaration is saved with the workflow and
+does not move pixels. Batch workspace uses the same control and can visibly
+suggest that choice only when the workflow demonstrates a `ZYX` requirement.
+Keep the suggestion only after review, and verify Z spacing separately.
 
 For Nikon ND2, 0.13 follows the reader's ordered dimension mapping when its
 labels and sizes exactly match the returned array. This fixes affected T/Z/C

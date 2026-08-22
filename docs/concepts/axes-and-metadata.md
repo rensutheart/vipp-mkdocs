@@ -49,16 +49,22 @@ Workflow schema 4 adds authored compute intent without changing these axis and
 metadata semantics. A schema-3 workflow therefore loads into 0.13 with explicit
 CPU execution rather than silently applying the new-session Auto policy.
 
-## TIFF page labels in a batch
+## TIFF page labels at an image source
 
 Some ordinary TIFF files report a page dimension as generic `Q` because the
 file does not say what those pages mean. VIPP does not assume that Q is Z for
 every TIFF.
 
+The `Image Source` inspector and each Batch workspace source use the same
+**Image stack** interpretation control. On an ordinary Image Source, the
+conservative default is **Use the file's labels unchanged**. Choose **Pages are
+depth slices (Z stack)** only after confirming that a reported `QYX` source is
+really a Z stack. The reviewed choice is saved with the workflow.
+
 In a new Batch workspace source, **Image stack** starts at **Automatic
 (recommended)**. If one representative reports exactly `QYX` and the workflow
 demonstrates that it requires `ZYX`, VIPP visibly selects **Pages are depth
-slices (Z stack)** and retries with this guarded declaration:
+slices (Z stack)** and retries with the same guarded declaration:
 
 ```text
 QYX -> ZYX
@@ -79,10 +85,18 @@ is declared. Relabelling Q as Z therefore does not discover a missing Z step or
 prove that the saved calibration is correct. Verify **Output Metadata** and use
 `Set Pixel Size / Units` before calibration-dependent analysis.
 
-The Automatic suggestion is applied only by the visible GUI. A resolved choice
-is saved as the concrete declaration and is reproduced by headless execution.
-An unresolved or historic blank value stores no declaration, reloads as **Use
-the file's labels unchanged**, and remains strict in headless runs.
+An Image Source declaration and a Batch source declaration use the same parser,
+validation, positional relabelling, metadata record, and execution path. The
+Automatic suggestion is applied only by the visible Batch GUI. A resolved
+choice is saved as the concrete declaration and is reproduced by headless
+execution. An unresolved or historic blank value stores no declaration,
+reloads as **Use the file's labels unchanged**, and remains strict in headless
+runs.
+
+After `QYX -> ZYX`, **Rescale Axes** exposes Z alongside Y and X. Without a
+reviewed declaration, a node that only needs a 2D spatial interpretation can
+use inferred trailing Y/X and displays that inference; it does not silently
+promote Q to Z.
 
 `Composite → RGB` adds explicit authoring modes around that contract.
 **Channel axis mode = Auto** resolves the carried explicit channel axis and

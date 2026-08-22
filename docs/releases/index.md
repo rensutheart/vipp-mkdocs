@@ -6,6 +6,27 @@ data.
 
 ## Current verified public alpha
 
+- [0.13.0a8](0.13.0a8.md) — one standard CuPy-only GPU installation,
+  CuPy background and basic-measurement providers, Remove Outliers, safer
+  optimizer assignment, wire insertion, and explicit source-axis handling.
+
+The immutable a8 alpha is distributed on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a8/). Its exact source, CI,
+GPU admission, intentionally unsigned normal installer, hashes, and numbered
+manual are recorded in the
+[a8 release-verification table](0.13.0a8.md#release-verification).
+
+0.13.0a8 writes workflow schema 4 and batch config/manifest schema 3. Valid
+schema-3 workflows and version-1 batch configs load as explicit CPU requests;
+version-2 batch configs retain their saved compute request. Neither older batch
+version contains source-axis declarations until reviewed and saved as version
+3. Workflow files do not contain cached results. Recalculate and validate after
+upgrading, and regenerate Python exports because generated programs require the
+exact VIPP runtime version that created them.
+
+## Earlier releases
+
 - [0.13.0a7](0.13.0a7.md) — visible one-click dtype repairs, readable
   per-implementation optimizer results, broader RL backend agreement, and a
   connected GPU segmentation/mask-cleanup example.
@@ -16,16 +37,6 @@ The immutable a7 alpha is public on
 GPU admission, intentionally unsigned installer, seven release assets, hashes,
 and numbered-manual publication are recorded in the
 [a7 release-verification table](0.13.0a7.md#release-verification).
-
-0.13.0a7 writes workflow schema 4 and batch config/manifest schema 3. Valid
-schema-3 workflows and version-1 batch configs load as explicit CPU requests;
-version-2 batch configs retain their saved compute request. Neither older batch
-version contains source-axis declarations until reviewed and saved as version
-3. Workflow files do not contain cached results. Recalculate and validate after
-upgrading, and regenerate Python exports because generated programs require the
-exact VIPP runtime version that created them.
-
-## Earlier releases
 
 - [0.13.0a6](0.13.0a6.md) — graph-fragment reuse and tunnel insertion,
   Compute Doctor 2.0, complete public-GPU admission checks, multi-series and

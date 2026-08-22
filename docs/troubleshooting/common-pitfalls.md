@@ -177,11 +177,10 @@ For **Custom**, CPU can still be the only scientifically admitted result for
 the exact dtype, parameters, shape, memory, provider, or environment, or it can
 be an amber visible fallback from a forced GPU choice. Read the node badge and
 decision reason, then run **Compute setup and memory…**. The standard CUDA extra
-does not include the separately reviewed cuCIM build used by background and
-basic measurement candidates. To enable them on an admitted Windows host, use
-the exact pinned local-build and manifest-verification route; installing an
-arbitrary cuCIM wheel is not sufficient. See the
-[Windows CUDA and cuCIM guide](../getting-started/windows-cuda.md) and
+includes every current reviewed provider, including background processing and
+basic measurements. Do not add an old private provider wheel when one of those
+nodes remains on CPU; read its exact workload or scientific gate instead. See
+the [Windows NVIDIA GPU guide](../getting-started/windows-cuda.md) and
 [choose and verify compute](../how-to/choose-compute.md).
 
 ## Optimizer Progress Appears Stationary

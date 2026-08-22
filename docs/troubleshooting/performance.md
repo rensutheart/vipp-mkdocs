@@ -121,7 +121,7 @@ The `Cancel` button cancels queued reruns and asks cooperative operations to
 stop. It cannot forcibly interrupt a NumPy, SciPy, or scikit-image call already
 inside a work unit.
 
-The same rule applies to CuPy/cuCIM calls and file writers. GPU progress is
+The same rule applies to CuPy/CuPyX calls and file writers. GPU progress is
 published only after stream synchronization at a declared checkpoint, so a
 monolithic plane/volume can appear stationary until that call finishes. This
 is an honest boundary, not a stalled percentage. Cooperative cancellation then
@@ -131,7 +131,7 @@ waits for synchronization and cleanup before output publication.
 
 A completed scientific pipeline can be followed by Stack contrast work for its
 node-card thumbnails. This is a separate presentation calculation: it does not
-mean a node is recalculating or that its CPU/CuPy/cuCIM provenance changed.
+mean a node is recalculating or that its CPU/CuPy provenance changed.
 
 Use the controls independently:
 

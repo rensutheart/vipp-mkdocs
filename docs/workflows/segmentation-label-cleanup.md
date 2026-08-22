@@ -23,6 +23,7 @@ Image Source
   -> Gaussian Blur
   -> Otsu Threshold
   -> Fill Holes
+  -> Remove Outliers (Binary)
   -> Remove Small Objects
   -> Label Connected Components
   -> Filter Labels By Volume
@@ -36,7 +37,7 @@ Image Source
 | Smoothing | `Gaussian Blur`, `Gaussian Blur 3D`, `Median Filter`, `Sigma Filter`, `Non-Local Means` |
 | Background | `Rolling-Ball Background`, `Subtract Background` |
 | Threshold | `Otsu Threshold`, `Triangle Threshold`, `Li Threshold`, `Yen Threshold`, `Binary Threshold`, `ImageJ Auto Threshold (8-bit)`, local threshold nodes |
-| Mask cleanup | `Fill Holes`, `Remove Small Objects`, morphology nodes |
+| Mask cleanup | `Fill Holes`, `Remove Outliers (Binary)`, `Remove Small Objects`, morphology nodes |
 | Label creation | `Label Connected Components`, watershed nodes |
 | Label cleanup | `Clear Border Objects`, `Filter Labels By Volume`, `Filter Labels By Property`, `Relabel Sequential` |
 
@@ -104,8 +105,8 @@ compare against the intended ImageJ reference before consequential use.
 
 Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
 Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
-Canny, median, Sigma Filter, and background correction have GPU candidates only
-inside declared regions. A portable a7 corridor can use an explicitly described
+Canny, median, Sigma Filter, Remove Outliers (Binary), and background correction
+have GPU candidates only inside declared regions. A portable a8 corridor can use an explicitly described
 channel, convert `uint8`/`uint16` to `float32` without rescaling, apply Gaussian
 Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
 without an intermediate host transfer.
@@ -118,13 +119,20 @@ a positive bounded size remains CPU. Connected Components still requires a
 Boolean call resolved as 2D or 3D. Unsupported calls receive an explained CPU
 decision, while invalid or explicitly non-fallback-safe calls fail planning.
 
+Remove Outliers (Binary) processes each trailing YX plane independently using
+Fiji-compatible circular neighborhoods. Choose foreground removal to clean
+bright specks or background filling to close dark notches. The public CuPy
+region accepts Boolean masks and radius 0.5–25; canonical `uint8` masks and
+larger valid radii use CPU. Review fine boundaries at the intended zoom because
+this majority cleanup can remove real thin structures.
+
 VIPP never inserts a cast during calculation. When dtype is the only reviewed
 blocker, the node may show a **GPU tip** and an **Add conversion** button. That
 button inserts a visible, undoable Convert Dtype node; review its memory,
 threshold, and scientific consequences before accepting it.
 
 Read each node badge after calculation and see the
-[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a7)
+[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a8)
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.

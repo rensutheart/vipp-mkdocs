@@ -16,5 +16,5 @@ meaning.
 
 In 0.13, apply the same distinction to execution: the workflow stores a
 portable **CPU / Auto / Prefer GPU / Custom** request, while an accepted run records
-the actual CPU/CuPy/cuCIM implementation and any fallback. See
+the actual CPU or CuPy-family implementation and any fallback. See
 [choose and verify compute](../how-to/choose-compute.md).

@@ -103,7 +103,7 @@ merged objects, and boundary errors.
 ## Verify what implementation produced the output
 
 After an accepted calculation, read the card's compact **CPU**, **GPU · CuPy**,
-**GPU · cuCIM**, or amber **CPU fallback** badge. A muted badge belongs to the
+**GPU · CuPy**, or amber **CPU fallback** badge. A muted badge belongs to the
 last accepted result while the node is stale or updating. Hover or inspect the
 node for the implementation ID/version, decision reason, memory estimate, and
 fallback details. The toolbar mode is only the request; it cannot establish

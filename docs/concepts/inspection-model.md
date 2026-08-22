@@ -82,7 +82,7 @@ leave it adaptive.
 
 Select a node to see that work in the compact **Thumbnail contrast** row near
 the top of its inspector: **Calculating… / CPU · NumPy / GPU · CuPy / CPU
-fallback / Error**. The separate scientific CPU/CuPy/cuCIM badge remains in the
+fallback / Error**. The separate scientific CPU/CuPy badge remains in the
 node title row and still identifies what produced the node output. Hover the
 inspector row or thumbnail for the detailed presentation decision; keyboard
 What's This help and screen readers receive the same text. Stack scans publish

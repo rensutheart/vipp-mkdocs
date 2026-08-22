@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.13.0a7. Controls can collapse into
+Labels below match napari-vipp 0.13.0a8. Controls can collapse into
 **Settings** when the window is narrow.
 
 ## Workflow tabs
@@ -96,7 +96,7 @@ implementation pins are an advanced persistence/API feature; a loaded pin
 remains visible until deliberately replaced. A separate optimizer lock—not
 merely choosing a backend—preserves a node during **Find fastest**.
 
-Calculated cards show compact **CPU**, **GPU · CuPy**, **GPU · cuCIM**, or amber
+Calculated cards show compact **CPU**, **GPU · CuPy**, or amber
 **CPU fallback** badges. A muted badge belongs to the last accepted run while a
 new result is pending or current Custom intent differs. Hover or inspect the node for the implementation ID and
 version, runtime/device, preference, decision reason, benchmark evidence,
@@ -191,7 +191,7 @@ CPU; main **Prefer GPU** biases presentation Auto toward GPU; main **Auto** and
 contrast** row near the top of its inspector: **Calculating…**, **CPU · NumPy**,
 **GPU · CuPy**, amber **CPU fallback**, or red **Error**. Ordinary success is
 muted, and the graph card stays compact. This never replaces the card's
-scientific **CPU**, **GPU · CuPy**, **GPU · cuCIM**, or **CPU fallback** badge.
+scientific **CPU**, **GPU · CuPy**, or **CPU fallback** badge.
 Hover the inspector row or thumbnail for scope, render detail, algorithm, byte
 count, elapsed time, selection reason, threshold, fallback, and failure
 information; keyboard What's This help and screen readers receive the same text.
@@ -232,7 +232,7 @@ provenance.
 
 **Cancel calculation** prevents queued reruns and rejects the active result. It
 asks cooperative work to stop, but cannot forcibly interrupt every NumPy, SciPy, or
-scikit-image, CuPy, or cuCIM call already executing. GPU progress advances only
+scikit-image, CuPy, or CuPyX call already executing. GPU progress advances only
 after synchronization at a truthful operation checkpoint, and cancellation
 waits for cleanup before compute controls unlock. Failed/OOM attempts never
 replace prior processing results with uncomputed or provenance-unknown values.
@@ -311,6 +311,13 @@ scientific notation such as `2e-4`; sufficiently small non-zero values are also
 displayed in scientific notation. A slider is an exploration window, not
 necessarily the full valid entry range. Right-click a numeric field and choose
 **Reset to default** to restore that operation's declared default.
+
+When an image-dependent bound acts on integer data, the corresponding slider
+and spinner use whole-number steps and values. Floating-point input restores
+decimal entry. This prevents controls such as explicit Clip bounds from
+authoring a fractional value that the integer operation cannot represent.
+Sliders keep a practical tuning window even when the spinner accepts a wider
+validated range; Sigma Filter radius is one example.
 
 ### Manual execution colors
 
@@ -392,6 +399,11 @@ The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved **Float histogram bins** parameter.
 
+Every node in the **Intensity And Contrast** palette family shows both its input
+and output histogram when an array result is available. Input and output scope
+controls remain independent, so changing a histogram from the current slice to
+the full stack changes only the display summary, not workflow data.
+
 ## Draggable histogram guides
 
 Input-histogram markers for Binary Threshold, Hysteresis Threshold, explicit
@@ -421,7 +433,14 @@ clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
 at its current display resolution; use a graph node when the scatter image must
 be part of the durable workflow.
 
-## Batch Image stack control
+## Image Source and Batch Image stack controls
+
+The `Image Source` inspector has an **Image stack** chooser for a file, store,
+sample, or napari-layer binding. It defaults to **Use the file's labels
+unchanged**. A reviewed **Pages are depth slices (Z stack)** choice saves
+`QYX -> ZYX` with the workflow; **Something else (advanced)...** accepts a
+complete reviewed source-to-effective declaration. All choices relabel axes by
+position without transposing pixels.
 
 Each collection source in Batch workspace has an **Image stack** chooser:
 
@@ -436,6 +455,8 @@ When Automatic can resolve the exact case, VIPP visibly selects the Z-stack
 choice and shows why it changed, that it will be saved, and that pixel order is
 unchanged. Verify the page meaning and Z calibration independently. Preview and
 Run use the same check; headless execution never invents a missing declaration.
+The Image Source and Batch controls share the same declaration parser,
+validation, metadata application, and headless execution infrastructure.
 
 ## Batch representative strip
 

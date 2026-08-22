@@ -33,7 +33,7 @@ Use this when you want measurements such as:
 
 ## CPU and GPU measurement coverage
 
-The 0.13.0a7 cuCIM candidates cover only the basic `Measure Objects` and
+The 0.13.0a8 CuPy candidates cover only the basic `Measure Objects` and
 `Measure Objects + Intensity` schemas. They require native-endian,
 non-negative `int32` labels in resolved 2D/3D leading blocks. The intensity
 variant additionally accepts matching Boolean, `uint8`, `uint16`, or finite
@@ -45,13 +45,11 @@ expected and appears in the node decision; the GPU provider never returns a
 reduced table while pretending the requested schema was complete. Its bounded
 device calculation is finished by an exact typed host-table finalizer that
 preserves schema, row/column order, units, integer fields, and missing-value
-semantics.
+semantics. A one-pixel object's population standard deviation is exactly zero.
 
-The standard `gpu-cuda13` extra does not distribute the separately reviewed
-cuCIM Windows build, so these nodes normally remain CPU after an ordinary GPU
-install. Windows users may add their own manifest-verified build of the exact
-pinned cuCIM 26.6.0 source. See the
-[Windows CUDA guide](../getting-started/windows-cuda.md) and
+The standard `gpu-cuda13` extra includes these CuPy providers. No separate
+provider build or installation is required. See the
+[Windows NVIDIA GPU guide](../getting-started/windows-cuda.md) and
 [choose and verify compute](../how-to/choose-compute.md).
 
 ## 3D Mesh Morphology

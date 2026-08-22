@@ -33,7 +33,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.13.0a7 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
+VIPP 0.13.0a8 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
 an explicit error. Schema 4 adds portable authored compute intent under
 `execution.compute`, including `cpu`, `auto`, `prefer_gpu`, or `custom` mode
 and per-node preferences. It does not store a claim that the same backend will
@@ -80,7 +80,7 @@ before using it in a consequential analysis.
 
 ### Optional Batch workspace attachment
 
-A 0.13.0a7 workflow can carry an optional top-level `batch_config`. The
+A 0.13.0a8 workflow can carry an optional top-level `batch_config`. The
 version-3 attachment contains source bindings, local input/output paths,
 patterns, guarded source-axis declarations, formats, output policy, run
 settings, and a complete compute request, including runtime/device and
@@ -145,7 +145,7 @@ bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
 different runtime. Regenerate and revalidate exported code after every VIPP
-upgrade, including 0.13.0a6 to 0.13.0a7. Interactive caches, thumbnails, pinned
+upgrade, including 0.13.0a7 to 0.13.0a8. Interactive caches, thumbnails, pinned
 layers, and graph layout remain UI state and are not reproduced.
 
 In 0.13, the callable API accepts a complete `compute_request`, a progress
@@ -203,8 +203,10 @@ next preview/save/run; and CLI arguments overlay only fields actually supplied.
 Unknown node IDs or malformed preferences fail before output artifacts are
 produced.
 
-The Batch workspace's friendly **Image stack** chooser is a front end to one
-durable declaration. A new unsaved row starts at **Automatic (recommended)**.
+The Image Source inspector and Batch workspace share one durable axis-
+declaration contract. The Image Source choice is saved in the workflow; each
+Batch source records its source-specific choice in the batch config. A new
+unsaved Batch row starts at **Automatic (recommended)**.
 If an ordinary TIFF reports exactly `QYX` and the representative reaches a
 workflow requirement for `ZYX`, the GUI can visibly select **Pages are depth
 slices (Z stack)** and retry with `QYX -> ZYX`. Once resolved, the config stores

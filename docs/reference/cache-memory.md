@@ -92,7 +92,7 @@ while allowing separate device keys to proceed independently.
 NVIDIA GPU. In the bounded M1 Max CPU smoke, VIPP presented host memory once as
 system RAM and did not fabricate or add a separate VRAM total. A future Apple
 or other accelerator provider that reports unified topology must instead use
-one shared CPU/GPU budget row. macOS remains CPU-only in 0.13.0a7.
+one shared CPU/GPU budget row. macOS remains CPU-only in 0.13.0a8.
 
 With **visible** fallback, one complete device segment may retry once on CPU
 after a classified runtime OOM, but only after synchronization and proven
@@ -102,7 +102,7 @@ typed failure. Availability or eligibility decisions made before device work
 are still explained but are not runtime OOM fallbacks.
 
 Cache mode limits retained graph outputs; it cannot cap every NumPy/SciPy or
-CuPy/cuCIM temporary. Low-memory mode can therefore coexist with an operation
+CuPy/CuPyX temporary. Low-memory mode can therefore coexist with an operation
 whose CPU RAM or VRAM workspace is large. Basic GPU measurement nodes also
 cross a deliberate host boundary for an exact typed-table finalizer after the
 bounded device calculation.

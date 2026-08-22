@@ -28,7 +28,7 @@ flowchart TD
    output used to tune the workflow.
 4. **What would make the workflow fail?** Predefine failure/QC criteria before
    seeing all experimental results.
-5. **What actually ran?** Archive accepted CPU/CuPy/cuCIM implementation and
+5. **What actually ran?** Archive the accepted CPU or CuPy-family implementation and
    fallback provenance. Auto, Prefer GPU, or Custom intent alone is not an
    execution record, and CPU/GPU parity does not replace assay validation.
 
