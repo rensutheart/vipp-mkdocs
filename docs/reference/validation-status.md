@@ -21,8 +21,9 @@ evidence owners**. The full native-Windows RTX 5090 `cuda:0` qualification
 passed all of them. Its aggregate evidence SHA-256 is
 `0365366dc23750e000c6e9c4f8b384cdf706afdcb338ae3a9f80cfad3d1d8506`.
 The evidence source was candidate commit
-`7189cf40280d895b61b061f1468767164ccfbcf4`; the only subsequent release delta
-was packaging canonicalization and did not change production GPU code.
+`7189cf40280d895b61b061f1468767164ccfbcf4`; the only subsequent
+executable-code change was the packaging canonicalizer. Other changes recorded
+evidence and documentation and did not alter production GPU code.
 
 Risk-based installer acceptance exercised the a8 behavior affected by this
 release. Updating the existing managed CUDA installation from a7 to a8 left
@@ -141,8 +142,9 @@ PyPI digests matched. The
 [numbered-manual workflow](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871275481)
 succeeded and all required 0.13.0a7 URLs returned HTTP 200. Stable-alias
 [workflow 31871941473](https://github.com/rensutheart/vipp-mkdocs/actions/runs/31871941473)
-succeeded; public `versions.json` maps `stable` to `0.13.0a7`, and the required
-stable URLs returned HTTP 200 with no stale prepublication wording.
+succeeded; at that deployment, public `versions.json` mapped `stable` to
+`0.13.0a7`, and the required stable URLs returned HTTP 200 with no stale
+prepublication wording.
 
 Fresh-account Unicode Known Folder, public-download SmartScreen, novice-pilot,
 RTX 40-series Windows, and native Linux CUDA field evidence remain **not run**.

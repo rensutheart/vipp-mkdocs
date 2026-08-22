@@ -13,8 +13,8 @@ data.
 The immutable a8 alpha is distributed on
 [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8) and
 [PyPI](https://pypi.org/project/napari-vipp/0.13.0a8/). Its exact source, CI,
-GPU admission, intentionally unsigned normal installer, hashes, and numbered
-manual are recorded in the
+GPU admission, intentionally unsigned normal installer, and artifact hashes
+are recorded in the
 [a8 release-verification table](0.13.0a8.md#release-verification).
 
 0.13.0a8 writes workflow schema 4 and batch config/manifest schema 3. Valid

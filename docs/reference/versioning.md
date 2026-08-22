@@ -15,7 +15,7 @@ published on
 [release verification](../releases/0.13.0a8.md#release-verification) records the
 exact application commit, tag, CI, GPU admission, intentionally unsigned
 installer, artifact hashes, public artifact-download hash checks, and
-numbered-manual publication. The nightly manual may describe later unreleased
+public package publication. The nightly manual may describe later unreleased
 work.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use

@@ -38,8 +38,8 @@ hide:
 
 !!! warning "Alpha release: validate before interpreting"
     This manual describes the public **napari-vipp 0.13.0a8** alpha. Its exact
-    tag, GitHub prerelease, PyPI files, release assets, numbered manual, and
-    hashes are recorded in the
+    tag, GitHub prerelease, PyPI files, release assets, and hashes are recorded
+    in the
     [a8 release-verification table](releases/0.13.0a8.md#release-verification).
     Verify the intentionally
     unsigned Windows installer against the official checksum before opening it.
