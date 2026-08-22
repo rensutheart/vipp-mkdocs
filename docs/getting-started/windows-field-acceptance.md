@@ -5,9 +5,10 @@ installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Use the exact public tagged installer"
-    The official public installer SHA-256 is `PENDING_SHA256`. Replace that
-    release-build placeholder before publishing this manual. Use this checklist
-    only with the exact `v0.13.0a8` GitHub asset and checksum identified by
+    The official public installer SHA-256 is
+    `5b8233a05696efbf8fea7557012934385021ea3e9018befdd7789bf624740528`.
+    Use this checklist only with the exact `v0.13.0a8` GitHub asset and
+    checksum identified by
     [release verification](../releases/0.13.0a8.md#release-verification). Do not
     use an untagged build or a similarly named file from another site.
 

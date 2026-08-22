@@ -6,34 +6,38 @@ is validated for every assay.
 
 ## 0.13.0a8 qualification boundary
 
-The CuPy-only provider migration reached application `main` at merge commit
-`db61a1996014967cd8a752e853b555987a0e94ef`. Its
-[exact-main CI run](https://github.com/rensutheart/napari-vipp/actions/runs/32567020754)
+Final a8 application source is commit
+[`5a66ae9d1098ca5a8d409a4075c585692e3c3638`](https://github.com/rensutheart/napari-vipp/commit/5a66ae9d1098ca5a8d409a4075c585692e3c3638).
+Its
+[exact-main CI run](https://github.com/rensutheart/napari-vipp/actions/runs/32584690313)
 passed all 13 jobs: quality/package checks, the full tests on Windows, Linux,
 and macOS with CPython 3.12 and 3.13, and clean wheel/source-archive
-installation lanes.
+installation lanes. The
+[Windows installer smoke](https://github.com/rensutheart/napari-vipp/actions/runs/32585512509)
+also passed against that commit.
 
-That migration CI is development evidence, not the final a8 release record.
-The exact release tag, final-main CI, installer workflow, distribution hashes,
-and documentation workflow remain recorded as placeholders in the
-[a8 release-verification table](../releases/0.13.0a8.md#release-verification)
-until the final artifacts exist. This manual must not be deployed as the
-numbered a8 snapshot before those placeholders are replaced.
+The public GPU catalogue declares **19 implementations** and **24 executable
+evidence owners**. The full native-Windows RTX 5090 `cuda:0` qualification
+passed all of them. Its aggregate evidence SHA-256 is
+`0365366dc23750e000c6e9c4f8b384cdf706afdcb338ae3a9f80cfad3d1d8506`.
+The evidence source was candidate commit
+`7189cf40280d895b61b061f1468767164ccfbcf4`; the only subsequent release delta
+was packaging canonicalization and did not change production GPU code.
 
-The current public GPU catalogue declares **19 implementations** and **24
-executable evidence owners**. Focused RTX 5090 evidence for the replacement
-CuPy basic-measurement providers passed 11 admission cases, 11 deliberate
-rejections, two cancellation/lifecycle cases, and 15 performance cases, with
-zero private-pool residue. A final full-catalogue admission run against the
-exact a8 candidate remains a release gate; this page does not claim that it has
-already passed.
+Risk-based installer acceptance exercised the a8 behavior affected by this
+release. Updating the existing managed CUDA installation from a7 to a8 left
+zero cuCIM, `nvimgcodec`, or retired-provider residue in active a8
+`site-packages`; `pip check` was clean; Compute Doctor passed **19 of 19**
+implementations; and the visible application reported VIPP 0.13.0a8. Both new
+CuPy measurement implementations passed parity, cancellation, reuse, and
+zero-private-pool-residue checks. The a7 rollback was deliberately preserved.
 
-The standard Windows CUDA installation is now CuPy/CuPyX-only and includes
-background processing and basic measurements. The separate cuCIM installer,
-source-build coordinator, private-wheel approval path, and hosted provider
-asset were removed. The exact a8 normal-installer build smoke and affected
-CPU/CUDA lifecycle checks remain final-release gates, not carried-forward a7
-passes.
+The separate cuCIM installer, source-build coordinator, private-wheel approval
+path, and hosted provider asset were removed. The redundant fresh CPU,
+installer-cancellation, same-version repair, and uninstall matrix was not
+repeated for this minor alpha; those unperformed paths are not claimed as a8
+passes. Exact public artifacts and publication evidence are recorded in the
+[a8 release-verification table](../releases/0.13.0a8.md#release-verification).
 
 ## Evidence available now
 
