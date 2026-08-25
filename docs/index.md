@@ -37,10 +37,10 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual describes the public **napari-vipp 0.13.0a8** alpha. Its exact
+    This manual describes the public **napari-vipp 0.13.0a9** alpha. Its exact
     tag, GitHub prerelease, PyPI files, release assets, and hashes are recorded
     in the
-    [a8 release-verification table](releases/0.13.0a8.md#release-verification).
+    [a9 release-verification table](releases/0.13.0a9.md#release-verification).
     Verify the intentionally
     unsigned Windows installer against the official checksum before opening it.
     Do not treat unperformed external fresh-machine or novice checks as passes.
@@ -50,11 +50,11 @@ hide:
     analysis—not as optional cleanup after it.
 
 !!! important "0.13 workflow and compute compatibility"
-    0.13.0a8 writes workflow schema 4. A valid schema-3 workflow loads with an
+    0.13.0a9 writes workflow schema 4. A valid schema-3 workflow loads with an
     explicit CPU compute request, while schemas 1 and 2 remain rejected. Cached
     results are not saved in workflow JSON and generated Python is pinned to
     its creator version. Read the
-    [0.13.0a8 release notes](releases/0.13.0a8.md) before upgrading and
+    [0.13.0a9 release notes](releases/0.13.0a9.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 3. Version-1 configs load with an
@@ -104,7 +104,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in the public alpha | [0.13.0a8 release notes](releases/0.13.0a8.md) |
+| Review everything changed in the public alpha | [0.13.0a9 release notes](releases/0.13.0a9.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

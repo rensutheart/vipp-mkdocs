@@ -98,6 +98,15 @@ reviewed declaration, a node that only needs a 2D spatial interpretation can
 use inferred trailing Y/X and displays that inference; it does not silently
 promote Q to Z.
 
+In 0.13.0a9, changing the Image Source declaration immediately refreshes the
+effective metadata along its active branch before a full pixel calculation.
+For a branch such as **Subtract Background -> Rescale Intensity -> Gaussian
+Blur 3D**, declaring `QYX -> ZYX` makes the Gaussian Sigma Z control visible at
+once. Reverting to the unchanged `QYX` labels hides the control but preserves
+its authored value; save/reopen restores visibility from the effective axes.
+An unrelated failing branch or GPU-memory rejection does not leave this branch
+displaying stale QYX metadata.
+
 `Composite → RGB` adds explicit authoring modes around that contract.
 **Channel axis mode = Auto** resolves the carried explicit channel axis and
 shows it read-only; **Manual** enables the axis selector and permits any valid

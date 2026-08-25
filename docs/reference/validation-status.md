@@ -1,8 +1,32 @@
 # Validation status
 
-This page summarizes the 0.13.0a8 evidence boundary and keeps earlier release
-evidence separate. It is a claim boundary, not a certificate that every node
-is validated for every assay.
+This page summarizes the current 0.13.0a9 evidence boundary and keeps its
+carried-forward 0.13.0a8 baseline separate. It is a claim boundary, not a
+certificate that every node is validated for every assay.
+
+## 0.13.0a9 focused qualification boundary
+
+Final a9 application source is commit
+[`d476c8976c91679faaaf0fe196c90b1ab4d63458`](https://github.com/rensutheart/napari-vipp/commit/d476c8976c91679faaaf0fe196c90b1ab4d63458).
+Its
+[exact-main CI](https://github.com/rensutheart/napari-vipp/actions/runs/32825042433)
+and
+[Windows installer build smoke](https://github.com/rensutheart/napari-vipp/actions/runs/32825073086)
+passed. Focused acceptance covered immediate QYX-to-ZYX Gaussian metadata,
+explicit volumetric skeletonization, actionable GPU VRAM preflight, stable
+sibling measurement caches, and Prefer GPU planning through CPU-only nodes.
+
+On the release workstation, the original affected workflow completed under
+Prefer GPU with the reviewed downstream CuPy/CuPyX operations on `cuda:0` and
+no fallback across required CPU-only boundaries. This is bounded evidence for
+that environment, not a universal device or installation claim.
+
+Installer transaction behavior, dependency/toolchain pins, and release
+infrastructure did not change. Their lifecycle evidence therefore carries
+forward from a8 rather than being replayed. The a9 tag nevertheless regenerated
+and checked the exact frozen payload, embedded wheel, version, `NotSigned`
+state, manifests, hashes, GitHub assets, and PyPI bytes. See the
+[a9 release-verification table](../releases/0.13.0a9.md#release-verification).
 
 ## 0.13.0a8 qualification boundary
 

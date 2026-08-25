@@ -1,16 +1,16 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.13.0a8 uses one standard CUDA 13 installation for every current
+VIPP 0.13.0a9 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, `nvcc`, cuCIM
 bundle, or locally built provider wheel is required.
 
-!!! warning "Use the exact a8 release"
+!!! warning "Use the exact a9 release"
     Download the installer and checksum only from the
-    [official v0.13.0a8 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8).
-    Verify `VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.13.0a8.txt` before opening it. This alpha is
+    [official v0.13.0a9 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9).
+    Verify `VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.13.0a9.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
 
 ## Choose the standard NVIDIA route
@@ -20,7 +20,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.13.0a8 boundary |
+| Requirement | 0.13.0a9 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -92,7 +92,7 @@ working directory:
 py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
-  "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a8"
+  "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a9"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -120,10 +120,10 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. Current a8 GPU providers
+The completed-node badge reports what actually ran. Current a9 GPU providers
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but a8 does not install or execute that provider.
+historical cuCIM identities, but a9 does not install or execute that provider.
 
 ## Background and basic measurements are CuPy-only
 
@@ -147,7 +147,7 @@ compute mode explicitly rather than expecting VIPP to guess.
 
 !!! danger "Do not reuse an old provider add-on"
     Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-    earlier VIPP release into 0.13.0a8. Those assets describe an older release
+    earlier VIPP release into 0.13.0a9. Those assets describe an older release
     boundary and are not required by the current application.
 
 ## Runtime behavior and provenance
@@ -176,6 +176,24 @@ This is often correct. Inspect the node's compute explanation for a dtype,
 rank, parameter, memory, workload, or parity exclusion. Do not change a
 scientific parameter merely to unlock GPU execution.
 
+In 0.13.0a9, Prefer GPU preserves exact workload facts across intervening
+CPU-only nodes. A required CPU Rescale Axes, Rescale Intensity, or Unsharp Mask
+step therefore does not by itself make reviewed downstream GPU work
+ineligible. If an affected downstream node still uses CPU, its compute details
+identify the actual runtime, provider, workload, or memory gate.
+
+### GPU VRAM preflight fails before calculation
+
+This is a conservative device-admission result, not an ordinary RAM error or a
+CUDA allocation failure. The diagnostic names the GPU and affected nodes and
+shows estimated peak use, available VRAM, the shortfall, and whether the safety
+reserve or configured cap is binding. Exact bytes remain in technical details.
+
+Start with its listed remedies: reduce or crop the input, move one listed node
+to CPU to split the device segment, close other GPU applications, or accept
+visible CPU fallback when offered. Change the reserve or memory cap only when
+you can still leave adequate device headroom.
+
 ### First GPU run is slow
 
 CuPy compiles kernels lazily. Compare warmed repeated runs and include transfer
@@ -190,8 +208,8 @@ changes. Run **Find fastest pipeline…** again and review the new evidence.
 ### Need the previous cuCIM procedure
 
 Use the matching archived release page for the old environment. Do not apply
-that procedure to a8. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
+that procedure to a9. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
 preserved as the historical record.
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[0.13.0a8 release notes](../releases/0.13.0a8.md).
+[0.13.0a9 release notes](../releases/0.13.0a9.md).

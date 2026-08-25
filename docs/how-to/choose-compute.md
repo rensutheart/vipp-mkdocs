@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a8 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.13.0a9 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -26,6 +26,13 @@ admission remain mandatory. VIPP never inserts a cast or changes an authored
 parameter to place more work on GPU. Developer-hidden implementations remain
 excluded unless an advanced request explicitly enables experimental admission;
 that does not turn them into public support.
+
+In 0.13.0a9 the planner preserves exact shape, dtype, finite-value, and axis
+facts across required CPU-only operations. A CPU Rescale Axes, Rescale
+Intensity, or Unsharp Mask decision does not by itself turn a reviewed
+downstream GPU candidate into an unknown workload. Mixed CPU/GPU badges are
+therefore expected: the host-only node stays on CPU while each eligible later
+node is considered independently for GPU.
 
 If every eligible GPU candidate has complete comparable timing evidence,
 Prefer GPU chooses the fastest GPU. If that evidence is incomplete, it chooses
@@ -202,8 +209,9 @@ unrunnable descendant.
 <a id="gpu-regions-in-0130a1"></a>
 <a id="gpu-regions-in-0130a7"></a>
 <a id="gpu-regions-in-0130a8"></a>
+<a id="gpu-regions-in-0130a9"></a>
 
-## GPU regions in 0.13.0a8
+## GPU regions in 0.13.0a9
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
@@ -275,6 +283,20 @@ VIPP keeps eligible adjacent operations in a private device-resident segment,
 then crosses to host memory only at a planned boundary. Before launch it applies
 an operation-specific conservative memory estimate. Host cache limits do not
 cap every temporary CPU or GPU workspace.
+
+If a planned segment does not fit, the **GPU VRAM preflight** message names the
+CUDA device and every affected node, then reports estimated peak use, effective
+available VRAM, and the shortfall in readable MiB or GiB. It says whether free
+VRAM after the safety reserve, a configured GPU memory cap, or both set the
+effective limit. Expand technical details when exact byte fields are needed.
+This is a pre-execution admission result, not an allocation OOM and not ordinary
+host-RAM exhaustion.
+
+Start with the diagnostic's listed remedies: reduce or crop the input, move one
+listed node—often the largest estimate—to CPU to split the resident segment,
+close other GPU applications, or accept visible CPU fallback when planning
+offers it. Change a reserve or configured cap only when adequate GPU headroom
+will remain.
 
 **Prefer GPU always requires visible fallback.** A strict Prefer-GPU request is
 invalid because the policy means GPU wherever possible and CPU everywhere else.
