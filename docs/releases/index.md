@@ -6,18 +6,19 @@ data.
 
 ## Current verified public alpha
 
-- [0.13.0a8](0.13.0a8.md) — one standard CuPy-only GPU installation,
-  CuPy background and basic-measurement providers, Remove Outliers, safer
-  optimizer assignment, wire insertion, and explicit source-axis handling.
+- [0.13.0a9](0.13.0a9.md) — Prefer GPU planning across CPU-only nodes,
+  immediate QYX-to-ZYX inspector propagation, explicit volumetric
+  skeletonization, stable sibling measurement caches, and actionable GPU VRAM
+  preflight errors.
 
-The immutable a8 alpha is distributed on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a8/). Its exact source, CI,
-GPU admission, intentionally unsigned normal installer, and artifact hashes
+The immutable a9 alpha is distributed on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a9/). Its exact source, CI,
+focused GPU evidence, intentionally unsigned normal installer, and artifact hashes
 are recorded in the
-[a8 release-verification table](0.13.0a8.md#release-verification).
+[a9 release-verification table](0.13.0a9.md#release-verification).
 
-0.13.0a8 writes workflow schema 4 and batch config/manifest schema 3. Valid
+0.13.0a9 writes workflow schema 4 and batch config/manifest schema 3. Valid
 schema-3 workflows and version-1 batch configs load as explicit CPU requests;
 version-2 batch configs retain their saved compute request. Neither older batch
 version contains source-axis declarations until reviewed and saved as version
@@ -26,6 +27,16 @@ upgrading, and regenerate Python exports because generated programs require the
 exact VIPP runtime version that created them.
 
 ## Earlier releases
+
+- [0.13.0a8](0.13.0a8.md) — one standard CuPy-only GPU installation,
+  CuPy background and basic-measurement providers, Remove Outliers, safer
+  optimizer assignment, wire insertion, and explicit source-axis handling.
+
+The immutable a8 alpha remains available on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a8) and
+[PyPI](https://pypi.org/project/napari-vipp/0.13.0a8/). Its exact source,
+qualification boundary, installer, and artifact hashes are recorded in the
+[a8 release-verification table](0.13.0a8.md#release-verification).
 
 - [0.13.0a7](0.13.0a7.md) — visible one-click dtype repairs, readable
   per-implementation optimizer results, broader RL backend agreement, and a

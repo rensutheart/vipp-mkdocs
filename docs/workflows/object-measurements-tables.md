@@ -33,7 +33,7 @@ Use this when you want measurements such as:
 
 ## CPU and GPU measurement coverage
 
-The 0.13.0a8 CuPy candidates cover only the basic `Measure Objects` and
+The 0.13.0a9 CuPy candidates cover only the basic `Measure Objects` and
 `Measure Objects + Intensity` schemas. They require native-endian,
 non-negative `int32` labels in resolved 2D/3D leading blocks. The intensity
 variant additionally accepts matching Boolean, `uint8`, `uint16`, or finite
@@ -71,6 +71,27 @@ phantom includes varied shapes and anisotropic calibration for regression and
 demonstration—not biological validation.*
 
 ## Table Assembly
+
+Manual/cached sibling measurements can be calculated in either order. In
+0.13.0a9, re-reading or re-materializing the same unchanged file revision does
+not stale a ready sibling merely because Python created a different array
+wrapper. For example:
+
+```text
+labels -> Measure Objects -----------------> Merge Tables
+      \-> Measure 3D Mesh Morphology ------/
+```
+
+Calculate both manual nodes. Each should remain **ready**, and Merge Tables
+should become calculable once it has both coherent tables. This also applies
+when low-memory cache pruning re-materializes the same pinned source revision.
+
+A genuine edit still invalidates the appropriate descendants. Recheck both
+branches after changing the source file/revision, labels, intensity input,
+parameters, or connections. If siblings alternate between ready and stale
+without any such change, preserve the workflow and execution details and
+[report the problem](../troubleshooting/report-a-problem.md); repeatedly
+recalculating is not a valid workaround for an incoherent merge.
 
 ```mermaid
 flowchart LR

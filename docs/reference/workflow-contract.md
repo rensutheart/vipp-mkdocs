@@ -33,7 +33,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.13.0a8 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
+VIPP 0.13.0a9 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
 an explicit error. Schema 4 adds portable authored compute intent under
 `execution.compute`, including `cpu`, `auto`, `prefer_gpu`, or `custom` mode
 and per-node preferences. It does not store a claim that the same backend will
@@ -80,7 +80,7 @@ before using it in a consequential analysis.
 
 ### Optional Batch workspace attachment
 
-A 0.13.0a8 workflow can carry an optional top-level `batch_config`. The
+A 0.13.0a9 workflow can carry an optional top-level `batch_config`. The
 version-3 attachment contains source bindings, local input/output paths,
 patterns, guarded source-axis declarations, formats, output policy, run
 settings, and a complete compute request, including runtime/device and

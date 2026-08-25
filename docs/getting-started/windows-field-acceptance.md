@@ -1,15 +1,15 @@
 # Try the VIPP Windows installer
 
-Use this checklist when someone asks you to test the tagged VIPP `0.13.0a8`
+Use this checklist when someone asks you to test the tagged VIPP `0.13.0a9`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Use the exact public tagged installer"
     The official public installer SHA-256 is
     `5b8233a05696efbf8fea7557012934385021ea3e9018befdd7789bf624740528`.
-    Use this checklist only with the exact `v0.13.0a8` GitHub asset and
+    Use this checklist only with the exact `v0.13.0a9` GitHub asset and
     checksum identified by
-    [release verification](../releases/0.13.0a8.md#release-verification). Do not
+    [release verification](../releases/0.13.0a9.md#release-verification). Do not
     use an untagged build or a similarly named file from another site.
 
     A display-independent production-backend install, repair, scientific
@@ -46,19 +46,19 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-Download the installer and checksum file only from the official `v0.13.0a8`
+Download the installer and checksum file only from the official `v0.13.0a9`
 entry on the
 [VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
-`VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
+`VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 `
-  .\VIPP-Setup-0.13.0a8-Windows-x86_64-UNSIGNED.exe
+  .\VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe
 ```
 
 Compare all 64 characters with the installer line in
-`SHA256SUMS-Windows-0.13.0a8.txt`. Stop and delete the file if they differ. This
+`SHA256SUMS-Windows-0.13.0a9.txt`. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so **Unknown publisher** is expected; an
 antivirus threat warning is not expected and must not be bypassed.
 
@@ -155,4 +155,4 @@ What was confusing or did not work:
 - Most important remaining problem:
 
 Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded `0.13.0a8` installer.
+version do not count as a pass for this downloaded `0.13.0a9` installer.
