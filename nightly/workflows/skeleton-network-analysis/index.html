@@ -556,6 +556,8 @@
       
         
       
+        
+      
     
     
     
@@ -599,6 +601,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1238,6 +1263,15 @@
   <a href="#basic-qc-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       Basic QC Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-2d-or-volumetric-3d-skeletonization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose 2D or volumetric 3D skeletonization
     </span>
   </a>
   
@@ -2617,6 +2651,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#choose-2d-or-volumetric-3d-skeletonization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose 2D or volumetric 3D skeletonization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#measurement-workflows" class="md-nav__link">
     <span class="md-ellipsis">
       Measurement Workflows
@@ -2686,6 +2729,34 @@ neurites, vessels, fibers, and similar networks.</p>
 </span></code></pre></div>
 <p>Use the overlay to check endpoints, junctions, isolated voxels, and branch
 structure before trusting tables.</p>
+<h2 id="choose-2d-or-volumetric-3d-skeletonization">Choose 2D or volumetric 3D skeletonization<a class="headerlink" href="#choose-2d-or-volumetric-3d-skeletonization" title="Permanent link">&para;</a></h2>
+<p>Select <strong>Skeletonize</strong> and review both <strong>Spatial processing</strong> and <strong>Method</strong>:</p>
+<ul>
+<li><strong>Auto from axes</strong> resolves declared <code>YX</code> as 2D and declared <code>ZYX</code> as one 3D
+  volume. An ambiguous <code>QYX</code> source is rejected until its page meaning is
+  declared.</li>
+<li><strong>2D YX</strong> processes each leading YX plane independently.</li>
+<li><strong>3D ZYX</strong> processes each ZYX block once as a volume. For <code>TZYX</code>, each time
+  point is an independent 3D block; time points are never joined.</li>
+</ul>
+<p>Auto chooses Zhang for 2D and Lee for 3D. <strong>Zhang 2D</strong> cannot be combined with
+a resolved 3D ZYX volume. The output preserves shape, effective axes,
+calibration, and leading dimensions, and its history records the resolved
+method and whether processing used a 2D plane or a volumetric block. The 3D
+Lee route uses a 3x3x3 neighbourhood with the image boundary treated as
+background.</p>
+<div class="admonition warning">
+<p class="admonition-title">Slice-wise and volumetric results answer different questions</p>
+<p>Independent YX thinning can change cross-Z connectivity, endpoints,
+junctions, cycles, and branch lengths even when every individual slice
+looks plausible. Use 3D only when Z semantics and spacing are independently
+supported by the acquisition record.</p>
+</div>
+<p>For visual QC, duplicate a representative mask branch and run one Skeletonize
+node as <strong>2D YX</strong> and the other as <strong>3D ZYX</strong>. Inspect XY, XZ, and YZ views in
+napari, then compare overlays, component counts, endpoints, junctions, and
+branch lengths. A bundled synthetic phantom is useful for regression, but it
+does not validate a biological segmentation or the acquisition's Z scale.</p>
 <h2 id="measurement-workflows">Measurement Workflows<a class="headerlink" href="#measurement-workflows" title="Permanent link">&para;</a></h2>
 <p>Per-component measurements:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>binary mask
@@ -2767,7 +2838,7 @@ structure before trusting tables.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 8, 2026 13:11:28 UTC">July 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
   </span>
 
     

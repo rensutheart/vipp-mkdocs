@@ -12,13 +12,13 @@
         <meta name="author" content="Rensu P. Theart">
       
       
-        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/concepts/graph-workflows/">
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/releases/0.13.0a9/">
       
       
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../data-types/">
+        <link rel="next" href="../0.13.0a8/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Graph workflows - VIPP — Visual Image Processing Platform</title>
+        <title>0.13.0a9 - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#graph-workflows" class="md-skip">
+        <a href="#vipp-0130a9" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Graph workflows
+              0.13.0a9
             
           </span>
         </div>
@@ -263,11 +263,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../releases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -351,13 +353,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../concepts/" class="md-tabs__link">
           
   
   
@@ -529,6 +529,8 @@
       
   
   
+    
+  
   
   
     
@@ -562,20 +564,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../releases/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -588,13 +593,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Release notes
@@ -607,10 +612,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../releases/0.13.0a9/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a9
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -621,6 +648,148 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Highlights">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefer-gpu-through-mixed-cpugpu-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prefer GPU through mixed CPU/GPU workflows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliable-declared-3d-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reliable declared 3D processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sibling-measurements-remain-ready-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sibling measurements remain ready together
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actionable-gpu-vram-preflight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actionable GPU VRAM preflight
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-installer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows installer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-and-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatibility and migration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scientific-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scientific boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continue-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continue reading
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -633,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+      <a href="../0.13.0a8/" class="md-nav__link">
         
   
   
@@ -656,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.13.0a7/" class="md-nav__link">
+      <a href="../0.13.0a7/" class="md-nav__link">
         
   
   
@@ -679,7 +848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.13.0a6/" class="md-nav__link">
+      <a href="../0.13.0a6/" class="md-nav__link">
         
   
   
@@ -702,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.13.0a5/" class="md-nav__link">
+      <a href="../0.13.0a5/" class="md-nav__link">
         
   
   
@@ -725,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.13.0a4/" class="md-nav__link">
+      <a href="../0.13.0a4/" class="md-nav__link">
         
   
   
@@ -748,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+      <a href="../0.13.0a1/" class="md-nav__link">
         
   
   
@@ -771,7 +940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+      <a href="../0.12.0a3/" class="md-nav__link">
         
   
   
@@ -794,7 +963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+      <a href="../0.12.0a2/" class="md-nav__link">
         
   
   
@@ -817,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/0.12.0a1/" class="md-nav__link">
+      <a href="../0.12.0a1/" class="md-nav__link">
         
   
   
@@ -1514,8 +1683,6 @@
       
   
   
-    
-  
   
   
     
@@ -1539,23 +1706,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../concepts/" class="md-nav__link ">
               
   
   
@@ -1568,13 +1732,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Concepts
@@ -1587,32 +1751,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Graph workflows
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../concepts/graph-workflows/" class="md-nav__link">
         
   
   
@@ -1623,55 +1765,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#core-graph-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Graph Features
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#good-graph-habits" class="md-nav__link">
-    <span class="md-ellipsis">
-      Good Graph Habits
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#avoid" class="md-nav__link">
-    <span class="md-ellipsis">
-      Avoid
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1684,7 +1777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../data-types/" class="md-nav__link">
+      <a href="../../concepts/data-types/" class="md-nav__link">
         
   
   
@@ -1707,7 +1800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../axes-and-metadata/" class="md-nav__link">
+      <a href="../../concepts/axes-and-metadata/" class="md-nav__link">
         
   
   
@@ -1730,7 +1823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../inspection-model/" class="md-nav__link">
+      <a href="../../concepts/inspection-model/" class="md-nav__link">
         
   
   
@@ -1753,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples-and-samples/" class="md-nav__link">
+      <a href="../../concepts/examples-and-samples/" class="md-nav__link">
         
   
   
@@ -2615,27 +2708,120 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#core-graph-features" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Core Graph Features
+      Highlights
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Highlights">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefer-gpu-through-mixed-cpugpu-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prefer GPU through mixed CPU/GPU workflows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliable-declared-3d-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reliable declared 3D processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sibling-measurements-remain-ready-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sibling measurements remain ready together
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actionable-gpu-vram-preflight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actionable GPU VRAM preflight
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-installer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows installer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-and-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatibility and migration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#good-graph-habits" class="md-nav__link">
+  <a href="#scientific-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      Good Graph Habits
+      Scientific boundary
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#avoid" class="md-nav__link">
+  <a href="#release-verification" class="md-nav__link">
     <span class="md-ellipsis">
-      Avoid
+      Release verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continue-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continue reading
     </span>
   </a>
   
@@ -2657,7 +2843,7 @@
 
 
   
-    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/concepts/graph-workflows.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/releases/0.13.0a9.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2665,85 +2851,179 @@
   
 
 
-<h1 id="graph-workflows">Graph Workflows<a class="headerlink" href="#graph-workflows" title="Permanent link">&para;</a></h1>
-<p>The graph is the visible record of a VIPP analysis.</p>
-<p>Each node performs one operation. Each connection says which output feeds which
-input. Parameters are adjusted in the inspector, and node outputs can be viewed
-as thumbnails, napari layers, histograms, labels, or tables.</p>
-<h2 id="core-graph-features">Core Graph Features<a class="headerlink" href="#core-graph-features" title="Permanent link">&para;</a></h2>
+<h1 id="vipp-0130a9">VIPP 0.13.0a9<a class="headerlink" href="#vipp-0130a9" title="Permanent link">&para;</a></h1>
+<p>VIPP 0.13.0a9 is a focused correctness release for workflows that combine
+declared 3D image axes, CPU-only processing steps, reviewed GPU providers, and
+multiple downstream measurements. It packages fixes found while testing real
+microscopy workflows before development returns to the broader 0.14 line.</p>
+<p>This remains alpha software. Preserve original images and workflows, test
+representative inputs, and review important outputs before using them for
+scientific conclusions or publication.</p>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
+<h3 id="prefer-gpu-through-mixed-cpugpu-workflows">Prefer GPU through mixed CPU/GPU workflows<a class="headerlink" href="#prefer-gpu-through-mixed-cpugpu-workflows" title="Permanent link">&para;</a></h3>
+<p><strong>Prefer GPU</strong> now carries exact shape, dtype, and axis facts through CPU-only
+operations such as <strong>Rescale Axes</strong>, <strong>Rescale Intensity</strong>, and <strong>Unsharp
+Mask</strong>. A reviewed downstream CuPy or CuPyX implementation therefore remains
+eligible after a required host operation. The host operation itself still runs
+on CPU, and every node continues to report the implementation that actually
+ran.</p>
+<p>Prefer GPU does not bypass runtime, dependency, scientific-parity, dtype,
+parameter, workload, or memory admission. If an installation cannot use an
+otherwise reviewed GPU implementation, select the node and read its compute
+details for the exact CPU decision or fallback reason.</p>
+<h3 id="reliable-declared-3d-processing">Reliable declared 3D processing<a class="headerlink" href="#reliable-declared-3d-processing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Changing an Image Source from <code>QYX</code> to <code>ZYX</code> immediately refreshes effective
+  axes along the active branch. <strong>Gaussian Blur 3D</strong> exposes Sigma Z without
+  waiting for a successful full pixel calculation, retains the authored value
+  while hidden, and restores the correct control after save/reopen.</li>
+<li><strong>Skeletonize</strong> now makes its resolved spatial processing explicit. Auto uses
+  Lee thinning for declared <code>ZYX</code>, processes each leading <code>ZYX</code> block once as
+  a volume, and records the resolved method and dimensionality. Zhang remains
+  a 2D-only method.</li>
+<li>Ambiguous TIFF page axes still fail closed. Declare <code>QYX -&gt; ZYX</code> only after
+  acquisition information confirms that the pages are depth slices.</li>
+</ul>
+<h3 id="sibling-measurements-remain-ready-together">Sibling measurements remain ready together<a class="headerlink" href="#sibling-measurements-remain-ready-together" title="Permanent link">&para;</a></h3>
+<p>Re-materializing an unchanged file no longer changes its effective source
+identity merely because the array wrapper is new. Sequential manual sibling
+measurements can remain ready together and feed <strong>Merge Tables</strong> in either
+execution order, including after low-memory cache pruning. A genuine source,
+parameter, connection, labels, or intensity change still invalidates the
+affected descendants.</p>
+<h3 id="actionable-gpu-vram-preflight">Actionable GPU VRAM preflight<a class="headerlink" href="#actionable-gpu-vram-preflight" title="Permanent link">&para;</a></h3>
+<p>When a planned GPU segment cannot fit before execution, the diagnostic now
+identifies the CUDA device and every affected graph node. It reports estimated
+peak use, effective available VRAM, and the shortfall in readable MiB or GiB;
+technical details retain exact byte counts and distinguish the free-VRAM
+safety reserve from a configured cap. Suggested remedies include reducing the
+input, moving a listed node to CPU to split the segment, closing other GPU
+applications, or accepting visible CPU fallback when planning offers it.</p>
+<p>This is a conservative pre-execution admission result, not a CUDA allocation
+failure and not evidence that ordinary system RAM is exhausted.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<h3 id="windows-installer">Windows installer<a class="headerlink" href="#windows-installer" title="Permanent link">&para;</a></h3>
+<p>Download the explicitly unsigned installer and checksum file from the
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9">official v0.13.0a9 GitHub release</a>:</p>
+<ul>
+<li><code>VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe</code></li>
+<li><code>SHA256SUMS-Windows-0.13.0a9.txt</code></li>
+</ul>
+<p>Verify the complete SHA-256 value before opening the installer. Windows reports
+<strong>Unknown publisher</strong> for this unsigned alpha and may require <strong>More info -&gt; Run
+anyway</strong>. Stop if the checksum differs or antivirus reports a threat; never
+disable Windows security.</p>
+<p>The managed installer continues to offer CPU and NVIDIA CUDA 13 installations
+side by side. The CUDA route includes the pinned CuPy/CuPyX and CUDA component
+stack; no separate GPU add-on is required.</p>
+<h3 id="manual-installation">Manual installation<a class="headerlink" href="#manual-installation" title="Permanent link">&para;</a></h3>
+<p>CPU on Windows, Linux, or macOS:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install --upgrade "napari[pyqt6]&gt;=0.6" "napari-vipp==0.13.0a9"
+</span></code></pre></div>
+<p>The reviewed native-Windows CUDA route uses CPython 3.12:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install --upgrade "napari[pyqt6]&gt;=0.6" "napari-vipp[gpu-cuda13]==0.13.0a9"
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>vipp-compute-doctor --track cuda13
+</span></code></pre></div>
+<h2 id="compatibility-and-migration">Compatibility and migration<a class="headerlink" href="#compatibility-and-migration" title="Permanent link">&para;</a></h2>
+<ul>
+<li>VIPP accepts workflow schemas 3 and 4 and writes schema 4.</li>
+<li>Batch configurations and manifests remain schema 3.</li>
+<li>Existing 0.13 workflows remain supported, but cached scientific results are
+  not stored in workflow JSON; recalculate and validate after upgrading.</li>
+<li>Generated Python remains pinned to the exact VIPP version that created it;
+  regenerate exports after upgrading.</li>
+<li>Preserve an important workflow before changing its source-axis declaration,
+  then verify the effective axes and Z calibration before volumetric analysis.</li>
+<li>Recheck actual CPU/GPU badges after upgrading. Saved compute intent is not a
+  promise that another machine has a healthy compatible CUDA runtime.</li>
+</ul>
+<h2 id="scientific-boundary">Scientific boundary<a class="headerlink" href="#scientific-boundary" title="Permanent link">&para;</a></h2>
+<p>CPU remains the portable reference and fallback. GPU eligibility is specific
+to the operation, exact workload, installed runtime, and device. VIPP does not
+silently cast an image or change a scientific parameter to make a node run on
+GPU.</p>
+<p>The release workstation completed the original affected workflow under global
+Prefer GPU. <strong>Subtract Background</strong>, <strong>Convert Dtype</strong>, <strong>Gaussian Blur</strong>,
+<strong>Otsu</strong>, <strong>Remove Outliers</strong>, and <strong>Remove Small Objects</strong> used reviewed
+CuPy/CuPyX implementations across CPU-only Rescale Axes, Rescale Intensity, and
+Unsharp Mask boundaries with no fallback. This bounded result verifies the
+planner and those reviewed providers in that environment; it is not a claim
+that every installation has a healthy CUDA runtime.</p>
+<h2 id="release-verification">Release verification<a class="headerlink" href="#release-verification" title="Permanent link">&para;</a></h2>
+<p>The annotated tag, public prerelease, PyPI files, and six GitHub assets resolve
+to the exact release commit and hashes below. The unchanged installer
+transaction/dependency baseline carries forward from 0.13.0a8; a9 regenerated
+the exact-tag package, installer, checksum, publication, and focused changed-
+behavior evidence.</p>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Use</th>
+<th>Check</th>
+<th>Exact release record</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Typed ports</td>
-<td>Prevent images, masks, labels, and tables from being mixed accidentally.</td>
+<td>Annotated <code>v0.13.0a9</code> tag</td>
+<td><a href="https://github.com/rensutheart/napari-vipp/commit/d476c8976c91679faaaf0fe196c90b1ab4d63458"><code>d476c8976c91679faaaf0fe196c90b1ab4d63458</code></a></td>
 </tr>
 <tr>
-<td>Multi-input nodes</td>
-<td>Express operations such as labels plus intensity image, image plus PSF, or two-channel colocalization.</td>
+<td>Exact-main application CI</td>
+<td><strong>Passed:</strong> <a href="https://github.com/rensutheart/napari-vipp/actions/runs/32825042433">run 32825042433</a></td>
 </tr>
 <tr>
-<td>Multi-output nodes</td>
-<td>Split channels, split axes, skeleton keypoints, or graph tables into separate outputs.</td>
+<td>Windows installer build smoke</td>
+<td><strong>Passed:</strong> <a href="https://github.com/rensutheart/napari-vipp/actions/runs/32825073086">run 32825073086</a></td>
 </tr>
 <tr>
-<td>Named tunnels</td>
-<td>Reuse a source such as a channel, mask, ROI, or reference image without drawing long wires.</td>
+<td>Exact-tag unsigned installer integrity</td>
+<td><strong>Passed:</strong> the <a href="https://github.com/rensutheart/napari-vipp/releases/download/v0.13.0a9/VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED-release.json">release manifest</a> records <code>development=false</code>, exact tag/commit/version, the qualified embedded wheel, and <code>NotSigned</code>; lifecycle evidence is carried forward from a8 because transaction/toolchain inputs did not change</td>
 </tr>
 <tr>
-<td>Live source subtitles</td>
-<td>See the layer, sample, file, or collection representative bound to each Image Source; hover for the complete value.</td>
+<td>Public GitHub alpha prerelease</td>
+<td><strong>Passed:</strong> <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9">six exact assets</a></td>
 </tr>
 <tr>
-<td>Workflow tabs</td>
-<td>Keep independent graphs, results, caches, histories, inspectors, paths, compute requests, and Batch workspaces open together.</td>
+<td>Public PyPI wheel and source archive</td>
+<td><strong>Passed:</strong> <a href="https://github.com/rensutheart/napari-vipp/actions/runs/32827936977">workflow 32827936977</a>; public digests and sizes match the GitHub assets</td>
 </tr>
 <tr>
-<td>Graph notes</td>
-<td>Record reasoning next to workflow steps.</td>
+<td>Wheel <code>napari_vipp-0.13.0a9-py3-none-any.whl</code></td>
+<td><code>c2f04335fd0a3a82e4b73ef570d42d27edd1dc0660482e806e2942566d4bab1f</code></td>
 </tr>
 <tr>
-<td>Graph search</td>
-<td>Find nodes, operation IDs, tunnel names, and batch output tags.</td>
+<td>Source archive <code>napari_vipp-0.13.0a9.tar.gz</code></td>
+<td><code>27d91b47cc2ada55e38af4ffc090099f1bb594fb185fd1d99c9d1d2c517c3e42</code></td>
 </tr>
 <tr>
-<td>Workflow JSON</td>
-<td>Save the graph, node parameters, connections, canvas positions, tunnels, portable schema-4 compute intent, and selected UI state.</td>
+<td><code>VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe</code></td>
+<td><code>7fbad9300db5d6b49963713248696d69302c11e5c23754fd0cae6864b5a2c0b8</code></td>
 </tr>
 <tr>
-<td>Actual-run provenance</td>
-<td>Record the CPU or CuPy-family implementation and fallback that produced each accepted result; authored intent alone is not proof.</td>
+<td><code>VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED-release.json</code></td>
+<td><code>b264a58536eb9e147bf2f4fa36ff6e12058e075f56e21ed6cb58b88f10722123</code></td>
 </tr>
 <tr>
-<td>Python export</td>
-<td>Generate a version-locked headless program that uses the same execution service, compute request, progress, cancellation, and optional output provenance.</td>
+<td><code>VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED-THIRD-PARTY-NOTICES.txt</code></td>
+<td><code>95ca668d0977be347ab39af820f97652ed3565ed7ea4218205bb3a716a847e2d</code></td>
+</tr>
+<tr>
+<td><code>SHA256SUMS-Windows-0.13.0a9.txt</code></td>
+<td><code>534f45e46c834c54ac2d01de8ed796dde6ac95830d1a4881ccb4624cf6ecc49f</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="good-graph-habits">Good Graph Habits<a class="headerlink" href="#good-graph-habits" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9">application release</a>
+and <a href="https://pypi.org/project/napari-vipp/0.13.0a9/">PyPI project page</a>
+are the canonical distribution locations.</p>
+<h2 id="continue-reading">Continue reading<a class="headerlink" href="#continue-reading" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Keep the source image and key masks inspectable.</li>
-<li>Use tunnels when a channel, mask, ROI, or reference image feeds many nodes.</li>
-<li>Add graph notes at scientific decision points.</li>
-<li>Detach and maximize VIPP for longer workflows.</li>
-<li>Hide the node library after building the graph when you need more canvas
-  space.</li>
-<li>Zoom out for whole-workflow review, then zoom in for parameter tuning.</li>
-<li>Add explicit <code>Batch Output</code> nodes before running a workflow over a folder.</li>
-<li>Read actual-run badges before assuming that Auto, Prefer GPU, or Custom
-  used a GPU.</li>
-<li>Save workflow snapshots before major parameter sweeps.</li>
-</ul>
-<h2 id="avoid">Avoid<a class="headerlink" href="#avoid" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Treating the final table as trustworthy without inspecting masks and labels.</li>
-<li>Reusing a workflow on structurally different data without retuning.</li>
-<li>Hiding scientific decisions in file names or external notes only.</li>
+<li><a href="../../getting-started/installation/">Install VIPP</a></li>
+<li><a href="../../how-to/choose-compute/">Choose CPU or GPU compute</a></li>
+<li><a href="../../concepts/axes-and-metadata/">Axes and metadata</a></li>
+<li><a href="../../workflows/skeleton-network-analysis/">Analyze skeleton networks</a></li>
+<li><a href="../../workflows/object-measurements-tables/">Measure objects and merge tables</a></li>
+<li><a href="../../reference/versioning/">Versions and compatibility</a></li>
 </ul>
 
 
@@ -2765,7 +3045,7 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
   </span>
 
     
@@ -2803,7 +3083,7 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Concepts">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Release notes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2813,20 +3093,20 @@ as thumbnails, napari layers, histograms, labels, or tables.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Concepts
+                Release notes
               </div>
             </div>
           </a>
         
         
           
-          <a href="../data-types/" class="md-footer__link md-footer__link--next" aria-label="Next: Images, masks, labels, tables">
+          <a href="../0.13.0a8/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.13.0a8">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Images, masks, labels, tables
+                0.13.0a8
               </div>
             </div>
             <div class="md-footer__button md-icon">
