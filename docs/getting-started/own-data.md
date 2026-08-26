@@ -11,13 +11,20 @@ valid is the important part.
 | `napari layer` | Images already opened, cropped, or registered in napari | The workflow depends on a layer being present and correctly selected; unsupported live/lazy transforms can be rejected. |
 | `file path` | A repeatable local file input | Moving, renaming, or replacing the file changes/breaks the source identity. |
 | `sample` | Tutorials, regression checks, and demonstrations | Synthetic data does not establish performance on your assay. |
-| Local OME-Zarr store | Chunked multidimensional data | Many operations are eager and can still materialize large arrays. |
+| Local OME-Zarr store | Multiscale multidimensional data with declared image or label groups | A lower level can accelerate presentation, but scientific graph analysis still materializes level 0. |
 
 Select `Image Source`, set **Source**, and then use the control specific to that
 route. The napari layer chooser is only shown for `napari layer`. The Image
 Source card's live subtitle shows the current layer, sample, file, or collection
 representative; hover the card for the complete binding when the subtitle is
 elided.
+
+For a multi-image file or store, choose the intended **Series / image**. VIPP
+records a stable `SourceItem v1` selector together with the reader/backend,
+normalized axes and shape, and exact container revision. On reopen, a changed
+file, missing companion, ambiguous legacy index, or unexpected reader topology
+stops for review rather than silently choosing the item at the old numeric
+position.
 
 ## Understand the source revision
 
@@ -34,6 +41,13 @@ be frozen without changing pixels.
 **Refresh** is the explicit instruction to accept the current source revision.
 Record an external checksum or repository identifier for long-term provenance;
 the workflow stores a source parameter/path, not the image bytes.
+
+For local multiscale OME-Zarr 0.4/0.5, the Image Source preview chooser lists
+the levels declared by the selected image or label. A lower-level layer is
+labelled `Preview level N - analysis remains full resolution`. It is a
+presentation aid only: the scientific graph, batch run, generated execution,
+cache, and provenance remain bound to level 0. A single-level source reports
+that no lower-level preview exists.
 
 ## Check metadata before processing
 
@@ -61,13 +75,12 @@ does not move pixels. Batch workspace uses the same control and can visibly
 suggest that choice only when the workflow demonstrates a `ZYX` requirement.
 Keep the suggestion only after review, and verify Z spacing separately.
 
-For Nikon ND2, 0.13 follows the reader's ordered dimension mapping when its
-labels and sizes exactly match the returned array. This fixes affected T/Z/C
-sliders and keeps napari and VIPP slice selection aligned. Still verify the
-displayed axis order, array shape, channel choice, and movement of every T, Z,
-and C control on a representative file. An inconsistent reader mapping is not
-trusted; VIPP falls back conservatively rather than reordering pixels from a
-malformed declaration.
+For optional microscope readers, inspection and full read share one normalized
+metadata contract. Still verify the selected item, reader/backend, displayed
+axis order, array shape, channels, calibration, and movement of every T/Z/C
+control on representative facility files. Native LIF, CZI, OIR, OIB, and LSM
+pixel reads remain eager, and optional Bio-Formats routes require Java and the
+needed codecs.
 
 ## Transfer a workflow deliberately
 
@@ -84,12 +97,13 @@ images from the new acquisition family:
 Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.
 
-When moving from 0.12.0a3 to 0.13.0a1, keep the original schema-3 file and open
-a duplicate. It loads with explicit CPU intent; inspect graph structure,
-sources, axes, parameters, dynamic ports, and decisive outputs before saving
-the duplicate as schema 4. Rebuild schema-1/2 workflows deliberately; changing
-only the JSON version is unsafe. See
-[versions and compatibility](../reference/versioning.md#move-from-0120a3-to-0130a1).
+When moving to 0.14.0a1, keep the original workflow and open a duplicate. Valid
+schema-3 and schema-4 files migrate to schema 5 and acquire SourceItems when
+their sources are resolved. Inspect graph structure, selected items,
+reader/backend, axes, calibration, parameters, dynamic ports, and decisive
+outputs before saving the duplicate. Rebuild schema-1/2 workflows deliberately;
+changing only the JSON version is unsafe. See
+[versions and compatibility](../reference/versioning.md).
 
 ## Protect sensitive data
 

@@ -6,32 +6,36 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.13.0a9 |
+| Source | Behavior in 0.14.0a1 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 14 deterministic VIPP samples. |
 | OME-TIFF | Reads image series and supported semantic axes, scale, channel, and selected acquisition fields from OME metadata. |
 | ImageJ TIFF | Reads supported hyperstack axes, XY resolution, z spacing, frame interval, and unit fields where present. |
 | Conventional TIFF | Reads TIFF series and infers basic axes where explicit semantic metadata is absent. |
-| Nikon ND2 with the optional `nd2` reader | Uses the reader's ordered dimension mapping when labels/sizes exactly match the returned shape, keeping T/Z/C navigation aligned; malformed mappings fall back conservatively. |
-| Local OME-Zarr 0.4/0.5 | Discovers supported image/label groups and reads analysis level 0; label groups are marked as labels. |
+| Nikon ND2 with the optional `nd2` reader | Exposes stable items, lazy inspection/data access, decoded-size estimates, calibration, channels, and selected objective metadata in the qualified corpus. |
+| Local OME-Zarr 0.4/0.5 | Discovers image/label groups and declared levels/transforms. A sliced lower level can be displayed while analysis remains fixed to level 0; label previews retain label semantics. |
 | NPY / NPZ | Reads one NPY array or a selected NPZ member; semantic microscopy metadata is not inherent. |
 | PNG, JPEG, BMP, GIF, WebP, TGA, PNM | Reads ordinary raster images; animated rasters use a leading time axis. |
-| Optional microscope readers | Uses an installed format-specific/BioIO route for CZI, ND2, Imaris IMS, Leica LIF/LOF/XLIF, and other supported containers, then normalizes fields the reader exposes. Coverage varies by format. |
+| Optional microscope readers | Qualified corpus routes cover CZI/LSM, ND2, LIF, OIR/OIB/OIF/VSI, and IMS with normalized inspection/read metadata. Native LIF, CZI, OIR/OIB, and LSM pixels remain eager; broad advertised extensions are not all qualified claims. |
 
 Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
 as acquisition metadata.
 
-For an inspectable multi-series TIFF, NPZ, Zarr, LIF, IMS, or similar
-container, collection batch creates one clearly named item per image series.
-Interactive representative browsing, collision-safe output names, manifests,
-and provenance retain both the container and selected series identity.
+For an inspectable multi-series TIFF, NPZ, Zarr, microscope container, or
+similar source, VIPP records a frozen `SourceItem v1`: stable logical selector,
+reader/backend and version, normalized shape/axes/metadata, and exact container
+revision. Interactive browsing, collision-safe output names, batch planning,
+manifests, and provenance retain that identity. Changed bytes, missing
+companions, ambiguous legacy indices, or an unexpected reader topology stop for
+review instead of selecting a different image by position.
 
-For ND2, actively move the T, Z, and C sliders on a representative acquisition
-and verify that the expected content changes. Ordered-axis normalization fixes
-the affected 0.12 behavior, but it cannot prove that a third-party reader's
-metadata or selected series matches the experiment.
+For every optional reader, actively move the T, Z, and C controls on a
+representative acquisition and verify that the expected content changes. Check
+the selected item, reader/backend, calibration, channels, and decoded shape
+against acquisition records. A normalized contract cannot prove that a
+third-party reader's presentation matches the experiment.
 
 ## Source revision contract
 
@@ -47,6 +51,13 @@ detached without changing pixels is rejected.
 
 These checks protect one execution boundary; they do not replace an archival
 checksum or persistent dataset identifier.
+
+For local multiscale OME-Zarr, a lower-level presentation layer is labelled
+`Preview level N - analysis remains full resolution`. The dynamic chooser lists
+the declared levels available for that selected image or label. Requested
+T/Z/C positions and Y/X region are sliced before preview computation. This
+layer never replaces SourceItem analysis level 0, scientific cache data, batch
+input, generated execution, or output provenance.
 
 ## Export choices
 
@@ -81,10 +92,12 @@ shared executor or create an exact compute-provenance sidecar.
 
 ## Current limitations
 
-- Analysis reads use OME-Zarr level 0; preview-level/pyramid selection is not
-  exposed.
-- Plate/well/field browsing and remote URI input are planned, not current.
-- Lazy OME-Zarr arrays may materialize when an eager operation executes.
+- Lower-level presentation preview is limited to local OME-Zarr 0.4/0.5;
+  analysis still materializes the complete selected level-0 image.
+- Remote stores, IMS pyramid preview, plate/well/field browsing, and general
+  operation-level lazy/chunked execution are planned, not current.
+- Native LIF, CZI, OIR, OIB, and LSM pixels remain eager. Large eager readers
+  can receive decoded-memory preflight but not invented chunk progress.
 - Only supported metadata fields propagate through compatible operations and
   writers; complete source metadata fidelity is not claimed.
 - Reopen representative outputs in the intended downstream software before a
@@ -95,7 +108,7 @@ shared executor or create an exact compute-provenance sidecar.
 - Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.13.0a9.
+  0.14.0a1.
 
 ## Execution provenance for saved outputs
 
@@ -108,13 +121,13 @@ implementation, environment, fallback records, outcome, and cleanup evidence.
 Failed or cancelled single-output publication attempts a failure sidecar at
 the requested destination name.
 
-Batch uses its authoritative version-3 manifest instead of duplicating one
+Batch uses its authoritative version-4 manifest instead of duplicating one
 sidecar per output. Every published output record carries an execution digest
-link to that item's complete execution document. Successfully read source
-records include their raw axes, effective axes, and applied declaration. The
-embedded config preserves an intended declaration even when an item was skipped
-or failed before source reading. Preserve the manifest, archive, item
-checkpoints, workflow/config pair, and source identities with the files.
+link to that item's complete execution document. Successfully read sources
+include canonical SourceItem/revision evidence, raw/effective axes, and any
+declaration; requested/effective per-sample overrides and their workflow hashes
+are also retained. Preserve the manifest, archive, item checkpoints,
+workflow/config pair, and source identities with the files.
 
 A generated standalone output remains private until execution cleanup and its
 requested staged publication checks are established. The generated local

@@ -6,27 +6,38 @@ data.
 
 ## Current verified public alpha
 
+- [0.14.0a1](0.14.0a1.md) — durable SourceItem identity, truthful microscope
+  reader contracts, dynamic local OME-Zarr preview without changing analysis,
+  typed per-sample batch values, restored Batch UX, and clearer installer
+  capacity and activity.
+
+The immutable a1 alpha is distributed on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1) and
+[PyPI](https://pypi.org/project/napari-vipp/0.14.0a1/). Its exact tag packages,
+intentionally unsigned installer, checksum, release manifest, and notices are
+available from the canonical GitHub release.
+
+0.14.0a1 writes workflow schema 5 and batch config/manifest schema 4. Valid
+workflow schemas 3 and 4 and batch versions 1 through 3 retain explicit
+migration paths. Older records acquire SourceItems when sources are resolved;
+older batch records contain no per-sample parameter overrides. Workflow files
+do not contain cached results or source pixels. Recalculate and validate after
+upgrading, and regenerate Python exports because generated programs require the
+exact VIPP runtime version that created them.
+
+## Earlier releases
+
 - [0.13.0a9](0.13.0a9.md) — Prefer GPU planning across CPU-only nodes,
   immediate QYX-to-ZYX inspector propagation, explicit volumetric
   skeletonization, stable sibling measurement caches, and actionable GPU VRAM
   preflight errors.
 
-The immutable a9 alpha is distributed on
+The immutable a9 alpha remains available on
 [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9) and
 [PyPI](https://pypi.org/project/napari-vipp/0.13.0a9/). Its exact source, CI,
-focused GPU evidence, intentionally unsigned normal installer, and artifact hashes
-are recorded in the
+focused GPU evidence, intentionally unsigned normal installer, and artifact
+hashes are recorded in the
 [a9 release-verification table](0.13.0a9.md#release-verification).
-
-0.13.0a9 writes workflow schema 4 and batch config/manifest schema 3. Valid
-schema-3 workflows and version-1 batch configs load as explicit CPU requests;
-version-2 batch configs retain their saved compute request. Neither older batch
-version contains source-axis declarations until reviewed and saved as version
-3. Workflow files do not contain cached results. Recalculate and validate after
-upgrading, and regenerate Python exports because generated programs require the
-exact VIPP runtime version that created them.
-
-## Earlier releases
 
 - [0.13.0a8](0.13.0a8.md) — one standard CuPy-only GPU installation,
   CuPy background and basic-measurement providers, Remove Outliers, safer

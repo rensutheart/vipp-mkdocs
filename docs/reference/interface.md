@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.13.0a9. Controls can collapse into
+Labels below match napari-vipp 0.14.0a1. Controls can collapse into
 **Settings** when the window is narrow.
 
 ## Workflow tabs
@@ -26,7 +26,7 @@ the active run finishes or cooperatively cancels.
 | --- | --- |
 | **New workflow…** | Create a new tab containing one unbound `Image Source` on an otherwise empty graph. |
 | **Open example…** | Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
-| **Load workflow…** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores and opens Batch workspace without running a preview. |
+| **Load workflow…** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative. |
 | **Save workflow…** | Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
 | **Batch workspace…** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
 | **Leave batch mode** | When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run. |
@@ -45,6 +45,12 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
+
+For a local multiscale OME-Zarr image or label, the Image Source inspector also
+shows a dynamic presentation-level chooser. It lists the levels declared by the
+selected source. A lower level is labelled
+`Preview level N - analysis remains full resolution`; selecting it changes only
+the napari presentation layer, never the level-0 graph input.
 
 ## Compute controls
 
@@ -459,6 +465,14 @@ The Image Source and Batch controls share the same declaration parser,
 validation, metadata application, and headless execution infrastructure.
 
 ## Batch representative strip
+
+The Batch workspace toolbar keeps a compact status and activity indicator at
+its right. It covers source discovery and preflight independently of the main
+graph progress bar, and mirrors overall item progress during a run. Detailed
+per-item and per-operation bars remain in the lower run section. The per-sample
+table shows authored defaults in blank/inherited cells; the selected node's
+inspector adds **Effective batch preview** only when that item actually
+overrides that node.
 
 After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired

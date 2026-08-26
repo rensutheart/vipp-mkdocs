@@ -22,42 +22,45 @@ Workflow tabs are independent live sessions, not one multi-workflow file.
 caches, undo/redo histories, transient viewport, and in-flight state are not
 bundled into that JSON.
 
-### Current schema: version 4
+### Current schema: version 5
 
 A current file identifies itself with:
 
 ```json
 {
   "type": "napari-vipp-workflow",
-  "version": 4
+  "version": 5
 }
 ```
 
-VIPP 0.13.0a9 accepts schema versions 3 and 4 and rejects versions 1 and 2 with
-an explicit error. Schema 4 adds portable authored compute intent under
-`execution.compute`, including `cpu`, `auto`, `prefer_gpu`, or `custom` mode
-and per-node preferences. It does not store a claim that the same backend will
-be available or fastest on another computer.
+VIPP 0.14.0a1 accepts schema versions 3, 4, and 5 and rejects versions 1 and 2
+with an explicit error. Schema 4 added portable authored compute intent under
+`execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
+logical selector, observed container revision, reader/backend evidence,
+normalized axes and shape, and available metadata. It does not store source
+pixels or claim that another reader/backend is equivalent.
 
 A schema-3 workflow has no compute contract. It therefore loads with an
 explicit **CPU** request, never the new-session Auto default. Saving the reviewed
-workflow emits schema 4. This one conservative migration does not relax the
+workflow emits schema 5 after its sources resolve. A schema-4 workflow retains
+its authored compute intent and likewise acquires SourceItems during resolution.
+These migrations do not relax the
 scientific reasons that schemas 1 and 2 remain rejected.
 
 Retain an older workflow unchanged for provenance and use the VIPP environment
-that created it when it must be inspected or run. Rebuild the graph in 0.13
+that created it when it must be inspected or run. Rebuild the graph in 0.14
 from the old graph and methods notes, then compare nodes, connections, dynamic
 ports, parameters, sources, metadata, and results on known data. Do not change
 the JSON version number by hand.
 
-A schema-3 workflow saved by 0.12 can therefore be reconstructed in 0.13 with
+A schema-3 workflow saved by 0.12 can therefore be reconstructed in 0.14 with
 its graph, parameters, connections, and persisted workflow state plus a known
 CPU request. This does not mean prior calculated results were embedded or
 revalidated. Scientific pixel/table caches, thumbnails, pinned layers, and
 runtime execution reports are not serialized in workflow JSON. Recalculate and
 validate the graph after upgrading.
 
-Schema-4 per-node preferences are keyed by workflow node ID and validated
+Per-node preferences are keyed by workflow node ID and validated
 before execution. They express an authored preference such as CPU or a GPU
 library, not a hidden cast or a stored benchmark result. The execution report,
 rather than workflow intent, is the record of the runtime, implementation,
@@ -80,19 +83,19 @@ before using it in a consequential analysis.
 
 ### Optional Batch workspace attachment
 
-A 0.13.0a9 workflow can carry an optional top-level `batch_config`. The
-version-3 attachment contains source bindings, local input/output paths,
+A 0.14.0a1 workflow can carry an optional top-level `batch_config`. The
+version-4 attachment contains canonical SourceItems and reviewed typed
+per-sample numeric overrides in addition to source bindings, local paths,
 patterns, guarded source-axis declarations, formats, output policy, run
-settings, and a complete compute request, including runtime/device and
-accelerator-memory settings. It contains no source pixels, calculated arrays,
-output files, manifests, or item sidecars.
+settings, and the complete compute request. It contains no source pixels,
+calculated arrays, output files, manifests, or item sidecars.
 
-A version-1 batch config had no compute request and loads as explicit CPU. It
-saves as version 3 only after validation. A version-2 config retains its saved
-compute request. Neither older version contains a source-axis declaration, and
-both are written as version 3 only after review and save. VIPP never guesses
-that an older collection run intended to use an accelerator or a different
-axis interpretation.
+A version-1 batch config had no compute request and loads as explicit CPU. A
+version-2 config retains its saved compute request. A version-3 config retains
+its guarded source declarations and acquires SourceItems when resolved. Older
+versions contain no per-sample overrides and are written as version 4 only
+after review and save. VIPP never guesses accelerator intent, a different axis
+interpretation, or which historic item should receive an override.
 
 The attachment is validated against the containing graph when it is saved and
 loaded. It is deliberately excluded from the scientific workflow hash: changing
@@ -101,11 +104,13 @@ that the graph's scientific operations changed. An invalid, unsupported, or
 mismatched attachment is not silently applied; VIPP can still load the
 scientific graph while reporting that Batch workspace was not restored.
 
-Restoring a valid attachment opens Batch workspace and populates its fields. It
-does not scan the collection, build a preview, load a representative, or
-calculate the graph. **Preview batch** remains optional and **Run batch** always
-performs a fresh preflight. Because paths are local configuration, review and
-repair them after moving a workflow to another computer.
+Restoring a valid attachment opens Batch workspace and starts a metadata-only
+background scan. Exact saved SourceItems and per-sample overrides are restored
+only when they match the fresh inventory; changed or missing sources remain
+quarantined for review. This does not load representative pixels or calculate
+the graph. **Preview batch** remains optional and **Run batch** always performs
+a fresh preflight. Because paths are local configuration, review and repair
+them after moving a workflow to another computer.
 
 ### Scientific parameters versus inspector state
 
@@ -126,7 +131,7 @@ ranges, and inspector layout do not alter node arrays. They are not substitutes
 for the saved scientific parameters. A screenshot can document what was
 reviewed, but the workflow JSON is the authoritative editable graph.
 
-In 0.13, compatible VIPP Inspect display profiles are saved independently by
+In 0.14, compatible VIPP Inspect display profiles are saved independently by
 node, output port, and RGB surface. They can include colormap, contrast,
 blending, opacity, visibility, gamma, interpolation, and compatible
 projection/rendering settings, but remain presentation state: restoring or
@@ -145,13 +150,13 @@ bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
 different runtime. Regenerate and revalidate exported code after every VIPP
-upgrade, including 0.13.0a7 to 0.13.0a8. Interactive caches, thumbnails, pinned
+upgrade, including 0.13.0a9 to 0.14.0a1. Interactive caches, thumbnails, pinned
 layers, and graph layout remain UI state and are not reproduced.
 
-In 0.13, the callable API accepts a complete `compute_request`, a progress
+The callable API accepts a complete `compute_request`, a progress
 callback, and a cooperative cancellation token. The generated CLI overlays
 only explicitly supplied `--compute-mode`, `--fallback-policy`, and repeatable
-`--node-preference` values; omitted fields retain the embedded schema-4 request.
+`--node-preference` values; omitted fields retain the embedded compute request.
 It also supports `--progress` and provenance controls. A runtime override does
 not mutate the embedded workflow.
 
@@ -178,7 +183,9 @@ failure is `2`, and cooperative cancellation is `130`.
 
 Generated CLI progress is operation-level. The saved batch runner additionally
 has an overall-item stream because it owns a collection plan. Generated inputs
-carry supplied `ImageDataset`/`SourcePayload` identity and metadata. The
+carry supplied `ImageDataset`/`SourcePayload` identity and metadata, including
+the canonical SourceItem when resolved. Effective per-sample parameters are
+applied to a detached workflow shared with interactive preview and batch. The
 generated local `load_image()` helper hashes before reading and verifies after
 materialization. A second exact source-byte recheck immediately before output
 publication is a durable saved-batch guarantee, not a promise for the folder
@@ -186,12 +193,13 @@ convenience or an arbitrary generated-Python array caller.
 
 ## Batch artifacts
 
-A batch run uses either a standalone version-3 `vipp_batch_config.json` or the
+A batch run uses either a standalone version-4 `vipp_batch_config.json` or the
 equivalent validated configuration attached to a workflow. It records
-collection bindings, any reviewed source-axis declarations, output policy,
-resolved output declarations, the workflow companion, canonical workflow hash,
-and configured compute request. Preview and execution share one deterministic
-sorted positional pairing and output planner.
+collection bindings, canonical SourceItems, any reviewed source-axis
+declarations, typed per-sample numeric overrides, output policy, resolved output
+declarations, the workflow companion, canonical workflow hash, and configured
+compute request. Preview and execution share one deterministic sorted
+positional pairing and output planner.
 Run always performs a fresh plan-only preflight. A new or deliberately edited
 plan can start in the same click without calculating a representative; an
 unexpectedly changed plan that was already reviewed stops for confirmation.
@@ -222,14 +230,13 @@ changes semantic names in place without moving pixels or changing shape.
 does not rename Q to Z. Existing calibration stays attached by position, so a
 declaration cannot discover a missing Z step, unit, or origin.
 
-Each run writes a latest version-3 manifest, a run-id archive, and item sidecars
-recording software versions, source identities/metadata, hashes, planned
-outputs, policies, errors, and status. For every source successfully read, the
-manifest records the reader-reported raw axes, the effective axes, and the
-applied declaration; its embedded config retains an intended declaration when
-an item is skipped or fails before reading. The manifest also records the
-configured/effective requests, whether a run override was used, request/config
-fingerprints, and an execution document plus digest for every calculated item.
+Each run writes a latest version-4 manifest, a run-id archive, and item sidecars
+recording software versions, canonical SourceItem/revision evidence, metadata,
+hashes, planned outputs, policies, errors, and status. It records raw/effective
+axes and declarations plus requested/effective per-sample overrides and
+effective workflow hashes. The manifest also records configured/effective
+compute requests, whether a run override was used, request/config fingerprints,
+and an execution document plus digest for every calculated item.
 Each published output links to that exact item execution. Output promotion is
 atomic per file after all sources and accelerator cleanup for an item are
 verified. These artifacts improve auditability but do not form one transaction
