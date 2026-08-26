@@ -1,16 +1,16 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.13.0a9 uses one standard CUDA 13 installation for every current
+VIPP 0.14.0a1 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, `nvcc`, cuCIM
 bundle, or locally built provider wheel is required.
 
-!!! warning "Use the exact a9 release"
+!!! warning "Use the exact a1 release"
     Download the installer and checksum only from the
-    [official v0.13.0a9 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9).
-    Verify `VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.13.0a9.txt` before opening it. This alpha is
+    [official v0.14.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1).
+    Verify `VIPP-Setup-0.14.0a1-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.14.0a1.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
 
 ## Choose the standard NVIDIA route
@@ -20,7 +20,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.13.0a9 boundary |
+| Requirement | 0.14.0a1 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -59,6 +59,14 @@ installation drive while setup runs. It also needs at least 5 GiB free on each
 drive used for Windows temporary files and VIPP installer records. These are
 disk-space requirements, not GPU memory requirements.
 
+The review gives separate rounded orientation: approximately 1.5 GiB to
+download, 5 GiB installed, and 7 GiB peak temporary working space for CUDA.
+Those estimates do not replace the 15 GiB installation-drive and 5 GiB
+temp/records-drive gates. Setup names the current phase and elapsed time, keeps
+the latest concrete activity visible through quiet periods, and exposes its log
+under **Advanced details**. A determinate percentage appears only when the
+underlying dependency tool reports a trustworthy byte total.
+
 ## Verify the installation
 
 A managed CUDA installation creates **VIPP Automatic**, **VIPP CPU**, and
@@ -92,7 +100,7 @@ working directory:
 py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
-  "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a9"
+  "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.14.0a1"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -120,10 +128,10 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. Current a9 GPU providers
+The completed-node badge reports what actually ran. Current a1 GPU providers
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but a9 does not install or execute that provider.
+historical cuCIM identities, but a1 does not install or execute that provider.
 
 ## Background and basic measurements are CuPy-only
 
@@ -147,7 +155,7 @@ compute mode explicitly rather than expecting VIPP to guess.
 
 !!! danger "Do not reuse an old provider add-on"
     Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-    earlier VIPP release into 0.13.0a9. Those assets describe an older release
+    earlier VIPP release into 0.14.0a1. Those assets describe an older release
     boundary and are not required by the current application.
 
 ## Runtime behavior and provenance
@@ -176,7 +184,7 @@ This is often correct. Inspect the node's compute explanation for a dtype,
 rank, parameter, memory, workload, or parity exclusion. Do not change a
 scientific parameter merely to unlock GPU execution.
 
-In 0.13.0a9, Prefer GPU preserves exact workload facts across intervening
+In 0.14.0a1, Prefer GPU preserves exact workload facts across intervening
 CPU-only nodes. A required CPU Rescale Axes, Rescale Intensity, or Unsharp Mask
 step therefore does not by itself make reviewed downstream GPU work
 ineligible. If an affected downstream node still uses CPU, its compute details
@@ -208,8 +216,8 @@ changes. Run **Find fastest pipeline…** again and review the new evidence.
 ### Need the previous cuCIM procedure
 
 Use the matching archived release page for the old environment. Do not apply
-that procedure to a9. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
+that procedure to a1. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
 preserved as the historical record.
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[0.13.0a9 release notes](../releases/0.13.0a9.md).
+[0.14.0a1 release notes](../releases/0.14.0a1.md).

@@ -49,6 +49,12 @@ Workflow schema 4 adds authored compute intent without changing these axis and
 metadata semantics. A schema-3 workflow therefore loads into 0.13 with explicit
 CPU execution rather than silently applying the new-session Auto policy.
 
+Workflow schema 5 adds the `SourceItem v1` record. It binds the logical image
+selector to the observed container revision, reader/backend, normalized axes,
+shape, and available metadata. This is distinct from changing axis meaning:
+SourceItem identifies which image was read, while an explicit axis declaration
+states how positions in that image should be interpreted.
+
 ## TIFF page labels at an image source
 
 Some ordinary TIFF files report a page dimension as generic `Q` because the
@@ -98,7 +104,7 @@ reviewed declaration, a node that only needs a 2D spatial interpretation can
 use inferred trailing Y/X and displays that inference; it does not silently
 promote Q to Z.
 
-In 0.13.0a9, changing the Image Source declaration immediately refreshes the
+In 0.14.0a1, changing the Image Source declaration immediately refreshes the
 effective metadata along its active branch before a full pixel calculation.
 For a branch such as **Subtract Background -> Rescale Intensity -> Gaussian
 Blur 3D**, declaring `QYX -> ZYX` makes the Gaussian Sigma Z control visible at
@@ -122,7 +128,7 @@ RGB/RGBA order where applicable and otherwise blends every fluorescence channel
 by carried pseudo-colour, falling back through Blue, Green, Red, Magenta,
 Yellow, and Cyan repeatedly.
 
-## Ordered ND2 dimensions in 0.13
+## Reader dimensions and stable items in 0.14
 
 For Nikon ND2, VIPP follows the reader's ordered `sizes` mapping only when the
 dimension labels and sizes exactly match the returned array shape. This keeps
@@ -137,6 +143,13 @@ displayed axis order and shape with acquisition records, move every T/Z/C
 control on a representative file, and inspect the resulting channel and slice
 before quantitative processing. Do not add `Reorder Axes` merely to make the
 controls look familiar unless the stored order is known independently.
+
+The same release contract keeps reader inspection and full read metadata
+aligned for the qualified LIF, CZI/LSM, OIR/OIB/OIF/VSI, and IMS routes. A
+multi-image source is selected by a stable item key where available, not merely
+its current list position. A changed file, missing companion, or unexpected
+reader topology therefore stops for review instead of silently attaching old
+axes or calibration to a different image.
 
 ## Physical Scale
 

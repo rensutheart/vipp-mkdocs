@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.13.0a9 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.14.0a1 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -27,7 +27,7 @@ parameter to place more work on GPU. Developer-hidden implementations remain
 excluded unless an advanced request explicitly enables experimental admission;
 that does not turn them into public support.
 
-In 0.13.0a9 the planner preserves exact shape, dtype, finite-value, and axis
+In 0.14.0a1 the planner preserves exact shape, dtype, finite-value, and axis
 facts across required CPU-only operations. A CPU Rescale Axes, Rescale
 Intensity, or Unsharp Mask decision does not by itself turn a reviewed
 downstream GPU candidate into an unknown workload. Mixed CPU/GPU badges are
@@ -211,7 +211,7 @@ unrunnable descendant.
 <a id="gpu-regions-in-0130a8"></a>
 <a id="gpu-regions-in-0130a9"></a>
 
-## GPU regions in 0.13.0a9
+## GPU regions in 0.14.0a1
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.

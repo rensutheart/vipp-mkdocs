@@ -37,10 +37,10 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual describes the public **napari-vipp 0.13.0a9** alpha. Its exact
-    tag, GitHub prerelease, PyPI files, release assets, and hashes are recorded
-    in the
-    [a9 release-verification table](releases/0.13.0a9.md#release-verification).
+    This manual describes the public **napari-vipp 0.14.0a1** alpha. Download
+    only from the canonical
+    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1)
+    or [PyPI page](https://pypi.org/project/napari-vipp/0.14.0a1/).
     Verify the intentionally
     unsigned Windows installer against the official checksum before opening it.
     Do not treat unperformed external fresh-machine or novice checks as passes.
@@ -50,18 +50,16 @@ hide:
     analysis—not as optional cleanup after it.
 
 !!! important "0.13 workflow and compute compatibility"
-    0.13.0a9 writes workflow schema 4. A valid schema-3 workflow loads with an
-    explicit CPU compute request, while schemas 1 and 2 remain rejected. Cached
-    results are not saved in workflow JSON and generated Python is pinned to
-    its creator version. Read the
-    [0.13.0a9 release notes](releases/0.13.0a9.md) before upgrading and
+    0.14.0a1 writes workflow schema 5. Valid schema-3 and schema-4 workflows
+    migrate explicitly; cached results and source pixels are not saved in
+    workflow JSON, and generated Python is pinned to its creator version. Read
+    the [0.14.0a1 release notes](releases/0.14.0a1.md) before upgrading and
     revalidate calculated results afterward.
 
-    Batch configs and manifests are version 3. Version-1 configs load with an
-    explicit CPU request; version-2 configs keep their saved compute request.
-    Both older versions have no source-axis declaration until reviewed and
-    saved as version 3. For ordinary TIFF collections, review the Batch
-    workspace's **Image stack** choice before treating generic pages as Z.
+    Batch configs and manifests are version 4. Older records have no
+    per-sample parameter overrides and acquire SourceItems only when their
+    sources are resolved. Review the selected item, reader, axes, calibration,
+    and any migrated batch values before consequential use.
 
 ## Choose your path
 
@@ -104,7 +102,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in the public alpha | [0.13.0a9 release notes](releases/0.13.0a9.md) |
+| Review everything changed in the public alpha | [0.14.0a1 release notes](releases/0.14.0a1.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

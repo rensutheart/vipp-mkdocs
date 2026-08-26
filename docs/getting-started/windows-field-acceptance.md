@@ -1,16 +1,14 @@
 # Try the VIPP Windows installer
 
-Use this checklist when someone asks you to test the tagged VIPP `0.13.0a9`
+Use this checklist when someone asks you to test the tagged VIPP `0.14.0a1`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Use the exact public tagged installer"
-    The official public installer SHA-256 is
-    `5b8233a05696efbf8fea7557012934385021ea3e9018befdd7789bf624740528`.
-    Use this checklist only with the exact `v0.13.0a9` GitHub asset and
-    checksum identified by
-    [release verification](../releases/0.13.0a9.md#release-verification). Do not
-    use an untagged build or a similarly named file from another site.
+    Use this checklist only with the exact `v0.14.0a1` GitHub asset and its
+    checksum from the
+    [official release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1).
+    Do not use an untagged build or a similarly named file from another site.
 
     A display-independent production-backend install, repair, scientific
     smoke, and uninstall does not count as a pass for the downloaded
@@ -46,19 +44,19 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-Download the installer and checksum file only from the official `v0.13.0a9`
+Download the installer and checksum file only from the official `v0.14.0a1`
 entry on the
 [VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
-`VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
+`VIPP-Setup-0.14.0a1-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 `
-  .\VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe
+  .\VIPP-Setup-0.14.0a1-Windows-x86_64-UNSIGNED.exe
 ```
 
 Compare all 64 characters with the installer line in
-`SHA256SUMS-Windows-0.13.0a9.txt`. Stop and delete the file if they differ. This
+`SHA256SUMS-Windows-0.14.0a1.txt`. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so **Unknown publisher** is expected; an
 antivirus threat warning is not expected and must not be bypassed.
 
@@ -74,6 +72,27 @@ antivirus threat warning is not expected and must not be bypassed.
 - [ ] I ran a small batch and could find its outputs.
 - [ ] Compute Doctor showed short, understandable results and one next action.
 - [ ] I could tell whether the calculation actually used CPU or GPU.
+
+What was confusing or did not work:
+
+## Capacity and activity check
+
+- [ ] CPU review showed approximately 250 MiB download, 1.5 GiB installed,
+      and 2.5 GiB peak working space.
+- [ ] CUDA review showed approximately 1.5 GiB download, 5 GiB installed, and
+      7 GiB peak working space.
+- [ ] The review presented those estimates separately from the enforced
+      minimums: CPU 5 GiB on the installation drive and 1 GiB on temp/records
+      drives; CUDA 15 GiB and 5 GiB respectively.
+- [ ] CUDA-ready wording described **at least 15 GiB of free disk space on the
+      installation drive** and did not compare this value with VRAM.
+- [ ] Setup named its current phase and showed elapsed time.
+- [ ] Work without a trustworthy total used an indeterminate activity bar;
+      trustworthy byte totals, when available, produced determinate progress.
+- [ ] A quiet operation kept its latest concrete activity and later showed a
+      still-working heartbeat without claiming success or failure.
+- [ ] **Advanced details** showed the exact setup-log path and **Open setup
+      log** opened that file.
 
 What was confusing or did not work:
 
@@ -155,4 +174,4 @@ What was confusing or did not work:
 - Most important remaining problem:
 
 Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded `0.13.0a9` installer.
+version do not count as a pass for this downloaded `0.14.0a1` installer.

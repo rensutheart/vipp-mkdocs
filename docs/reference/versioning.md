@@ -8,15 +8,13 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The numbered **0.13.0a9** snapshot is the current verified public alpha,
+The numbered **0.14.0a1** snapshot is the current verified public alpha,
 published on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9) and
-[PyPI](https://pypi.org/project/napari-vipp/0.13.0a9/). Its
-[release verification](../releases/0.13.0a9.md#release-verification) records the
-exact application commit, tag, CI, focused GPU evidence, intentionally unsigned
-installer, artifact hashes, public artifact-download hash checks, and
-public package publication. The nightly manual may describe later unreleased
-work.
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1) and
+[PyPI](https://pypi.org/project/napari-vipp/0.14.0a1/). The canonical GitHub
+release carries the exact immutable-tag package, intentionally unsigned
+installer, checksum, release manifest, and notices. The nightly manual may
+describe later unreleased work.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -30,52 +28,35 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.13.0a9 writes schema version 4; versions 1 and 2 are rejected. Valid
-schema-3 workflows load structurally with an explicit CPU compute request and
-become schema 4 only when saved. Workflow JSON contains no cached scientific
-pixels/tables. Recalculate and compare graph structure, parameters, sources,
-axes, channels, physical grids, dynamic ports, compute request, actual backend,
-and results on known sample data. See the
+VIPP 0.14.0a1 writes schema version 5; versions 1 and 2 are rejected. Valid
+schema-3 workflows load with explicit CPU intent and schema-4 workflows retain
+authored compute intent. Both acquire canonical SourceItems when their sources
+resolve. Workflow JSON contains no source pixels or cached scientific results.
+Recalculate and compare graph structure, parameters, selected items,
+reader/backend, axes, channels, physical grids, dynamic ports, compute request,
+actual backend, and results on known sample data. See the
 [workflow contract](workflow-contract.md).
 
-## Move from an earlier 0.13 alpha to 0.13.0a9
+## Move from 0.13.0a9 to 0.14.0a1
 
-The workflow and batch schema numbers do not change between 0.13.0a1 and
-0.13.0a9, but generated programs are version-locked. Across the 0.13 alphas,
-GPU identities and regions changed, Image Source gained a durable axis
-declaration, and new graph edits, nodes, and dimensionality fixes can affect
-calculation.
+0.14 introduces SourceItem identity, workflow schema 5, and batch
+config/manifest schema 4. Treat the upgrade as a source and scientific review.
 
-1. Preserve the earlier environment, workflows, outputs, execution reports,
-   batch artifacts, and any private cuCIM wheel and build manifest as historical
-   evidence. Do not install the old provider into a9.
-2. Install `0.13.0a9` separately with the
-   checksum-verified unsigned Windows installer, or upgrade a dedicated manual
-   environment with an exact `napari-vipp==0.13.0a9` or
-   `napari-vipp[gpu-cuda13]==0.13.0a9` pin. Use the official public assets and
-   recorded hashes; do not substitute an untagged build. Do not mix CUDA-major
-   extras.
-3. Run `pip check` and, for CUDA, `vipp-compute-doctor --track cuda13 --refresh`.
-   The normal CuPy/CuPyX installation now contains every current provider. Do
-   not reuse a cuCIM bundle, private wheel, or approval record from an earlier
-   release.
-4. Open a duplicate workflow, run it on CPU, and compare decisive intermediate
-   and final results before enabling Auto or Prefer GPU.
-5. Record the exact GPU model, compute capability, driver, CUDA and scientific
-   package versions, and actual implementation IDs. Minor floating-point
-   differences can occur across otherwise compatible devices.
-6. Review each Image Source and Batch **Image stack** choice. A saved exact
-   basic-measurement cuCIM pin migrates to its CuPy replacement; a broad
-   `library:cucim` preference remains unavailable and needs an explicit current
-   choice.
-7. For a declared Z stack, confirm that Gaussian Blur 3D exposes Sigma Z and
-   that Skeletonize resolves to the intended 2D or volumetric 3D mode. If a
-   workflow joins manual sibling measurements, calculate both and confirm that
-   Merge Tables becomes ready.
-8. Under Prefer GPU, inspect actual badges on both sides of CPU-only nodes. A
-   GPU VRAM preflight rejection now names the affected nodes and binding limit;
-   follow that diagnostic rather than assuming the whole CUDA route is broken.
-9. Regenerate and revalidate exported Python and saved batch runners under a9.
+1. Preserve the 0.13 environment, workflow, input identities, outputs,
+   execution reports, and batch artifacts.
+2. Install `0.14.0a1` separately from the official checksum-verified installer
+   or an exact package pin. Do not substitute an untagged build.
+3. Open a duplicate workflow. Resolve every Image Source and verify the selected
+   item, reader/backend, axes, shape, calibration, channels, and decisive
+   results before saving schema 5.
+4. For attached batch workspaces, let metadata-only discovery complete. Review
+   every restored SourceItem and per-sample value; changed or missing sources
+   must remain quarantined rather than being reassigned by order or filename.
+5. Confirm that an OME-Zarr lower-level preview is labelled presentation-only
+   and that analysis/output still use level 0.
+6. Run CPU reference checks before relying on accelerator results, then inspect
+   actual implementation badges and provenance for the intended compute mode.
+7. Regenerate and revalidate exported Python and saved batch runners under a1.
 
 ## Move from 0.12.0a3 to 0.13.0a1
 
@@ -198,17 +179,17 @@ python -m pip install --pre napari-vipp
 ```
 
 To reproduce a specific alpha exactly, specify the version in a fresh
-environment. An exact prerelease does not need `--pre`. The a9 examples below
+environment. An exact prerelease does not need `--pre`. The a1 examples below
 use the public PyPI release:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.13.0a9"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.14.0a1"
 ```
 
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.13.0a9"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.14.0a1"
 vipp-compute-doctor --track cuda13
 ```
 

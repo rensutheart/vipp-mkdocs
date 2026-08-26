@@ -1,10 +1,31 @@
 # Validation status
 
-This page summarizes the current 0.13.0a9 evidence boundary and keeps its
-carried-forward 0.13.0a8 baseline separate. It is a claim boundary, not a
-certificate that every node is validated for every assay.
+This page summarizes the current 0.14.0a1 evidence boundary and keeps its
+carried-forward 0.13 baselines separate. It is a claim boundary, not a
+certificate that every node, reader, or workflow is validated for every assay.
 
-## 0.13.0a9 focused qualification boundary
+## 0.14.0a1 focused qualification boundary
+
+The changed release domains are SourceItem identity and migration,
+reader-contract normalization, local OME-Zarr presentation preview, typed
+per-sample batch values and retained-workspace UX, source-load preflight, and
+installer capacity/activity presentation. Qualification uses focused core/UI,
+reader, schema/migration, preview, override, and installer-presentation checks,
+the integrated release suite, the strict verified-cache public corpus profile,
+and exact-tag package and installer checks.
+
+This scope does not claim remote stores, IMS pyramid preview, HCS traversal,
+operation-level lazy execution, broad optional-reader equivalence, or
+per-sample expressions/source selectors/topology changes. The lower OME-Zarr
+level is presentation-only; scientific analysis remains level 0. The unchanged
+full GPU catalogue and installer transactional lifecycle retain their recorded
+0.13 evidence rather than being silently counted as newly rerun.
+
+Exact public packages and the immutable release assets are available from the
+[v0.14.0a1 GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1)
+and [PyPI](https://pypi.org/project/napari-vipp/0.14.0a1/).
+
+## 0.13.0a9 qualification boundary
 
 Final a9 application source is commit
 [`d476c8976c91679faaaf0fe196c90b1ab4d63458`](https://github.com/rensutheart/napari-vipp/commit/d476c8976c91679faaaf0fe196c90b1ab4d63458).

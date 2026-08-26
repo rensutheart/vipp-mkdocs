@@ -40,15 +40,20 @@ cooperative cancellation completes and final state is persisted.
    CPU/GPU per-node preferences and benchmarking.
 6. Choose an output folder, formats, naming, existing-file policy, fallback
    policy, device, and accelerator-memory settings.
-7. Optionally select **Preview batch** to review pairing and collision summaries.
-8. When previewing, navigate several representatives, including difficult and
+7. Wait for the compact toolbar status to report the current item count. A
+   restored workspace performs this metadata-only discovery automatically;
+   **Preview batch** remains optional.
+8. Review any values in **Per-sample parameters (optional)**. Enter only
+   exceptions; blank cells inherit the shown workflow value.
+9. Optionally select **Preview batch** to review pairing and collision summaries.
+10. When previewing, navigate several representatives, including difficult and
    boundary cases.
-9. Save the workflow and choose **Yes** to attach the Batch workspace, or use
+11. Save the workflow and choose **Yes** to attach the Batch workspace, or use
    **Save config...** when a separate headless-replay configuration is needed.
-10. Select **Run batch**. It performs its own plan-only preflight and starts
+12. Select **Run batch**. It performs its own plan-only preflight and starts
    directly when no reviewed plan is current. If a displayed plan changed
    unexpectedly, review the refreshed plan and run again only after accepting it.
-11. Inspect outputs, final status, validation text, manifest, archive, item
+13. Inspect outputs, final status, validation text, manifest, archive, item
     sidecars, configured/effective compute requests, actual node
     implementations, fallbacks, and cleanup evidence before treating the run as
     complete.
@@ -83,9 +88,11 @@ Directory names and filename similarity do not create biological pairing.
 Inspect the preview and retain an independent sample/field map when position is
 not sufficient evidence. A multi-series TIFF, NPZ, Zarr, LIF, IMS, or other
 inspectable container can therefore contribute several clearly labelled rows.
-The selected series index/name is retained in the representative view, output
-stem, manifest, and provenance. Time, channel, and Z remain inside each selected
-series; 0.13 does not iterate semantic-axis combinations or discover
+Each row carries a canonical `SourceItem v1` stable selector plus the observed
+container revision and reader evidence. A changed file, missing companion,
+ambiguous legacy index, or unexpected item topology stops for review instead of
+silently reassigning the old row. Time, channel, and Z remain axes inside each
+item; 0.14.0a1 does not iterate semantic-axis combinations or discover
 plate/well/field HCS structure.
 
 The first bound source is the primary source used by default naming. Fixed
@@ -170,17 +177,39 @@ Choose the batch default deliberately:
 
 | Policy | Existing destination |
 | --- | --- |
-| `Error` | Treat it as a collision that must be resolved before execution. |
-| `Skip` | Keep the file unchanged and record the output as skipped. |
-| `Overwrite` | Replace the destination and record the new write. |
+| `Ask before overwrite (recommended)` | In the Batch workspace, list the exact existing outputs and require one-run consent before replacement. Cancel keeps every file. Headless execution remains fail-closed because it cannot ask. |
+| `Skip existing` | Keep the file unchanged and record the output as skipped. |
+| `Overwrite without asking` | Replace the destination and record the new write. |
 
-When every resolved output for an item already exists under `Skip`, VIPP records
+When every resolved output for an item already exists under `Skip existing`, VIPP records
 that no-op without loading the source pixels or calculating the graph. If an
 item has a mixture of existing and missing outputs, it still calculates once so
 the missing outputs can be produced correctly.
 
 An explicit overwrite choice on a `Batch Output` node takes precedence over
-the batch default.
+the batch default. Duplicate destinations, outputs overlapping inputs, and
+explicitly protected outputs remain hard errors and cannot be approved through
+the overwrite dialog.
+
+## Override a reviewed numeric value for one sample
+
+After a fresh plan resolves stable SourceItems, **Per-sample parameters
+(optional)** shows eligible authored numeric scientific controls as columns and
+primary SourceItems as rows. A blank cell visibly says that it inherits the
+workflow value. Enter only a value that differs for that item.
+
+The value uses the node's normal integer or floating-point contract. Source
+paths/selectors, output destinations, compute/cache controls, derived fields,
+expressions, and graph topology cannot be overridden. Duplicate, stale,
+zero-match, multi-match, or invalid rows stop preflight before outputs are
+published.
+
+Selecting a representative applies its values to a detached effective workflow;
+the authored graph and saved defaults do not change. When the selected item
+actually overrides the inspected node, its inspector labels the **Effective
+batch preview** value and the authored default. That block is absent when the
+item has no override for that node. Preview, execution, checkpoints, manifests,
+and provenance retain the same effective values and workflow hashes.
 
 ## Review representatives
 
@@ -232,6 +261,13 @@ VIPP creates the output directory, writes run artifacts, or initializes CPU or
 GPU devices. Every later item is still checked when read; one representative is
 not evidence that a collection is uniform.
 
+The fixed Batch toolbar also shows its own compact status and activity at the
+right. Metadata-only source discovery and preflight use an indeterminate
+indicator; a full run mirrors overall item progress there while detailed
+per-item and per-operation progress remains in the lower run section. This is
+separate from the main VIPP graph-calculation bar because source discovery and
+graph calculation can overlap.
+
 ## Save and replay a configuration
 
 When Batch workspace is active, **Save workflow...** offers three choices:
@@ -244,12 +280,14 @@ When Batch workspace is active, **Save workflow...** offers three choices:
 - **Cancel** does not save a file.
 
 Loading a workflow with a valid attachment restores and opens Batch workspace
-with its fields populated. VIPP does not preview the plan, read a
-representative, or calculate the graph as part of that batch restore. Use
-optional **Preview batch** for inspection, or choose **Run batch** to perform a
-fresh preflight and start the full run. An invalid or mismatched attachment is
-not silently applied; the scientific workflow can still load while VIPP
-reports that the Batch workspace was not restored.
+with its fields populated, then performs background metadata-only sample
+discovery. Exact saved SourceItems and per-sample overrides are restored when
+they match; changed or missing sources stay quarantined for review. VIPP does
+not load representative pixels or calculate the graph as part of this restore.
+Use optional **Preview batch** for inspection, or choose **Run batch** for the
+full run. An invalid or mismatched attachment is not silently applied; the
+scientific workflow can still load while VIPP reports that the Batch workspace
+was not restored.
 
 For command-line replay or when workflow and automation settings should remain
 separate, use **Save config...**. It writes a standalone versioned
@@ -265,12 +303,14 @@ separate, use **Save config...**. It writes a standalone versioned
 - the required workflow companion and optional runner;
 - the canonical scientific workflow hash.
 
-Batch config schema 3 stores the compute request and guarded source-axis
-declarations. A version-1 config had no compute fields and loads as explicit
-CPU; a version-2 config retains its saved compute request. Neither older version
-contains an axis declaration, and both are written as version 3 after review and
-save. Their blank declaration displays as **Use the file's labels unchanged**,
-not the automatic policy of a new unsaved row. Loading a config does not
+Batch config schema 4 adds canonical SourceItems and typed per-sample numeric
+overrides to the compute request and guarded source-axis declarations. A
+version-1 config had no compute fields and loads as explicit CPU; version 2
+retains its compute request; version 3 retains its source declarations and
+acquires SourceItems when resolved. Older versions contain no per-sample
+overrides and become version 4 only after review and save. A blank declaration
+displays as **Use the file's labels unchanged**, not the automatic policy of a
+new unsaved row. Loading a config does not
 silently replace the toolbar request; it retains its saved request until the
 user changes a toolbar compute setting, at which point the current complete
 toolbar request is used for the next preview, save, or run.
@@ -387,16 +427,19 @@ Every workspace or headless run writes:
 - a run-id manifest archive — preserves prior finalized runs;
 - a run-id sidecar directory — per-item/output checkpoints during execution.
 
-The version-3 manifest records:
+The version-4 manifest records:
 
 - canonical workflow/config and their hashes;
 - VIPP, Python, and relevant runtime package versions;
-- each source identity and available metadata;
+- each canonical SourceItem, exact source revision, reader evidence, and
+  available metadata;
 - for each source successfully read, its raw axes, effective axes, and applied
   declaration; the embedded config retains an intended declaration when an item
   is skipped or fails before reading;
 - every planned output path, format, and collision policy;
 - errors and item/output states;
+- requested/effective per-sample parameter overrides and effective workflow
+  hashes;
 - the configured and effective compute requests, whether a CLI/UI override was
   used, and their fingerprints;
 - for every calculated item, the formal execution document and digest with
@@ -446,7 +489,7 @@ not evidence that another assay or naming scheme is valid.
 - Output names, formats, subfolders, and collision policy are intentional.
 - The fresh preflight matches the reviewed plan.
 - The configured and effective compute requests match the intended run, and
-  the version-3 manifest and item execution provenance explain the actual CPU,
+  the version-4 manifest and item execution provenance explain the actual CPU,
   GPU, and fallback decisions. Interactive node badges describe the last
   accepted interactive calculation, not every detached batch item.
 - Completed/partial/skipped/cancelled/failed counts match expectations.

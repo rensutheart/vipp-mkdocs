@@ -92,7 +92,7 @@ while allowing separate device keys to proceed independently.
 NVIDIA GPU. In the bounded M1 Max CPU smoke, VIPP presented host memory once as
 system RAM and did not fabricate or add a separate VRAM total. A future Apple
 or other accelerator provider that reports unified topology must instead use
-one shared CPU/GPU budget row. macOS remains CPU-only in 0.13.0a9.
+one shared CPU/GPU budget row. macOS remains CPU-only in 0.14.0a1.
 
 With **visible** fallback, one complete device segment may retry once on CPU
 after a classified runtime OOM, but only after synchronization and proven
@@ -202,11 +202,16 @@ as a whole is not committed until the run finishes successfully.
 
 ## Large-Data Direction
 
+VIPP 0.14.0a1 can slice a declared lower local OME-Zarr 0.4/0.5 level
+for presentation before computing that preview. The layer name states that
+analysis remains full resolution, and the graph still materializes the complete
+selected level-0 image. This reduces presentation work for supported stores; it
+does not make downstream operations lazy or change scientific output.
+
 Future large-data work should add:
 
-- pyramid-aware source-level selection beyond the current 90 × 55, 180 × 110,
-  360 × 220, and 720 × 440 backing-detail controls. Very High uses four times
-  the pixmap memory of High;
+- pyramid-aware presentation beyond local OME-Zarr, including remote stores,
+  IMS pyramids, and HCS plate/well/field traversal;
 - more lazy and chunk-native operations;
 - operation capability declarations;
 - OME-Zarr pyramid export;

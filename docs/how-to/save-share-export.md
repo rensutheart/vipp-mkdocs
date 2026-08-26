@@ -47,11 +47,12 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.13.0a9 writes schema 4 and rejects versions 1 and 2. Valid schema-3 workflows
-load structurally with an explicit CPU request, but cached pixels and tables
-are not serialized. Saving the reviewed duplicate writes schema 4. Follow the
-[0.12.0a3 to 0.13.0a1 procedure](../reference/versioning.md#move-from-0120a3-to-0130a1).
-The earlier release-to-release procedures remain available for older workflows.
+0.14.0a1 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
+load with explicit CPU intent; schema-4 workflows retain authored compute
+intent. Both acquire SourceItems when sources resolve, but cached pixels and
+tables are not serialized. Inspect selected items, readers, axes, and decisive
+outputs before saving the reviewed duplicate. Earlier release-to-release
+procedures remain available for older workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-to-0120a1).
 
