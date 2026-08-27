@@ -39,12 +39,19 @@ Use one documentation PR and one post-package deployment:
    Manually inspect the changed pages and any changed screenshots.
 4. Merge the documentation PR before or with the application release.
 5. After the GitHub release and PyPI version are public, run **Deploy versioned
-   documentation** once with the target version and `make_stable=true` when
-   that alpha should be the default manual.
+   documentation** with the target version and `make_stable=true` when that
+   alpha should be the default manual. Do not dispatch duplicate runs while one
+   is queued or active.
 6. Verify the numbered home page, `stable`, and the changed pages. Stop; do not
    create a second evidence-only PR to record the deployment that just ran.
 
 If an alpha should not become the default manual, use `make_stable=false`.
+
+If GitHub reports `startup_failure`, zero executed steps, or that a hosted
+runner never acquired the job, no documentation was published. Verify that no
+other deployment is queued or active before retrying. Treat an actual build or
+deploy-step failure as a content or workflow blocker, and never claim the
+numbered or **stable** site until its URLs and `versions.json` have been checked.
 
 ## Release candidate and stable production
 

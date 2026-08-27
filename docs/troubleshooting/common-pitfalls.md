@@ -53,7 +53,7 @@ Symptom:
 Fix:
 
 - review that source's **Image stack** choice;
-- keep **Pages are depth slices (Z stack)** only if the TIFF pages really are
+- keep **Stack planes are depth slices (Z stack)** only if the TIFF pages really are
   depth slices;
 - otherwise choose **Use the file's labels unchanged** and correct the workflow
   or source metadata deliberately;
@@ -145,7 +145,7 @@ Fix:
 - use `Reorder Axes` or `Set Pixel Size / Units` only with known values;
 - reproduce the issue with a non-sensitive minimal file before reporting it.
 
-For an ND2 file in 0.13, compare the reported ordered shape/axes with the
+For an ND2 file, compare the reported ordered shape/axes with the
 reader/acquisition record and move every available T, Z, and C slider. Each
 control should change the corresponding content in both napari and the linked
 VIPP preview. VIPP trusts the reader's ordered dimensions only when their labels
@@ -164,7 +164,7 @@ acceleration only if it clears the 1.20x/20-ms gate. Interactive, batch, and
 registry-lifecycle timing surfaces are never mixed. Auto never silently
 benchmarks multiple implementations. Use Prefer GPU when every reviewed
 eligible accelerator should run regardless of speed.
-Use Custom and apply a reviewed provider or **Find fastest** when you need
+Use Custom and apply a reviewed provider or **Find fastest pipeline…** when you need
 per-node control or a measured assignment.
 
 For **Prefer GPU**, CPU means that no reviewed accelerator passed every gate for

@@ -1,6 +1,6 @@
 # Architecture and scientific boundaries
 
-VIPP 0.13 separates scientific services from Qt presentation so the same
+VIPP separates scientific services from Qt presentation so the same
 validated behavior can support interactive execution, generated Python, and
 batch runs.
 
@@ -28,7 +28,10 @@ the application; reusable policy should still move to the narrowest owner.
 | Multi-image and image/PSF grid validation | `core/grid.py` |
 | Exact statistics, histograms, percentiles, contrast, and label sizes | `core/diagnostics.py` |
 | Presentation-only thumbnail contrast selection, exact integer histograms, and CuPy execution | `core/thumbnail_statistics.py`, `core/gpu/cupy_thumbnail_statistics.py`, `ui/diagnostic_workers.py` |
-| File/store identities and stable snapshots | `core/source_identity.py`, `core/file_sources.py` |
+| File/store revision identities and frozen snapshots | `core/source_identity.py`, `core/file_sources.py` |
+| Stable SourceItems, inspection, resolution, and persistence | `core/source_items.py`, `core/source_inspection.py`, `core/source_resolution.py`, `core/source_item_persistence.py` |
+| Normalized reader registry and format adapters | `core/io/` |
+| Multiscale source presentation previews | `core/source_preview.py`, `ui/source_preview.py` |
 | Live napari-layer snapshots and invalidation | `ui/source_adapter.py` |
 | Detached graph/workflow state | `core/snapshots.py`, `core/workflow.py` |
 | Typed headless execution and Qt adaptation | `core/execution.py`, `ui/workers.py` |

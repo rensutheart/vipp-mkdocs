@@ -71,7 +71,8 @@ tunnel, or table merge still depends on it.
 - Arrange flow from left to right.
 - Put alternative methods on parallel branches, not one after another.
 - Keep source, QC, and output nodes visually distinct.
-- Use **Auto structure graph** as a starting point, then preserve meaningful
+- Use **Structure** (shown as **Auto structure graph** when space permits) as a
+  starting point, then preserve meaningful
   parallel alignment.
 - Add graph notes at decisions: why a channel was selected, how a threshold was
   chosen, or what an exclusion means.
@@ -90,7 +91,7 @@ The **Port labels** setting has three display modes:
 Long names are elided on the card and show their full text in a tooltip. Labels
 reserve card space but deliberately do not reposition the graph when the mode
 changes. If existing cards now overlap, the VIPP message strip reports how many
-pairs overlap. Run **Auto structure graph** to rebuild a size-aware source-to-sink
+pairs overlap. Run **Structure** to rebuild a size-aware source-to-sink
 layout, or move those cards manually. Auto structure remains a one-shot,
 undoable layout edit; port-label visibility does not change the workflow's
 connections or scientific calculation.
@@ -103,7 +104,7 @@ or `red_channel`, and attach compatible inputs as subscribers.
 
 Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use
-**Tunnels…** to focus the source, reveal subscribers, rename, or remove it.
+**Tunnels...** to focus the source, reveal subscribers, rename, or remove it.
 
 To reroute a named output tunnel, drag its source badge to another compatible
 output. Preview and commit use the same port-type, cycle, and topology checks;

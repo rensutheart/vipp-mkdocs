@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.14.0a2: releases/0.14.0a2.md
       - 0.14.0a1: releases/0.14.0a1.md
       - 0.13.0a9: releases/0.13.0a9.md
       - 0.13.0a8: releases/0.13.0a8.md
@@ -134,6 +135,7 @@ nav:
   - Start here:
       - Start here: getting-started/index.md
       - Install VIPP: getting-started/installation.md
+      - Install on macOS: getting-started/macos.md
       - Windows NVIDIA GPU: getting-started/windows-cuda.md
       - Test a Windows install: getting-started/windows-field-acceptance.md
       - Launch VIPP: getting-started/launching.md

@@ -27,9 +27,9 @@ cooperative cancellation completes and final state is persisted.
 3. Open **Batch workspace...** and bind each varying `Image Source` to a local
    folder and pattern.
 4. Leave **Image stack** at **Automatic (recommended)** for a new source unless
-   you already know what its TIFF pages mean. If VIPP suggests **Pages are depth
-   slices (Z stack)**, keep that choice only after confirming the pages really
-   are depth slices.
+   you already know what its TIFF pages mean. If VIPP suggests **Stack planes
+   are depth slices (Z stack)**, keep that choice only after confirming the
+   pages really are depth slices.
 5. Choose the intended toolbar compute request. New work defaults to Auto,
    which uses reviewed safe GPU defaults without compatible history. An
    accelerated-only batch timing makes the next matching global Auto batch run
@@ -49,7 +49,7 @@ cooperative cancellation completes and final state is persisted.
 10. When previewing, navigate several representatives, including difficult and
    boundary cases.
 11. Save the workflow and choose **Yes** to attach the Batch workspace, or use
-   **Save config...** when a separate headless-replay configuration is needed.
+   **Save...** when a separate headless-replay configuration is needed.
 12. Select **Run batch**. It performs its own plan-only preflight and starts
    directly when no reviewed plan is current. If a displayed plan changed
    unexpectedly, review the refreshed plan and run again only after accepting it.
@@ -105,7 +105,7 @@ For a new source, **Image stack** begins at **Automatic (recommended)**. Most
 users can leave it there. On Preview or Run, VIPP checks one representative and
 changes the choice only in one narrow case: an ordinary TIFF reports exactly
 `QYX`, and the workflow then proves that it needs `ZYX` for 3D processing. VIPP
-visibly selects **Pages are depth slices (Z stack)**, explains the change, and
+visibly selects **Stack planes are depth slices (Z stack)**, explains the change, and
 retries the check once.
 
 That suggestion is useful, but it is not proof that the pages are depth slices.
@@ -211,6 +211,12 @@ batch preview** value and the authored default. That block is absent when the
 item has no override for that node. Preview, execution, checkpoints, manifests,
 and provenance retain the same effective values and workflow hashes.
 
+![The Batch workspace with two resolved source items, inherited workflow values, and one per-sample threshold override](../assets/screenshots/workflows/batch-workspace-overrides.png)
+
+*Blank cells inherit the authored workflow value; only the second synthetic
+sample overrides Binary Threshold. The compact toolbar reports workspace
+planning activity, while detailed run progress remains lower in the window.*
+
 ## Review representatives
 
 After preview, the retained strip above the graph shows `Item N of M`, the
@@ -290,7 +296,7 @@ scientific workflow can still load while VIPP reports that the Batch workspace
 was not restored.
 
 For command-line replay or when workflow and automation settings should remain
-separate, use **Save config...**. It writes a standalone versioned
+separate, use **Save...**. It writes a standalone versioned
 `vipp_batch_config.json` containing:
 
 - source-node bindings, folders, and patterns;
@@ -315,7 +321,7 @@ silently replace the toolbar request; it retains its saved request until the
 user changes a toolbar compute setting, at which point the current complete
 toolbar request is used for the next preview, save, or run.
 
-**Load config...** validates it against the current workflow. A hash or resolved
+**Load...** validates it against the current workflow. A hash or resolved
 output mismatch fails rather than silently applying stale selections.
 
 The optional `vipp_batch_pipeline.py` is a thin command-line launcher. It
@@ -465,7 +471,8 @@ run-level error because VIPP must not report success without durable provenance.
 
 ## Deterministic batch demo
 
-Choose **Open example... → Deterministic Batch & Provenance → Open batch
+From Batch workspace, choose the secondary **Demo...** shortcut. Alternatively,
+choose **Open example... → Deterministic Batch & Provenance → Open batch
 demo...**. Select a writable location; VIPP creates a unique working copy and
 does not overwrite an earlier demo.
 

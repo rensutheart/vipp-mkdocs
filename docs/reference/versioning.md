@@ -4,17 +4,24 @@ This manual has two publication tracks and release-numbered snapshots.
 
 | Selector | Meaning | Use it for |
 | --- | --- | --- |
-| **stable** | Alias for the current supported software release manual | Routine analysis and citation |
+| **stable** | Alias intended for the current supported software release manual | Routine analysis after confirming the displayed version |
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The numbered **0.14.0a1** snapshot is the current verified public alpha,
-published on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1) and
-[PyPI](https://pypi.org/project/napari-vipp/0.14.0a1/). The canonical GitHub
-release carries the exact immutable-tag package, intentionally unsigned
-installer, checksum, release manifest, and notices. The nightly manual may
-describe later unreleased work.
+VIPP **0.14.0a2** is the current verified public alpha. The
+[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2)
+carries the immutable-tag manual-install wheel, the intentionally unsigned
+Windows installer, separate intentionally unsigned Apple Silicon and Intel
+macOS packages, checksums, release manifests, and supporting evidence. The
+[PyPI 0.14.0a2 page](https://pypi.org/project/napari-vipp/0.14.0a2/) is also
+public, but its wheel and source archive were uploaded from the earlier
+pre-resize-fix build and cannot be replaced. Use a platform installer or the
+wheel attached to the GitHub release when the detached-window resizing fix is
+required. The nightly manual may describe later unreleased work.
+
+Application publication and manual deployment are separate operations. Always
+confirm the version shown by the manual selector; do not assume that the
+**stable** alias moved merely because a new package was published.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -28,7 +35,7 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.14.0a1 writes schema version 5; versions 1 and 2 are rejected. Valid
+VIPP 0.14.0a2 writes schema version 5; versions 1 and 2 are rejected. Valid
 schema-3 workflows load with explicit CPU intent and schema-4 workflows retain
 authored compute intent. Both acquire canonical SourceItems when their sources
 resolve. Workflow JSON contains no source pixels or cached scientific results.
@@ -36,6 +43,30 @@ Recalculate and compare graph structure, parameters, selected items,
 reader/backend, axes, channels, physical grids, dynamic ports, compute request,
 actual backend, and results on known sample data. See the
 [workflow contract](workflow-contract.md).
+
+## Move from 0.14.0a1 to 0.14.0a2
+
+0.14.0a2 is a focused desktop-compatibility and packaging alpha. It does not
+change the SourceItem, reader, workflow-schema-5, batch-schema-4, per-sample,
+OME-Zarr preview, or scientific CPU/GPU contracts introduced in 0.14.0a1.
+
+1. Keep the original 0.14.0a1 environment, workflow, batch evidence, and
+   decisive outputs for provenance.
+2. Choose the checksum-verified Windows installer, the architecture-matched
+   checksum-verified macOS package, or the wheel attached to the
+   [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2).
+   The macOS packages are CPU-only, require macOS 13 or newer, and install a
+   current-user environment under `~/Library/vipp` with
+   `~/Applications/VIPP.app`.
+3. Do not treat `pip install napari-vipp==0.14.0a2` as the resize-fixed build.
+   PyPI's immutable a2 files predate that fix. Record the installation surface
+   as well as the nominal version when reproducing an a2 environment.
+4. Open a duplicate workflow and confirm sources, graph structure, parameters,
+   compute intent, and decisive outputs. Schema migration is not expected, but
+   an alpha update still warrants a focused comparison.
+5. If VIPP is detached from napari, confirm that the floating window can be
+   resized in width and height or maximized. Reattaching it should restore
+   napari's dock constraints.
 
 ## Move from 0.13.0a9 to 0.14.0a1
 
@@ -80,7 +111,7 @@ scientific review, not only a file-format conversion.
    implementation will actually be available on another machine.
 5. If acceleration is wanted after the CPU comparison, use **Prefer GPU** to
    place every reviewed eligible operation on GPU regardless of speed, or use
-   Custom to choose providers per node/apply **Find fastest**. Auto uses
+   Custom to choose providers per node/apply **Find fastest pipeline…**. Auto uses
    reviewed safe GPU defaults without compatible history; accelerated-only
    history schedules one same-surface CPU measurement before later matching
    runs apply the 1.20x/20-ms gate.
@@ -178,20 +209,27 @@ python -m pip install "napari[pyqt6]"
 python -m pip install --pre napari-vipp
 ```
 
-To reproduce a specific alpha exactly, specify the version in a fresh
-environment. An exact prerelease does not need `--pre`. The a1 examples below
-use the public PyPI release:
+To reproduce a specific alpha exactly, use a fresh environment and record the
+distribution surface as well as the version. An exact prerelease does not need
+`--pre`. For the resize-fixed 0.14.0a2 build, install the wheel attached to the
+canonical GitHub release:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.14.0a1"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
 ```
 
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.14.0a1"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13] @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
 vipp-compute-doctor --track cuda13
 ```
+
+The files served by `napari-vipp==0.14.0a2` on PyPI are legitimate published
+a2 artifacts, but they are the earlier pre-resize-fix build. They remain useful
+only when that exact distribution is the intended provenance; they must not be
+described as byte-identical to the current GitHub wheel or as containing the
+detached-window fix.
 
 The extra installs a reproducible CUDA/CuPy track; it does not make an
 unqualified GPU, driver, OS, or scientific stack scientifically admitted.

@@ -1,18 +1,22 @@
 # Try the VIPP Windows installer
 
-Use this checklist when someone asks you to test the tagged VIPP `0.14.0a1`
+Use this checklist when someone asks you to test the tagged VIPP `0.14.0a2`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Use the exact public tagged installer"
-    Use this checklist only with the exact `v0.14.0a1` GitHub asset and its
+    Use this checklist only with the exact `v0.14.0a2` GitHub asset and its
     checksum from the
-    [official release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1).
+    [official release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2).
     Do not use an untagged build or a similarly named file from another site.
 
     A display-independent production-backend install, repair, scientific
     smoke, and uninstall does not count as a pass for the downloaded
     installer's visible setup window or operator experience.
+
+    The `0.14.0a2` files on PyPI predate the detached-window resizing fix.
+    This checklist intentionally covers the corrected Windows installer from
+    the GitHub release, not that earlier PyPI build.
 
 Start with the normal [Windows installation instructions](installation.md).
 If you have a suitable NVIDIA GPU and were asked to test acceleration, also use
@@ -44,19 +48,19 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-Download the installer and checksum file only from the official `v0.14.0a1`
+Download the installer and checksum file only from the official `v0.14.0a2`
 entry on the
 [VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
-`VIPP-Setup-0.14.0a1-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
+`VIPP-Setup-0.14.0a2-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 `
-  .\VIPP-Setup-0.14.0a1-Windows-x86_64-UNSIGNED.exe
+  .\VIPP-Setup-0.14.0a2-Windows-x86_64-UNSIGNED.exe
 ```
 
 Compare all 64 characters with the installer line in
-`SHA256SUMS-Windows-0.14.0a1.txt`. Stop and delete the file if they differ. This
+`SHA256SUMS-Windows-0.14.0a2.txt`. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so **Unknown publisher** is expected; an
 antivirus threat warning is not expected and must not be bypassed.
 
@@ -67,6 +71,8 @@ antivirus threat warning is not expected and must not be bypassed.
 - [ ] Installation finished and created the expected VIPP shortcut or
       shortcuts.
 - [ ] **VIPP** or **VIPP Automatic** opened successfully.
+- [ ] I detached the VIPP window and could maximize or resize it in both width
+      and height; reattaching it restored napari's dock behavior.
 - [ ] I opened a bundled example, calculated it, and saw a sensible result.
 - [ ] I saved the workflow, closed it, reopened it, and calculated it again.
 - [ ] I ran a small batch and could find its outputs.
@@ -128,7 +134,7 @@ Complete this only if the installer offered the NVIDIA CUDA route.
 - [ ] If a node showed a dtype-only **GPU tip**, **Add conversion** inserted one
       visible Convert Dtype node in the expected place and Undo removed it.
 - [ ] A relevant GPU tip remained visible after a Prefer GPU calculation.
-- [ ] **Find fastest** kept grouped results readable and inspectable, including
+- [ ] **Find fastest pipeline…** kept grouped results readable and inspectable, including
       when it could not choose a winner.
 
 - [ ] The release contained no separate cuCIM ZIP, source-build helper, or
@@ -174,4 +180,4 @@ What was confusing or did not work:
 - Most important remaining problem:
 
 Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded `0.14.0a1` installer.
+version do not count as a pass for this downloaded `0.14.0a2` installer.

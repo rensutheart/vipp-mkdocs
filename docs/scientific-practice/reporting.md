@@ -14,7 +14,7 @@ Report:
 - Python and important dependency versions or an environment file;
 - workflow JSON and, if used, generated Python;
 - authored compute mode and per-node preferences, plus the actual CPU/CuPy/
-  CuPy/CuPyX implementation IDs/versions, environment fingerprint, fallback/OOM
+  CuPyX implementation IDs/versions, environment fingerprint, fallback/OOM
   records, and cleanup outcome from execution provenance;
 - any explicit optimizer locks, exact-workload benchmark/assignment used, and
   whether a time limit left alternatives unmeasured;
@@ -48,7 +48,7 @@ Report:
 
 ## Suggested concise wording
 
-> Images were processed with napari-vipp 0.13.0a8 using the archived workflow
+> Images were processed with napari-vipp [exact version] using the archived workflow
 > JSON [identifier]. The workflow was developed on [development set] and frozen
 > before evaluation on [held-out set]. Intermediate masks and labels were
 > reviewed using predefined criteria [reference], and [metrics] were calculated
@@ -71,7 +71,7 @@ optimizer assignment. Prefer GPU means accelerator placement regardless of
 speed; it is not a claim that GPU was faster.
 
 If a generated CLI wrote outputs, retain whether provenance was enabled and the
-atomic sibling sidecars. For batch, retain the finalized version-3 manifest and
+atomic sibling sidecars. For batch, retain the finalized version-4 manifest and
 execution digests rather than reconstructing implementation choices from card
 badges or screenshots. When a source-axis declaration was used, report the raw
 axes, effective axes, and how the interpretation was verified.

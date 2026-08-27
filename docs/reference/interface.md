@@ -1,14 +1,19 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.14.0a1. Controls can collapse into
+Labels below match napari-vipp 0.14.0a2. Controls can collapse into
 **Settings** when the window is narrow.
+
+When the VIPP dock is detached from napari, its floating window can be resized
+freely in width and height or maximized. Reattaching it restores napari's
+original dock constraints; those embedded constraints should not remain on the
+floating window.
 
 ## Workflow tabs
 
 The movable tab bar holds independent live workflow sessions. Each tab retains
 its graph, calculated results, ancillary caches, undo/redo history, inspector
 state, file path, dirty baseline, display choices, compute request, and Batch
-workspace. **New workflow…** and **Load workflow…** create sessions rather than
+workspace. **New workflow...** and **Load workflow...** create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.
 
@@ -24,16 +29,16 @@ the active run finishes or cooperatively cancels.
 
 | Control | Effect |
 | --- | --- |
-| **New workflow…** | Create a new tab containing one unbound `Image Source` on an otherwise empty graph. |
-| **Open example…** | Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
-| **Load workflow…** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative. |
-| **Save workflow…** | Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
-| **Batch workspace…** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
+| **New workflow...** | Create a new tab containing one unbound `Image Source` on an otherwise empty graph. |
+| **Open example...** | Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
+| **Load workflow...** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative. |
+| **Save workflow...** | Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
+| **Batch workspace...** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
 | **Leave batch mode** | When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run. |
-| **Export Python…** | Generate a headless script using supported operation and I/O calls. |
-| **Export OME dataset…** | Save one reference image with associated graph label outputs. |
-| **Tunnels…** | Manage named graph outputs and subscribers. |
-| **Auto structure graph** | Apply a one-shot source-to-sink layout; undo restores positions. |
+| **Export Python...** | Generate a headless script using supported operation and I/O calls. |
+| **Export OME dataset...** | Save one reference image with associated graph label outputs. |
+| **Tunnels...** | Manage named graph outputs and subscribers. |
+| **Structure / Auto structure graph** | Apply a one-shot source-to-sink layout; the compact label is used when toolbar space is limited, and undo restores positions. |
 | **Focus** | Recover the graph center without changing zoom, selection, layout, cache state, or undo history. |
 | **Refresh** | Re-evaluate ordinary automatic graph state. |
 | **Calculate all** | Calculate manual nodes that are not current. During isolated tuning, first apply the tuned result and release the temporary downstream boundary. |
@@ -46,11 +51,16 @@ output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
 
-For a local multiscale OME-Zarr image or label, the Image Source inspector also
-shows a dynamic presentation-level chooser. It lists the levels declared by the
-selected source. A lower level is labelled
-`Preview level N - analysis remains full resolution`; selecting it changes only
-the napari presentation layer, never the level-0 graph input.
+For a local multiscale OME-Zarr image or label, the Image Source inspector's
+**Resolution** panel provides a dynamic **Show in napari** chooser. It lists
+**Analysis output — L0**, **Presentation preview — Auto (best fit)**, and one
+**Presentation preview — LN** entry for each lower level declared by the
+source. A lower-level napari layer is labelled
+`Preview level N - analysis remains full resolution`. A completed background
+preview does not replace or take focus from the active analysis or VIPP Inspect
+layer; choose it explicitly to show it. **Try loading preview again** appears
+only after a preview failure. Presentation selection never changes the level-0
+graph input.
 
 ## Compute controls
 
@@ -71,7 +81,7 @@ exist, a later matching run uses acceleration only if it clears the reviewed
 completed full-pipeline wall times are retained. Interactive, batch, and
 registry-lifecycle timing surfaces are never mixed, and Auto never silently
 benchmarks multiple implementations. Use **Prefer GPU** for global accelerator placement without a speed
-requirement or a reviewed Custom provider/**Find fastest** proposal for per-node
+requirement or a reviewed Custom provider/**Find fastest pipeline…** proposal for per-node
 control.
 
 Prefer GPU bypasses only Auto's CPU-versus-GPU performance gate. Scientific,
@@ -100,7 +110,7 @@ be rejected, fall back, or fail; execution admission is call-specific. **Best
 GPU** appears only when several libraries genuinely compete. Exact
 implementation pins are an advanced persistence/API feature; a loaded pin
 remains visible until deliberately replaced. A separate optimizer lock—not
-merely choosing a backend—preserves a node during **Find fastest**.
+merely choosing a backend—preserves a node during **Find fastest pipeline…**.
 
 Calculated cards show compact **CPU**, **GPU · CuPy**, or amber
 **CPU fallback** badges. A muted badge belongs to the last accepted run while a
@@ -212,7 +222,8 @@ limit is published.
 Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
 overlap; VIPP reports the number of overlapping card pairs in its message strip.
-Use **Auto structure graph** to make label-aware space, or move the affected
+Use **Structure** (shown as **Auto structure graph** when space permits) to make
+label-aware space, or move the affected
 cards manually. Label visibility is a graph-display choice and never changes
 connections or processed data.
 
@@ -247,7 +258,7 @@ completed processing node may additionally be accepted, but only with matching
 actual-implementation provenance; all other nodes retain their coherent
 outputs, thumbnails, and badges.
 
-If cleanup fails after calculation, node benchmarking, **Find fastest**, or a
+If cleanup fails after calculation, node benchmarking, **Find fastest pipeline…**, or a
 collection batch, VIPP requests cancellation of other active compute and every
 compute entry point, policy control, and policy-changing undo/redo action is
 disabled for that process. The actionable message asks for a restart because
@@ -306,7 +317,7 @@ workflow JSON.
 Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
-**Pin selected**, **Save selected output…**, and an explicit reset of the
+**Pin selected**, **Save selected output...**, and an explicit reset of the
 selected output's remembered display profile.
 
 ### Numeric parameter entry
@@ -405,7 +416,7 @@ The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved **Float histogram bins** parameter.
 
-Every node in the **Intensity And Contrast** palette family shows both its input
+Every node in the **Intensity & Contrast** palette family shows both its input
 and output histogram when an array result is available. Input and output scope
 controls remain independent, so changing a histogram from the current slice to
 the full stack changes only the display summary, not workflow data.
@@ -443,7 +454,7 @@ be part of the durable workflow.
 
 The `Image Source` inspector has an **Image stack** chooser for a file, store,
 sample, or napari-layer binding. It defaults to **Use the file's labels
-unchanged**. A reviewed **Pages are depth slices (Z stack)** choice saves
+unchanged**. A reviewed **Stack planes are depth slices (Z stack)** choice saves
 `QYX -> ZYX` with the workflow; **Something else (advanced)...** accepts a
 complete reviewed source-to-effective declaration. All choices relabel axes by
 position without transposing pixels.
@@ -454,7 +465,7 @@ Each collection source in Batch workspace has an **Image stack** chooser:
 | --- | --- |
 | **Automatic (recommended)** | Default for a new unsaved row. VIPP changes it only when an ordinary TIFF reports exactly `QYX` and the representative reaches a demonstrated `ZYX` workflow requirement. |
 | **Use the file's labels unchanged** | Trust the reader labels and reject the automatic Z-stack interpretation for this source. Loaded blank declarations use this conservative choice. |
-| **Pages are depth slices (Z stack)** | Save the guarded `QYX -> ZYX` interpretation. Axis names change in place; pixels are not transposed. |
+| **Stack planes are depth slices (Z stack)** | Save the guarded `QYX -> ZYX` interpretation. Axis names change in place; pixels are not transposed. |
 | **Something else (advanced)...** | Enter an uncommon reviewed source-to-effective axis declaration. |
 
 When Automatic can resolve the exact case, VIPP visibly selects the Z-stack
@@ -479,7 +490,7 @@ Previous/Next, a full-plan slider, item position, batch ID, and every paired
 filename. It calculates one representative only and never saves batch outputs.
 The requested item is labelled as current only after all matching sources load
 and the graph calculation succeeds. The strip does not duplicate the main
-**Batch workspace…** action; use the sole toolbar button to reopen the retained
+**Batch workspace...** action; use the sole toolbar button to reopen the retained
 workspace. **Leave batch mode** discards these transient representative source
 overrides and returns the tab to ordinary single-image use; it is disabled
 during a run. See [process a folder](../workflows/batch-processing.md).

@@ -106,7 +106,8 @@ compare against the intended ImageJ reference before consequential use.
 Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
 Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
 Canny, median, Sigma Filter, Remove Outliers (Binary), and background correction
-have GPU candidates only inside declared regions. A portable a8 corridor can use an explicitly described
+have GPU candidates only inside declared regions. The portable corridor
+introduced in a8 can use an explicitly described
 channel, convert `uint8`/`uint16` to `float32` without rescaling, apply Gaussian
 Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
 without an intermediate host transfer.
@@ -132,7 +133,7 @@ button inserts a visible, undoable Convert Dtype node; review its memory,
 threshold, and scientific consequences before accepting it.
 
 Read each node badge after calculation and see the
-[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a8)
+[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0140a1)
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.
@@ -200,7 +201,8 @@ inspectable; they do not validate the thresholds for another dataset.
 ![A threshold-mask intermediate output shown at full resolution above its VIPP graph](../assets/screenshots/workflows/inspect-intermediate-result.png)
 
 *Inspect a decisive intermediate at full resolution. Here the threshold mask is
-pinned in napari while its graph node and input histogram remain visible.*
+pinned in napari while its graph node and stack-histogram threshold setting
+remain visible.*
 
 - Does the mask include the biology of interest?
 - Are background/noise structures being labeled as objects?

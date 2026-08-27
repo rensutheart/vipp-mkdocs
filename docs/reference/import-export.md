@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.14.0a1 |
+| Source | Behavior in 0.14.0a2 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 14 deterministic VIPP samples. |
@@ -73,7 +73,7 @@ input, generated execution, or output provenance.
 
 ## OME analysis dataset
 
-**Export OME dataset…** writes one reference image and graph label outputs into
+**Export OME dataset...** writes one reference image and graph label outputs into
 one local `.ome.zarr` store:
 
 ```text
@@ -108,11 +108,11 @@ shared executor or create an exact compute-provenance sidecar.
 - Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.14.0a1.
+  0.14.0a2.
 
 ## Execution provenance for saved outputs
 
-The interactive **Save selected output…** action writes the selected cached
+The interactive **Save selected output...** action writes the selected cached
 result directly. It does not rerun the graph or write exact execution
 provenance, so it is not a complete analysis archive. Generated Python/CLI can
 instead write an atomic `.vipp-provenance.json` sibling that binds the output

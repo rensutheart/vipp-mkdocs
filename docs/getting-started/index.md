@@ -1,8 +1,8 @@
 # Start here
 
-If VIPP is not installed yet, begin with [Install VIPP](installation.md). On
-Windows, the checksum-verified unsigned installer is the recommended route and
-creates the launch shortcuts for you.
+If VIPP is not installed yet, begin with [Install VIPP](installation.md).
+Checksum-verified unsigned installers are the recommended route on Windows and
+macOS; they create the normal launch shortcuts or application for you.
 
 If someone has asked you to evaluate the alpha on a new Windows computer, use
 the [short field checklist](windows-field-acceptance.md) and leave anything you

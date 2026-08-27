@@ -3,9 +3,9 @@
 VIPP supports pixel, ROI-masked, object-restricted, and label-association
 workflows.
 
-!!! warning "0.13 colocalization results can differ from 0.12"
+!!! warning "0.13 and later colocalization results can differ from 0.12"
 
-    VIPP 0.13 retains finite native channel intensities rather than jointly
+    VIPP 0.13 and later retain finite native channel intensities rather than jointly
     scaling/clipping both channels to 0–255. Thresholds and intensity sums now
     use native units, and the Costes, Pearson, and Manders definitions were
     revised toward Fiji Coloc 2 3.1.0 semantics. Preserve older results and
@@ -88,7 +88,7 @@ the colormap redraws cached density without recalculating metrics. The pop-out
 can save PNG or TIFF at its current display resolution; use a graph scatter node
 when the chosen scatter definition and image need to remain in the workflow.
 
-## Native intensity and metric names in 0.13
+## Native intensity and metric names in 0.13 and later
 
 - Pearson no-threshold and threshold-domain outputs now expose canonical names
   that distinguish an **any-channel-below-threshold** (OR) population from the

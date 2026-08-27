@@ -18,7 +18,7 @@ itself, freeze the Python environment, preserve every external source, prove
 metadata correctness, or capture the rationale for every choice.
 
 Workflow tabs are independent live sessions, not one multi-workflow file.
-**Save workflow…** serializes the active tab only. Other open tabs, their
+**Save workflow...** serializes the active tab only. Other open tabs, their
 caches, undo/redo histories, transient viewport, and in-flight state are not
 bundled into that JSON.
 
@@ -33,7 +33,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.14.0a1 accepts schema versions 3, 4, and 5 and rejects versions 1 and 2
+VIPP 0.14.0a2 accepts schema versions 3, 4, and 5 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 `execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
 logical selector, observed container revision, reader/backend evidence,
@@ -83,7 +83,7 @@ before using it in a consequential analysis.
 
 ### Optional Batch workspace attachment
 
-A 0.14.0a1 workflow can carry an optional top-level `batch_config`. The
+A 0.14.0a2 workflow can carry an optional top-level `batch_config`. The
 version-4 attachment contains canonical SourceItems and reviewed typed
 per-sample numeric overrides in addition to source bindings, local paths,
 patterns, guarded source-axis declarations, formats, output policy, run
@@ -150,7 +150,8 @@ bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
 different runtime. Regenerate and revalidate exported code after every VIPP
-upgrade, including 0.13.0a9 to 0.14.0a1. Interactive caches, thumbnails, pinned
+upgrade, including 0.13.0a9 to 0.14.0a1 and the focused 0.14.0a1 to 0.14.0a2
+desktop update. Interactive caches, thumbnails, pinned
 layers, and graph layout remain UI state and are not reproduced.
 
 The callable API accepts a complete `compute_request`, a progress
@@ -216,8 +217,8 @@ declaration contract. The Image Source choice is saved in the workflow; each
 Batch source records its source-specific choice in the batch config. A new
 unsaved Batch row starts at **Automatic (recommended)**.
 If an ordinary TIFF reports exactly `QYX` and the representative reaches a
-workflow requirement for `ZYX`, the GUI can visibly select **Pages are depth
-slices (Z stack)** and retry with `QYX -> ZYX`. Once resolved, the config stores
+workflow requirement for `ZYX`, the GUI can visibly select **Stack planes are
+depth slices (Z stack)** and retry with `QYX -> ZYX`. Once resolved, the config stores
 `"source_axes": "QYX"` and `"effective_axes": "ZYX"`. An unresolved
 automatic choice stores no declaration; loading that blank value shows **Use
 the file's labels unchanged**, and headless execution does not invent a

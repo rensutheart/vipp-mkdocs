@@ -5,16 +5,16 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 4) | Reopen/edit the graph and authored compute request in VIPP 0.13; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 5) | Reopen/edit the graph and authored compute request in VIPP 0.14.0a2; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
-| Batch config (version 3) | Recreate source bindings, guarded source-axis declarations, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
-| Batch manifest/archive (version 3) and sidecars | Audit planned inputs/outputs, raw and effective source axes, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
+| Batch config (version 4) | Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
+| Batch manifest/archive (version 4) and sidecars | Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective per-sample values, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
 
 ## Save a workflow
 
-Choose **Save workflow…**. Use `.json` and include a meaningful analysis name.
+Choose **Save workflow...**. Use `.json` and include a meaningful analysis name.
 The action saves the active workflow tab; other tabs keep their own paths,
 dirty baselines, caches, and histories. Closing a dirty tab still uses
 Save/Discard/Cancel handling.
@@ -24,17 +24,18 @@ If a Batch workspace is active, VIPP asks what to save:
   workflow JSON. This includes source bindings, local input/output paths,
   patterns, formats, and run policies. It does not include input pixels,
   computed arrays, or output files.
-- **No** writes the ordinary graph-only workflow. Use **Save config…** in
+- **No** writes the ordinary graph-only workflow. Use **Save...** in
   Batch workspace if a separate configuration is required.
 - **Cancel** writes nothing.
 
 Loading a workflow with a valid attachment restores and opens Batch workspace
-with those settings. It does not scan the collection, build a preview, load a
-representative, or run the graph for the batch setup. **Preview batch** remains
-optional, and **Run batch** performs a fresh preflight. If the attachment is
-unsupported or does not match the workflow, VIPP loads the scientific workflow
-but reports that its Batch workspace could not be restored rather than silently
-applying the settings.
+with those settings, then starts metadata-only source discovery in the
+background. This rematches saved SourceItems and per-sample overrides without
+loading representative pixels or calculating the graph. **Preview batch**
+remains optional, and **Run batch** performs a fresh preflight. If the
+attachment is unsupported or does not match the workflow, VIPP loads the
+scientific workflow but reports that its Batch workspace could not be restored
+rather than silently applying the settings.
 
 Before sharing:
 
@@ -47,7 +48,7 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.14.0a1 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
+0.14.0a2 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
 load with explicit CPU intent; schema-4 workflows retain authored compute
 intent. Both acquire SourceItems when sources resolve, but cached pixels and
 tables are not serialized. Inspect selected items, readers, axes, and decisive
@@ -58,7 +59,7 @@ the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-t
 
 ## Save a selected output
 
-Select the desired output and choose **Save selected output…**. The available
+Select the desired output and choose **Save selected output...**. The available
 format depends on the data type and dimensionality. For tables use CSV or TSV;
 for scientific images prefer a format that can represent the axes, dtype, and
 calibration you need.
@@ -73,7 +74,7 @@ durable batch runner, when the saved result must carry that record.
 
 ## Export an OME analysis dataset
 
-**Export OME dataset…** serializes the cached reference image and selected graph
+**Export OME dataset...** serializes the cached reference image and selected graph
 label outputs. It likewise does not rerun the graph or add exact per-node
 compute provenance. Use it for the documented image/label association, not as
 a substitute for generated-CLI provenance or a finalized batch manifest and
@@ -81,7 +82,7 @@ item sidecars.
 
 ## Export Python
 
-Choose **Export Python…** when a graph needs a reviewable headless program. The
+Choose **Export Python...** when a graph needs a reviewable headless program. The
 script embeds validated immutable workflow JSON, constructs a fresh pipeline
 per call, and uses the same headless executor as VIPP. It carries supported
 `ImageState`, accepts explicit multi-source bindings, and fails on missing,
@@ -92,11 +93,11 @@ runtime. Regenerate and revalidate it after every upgrade, including alpha
 updates. UI caches, pinned layers, and graph layout are presentation state and
 are intentionally absent.
 
-In 0.13, Python callers can pass a complete `ComputeRequest`, progress callback,
-and cooperative cancellation token. The generated CLI accepts
+Python callers can pass a complete `ComputeRequest`, progress callback, and
+cooperative cancellation token. The generated CLI accepts
 `--compute-mode`, `--fallback-policy`, repeatable `--node-preference`,
 `--progress`, and provenance controls. Omitted CLI fields retain the embedded
-schema-4 request; overrides do not mutate the workflow.
+schema-5 request; overrides do not mutate the workflow.
 
 `--compute-mode prefer_gpu` requests every scientifically eligible reviewed
 public GPU implementation regardless of CPU speed. It requires visible
@@ -132,21 +133,23 @@ stability of arbitrary arrays or independently supplied source payloads.
 Use `python generated_pipeline.py --help` for the exact source-binding and
 output arguments emitted for that graph. Add `--progress` for operation updates
 and supply compute overrides only when the run should deliberately differ from
-the embedded schema-4 request.
+the embedded schema-5 request.
 
 ## Save a batch configuration and evidence
 
-Use **Batch workspace... → Save config...** to write
+Use **Batch workspace... → Save...** to write
 `vipp_batch_config.json`. Keep it with its required workflow companion. After a
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
 
-Version-3 configs store the complete configured compute request and any reviewed
-source-axis declarations. Version-1 configs load as explicit CPU; version-2
-configs retain their saved compute request. Both older versions load without
-axis declarations and are written as version 3 after review and save. The runner
-uses its saved request by default and can overlay explicit
+Version-4 configs store the complete configured compute request, reviewed
+source-axis declarations, stable SourceItems, and typed per-sample numeric
+overrides. Version-1 configs load as explicit CPU; version-2 retains its saved
+compute request; version-3 also retains reviewed source declarations and
+acquires SourceItems when sources resolve. Versions 1 through 3 contain no
+per-sample overrides and are written as version 4 only after review and save.
+The runner uses its saved request by default and can overlay explicit
 compute/fallback/per-node CLI choices. `--progress` prints both overall-item and
 current-operation progress. One `Ctrl+C` requests normal cooperative
 cancellation and allows manifest/sidecar cleanup; a second is an emergency

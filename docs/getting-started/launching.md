@@ -1,5 +1,16 @@
 # Launch VIPP
 
+## Open the installed app on macOS
+
+The macOS package creates `~/Applications/VIPP.app`. Open your user
+**Applications** folder and double-click **VIPP**; no terminal or separately
+installed Python is required. The managed CPU-only environment remains under
+`~/Library/vipp`.
+
+First launch may take longer while napari loads. If the package has not been
+installed yet, follow [Install VIPP on macOS](macos.md), including checksum
+verification and the **Open Anyway** steps for this unsigned, unnotarized alpha.
+
 ## Use the installed shortcut on Windows
 
 The Windows installer creates launchers for the managed installation:
@@ -14,7 +25,7 @@ Prefer-GPU session requests every scientifically and operationally eligible GPU
 implementation, but operations outside the reviewed region still use CPU with
 an explanation.
 
-## Open the napari widget
+## Open the napari widget from a manual environment
 
 Activate the environment used for installation and run:
 
@@ -48,7 +59,7 @@ Auto run measure CPU once on the same execution surface. Auto never silently
 benchmarks multiple implementations.
 Use **Prefer GPU** when every reviewed eligible accelerator
 should run regardless of speed. Use a reviewed Custom
-choice or apply a **Find fastest** proposal for per-node control and measurement.
+choice or apply a **Find fastest pipeline…** proposal for per-node control and measurement.
 
 VIPP's severity-aware message strip reports graph, workflow, and compute
 feedback. Napari's own bottom status bar reports viewer coordinates and layer
@@ -56,7 +67,7 @@ information; the two surfaces have different owners and purposes.
 
 ## Open a bundled example
 
-Choose **Open example…** in the VIPP toolbar. The chooser opens a new workflow
+Choose **Open example...** in the VIPP toolbar. The chooser opens a new workflow
 tab, groups complete graph templates by task, and configures their `Image
 Source` nodes to use matching bundled samples.
 
@@ -95,4 +106,4 @@ if the plugin is installed but still not discovered.
 Repository scripts such as `scripts/launch_vipp_sample.py` and
 `scripts/launch_vipp_intensity_workflow.py --list` are for development,
 screenshots, and repeatable review. End users should normally use
-**Open example…** or **Load workflow…** inside VIPP.
+**Open example...** or **Load workflow...** inside VIPP.
