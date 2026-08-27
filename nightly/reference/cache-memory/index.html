@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2831,7 +2906,8 @@ while allowing separate device keys to proceed independently.</p>
 NVIDIA GPU. In the bounded M1 Max CPU smoke, VIPP presented host memory once as
 system RAM and did not fabricate or add a separate VRAM total. A future Apple
 or other accelerator provider that reports unified topology must instead use
-one shared CPU/GPU budget row. macOS remains CPU-only in 0.13.0a9.</p>
+one shared CPU/GPU budget row. macOS remains CPU-only in 0.14.0a2, including
+the Apple Silicon and Intel installer-managed environments.</p>
 <p>With <strong>visible</strong> fallback, one complete device segment may retry once on CPU
 after a classified runtime OOM, but only after synchronization and proven
 cleanup. The accepted badge becomes amber and provenance retains the attempted
@@ -2924,11 +3000,16 @@ execution keeps napari responsive; it does not turn an eager operation into
 a lazy or lower-cost one.</p>
 </div>
 <h2 id="large-data-direction">Large-Data Direction<a class="headerlink" href="#large-data-direction" title="Permanent link">&para;</a></h2>
+<p>VIPP 0.14.0a2 retains the lower-level presentation path introduced in
+0.14.0a1: it can slice a declared lower local OME-Zarr 0.4/0.5 level
+for presentation before computing that preview. The layer name states that
+analysis remains full resolution, and the graph still materializes the complete
+selected level-0 image. This reduces presentation work for supported stores; it
+does not make downstream operations lazy or change scientific output.</p>
 <p>Future large-data work should add:</p>
 <ul>
-<li>pyramid-aware source-level selection beyond the current 90 × 55, 180 × 110,
-  360 × 220, and 720 × 440 backing-detail controls. Very High uses four times
-  the pixmap memory of High;</li>
+<li>pyramid-aware presentation beyond local OME-Zarr, including remote stores,
+  IMS pyramids, and HCS plate/well/field traversal;</li>
 <li>more lazy and chunk-native operations;</li>
 <li>operation capability declarations;</li>
 <li>OME-Zarr pyramid export;</li>
@@ -2954,7 +3035,7 @@ a lazy or lower-cost one.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
   </span>
 
     

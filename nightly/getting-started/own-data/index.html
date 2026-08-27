@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -869,6 +919,8 @@
       
         
       
+        
+      
     
     
     
@@ -930,6 +982,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2732,8 +2807,8 @@ valid is the important part.</p>
 </tr>
 <tr>
 <td>Local OME-Zarr store</td>
-<td>Chunked multidimensional data</td>
-<td>Many operations are eager and can still materialize large arrays.</td>
+<td>Multiscale multidimensional data with declared image or label groups</td>
+<td>A lower level can accelerate presentation, but scientific graph analysis still materializes level 0.</td>
 </tr>
 </tbody>
 </table>
@@ -2742,6 +2817,12 @@ route. The napari layer chooser is only shown for <code>napari layer</code>. The
 Source card's live subtitle shows the current layer, sample, file, or collection
 representative; hover the card for the complete binding when the subtitle is
 elided.</p>
+<p>For a multi-image file or store, choose the intended <strong>Series / image</strong>. VIPP
+records a stable <code>SourceItem v1</code> selector together with the reader/backend,
+normalized axes and shape, and exact container revision. On reopen, a changed
+file, missing companion, ambiguous legacy index, or unexpected reader topology
+stops for review rather than silently choosing the item at the old numeric
+position.</p>
 <h2 id="understand-the-source-revision">Understand the source revision<a class="headerlink" href="#understand-the-source-revision" title="Permanent link">&para;</a></h2>
 <p>During one interactive revision, VIPP does not repeatedly read an uncontrolled
 moving target. A local file or directory store is identified before and after
@@ -2754,6 +2835,20 @@ be frozen without changing pixels.</p>
 <p><strong>Refresh</strong> is the explicit instruction to accept the current source revision.
 Record an external checksum or repository identifier for long-term provenance;
 the workflow stores a source parameter/path, not the image bytes.</p>
+<p>For local multiscale OME-Zarr 0.4/0.5, open the Image Source inspector's
+<strong>Resolution</strong> section and use <strong>Show in napari</strong>. Its dynamic choices include
+<strong>Analysis output — L0</strong>, <strong>Presentation preview — Auto (best fit)</strong>, and one
+<strong>Presentation preview — LN</strong> entry for each lower level declared by the
+selected image or label. A lower-level layer is labelled
+<code>Preview level N - analysis remains full resolution</code>. It loads in the
+background without replacing the active analysis or VIPP Inspect layer; choose
+it explicitly when you want to view it. If loading fails, <strong>Try loading preview
+again</strong> appears. The preview is a presentation aid only: the scientific graph,
+batch run, generated execution, cache, and provenance remain bound to level 0.
+A single-level source reports that no lower-level preview exists.</p>
+<p><img alt="The Image Source Resolution controls with analysis level 0, automatic presentation preview, and two explicit lower pyramid levels" src="../../assets/screenshots/sources/image-source-multiscale-resolution.png" /></p>
+<p><em>A synthetic three-level OME-Zarr illustrates the dynamic display choices. The
+selected presentation level changes only napari's view; analysis stays on L0.</em></p>
 <h2 id="check-metadata-before-processing">Check metadata before processing<a class="headerlink" href="#check-metadata-before-processing" title="Permanent link">&para;</a></h2>
 <p>Confirm at minimum:</p>
 <ul>
@@ -2771,18 +2866,17 @@ meaning. VIPP rejects detected mismatches rather than resampling silently.</p>
 record where the corrected values came from.</p>
 <p>For an ordinary TIFF that reports generic <code>QYX</code>, use the Image Source node's
 <strong>Image stack</strong> chooser instead of trying to rename Q with <code>Reorder Axes</code>.
-Choose <strong>Pages are depth slices (Z stack)</strong> only after confirming the page
+Choose <strong>Stack planes are depth slices (Z stack)</strong> only after confirming the page
 meaning; the resulting <code>QYX -&gt; ZYX</code> declaration is saved with the workflow and
 does not move pixels. Batch workspace uses the same control and can visibly
 suggest that choice only when the workflow demonstrates a <code>ZYX</code> requirement.
 Keep the suggestion only after review, and verify Z spacing separately.</p>
-<p>For Nikon ND2, 0.13 follows the reader's ordered dimension mapping when its
-labels and sizes exactly match the returned array. This fixes affected T/Z/C
-sliders and keeps napari and VIPP slice selection aligned. Still verify the
-displayed axis order, array shape, channel choice, and movement of every T, Z,
-and C control on a representative file. An inconsistent reader mapping is not
-trusted; VIPP falls back conservatively rather than reordering pixels from a
-malformed declaration.</p>
+<p>For optional microscope readers, inspection and full read share one normalized
+metadata contract. Still verify the selected item, reader/backend, displayed
+axis order, array shape, channels, calibration, and movement of every T/Z/C
+control on representative facility files. Native LIF, CZI, OIR, OIB, and LSM
+pixel reads remain eager, and optional Bio-Formats routes require Java and the
+needed codecs.</p>
 <h2 id="transfer-a-workflow-deliberately">Transfer a workflow deliberately<a class="headerlink" href="#transfer-a-workflow-deliberately" title="Permanent link">&para;</a></h2>
 <p>Do not judge transfer only from the final object count. On representative
 images from the new acquisition family:</p>
@@ -2796,12 +2890,13 @@ images from the new acquisition family:</p>
 </ol>
 <p>Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.</p>
-<p>When moving from 0.12.0a3 to 0.13.0a1, keep the original schema-3 file and open
-a duplicate. It loads with explicit CPU intent; inspect graph structure,
-sources, axes, parameters, dynamic ports, and decisive outputs before saving
-the duplicate as schema 4. Rebuild schema-1/2 workflows deliberately; changing
-only the JSON version is unsafe. See
-<a href="../../reference/versioning/#move-from-0120a3-to-0130a1">versions and compatibility</a>.</p>
+<p>When moving to 0.14.0a1, keep the original workflow and open a duplicate. Valid
+schema-3 and schema-4 files migrate to schema 5 and acquire SourceItems when
+their sources are resolved. Inspect graph structure, selected items,
+reader/backend, axes, calibration, parameters, dynamic ports, and decisive
+outputs before saving the duplicate. Rebuild schema-1/2 workflows deliberately;
+changing only the JSON version is unsafe. See
+<a href="../../reference/versioning/">versions and compatibility</a>.</p>
 <h2 id="protect-sensitive-data">Protect sensitive data<a class="headerlink" href="#protect-sensitive-data" title="Permanent link">&para;</a></h2>
 <p>Workflow JSON may contain local paths, source names, graph notes, or metadata
 values. Review it before sharing publicly. Do not use patient identifiers,
@@ -2830,7 +2925,7 @@ examples, notes, or metadata columns.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 09:43:16 UTC">August 27, 2026</span>
   </span>
 
     

@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2177,9 +2252,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#move-from-an-earlier-013-alpha-to-0130a9" class="md-nav__link">
+  <a href="#move-from-0140a1-to-0140a2" class="md-nav__link">
     <span class="md-ellipsis">
-      Move from an earlier 0.13 alpha to 0.13.0a9
+      Move from 0.14.0a1 to 0.14.0a2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#move-from-0130a9-to-0140a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.13.0a9 to 0.14.0a1
     </span>
   </a>
   
@@ -2669,9 +2753,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#move-from-an-earlier-013-alpha-to-0130a9" class="md-nav__link">
+  <a href="#move-from-0140a1-to-0140a2" class="md-nav__link">
     <span class="md-ellipsis">
-      Move from an earlier 0.13 alpha to 0.13.0a9
+      Move from 0.14.0a1 to 0.14.0a2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#move-from-0130a9-to-0140a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.13.0a9 to 0.14.0a1
     </span>
   </a>
   
@@ -2768,8 +2861,8 @@
 <tbody>
 <tr>
 <td><strong>stable</strong></td>
-<td>Alias for the current supported software release manual</td>
-<td>Routine analysis and citation</td>
+<td>Alias intended for the current supported software release manual</td>
+<td>Routine analysis after confirming the displayed version</td>
 </tr>
 <tr>
 <td><strong>nightly</strong></td>
@@ -2783,15 +2876,19 @@
 </tr>
 </tbody>
 </table>
-<p>The numbered <strong>0.13.0a9</strong> snapshot is the current verified public alpha,
-published on
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9">GitHub</a> and
-<a href="https://pypi.org/project/napari-vipp/0.13.0a9/">PyPI</a>. Its
-<a href="../../releases/0.13.0a9/#release-verification">release verification</a> records the
-exact application commit, tag, CI, focused GPU evidence, intentionally unsigned
-installer, artifact hashes, public artifact-download hash checks, and
-public package publication. The nightly manual may describe later unreleased
-work.</p>
+<p>VIPP <strong>0.14.0a2</strong> is the current verified public alpha. The
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2">canonical GitHub release</a>
+carries the immutable-tag manual-install wheel, the intentionally unsigned
+Windows installer, separate intentionally unsigned Apple Silicon and Intel
+macOS packages, checksums, release manifests, and supporting evidence. The
+<a href="https://pypi.org/project/napari-vipp/0.14.0a2/">PyPI 0.14.0a2 page</a> is also
+public, but its wheel and source archive were uploaded from the earlier
+pre-resize-fix build and cannot be replaced. Use a platform installer or the
+wheel attached to the GitHub release when the detached-window resizing fix is
+required. The nightly manual may describe later unreleased work.</p>
+<p>Application publication and manual deployment are separate operations. Always
+confirm the version shown by the manual selector; do not assume that the
+<strong>stable</strong> alias moved merely because a new package was published.</p>
 <p>The <code>main</code>/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.</p>
 <h2 id="match-software-and-manual">Match software and manual<a class="headerlink" href="#match-software-and-manual" title="Permanent link">&para;</a></h2>
@@ -2802,50 +2899,56 @@ selector in the site header. If they differ:</p>
 <li>install the release described by the manual in a separate environment.</li>
 </ul>
 <p>Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.13.0a9 writes schema version 4; versions 1 and 2 are rejected. Valid
-schema-3 workflows load structurally with an explicit CPU compute request and
-become schema 4 only when saved. Workflow JSON contains no cached scientific
-pixels/tables. Recalculate and compare graph structure, parameters, sources,
-axes, channels, physical grids, dynamic ports, compute request, actual backend,
-and results on known sample data. See the
+VIPP 0.14.0a2 writes schema version 5; versions 1 and 2 are rejected. Valid
+schema-3 workflows load with explicit CPU intent and schema-4 workflows retain
+authored compute intent. Both acquire canonical SourceItems when their sources
+resolve. Workflow JSON contains no source pixels or cached scientific results.
+Recalculate and compare graph structure, parameters, selected items,
+reader/backend, axes, channels, physical grids, dynamic ports, compute request,
+actual backend, and results on known sample data. See the
 <a href="../workflow-contract/">workflow contract</a>.</p>
-<h2 id="move-from-an-earlier-013-alpha-to-0130a9">Move from an earlier 0.13 alpha to 0.13.0a9<a class="headerlink" href="#move-from-an-earlier-013-alpha-to-0130a9" title="Permanent link">&para;</a></h2>
-<p>The workflow and batch schema numbers do not change between 0.13.0a1 and
-0.13.0a9, but generated programs are version-locked. Across the 0.13 alphas,
-GPU identities and regions changed, Image Source gained a durable axis
-declaration, and new graph edits, nodes, and dimensionality fixes can affect
-calculation.</p>
+<h2 id="move-from-0140a1-to-0140a2">Move from 0.14.0a1 to 0.14.0a2<a class="headerlink" href="#move-from-0140a1-to-0140a2" title="Permanent link">&para;</a></h2>
+<p>0.14.0a2 is a focused desktop-compatibility and packaging alpha. It does not
+change the SourceItem, reader, workflow-schema-5, batch-schema-4, per-sample,
+OME-Zarr preview, or scientific CPU/GPU contracts introduced in 0.14.0a1.</p>
 <ol>
-<li>Preserve the earlier environment, workflows, outputs, execution reports,
-   batch artifacts, and any private cuCIM wheel and build manifest as historical
-   evidence. Do not install the old provider into a9.</li>
-<li>Install <code>0.13.0a9</code> separately with the
-   checksum-verified unsigned Windows installer, or upgrade a dedicated manual
-   environment with an exact <code>napari-vipp==0.13.0a9</code> or
-   <code>napari-vipp[gpu-cuda13]==0.13.0a9</code> pin. Use the official public assets and
-   recorded hashes; do not substitute an untagged build. Do not mix CUDA-major
-   extras.</li>
-<li>Run <code>pip check</code> and, for CUDA, <code>vipp-compute-doctor --track cuda13 --refresh</code>.
-   The normal CuPy/CuPyX installation now contains every current provider. Do
-   not reuse a cuCIM bundle, private wheel, or approval record from an earlier
-   release.</li>
-<li>Open a duplicate workflow, run it on CPU, and compare decisive intermediate
-   and final results before enabling Auto or Prefer GPU.</li>
-<li>Record the exact GPU model, compute capability, driver, CUDA and scientific
-   package versions, and actual implementation IDs. Minor floating-point
-   differences can occur across otherwise compatible devices.</li>
-<li>Review each Image Source and Batch <strong>Image stack</strong> choice. A saved exact
-   basic-measurement cuCIM pin migrates to its CuPy replacement; a broad
-   <code>library:cucim</code> preference remains unavailable and needs an explicit current
-   choice.</li>
-<li>For a declared Z stack, confirm that Gaussian Blur 3D exposes Sigma Z and
-   that Skeletonize resolves to the intended 2D or volumetric 3D mode. If a
-   workflow joins manual sibling measurements, calculate both and confirm that
-   Merge Tables becomes ready.</li>
-<li>Under Prefer GPU, inspect actual badges on both sides of CPU-only nodes. A
-   GPU VRAM preflight rejection now names the affected nodes and binding limit;
-   follow that diagnostic rather than assuming the whole CUDA route is broken.</li>
-<li>Regenerate and revalidate exported Python and saved batch runners under a9.</li>
+<li>Keep the original 0.14.0a1 environment, workflow, batch evidence, and
+   decisive outputs for provenance.</li>
+<li>Choose the checksum-verified Windows installer, the architecture-matched
+   checksum-verified macOS package, or the wheel attached to the
+   <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2">GitHub release</a>.
+   The macOS packages are CPU-only, require macOS 13 or newer, and install a
+   current-user environment under <code>~/Library/vipp</code> with
+   <code>~/Applications/VIPP.app</code>.</li>
+<li>Do not treat <code>pip install napari-vipp==0.14.0a2</code> as the resize-fixed build.
+   PyPI's immutable a2 files predate that fix. Record the installation surface
+   as well as the nominal version when reproducing an a2 environment.</li>
+<li>Open a duplicate workflow and confirm sources, graph structure, parameters,
+   compute intent, and decisive outputs. Schema migration is not expected, but
+   an alpha update still warrants a focused comparison.</li>
+<li>If VIPP is detached from napari, confirm that the floating window can be
+   resized in width and height or maximized. Reattaching it should restore
+   napari's dock constraints.</li>
+</ol>
+<h2 id="move-from-0130a9-to-0140a1">Move from 0.13.0a9 to 0.14.0a1<a class="headerlink" href="#move-from-0130a9-to-0140a1" title="Permanent link">&para;</a></h2>
+<p>0.14 introduces SourceItem identity, workflow schema 5, and batch
+config/manifest schema 4. Treat the upgrade as a source and scientific review.</p>
+<ol>
+<li>Preserve the 0.13 environment, workflow, input identities, outputs,
+   execution reports, and batch artifacts.</li>
+<li>Install <code>0.14.0a1</code> separately from the official checksum-verified installer
+   or an exact package pin. Do not substitute an untagged build.</li>
+<li>Open a duplicate workflow. Resolve every Image Source and verify the selected
+   item, reader/backend, axes, shape, calibration, channels, and decisive
+   results before saving schema 5.</li>
+<li>For attached batch workspaces, let metadata-only discovery complete. Review
+   every restored SourceItem and per-sample value; changed or missing sources
+   must remain quarantined rather than being reassigned by order or filename.</li>
+<li>Confirm that an OME-Zarr lower-level preview is labelled presentation-only
+   and that analysis/output still use level 0.</li>
+<li>Run CPU reference checks before relying on accelerator results, then inspect
+   actual implementation badges and provenance for the intended compute mode.</li>
+<li>Regenerate and revalidate exported Python and saved batch runners under a1.</li>
 </ol>
 <h2 id="move-from-0120a3-to-0130a1">Move from 0.12.0a3 to 0.13.0a1<a class="headerlink" href="#move-from-0120a3-to-0130a1" title="Permanent link">&para;</a></h2>
 <p>0.13 introduces durable compute intent and guarded source-axis declarations,
@@ -2868,7 +2971,7 @@ scientific review, not only a file-format conversion.</p>
    implementation will actually be available on another machine.</li>
 <li>If acceleration is wanted after the CPU comparison, use <strong>Prefer GPU</strong> to
    place every reviewed eligible operation on GPU regardless of speed, or use
-   Custom to choose providers per node/apply <strong>Find fastest</strong>. Auto uses
+   Custom to choose providers per node/apply <strong>Find fastest pipeline…</strong>. Auto uses
    reviewed safe GPU defaults without compatible history; accelerated-only
    history schedules one same-surface CPU measurement before later matching
    runs apply the 1.20x/20-ms gate.
@@ -2958,15 +3061,21 @@ without testing it.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m pip install "napari[pyqt6]"
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python -m pip install --pre napari-vipp
 </span></code></pre></div>
-<p>To reproduce a specific alpha exactly, specify the version in a fresh
-environment. An exact prerelease does not need <code>--pre</code>. The a9 examples below
-use the public PyPI release:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp==0.13.0a9"
+<p>To reproduce a specific alpha exactly, use a fresh environment and record the
+distribution surface as well as the version. An exact prerelease does not need
+<code>--pre</code>. For the resize-fixed 0.14.0a2 build, install the wheel attached to the
+canonical GitHub release:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
 </span></code></pre></div>
 <p>For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp[gpu-cuda13]==0.13.0a9"
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp[gpu-cuda13] @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vipp-compute-doctor --track cuda13
 </span></code></pre></div>
+<p>The files served by <code>napari-vipp==0.14.0a2</code> on PyPI are legitimate published
+a2 artifacts, but they are the earlier pre-resize-fix build. They remain useful
+only when that exact distribution is the intended provenance; they must not be
+described as byte-identical to the current GitHub wheel or as containing the
+detached-window fix.</p>
 <p>The extra installs a reproducible CUDA/CuPy track; it does not make an
 unqualified GPU, driver, OS, or scientific stack scientifically admitted.
 Never install both CUDA-major extras into one environment. See
@@ -2997,7 +3106,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
   </span>
 
     

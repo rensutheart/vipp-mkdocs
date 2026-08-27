@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2924,13 +2999,17 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.13.0a9. Controls can collapse into
+<p>Labels below match napari-vipp 0.14.0a2. Controls can collapse into
 <strong>Settings</strong> when the window is narrow.</p>
+<p>When the VIPP dock is detached from napari, its floating window can be resized
+freely in width and height or maximized. Reattaching it restores napari's
+original dock constraints; those embedded constraints should not remain on the
+floating window.</p>
 <h2 id="workflow-tabs">Workflow tabs<a class="headerlink" href="#workflow-tabs" title="Permanent link">&para;</a></h2>
 <p>The movable tab bar holds independent live workflow sessions. Each tab retains
 its graph, calculated results, ancillary caches, undo/redo history, inspector
 state, file path, dirty baseline, display choices, compute request, and Batch
-workspace. <strong>New workflow…</strong> and <strong>Load workflow…</strong> create sessions rather than
+workspace. <strong>New workflow...</strong> and <strong>Load workflow...</strong> create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.</p>
 <p>Switching tabs restores retained state and does not recalculate scientific
@@ -2950,23 +3029,23 @@ the active run finishes or cooperatively cancels.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>New workflow…</strong></td>
+<td><strong>New workflow...</strong></td>
 <td>Create a new tab containing one unbound <code>Image Source</code> on an otherwise empty graph.</td>
 </tr>
 <tr>
-<td><strong>Open example…</strong></td>
+<td><strong>Open example...</strong></td>
 <td>Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request.</td>
 </tr>
 <tr>
-<td><strong>Load workflow…</strong></td>
-<td>Open an external or previously saved workflow JSON. A valid attached batch configuration restores and opens Batch workspace without running a preview.</td>
+<td><strong>Load workflow...</strong></td>
+<td>Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative.</td>
 </tr>
 <tr>
-<td><strong>Save workflow…</strong></td>
+<td><strong>Save workflow...</strong></td>
 <td>Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON.</td>
 </tr>
 <tr>
-<td><strong>Batch workspace…</strong></td>
+<td><strong>Batch workspace...</strong></td>
 <td>Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions.</td>
 </tr>
 <tr>
@@ -2974,20 +3053,20 @@ the active run finishes or cooperatively cancels.</p>
 <td>When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run.</td>
 </tr>
 <tr>
-<td><strong>Export Python…</strong></td>
+<td><strong>Export Python...</strong></td>
 <td>Generate a headless script using supported operation and I/O calls.</td>
 </tr>
 <tr>
-<td><strong>Export OME dataset…</strong></td>
+<td><strong>Export OME dataset...</strong></td>
 <td>Save one reference image with associated graph label outputs.</td>
 </tr>
 <tr>
-<td><strong>Tunnels…</strong></td>
+<td><strong>Tunnels...</strong></td>
 <td>Manage named graph outputs and subscribers.</td>
 </tr>
 <tr>
-<td><strong>Auto structure graph</strong></td>
-<td>Apply a one-shot source-to-sink layout; undo restores positions.</td>
+<td><strong>Structure / Auto structure graph</strong></td>
+<td>Apply a one-shot source-to-sink layout; the compact label is used when toolbar space is limited, and undo restores positions.</td>
 </tr>
 <tr>
 <td><strong>Focus</strong></td>
@@ -3013,6 +3092,16 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.</p>
+<p>For a local multiscale OME-Zarr image or label, the Image Source inspector's
+<strong>Resolution</strong> panel provides a dynamic <strong>Show in napari</strong> chooser. It lists
+<strong>Analysis output — L0</strong>, <strong>Presentation preview — Auto (best fit)</strong>, and one
+<strong>Presentation preview — LN</strong> entry for each lower level declared by the
+source. A lower-level napari layer is labelled
+<code>Preview level N - analysis remains full resolution</code>. A completed background
+preview does not replace or take focus from the active analysis or VIPP Inspect
+layer; choose it explicitly to show it. <strong>Try loading preview again</strong> appears
+only after a preview failure. Presentation selection never changes the level-0
+graph input.</p>
 <h2 id="compute-controls">Compute controls<a class="headerlink" href="#compute-controls" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3053,7 +3142,7 @@ exist, a later matching run uses acceleration only if it clears the reviewed
 completed full-pipeline wall times are retained. Interactive, batch, and
 registry-lifecycle timing surfaces are never mixed, and Auto never silently
 benchmarks multiple implementations. Use <strong>Prefer GPU</strong> for global accelerator placement without a speed
-requirement or a reviewed Custom provider/<strong>Find fastest</strong> proposal for per-node
+requirement or a reviewed Custom provider/<strong>Find fastest pipeline…</strong> proposal for per-node
 control.</p>
 <p>Prefer GPU bypasses only Auto's CPU-versus-GPU performance gate. Scientific,
 dtype, parameter, dependency, environment, and memory admission remain active,
@@ -3079,7 +3168,7 @@ be rejected, fall back, or fail; execution admission is call-specific. <strong>B
 GPU</strong> appears only when several libraries genuinely compete. Exact
 implementation pins are an advanced persistence/API feature; a loaded pin
 remains visible until deliberately replaced. A separate optimizer lock—not
-merely choosing a backend—preserves a node during <strong>Find fastest</strong>.</p>
+merely choosing a backend—preserves a node during <strong>Find fastest pipeline…</strong>.</p>
 <p>Calculated cards show compact <strong>CPU</strong>, <strong>GPU · CuPy</strong>, or amber
 <strong>CPU fallback</strong> badges. A muted badge belongs to the last accepted run while a
 new result is pending or current Custom intent differs. Hover or inspect the node for the implementation ID and
@@ -3213,7 +3302,8 @@ limit is published.</p>
 <p>Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
 overlap; VIPP reports the number of overlapping card pairs in its message strip.
-Use <strong>Auto structure graph</strong> to make label-aware space, or move the affected
+Use <strong>Structure</strong> (shown as <strong>Auto structure graph</strong> when space permits) to make
+label-aware space, or move the affected
 cards manually. Label visibility is a graph-display choice and never changes
 connections or processed data.</p>
 <h2 id="execution-and-memory-settings">Execution and memory settings<a class="headerlink" href="#execution-and-memory-settings" title="Permanent link">&para;</a></h2>
@@ -3269,7 +3359,7 @@ A verified source boundary may be accepted. If cleanup itself failed, a
 completed processing node may additionally be accepted, but only with matching
 actual-implementation provenance; all other nodes retain their coherent
 outputs, thumbnails, and badges.</p>
-<p>If cleanup fails after calculation, node benchmarking, <strong>Find fastest</strong>, or a
+<p>If cleanup fails after calculation, node benchmarking, <strong>Find fastest pipeline…</strong>, or a
 collection batch, VIPP requests cancellation of other active compute and every
 compute entry point, policy control, and policy-changing undo/redo action is
 disabled for that process. The actionable message asks for a restart because
@@ -3320,7 +3410,7 @@ workflow JSON.</p>
 <p>Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
-<strong>Pin selected</strong>, <strong>Save selected output…</strong>, and an explicit reset of the
+<strong>Pin selected</strong>, <strong>Save selected output...</strong>, and an explicit reset of the
 selected output's remembered display profile.</p>
 <h3 id="numeric-parameter-entry">Numeric parameter entry<a class="headerlink" href="#numeric-parameter-entry" title="Permanent link">&para;</a></h3>
 <p>Numeric spinners accept direct keyboard entry as well as their step buttons and
@@ -3417,7 +3507,7 @@ layer contrast changes downstream arrays, masks, thresholds, or measurements.</p
 <p>The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved <strong>Float histogram bins</strong> parameter.</p>
-<p>Every node in the <strong>Intensity And Contrast</strong> palette family shows both its input
+<p>Every node in the <strong>Intensity &amp; Contrast</strong> palette family shows both its input
 and output histogram when an array result is available. Input and output scope
 controls remain independent, so changing a histogram from the current slice to
 the full stack changes only the display summary, not workflow data.</p>
@@ -3447,7 +3537,7 @@ be part of the durable workflow.</p>
 <h2 id="image-source-and-batch-image-stack-controls">Image Source and Batch Image stack controls<a class="headerlink" href="#image-source-and-batch-image-stack-controls" title="Permanent link">&para;</a></h2>
 <p>The <code>Image Source</code> inspector has an <strong>Image stack</strong> chooser for a file, store,
 sample, or napari-layer binding. It defaults to <strong>Use the file's labels
-unchanged</strong>. A reviewed <strong>Pages are depth slices (Z stack)</strong> choice saves
+unchanged</strong>. A reviewed <strong>Stack planes are depth slices (Z stack)</strong> choice saves
 <code>QYX -&gt; ZYX</code> with the workflow; <strong>Something else (advanced)...</strong> accepts a
 complete reviewed source-to-effective declaration. All choices relabel axes by
 position without transposing pixels.</p>
@@ -3469,7 +3559,7 @@ position without transposing pixels.</p>
 <td>Trust the reader labels and reject the automatic Z-stack interpretation for this source. Loaded blank declarations use this conservative choice.</td>
 </tr>
 <tr>
-<td><strong>Pages are depth slices (Z stack)</strong></td>
+<td><strong>Stack planes are depth slices (Z stack)</strong></td>
 <td>Save the guarded <code>QYX -&gt; ZYX</code> interpretation. Axis names change in place; pixels are not transposed.</td>
 </tr>
 <tr>
@@ -3485,12 +3575,19 @@ Run use the same check; headless execution never invents a missing declaration.
 The Image Source and Batch controls share the same declaration parser,
 validation, metadata application, and headless execution infrastructure.</p>
 <h2 id="batch-representative-strip">Batch representative strip<a class="headerlink" href="#batch-representative-strip" title="Permanent link">&para;</a></h2>
+<p>The Batch workspace toolbar keeps a compact status and activity indicator at
+its right. It covers source discovery and preflight independently of the main
+graph progress bar, and mirrors overall item progress during a run. Detailed
+per-item and per-operation bars remain in the lower run section. The per-sample
+table shows authored defaults in blank/inherited cells; the selected node's
+inspector adds <strong>Effective batch preview</strong> only when that item actually
+overrides that node.</p>
 <p>After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired
 filename. It calculates one representative only and never saves batch outputs.
 The requested item is labelled as current only after all matching sources load
 and the graph calculation succeeds. The strip does not duplicate the main
-<strong>Batch workspace…</strong> action; use the sole toolbar button to reopen the retained
+<strong>Batch workspace...</strong> action; use the sole toolbar button to reopen the retained
 workspace. <strong>Leave batch mode</strong> discards these transient representative source
 overrides and returns the tab to ordinary single-image use; it is disabled
 during a run. See <a href="../../workflows/batch-processing/">process a folder</a>.</p>
@@ -3514,7 +3611,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
   </span>
 
     

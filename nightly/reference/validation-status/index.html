@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2145,9 +2220,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0130a9-focused-qualification-boundary" class="md-nav__link">
+  <a href="#0140a2-focused-qualification-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a9 focused qualification boundary
+      0.14.0a2 focused qualification boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0140a1-sourceitem-and-batch-qualification-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.0a1 SourceItem and batch qualification boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0130a9-qualification-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.0a9 qualification boundary
     </span>
   </a>
   
@@ -2696,9 +2789,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0130a9-focused-qualification-boundary" class="md-nav__link">
+  <a href="#0140a2-focused-qualification-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      0.13.0a9 focused qualification boundary
+      0.14.0a2 focused qualification boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0140a1-sourceitem-and-batch-qualification-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.0a1 SourceItem and batch qualification boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0130a9-qualification-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.0a9 qualification boundary
     </span>
   </a>
   
@@ -2828,10 +2939,103 @@
 
 
 <h1 id="validation-status">Validation status<a class="headerlink" href="#validation-status" title="Permanent link">&para;</a></h1>
-<p>This page summarizes the current 0.13.0a9 evidence boundary and keeps its
-carried-forward 0.13.0a8 baseline separate. It is a claim boundary, not a
-certificate that every node is validated for every assay.</p>
-<h2 id="0130a9-focused-qualification-boundary">0.13.0a9 focused qualification boundary<a class="headerlink" href="#0130a9-focused-qualification-boundary" title="Permanent link">&para;</a></h2>
+<p>This page summarizes the current 0.14.0a2 evidence boundary and keeps the
+0.14.0a1 scientific/source qualification and carried-forward 0.13 baselines
+separate. It is a claim boundary, not a certificate that every node, reader, or
+workflow is validated for every assay.</p>
+<h2 id="0140a2-focused-qualification-boundary">0.14.0a2 focused qualification boundary<a class="headerlink" href="#0140a2-focused-qualification-boundary" title="Permanent link">&para;</a></h2>
+<p>0.14.0a2 changes desktop/Qt compatibility, detached-window sizing, and release
+packaging. It adds separate offline CPU-only macOS packages for Apple Silicon
+and Intel. SourceItem, reader, workflow schema 5, batch config/manifest schema
+4, OME-Zarr preview, per-sample parameter, scientific operation, and GPU
+contracts are unchanged from 0.14.0a1 and retain that recorded evidence.</p>
+<p>The annotated <code>v0.14.0a2</code> tag resolves to
+<a href="https://github.com/rensutheart/napari-vipp/commit/4aaf9961b97259c94390c859374d8a6b9f45ec6c"><code>4aaf9961b97259c94390c859374d8a6b9f45ec6c</code></a>.
+The <a href="https://github.com/rensutheart/napari-vipp/actions/runs/33048422781">exact-tag CI run</a>
+passed, including the supported Windows, Linux, and macOS Python matrix and
+clean distribution installs. The
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/33048446173">unsigned-installer workflow</a>
+passed for Windows x86_64, macOS arm64, and macOS x86_64. Its native macOS jobs
+inspected, installed, launched, and cleanly shut down each final package. The
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/33048727450">PyPI publication workflow</a>
+also passed.</p>
+<p>The <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2">GitHub prerelease</a>
+contains 20 assets. Primary public artifact SHA-256 values are:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub wheel <code>napari_vipp-0.14.0a2-py3-none-any.whl</code></td>
+<td><code>a30aa4ff1f4882b06903800d60912be4f6b29f185716a1752b3f8c540690ae8c</code></td>
+</tr>
+<tr>
+<td>GitHub source archive <code>napari_vipp-0.14.0a2.tar.gz</code></td>
+<td><code>8d1bf13b752bdb4c6777076c5e6bda5a75275073016f15e347ed8698e6b01886</code></td>
+</tr>
+<tr>
+<td>Windows installer <code>VIPP-Setup-0.14.0a2-Windows-x86_64-UNSIGNED.exe</code></td>
+<td><code>cdab2be65b83c36260ba45b3b700bc1685287e665bb9558585f9f13f9fb3f3be</code></td>
+</tr>
+<tr>
+<td>Apple Silicon package <code>VIPP-0.14.0a2-macOS-arm64-UNSIGNED.pkg</code></td>
+<td><code>9ad6a01e614277a4abac501a27d8623da5bd22bf4184bfb7b0884c319b67f529</code></td>
+</tr>
+<tr>
+<td>Intel package <code>VIPP-0.14.0a2-macOS-x86_64-UNSIGNED.pkg</code></td>
+<td><code>15ddfa6378af4bdf69887d35bd107b04143d89a944e68686687f350532546d14</code></td>
+</tr>
+</tbody>
+</table>
+<p>The two macOS packages require macOS 13 or newer, are current-user-only,
+explicitly unsigned and unnotarized, and install CPU-only managed environments.
+Automated native lifecycle evidence does not establish browser-quarantine,
+managed-device override, signing/notarization, graphical update/uninstall, or
+Apple-accelerator support.</p>
+<div class="admonition warning">
+<p class="admonition-title">PyPI a2 is a different, earlier build</p>
+<p>PyPI cannot replace uploaded files. Its a2 wheel
+(<code>3b066887de739d600a684abf85d599832d5b92c83fb357b6c75a471ed20cd2a8</code>)
+and source archive
+(<code>ad72ae95a5595c8bcad6125aada8aab1c30a419b98929a91b405d3560405fd27</code>)
+are the pre-resize-fix build and do not match the current GitHub release
+wheel/source bytes. Use a platform installer or the GitHub wheel for the
+detached-window fix, and record which distribution surface was used.</p>
+</div>
+<p>This is application and artifact evidence. It does not itself claim that the
+numbered or stable documentation deployment succeeded.</p>
+<h2 id="0140a1-sourceitem-and-batch-qualification-boundary">0.14.0a1 SourceItem and batch qualification boundary<a class="headerlink" href="#0140a1-sourceitem-and-batch-qualification-boundary" title="Permanent link">&para;</a></h2>
+<p>The changed release domains are SourceItem identity and migration,
+reader-contract normalization, local OME-Zarr presentation preview, typed
+per-sample batch values and retained-workspace UX, source-load preflight, and
+installer capacity/activity presentation. Qualification uses focused core/UI,
+reader, schema/migration, preview, override, and installer-presentation checks,
+the integrated release suite, the strict verified-cache public corpus profile,
+and exact-tag package and installer checks.</p>
+<p>This scope does not claim remote stores, IMS pyramid preview, HCS traversal,
+operation-level lazy execution, broad optional-reader equivalence, or
+per-sample expressions/source selectors/topology changes. The lower OME-Zarr
+level is presentation-only; scientific analysis remains level 0. The unchanged
+full GPU catalogue and installer transactional lifecycle retain their recorded
+0.13 evidence rather than being silently counted as newly rerun.</p>
+<p>Exact public packages and the immutable release assets are available from the
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1">v0.14.0a1 GitHub release</a>
+and <a href="https://pypi.org/project/napari-vipp/0.14.0a1/">PyPI</a>.
+The annotated tag resolves to
+<a href="https://github.com/rensutheart/napari-vipp/commit/e16ca87161ec7b1041a5e98c5a2bf786b11a1ec8"><code>e16ca87161ec7b1041a5e98c5a2bf786b11a1ec8</code></a>;
+<a href="https://github.com/rensutheart/napari-vipp/actions/runs/32975633514">exact-main CI</a>,
+the <a href="https://github.com/rensutheart/napari-vipp/actions/runs/32975659650">exact-main installer build</a>,
+and the <a href="https://github.com/rensutheart/napari-vipp/actions/runs/32982120913">PyPI publication workflow</a>
+passed. The strict public-corpus manifest SHA-256 is
+<code>3365b4cec7a220f6399f3c030eb3ac751581bde730fac60f01c9fca3b823714d</code>.
+Exact distribution hashes are recorded in the
+<a href="../../releases/0.14.0a1/#release-verification">0.14.0a1 release-verification table</a>.
+This application evidence does not claim a documentation deployment result.</p>
+<h2 id="0130a9-qualification-boundary">0.13.0a9 qualification boundary<a class="headerlink" href="#0130a9-qualification-boundary" title="Permanent link">&para;</a></h2>
 <p>Final a9 application source is commit
 <a href="https://github.com/rensutheart/napari-vipp/commit/d476c8976c91679faaaf0fe196c90b1ab4d63458"><code>d476c8976c91679faaaf0fe196c90b1ab4d63458</code></a>.
 Its
@@ -2889,6 +3093,11 @@ passes. Exact public artifacts and publication evidence are recorded in the
 <li>architecture tests enforce the Qt-free <code>core/</code> dependency boundary, and
   focused tests cover stable source revisions, physical grids, detached
   snapshots, atomic persistence, typed execution, and stale-result rejection;</li>
+<li>strict public-corpus v4 qualification covers 20 frozen artifacts (210.41 MiB),
+  97 biological fields, and the claimed OME-Zarr, TIFF, ND2, LIF, CZI/LSM,
+  OIR/OIB/VSI, and IMS routes. All 10 strict vendor cases passed, including the
+  IMS case under portable Temurin 21. The corpus-manifest SHA-256 is
+  <code>3365b4cec7a220f6399f3c030eb3ac751581bde730fac60f01c9fca3b823714d</code>;</li>
 <li>14 deterministic synthetic samples and 15 checked-in workflows support
   regression checks and inspection;</li>
 <li>a generated two-source batch bundle exercises three paired items, nine exact
@@ -2902,16 +3111,18 @@ passes. Exact public artifacts and publication evidence are recorded in the
   waiting stale states, progressive node previews, compatible layer reuse, and
   rejection of stale contrast/histogram results;</li>
 <li>batch tests cover attached-config validation and round-trip, guarded source-
-  axis declarations, representative scientific preflight, restore without
-  preview, inspected multi-series expansion and identity retention, direct
+  axis declarations, representative scientific preflight, background
+  metadata-only restore without calculating representative pixels, inspected
+  multi-series expansion and identity retention, direct
   plan-only execution, complete-item fast skips, transient
   atomic-write retries, and continuing after a final item-sidecar failure;</li>
-<li>compute tests cover import-safe CPU-only use, workflow-schema-4 and
-  batch-schema-3 intent, eligibility planning, exact implementation identity,
-  resident device segments, memory admission, classified fallback, optimizer
-  review/apply and grouped result inspection, visible dtype-repair proposals,
-  Prefer-GPU selection/serialization/UI/durable behavior, progress,
-  cancellation, cleanup, and atomic publication; and</li>
+<li>compute tests cover import-safe CPU-only use, workflow-schema-5 and
+  batch-schema-4 intent, migration from workflow schemas 3/4 and batch versions
+  1/2/3, eligibility planning, exact implementation identity, resident device
+  segments, memory admission, classified fallback, optimizer review/apply and
+  grouped result inspection, visible dtype-repair proposals, Prefer-GPU
+  selection/serialization/UI/durable behavior, progress, cancellation,
+  cleanup, and atomic publication; and</li>
 <li>opt-in native-Windows RTX tests exercise a real durable GPU batch and an
   imported generated Python workflow through the same executor.</li>
 </ul>
@@ -3274,8 +3485,8 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>I/O and metadata</td>
-<td>Focused format, dtype, validation, and round-trip tests</td>
-<td>A release-pinned field matrix and licensed corpus of representative microscope files</td>
+<td>Focused format, dtype, validation, and round-trip tests plus strict public-corpus v4 qualification across 20 frozen artifacts, 97 biological fields, and the claimed microscope-reader routes</td>
+<td>Broader independent facility files, negative controls for unusual vendor dimensions, network/remote filesystems, and cross-reader comparisons outside the frozen corpus</td>
 </tr>
 <tr>
 <td>PSF/deconvolution</td>
@@ -3284,7 +3495,7 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Compute/GPU execution</td>
-<td>Exact operation-region tests, immutable policy v8, tagged a4 source/artifacts, green cross-platform CI, a qualified private local cuCIM build, real RTX 5090 reference evidence, exact tagged-wheel RTX 4050 Auto/Prefer/all-example parity and cleanup, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI smokes</td>
+<td>Exact operation-region tests, immutable policy v10, carried-forward a8 full-catalogue qualification for 19 CuPy/CuPyX implementations and 24 evidence owners on native Windows RTX 5090, focused a9 and 0.14 shared-planner/source-axis real-GPU evidence, exact 0.14 artifact checks, OOM/cancellation/cleanup coverage, bounded M1 Max CPU and Windows UI smokes, and a2 native macOS CPU installer lifecycle checks</td>
 <td>Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance</td>
 </tr>
 <tr>
@@ -3299,7 +3510,7 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Workflow/export architecture</td>
-<td>Schema-4/schema-3 migration, batch-config/manifest schema 3, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests</td>
+<td>Workflow schema 5 with explicit schema-3/4 migration, batch config/manifest schema 4 with version-1/2/3 migration, canonical SourceItems, typed per-sample overrides, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests</td>
 <td>Independent reproducibility exercises across archived environments and long-lived release migrations</td>
 </tr>
 <tr>
@@ -3312,14 +3523,17 @@ same as an external comparison or assay validation. The distinction matters:</p>
 <h2 id="release-specific-limitations">Release-specific limitations<a class="headerlink" href="#release-specific-limitations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Workflow schemas 1 and 2 are intentionally rejected. Valid schema-3 workflows
-  load as explicit CPU and save as schema 4; cached pixels/tables are not
-  serialized and exported Python is runtime-version pinned. Recalculate,
-  regenerate exports, and validate after upgrading.</li>
+  load as explicit CPU, while schema-4 workflows retain their authored compute
+  request. Both acquire canonical SourceItems when sources resolve and save as
+  schema 5; cached pixels/tables are not serialized and exported Python is
+  runtime-version pinned. Recalculate, regenerate exports, and validate after
+  upgrading.</li>
 <li>Version-1 batch configs load as explicit CPU; version-2 configs retain their
-  saved compute request. Both older versions have no source-axis declaration
-  until reviewed and saved as version 3. A saved Auto, Prefer GPU, or Custom
-  request is intent; actual implementation
-  provenance must be retained from each run. Auto uses reviewed GPU defaults
+  saved compute request; and version-3 configs retain guarded source-axis
+  declarations and acquire SourceItems when resolved. Older versions contain
+  no per-sample overrides and are written as version 4 only after review and
+  save. A saved Auto, Prefer GPU, or Custom request is intent; actual
+  implementation provenance must be retained from each run. Auto uses reviewed GPU defaults
   without compatible history; accelerated-only history schedules one
   same-surface CPU measurement before a later matching run applies the
   1.20x/20-ms gate. Prefer GPU instead requests
@@ -3331,19 +3545,16 @@ same as an external comparison or assay validation. The distinction matters:</p>
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  <a href="../../how-to/choose-compute/#gpu-regions-in-0130a7">CPU/GPU matrix</a> is a
+  <a href="../../how-to/choose-compute/#gpu-regions-in-0140a2">CPU/GPU matrix</a> is a
   readable summary; the runtime policy/decision remains authoritative.</li>
-<li>cuCIM remains optional and omits Clara I/O. VIPP distributes no Windows
-  wheel; each user builds the exact 26.6.0 tag/commit locally with the pinned
-  recipe. Admission verifies that build's wheel-file hash, the policy-pinned
-  canonical installed payload, source/recipe provenance, and the existing
-  scientific environment/workload gates. This private per-user rebuild is the
-  0.13.0a7 route, using only its matching published bundle; VIPP will not host
-  or redistribute the wheel. Clara
-  whole-slide I/O remains outside that build. See the
+<li>The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a2 does not
+  install or execute cuCIM, and the retired private-wheel/source-build route
+  must not be added to a current environment. See the
   <a href="../../getting-started/windows-cuda/">Windows CUDA guide</a>.</li>
-<li>Batch processing is local-file and sorted-position oriented. It does not
-  iterate selected T/C/Z combinations or discover plate/well/field structure.</li>
+<li>Batch processing remains local-file and pairs source lists positionally,
+  although each resolved item is pinned to a canonical SourceItem rather than
+  being silently reassigned by a changed series order. It does not iterate
+  selected T/C/Z combinations or discover plate/well/field structure.</li>
 <li>Many operations are eager even when a source format supports lazy/chunked
   access; background execution improves responsiveness, not total work.</li>
 <li>Declared-grid validation cannot prove biological registration or metadata
@@ -3385,7 +3596,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
   </span>
 
     

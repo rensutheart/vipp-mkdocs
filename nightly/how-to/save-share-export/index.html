@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2732,8 +2807,8 @@ interchangeable.</p>
 </thead>
 <tbody>
 <tr>
-<td>Workflow JSON (schema 4)</td>
-<td>Reopen/edit the graph and authored compute request in VIPP 0.13; optionally restore an attached versioned Batch workspace configuration</td>
+<td>Workflow JSON (schema 5)</td>
+<td>Reopen/edit the graph and authored compute request in VIPP 0.14.0a2; optionally restore an attached versioned Batch workspace configuration</td>
 <td>Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes</td>
 </tr>
 <tr>
@@ -2752,19 +2827,19 @@ interchangeable.</p>
 <td>A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar</td>
 </tr>
 <tr>
-<td>Batch config (version 3)</td>
-<td>Recreate source bindings, guarded source-axis declarations, output declarations, naming, collision policy, workflow association, and configured compute request</td>
+<td>Batch config (version 4)</td>
+<td>Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, output declarations, naming, collision policy, workflow association, and configured compute request</td>
 <td>Input bytes, actual run decisions, finalized outcome</td>
 </tr>
 <tr>
-<td>Batch manifest/archive (version 3) and sidecars</td>
-<td>Audit planned inputs/outputs, raw and effective source axes, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status</td>
+<td>Batch manifest/archive (version 4) and sidecars</td>
+<td>Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective per-sample values, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status</td>
 <td>One atomic transaction or proof of biological validity</td>
 </tr>
 </tbody>
 </table>
 <h2 id="save-a-workflow">Save a workflow<a class="headerlink" href="#save-a-workflow" title="Permanent link">&para;</a></h2>
-<p>Choose <strong>Save workflow…</strong>. Use <code>.json</code> and include a meaningful analysis name.
+<p>Choose <strong>Save workflow...</strong>. Use <code>.json</code> and include a meaningful analysis name.
 The action saves the active workflow tab; other tabs keep their own paths,
 dirty baselines, caches, and histories. Closing a dirty tab still uses
 Save/Discard/Cancel handling.
@@ -2774,17 +2849,18 @@ If a Batch workspace is active, VIPP asks what to save:</p>
   workflow JSON. This includes source bindings, local input/output paths,
   patterns, formats, and run policies. It does not include input pixels,
   computed arrays, or output files.</li>
-<li><strong>No</strong> writes the ordinary graph-only workflow. Use <strong>Save config…</strong> in
+<li><strong>No</strong> writes the ordinary graph-only workflow. Use <strong>Save...</strong> in
   Batch workspace if a separate configuration is required.</li>
 <li><strong>Cancel</strong> writes nothing.</li>
 </ul>
 <p>Loading a workflow with a valid attachment restores and opens Batch workspace
-with those settings. It does not scan the collection, build a preview, load a
-representative, or run the graph for the batch setup. <strong>Preview batch</strong> remains
-optional, and <strong>Run batch</strong> performs a fresh preflight. If the attachment is
-unsupported or does not match the workflow, VIPP loads the scientific workflow
-but reports that its Batch workspace could not be restored rather than silently
-applying the settings.</p>
+with those settings, then starts metadata-only source discovery in the
+background. This rematches saved SourceItems and per-sample overrides without
+loading representative pixels or calculating the graph. <strong>Preview batch</strong>
+remains optional, and <strong>Run batch</strong> performs a fresh preflight. If the
+attachment is unsupported or does not match the workflow, VIPP loads the
+scientific workflow but reports that its Batch workspace could not be restored
+rather than silently applying the settings.</p>
 <p>Before sharing:</p>
 <ol>
 <li>Reopen the file in the same VIPP release.</li>
@@ -2795,15 +2871,16 @@ applying the settings.</p>
 </ol>
 <p>Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.</p>
-<p>0.13.0a9 writes schema 4 and rejects versions 1 and 2. Valid schema-3 workflows
-load structurally with an explicit CPU request, but cached pixels and tables
-are not serialized. Saving the reviewed duplicate writes schema 4. Follow the
-<a href="../../reference/versioning/#move-from-0120a3-to-0130a1">0.12.0a3 to 0.13.0a1 procedure</a>.
-The earlier release-to-release procedures remain available for older workflows.
+<p>0.14.0a2 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
+load with explicit CPU intent; schema-4 workflows retain authored compute
+intent. Both acquire SourceItems when sources resolve, but cached pixels and
+tables are not serialized. Inspect selected items, readers, axes, and decisive
+outputs before saving the reviewed duplicate. Earlier release-to-release
+procedures remain available for older workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate <a href="../../reference/versioning/#upgrade-to-0120a1">schema-1/2 rebuild procedure</a>.</p>
 <h2 id="save-a-selected-output">Save a selected output<a class="headerlink" href="#save-a-selected-output" title="Permanent link">&para;</a></h2>
-<p>Select the desired output and choose <strong>Save selected output…</strong>. The available
+<p>Select the desired output and choose <strong>Save selected output...</strong>. The available
 format depends on the data type and dimensionality. For tables use CSV or TSV;
 for scientific images prefer a format that can represent the axes, dtype, and
 calibration you need.</p>
@@ -2814,13 +2891,13 @@ rerun the graph through the shared executor or create an exact execution-
 provenance sidecar. Use the generated CLI with provenance enabled, or the
 durable batch runner, when the saved result must carry that record.</p>
 <h2 id="export-an-ome-analysis-dataset">Export an OME analysis dataset<a class="headerlink" href="#export-an-ome-analysis-dataset" title="Permanent link">&para;</a></h2>
-<p><strong>Export OME dataset…</strong> serializes the cached reference image and selected graph
+<p><strong>Export OME dataset...</strong> serializes the cached reference image and selected graph
 label outputs. It likewise does not rerun the graph or add exact per-node
 compute provenance. Use it for the documented image/label association, not as
 a substitute for generated-CLI provenance or a finalized batch manifest and
 item sidecars.</p>
 <h2 id="export-python">Export Python<a class="headerlink" href="#export-python" title="Permanent link">&para;</a></h2>
-<p>Choose <strong>Export Python…</strong> when a graph needs a reviewable headless program. The
+<p>Choose <strong>Export Python...</strong> when a graph needs a reviewable headless program. The
 script embeds validated immutable workflow JSON, constructs a fresh pipeline
 per call, and uses the same headless executor as VIPP. It carries supported
 <code>ImageState</code>, accepts explicit multi-source bindings, and fails on missing,
@@ -2829,11 +2906,11 @@ duplicate, or unknown sources.</p>
 runtime. Regenerate and revalidate it after every upgrade, including alpha
 updates. UI caches, pinned layers, and graph layout are presentation state and
 are intentionally absent.</p>
-<p>In 0.13, Python callers can pass a complete <code>ComputeRequest</code>, progress callback,
-and cooperative cancellation token. The generated CLI accepts
+<p>Python callers can pass a complete <code>ComputeRequest</code>, progress callback, and
+cooperative cancellation token. The generated CLI accepts
 <code>--compute-mode</code>, <code>--fallback-policy</code>, repeatable <code>--node-preference</code>,
 <code>--progress</code>, and provenance controls. Omitted CLI fields retain the embedded
-schema-4 request; overrides do not mutate the workflow.</p>
+schema-5 request; overrides do not mutate the workflow.</p>
 <p><code>--compute-mode prefer_gpu</code> requests every scientifically eligible reviewed
 public GPU implementation regardless of CPU speed. It requires visible
 fallback; when no fallback override is provided, the CLI supplies <code>visible</code>,
@@ -2864,18 +2941,20 @@ stability of arbitrary arrays or independently supplied source payloads.</p>
 <p>Use <code>python generated_pipeline.py --help</code> for the exact source-binding and
 output arguments emitted for that graph. Add <code>--progress</code> for operation updates
 and supply compute overrides only when the run should deliberately differ from
-the embedded schema-4 request.</p>
+the embedded schema-5 request.</p>
 <h2 id="save-a-batch-configuration-and-evidence">Save a batch configuration and evidence<a class="headerlink" href="#save-a-batch-configuration-and-evidence" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Batch workspace... → Save config...</strong> to write
+<p>Use <strong>Batch workspace... → Save...</strong> to write
 <code>vipp_batch_config.json</code>. Keep it with its required workflow companion. After a
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 <code>vipp_batch_pipeline.py</code> is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.</p>
-<p>Version-3 configs store the complete configured compute request and any reviewed
-source-axis declarations. Version-1 configs load as explicit CPU; version-2
-configs retain their saved compute request. Both older versions load without
-axis declarations and are written as version 3 after review and save. The runner
-uses its saved request by default and can overlay explicit
+<p>Version-4 configs store the complete configured compute request, reviewed
+source-axis declarations, stable SourceItems, and typed per-sample numeric
+overrides. Version-1 configs load as explicit CPU; version-2 retains its saved
+compute request; version-3 also retains reviewed source declarations and
+acquires SourceItems when sources resolve. Versions 1 through 3 contain no
+per-sample overrides and are written as version 4 only after review and save.
+The runner uses its saved request by default and can overlay explicit
 compute/fallback/per-node CLI choices. <code>--progress</code> prints both overall-item and
 current-operation progress. One <code>Ctrl+C</code> requests normal cooperative
 cancellation and allows manifest/sidecar cleanup; a second is an emergency
@@ -2931,7 +3010,7 @@ a manifest, or durable replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
   </span>
 
     

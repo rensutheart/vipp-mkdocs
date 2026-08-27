@@ -159,6 +159,22 @@
   white-space: nowrap;
 }
 
+.vipp-release-verification table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.vipp-release-verification th:first-child,
+.vipp-release-verification td:first-child {
+  width: 34%;
+  white-space: normal;
+}
+
+.vipp-release-verification td,
+.vipp-release-verification code {
+  overflow-wrap: anywhere;
+}
+
 .md-typeset .version-badge {
   display: inline-block;
   padding: .15rem .5rem;

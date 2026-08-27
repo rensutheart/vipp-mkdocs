@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -1715,9 +1790,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ordered-nd2-dimensions-in-013" class="md-nav__link">
+  <a href="#reader-dimensions-and-stable-items-in-014" class="md-nav__link">
     <span class="md-ellipsis">
-      Ordered ND2 dimensions in 0.13
+      Reader dimensions and stable items in 0.14
     </span>
   </a>
   
@@ -2678,9 +2753,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ordered-nd2-dimensions-in-013" class="md-nav__link">
+  <a href="#reader-dimensions-and-stable-items-in-014" class="md-nav__link">
     <span class="md-ellipsis">
-      Ordered ND2 dimensions in 0.13
+      Reader dimensions and stable items in 0.14
     </span>
   </a>
   
@@ -2820,19 +2895,25 @@ shape.</p>
 <p>Workflow schema 4 adds authored compute intent without changing these axis and
 metadata semantics. A schema-3 workflow therefore loads into 0.13 with explicit
 CPU execution rather than silently applying the new-session Auto policy.</p>
+<p>Workflow schema 5 adds the <code>SourceItem v1</code> record. It binds the logical image
+selector to the observed container revision, reader/backend, normalized axes,
+shape, and available metadata. This is distinct from changing axis meaning:
+SourceItem identifies which image was read, while an explicit axis declaration
+states how positions in that image should be interpreted.</p>
 <h2 id="tiff-page-labels-at-an-image-source">TIFF page labels at an image source<a class="headerlink" href="#tiff-page-labels-at-an-image-source" title="Permanent link">&para;</a></h2>
 <p>Some ordinary TIFF files report a page dimension as generic <code>Q</code> because the
 file does not say what those pages mean. VIPP does not assume that Q is Z for
 every TIFF.</p>
 <p>The <code>Image Source</code> inspector and each Batch workspace source use the same
 <strong>Image stack</strong> interpretation control. On an ordinary Image Source, the
-conservative default is <strong>Use the file's labels unchanged</strong>. Choose <strong>Pages are
-depth slices (Z stack)</strong> only after confirming that a reported <code>QYX</code> source is
-really a Z stack. The reviewed choice is saved with the workflow.</p>
+conservative default is <strong>Use the file's labels unchanged</strong>. Choose <strong>Stack
+planes are depth slices (Z stack)</strong> only after confirming that a reported
+<code>QYX</code> source is really a Z stack. The reviewed choice is saved with the
+workflow.</p>
 <p>In a new Batch workspace source, <strong>Image stack</strong> starts at <strong>Automatic
 (recommended)</strong>. If one representative reports exactly <code>QYX</code> and the workflow
-demonstrates that it requires <code>ZYX</code>, VIPP visibly selects <strong>Pages are depth
-slices (Z stack)</strong> and retries with the same guarded declaration:</p>
+demonstrates that it requires <code>ZYX</code>, VIPP visibly selects <strong>Stack planes are
+depth slices (Z stack)</strong> and retries with the same guarded declaration:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>QYX -&gt; ZYX
 </span></code></pre></div>
 <p>Keep that suggestion only when independent acquisition information confirms
@@ -2858,7 +2939,7 @@ runs.</p>
 reviewed declaration, a node that only needs a 2D spatial interpretation can
 use inferred trailing Y/X and displays that inference; it does not silently
 promote Q to Z.</p>
-<p>In 0.13.0a9, changing the Image Source declaration immediately refreshes the
+<p>In 0.14.0a1, changing the Image Source declaration immediately refreshes the
 effective metadata along its active branch before a full pixel calculation.
 For a branch such as <strong>Subtract Background -&gt; Rescale Intensity -&gt; Gaussian
 Blur 3D</strong>, declaring <code>QYX -&gt; ZYX</code> makes the Gaussian Sigma Z control visible at
@@ -2879,7 +2960,7 @@ not limited to three or four source channels. Auto mode uses declared encoded
 RGB/RGBA order where applicable and otherwise blends every fluorescence channel
 by carried pseudo-colour, falling back through Blue, Green, Red, Magenta,
 Yellow, and Cyan repeatedly.</p>
-<h2 id="ordered-nd2-dimensions-in-013">Ordered ND2 dimensions in 0.13<a class="headerlink" href="#ordered-nd2-dimensions-in-013" title="Permanent link">&para;</a></h2>
+<h2 id="reader-dimensions-and-stable-items-in-014">Reader dimensions and stable items in 0.14<a class="headerlink" href="#reader-dimensions-and-stable-items-in-014" title="Permanent link">&para;</a></h2>
 <p>For Nikon ND2, VIPP follows the reader's ordered <code>sizes</code> mapping only when the
 dimension labels and sizes exactly match the returned array shape. This keeps
 T, Z, and C controls attached to the dimensions they actually index and fixes
@@ -2892,6 +2973,12 @@ displayed axis order and shape with acquisition records, move every T/Z/C
 control on a representative file, and inspect the resulting channel and slice
 before quantitative processing. Do not add <code>Reorder Axes</code> merely to make the
 controls look familiar unless the stored order is known independently.</p>
+<p>The same release contract keeps reader inspection and full read metadata
+aligned for the qualified LIF, CZI/LSM, OIR/OIB/OIF/VSI, and IMS routes. A
+multi-image source is selected by a stable item key where available, not merely
+its current list position. A changed file, missing companion, or unexpected
+reader topology therefore stops for review instead of silently attaching old
+axes or calibration to a different image.</p>
 <h2 id="physical-scale">Physical Scale<a class="headerlink" href="#physical-scale" title="Permanent link">&para;</a></h2>
 <p>Scale-aware measurements use pixel size and units when available.</p>
 <p>Use <code>Set Pixel Size / Units</code> when input calibration is missing or wrong.</p>
@@ -2948,7 +3035,7 @@ triggers for replacement guesses.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 09:43:16 UTC">August 27, 2026</span>
   </span>
 
     

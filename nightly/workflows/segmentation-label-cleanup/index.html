@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -867,6 +917,8 @@
       
         
       
+        
+      
     
     
     
@@ -925,6 +977,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2976,7 +3051,8 @@ compare against the intended ImageJ reference before consequential use.</p>
 <p>Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
 Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
 Canny, median, Sigma Filter, Remove Outliers (Binary), and background correction
-have GPU candidates only inside declared regions. A portable a8 corridor can use an explicitly described
+have GPU candidates only inside declared regions. The portable corridor
+introduced in a8 can use an explicitly described
 channel, convert <code>uint8</code>/<code>uint16</code> to <code>float32</code> without rescaling, apply Gaussian
 Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
 without an intermediate host transfer.</p>
@@ -2998,7 +3074,7 @@ blocker, the node may show a <strong>GPU tip</strong> and an <strong>Add convers
 button inserts a visible, undoable Convert Dtype node; review its memory,
 threshold, and scientific consequences before accepting it.</p>
 <p>Read each node badge after calculation and see the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0130a8">CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0140a1">CPU/GPU operation matrix</a>
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.</p>
@@ -3045,7 +3121,8 @@ inspectable; they do not validate the thresholds for another dataset.</p>
 <h2 id="what-to-check">What To Check<a class="headerlink" href="#what-to-check" title="Permanent link">&para;</a></h2>
 <p><img alt="A threshold-mask intermediate output shown at full resolution above its VIPP graph" src="../../assets/screenshots/workflows/inspect-intermediate-result.png" /></p>
 <p><em>Inspect a decisive intermediate at full resolution. Here the threshold mask is
-pinned in napari while its graph node and input histogram remain visible.</em></p>
+pinned in napari while its graph node and stack-histogram threshold setting
+remain visible.</em></p>
 <ul>
 <li>Does the mask include the biology of interest?</li>
 <li>Are background/noise structures being labeled as objects?</li>
@@ -3073,7 +3150,7 @@ pinned in napari while its graph node and input histogram remain visible.</em></
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 22, 2026 14:16:34 UTC">August 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 09:43:16 UTC">August 27, 2026</span>
   </span>
 
     

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/getting-started/windows-cuda/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="../macos/">
       
       
         <link rel="next" href="../windows-field-acceptance/">
@@ -558,6 +558,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -601,6 +605,52 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -869,6 +919,8 @@
       
         
       
+        
+      
     
     
     
@@ -930,6 +982,29 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
     
   </span>
   
@@ -2858,29 +2933,32 @@
 
 
 <h1 id="windows-nvidia-gpu-setup">Windows NVIDIA GPU setup<a class="headerlink" href="#windows-nvidia-gpu-setup" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.13.0a9 uses one standard CUDA 13 installation for every current
+<p>VIPP 0.14.0a2 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, <code>nvcc</code>, cuCIM
 bundle, or locally built provider wheel is required.</p>
 <div class="admonition warning">
-<p class="admonition-title">Use the exact a9 release</p>
+<p class="admonition-title">Use the exact a2 release</p>
 <p>Download the installer and checksum only from the
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.13.0a9">official v0.13.0a9 release</a>.
-Verify <code>VIPP-Setup-0.13.0a9-Windows-x86_64-UNSIGNED.exe</code> against
-<code>SHA256SUMS-Windows-0.13.0a9.txt</code> before opening it. This alpha is
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2">official v0.14.0a2 release</a>.
+Verify <code>VIPP-Setup-0.14.0a2-Windows-x86_64-UNSIGNED.exe</code> against
+<code>SHA256SUMS-Windows-0.14.0a2.txt</code> before opening it. This alpha is
 intentionally unsigned, so <strong>Unknown publisher</strong> is expected.</p>
+<p>The files published to PyPI as <code>0.14.0a2</code> predate the detached-window
+resizing fix. Use the corrected GitHub installer above, or the GitHub wheel
+shown in the manual-environment command below, when that fix is required.</p>
 </div>
 <h2 id="choose-the-standard-nvidia-route">Choose the standard NVIDIA route<a class="headerlink" href="#choose-the-standard-nvidia-route" title="Permanent link">&para;</a></h2>
 <p>In setup, keep <strong>Automatic</strong> or expand <strong>Advanced details</strong> and select
-<strong>NVIDIA GPU</strong>. Setup checks the computer before enabling <strong>Install</strong> and
+<strong>NVIDIA GPU</strong>. Setup checks the computer before enabling <strong>Install VIPP</strong> and
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.</p>
 <table>
 <thead>
 <tr>
 <th>Requirement</th>
-<th>0.13.0a9 boundary</th>
+<th>0.14.0a2 boundary</th>
 </tr>
 </thead>
 <tbody>
@@ -2937,6 +3015,13 @@ or the first GPU work compile again after VIPP restarts.</p>
 installation drive while setup runs. It also needs at least 5 GiB free on each
 drive used for Windows temporary files and VIPP installer records. These are
 disk-space requirements, not GPU memory requirements.</p>
+<p>The review gives separate rounded orientation: approximately 1.5 GiB to
+download, 5 GiB installed, and 7 GiB peak temporary working space for CUDA.
+Those estimates do not replace the 15 GiB installation-drive and 5 GiB
+temp/records-drive gates. Setup names the current phase and elapsed time, keeps
+the latest concrete activity visible through quiet periods, and exposes its log
+under <strong>Advanced details</strong>. A determinate percentage appears only when the
+underlying dependency tool reports a trustworthy byte total.</p>
 <h2 id="verify-the-installation">Verify the installation<a class="headerlink" href="#verify-the-installation" title="Permanent link">&para;</a></h2>
 <p>A managed CUDA installation creates <strong>VIPP Automatic</strong>, <strong>VIPP CPU</strong>, and
 <strong>VIPP Prefer GPU</strong> shortcuts. Start with <strong>VIPP Automatic</strong>. Open <strong>Compute
@@ -2961,9 +3046,10 @@ working directory:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="s2">".venv-vipp-gpu-cu13"</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">`</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="s2">"napari[pyqt6]&gt;=0.6"</span> <span class="s2">"napari-vipp[gpu-cuda13]==0.13.0a9"</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe"</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="s2">"napari[pyqt6]&gt;=0.6"</span> <span class="p">`</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="s2">"napari-vipp[gpu-cuda13] @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe"</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"</span>
 </span></code></pre></div>
 <p>This environment is separate from installer management. Do not move or rename
 it after CuPy has compiled kernels, and do not mix CUDA 12 and CUDA 13 packages
@@ -2985,10 +3071,10 @@ parameters, extended measurement columns, scientific parity, or memory needs
 remain on CPU with an explanation. <strong>Auto</strong> can correctly select CPU when the
 complete workload is faster there. <strong>Prefer GPU</strong> still allows visible CPU
 fallback.</p>
-<p>The completed-node badge reports what actually ran. Current a9 GPU providers
+<p>The completed-node badge reports what actually ran. Current a2 GPU providers
 appear as <strong>GPU · CuPy</strong>; an amber <strong>CPU fallback</strong> badge identifies a failed or
 ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but a9 does not install or execute that provider.</p>
+historical cuCIM identities, but a2 does not install or execute that provider.</p>
 <h2 id="background-and-basic-measurements-are-cupy-only">Background and basic measurements are CuPy-only<a class="headerlink" href="#background-and-basic-measurements-are-cupy-only" title="Permanent link">&para;</a></h2>
 <p>Rolling-Ball Background and Subtract Background no longer need a separately
 built provider. <strong>Measure Objects</strong> and <strong>Measure Objects + Intensity</strong> also use
@@ -3021,7 +3107,7 @@ compute mode explicitly rather than expecting VIPP to guess.</p>
 <div class="admonition danger">
 <p class="admonition-title">Do not reuse an old provider add-on</p>
 <p>Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-earlier VIPP release into 0.13.0a9. Those assets describe an older release
+earlier VIPP release into 0.14.0a2. Those assets describe an older release
 boundary and are not required by the current application.</p>
 </div>
 <h2 id="runtime-behavior-and-provenance">Runtime behavior and provenance<a class="headerlink" href="#runtime-behavior-and-provenance" title="Permanent link">&para;</a></h2>
@@ -3045,7 +3131,7 @@ bitwise identity across devices. Preserve:</p>
 <p>This is often correct. Inspect the node's compute explanation for a dtype,
 rank, parameter, memory, workload, or parity exclusion. Do not change a
 scientific parameter merely to unlock GPU execution.</p>
-<p>In 0.13.0a9, Prefer GPU preserves exact workload facts across intervening
+<p>In 0.14.0a2, Prefer GPU preserves exact workload facts across intervening
 CPU-only nodes. A required CPU Rescale Axes, Rescale Intensity, or Unsharp Mask
 step therefore does not by itself make reviewed downstream GPU work
 ineligible. If an affected downstream node still uses CPU, its compute details
@@ -3068,10 +3154,10 @@ parameters, compute intent, implementation catalogue, environment, or device
 changes. Run <strong>Find fastest pipeline…</strong> again and review the new evidence.</p>
 <h3 id="need-the-previous-cucim-procedure">Need the previous cuCIM procedure<a class="headerlink" href="#need-the-previous-cucim-procedure" title="Permanent link">&para;</a></h3>
 <p>Use the matching archived release page for the old environment. Do not apply
-that procedure to a9. The <a href="../../releases/0.13.0a7/">0.13.0a7 release page</a> is
+that procedure to a2. The <a href="../../releases/0.13.0a7/">0.13.0a7 release page</a> is
 preserved as the historical record.</p>
 <p>Continue with <a href="../../how-to/choose-compute/">Choose CPU or GPU compute</a> and the
-<a href="../../releases/0.13.0a9/">0.13.0a9 release notes</a>.</p>
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2">official v0.14.0a2 release</a>.</p>
 
 
 
@@ -3092,7 +3178,7 @@ preserved as the historical record.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 08:58:41 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
   </span>
 
     
@@ -3130,7 +3216,7 @@ preserved as the historical record.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install VIPP">
+          <a href="../macos/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install on macOS">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3140,7 +3226,7 @@ preserved as the historical record.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Install VIPP
+                Install on macOS
               </div>
             </div>
           </a>
