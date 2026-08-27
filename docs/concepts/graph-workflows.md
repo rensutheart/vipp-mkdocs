@@ -18,7 +18,7 @@ as thumbnails, napari layers, histograms, labels, or tables.
 | Workflow tabs | Keep independent graphs, results, caches, histories, inspectors, paths, compute requests, and Batch workspaces open together. |
 | Graph notes | Record reasoning next to workflow steps. |
 | Graph search | Find nodes, operation IDs, tunnel names, and batch output tags. |
-| Workflow JSON | Save the graph, node parameters, connections, canvas positions, tunnels, portable schema-4 compute intent, and selected UI state. |
+| Workflow JSON | Save the graph, node parameters, connections, canvas positions, tunnels, portable schema-5 compute intent, stable SourceItems, an optional versioned Batch workspace, and selected UI state. |
 | Actual-run provenance | Record the CPU or CuPy-family implementation and fallback that produced each accepted result; authored intent alone is not proof. |
 | Python export | Generate a version-locked headless program that uses the same execution service, compute request, progress, cancellation, and optional output provenance. |
 

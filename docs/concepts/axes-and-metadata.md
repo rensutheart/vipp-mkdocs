@@ -63,14 +63,15 @@ every TIFF.
 
 The `Image Source` inspector and each Batch workspace source use the same
 **Image stack** interpretation control. On an ordinary Image Source, the
-conservative default is **Use the file's labels unchanged**. Choose **Pages are
-depth slices (Z stack)** only after confirming that a reported `QYX` source is
-really a Z stack. The reviewed choice is saved with the workflow.
+conservative default is **Use the file's labels unchanged**. Choose **Stack
+planes are depth slices (Z stack)** only after confirming that a reported
+`QYX` source is really a Z stack. The reviewed choice is saved with the
+workflow.
 
 In a new Batch workspace source, **Image stack** starts at **Automatic
 (recommended)**. If one representative reports exactly `QYX` and the workflow
-demonstrates that it requires `ZYX`, VIPP visibly selects **Pages are depth
-slices (Z stack)** and retries with the same guarded declaration:
+demonstrates that it requires `ZYX`, VIPP visibly selects **Stack planes are
+depth slices (Z stack)** and retries with the same guarded declaration:
 
 ```text
 QYX -> ZYX

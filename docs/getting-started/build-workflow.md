@@ -5,7 +5,7 @@ canvas. It uses bundled data, so unexpected results are easier to diagnose.
 
 ## 1. Start clean
 
-Choose **New workflow…**. VIPP opens a new tab and preserves any other workflow
+Choose **New workflow...**. VIPP opens a new tab and preserves any other workflow
 tabs. The new graph contains one unbound `Image Source` on an otherwise empty
 canvas. Select that source (do not add a second one) and set:
 
@@ -67,11 +67,11 @@ column names, units, and whether leading axes are represented as expected.
 
 ## 5. Save an inspectable checkpoint
 
-Choose **Save workflow…** and use a name that communicates its purpose and
+Choose **Save workflow...** and use a name that communicates its purpose and
 release, for example:
 
 ```text
-nuclei-segmentation-vipp-0.13.0a8.json
+nuclei-segmentation-vipp-0.14.0a1.json
 ```
 
 Also record:
@@ -87,7 +87,7 @@ does not preserve.
 
 ## 6. Test that the workflow reopens
 
-Create another workflow tab, then load the saved JSON. **Load workflow…** opens
+Create another workflow tab, then load the saved JSON. **Load workflow...** opens
 another session rather than replacing the active graph. Confirm the source,
 graph, parameters, connections, and authored compute request before relying on
 the file as an analysis record.

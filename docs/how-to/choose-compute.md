@@ -52,7 +52,7 @@ the Custom choices take effect when a node preference changes, you calculate,
 or you apply a reviewed optimizer proposal.
 
 Compute policy cannot change underneath active work. While a pipeline
-calculation, node benchmark, or **Find fastest** analysis is running, the mode
+calculation, node benchmark, or **Find fastest pipeline…** analysis is running, the mode
 and applicable per-node controls are disabled until normal completion. To
 select another policy sooner, use the explicit **Cancel calculation**, **Cancel
 benchmark**, or **Cancel analysis** control first. The controls remain locked
@@ -334,7 +334,7 @@ fastest**, or collection batch, VIPP cannot prove the runtime safe to reuse. It
 requests cancellation of every other active compute owner and disables new
 calculation, policy changes (including policy-changing undo/redo),
 benchmark/optimizer work, and batch starts for that process. Newly measured
-**Find fastest** evidence from the unsafe analysis is rolled back. If that
+**Find fastest pipeline…** evidence from the unsafe analysis is rolled back. If that
 record-level rollback cannot be written, VIPP writes a durable poison marker
 first and moves the complete local timing store to an `.unsafe-*` quarantine
 filename under its cross-process lock. A restart resolves the marker or refuses
@@ -346,18 +346,18 @@ succeeds.
 ## Keep interactive and durable execution aligned
 
 Interactive calculation, saved batch runners, and generated Python/CLI use the
-same execution service. Interactive **Save selected output…** and **Export OME
-dataset…** serialize accepted cached values instead; they do not rerun the graph
+same execution service. Interactive **Save selected output...** and **Export OME
+dataset...** serialize accepted cached values instead; they do not rerun the graph
 or create exact compute-provenance sidecars. Preserve:
 
-- the schema-4 workflow and complete compute request;
-- for batch, the version-3 config, finalized manifest/archive, and item
+- the schema-5 workflow and complete compute request;
+- for batch, the version-4 config, finalized manifest/archive, and item
   sidecars;
 - for generated outputs, requested `.vipp-provenance.json` sidecars;
 - the actual implementation IDs/versions and environment fingerprint; and
 - CPU decisions, classified fallbacks/OOM, cancellation, and cleanup outcome.
 
-Workflow schema 4, batch config schema 3, saved runners, and generated CLIs use
+Workflow schema 5, batch config schema 4, saved runners, and generated CLIs use
 the stable value `prefer_gpu`. Saved per-node preferences remain present but
 dormant outside Custom; switching back to Custom reactivates them.
 `Benchmark node…` and **Find fastest pipeline…** are Custom-only. A CLI mode

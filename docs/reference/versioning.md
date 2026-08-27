@@ -4,17 +4,20 @@ This manual has two publication tracks and release-numbered snapshots.
 
 | Selector | Meaning | Use it for |
 | --- | --- | --- |
-| **stable** | Alias for the current supported software release manual | Routine analysis and citation |
+| **stable** | Alias intended for the current supported software release manual | Routine analysis after confirming the displayed version |
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-The numbered **0.14.0a1** snapshot is the current verified public alpha,
-published on
+VIPP **0.14.0a1** is the current verified public alpha, published on
 [GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1) and
 [PyPI](https://pypi.org/project/napari-vipp/0.14.0a1/). The canonical GitHub
 release carries the exact immutable-tag package, intentionally unsigned
 installer, checksum, release manifest, and notices. The nightly manual may
 describe later unreleased work.
+
+Application publication and manual deployment are separate operations. Always
+confirm the version shown by the manual selector; do not assume that the
+**stable** alias moved merely because a new package was published.
 
 The `main`/nightly manual can describe behavior newer than the latest tag. Use
 the version selector when you need the manual for an installed release.
@@ -80,7 +83,7 @@ scientific review, not only a file-format conversion.
    implementation will actually be available on another machine.
 5. If acceleration is wanted after the CPU comparison, use **Prefer GPU** to
    place every reviewed eligible operation on GPU regardless of speed, or use
-   Custom to choose providers per node/apply **Find fastest**. Auto uses
+   Custom to choose providers per node/apply **Find fastest pipeline…**. Auto uses
    reviewed safe GPU defaults without compatible history; accelerated-only
    history schedules one same-surface CPU measurement before later matching
    runs apply the 1.20x/20-ms gate.

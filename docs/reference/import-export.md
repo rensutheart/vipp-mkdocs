@@ -73,7 +73,7 @@ input, generated execution, or output provenance.
 
 ## OME analysis dataset
 
-**Export OME dataset…** writes one reference image and graph label outputs into
+**Export OME dataset...** writes one reference image and graph label outputs into
 one local `.ome.zarr` store:
 
 ```text
@@ -112,7 +112,7 @@ shared executor or create an exact compute-provenance sidecar.
 
 ## Execution provenance for saved outputs
 
-The interactive **Save selected output…** action writes the selected cached
+The interactive **Save selected output...** action writes the selected cached
 result directly. It does not rerun the graph or write exact execution
 provenance, so it is not a complete analysis archive. Generated Python/CLI can
 instead write an atomic `.vipp-provenance.json` sibling that binds the output

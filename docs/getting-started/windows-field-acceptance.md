@@ -128,7 +128,7 @@ Complete this only if the installer offered the NVIDIA CUDA route.
 - [ ] If a node showed a dtype-only **GPU tip**, **Add conversion** inserted one
       visible Convert Dtype node in the expected place and Undo removed it.
 - [ ] A relevant GPU tip remained visible after a Prefer GPU calculation.
-- [ ] **Find fastest** kept grouped results readable and inspectable, including
+- [ ] **Find fastest pipeline…** kept grouped results readable and inspectable, including
       when it could not choose a winner.
 
 - [ ] The release contained no separate cuCIM ZIP, source-build helper, or

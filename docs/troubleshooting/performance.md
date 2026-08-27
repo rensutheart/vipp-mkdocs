@@ -23,7 +23,7 @@ makes the next global Auto run measure CPU once on the same execution surface;
 once both observations exist, a later matching run applies the 1.20x/20-ms
 gate. Auto never silently benchmarks multiple implementations. Use
 **Prefer GPU** to use every reviewed eligible accelerator regardless of speed,
-or use **Custom** for per-node choices and **Find fastest**. Then use
+or use **Custom** for per-node choices and **Find fastest pipeline…**. Then use
 **Compute setup and memory…** and the badge reason to understand any call-specific
 CPU decision or fallback. Do not infer GPU use from the selected mode. For the complete decision sequence and operation matrix, see
 [choose and verify CPU or GPU compute](../how-to/choose-compute.md).

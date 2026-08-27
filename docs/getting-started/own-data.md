@@ -42,12 +42,22 @@ be frozen without changing pixels.
 Record an external checksum or repository identifier for long-term provenance;
 the workflow stores a source parameter/path, not the image bytes.
 
-For local multiscale OME-Zarr 0.4/0.5, the Image Source preview chooser lists
-the levels declared by the selected image or label. A lower-level layer is
-labelled `Preview level N - analysis remains full resolution`. It is a
-presentation aid only: the scientific graph, batch run, generated execution,
-cache, and provenance remain bound to level 0. A single-level source reports
-that no lower-level preview exists.
+For local multiscale OME-Zarr 0.4/0.5, open the Image Source inspector's
+**Resolution** section and use **Show in napari**. Its dynamic choices include
+**Analysis output — L0**, **Presentation preview — Auto (best fit)**, and one
+**Presentation preview — LN** entry for each lower level declared by the
+selected image or label. A lower-level layer is labelled
+`Preview level N - analysis remains full resolution`. It loads in the
+background without replacing the active analysis or VIPP Inspect layer; choose
+it explicitly when you want to view it. If loading fails, **Try loading preview
+again** appears. The preview is a presentation aid only: the scientific graph,
+batch run, generated execution, cache, and provenance remain bound to level 0.
+A single-level source reports that no lower-level preview exists.
+
+![The Image Source Resolution controls with analysis level 0, automatic presentation preview, and two explicit lower pyramid levels](../assets/screenshots/sources/image-source-multiscale-resolution.png)
+
+*A synthetic three-level OME-Zarr illustrates the dynamic display choices. The
+selected presentation level changes only napari's view; analysis stays on L0.*
 
 ## Check metadata before processing
 
@@ -69,7 +79,7 @@ record where the corrected values came from.
 
 For an ordinary TIFF that reports generic `QYX`, use the Image Source node's
 **Image stack** chooser instead of trying to rename Q with `Reorder Axes`.
-Choose **Pages are depth slices (Z stack)** only after confirming the page
+Choose **Stack planes are depth slices (Z stack)** only after confirming the page
 meaning; the resulting `QYX -> ZYX` declaration is saved with the workflow and
 does not move pixels. Batch workspace uses the same control and can visibly
 suggest that choice only when the workflow demonstrates a `ZYX` requirement.

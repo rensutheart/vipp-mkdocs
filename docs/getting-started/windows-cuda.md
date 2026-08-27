@@ -16,7 +16,7 @@ bundle, or locally built provider wheel is required.
 ## Choose the standard NVIDIA route
 
 In setup, keep **Automatic** or expand **Advanced details** and select
-**NVIDIA GPU**. Setup checks the computer before enabling **Install** and
+**NVIDIA GPU**. Setup checks the computer before enabling **Install VIPP** and
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 

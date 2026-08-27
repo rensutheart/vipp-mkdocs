@@ -46,7 +46,8 @@ scientific region or environment gate is not satisfied.
     structures against an appropriate reference.
 
 !!! note "Backend agreement is not restoration validity"
-    The a7 RL/RL-TV v2 policy requires equal shape and `float32` dtype,
+    The current RL/RL-TV v2 policy, introduced in a7, requires equal shape and
+    `float32` dtype,
     identical finite masks, finite non-negative clipped outputs, NRMSE no
     greater than `0.005`, and maximum absolute error no greater than
     `1e-6 + 0.005 × the CPU-reference peak`. These limits test GPU agreement
@@ -216,7 +217,7 @@ varying, or otherwise not rotationally symmetric.
 #### Why some Fiji or ImageJ examples use image-sized PSFs
 
 Software packages can impose different array-shape conventions while modeling
-the same physical sampling. The [ImageJ deconvolution guide](https://imagej.net/imaging/deconvolution/)
+the same physical sampling. The [ImageJ deconvolution guide](https://imagej.net/imaging/deconvolution)
 describes PSF width, height, and depth as PSF dimensions and permits a PSF equal
 to or smaller than the image. A [PyImageJ 3D deconvolution example](https://py.imagej.net/en/latest/Deconvolution.html)
 constructs an image-sized diffraction kernel for that particular operation.

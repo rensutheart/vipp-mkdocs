@@ -49,7 +49,7 @@ hide:
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
-!!! important "0.13 workflow and compute compatibility"
+!!! important "0.13 → 0.14 workflow and compute compatibility"
     0.14.0a1 writes workflow schema 5. Valid schema-3 and schema-4 workflows
     migrate explicitly; cached results and source pixels are not saved in
     workflow JSON, and generated Python is pinned to its creator version. Read

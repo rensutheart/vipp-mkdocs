@@ -26,8 +26,8 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.13 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0130a8)
-for the accelerated node families and their first public regions.
+[0.14.0a1 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0140a1)
+for the accelerated node families and their current public regions.
 
 | Family | Nodes |
 | --- | ---: |
@@ -44,7 +44,7 @@ for the accelerated node families and their first public regions.
 
 ## Image Data
 
-### Source And Output
+### Source & Output
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
@@ -52,7 +52,7 @@ for the accelerated node families and their first public regions.
 | `Save Image` | array | any | Save an image-like output during interactive recompute. |
 | `Batch Output` | any | same as input | Mark an output for folder batch execution. |
 
-### Axes And Regions
+### Axes & Regions
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ for the accelerated node families and their first public regions.
 | `Set Microscope Metadata` | array | same as input | Record missing channel emission wavelengths, objective numerical aperture, or immersion refractive index without changing pixels. |
 | `Rescale Axes` | array | same as input | Resample X/Y/Z and update physical scale. |
 
-### Channels And Composites
+### Channels & Composites
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
@@ -86,7 +86,7 @@ intermediates remain eligible for normal Smart/Low-memory pruning. Intensity
 mapping is a separate native-preserving versus explicitly lossy percentile
 choice.
 
-### Math And Logic
+### Math & Logic
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
@@ -106,7 +106,7 @@ choice.
 | --- | --- | --- | --- |
 | `Convert Dtype` | array | any | Convert array dtype. |
 
-## Intensity And Contrast
+## Intensity & Contrast
 
 | Node | Output | Use |
 | --- | --- | --- |

@@ -69,7 +69,7 @@ and lets you check again after installing it.
    and explains what is missing.
 3. Under **Reviewed settings**, confirm the fixed installation location, compute
    route, and whether to add a Desktop shortcut.
-4. Select **Install** and wait for setup and its final acceptance checks.
+4. Select **Install VIPP** and wait for setup and its final acceptance checks.
 5. Open **VIPP** for a CPU installation. A CUDA installation provides
    **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** shortcuts; begin
    with **VIPP Automatic**.
@@ -86,15 +86,16 @@ and lets you check again after installing it.
     environments are inspected separately and remain unchanged.
 
 Changing the compute choice or Desktop-shortcut choice requires
-**Check these settings** again. Setup never enables **Install** for settings it
+**Check these settings** again. Setup never enables **Install VIPP** for settings it
 has not checked.
 
 GPU setup is a large download. It currently needs at least 15 GiB free on the
-installation drive while setup runs; that is disk storage, not GPU memory
-(VRAM). It also needs at least 5 GiB free on every drive used for Windows
-temporary files and VIPP installer records. CPU setup needs at least 1 GiB in
-those temporary/record locations. Setup identifies the exact location when a
-check fails.
+installation drive while setup runs; CPU setup needs at least 5 GiB there.
+Those are disk-storage requirements, not GPU memory (VRAM). GPU setup also
+needs at least 5 GiB free on every drive used for Windows temporary files and
+VIPP installer records; CPU setup needs at least 1 GiB in those
+temporary/record locations. Setup identifies the exact location when a check
+fails.
 
 Before confirmation, the review separates approximate capacity from those
 conservative enforced minimums:
@@ -192,7 +193,7 @@ VIPP checkout, or an environment with multiple Qt bindings.
 ## Confirm the installation
 
 For an installer-managed copy, open the created VIPP shortcut and choose
-**Open example…**. For a manually managed environment, you can also run:
+**Open example...**. For a manually managed environment, you can also run:
 
 ```text
 python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
