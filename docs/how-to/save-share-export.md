@@ -5,7 +5,7 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 5) | Reopen/edit the graph and authored compute request in VIPP 0.14.0a1; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 5) | Reopen/edit the graph and authored compute request in VIPP 0.14.0a2; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
@@ -48,7 +48,7 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.14.0a1 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
+0.14.0a2 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
 load with explicit CPU intent; schema-4 workflows retain authored compute
 intent. Both acquire SourceItems when sources resolve, but cached pixels and
 tables are not serialized. Inspect selected items, readers, axes, and decisive

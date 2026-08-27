@@ -1,10 +1,59 @@
 # Validation status
 
-This page summarizes the current 0.14.0a1 evidence boundary and keeps its
-carried-forward 0.13 baselines separate. It is a claim boundary, not a
-certificate that every node, reader, or workflow is validated for every assay.
+This page summarizes the current 0.14.0a2 evidence boundary and keeps the
+0.14.0a1 scientific/source qualification and carried-forward 0.13 baselines
+separate. It is a claim boundary, not a certificate that every node, reader, or
+workflow is validated for every assay.
 
-## 0.14.0a1 focused qualification boundary
+## 0.14.0a2 focused qualification boundary
+
+0.14.0a2 changes desktop/Qt compatibility, detached-window sizing, and release
+packaging. It adds separate offline CPU-only macOS packages for Apple Silicon
+and Intel. SourceItem, reader, workflow schema 5, batch config/manifest schema
+4, OME-Zarr preview, per-sample parameter, scientific operation, and GPU
+contracts are unchanged from 0.14.0a1 and retain that recorded evidence.
+
+The annotated `v0.14.0a2` tag resolves to
+[`4aaf9961b97259c94390c859374d8a6b9f45ec6c`](https://github.com/rensutheart/napari-vipp/commit/4aaf9961b97259c94390c859374d8a6b9f45ec6c).
+The [exact-tag CI run](https://github.com/rensutheart/napari-vipp/actions/runs/33048422781)
+passed, including the supported Windows, Linux, and macOS Python matrix and
+clean distribution installs. The
+[unsigned-installer workflow](https://github.com/rensutheart/napari-vipp/actions/runs/33048446173)
+passed for Windows x86_64, macOS arm64, and macOS x86_64. Its native macOS jobs
+inspected, installed, launched, and cleanly shut down each final package. The
+[PyPI publication workflow](https://github.com/rensutheart/napari-vipp/actions/runs/33048727450)
+also passed.
+
+The [GitHub prerelease](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2)
+contains 20 assets. Primary public artifact SHA-256 values are:
+
+| Artifact | SHA-256 |
+| --- | --- |
+| GitHub wheel `napari_vipp-0.14.0a2-py3-none-any.whl` | `a30aa4ff1f4882b06903800d60912be4f6b29f185716a1752b3f8c540690ae8c` |
+| GitHub source archive `napari_vipp-0.14.0a2.tar.gz` | `8d1bf13b752bdb4c6777076c5e6bda5a75275073016f15e347ed8698e6b01886` |
+| Windows installer `VIPP-Setup-0.14.0a2-Windows-x86_64-UNSIGNED.exe` | `cdab2be65b83c36260ba45b3b700bc1685287e665bb9558585f9f13f9fb3f3be` |
+| Apple Silicon package `VIPP-0.14.0a2-macOS-arm64-UNSIGNED.pkg` | `9ad6a01e614277a4abac501a27d8623da5bd22bf4184bfb7b0884c319b67f529` |
+| Intel package `VIPP-0.14.0a2-macOS-x86_64-UNSIGNED.pkg` | `15ddfa6378af4bdf69887d35bd107b04143d89a944e68686687f350532546d14` |
+
+The two macOS packages require macOS 13 or newer, are current-user-only,
+explicitly unsigned and unnotarized, and install CPU-only managed environments.
+Automated native lifecycle evidence does not establish browser-quarantine,
+managed-device override, signing/notarization, graphical update/uninstall, or
+Apple-accelerator support.
+
+!!! warning "PyPI a2 is a different, earlier build"
+    PyPI cannot replace uploaded files. Its a2 wheel
+    (`3b066887de739d600a684abf85d599832d5b92c83fb357b6c75a471ed20cd2a8`)
+    and source archive
+    (`ad72ae95a5595c8bcad6125aada8aab1c30a419b98929a91b405d3560405fd27`)
+    are the pre-resize-fix build and do not match the current GitHub release
+    wheel/source bytes. Use a platform installer or the GitHub wheel for the
+    detached-window fix, and record which distribution surface was used.
+
+This is application and artifact evidence. It does not itself claim that the
+numbered or stable documentation deployment succeeded.
+
+## 0.14.0a1 SourceItem and batch qualification boundary
 
 The changed release domains are SourceItem identity and migration,
 reader-contract normalization, local OME-Zarr presentation preview, typed
@@ -496,7 +545,7 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests plus strict public-corpus v4 qualification across 20 frozen artifacts, 97 biological fields, and the claimed microscope-reader routes | Broader independent facility files, negative controls for unusual vendor dimensions, network/remote filesystems, and cross-reader comparisons outside the frozen corpus |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy v10, carried-forward a8 full-catalogue qualification for 19 CuPy/CuPyX implementations and 24 evidence owners on native Windows RTX 5090, focused a9 and 0.14 shared-planner/source-axis real-GPU evidence, exact 0.14 artifact checks, OOM/cancellation/cleanup coverage, and bounded M1 Max CPU plus Windows UI smokes | Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy v10, carried-forward a8 full-catalogue qualification for 19 CuPy/CuPyX implementations and 24 evidence owners on native Windows RTX 5090, focused a9 and 0.14 shared-planner/source-axis real-GPU evidence, exact 0.14 artifact checks, OOM/cancellation/cleanup coverage, bounded M1 Max CPU and Windows UI smokes, and a2 native macOS CPU installer lifecycle checks | Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
 | Workflow/export architecture | Workflow schema 5 with explicit schema-3/4 migration, batch config/manifest schema 4 with version-1/2/3 migration, canonical SourceItems, typed per-sample overrides, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
@@ -527,9 +576,9 @@ same as an external comparison or assay validation. The distinction matters:
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0140a1) is a
+  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0140a2) is a
   readable summary; the runtime policy/decision remains authoritative.
-- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a1 does not
+- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a2 does not
   install or execute cuCIM, and the retired private-wheel/source-build route
   must not be added to a current environment. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).

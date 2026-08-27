@@ -1,17 +1,21 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.14.0a1 uses one standard CUDA 13 installation for every current
+VIPP 0.14.0a2 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, `nvcc`, cuCIM
 bundle, or locally built provider wheel is required.
 
-!!! warning "Use the exact a1 release"
+!!! warning "Use the exact a2 release"
     Download the installer and checksum only from the
-    [official v0.14.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1).
-    Verify `VIPP-Setup-0.14.0a1-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.14.0a1.txt` before opening it. This alpha is
+    [official v0.14.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2).
+    Verify `VIPP-Setup-0.14.0a2-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.14.0a2.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
+
+    The files published to PyPI as `0.14.0a2` predate the detached-window
+    resizing fix. Use the corrected GitHub installer above, or the GitHub wheel
+    shown in the manual-environment command below, when that fix is required.
 
 ## Choose the standard NVIDIA route
 
@@ -20,7 +24,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.14.0a1 boundary |
+| Requirement | 0.14.0a2 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -100,7 +104,8 @@ working directory:
 py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
-  "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.14.0a1"
+  "napari[pyqt6]>=0.6" `
+  "napari-vipp[gpu-cuda13] @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -128,10 +133,10 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. Current a1 GPU providers
+The completed-node badge reports what actually ran. Current a2 GPU providers
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but a1 does not install or execute that provider.
+historical cuCIM identities, but a2 does not install or execute that provider.
 
 ## Background and basic measurements are CuPy-only
 
@@ -155,7 +160,7 @@ compute mode explicitly rather than expecting VIPP to guess.
 
 !!! danger "Do not reuse an old provider add-on"
     Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-    earlier VIPP release into 0.14.0a1. Those assets describe an older release
+    earlier VIPP release into 0.14.0a2. Those assets describe an older release
     boundary and are not required by the current application.
 
 ## Runtime behavior and provenance
@@ -184,7 +189,7 @@ This is often correct. Inspect the node's compute explanation for a dtype,
 rank, parameter, memory, workload, or parity exclusion. Do not change a
 scientific parameter merely to unlock GPU execution.
 
-In 0.14.0a1, Prefer GPU preserves exact workload facts across intervening
+In 0.14.0a2, Prefer GPU preserves exact workload facts across intervening
 CPU-only nodes. A required CPU Rescale Axes, Rescale Intensity, or Unsharp Mask
 step therefore does not by itself make reviewed downstream GPU work
 ineligible. If an affected downstream node still uses CPU, its compute details
@@ -216,8 +221,8 @@ changes. Run **Find fastest pipeline…** again and review the new evidence.
 ### Need the previous cuCIM procedure
 
 Use the matching archived release page for the old environment. Do not apply
-that procedure to a1. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
+that procedure to a2. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
 preserved as the historical record.
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[0.14.0a1 release notes](../releases/0.14.0a1.md).
+[official v0.14.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2).

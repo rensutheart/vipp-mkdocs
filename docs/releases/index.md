@@ -6,6 +6,24 @@ data.
 
 ## Current verified public alpha
 
+- [0.14.0a2](0.14.0a2.md) — native unsigned CPU-only macOS installers for
+  Apple Silicon and Intel, detached-window resizing, cross-Qt compatibility,
+  and a refreshed unsigned Windows installer.
+
+The immutable a2 alpha is distributed on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2) and
+[PyPI](https://pypi.org/project/napari-vipp/0.14.0a2/). The GitHub wheel and
+installers contain the detached-window resizing fix. PyPI retains the earlier
+pre-fix wheel and source archive because published files cannot be replaced;
+see the [a2 release-verification table](0.14.0a2.md#release-verification) for
+the distinct hashes and exact boundary.
+
+0.14.0a2 retains workflow schema 5 and batch config/manifest schema 4. Its
+scientific SourceItem, reader, workflow, and GPU contracts are unchanged from
+0.14.0a1.
+
+## Earlier releases
+
 - [0.14.0a1](0.14.0a1.md) — durable SourceItem identity, truthful microscope
   reader contracts, dynamic local OME-Zarr preview without changing analysis,
   typed per-sample batch values, restored Batch UX, and clearer installer
@@ -24,8 +42,6 @@ older batch records contain no per-sample parameter overrides. Workflow files
 do not contain cached results or source pixels. Recalculate and validate after
 upgrading, and regenerate Python exports because generated programs require the
 exact VIPP runtime version that created them.
-
-## Earlier releases
 
 - [0.13.0a9](0.13.0a9.md) — Prefer GPU planning across CPU-only nodes,
   immediate QYX-to-ZYX inspector propagation, explicit volumetric

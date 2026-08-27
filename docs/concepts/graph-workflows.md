@@ -27,7 +27,9 @@ as thumbnails, napari layers, histograms, labels, or tables.
 - Keep the source image and key masks inspectable.
 - Use tunnels when a channel, mask, ROI, or reference image feeds many nodes.
 - Add graph notes at scientific decision points.
-- Detach and maximize VIPP for longer workflows.
+- Detach VIPP for longer workflows, then resize the floating window freely in
+  width and height or maximize it. Reattaching restores napari's dock
+  constraints.
 - Hide the node library after building the graph when you need more canvas
   space.
 - Zoom out for whole-workflow review, then zoom in for parameter tuning.

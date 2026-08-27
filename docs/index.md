@@ -37,12 +37,13 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in context. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual describes the public **napari-vipp 0.14.0a1** alpha. Download
+    This manual describes the public **napari-vipp 0.14.0a2** alpha. Download
     only from the canonical
-    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a1)
-    or [PyPI page](https://pypi.org/project/napari-vipp/0.14.0a1/).
-    Verify the intentionally
-    unsigned Windows installer against the official checksum before opening it.
+    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2)
+    or [PyPI page](https://pypi.org/project/napari-vipp/0.14.0a2/).
+    Verify every intentionally unsigned Windows or macOS installer against its
+    official checksum before opening it. PyPI retains the earlier pre-resize-fix
+    package bytes; use the GitHub wheel or an installer when that UI fix matters.
     Do not treat unperformed external fresh-machine or novice checks as passes.
     Interfaces, workflow files, and parameter defaults may change between
     alpha releases.
@@ -50,10 +51,10 @@ hide:
     analysis—not as optional cleanup after it.
 
 !!! important "0.13 → 0.14 workflow and compute compatibility"
-    0.14.0a1 writes workflow schema 5. Valid schema-3 and schema-4 workflows
+    0.14.0a2 writes workflow schema 5. Valid schema-3 and schema-4 workflows
     migrate explicitly; cached results and source pixels are not saved in
     workflow JSON, and generated Python is pinned to its creator version. Read
-    the [0.14.0a1 release notes](releases/0.14.0a1.md) before upgrading and
+    the [0.14.0a2 release notes](releases/0.14.0a2.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 4. Older records have no
@@ -64,7 +65,7 @@ hide:
 ## Choose your path
 
 <div class="vipp-card-grid">
-<a class="vipp-card" href="getting-started/installation/"><strong>Install VIPP</strong><span>Verify and run the unsigned Windows alpha, or follow the pinned manual routes.</span></a>
+<a class="vipp-card" href="getting-started/installation/"><strong>Install VIPP</strong><span>Verify and run the unsigned Windows or macOS installer, or follow a pinned manual route.</span></a>
 <a class="vipp-card" href="getting-started/"><strong>New to VIPP</strong><span>Tour a finished graph and build a small segmentation workflow.</span></a>
 <a class="vipp-card" href="workflows/"><strong>I have an analysis task</strong><span>Follow recipes for segmentation, measurements, networks, colocalization, restoration, or batch runs.</span></a>
 <a class="vipp-card" href="how-to/choose-compute/"><strong>I want to use my GPU</strong><span>Install the standard CUDA choice, choose a compute policy, benchmark safely, and verify what actually ran.</span></a>
@@ -102,7 +103,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in the public alpha | [0.14.0a1 release notes](releases/0.14.0a1.md) |
+| Review everything changed in the public alpha | [0.14.0a2 release notes](releases/0.14.0a2.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

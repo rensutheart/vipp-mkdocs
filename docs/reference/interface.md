@@ -1,7 +1,12 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.14.0a1. Controls can collapse into
+Labels below match napari-vipp 0.14.0a2. Controls can collapse into
 **Settings** when the window is narrow.
+
+When the VIPP dock is detached from napari, its floating window can be resized
+freely in width and height or maximized. Reattaching it restores napari's
+original dock constraints; those embedded constraints should not remain on the
+floating window.
 
 ## Workflow tabs
 

@@ -1,5 +1,16 @@
 # Launch VIPP
 
+## Open the installed app on macOS
+
+The macOS package creates `~/Applications/VIPP.app`. Open your user
+**Applications** folder and double-click **VIPP**; no terminal or separately
+installed Python is required. The managed CPU-only environment remains under
+`~/Library/vipp`.
+
+First launch may take longer while napari loads. If the package has not been
+installed yet, follow [Install VIPP on macOS](macos.md), including checksum
+verification and the **Open Anyway** steps for this unsigned, unnotarized alpha.
+
 ## Use the installed shortcut on Windows
 
 The Windows installer creates launchers for the managed installation:
@@ -14,7 +25,7 @@ Prefer-GPU session requests every scientifically and operationally eligible GPU
 implementation, but operations outside the reviewed region still use CPU with
 an explanation.
 
-## Open the napari widget
+## Open the napari widget from a manual environment
 
 Activate the environment used for installation and run:
 
