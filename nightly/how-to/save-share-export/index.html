@@ -562,6 +562,8 @@
       
         
       
+        
+      
     
     
     
@@ -605,6 +607,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2807,8 +2832,8 @@ interchangeable.</p>
 </thead>
 <tbody>
 <tr>
-<td>Workflow JSON (schema 5)</td>
-<td>Reopen/edit the graph and authored compute request in VIPP 0.14.0a2; optionally restore an attached versioned Batch workspace configuration</td>
+<td>Workflow JSON (schema 6)</td>
+<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.14.0a3; optionally restore an attached versioned Batch workspace configuration</td>
 <td>Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes</td>
 </tr>
 <tr>
@@ -2827,22 +2852,31 @@ interchangeable.</p>
 <td>A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar</td>
 </tr>
 <tr>
-<td>Batch config (version 4)</td>
-<td>Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, output declarations, naming, collision policy, workflow association, and configured compute request</td>
+<td>Batch config (version 5)</td>
+<td>Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, output declarations, naming, collision policy, workflow association, and configured compute request</td>
 <td>Input bytes, actual run decisions, finalized outcome</td>
 </tr>
 <tr>
-<td>Batch manifest/archive (version 4) and sidecars</td>
-<td>Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective per-sample values, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status</td>
+<td>Batch manifest/archive (version 5) and sidecars</td>
+<td>Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective values and bypass choices, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status</td>
 <td>One atomic transaction or proof of biological validity</td>
 </tr>
 </tbody>
 </table>
 <h2 id="save-a-workflow">Save a workflow<a class="headerlink" href="#save-a-workflow" title="Permanent link">&para;</a></h2>
-<p>Choose <strong>Save workflow...</strong>. Use <code>.json</code> and include a meaningful analysis name.
+<p>Choose <strong>Save workflow</strong> or press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-s">S</kbd></span>. Use <code>.json</code> and include a meaningful analysis name.
 The action saves the active workflow tab; other tabs keep their own paths,
 dirty baselines, caches, and histories. Closing a dirty tab still uses
-Save/Discard/Cancel handling.
+Save/Discard/Cancel handling.</p>
+<p>The default save policy overwrites the active workflow's existing JSON. A first
+save asks for a destination and confirms before replacing an existing file.
+Under <strong>Settings → Workflow saving</strong>, choose confirmation on every overwrite or
+timestamped copies when that better matches the project's recordkeeping. A
+successful save clears the tab's dirty asterisk and reports <strong>Saved workflow</strong>.
+Bundled examples remain templates and are never overwritten in place.
+Use <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span> or <strong>Settings → Save workflow as…</strong> when the active tab
+should be written to a different name or location without changing the normal
+save policy.
 If a Batch workspace is active, VIPP asks what to save:</p>
 <ul>
 <li><strong>Yes</strong> attaches the current versioned batch configuration to the same
@@ -2871,12 +2905,14 @@ rather than silently applying the settings.</p>
 </ol>
 <p>Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.</p>
-<p>0.14.0a2 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
-load with explicit CPU intent; schema-4 workflows retain authored compute
-intent. Both acquire SourceItems when sources resolve, but cached pixels and
-tables are not serialized. Inspect selected items, readers, axes, and decisive
-outputs before saving the reviewed duplicate. Earlier release-to-release
-procedures remain available for older workflows.
+<p>0.14.0a3 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
+load with explicit CPU intent. Schema-4 and schema-5 workflows retain authored
+compute intent; schema 5 also retains canonical SourceItems, while schema-4
+sources acquire them when they resolve. Schema 6 adds persisted safe-node bypass
+intent. Cached pixels and tables are not serialized. Inspect selected items,
+readers, axes, bypass choices, and decisive outputs before saving the reviewed
+duplicate. Earlier release-to-release procedures remain available for older
+workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate <a href="../../reference/versioning/#upgrade-to-0120a1">schema-1/2 rebuild procedure</a>.</p>
 <h2 id="save-a-selected-output">Save a selected output<a class="headerlink" href="#save-a-selected-output" title="Permanent link">&para;</a></h2>
@@ -2910,14 +2946,15 @@ are intentionally absent.</p>
 cooperative cancellation token. The generated CLI accepts
 <code>--compute-mode</code>, <code>--fallback-policy</code>, repeatable <code>--node-preference</code>,
 <code>--progress</code>, and provenance controls. Omitted CLI fields retain the embedded
-schema-5 request; overrides do not mutate the workflow.</p>
+workflow compute request; overrides do not mutate the workflow.</p>
 <p><code>--compute-mode prefer_gpu</code> requests every scientifically eligible reviewed
 public GPU implementation regardless of CPU speed. It requires visible
 fallback; when no fallback override is provided, the CLI supplies <code>visible</code>,
 while an explicit strict combination is rejected. Stored per-node preferences
 remain in the workflow but are inactive outside Custom. The generated path
 uses the same planner and exact implementation provenance as interactive and
-batch execution.</p>
+batch execution. Bypassed nodes forward their exact primary input without
+invoking a backend and are recorded as bypassed rather than CPU or GPU work.</p>
 <p>With provenance enabled, a successful saved output receives an atomic sibling
 such as <code>result.ome.tif.vipp-provenance.json</code>. The document binds the output
 node/port to the effective request, actual CPU/CuPy implementation,
@@ -2941,19 +2978,21 @@ stability of arbitrary arrays or independently supplied source payloads.</p>
 <p>Use <code>python generated_pipeline.py --help</code> for the exact source-binding and
 output arguments emitted for that graph. Add <code>--progress</code> for operation updates
 and supply compute overrides only when the run should deliberately differ from
-the embedded schema-5 request.</p>
+the embedded workflow request.</p>
 <h2 id="save-a-batch-configuration-and-evidence">Save a batch configuration and evidence<a class="headerlink" href="#save-a-batch-configuration-and-evidence" title="Permanent link">&para;</a></h2>
 <p>Use <strong>Batch workspace... → Save...</strong> to write
 <code>vipp_batch_config.json</code>. Keep it with its required workflow companion. After a
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 <code>vipp_batch_pipeline.py</code> is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.</p>
-<p>Version-4 configs store the complete configured compute request, reviewed
-source-axis declarations, stable SourceItems, and typed per-sample numeric
-overrides. Version-1 configs load as explicit CPU; version-2 retains its saved
-compute request; version-3 also retains reviewed source declarations and
-acquires SourceItems when sources resolve. Versions 1 through 3 contain no
-per-sample overrides and are written as version 4 only after review and save.
+<p>Version-5 configs store the complete configured compute request, reviewed
+source-axis declarations, stable SourceItems, typed per-sample numeric
+overrides, and whole-batch <strong>Use workflow / Run / Bypass</strong> profiles. Profiles
+apply to detached effective workflows without mutating authored graph intent
+and are recorded in manifests and hashes. Version-1 configs load as explicit
+CPU; version-2 retains its saved compute request; version-3 also retains
+reviewed source declarations; version 4 adds SourceItems and numeric overrides.
+Earlier supported versions are written as version 5 only after review and save.
 The runner uses its saved request by default and can overlay explicit
 compute/fallback/per-node CLI choices. <code>--progress</code> prints both overall-item and
 current-operation progress. One <code>Ctrl+C</code> requests normal cooperative
@@ -3010,7 +3049,7 @@ a manifest, or durable replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
   </span>
 
     

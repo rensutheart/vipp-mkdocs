@@ -562,6 +562,8 @@
       
         
       
+        
+      
     
     
     
@@ -605,6 +607,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2999,7 +3024,7 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.14.0a2. Controls can collapse into
+<p>Labels below match napari-vipp 0.14.0a3. Controls can collapse into
 <strong>Settings</strong> when the window is narrow.</p>
 <p>When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
@@ -3034,15 +3059,15 @@ the active run finishes or cooperatively cancels.</p>
 </tr>
 <tr>
 <td><strong>Open example...</strong></td>
-<td>Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request.</td>
+<td>Open one of 18 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request.</td>
 </tr>
 <tr>
 <td><strong>Load workflow...</strong></td>
 <td>Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative.</td>
 </tr>
 <tr>
-<td><strong>Save workflow...</strong></td>
-<td>Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON.</td>
+<td><strong>Save workflow / Ctrl+S</strong></td>
+<td>Save the active tab's graph structure, parameters, layout, portable compute request, bypass choices, and selected UI/display profiles—not computed arrays. The default overwrites the active JSON; first save asks for a destination. Use <strong>Settings → Save workflow as…</strong> or <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span> for another path. When Batch workspace is active, choose whether to attach its versioned configuration.</td>
 </tr>
 <tr>
 <td><strong>Batch workspace...</strong></td>
@@ -3082,7 +3107,7 @@ the active run finishes or cooperatively cancels.</p>
 </tr>
 <tr>
 <td><strong>Undo / Redo</strong></td>
-<td>Reverse or restore supported workflow edits.</td>
+<td>Reverse or restore supported workflow edits. Parameter changes restore in place and invalidate only the changed node and descendants; one completed slider gesture contributes one history step.</td>
 </tr>
 </tbody>
 </table>
@@ -3092,6 +3117,12 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.</p>
+<p>Compatible fixed-single-output processing cards expose <strong>Bypass node</strong> in the
+inspector and context menu. Bypass forwards the exact primary input without
+running the operation. Sources, writers, unused terminals, tunnels, dynamic or
+multiple outputs, and unsafe type splices remain unavailable. A bypassed card
+keeps its badge, faded dotted outline, pass-through cue, and optional
+presentation-only would-run thumbnail; clear the action to run it again.</p>
 <p>For a local multiscale OME-Zarr image or label, the Image Source inspector's
 <strong>Resolution</strong> panel provides a dynamic <strong>Show in napari</strong> chooser. It lists
 <strong>Analysis output — L0</strong>, <strong>Presentation preview — Auto (best fit)</strong>, and one
@@ -3102,6 +3133,17 @@ preview does not replace or take focus from the active analysis or VIPP Inspect
 layer; choose it explicitly to show it. <strong>Try loading preview again</strong> appears
 only after a preview failure. Presentation selection never changes the level-0
 graph input.</p>
+<p>If a complete local OME-Zarr source is unsafe for host RAM but an exact direct
+read can be proven, the same inspector offers <strong>Add fitted Crop Stack</strong> or <strong>Fit
+existing Crop Stack</strong>. The centred content-agnostic proposal is one explicit
+undoable edit and must be reviewed; VIPP never adds or changes the Crop without
+the user's action.</p>
+<p>Crop Stack exposes Z start/end only for an explicitly identified Z axis and
+keeps time/channel dimensions intact. Dragging margins updates a lightweight
+2D current-plane guide or transparent 3D wireframe, then commits one scientific
+edit on release. <strong>ROI outline thickness</strong> is clearly separated from crop
+margins because it changes only the 2D/3D guide, not pixels, workflow hashes,
+batch output, or export.</p>
 <h2 id="compute-controls">Compute controls<a class="headerlink" href="#compute-controls" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3249,6 +3291,10 @@ duplicate that purpose in its message strip.</p>
 <td>Graph zoom</td>
 <td>Scales graph cards; reset returns to 100%.</td>
 </tr>
+<tr>
+<td>Workflow saving</td>
+<td>Overwrite the active JSON, confirm before every overwrite, or create a timestamped copy for each save.</td>
+</tr>
 </tbody>
 </table>
 <p>Thumbnail detail and thumbnail statistics are independent. Low/Standard/High/Very High
@@ -3382,6 +3428,11 @@ same process-wide compute quarantine as scientific GPU cleanup failure.</p>
 <p>Background execution changes <em>where</em> work runs, not the method or the values it
 uses. Exact operations still inspect the complete required population. They may
 consume CPU time and memory while napari remains responsive.</p>
+<p>Generated Image and Labels layers carry VIPP's axis names into napari when the
+installed layer API supports them. Labels follow displayed rank, omit a hidden
+RGB/RGBA component axis, and update on layer reuse. Hidden or provisional source
+previews cannot replace the selected scientific layer's labels. This is viewer
+presentation only and never changes <code>ImageState</code> or operation semantics.</p>
 <h3 id="tune-one-node-in-isolation">Tune one node in isolation<a class="headerlink" href="#tune-one-node-in-isolation" title="Permanent link">&para;</a></h3>
 <p><strong>Tune node in isolation</strong> is available in the selected-node inspector and the
 node context menu. The selected node must have a coherent cached result, and no
@@ -3582,6 +3633,11 @@ per-item and per-operation bars remain in the lower run section. The per-sample
 table shows authored defaults in blank/inherited cells; the selected node's
 inspector adds <strong>Effective batch preview</strong> only when that item actually
 overrides that node.</p>
+<p>The per-node batch execution profile offers <strong>Use workflow / Run / Bypass</strong> for
+nodes whose current topology supports bypass. It is applied to a detached
+effective workflow and does not mutate authored graph intent. The resolved
+choice and hashes are written to version-5 configuration and manifest evidence;
+an unsafe effective splice fails preflight.</p>
 <p>After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired
 filename. It calculates one representative only and never saves batch outputs.
@@ -3611,7 +3667,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
   </span>
 
     

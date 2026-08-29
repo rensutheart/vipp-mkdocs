@@ -562,6 +562,8 @@
       
         
       
+        
+      
     
     
     
@@ -605,6 +607,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1566,6 +1591,15 @@
   <a href="#undo-duplicate-and-delete" class="md-nav__link">
     <span class="md-ellipsis">
       Undo, duplicate, and delete
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bypass-a-compatible-processing-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bypass a compatible processing node
     </span>
   </a>
   
@@ -2804,6 +2838,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bypass-a-compatible-processing-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bypass a compatible processing node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#keep-long-graphs-readable" class="md-nav__link">
     <span class="md-ellipsis">
       Keep long graphs readable
@@ -2928,10 +2971,32 @@ using it for a consequential calculation.</p>
 notes that exercise tunnel insertion, value transfer, fragment copy/paste,
 group movement, and undo/redo.</p>
 <h2 id="undo-duplicate-and-delete">Undo, duplicate, and delete<a class="headerlink" href="#undo-duplicate-and-delete" title="Permanent link">&para;</a></h2>
-<p>Use undo/redo for graph edits and parameter changes. Copy or duplicate a
-configured node when comparing two parameter choices, then branch both from the
-same upstream output. Delete a branch only after confirming that no output,
-tunnel, or table merge still depends on it.</p>
+<p>Use undo/redo for graph edits and parameter changes. A parameter undo restores
+that node in place, retains unaffected cards, thumbnails, viewer layers, and
+caches, then recalculates only the changed node and its descendants. Dragging a
+slider records one edit when the press-drag-release gesture finishes rather
+than one history entry for each intermediate calculated value.</p>
+<p>Copy or duplicate a configured node when comparing two parameter choices, then
+branch both from the same upstream output. Delete a branch only after confirming
+that no output, tunnel, or table merge still depends on it.</p>
+<h2 id="bypass-a-compatible-processing-node">Bypass a compatible processing node<a class="headerlink" href="#bypass-a-compatible-processing-node" title="Permanent link">&para;</a></h2>
+<p>Select a node and check <strong>Bypass node</strong>, or right-click it and choose <strong>Bypass
+node</strong>. VIPP forwards the exact first/main input to every compatible consumer
+without deleting the node or changing its stored parameters. For a multi-input
+restoration operation such as RL or RL-TV, this means Image/intensity is
+forwarded and PSF is ignored.</p>
+<p>Bypass is available only when the live topology proves the splice safe. Sources,
+writers, unused terminal nodes, tunnels, dynamic or multiple outputs such as
+Split Channels, and type-incompatible consumers cannot enter bypass. Clear the
+checkbox or context-menu action to run the node again.</p>
+<p>A bypassed card keeps its <strong>Bypassed</strong> badge, faded dotted outline, and
+pass-through cue. Its thumbnail may still show a presentation-only would-run
+preview so parameters remain understandable; those hypothetical pixels never
+enter downstream analysis, cache identity, timing, export, batch output, or
+provenance. The bypass choice itself is saved, hashed, undoable, and recorded in
+execution provenance.</p>
+<p>Use bypass for an explicit comparison, not to hide uncertainty. Record why the
+step was omitted and recalculate decisive outputs before accepting the branch.</p>
 <h2 id="keep-long-graphs-readable">Keep long graphs readable<a class="headerlink" href="#keep-long-graphs-readable" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Arrange flow from left to right.</li>
@@ -3027,7 +3092,7 @@ workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 09:43:16 UTC">August 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
   </span>
 
     

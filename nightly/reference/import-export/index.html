@@ -562,6 +562,8 @@
       
         
       
+        
+      
     
     
     
@@ -605,6 +607,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2928,7 +2953,7 @@ support does not imply lossless preservation of every source metadata field.</p>
 <thead>
 <tr>
 <th>Source</th>
-<th>Behavior in 0.14.0a2</th>
+<th>Behavior in 0.14.0a3</th>
 </tr>
 </thead>
 <tbody>
@@ -2958,7 +2983,7 @@ support does not imply lossless preservation of every source metadata field.</p>
 </tr>
 <tr>
 <td>Local OME-Zarr 0.4/0.5</td>
-<td>Discovers image/label groups and declared levels/transforms. A sliced lower level can be displayed while analysis remains fixed to level 0; label previews retain label semantics.</td>
+<td>Discovers image/label groups and declared levels/transforms. A sliced lower level can be displayed while analysis remains fixed to level 0; label previews retain label semantics. One strictly eligible sole direct Crop Stack can also read its exact retained level-0 window before materialization.</td>
 </tr>
 <tr>
 <td>NPY / NPZ</td>
@@ -3069,8 +3094,10 @@ serializes accepted cached values. It does not rerun the graph through the
 shared executor or create an exact compute-provenance sidecar.</p>
 <h2 id="current-limitations">Current limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Lower-level presentation preview is limited to local OME-Zarr 0.4/0.5;
-  analysis still materializes the complete selected level-0 image.</li>
+<li>Lower-level presentation preview and exact source-window reads are limited to
+  local OME-Zarr 0.4/0.5. Exact level-0 pushdown requires one direct,
+  non-bypassed Crop Stack with explicit compatible axes; other paths still
+  materialize the complete selected image when memory preflight permits it.</li>
 <li>Remote stores, IMS pyramid preview, plate/well/field browsing, and general
   operation-level lazy/chunked execution are planned, not current.</li>
 <li>Native LIF, CZI, OIR, OIB, and LSM pixels remain eager. Large eager readers
@@ -3085,7 +3112,7 @@ shared executor or create an exact compute-provenance sidecar.</p>
 <li>Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.14.0a2.</li>
+  0.14.0a3.</li>
 </ul>
 <h2 id="execution-provenance-for-saved-outputs">Execution provenance for saved outputs<a class="headerlink" href="#execution-provenance-for-saved-outputs" title="Permanent link">&para;</a></h2>
 <p>The interactive <strong>Save selected output...</strong> action writes the selected cached
@@ -3096,7 +3123,7 @@ node/port to the effective compute request, actual CPU/CuPy
 implementation, environment, fallback records, outcome, and cleanup evidence.
 Failed or cancelled single-output publication attempts a failure sidecar at
 the requested destination name.</p>
-<p>Batch uses its authoritative version-4 manifest instead of duplicating one
+<p>Batch uses its authoritative version-5 manifest instead of duplicating one
 sidecar per output. Every published output record carries an execution digest
 link to that item's complete execution document. Successfully read sources
 include canonical SourceItem/revision evidence, raw/effective axes, and any
@@ -3143,7 +3170,7 @@ silently resample, register, reorder, or repair a transform.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 10:06:25 UTC">August 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
   </span>
 
     
