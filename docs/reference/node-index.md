@@ -12,7 +12,7 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-Introduced in 0.14.0a1 and retained in 0.14.0a2, manual/cached nodes and nodes
+Introduced in 0.14.0a1 and retained in 0.14.0a3, manual/cached nodes and nodes
 selected for isolated tuning use the same graph-wide execution language.
 Bright amber identifies the node that needs action; dark amber identifies
 downstream nodes that are stale but waiting for that action. **Tune node in
@@ -27,7 +27,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.14.0a2 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0140a2)
+[0.14.0a3 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0140a3)
 for the accelerated node families and their current public regions.
 
 | Family | Nodes |
@@ -57,7 +57,7 @@ for the accelerated node families and their current public regions.
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
-| `Crop Stack` | image, mask, or labels | same as input | Crop spatial edges while preserving graph-port type, including ROI masks. |
+| `Crop Stack` | image, mask, or labels | same as input | Crop explicit Y/X and optional Z edges while preserving T/C, graph-port type, calibration, and origin; an eligible sole direct local OME-Zarr source can read only the retained window. |
 | `Select Axis Slice` | array | any | Keep or select an index/range along an axis. |
 | `Split Axis` | array | dynamic outputs | Split time, z, or other non-channel axes. |
 | `Reorder Axes` | array | same as input | Transpose pixels and their existing axis records into a reviewed order; does not rename axes. |
@@ -159,7 +159,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes have been public since 0.14.0a1 and remain available in 0.14.0a2.
+These nodes have been public since 0.14.0a1 and remain available in 0.14.0a3.
 They have synthetic examples and automated coverage, but broad real-image
 restoration validation remains an evidence gap;
 see [validation status](validation-status.md).

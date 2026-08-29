@@ -61,10 +61,38 @@ group movement, and undo/redo.
 
 ## Undo, duplicate, and delete
 
-Use undo/redo for graph edits and parameter changes. Copy or duplicate a
-configured node when comparing two parameter choices, then branch both from the
-same upstream output. Delete a branch only after confirming that no output,
-tunnel, or table merge still depends on it.
+Use undo/redo for graph edits and parameter changes. A parameter undo restores
+that node in place, retains unaffected cards, thumbnails, viewer layers, and
+caches, then recalculates only the changed node and its descendants. Dragging a
+slider records one edit when the press-drag-release gesture finishes rather
+than one history entry for each intermediate calculated value.
+
+Copy or duplicate a configured node when comparing two parameter choices, then
+branch both from the same upstream output. Delete a branch only after confirming
+that no output, tunnel, or table merge still depends on it.
+
+## Bypass a compatible processing node
+
+Select a node and check **Bypass node**, or right-click it and choose **Bypass
+node**. VIPP forwards the exact first/main input to every compatible consumer
+without deleting the node or changing its stored parameters. For a multi-input
+restoration operation such as RL or RL-TV, this means Image/intensity is
+forwarded and PSF is ignored.
+
+Bypass is available only when the live topology proves the splice safe. Sources,
+writers, unused terminal nodes, tunnels, dynamic or multiple outputs such as
+Split Channels, and type-incompatible consumers cannot enter bypass. Clear the
+checkbox or context-menu action to run the node again.
+
+A bypassed card keeps its **Bypassed** badge, faded dotted outline, and
+pass-through cue. Its thumbnail may still show a presentation-only would-run
+preview so parameters remain understandable; those hypothetical pixels never
+enter downstream analysis, cache identity, timing, export, batch output, or
+provenance. The bypass choice itself is saved, hashed, undoable, and recorded in
+execution provenance.
+
+Use bypass for an explicit comparison, not to hide uncertainty. Record why the
+step was omitted and recalculate decisive outputs before accepting the branch.
 
 ## Keep long graphs readable
 

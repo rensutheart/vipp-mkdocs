@@ -4,25 +4,27 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Current verified public alpha
+## Current public alpha
+
+- [0.14.0a3](0.14.0a3.md) — responsive volumetric Crop Stack, exact bounded
+  local OME-Zarr reads for the sole-direct-Crop case, topology-safe bypass,
+  improved save/undo behavior, and napari 0.9 compatibility.
+
+The immutable a3 alpha is distributed on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3) and
+[PyPI](https://pypi.org/project/napari-vipp/0.14.0a3/). Use only the exact
+release assets and their matching checksum files.
+
+0.14.0a3 writes workflow schema 6 and batch config/manifest schema 5. Valid
+supported earlier records retain explicit migration paths; recalculate and
+validate consequential results after upgrading.
+
+## Earlier releases
 
 - [0.14.0a2](0.14.0a2.md) — native unsigned CPU-only macOS installers for
   Apple Silicon and Intel, detached-window resizing, cross-Qt compatibility,
-  and a refreshed unsigned Windows installer.
-
-The immutable a2 alpha is distributed on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2) and
-[PyPI](https://pypi.org/project/napari-vipp/0.14.0a2/). The GitHub wheel and
-installers contain the detached-window resizing fix. PyPI retains the earlier
-pre-fix wheel and source archive because published files cannot be replaced;
-see the [a2 release-verification table](0.14.0a2.md#release-verification) for
-the distinct hashes and exact boundary.
-
-0.14.0a2 retains workflow schema 5 and batch config/manifest schema 4. Its
-scientific SourceItem, reader, workflow, and GPU contracts are unchanged from
-0.14.0a1.
-
-## Earlier releases
+  and a refreshed unsigned Windows installer. Its historical release page
+  records the distinct GitHub and PyPI package hashes from that publication.
 
 - [0.14.0a1](0.14.0a1.md) — durable SourceItem identity, truthful microscope
   reader contracts, dynamic local OME-Zarr preview without changing analysis,

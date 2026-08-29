@@ -18,34 +18,37 @@ itself, freeze the Python environment, preserve every external source, prove
 metadata correctness, or capture the rationale for every choice.
 
 Workflow tabs are independent live sessions, not one multi-workflow file.
-**Save workflow...** serializes the active tab only. Other open tabs, their
+**Save workflow** serializes the active tab only. Other open tabs, their
 caches, undo/redo histories, transient viewport, and in-flight state are not
 bundled into that JSON.
 
-### Current schema: version 5
+### Current schema: version 6
 
 A current file identifies itself with:
 
 ```json
 {
   "type": "napari-vipp-workflow",
-  "version": 5
+  "version": 6
 }
 ```
 
-VIPP 0.14.0a2 accepts schema versions 3, 4, and 5 and rejects versions 1 and 2
+VIPP 0.14.0a3 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 `execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
 logical selector, observed container revision, reader/backend evidence,
 normalized axes and shape, and available metadata. It does not store source
-pixels or claim that another reader/backend is equivalent.
+pixels or claim that another reader/backend is equivalent. Schema 6 adds
+authored topology-safe Run/Bypass intent for compatible processing nodes.
 
 A schema-3 workflow has no compute contract. It therefore loads with an
 explicit **CPU** request, never the new-session Auto default. Saving the reviewed
-workflow emits schema 5 after its sources resolve. A schema-4 workflow retains
-its authored compute intent and likewise acquires SourceItems during resolution.
-These migrations do not relax the
-scientific reasons that schemas 1 and 2 remain rejected.
+workflow emits schema 6 after its sources resolve. Schema-4 and schema-5
+workflows retain authored compute intent. Schema 5 also retains canonical
+SourceItems; schema-4 sources acquire them during resolution. Nodes from all
+three accepted legacy schemas default to Run because those files had no bypass
+intent. These migrations do not relax the scientific reasons that schemas 1 and
+2 remain rejected.
 
 Retain an older workflow unchanged for provenance and use the VIPP environment
 that created it when it must be inspected or run. Rebuild the graph in 0.14
@@ -81,21 +84,35 @@ Alpha compatibility is not guaranteed across future schema or operation
 changes. Preserve the original file and exact VIPP version, and test a duplicate
 before using it in a consequential analysis.
 
+Bypass forwards the exact primary input without running the operation or
+forcing a host transfer. The saved setting is part of scientific identity and
+execution provenance. A presentation-only would-run thumbnail is never a saved
+or downstream output. Sources, writers, terminal nodes, tunnels, dynamic or
+multiple outputs, and incompatible splices fail closed.
+
 ### Optional Batch workspace attachment
 
-A 0.14.0a2 workflow can carry an optional top-level `batch_config`. The
-version-4 attachment contains canonical SourceItems and reviewed typed
-per-sample numeric overrides in addition to source bindings, local paths,
-patterns, guarded source-axis declarations, formats, output policy, run
-settings, and the complete compute request. It contains no source pixels,
-calculated arrays, output files, manifests, or item sidecars.
+A 0.14.0a3 workflow can carry an optional top-level `batch_config`. The
+version-5 attachment contains canonical SourceItems, reviewed typed per-sample
+numeric overrides, and whole-batch **Use workflow / Run / Bypass** profiles in
+addition to source bindings, local paths, patterns, guarded source-axis
+declarations, formats, output policy, run settings, and the complete compute
+request. It contains no source pixels, calculated arrays, output files,
+manifests, or item sidecars.
 
 A version-1 batch config had no compute request and loads as explicit CPU. A
 version-2 config retains its saved compute request. A version-3 config retains
 its guarded source declarations and acquires SourceItems when resolved. Older
-versions contain no per-sample overrides and are written as version 4 only
-after review and save. VIPP never guesses accelerator intent, a different axis
-interpretation, or which historic item should receive an override.
+versions contain no per-sample overrides; version 4 adds SourceItems and typed
+numeric overrides but no batch execution profiles. Earlier supported records
+are written as version 5 only after review and save. VIPP never guesses
+accelerator intent, a different axis interpretation, which historic item
+should receive an override, or whether a node should run or bypass.
+
+Batch profiles apply atomically to detached effective workflows and never
+mutate authored graph intent. Effective Run/Bypass choices, hashes, and
+provenance are recorded for each item and manifest. A profile that cannot be
+applied safely fails preflight rather than silently changing topology.
 
 The attachment is validated against the containing graph when it is saved and
 loaded. It is deliberately excluded from the scientific workflow hash: changing
@@ -150,8 +167,9 @@ bindings for every source. Missing, duplicate, and unknown bindings fail.
 
 An export records the exact VIPP version that generated it and refuses a
 different runtime. Regenerate and revalidate exported code after every VIPP
-upgrade, including 0.13.0a9 to 0.14.0a1 and the focused 0.14.0a1 to 0.14.0a2
-desktop update. Interactive caches, thumbnails, pinned
+upgrade, including 0.13.0a9 to 0.14.0a1, the focused 0.14.0a1 to 0.14.0a2
+desktop update, and the schema-6 0.14.0a2 to 0.14.0a3 update. Interactive
+caches, thumbnails, pinned
 layers, and graph layout remain UI state and are not reproduced.
 
 The callable API accepts a complete `compute_request`, a progress
@@ -194,7 +212,7 @@ convenience or an arbitrary generated-Python array caller.
 
 ## Batch artifacts
 
-A batch run uses either a standalone version-4 `vipp_batch_config.json` or the
+A batch run uses either a standalone version-5 `vipp_batch_config.json` or the
 equivalent validated configuration attached to a workflow. It records
 collection bindings, canonical SourceItems, any reviewed source-axis
 declarations, typed per-sample numeric overrides, output policy, resolved output
@@ -231,7 +249,7 @@ changes semantic names in place without moving pixels or changing shape.
 does not rename Q to Z. Existing calibration stays attached by position, so a
 declaration cannot discover a missing Z step, unit, or origin.
 
-Each run writes a latest version-4 manifest, a run-id archive, and item sidecars
+Each run writes a latest version-5 manifest, a run-id archive, and item sidecars
 recording software versions, canonical SourceItem/revision evidence, metadata,
 hashes, planned outputs, policies, errors, and status. It records raw/effective
 axes and declarations plus requested/effective per-sample overrides and

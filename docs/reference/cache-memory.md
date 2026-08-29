@@ -1,10 +1,12 @@
 # Cache And Memory
 
-VIPP is currently an eager interactive workflow builder. Its accepted public
+VIPP is primarily an eager interactive workflow builder. Its accepted public
 cache uses host NumPy-like in-memory outputs so thumbnails, inspection, pinned
 layers, and downstream edits feel immediate. Eligible nodes may use private
 device-resident segments during a run, but those values cross a verified host
-boundary before they become public results.
+boundary before they become public results. VIPP 0.14.0a3 has one deliberately
+narrow read-time exception: an eligible direct local OME-Zarr `Image Source →
+Crop Stack` path can materialize only the exact retained level-0 window.
 
 ## Cache Modes
 
@@ -92,7 +94,7 @@ while allowing separate device keys to proceed independently.
 NVIDIA GPU. In the bounded M1 Max CPU smoke, VIPP presented host memory once as
 system RAM and did not fabricate or add a separate VRAM total. A future Apple
 or other accelerator provider that reports unified topology must instead use
-one shared CPU/GPU budget row. macOS remains CPU-only in 0.14.0a2, including
+one shared CPU/GPU budget row. macOS remains CPU-only in 0.14.0a3, including
 the Apple Silicon and Intel installer-managed environments.
 
 With **visible** fallback, one complete device segment may retry once on CPU
@@ -201,14 +203,42 @@ as a whole is not committed until the run finishes successfully.
     execution keeps napari responsive; it does not turn an eager operation into
     a lazy or lower-cost one.
 
+## Low-RAM source crop repair
+
+Before materializing an inspected file source, VIPP compares the complete
+decoded level-0 requirement with safe physical RAM and, on Windows, commit
+headroom. If the complete image is unsafe but the local reader can prove an
+exact scientific region read, Image Source offers **Add fitted Crop Stack** or
+**Fit existing Crop Stack** rather than starting a doomed allocation.
+
+The proposed crop is centred, content-agnostic, and conservatively bounded for
+the current machine. It retains every time and channel position and changes only
+explicit spatial Z/Y/X margins. The estimate includes every touched decoded
+chunk, the assembled ROI, and its detached publication copy. Review and adjust
+the ROI: fitting memory is not evidence that the selection is biologically
+appropriate or that downstream operations will fit.
+
+The action is opt-in and one undoable graph edit. An eligible local OME-Zarr
+reader then slices level 0 before materialization while Image Source retains the
+complete logical shape and immutable SourceItem identity. Full-container
+identity verification still runs before and after the read, so a very large
+store may remain I/O-bound.
+
+This repair is unavailable for branches, output tunnels, bypassed/no-op Crops,
+ambiguous axes or identity, unsupported readers, remote stores, and chunk grids
+whose smallest safe window still exceeds the budget. VIPP then permits the
+ordinary complete read only when normal memory preflight passes; it never falls
+back to a hidden complete allocation.
+
 ## Large-Data Direction
 
-VIPP 0.14.0a2 retains the lower-level presentation path introduced in
+VIPP 0.14.0a3 retains the lower-level presentation path introduced in
 0.14.0a1: it can slice a declared lower local OME-Zarr 0.4/0.5 level
 for presentation before computing that preview. The layer name states that
-analysis remains full resolution, and the graph still materializes the complete
-selected level-0 image. This reduces presentation work for supported stores; it
-does not make downstream operations lazy or change scientific output.
+analysis remains full resolution. Separately, the strictly eligible direct
+Crop path above can materialize one exact retained level-0 window. Other graph
+paths still materialize complete inputs. This does not make downstream
+operations lazy or change scientific output.
 
 Future large-data work should add:
 

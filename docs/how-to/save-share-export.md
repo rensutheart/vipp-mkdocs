@@ -5,19 +5,29 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 5) | Reopen/edit the graph and authored compute request in VIPP 0.14.0a2; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.14.0a3; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
-| Batch config (version 4) | Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
-| Batch manifest/archive (version 4) and sidecars | Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective per-sample values, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
+| Batch config (version 5) | Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
+| Batch manifest/archive (version 5) and sidecars | Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective values and bypass choices, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
 
 ## Save a workflow
 
-Choose **Save workflow...**. Use `.json` and include a meaningful analysis name.
+Choose **Save workflow** or press ++ctrl+s++. Use `.json` and include a meaningful analysis name.
 The action saves the active workflow tab; other tabs keep their own paths,
 dirty baselines, caches, and histories. Closing a dirty tab still uses
 Save/Discard/Cancel handling.
+
+The default save policy overwrites the active workflow's existing JSON. A first
+save asks for a destination and confirms before replacing an existing file.
+Under **Settings → Workflow saving**, choose confirmation on every overwrite or
+timestamped copies when that better matches the project's recordkeeping. A
+successful save clears the tab's dirty asterisk and reports **Saved workflow**.
+Bundled examples remain templates and are never overwritten in place.
+Use ++ctrl+shift+s++ or **Settings → Save workflow as…** when the active tab
+should be written to a different name or location without changing the normal
+save policy.
 If a Batch workspace is active, VIPP asks what to save:
 
 - **Yes** attaches the current versioned batch configuration to the same
@@ -48,12 +58,14 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.14.0a2 writes schema 5 and rejects versions 1 and 2. Valid schema-3 workflows
-load with explicit CPU intent; schema-4 workflows retain authored compute
-intent. Both acquire SourceItems when sources resolve, but cached pixels and
-tables are not serialized. Inspect selected items, readers, axes, and decisive
-outputs before saving the reviewed duplicate. Earlier release-to-release
-procedures remain available for older workflows.
+0.14.0a3 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
+load with explicit CPU intent. Schema-4 and schema-5 workflows retain authored
+compute intent; schema 5 also retains canonical SourceItems, while schema-4
+sources acquire them when they resolve. Schema 6 adds persisted safe-node bypass
+intent. Cached pixels and tables are not serialized. Inspect selected items,
+readers, axes, bypass choices, and decisive outputs before saving the reviewed
+duplicate. Earlier release-to-release procedures remain available for older
+workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-to-0120a1).
 
@@ -97,7 +109,7 @@ Python callers can pass a complete `ComputeRequest`, progress callback, and
 cooperative cancellation token. The generated CLI accepts
 `--compute-mode`, `--fallback-policy`, repeatable `--node-preference`,
 `--progress`, and provenance controls. Omitted CLI fields retain the embedded
-schema-5 request; overrides do not mutate the workflow.
+workflow compute request; overrides do not mutate the workflow.
 
 `--compute-mode prefer_gpu` requests every scientifically eligible reviewed
 public GPU implementation regardless of CPU speed. It requires visible
@@ -105,7 +117,8 @@ fallback; when no fallback override is provided, the CLI supplies `visible`,
 while an explicit strict combination is rejected. Stored per-node preferences
 remain in the workflow but are inactive outside Custom. The generated path
 uses the same planner and exact implementation provenance as interactive and
-batch execution.
+batch execution. Bypassed nodes forward their exact primary input without
+invoking a backend and are recorded as bypassed rather than CPU or GPU work.
 
 With provenance enabled, a successful saved output receives an atomic sibling
 such as `result.ome.tif.vipp-provenance.json`. The document binds the output
@@ -133,7 +146,7 @@ stability of arbitrary arrays or independently supplied source payloads.
 Use `python generated_pipeline.py --help` for the exact source-binding and
 output arguments emitted for that graph. Add `--progress` for operation updates
 and supply compute overrides only when the run should deliberately differ from
-the embedded schema-5 request.
+the embedded workflow request.
 
 ## Save a batch configuration and evidence
 
@@ -143,12 +156,14 @@ run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
 
-Version-4 configs store the complete configured compute request, reviewed
-source-axis declarations, stable SourceItems, and typed per-sample numeric
-overrides. Version-1 configs load as explicit CPU; version-2 retains its saved
-compute request; version-3 also retains reviewed source declarations and
-acquires SourceItems when sources resolve. Versions 1 through 3 contain no
-per-sample overrides and are written as version 4 only after review and save.
+Version-5 configs store the complete configured compute request, reviewed
+source-axis declarations, stable SourceItems, typed per-sample numeric
+overrides, and whole-batch **Use workflow / Run / Bypass** profiles. Profiles
+apply to detached effective workflows without mutating authored graph intent
+and are recorded in manifests and hashes. Version-1 configs load as explicit
+CPU; version-2 retains its saved compute request; version-3 also retains
+reviewed source declarations; version 4 adds SourceItems and numeric overrides.
+Earlier supported versions are written as version 5 only after review and save.
 The runner uses its saved request by default and can overlay explicit
 compute/fallback/per-node CLI choices. `--progress` prints both overall-item and
 current-operation progress. One `Ctrl+C` requests normal cooperative

@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.14.0a2. Controls can collapse into
+Labels below match napari-vipp 0.14.0a3. Controls can collapse into
 **Settings** when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -30,9 +30,9 @@ the active run finishes or cooperatively cancels.
 | Control | Effect |
 | --- | --- |
 | **New workflow...** | Create a new tab containing one unbound `Image Source` on an otherwise empty graph. |
-| **Open example...** | Open one of 15 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
+| **Open example...** | Open one of 18 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request. |
 | **Load workflow...** | Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative. |
-| **Save workflow...** | Save the active tab's graph structure, parameters, layout, portable compute request, and selected UI/display profiles—not computed arrays. When a Batch workspace is active, choose whether to attach its versioned configuration to the same workflow JSON. |
+| **Save workflow / Ctrl+S** | Save the active tab's graph structure, parameters, layout, portable compute request, bypass choices, and selected UI/display profiles—not computed arrays. The default overwrites the active JSON; first save asks for a destination. Use **Settings → Save workflow as…** or ++ctrl+shift+s++ for another path. When Batch workspace is active, choose whether to attach its versioned configuration. |
 | **Batch workspace...** | Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions. |
 | **Leave batch mode** | When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run. |
 | **Export Python...** | Generate a headless script using supported operation and I/O calls. |
@@ -42,7 +42,7 @@ the active run finishes or cooperatively cancels.
 | **Focus** | Recover the graph center without changing zoom, selection, layout, cache state, or undo history. |
 | **Refresh** | Re-evaluate ordinary automatic graph state. |
 | **Calculate all** | Calculate manual nodes that are not current. During isolated tuning, first apply the tuned result and release the temporary downstream boundary. |
-| **Undo / Redo** | Reverse or restore supported workflow edits. |
+| **Undo / Redo** | Reverse or restore supported workflow edits. Parameter changes restore in place and invalidate only the changed node and descendants; one completed slider gesture contributes one history step. |
 
 Image Source cards display the live layer, sample, file, or collection binding
 in an elided subtitle and retain the complete value in a tooltip. A compatible
@@ -50,6 +50,13 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
+
+Compatible fixed-single-output processing cards expose **Bypass node** in the
+inspector and context menu. Bypass forwards the exact primary input without
+running the operation. Sources, writers, unused terminals, tunnels, dynamic or
+multiple outputs, and unsafe type splices remain unavailable. A bypassed card
+keeps its badge, faded dotted outline, pass-through cue, and optional
+presentation-only would-run thumbnail; clear the action to run it again.
 
 For a local multiscale OME-Zarr image or label, the Image Source inspector's
 **Resolution** panel provides a dynamic **Show in napari** chooser. It lists
@@ -61,6 +68,19 @@ preview does not replace or take focus from the active analysis or VIPP Inspect
 layer; choose it explicitly to show it. **Try loading preview again** appears
 only after a preview failure. Presentation selection never changes the level-0
 graph input.
+
+If a complete local OME-Zarr source is unsafe for host RAM but an exact direct
+read can be proven, the same inspector offers **Add fitted Crop Stack** or **Fit
+existing Crop Stack**. The centred content-agnostic proposal is one explicit
+undoable edit and must be reviewed; VIPP never adds or changes the Crop without
+the user's action.
+
+Crop Stack exposes Z start/end only for an explicitly identified Z axis and
+keeps time/channel dimensions intact. Dragging margins updates a lightweight
+2D current-plane guide or transparent 3D wireframe, then commits one scientific
+edit on release. **ROI outline thickness** is clearly separated from crop
+margins because it changes only the 2D/3D guide, not pixels, workflow hashes,
+batch output, or export.
 
 ## Compute controls
 
@@ -164,6 +184,7 @@ duplicate that purpose in its message strip.
 | Save thumbnail visibility in workflows | Includes per-node thumbnail visibility in workflow UI state. |
 | Port labels | `Ambiguous only` (default) labels multi-input or multi-output nodes, `Show all` labels every port, and `Hide all` removes persistent labels. |
 | Graph zoom | Scales graph cards; reset returns to 100%. |
+| Workflow saving | Overwrite the active JSON, confirm before every overwrite, or create a timestamped copy for each save. |
 
 Thumbnail detail and thumbnail statistics are independent. Low/Standard/High/Very High
 changes only the retained source image for the fixed card viewport; it neither
@@ -284,6 +305,12 @@ same process-wide compute quarantine as scientific GPU cleanup failure.
 Background execution changes *where* work runs, not the method or the values it
 uses. Exact operations still inspect the complete required population. They may
 consume CPU time and memory while napari remains responsive.
+
+Generated Image and Labels layers carry VIPP's axis names into napari when the
+installed layer API supports them. Labels follow displayed rank, omit a hidden
+RGB/RGBA component axis, and update on layer reuse. Hidden or provisional source
+previews cannot replace the selected scientific layer's labels. This is viewer
+presentation only and never changes `ImageState` or operation semantics.
 
 ### Tune one node in isolation
 
@@ -484,6 +511,12 @@ per-item and per-operation bars remain in the lower run section. The per-sample
 table shows authored defaults in blank/inherited cells; the selected node's
 inspector adds **Effective batch preview** only when that item actually
 overrides that node.
+
+The per-node batch execution profile offers **Use workflow / Run / Bypass** for
+nodes whose current topology supports bypass. It is applied to a detached
+effective workflow and does not mutate authored graph intent. The resolved
+choice and hashes are written to version-5 configuration and manifest evidence;
+an unsafe effective splice fails preflight.
 
 After a successful batch preview, a persistent strip above the graph exposes
 Previous/Next, a full-plan slider, item position, batch ID, and every paired

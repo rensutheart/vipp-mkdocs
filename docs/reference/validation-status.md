@@ -1,11 +1,61 @@
 # Validation status
 
-This page summarizes the current 0.14.0a2 evidence boundary and keeps the
-0.14.0a1 scientific/source qualification and carried-forward 0.13 baselines
-separate. It is a claim boundary, not a certificate that every node, reader, or
-workflow is validated for every assay.
+This page preserves exact release evidence and keeps changed-domain
+qualification separate from carried-forward scientific and installer records.
+It is a claim boundary, not a certificate that every node, reader, or workflow
+is validated for every assay.
 
-## 0.14.0a2 focused qualification boundary
+## 0.14.0a3 exact application and artifact record
+
+The annotated `v0.14.0a3` tag resolves to
+[`3c61d0c84cc728d90537ae10c4c521e4a4f40809`](https://github.com/rensutheart/napari-vipp/commit/3c61d0c84cc728d90537ae10c4c521e4a4f40809).
+The [exact-main application CI](https://github.com/rensutheart/napari-vipp/actions/runs/33257954476),
+[Windows installer smoke](https://github.com/rensutheart/napari-vipp/actions/runs/33257982020),
+and [native macOS arm64/x86_64 smoke](https://github.com/rensutheart/napari-vipp/actions/runs/33257983570)
+passed at that commit. The
+[exact-tag unsigned-installer workflow](https://github.com/rensutheart/napari-vipp/actions/runs/33259296811)
+then passed for Windows x86_64, macOS arm64, and macOS x86_64.
+
+The [GitHub prerelease](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3)
+contains exactly 20 qualified assets: the wheel and source archive, four Windows
+files, seven Apple Silicon files, and seven Intel macOS files. Independent
+CPython 3.12.10 builds of the exact-tag wheel and source archive matched before
+publication. The
+[PyPI publication workflow](https://github.com/rensutheart/napari-vipp/actions/runs/33263567839)
+passed, and freshly downloaded [PyPI files](https://pypi.org/project/napari-vipp/0.14.0a3/)
+matched the exact GitHub release bytes.
+
+| Public artifact | SHA-256 |
+| --- | --- |
+| Wheel `napari_vipp-0.14.0a3-py3-none-any.whl` | `7231ab13c76ab8bb2926d0e1569eb527491b392d36dba6b888d4eec03ba616e2` |
+| Source archive `napari_vipp-0.14.0a3.tar.gz` | `185bb25e19f8e04ed47df5c45993ac52153c53c5b1c14e4d7c79010d84558cad` |
+| Windows installer `VIPP-Setup-0.14.0a3-Windows-x86_64-UNSIGNED.exe` | `8774dd14047cb31f3694a30c05878ff59e50fe2e3f5f200d09e13082eed30d73` |
+| Apple Silicon package `VIPP-0.14.0a3-macOS-arm64-UNSIGNED.pkg` | `69b62fd576bdba9c2002457107ea46cd99b6a5cf091558b35281c99cd57f4100` |
+| Intel package `VIPP-0.14.0a3-macOS-x86_64-UNSIGNED.pkg` | `5b97d530a58df9f1d3a873e2f22036bcfa6d62d50cbd22b960b063c76e249d73` |
+
+This is application and artifact evidence. The numbered and stable
+documentation deployment is verified separately after this exact manual is
+deployed.
+
+## 0.14.0a3 changed-domain qualification scope
+
+0.14.0a3 changes core/UI behavior, workflow schema and provenance, local
+OME-Zarr source-window planning and memory preflight, shared execution
+coordination, napari/Qt compatibility, installer dependency inputs, and
+documentation. Qualification must cover responsive Z/Y/X Crop Stack behavior,
+opt-in low-RAM crop repair, exact sole-direct source-window parity and refusal
+cases, safe interactive and batch bypass, save/undo behavior, workflow schema 6
+and batch config/manifest schema 5 migrations, napari 0.6/0.9/latest boundaries,
+PyQt6/PySide6 startup, and exact-tag Windows plus both native macOS packages.
+
+GPU provider kernels and their admitted scientific regions are unchanged. Their
+recorded catalogue evidence may carry forward only if the a3 shared-execution
+checks and changed-domain declaration pass. General branch-aware region
+planning, remote or non-OME-Zarr exact reads, general lazy/chunked execution,
+Apple GPU support, signed/notarized installers, and broad assay validation are
+not claimed.
+
+## Previous exact record: 0.14.0a2 focused qualification boundary
 
 0.14.0a2 changes desktop/Qt compatibility, detached-window sizing, and release
 packaging. It adds separate offline CPU-only macOS packages for Apple Silicon
@@ -156,7 +206,7 @@ passes. Exact public artifacts and publication evidence are recorded in the
   OIR/OIB/VSI, and IMS routes. All 10 strict vendor cases passed, including the
   IMS case under portable Temurin 21. The corpus-manifest SHA-256 is
   `3365b4cec7a220f6399f3c030eb3ac751581bde730fac60f01c9fca3b823714d`;
-- 14 deterministic synthetic samples and 15 checked-in workflows support
+- 14 deterministic synthetic samples and 18 checked-in workflows support
   regression checks and inspection;
 - a generated two-source batch bundle exercises three paired items, nine exact
   NPY/TIFF/TSV outputs, workflow/config hashes, source identities, manifests,
@@ -174,11 +224,11 @@ passes. Exact public artifacts and publication evidence are recorded in the
   multi-series expansion and identity retention, direct
   plan-only execution, complete-item fast skips, transient
   atomic-write retries, and continuing after a final item-sidecar failure;
-- compute tests cover import-safe CPU-only use, workflow-schema-5 and
-  batch-schema-4 intent, migration from workflow schemas 3/4 and batch versions
-  1/2/3, eligibility planning, exact implementation identity, resident device
-  segments, memory admission, classified fallback, optimizer review/apply and
-  grouped result inspection, visible dtype-repair proposals, Prefer-GPU
+- compute tests cover import-safe CPU-only use, workflow-schema-6 and
+  batch-schema-5 intent, migration from workflow schemas 3/4/5 and batch
+  versions 1/2/3/4, eligibility planning, exact implementation identity,
+  resident device segments, memory admission, classified fallback, optimizer
+  review/apply and grouped result inspection, visible dtype-repair proposals, Prefer-GPU
   selection/serialization/UI/durable behavior, progress, cancellation,
   cleanup, and atomic publication; and
 - opt-in native-Windows RTX tests exercise a real durable GPU batch and an
@@ -545,25 +595,27 @@ same as an external comparison or assay validation. The distinction matters:
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests plus strict public-corpus v4 qualification across 20 frozen artifacts, 97 biological fields, and the claimed microscope-reader routes | Broader independent facility files, negative controls for unusual vendor dimensions, network/remote filesystems, and cross-reader comparisons outside the frozen corpus |
 | PSF/deconvolution | Deterministic 2D/3D synthetic images, measured-PSF samples, and operation tests | Real bead PSFs, representative microscopy images, artifact/noise analysis, performance characterization |
-| Compute/GPU execution | Exact operation-region tests, immutable policy v10, carried-forward a8 full-catalogue qualification for 19 CuPy/CuPyX implementations and 24 evidence owners on native Windows RTX 5090, focused a9 and 0.14 shared-planner/source-axis real-GPU evidence, exact 0.14 artifact checks, OOM/cancellation/cleanup coverage, bounded M1 Max CPU and Windows UI smokes, and a2 native macOS CPU installer lifecycle checks | Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
+| Compute/GPU execution | Exact operation-region tests, immutable policy v10, regenerated a3 full-catalogue qualification for 19 CuPy/CuPyX implementations and 24 evidence owners on native Windows RTX 5090, focused a9 and 0.14 shared-planner/source-axis real-GPU evidence, OOM/cancellation/cleanup coverage, bounded M1 Max CPU and Windows UI smokes, a3 exact-main Windows and native macOS smokes, and exact-tag three-platform installer qualification | Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
-| Workflow/export architecture | Workflow schema 5 with explicit schema-3/4 migration, batch config/manifest schema 4 with version-1/2/3 migration, canonical SourceItems, typed per-sample overrides, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
+| Workflow/export architecture | Workflow schema 6 with explicit schema-3/4/5 migration, batch config/manifest schema 5 with supported earlier-version migration, canonical SourceItems, typed per-sample overrides, safe authored and batch bypass intent, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
 | Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
 ## Release-specific limitations
 
 - Workflow schemas 1 and 2 are intentionally rejected. Valid schema-3 workflows
-  load as explicit CPU, while schema-4 workflows retain their authored compute
-  request. Both acquire canonical SourceItems when sources resolve and save as
-  schema 5; cached pixels/tables are not serialized and exported Python is
-  runtime-version pinned. Recalculate, regenerate exports, and validate after
-  upgrading.
+  load as explicit CPU, while schema-4 and schema-5 workflows retain authored
+  compute intent. Schema 5 also retains canonical SourceItems; schema-4 sources
+  acquire them when they resolve. Supported earlier files save as schema 6, and
+  nodes without authored bypass intent default to Run. Cached pixels/tables are
+  not serialized and exported Python is runtime-version pinned. Recalculate,
+  regenerate exports, and validate after upgrading.
 - Version-1 batch configs load as explicit CPU; version-2 configs retain their
   saved compute request; and version-3 configs retain guarded source-axis
-  declarations and acquire SourceItems when resolved. Older versions contain
-  no per-sample overrides and are written as version 4 only after review and
-  save. A saved Auto, Prefer GPU, or Custom request is intent; actual
+  declarations and acquire SourceItems when resolved; version 4 adds SourceItems
+  and typed numeric overrides. Earlier versions have no batch execution-profile
+  override and are written as version 5 only after review and save. A saved
+  Auto, Prefer GPU, or Custom request is intent; actual
   implementation provenance must be retained from each run. Auto uses reviewed GPU defaults
   without compatible history; accelerated-only history schedules one
   same-surface CPU measurement before a later matching run applies the
@@ -576,9 +628,9 @@ same as an external comparison or assay validation. The distinction matters:
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0140a2) is a
+  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0140a3) is a
   readable summary; the runtime policy/decision remains authoritative.
-- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a2 does not
+- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a3 does not
   install or execute cuCIM, and the retired private-wheel/source-build route
   must not be added to a current environment. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).
@@ -586,8 +638,10 @@ same as an external comparison or assay validation. The distinction matters:
   although each resolved item is pinned to a canonical SourceItem rather than
   being silently reassigned by a changed series order. It does not iterate
   selected T/C/Z combinations or discover plate/well/field structure.
-- Many operations are eager even when a source format supports lazy/chunked
-  access; background execution improves responsiveness, not total work.
+- Most operations are eager even when a source format supports lazy/chunked
+  access. One strictly eligible direct local OME-Zarr Crop Stack can read only
+  its exact retained level-0 window; other graphs retain full-read memory
+  preflight. Background execution improves responsiveness, not total work.
 - Declared-grid validation cannot prove biological registration or metadata
   truth. It can only enforce the axes/calibration supplied to VIPP.
 - Richardson-Lucy/TV controls and synthetic tests do not establish a validated

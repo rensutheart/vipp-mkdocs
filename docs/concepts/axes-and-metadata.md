@@ -55,6 +55,10 @@ shape, and available metadata. This is distinct from changing axis meaning:
 SourceItem identifies which image was read, while an explicit axis declaration
 states how positions in that image should be interpreted.
 
+Workflow schema 6 retains those records and adds topology-safe node bypass
+intent. Bypass does not rename axes or change metadata: a safe bypass aliases
+the exact primary input state to the output.
+
 ## TIFF page labels at an image source
 
 Some ordinary TIFF files report a page dimension as generic `Q` because the

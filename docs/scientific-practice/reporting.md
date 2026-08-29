@@ -71,7 +71,7 @@ optimizer assignment. Prefer GPU means accelerator placement regardless of
 speed; it is not a claim that GPU was faster.
 
 If a generated CLI wrote outputs, retain whether provenance was enabled and the
-atomic sibling sidecars. For batch, retain the finalized version-4 manifest and
+atomic sibling sidecars. For batch, retain the finalized version-5 manifest and
 execution digests rather than reconstructing implementation choices from card
 badges or screenshots. When a source-axis declaration was used, report the raw
 axes, effective axes, and how the interpretation was verified.
