@@ -11,7 +11,7 @@ valid is the important part.
 | `napari layer` | Images already opened, cropped, or registered in napari | The workflow depends on a layer being present and correctly selected; unsupported live/lazy transforms can be rejected. |
 | `file path` | A repeatable local file input | Moving, renaming, or replacing the file changes/breaks the source identity. |
 | `sample` | Tutorials, regression checks, and demonstrations | Synthetic data does not establish performance on your assay. |
-| Local OME-Zarr store | Multiscale multidimensional data with declared image or label groups | A lower level can accelerate presentation, but scientific graph analysis still materializes level 0. |
+| Local OME-Zarr store | Multiscale multidimensional data with declared image or label groups | A lower level can accelerate presentation; one strictly eligible direct Crop Stack can also read only its retained level-0 window. Other graph paths remain eager. |
 
 Select `Image Source`, set **Source**, and then use the control specific to that
 route. The napari layer chooser is only shown for `napari layer`. The Image
@@ -54,10 +54,21 @@ again** appears. The preview is a presentation aid only: the scientific graph,
 batch run, generated execution, cache, and provenance remain bound to level 0.
 A single-level source reports that no lower-level preview exists.
 
+If a complete local OME-Zarr source cannot fit the safe host-RAM budget, Image
+Source can offer **Add fitted Crop Stack** or **Fit existing Crop Stack** when an
+exact direct read is provably safe. Accepting the action authors one visible
+centred Crop or updates the existing eligible Crop as an undoable starting
+point; VIPP does not silently crop, inspect image content to choose a biological
+ROI, or promise that downstream processing will fit. Review every margin before
+analysis. Branches, tunnels, bypassed Crops, ambiguous axes or identity, and
+unsupported readers retain the ordinary full-read preflight.
+
 ![The Image Source Resolution controls with analysis level 0, automatic presentation preview, and two explicit lower pyramid levels](../assets/screenshots/sources/image-source-multiscale-resolution.png)
 
 *A synthetic three-level OME-Zarr illustrates the dynamic display choices. The
-selected presentation level changes only napari's view; analysis stays on L0.*
+selected presentation level changes only napari's view; analysis stays on L0.
+This compact source fits the safe RAM budget, so the conditional fitted-Crop
+action is not shown.*
 
 ## Check metadata before processing
 
@@ -107,12 +118,14 @@ images from the new acquisition family:
 Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.
 
-When moving to 0.14.0a1, keep the original workflow and open a duplicate. Valid
-schema-3 and schema-4 files migrate to schema 5 and acquire SourceItems when
-their sources are resolved. Inspect graph structure, selected items,
-reader/backend, axes, calibration, parameters, dynamic ports, and decisive
-outputs before saving the duplicate. Rebuild schema-1/2 workflows deliberately;
-changing only the JSON version is unsafe. See
+When moving to 0.14.0a3, keep the original workflow and open a duplicate. Valid
+schema-3, schema-4, and schema-5 files migrate to schema 6. Schema-3/4 sources
+acquire canonical SourceItems when they resolve, while schema 5 retains its
+saved SourceItems; schema 6 preserves safe-node bypass intent. Inspect graph
+structure, selected items, reader/backend, axes, calibration, parameters,
+bypass choices, dynamic ports, and decisive outputs before saving the duplicate.
+Rebuild schema-1/2 workflows deliberately; changing only the JSON version is
+unsafe. See
 [versions and compatibility](../reference/versioning.md).
 
 ## Protect sensitive data

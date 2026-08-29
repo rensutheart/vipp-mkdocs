@@ -85,7 +85,7 @@ button may read **Recalculate**.
 
 ## Save a copy
 
-Choose **Save workflow...** and save the JSON under a new name. Reopen it with
+Choose **Save workflow** and save the JSON under a new name. Reopen it with
 **Load workflow...**. The graph and settings should return; cached images and
 tables are deliberately recomputed from a source.
 

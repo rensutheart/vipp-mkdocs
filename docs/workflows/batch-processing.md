@@ -92,7 +92,7 @@ Each row carries a canonical `SourceItem v1` stable selector plus the observed
 container revision and reader evidence. A changed file, missing companion,
 ambiguous legacy index, or unexpected item topology stops for review instead of
 silently reassigning the old row. Time, channel, and Z remain axes inside each
-item; 0.14.0a1 does not iterate semantic-axis combinations or discover
+item; VIPP does not iterate semantic-axis combinations or discover
 plate/well/field HCS structure.
 
 The first bound source is the primary source used by default naming. Fixed
@@ -211,11 +211,13 @@ batch preview** value and the authored default. That block is absent when the
 item has no override for that node. Preview, execution, checkpoints, manifests,
 and provenance retain the same effective values and workflow hashes.
 
-![The Batch workspace with two resolved source items, inherited workflow values, and one per-sample threshold override](../assets/screenshots/workflows/batch-workspace-overrides.png)
+![The Batch workspace with a global Gaussian Blur bypass profile, two resolved source items, inherited workflow values, and one per-sample threshold override](../assets/screenshots/workflows/batch-workspace-overrides.png)
 
-*Blank cells inherit the authored workflow value; only the second synthetic
-sample overrides Binary Threshold. The compact toolbar reports workspace
-planning activity, while detailed run progress remains lower in the window.*
+*Node behavior applies the reviewed Run or Bypass profile to every sample; this
+capture bypasses Gaussian Blur without editing the authored workflow. Blank
+cells inherit the authored workflow value, and only the second synthetic sample
+overrides Binary Threshold. The compact toolbar reports workspace planning
+activity, while detailed run progress remains lower in the window.*
 
 ## Review representatives
 
@@ -276,7 +278,7 @@ graph calculation can overlap.
 
 ## Save and replay a configuration
 
-When Batch workspace is active, **Save workflow...** offers three choices:
+When Batch workspace is active, **Save workflow** offers three choices:
 
 - **Yes** attaches the current versioned batch configuration to the workflow
   JSON. It records collection bindings, local input/output paths, patterns,
@@ -306,20 +308,31 @@ separate, use **Save...**. It writes a standalone versioned
 - continue-after-failure behavior;
 - complete compute mode, per-node preferences, fallback policy,
   runtime/device selection, and accelerator memory limits;
+- per-node **Use workflow / Run / Bypass** execution profiles;
 - the required workflow companion and optional runner;
 - the canonical scientific workflow hash.
 
-Batch config schema 4 adds canonical SourceItems and typed per-sample numeric
-overrides to the compute request and guarded source-axis declarations. A
+Batch config schema 5 retains canonical SourceItems, guarded source-axis
+declarations, typed per-sample numeric overrides, and the configured compute
+request. It adds whole-batch Run/Bypass profiles as separate
+`node_execution_overrides`. A
 version-1 config had no compute fields and loads as explicit CPU; version 2
 retains its compute request; version 3 retains its source declarations and
-acquires SourceItems when resolved. Older versions contain no per-sample
-overrides and become version 4 only after review and save. A blank declaration
+acquires SourceItems when resolved; version 4 adds SourceItems and typed numeric
+overrides. Earlier supported versions become version 5 only after review and
+save. A blank declaration
 displays as **Use the file's labels unchanged**, not the automatic policy of a
 new unsaved row. Loading a config does not
 silently replace the toolbar request; it retains its saved request until the
 user changes a toolbar compute setting, at which point the current complete
 toolbar request is used for the next preview, save, or run.
+
+For a compatible processing node, **Use workflow** preserves the authored
+bypass choice for every item, **Run** clears it in the detached effective
+workflow, and **Bypass** applies the exact topology-safe splice. These profiles
+do not mutate the interactive graph. Preflight rejects an unsafe effective
+splice, and the chosen profile, effective workflow hash, and bypass provenance
+remain visible in version-5 run evidence.
 
 **Load...** validates it against the current workflow. A hash or resolved
 output mismatch fails rather than silently applying stale selections.
@@ -433,7 +446,7 @@ Every workspace or headless run writes:
 - a run-id manifest archive — preserves prior finalized runs;
 - a run-id sidecar directory — per-item/output checkpoints during execution.
 
-The version-4 manifest records:
+The version-5 manifest records:
 
 - canonical workflow/config and their hashes;
 - VIPP, Python, and relevant runtime package versions;
@@ -496,7 +509,7 @@ not evidence that another assay or naming scheme is valid.
 - Output names, formats, subfolders, and collision policy are intentional.
 - The fresh preflight matches the reviewed plan.
 - The configured and effective compute requests match the intended run, and
-  the version-4 manifest and item execution provenance explain the actual CPU,
+  the version-5 manifest and item execution provenance explain the actual CPU,
   GPU, and fallback decisions. Interactive node badges describe the last
   accepted interactive calculation, not every detached batch item.
 - Completed/partial/skipped/cancelled/failed counts match expectations.

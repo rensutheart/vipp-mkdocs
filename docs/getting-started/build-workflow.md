@@ -67,11 +67,11 @@ column names, units, and whether leading axes are represented as expected.
 
 ## 5. Save an inspectable checkpoint
 
-Choose **Save workflow...** and use a name that communicates its purpose and
+Choose **Save workflow** and use a name that communicates its purpose and
 release, for example:
 
 ```text
-nuclei-segmentation-vipp-0.14.0a2.json
+nuclei-segmentation-vipp-0.14.0a3.json
 ```
 
 Also record:

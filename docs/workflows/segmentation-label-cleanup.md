@@ -201,8 +201,8 @@ inspectable; they do not validate the thresholds for another dataset.
 ![A threshold-mask intermediate output shown at full resolution above its VIPP graph](../assets/screenshots/workflows/inspect-intermediate-result.png)
 
 *Inspect a decisive intermediate at full resolution. Here the threshold mask is
-pinned in napari while its graph node and stack-histogram threshold setting
-remain visible.*
+pinned in napari while its graph node remains visible and the selected Stack
+histogram scope is recorded in the inspector history.*
 
 - Does the mask include the biology of interest?
 - Are background/noise structures being labeled as objects?

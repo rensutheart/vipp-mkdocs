@@ -6,7 +6,7 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-| Source | Behavior in 0.14.0a2 |
+| Source | Behavior in 0.14.0a3 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 14 deterministic VIPP samples. |
@@ -14,7 +14,7 @@ support does not imply lossless preservation of every source metadata field.
 | ImageJ TIFF | Reads supported hyperstack axes, XY resolution, z spacing, frame interval, and unit fields where present. |
 | Conventional TIFF | Reads TIFF series and infers basic axes where explicit semantic metadata is absent. |
 | Nikon ND2 with the optional `nd2` reader | Exposes stable items, lazy inspection/data access, decoded-size estimates, calibration, channels, and selected objective metadata in the qualified corpus. |
-| Local OME-Zarr 0.4/0.5 | Discovers image/label groups and declared levels/transforms. A sliced lower level can be displayed while analysis remains fixed to level 0; label previews retain label semantics. |
+| Local OME-Zarr 0.4/0.5 | Discovers image/label groups and declared levels/transforms. A sliced lower level can be displayed while analysis remains fixed to level 0; label previews retain label semantics. One strictly eligible sole direct Crop Stack can also read its exact retained level-0 window before materialization. |
 | NPY / NPZ | Reads one NPY array or a selected NPZ member; semantic microscopy metadata is not inherent. |
 | PNG, JPEG, BMP, GIF, WebP, TGA, PNM | Reads ordinary raster images; animated rasters use a leading time axis. |
 | Optional microscope readers | Qualified corpus routes cover CZI/LSM, ND2, LIF, OIR/OIB/OIF/VSI, and IMS with normalized inspection/read metadata. Native LIF, CZI, OIR/OIB, and LSM pixels remain eager; broad advertised extensions are not all qualified claims. |
@@ -92,8 +92,10 @@ shared executor or create an exact compute-provenance sidecar.
 
 ## Current limitations
 
-- Lower-level presentation preview is limited to local OME-Zarr 0.4/0.5;
-  analysis still materializes the complete selected level-0 image.
+- Lower-level presentation preview and exact source-window reads are limited to
+  local OME-Zarr 0.4/0.5. Exact level-0 pushdown requires one direct,
+  non-bypassed Crop Stack with explicit compatible axes; other paths still
+  materialize the complete selected image when memory preflight permits it.
 - Remote stores, IMS pyramid preview, plate/well/field browsing, and general
   operation-level lazy/chunked execution are planned, not current.
 - Native LIF, CZI, OIR, OIB, and LSM pixels remain eager. Large eager readers
@@ -108,7 +110,7 @@ shared executor or create an exact compute-provenance sidecar.
 - Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.14.0a2.
+  0.14.0a3.
 
 ## Execution provenance for saved outputs
 
@@ -121,7 +123,7 @@ implementation, environment, fallback records, outcome, and cleanup evidence.
 Failed or cancelled single-output publication attempts a failure sidecar at
 the requested destination name.
 
-Batch uses its authoritative version-4 manifest instead of duplicating one
+Batch uses its authoritative version-5 manifest instead of duplicating one
 sidecar per output. Every published output record carries an execution digest
 link to that item's complete execution document. Successfully read sources
 include canonical SourceItem/revision evidence, raw/effective axes, and any

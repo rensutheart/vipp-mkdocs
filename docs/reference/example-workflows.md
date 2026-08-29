@@ -1,6 +1,6 @@
 # Example Workflows
 
-The release contains **15** example workflows under:
+The release contains **18** example workflows under:
 
 ```text
 examples/
@@ -24,6 +24,9 @@ custom or external workflow JSON files.
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
 | `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, one-step undo/redo, and a qualified GPU dtype repair. Its deliberately loose demonstration fragments are not calculated. |
+| `responsive-volume-crop-acceptance.json` | synthetic time-lapse multichannel | Numbered TCZYX checks for explicit-Z crop margins, immediate 2D/3D ROI feedback, one committed calculation and undo gesture, preserved T/C and physical origins, QYX safety, and truthful CPU/GPU status. |
+| `safe-node-bypass-acceptance.json` | synthetic volume | Focused Crop Stack checks for exact pass-through data, would-run thumbnails, bypass styling, undo/save/export, GPU-neutral status, and batch Run/Bypass profiles. |
+| `general-node-bypass-acceptance.json` | synthetic deconvolution image plus measured PSF | Generalized unary and multi-input bypass checks, including RL-TV forwarding Image port 0 while retaining but ignoring its PSF input and refusing unsafe boundaries. |
 | `synthetic-batch-provenance.json` | generated two-source NumPy collection | Three paired items, explicit NPY/TIFF/TSV outputs, representative navigation, saved config/runner, exact ground truth, manifests, archives, and item sidecars. Open it through the chooser and create a writable working copy. |
 | `otsu-red-channel-labels.json` | synthetic multichannel volume | Label cleanup: split the red/TRITC-like channel, blur, Otsu threshold, mask cleanup, connected components, border clearing, and volume filtering. |
 | `synthetic-gpu-segmentation-bridge.json` | synthetic GPU segmentation cleanup | Annotated portable path through Extract Channel, exact float32 Preserve conversion, Gaussian Blur, fixed Binary Threshold, Boolean Remove Small Objects and Fill Holes, and 3D Connected Components. Unsupported GPU regions fall back visibly to CPU. |
@@ -47,11 +50,14 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.14.0a2 they remain:
+Use `--list` to print the release's exact IDs. In 0.14.0a3 they are:
 
 | ID | Example title |
 | --- | --- |
 | `graph-authoring` | Graph Editing Acceptance Check |
+| `responsive-crop` | Responsive Volumetric Crop Acceptance |
+| `safe-node-bypass` | Safe Node Bypass Acceptance |
+| `general-node-bypass` | General Node Bypass Acceptance |
 | `batch-provenance` | Deterministic Batch & Provenance |
 | `label-cleanup` | Red-Channel Label Cleanup |
 | `gpu-segmentation` | Portable GPU Segmentation Bridge |

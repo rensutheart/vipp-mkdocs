@@ -8,16 +8,14 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-VIPP **0.14.0a2** is the current verified public alpha. The
-[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a2)
-carries the immutable-tag manual-install wheel, the intentionally unsigned
+VIPP **0.14.0a3** is the current alpha. The
+[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3)
+carries the exact qualified manual-install wheel, the intentionally unsigned
 Windows installer, separate intentionally unsigned Apple Silicon and Intel
 macOS packages, checksums, release manifests, and supporting evidence. The
-[PyPI 0.14.0a2 page](https://pypi.org/project/napari-vipp/0.14.0a2/) is also
-public, but its wheel and source archive were uploaded from the earlier
-pre-resize-fix build and cannot be replaced. Use a platform installer or the
-wheel attached to the GitHub release when the detached-window resizing fix is
-required. The nightly manual may describe later unreleased work.
+[PyPI 0.14.0a3 page](https://pypi.org/project/napari-vipp/0.14.0a3/) provides
+the exact package pin for manual installations. The nightly manual may describe
+later unreleased work.
 
 Application publication and manual deployment are separate operations. Always
 confirm the version shown by the manual selector; do not assume that the
@@ -35,14 +33,40 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.14.0a2 writes schema version 5; versions 1 and 2 are rejected. Valid
-schema-3 workflows load with explicit CPU intent and schema-4 workflows retain
-authored compute intent. Both acquire canonical SourceItems when their sources
-resolve. Workflow JSON contains no source pixels or cached scientific results.
-Recalculate and compare graph structure, parameters, selected items,
-reader/backend, axes, channels, physical grids, dynamic ports, compute request,
-actual backend, and results on known sample data. See the
-[workflow contract](workflow-contract.md).
+VIPP 0.14.0a3 writes workflow schema version 6 and batch configuration/manifest
+schema version 5; workflow versions 1 and 2 are rejected. Valid schema-3
+workflows load with explicit CPU intent, schema-4 workflows retain authored
+compute intent, and schema-5 workflows retain canonical SourceItem evidence.
+Supported earlier batch configurations remain loadable and acquire their newer
+fields only after review and save. Workflow JSON contains no source pixels or
+cached scientific results. Recalculate and compare graph structure, parameters,
+selected items, reader/backend, axes, channels, physical grids, dynamic ports,
+compute request, node behavior, actual backend, and results on known sample
+data. See the [workflow contract](workflow-contract.md).
+
+## Move from 0.14.0a2 to 0.14.0a3
+
+0.14.0a3 adds responsive volumetric cropping, exact bounded source reads for a
+strict direct local OME-Zarr Crop Stack path, safe node bypass and batch
+execution profiles, workflow-editing improvements, and napari 0.9
+qualification.
+
+1. Preserve the exact 0.14.0a2 environment, original workflows, batch evidence,
+   generated programs, and decisive outputs for provenance.
+2. Install the exact qualified 0.14.0a3 asset for the platform, or use an exact
+   package pin in a fresh environment. Do not replace the preserved a2
+   environment in place.
+3. Open a duplicate schema-5 workflow and review sources, graph structure,
+   parameters, compute intent, and every node's Run/Bypass state. A workflow
+   without saved bypass intent continues to run its nodes; saving the reviewed
+   duplicate writes workflow schema 6.
+4. Review the effective node behavior after loading any schema-4 batch
+   configuration. Older configurations contain no whole-batch override and
+   therefore use the workflow's authored behavior. Saving after review writes
+   batch configuration schema 5, and new runs write manifest schema 5.
+5. Recalculate known sample data and compare decisive intermediates and final
+   results. Give focused attention to Crop Stack bounds, source identity,
+   requested versus actual backends, bypass provenance, and batch outputs.
 
 ## Move from 0.14.0a1 to 0.14.0a2
 
@@ -211,25 +235,18 @@ python -m pip install --pre napari-vipp
 
 To reproduce a specific alpha exactly, use a fresh environment and record the
 distribution surface as well as the version. An exact prerelease does not need
-`--pre`. For the resize-fixed 0.14.0a2 build, install the wheel attached to the
-canonical GitHub release:
+`--pre`. For the current 0.14.0a3 release, use the exact package pin:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.14.0a3"
 ```
 
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13] @ https://github.com/rensutheart/napari-vipp/releases/download/v0.14.0a2/napari_vipp-0.14.0a2-py3-none-any.whl"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.14.0a3"
 vipp-compute-doctor --track cuda13
 ```
-
-The files served by `napari-vipp==0.14.0a2` on PyPI are legitimate published
-a2 artifacts, but they are the earlier pre-resize-fix build. They remain useful
-only when that exact distribution is the intended provenance; they must not be
-described as byte-identical to the current GitHub wheel or as containing the
-detached-window fix.
 
 The extra installs a reproducible CUDA/CuPy track; it does not make an
 unqualified GPU, driver, OS, or scientific stack scientifically admitted.
