@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2833,7 +2858,7 @@ interchangeable.</p>
 <tbody>
 <tr>
 <td>Workflow JSON (schema 6)</td>
-<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.14.0a3; optionally restore an attached versioned Batch workspace configuration</td>
+<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.15.0a1; optionally restore an attached versioned batch configuration</td>
 <td>Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes</td>
 </tr>
 <tr>
@@ -2852,8 +2877,8 @@ interchangeable.</p>
 <td>A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar</td>
 </tr>
 <tr>
-<td>Batch config (version 5)</td>
-<td>Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, output declarations, naming, collision policy, workflow association, and configured compute request</td>
+<td>Batch config (version 6)</td>
+<td>Recreate source bindings, stable SourceItems, axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, individual existing-output choices, output definitions, naming, policy, workflow association, and compute request</td>
 <td>Input bytes, actual run decisions, finalized outcome</td>
 </tr>
 <tr>
@@ -2883,15 +2908,15 @@ If a Batch workspace is active, VIPP asks what to save:</p>
   workflow JSON. This includes source bindings, local input/output paths,
   patterns, formats, and run policies. It does not include input pixels,
   computed arrays, or output files.</li>
-<li><strong>No</strong> writes the ordinary graph-only workflow. Use <strong>Save...</strong> in
-  Batch workspace if a separate configuration is required.</li>
+<li><strong>No</strong> writes the ordinary graph-only workflow. Use <strong>Save config</strong> in
+  Batch workflow if a separate configuration is required.</li>
 <li><strong>Cancel</strong> writes nothing.</li>
 </ul>
 <p>Loading a workflow with a valid attachment restores and opens Batch workspace
-with those settings, then starts metadata-only source discovery in the
-background. This rematches saved SourceItems and per-sample overrides without
-loading representative pixels or calculating the graph. <strong>Preview batch</strong>
-remains optional, and <strong>Run batch</strong> performs a fresh preflight. If the
+with those settings, then checks sources in the background. This rematches
+saved SourceItems, per-sample overrides, and exact-item file policies without
+loading representative pixels or calculating the graph. <strong>Preview selected</strong>
+remains optional, and Run performs a final validation. If the
 attachment is unsupported or does not match the workflow, VIPP loads the
 scientific workflow but reports that its Batch workspace could not be restored
 rather than silently applying the settings.</p>
@@ -2905,7 +2930,7 @@ rather than silently applying the settings.</p>
 </ol>
 <p>Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.</p>
-<p>0.14.0a3 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
+<p>0.15.0a1 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
 load with explicit CPU intent. Schema-4 and schema-5 workflows retain authored
 compute intent; schema 5 also retains canonical SourceItems, while schema-4
 sources acquire them when they resolve. Schema 6 adds persisted safe-node bypass
@@ -2980,19 +3005,21 @@ output arguments emitted for that graph. Add <code>--progress</code> for operati
 and supply compute overrides only when the run should deliberately differ from
 the embedded workflow request.</p>
 <h2 id="save-a-batch-configuration-and-evidence">Save a batch configuration and evidence<a class="headerlink" href="#save-a-batch-configuration-and-evidence" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Batch workspace... → Save...</strong> to write
+<p>Use <strong>Batch → Save config</strong> to write
 <code>vipp_batch_config.json</code>. Keep it with its required workflow companion. After a
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 <code>vipp_batch_pipeline.py</code> is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.</p>
-<p>Version-5 configs store the complete configured compute request, reviewed
+<p>Version-6 configs store the complete configured compute request, reviewed
 source-axis declarations, stable SourceItems, typed per-sample numeric
-overrides, and whole-batch <strong>Use workflow / Run / Bypass</strong> profiles. Profiles
+overrides, whole-batch <strong>Use workflow / Run / Bypass</strong> profiles, and exact-item
+existing-file choices. Profiles
 apply to detached effective workflows without mutating authored graph intent
 and are recorded in manifests and hashes. Version-1 configs load as explicit
 CPU; version-2 retains its saved compute request; version-3 also retains
 reviewed source declarations; version 4 adds SourceItems and numeric overrides.
-Earlier supported versions are written as version 5 only after review and save.
+Version 5 adds node profiles; version 6 adds item file policies. Earlier
+supported versions are written as version 6 only after review and save.
 The runner uses its saved request by default and can overlay explicit
 compute/fallback/per-node CLI choices. <code>--progress</code> prints both overall-item and
 current-operation progress. One <code>Ctrl+C</code> requests normal cooperative
@@ -3049,7 +3076,7 @@ a manifest, or durable replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

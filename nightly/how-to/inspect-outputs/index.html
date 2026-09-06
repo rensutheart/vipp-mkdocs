@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1575,6 +1600,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#use-the-inspector-for-the-selected-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use the inspector for the selected data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#read-display-summaries-correctly" class="md-nav__link">
     <span class="md-ellipsis">
       Read Display Summaries Correctly
@@ -1614,6 +1648,15 @@
   <a href="#inspect-colocalization-scatter-at-useful-resolution" class="md-nav__link">
     <span class="md-ellipsis">
       Inspect colocalization scatter at useful resolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-a-complete-result-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open a complete result table
     </span>
   </a>
   
@@ -2760,6 +2803,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#use-the-inspector-for-the-selected-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use the inspector for the selected data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#read-display-summaries-correctly" class="md-nav__link">
     <span class="md-ellipsis">
       Read Display Summaries Correctly
@@ -2799,6 +2851,15 @@
   <a href="#inspect-colocalization-scatter-at-useful-resolution" class="md-nav__link">
     <span class="md-ellipsis">
       Inspect colocalization scatter at useful resolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-a-complete-result-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open a complete result table
     </span>
   </a>
   
@@ -2899,6 +2960,20 @@ rather than treating a thumbnail as evidence for every decision.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="use-the-inspector-for-the-selected-data">Use the inspector for the selected data<a class="headerlink" href="#use-the-inspector-for-the-selected-data" title="Permanent link">&para;</a></h2>
+<p>The inspector now presents sections according to the node's scientific role.
+Image operations show intensity distributions; masks show foreground occupancy;
+labels show object-size distributions rather than a misleading histogram of
+label IDs. <strong>Filter Labels By Property</strong> shows the selected measurement and
+range. Metadata-only nodes emphasize axes and calibration without duplicating
+an unchanged intensity histogram.</p>
+<p>Measurement nodes put <strong>Results</strong> near their settings. Colocalization nodes
+prioritize joint scatter and thresholds. Shared <strong>Behavior</strong>, <strong>Compute</strong>,
+<strong>Output Metadata</strong>, and history sections remain available below. Expand the
+section you need; the inspector is not a requirement to use every diagnostic.</p>
+<p>Connected inputs identify which branch supplies each named input. When a node
+has multiple outputs, select the output you intend to inspect or save. Always
+check whether the displayed result is current, stale, or still calculating.</p>
 <h2 id="read-display-summaries-correctly">Read Display Summaries Correctly<a class="headerlink" href="#read-display-summaries-correctly" title="Permanent link">&para;</a></h2>
 <p>An inspector histogram counts every finite value in the chosen slice or stack,
 then groups those counts into a compact chart. Its chart bins are independent
@@ -2908,8 +2983,9 @@ mask.</p>
 <p>The colocalization scatter density, ROI population, and colocalized count are
 also calculated over every ROI voxel. Threshold-independent density remains
 visible while exact threshold-dependent counts are recalculated, but a
-calculating count is not final evidence. Interactive density is capped at 1,024
-bins per axis; dedicated graph scatter nodes can render up to 4,096. On a large
+calculating count is not final evidence. The compact inspector uses a
+mass-preserving representation of at most 1,024 bins per axis; the detached
+scatter window can retain and render up to 4,096 bins per axis. On a large
 input, wait for the exact background calculation to finish before capturing a
 QC screenshot or recording a count.</p>
 <p>Napari contrast limits are display-only. For a large inspect or pinned layer,
@@ -2918,7 +2994,7 @@ exact full finite range when the background calculation completes. A manual
 contrast adjustment made while waiting is preserved. Neither range changes the
 node output or downstream measurements.</p>
 <h2 id="tune-thumbnail-speed-and-detail">Tune Thumbnail Speed And Detail<a class="headerlink" href="#tune-thumbnail-speed-and-detail" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Thumbnail detail</strong> for the rendered image and <strong>Contrast range</strong> for the
+<p>Use <strong>Preview → Detail</strong> for the rendered image and <strong>Preview → Range</strong> for the
 statistics workload; they solve different problems.</p>
 <table>
 <thead>
@@ -3011,14 +3087,46 @@ what produced the displayed pixels or table.</p>
 <p>See <a href="../choose-compute/">choose and verify CPU or GPU compute</a> before comparing
 or benchmarking implementations.</p>
 <h2 id="inspect-colocalization-scatter-at-useful-resolution">Inspect colocalization scatter at useful resolution<a class="headerlink" href="#inspect-colocalization-scatter-at-useful-resolution" title="Permanent link">&para;</a></h2>
-<p>The inspector and resizable pop-out share a linked colormap selector. Changing
-it redraws the cached density and does not change thresholds or metrics. The
-pop-out can save PNG or TIFF at its current display resolution.</p>
-<p>Use <code>Colocalization Scatter Plot</code> or its masked variant when the scatter itself
-must be a durable graph output. Those nodes support native populated axis
-ranges, optional symmetric percentile clipping, independent histogram bins and
-square output size up to 4,096. Threshold guides are drawn after density
-aggregation so downsampling does not erase them.</p>
+<p>Select <code>Colocalization Metrics</code> or its masked variant and use <strong>Open in window</strong>
+in the scatter section. The larger resizable view provides density bins,
+colormap, logarithmic density, populated-range zoom, equal-axis scales, and PNG
+or TIFF export at an explicit <strong>Export size</strong>.</p>
+<p><img alt="The detached scatter window with synthetic channel densities, threshold guides, and labelled display and export controls" src="../../assets/screenshots/workflows/colocalization-scatter-window.png" /></p>
+<p><em>Display controls change the density picture. Moving and releasing a threshold
+guide changes a scientific parameter and requires a new exact count.</em></p>
+<p>The default zero-inclusive shared axis range lets equal intensity differences
+have equal visual lengths. <strong>Zoom to populated data</strong> uses the chosen populated
+range percentile; <strong>Equal axis scales</strong> preserves equal intensity units per
+pixel. View bounds and density clipping change the picture, not the complete
+ROI used for exact counts and metric tables.</p>
+<p>Colormap and log-density changes redraw retained data immediately. Re-binning
+runs in the background with a memory preflight. The pop-out supports up to
+4,096 bins per axis; the smaller inspector uses a bounded mass-preserving
+derivative rather than sampling source voxels.</p>
+<p>Dragging a threshold guide previews its position and a density-derived count.
+Releasing it commits the scientific threshold and requests the exact full-ROI
+count. Wait for that exact result before recording it. Plot display settings
+alone do not change the workflow's thresholds.</p>
+<p>Legacy <code>Colocalization Scatter Plot</code> graph nodes remain executable in existing
+workflows and through headless calls when a durable raster is required, but
+are hidden from the palette. Use the metrics-node pop-out for new interactive
+scatter inspection.</p>
+<h2 id="open-a-complete-result-table">Open a complete result table<a class="headerlink" href="#open-a-complete-result-table" title="Permanent link">&para;</a></h2>
+<p>In a table-producing node's <strong>Results</strong> section, use <strong>Open in window</strong>. This
+opens the complete table in a resizable sortable view, not only the compact
+inspector preview. Click a column heading to sort ascending, then again to sort
+descending. Review units, missing values, and status/error columns alongside
+the measurements.</p>
+<p><img alt="The resizable result-table window with synthetic object measurements and CSV/TSV export" src="../../assets/screenshots/workflows/result-table-window.png" /></p>
+<p><em>Open the full result when a compact preview is insufficient. Sorting affects
+only this view; export retains the workflow table's scientific row order.</em></p>
+<p>Sorting changes the view only. <strong>Export CSV/TSV…</strong> preserves the workflow's
+exact row order. A result made stale by an upstream edit remains explicitly
+labelled; use <strong>Recalculate</strong> before treating it as a new result.</p>
+<p>For a reproducible intensity distribution, add the manual <strong>Intensity
+Histogram</strong> node. Unlike a display-only histogram, its bin definition is part
+of the workflow and its full-resolution result is a table. See
+<a href="../../workflows/object-measurements-tables/#reproducible-intensity-histograms">histogram and table workflows</a>.</p>
 <h2 id="compare-3d-data-without-hiding-failures">Compare 3D data without hiding failures<a class="headerlink" href="#compare-3d-data-without-hiding-failures" title="Permanent link">&para;</a></h2>
 <p>A maximum-intensity projection can make a workflow look persuasive while
 hiding slice-specific noise or z-merging. Review at least:</p>
@@ -3067,7 +3175,7 @@ replacement for them.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 09:43:16 UTC">August 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

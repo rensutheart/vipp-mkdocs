@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2911,7 +2936,7 @@ bundled into that JSON.</p>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>VIPP 0.14.0a3 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
+<p>VIPP 0.15.0a1 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 <code>execution.compute</code>. Schema 5 adds canonical <code>SourceItem v1</code> records: stable
 logical selector, observed container revision, reader/backend evidence,
@@ -2960,19 +2985,23 @@ execution provenance. A presentation-only would-run thumbnail is never a saved
 or downstream output. Sources, writers, terminal nodes, tunnels, dynamic or
 multiple outputs, and incompatible splices fail closed.</p>
 <h3 id="optional-batch-workspace-attachment">Optional Batch workspace attachment<a class="headerlink" href="#optional-batch-workspace-attachment" title="Permanent link">&para;</a></h3>
-<p>A 0.14.0a3 workflow can carry an optional top-level <code>batch_config</code>. The
-version-5 attachment contains canonical SourceItems, reviewed typed per-sample
+<p>A 0.15.0a1 workflow can carry an optional top-level <code>batch_config</code>. The
+version-6 attachment contains canonical SourceItems, reviewed typed per-sample
 numeric overrides, and whole-batch <strong>Use workflow / Run / Bypass</strong> profiles in
 addition to source bindings, local paths, patterns, guarded source-axis
 declarations, formats, output policy, run settings, and the complete compute
-request. It contains no source pixels, calculated arrays, output files,
+request. It also stores exact-item existing-output choices, so one sample can
+keep existing outputs while another reruns and overwrites. These choices bind
+the source identity and resolved destinations, not a row position.
+It contains no source pixels, calculated arrays, output files,
 manifests, or item sidecars.</p>
 <p>A version-1 batch config had no compute request and loads as explicit CPU. A
 version-2 config retains its saved compute request. A version-3 config retains
 its guarded source declarations and acquires SourceItems when resolved. Older
 versions contain no per-sample overrides; version 4 adds SourceItems and typed
 numeric overrides but no batch execution profiles. Earlier supported records
-are written as version 5 only after review and save. VIPP never guesses
+are written as version 6 only after review and save. Version 5 contains node
+execution profiles but no item-specific file policies. VIPP never guesses
 accelerator intent, a different axis interpretation, which historic item
 should receive an override, or whether a node should run or bypass.</p>
 <p>Batch profiles apply atomically to detached effective workflows and never
@@ -2985,12 +3014,13 @@ where or how a graph is applied must not create a self-referential hash or imply
 that the graph's scientific operations changed. An invalid, unsupported, or
 mismatched attachment is not silently applied; VIPP can still load the
 scientific graph while reporting that Batch workspace was not restored.</p>
-<p>Restoring a valid attachment opens Batch workspace and starts a metadata-only
-background scan. Exact saved SourceItems and per-sample overrides are restored
+<p>Restoring a valid attachment opens Batch workflow and checks sources in the
+background. Exact saved SourceItems and per-sample overrides are restored
 only when they match the fresh inventory; changed or missing sources remain
 quarantined for review. This does not load representative pixels or calculate
-the graph. <strong>Preview batch</strong> remains optional and <strong>Run batch</strong> always performs
-a fresh preflight. Because paths are local configuration, review and repair
+the graph. <strong>Preview selected</strong> remains optional and Run performs one final
+collection validation before the worker reuses that fresh plan. Because paths
+are local configuration, review and repair
 them after moving a workflow to another computer.</p>
 <h3 id="scientific-parameters-versus-inspector-state">Scientific parameters versus inspector state<a class="headerlink" href="#scientific-parameters-versus-inspector-state" title="Permanent link">&para;</a></h3>
 <p>The workflow saves parameters that can change calculations, including:</p>
@@ -2999,7 +3029,7 @@ them after moving a workflow to another computer.</p>
 <li>the threshold scope (<code>Stack histogram</code> or <code>Slice histogram</code>);</li>
 <li>Minimum's maximum smoothing iterations;</li>
 <li><code>Rescale Intensity</code> cutoff mode plus its percentile or explicit-value fields;</li>
-<li><code>Clip</code> cutoff mode and explicit values;</li>
+<li><code>Clamp Intensity</code> cutoff mode and explicit values;</li>
 <li><code>Linear Scale + Offset</code> values written by Auto Contrast;</li>
 <li>required channel-axis choices for channel-sensitive operations;</li>
 <li>Composite-to-RGB <code>channel_axis_mode</code>, <code>mapping_mode</code>, ordered per-source
@@ -3063,7 +3093,7 @@ materialization. A second exact source-byte recheck immediately before output
 publication is a durable saved-batch guarantee, not a promise for the folder
 convenience or an arbitrary generated-Python array caller.</p>
 <h2 id="batch-artifacts">Batch artifacts<a class="headerlink" href="#batch-artifacts" title="Permanent link">&para;</a></h2>
-<p>A batch run uses either a standalone version-5 <code>vipp_batch_config.json</code> or the
+<p>A batch run uses either a standalone version-6 <code>vipp_batch_config.json</code> or the
 equivalent validated configuration attached to a workflow. It records
 collection bindings, canonical SourceItems, any reviewed source-axis
 declarations, typed per-sample numeric overrides, output policy, resolved output
@@ -3173,7 +3203,7 @@ source identities and calibration evidence with the workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

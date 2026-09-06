@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2245,6 +2270,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0150a1-scope-and-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.0a1 scope and evidence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0140a3-exact-application-and-artifact-record" class="md-nav__link">
     <span class="md-ellipsis">
       0.14.0a3 exact application and artifact record
@@ -2832,6 +2866,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0150a1-scope-and-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.0a1 scope and evidence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0140a3-exact-application-and-artifact-record" class="md-nav__link">
     <span class="md-ellipsis">
       0.14.0a3 exact application and artifact record
@@ -3004,6 +3047,25 @@
 qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.</p>
+<h2 id="0150a1-scope-and-evidence">0.15.0a1 scope and evidence<a class="headerlink" href="#0150a1-scope-and-evidence" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1">0.15.0a1 release</a>
+is the canonical source for its exact assets, checksums, application revision,
+and release qualification evidence. Do not apply the older asset hashes below
+to a 0.15.0a1 download.</p>
+<p>This release changes batch execution and cancellation, configuration version 6,
+the inspector and diagnostic plots, source/axis presentation, and mesh/skeleton
+measurement providers. These changed areas need their own regression or
+device evidence; an unchanged CUDA installation alone does not qualify a new
+provider. Unaffected scientific regions retain their documented boundaries.</p>
+<p>The hybrid mesh path performs label preparation on GPU but retains CPU marching
+cubes, convex hulls, and table construction. Analyze Skeleton's device path
+measures an already-authored Boolean skeleton, not GPU thinning. See the
+<a href="../../how-to/choose-compute/#gpu-regions-in-0150a1">current operation matrix</a>.</p>
+<p>The new synthetic threshold gallery and exhaustive inspector example add
+review coverage, not independent biological validation. The ImageJ Default
+implementation and Fiji-related colocalization methods retain their stated
+experimental source-aligned status; external golden parity is not implied by
+the UI refresh or version change.</p>
 <h2 id="0140a3-exact-application-and-artifact-record">0.14.0a3 exact application and artifact record<a class="headerlink" href="#0140a3-exact-application-and-artifact-record" title="Permanent link">&para;</a></h2>
 <p>The annotated <code>v0.14.0a3</code> tag resolves to
 <a href="https://github.com/rensutheart/napari-vipp/commit/3c61d0c84cc728d90537ae10c4c521e4a4f40809"><code>3c61d0c84cc728d90537ae10c4c521e4a4f40809</code></a>.
@@ -3224,7 +3286,7 @@ passes. Exact public artifacts and publication evidence are recorded in the
   OIR/OIB/VSI, and IMS routes. All 10 strict vendor cases passed, including the
   IMS case under portable Temurin 21. The corpus-manifest SHA-256 is
   <code>3365b4cec7a220f6399f3c030eb3ac751581bde730fac60f01c9fca3b823714d</code>;</li>
-<li>14 deterministic synthetic samples and 18 checked-in workflows support
+<li>15 deterministic synthetic samples and 19 checked-in workflows support
   regression checks and inspection;</li>
 <li>a generated two-source batch bundle exercises three paired items, nine exact
   NPY/TIFF/TSV outputs, workflow/config hashes, source identities, manifests,
@@ -3238,13 +3300,16 @@ passes. Exact public artifacts and publication evidence are recorded in the
   rejection of stale contrast/histogram results;</li>
 <li>batch tests cover attached-config validation and round-trip, guarded source-
   axis declarations, representative scientific preflight, background
-  metadata-only restore without calculating representative pixels, inspected
+  source checking on restore without calculating representative pixels, inspected
   multi-series expansion and identity retention, direct
   plan-only execution, complete-item fast skips, transient
-  atomic-write retries, and continuing after a final item-sidecar failure;</li>
+  atomic-write retries, and continuing after a final item-sidecar failure.
+  The current batch suite additionally covers individual existing-output
+  choices, reused Run preflight, selection and reset semantics, cooperative
+  cancellation, node progress, and the readable report;</li>
 <li>compute tests cover import-safe CPU-only use, workflow-schema-6 and
-  batch-schema-5 intent, migration from workflow schemas 3/4/5 and batch
-  versions 1/2/3/4, eligibility planning, exact implementation identity,
+  batch-config-6 intent, migration from workflow schemas 3/4/5 and batch
+  versions 1/2/3/4/5, eligibility planning, exact implementation identity,
   resident device segments, memory admission, classified fallback, optimizer
   review/apply and grouped result inspection, visible dtype-repair proposals, Prefer-GPU
   selection/serialization/UI/durable behavior, progress, cancellation,
@@ -3636,7 +3701,7 @@ same as an external comparison or assay validation. The distinction matters:</p>
 </tr>
 <tr>
 <td>Workflow/export architecture</td>
-<td>Workflow schema 6 with explicit schema-3/4/5 migration, batch config/manifest schema 5 with supported earlier-version migration, canonical SourceItems, typed per-sample overrides, safe authored and batch bypass intent, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests</td>
+<td>Workflow schema 6 with explicit schema-3/4/5 migration, batch config 6 and manifest 5 with supported earlier-version migration, canonical SourceItems, typed per-sample overrides, exact-item output choices, safe authored and batch bypass intent, guarded source-axis declarations, attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests</td>
 <td>Independent reproducibility exercises across archived environments and long-lived release migrations</td>
 </tr>
 <tr>
@@ -3673,9 +3738,9 @@ same as an external comparison or assay validation. The distinction matters:</p>
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  <a href="../../how-to/choose-compute/#gpu-regions-in-0140a3">CPU/GPU matrix</a> is a
+  <a href="../../how-to/choose-compute/#gpu-regions-in-0150a1">CPU/GPU matrix</a> is a
   readable summary; the runtime policy/decision remains authoritative.</li>
-<li>The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a3 does not
+<li>The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.15.0a1 does not
   install or execute cuCIM, and the retired private-wheel/source-build route
   must not be added to a current environment. See the
   <a href="../../getting-started/windows-cuda/">Windows CUDA guide</a>.</li>
@@ -3726,7 +3791,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3024,8 +3049,8 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.14.0a3. Controls can collapse into
-<strong>Settings</strong> when the window is narrow.</p>
+<p>Labels below match napari-vipp 0.15.0a1. Some labels shorten to icons and
+graph-local controls move into the gear menu when the window is narrow.</p>
 <p>When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
@@ -3034,7 +3059,7 @@ floating window.</p>
 <p>The movable tab bar holds independent live workflow sessions. Each tab retains
 its graph, calculated results, ancillary caches, undo/redo history, inspector
 state, file path, dirty baseline, display choices, compute request, and Batch
-workspace. <strong>New workflow...</strong> and <strong>Load workflow...</strong> create sessions rather than
+workspace. <strong>New</strong> and <strong>Open</strong> create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.</p>
 <p>Switching tabs restores retained state and does not recalculate scientific
@@ -3045,6 +3070,11 @@ collection batch remains owned by its originating tab; VIPP blocks
 closing that origin, launching a second batch, or closing the application until
 the active run finishes or cooperatively cancels.</p>
 <h2 id="workflow-toolbar">Workflow toolbar<a class="headerlink" href="#workflow-toolbar" title="Permanent link">&para;</a></h2>
+<p>The command bar groups <strong>New / Open / Save</strong>, <strong>Batch / Preview</strong>, calculation
+and compute, then Undo/Redo and the gear menu. Below the workflow tabs, the
+graph context row holds sidebar toggles, <strong>Find in workflow</strong>, <strong>Refresh</strong>,
+<strong>Focus</strong>, <strong>Auto Arrange</strong>, <strong>Tunnels…</strong>, and zoom. This keeps graph navigation
+separate from file and execution actions.</p>
 <table>
 <thead>
 <tr>
@@ -3054,35 +3084,35 @@ the active run finishes or cooperatively cancels.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>New workflow...</strong></td>
-<td>Create a new tab containing one unbound <code>Image Source</code> on an otherwise empty graph.</td>
+<td><strong>New</strong></td>
+<td>Create a new workflow tab. Open one of 19 bundled examples through <strong>Gear menu → Open example…</strong>.</td>
 </tr>
 <tr>
-<td><strong>Open example...</strong></td>
-<td>Open one of 18 bundled templates; ordinary examples configure sample sources, while the batch example creates a safe working copy on request.</td>
+<td><strong>Open</strong></td>
+<td>Open an external or saved workflow JSON. A valid attached batch configuration restores Batch workflow and checks sources without calculating a representative.</td>
 </tr>
 <tr>
-<td><strong>Load workflow...</strong></td>
-<td>Open an external or previously saved workflow JSON. A valid attached batch configuration restores Batch workspace and starts metadata-only sample discovery without calculating a representative.</td>
+<td><strong>Save / Ctrl+S</strong></td>
+<td>Save the active tab's graph, parameters, layout, compute request, bypass choices, and presentation profiles—not calculated arrays. The first save asks for a path; later saves follow the configured save policy. <strong>Save workflow as…</strong> or <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span> chooses another path. An active batch can be attached to the workflow JSON.</td>
 </tr>
 <tr>
-<td><strong>Save workflow / Ctrl+S</strong></td>
-<td>Save the active tab's graph structure, parameters, layout, portable compute request, bypass choices, and selected UI/display profiles—not computed arrays. The default overwrites the active JSON; first save asks for a destination. Use <strong>Settings → Save workflow as…</strong> or <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span> for another path. When Batch workspace is active, choose whether to attach its versioned configuration.</td>
+<td><strong>Batch</strong></td>
+<td>Open or return to <strong>Setup</strong>, <strong>Items &amp; outputs</strong>, <strong>Overrides</strong>, and <strong>Run &amp; results</strong> in the retained Batch workflow window.</td>
 </tr>
 <tr>
-<td><strong>Batch workspace...</strong></td>
-<td>Open or return to the retained local-collection setup, optional representative preview, run progress, final status, and provenance view. This is the sole Batch workspace entry and is visually separated between workflow loading and the export actions.</td>
+<td><strong>Leave batch</strong></td>
+<td>Discard the representative's transient collection-source overrides and return the tab to ordinary single-image mode. It does not delete files and is unavailable during a run.</td>
 </tr>
 <tr>
-<td><strong>Leave batch mode</strong></td>
-<td>When a retained representative session exists, discard its transient collection source overrides and return that workflow tab to ordinary single-image mode. It is unavailable during an active batch run.</td>
+<td><strong>Preview</strong></td>
+<td>Change graph-card presentation: thumbnail mode, contrast, range, colormap, detail, and port labels. It does not run a batch representative.</td>
 </tr>
 <tr>
-<td><strong>Export Python...</strong></td>
-<td>Generate a headless script using supported operation and I/O calls.</td>
+<td><strong>Export Python…</strong> (gear menu)</td>
+<td>Generate a headless script using the shared workflow executor.</td>
 </tr>
 <tr>
-<td><strong>Export OME dataset...</strong></td>
+<td><strong>Export OME dataset…</strong> (gear menu)</td>
 <td>Save one reference image with associated graph label outputs.</td>
 </tr>
 <tr>
@@ -3090,8 +3120,8 @@ the active run finishes or cooperatively cancels.</p>
 <td>Manage named graph outputs and subscribers.</td>
 </tr>
 <tr>
-<td><strong>Structure / Auto structure graph</strong></td>
-<td>Apply a one-shot source-to-sink layout; the compact label is used when toolbar space is limited, and undo restores positions.</td>
+<td><strong>Auto Arrange</strong></td>
+<td>Apply a one-shot source-to-sink layout; undo restores positions.</td>
 </tr>
 <tr>
 <td><strong>Focus</strong></td>
@@ -3117,6 +3147,15 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.</p>
+<p>Drop a supported image file directly onto an <code>Image Source</code> card to open it.
+With that card selected, <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-v">V</kbd></span> / <span class="keys"><kbd class="key-command">Cmd</kbd><span>+</span><kbd class="key-v">V</kbd></span> accepts a copied file or image
+pixels. File-backed inputs retain their reader metadata; raw clipboard pixels
+become a normal napari layer with explicit RGB/RGBA semantics. Pasting pixels
+does not invent physical calibration or an original microscope file.</p>
+<p>When previewing a batch item, the strip above the graph shows the sample,
+position, and source information without repeating an equivalent batch ID.
+Its inspect-item action returns directly to that sample in the Batch workflow
+window. See <a href="../../workflows/batch-processing/">process a folder</a>.</p>
 <p>Compatible fixed-single-output processing cards expose <strong>Bypass node</strong> in the
 inspector and context menu. Bypass forwards the exact primary input without
 running the operation. Sources, writers, unused terminals, tunnels, dynamic or
@@ -3220,9 +3259,16 @@ memory estimate, and fallback details.</p>
 and require scientific parity before timing alternatives. CPU timing uses
 paired warm medians; GPU timing distinguishes resident compute from transfers
 modeled across the complete pipeline. The optimizer reports overall and
-current-operation progress. A monolithic library call can remain at one
+current-operation progress plus <strong>Elapsed</strong> and <strong>Current stage</strong> timers. The
+stage timer resets when the node, backend, or measurement phase changes, not
+with every progress update. Elapsed time continues while waiting for safe
+cancellation and stops when the attempt finishes; a retry starts a new timer.
+A ticking clock shows that the interface is responsive, not proof of progress
+inside an atomic CPU call. Some CPU calls report only when they finish.
+A monolithic library call can remain at one
 percentage until it returns; a reached time limit means comparisons remain, not
-that the current graph was proved optimal. Completed exact benchmark records
+that the current graph was proved optimal. The time limit takes effect at safe
+checkpoints and cannot forcibly interrupt every active library call. Completed exact benchmark records
 are reused on retry.</p>
 <p>When dtype is the only remaining blocker for a reviewed GPU region, an affected
 node may show a subtle <strong>GPU tip</strong>. Its inspector explains the exact conversion
@@ -3348,7 +3394,7 @@ limit is published.</p>
 <p>Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
 overlap; VIPP reports the number of overlapping card pairs in its message strip.
-Use <strong>Structure</strong> (shown as <strong>Auto structure graph</strong> when space permits) to make
+Use <strong>Auto Arrange</strong> to make
 label-aware space, or move the affected
 cards manually. Label visibility is a graph-display choice and never changes
 connections or processed data.</p>
@@ -3472,7 +3518,7 @@ necessarily the full valid entry range. Right-click a numeric field and choose
 <strong>Reset to default</strong> to restore that operation's declared default.</p>
 <p>When an image-dependent bound acts on integer data, the corresponding slider
 and spinner use whole-number steps and values. Floating-point input restores
-decimal entry. This prevents controls such as explicit Clip bounds from
+decimal entry. This prevents controls such as explicit Clamp Intensity bounds from
 authoring a fractional value that the integer operation cannot represent.
 Sliders keep a practical tuning window even when the spinner accepts a wider
 validated range; Sigma Filter radius is one example.</p>
@@ -3564,7 +3610,7 @@ controls remain independent, so changing a histogram from the current slice to
 the full stack changes only the display summary, not workflow data.</p>
 <h2 id="draggable-histogram-guides">Draggable histogram guides<a class="headerlink" href="#draggable-histogram-guides" title="Permanent link">&para;</a></h2>
 <p>Input-histogram markers for Binary Threshold, Hysteresis Threshold, explicit
-Rescale Intensity/Clip cutoffs, and supported colocalization thresholds are
+Rescale Intensity/Clamp Intensity cutoffs, and supported colocalization thresholds are
 editable by dragging. A pointer click without movement does not change the
 parameter.</p>
 <p>Rescale Intensity has two draggable guides. Moving a percentile-derived guide
@@ -3573,18 +3619,19 @@ queues interactive recalculation. This is a scientific parameter edit: save
 the workflow after accepting it. VIPP reuses unchanged input counts while a
 manual marker moves and refreshes the output histogram after the output changes.</p>
 <h2 id="colocalization-scatter-controls">Colocalization scatter controls<a class="headerlink" href="#colocalization-scatter-controls" title="Permanent link">&para;</a></h2>
-<p>The inspector scatter and resizable pop-out share a two-way linked colormap
-selector. Redrawing from the cached threshold-independent density does not
-change channels, ROI, thresholds, counts, or tables. Threshold scrubbing moves
-the guides immediately, marks the old exact count as calculating, coalesces
-rapid requests, and recounts the complete ROI before publishing a new value.</p>
-<p>Interactive density is capped and reported at 1,024 bins per axis to keep the
-viewer responsive. <code>Colocalization Scatter Plot</code> and its masked variant are
-ordinary graph nodes with independently configurable bins and square output
-size up to 4,096, native populated axis ranges, optional symmetric percentile
-clipping, and memory-bounded masked accumulation. The pop-out saves PNG or TIFF
-at its current display resolution; use a graph node when the scatter image must
-be part of the durable workflow.</p>
+<p>Use <strong>Open in window</strong> in a metrics node's scatter section. The inspector and
+resizable pop-out share a linked colormap; colour and log-density changes reuse
+the cached density. <strong>Density bins</strong> can request up to 4,096 bins per axis in
+the pop-out, subject to a background memory preflight. The compact inspector
+uses a mass-preserving derivative of at most 1,024 bins per axis.</p>
+<p><strong>Zoom to populated data</strong>, <strong>Populated range percentile</strong>, and <strong>Equal axis
+scales</strong> change the view, not the full ROI used for exact metrics. The default
+uses zero-inclusive shared axes. <strong>Export size</strong> controls square PNG/TIFF size
+independently of the window dimensions.</p>
+<p>Threshold dragging previews guides and a density-derived count; release commits
+the scientific threshold and requests the exact full-ROI count. Legacy graph
+scatter-raster nodes remain executable but are hidden from the palette. See
+<a href="../../how-to/inspect-outputs/#inspect-colocalization-scatter-at-useful-resolution">inspect outputs</a>.</p>
 <h2 id="image-source-and-batch-image-stack-controls">Image Source and Batch Image stack controls<a class="headerlink" href="#image-source-and-batch-image-stack-controls" title="Permanent link">&para;</a></h2>
 <p>The <code>Image Source</code> inspector has an <strong>Image stack</strong> chooser for a file, store,
 sample, or napari-layer binding. It defaults to <strong>Use the file's labels
@@ -3592,7 +3639,7 @@ unchanged</strong>. A reviewed <strong>Stack planes are depth slices (Z stack)</
 <code>QYX -&gt; ZYX</code> with the workflow; <strong>Something else (advanced)...</strong> accepts a
 complete reviewed source-to-effective declaration. All choices relabel axes by
 position without transposing pixels.</p>
-<p>Each collection source in Batch workspace has an <strong>Image stack</strong> chooser:</p>
+<p>Each collection source in Batch workflow has an <strong>Image axes</strong> chooser:</p>
 <table>
 <thead>
 <tr>
@@ -3626,27 +3673,20 @@ Run use the same check; headless execution never invents a missing declaration.
 The Image Source and Batch controls share the same declaration parser,
 validation, metadata application, and headless execution infrastructure.</p>
 <h2 id="batch-representative-strip">Batch representative strip<a class="headerlink" href="#batch-representative-strip" title="Permanent link">&para;</a></h2>
-<p>The Batch workspace toolbar keeps a compact status and activity indicator at
-its right. It covers source discovery and preflight independently of the main
-graph progress bar, and mirrors overall item progress during a run. Detailed
-per-item and per-operation bars remain in the lower run section. The per-sample
-table shows authored defaults in blank/inherited cells; the selected node's
-inspector adds <strong>Effective batch preview</strong> only when that item actually
-overrides that node.</p>
-<p>The per-node batch execution profile offers <strong>Use workflow / Run / Bypass</strong> for
-nodes whose current topology supports bypass. It is applied to a detached
-effective workflow and does not mutate authored graph intent. The resolved
-choice and hashes are written to version-5 configuration and manifest evidence;
-an unsafe effective splice fails preflight.</p>
-<p>After a successful batch preview, a persistent strip above the graph exposes
-Previous/Next, a full-plan slider, item position, batch ID, and every paired
-filename. It calculates one representative only and never saves batch outputs.
-The requested item is labelled as current only after all matching sources load
-and the graph calculation succeeds. The strip does not duplicate the main
-<strong>Batch workspace...</strong> action; use the sole toolbar button to reopen the retained
-workspace. <strong>Leave batch mode</strong> discards these transient representative source
-overrides and returns the tab to ordinary single-image use; it is disabled
-during a run. See <a href="../../workflows/batch-processing/">process a folder</a>.</p>
+<p>After <strong>Preview selected</strong>, the persistent strip above the graph provides
+Previous/Next, a full-plan slider, item position, and source information. Its
+inspect-item action opens the corresponding sample in the Batch workflow
+window. Equivalent batch ID/source names are not repeated unnecessarily.</p>
+<p>The representative calculates only that item and never saves batch outputs.
+Its per-sample parameters and whole-batch Run/Bypass profile are applied to a
+detached effective workflow without editing authored defaults. The inspector
+shows <strong>Effective batch preview</strong> where an actual exception affects that node.
+The requested sample is labelled current only after matching sources load and
+calculation succeeds.</p>
+<p><strong>Leave batch</strong> clears transient representative bindings and returns to ordinary
+single-image use. It is disabled during an active batch run. Batch progress is
+shown in the retained window's footer and <strong>Run &amp; results</strong> tab, independently
+of ordinary graph progress. See <a href="../../workflows/batch-processing/">process a folder</a>.</p>
 
 
 
@@ -3667,7 +3707,7 @@ during a run. See <a href="../../workflows/batch-processing/">process a folder</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

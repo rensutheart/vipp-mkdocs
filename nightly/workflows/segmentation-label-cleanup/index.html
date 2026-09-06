@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1360,9 +1385,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#imagej-auto-threshold-is-a-separate-conversion-path" class="md-nav__link">
+  <a href="#imagej-default-threshold-is-a-separate-conversion-path" class="md-nav__link">
     <span class="md-ellipsis">
-      ImageJ Auto Threshold is a separate conversion path
+      ImageJ Default Threshold is a separate conversion path
     </span>
   </a>
   
@@ -2848,9 +2873,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#imagej-auto-threshold-is-a-separate-conversion-path" class="md-nav__link">
+  <a href="#imagej-default-threshold-is-a-separate-conversion-path" class="md-nav__link">
     <span class="md-ellipsis">
-      ImageJ Auto Threshold is a separate conversion path
+      ImageJ Default Threshold is a separate conversion path
     </span>
   </a>
   
@@ -2985,7 +3010,7 @@ labels.</p>
 </tr>
 <tr>
 <td>Threshold</td>
-<td><code>Otsu Threshold</code>, <code>Triangle Threshold</code>, <code>Li Threshold</code>, <code>Yen Threshold</code>, <code>Binary Threshold</code>, <code>ImageJ Auto Threshold (8-bit)</code>, local threshold nodes</td>
+<td><code>Otsu Threshold</code>, <code>Triangle Threshold</code>, <code>Li Threshold</code>, <code>Yen Threshold</code>, <code>Binary Threshold</code>, <code>ImageJ Default Threshold (8-bit)</code>, local threshold nodes</td>
 </tr>
 <tr>
 <td>Mask cleanup</td>
@@ -3062,12 +3087,22 @@ replace this setting.</p>
 <p>For example, a methods record might state: “Otsu thresholding used the complete
 <code>float32</code> stack with 1,024 histogram bins; non-finite pixels were treated as
 background.”</p>
-<h3 id="imagej-auto-threshold-is-a-separate-conversion-path">ImageJ Auto Threshold is a separate conversion path<a class="headerlink" href="#imagej-auto-threshold-is-a-separate-conversion-path" title="Permanent link">&para;</a></h3>
-<p><code>ImageJ Auto Threshold (8-bit)</code> is an explicit experimental compatibility node
-targeting ImageJ 1.54p <code>Default</code> or <code>Triangle</code> behavior. It first follows the
+<h3 id="imagej-default-threshold-is-a-separate-conversion-path">ImageJ Default Threshold is a separate conversion path<a class="headerlink" href="#imagej-default-threshold-is-a-separate-conversion-path" title="Permanent link">&para;</a></h3>
+<p><code>ImageJ Default Threshold (8-bit)</code> is an explicit experimental compatibility node
+targeting ImageJ 1.54p's modified IsoData (<code>Default</code>) behavior. It first follows the
 declared per-plane 8-bit conversion for scalar <code>uint8</code>, <code>uint16</code>, or <code>float32</code>,
 then thresholds that result. It does not change the generic VIPP Otsu,
 Triangle, Li, Yen, Isodata, or Minimum nodes.</p>
+<p>The public node no longer exposes a method dropdown. An older saved workflow
+that selected ImageJ <code>Triangle</code> retains that distinct calculation as fixed
+legacy compatibility; loading does not silently replace it with Default. Use
+the new public node deliberately when choosing the Default method.</p>
+<p>For <strong>Minimum Threshold</strong>, “Minimum” means the valley between two histogram
+peaks, not the image's minimum pixel value. Its smoothing operates on the
+histogram, not the image. The convergence limit is an early-stopping safety
+limit, not smoothing strength; a distribution that does not resolve two peaks
+can fail. Keep the scientific Stack/Slice threshold scope separate from the
+inspector histogram's display scope.</p>
 <p>Boolean handling and RGB/RGBA luma reduction are VIPP extensions and are not
 claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Independent
 ImageJ-generated golden parity is pending, so record the node explicitly and
@@ -3175,7 +3210,7 @@ histogram scope is recorded in the inspector history.</em></p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

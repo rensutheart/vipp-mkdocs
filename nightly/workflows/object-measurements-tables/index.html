@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1335,6 +1360,24 @@
       On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-and-export-the-complete-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect and export the complete table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducible-intensity-histograms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reproducible intensity histograms
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#basic-object-measurement" class="md-nav__link">
@@ -2751,6 +2794,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#inspect-and-export-the-complete-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect and export the complete table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducible-intensity-histograms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reproducible intensity histograms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#basic-object-measurement" class="md-nav__link">
     <span class="md-ellipsis">
       Basic Object Measurement
@@ -2839,6 +2900,33 @@
 
 <h1 id="object-measurements-and-tables">Object Measurements And Tables<a class="headerlink" href="#object-measurements-and-tables" title="Permanent link">&para;</a></h1>
 <p>Measurement workflows start from labels and produce tables.</p>
+<h2 id="inspect-and-export-the-complete-table">Inspect and export the complete table<a class="headerlink" href="#inspect-and-export-the-complete-table" title="Permanent link">&para;</a></h2>
+<p>Select a calculated measurement node and expand <strong>Results</strong>. The compact table
+provides a quick preview; <strong>Open in window</strong> opens every row in a resizable
+result-table window. Click column headings to sort and inspect outliers, units,
+missing values, and per-object status/error fields.</p>
+<p>Sorting is display-only. <strong>Export CSV/TSV…</strong> writes the exact scientific table
+in workflow row order, not the sorted presentation order. If upstream data or
+parameters changed, recalculate the stale manual result before exporting it.
+The result window shows the stale/current state rather than silently treating
+an old table as a new calculation.</p>
+<h2 id="reproducible-intensity-histograms">Reproducible intensity histograms<a class="headerlink" href="#reproducible-intensity-histograms" title="Permanent link">&para;</a></h2>
+<p><code>Intensity Histogram</code> produces a full-data table from one connected numeric
+array. Choose bin count, data-derived or custom bounds, and linear or logarithmic
+bin spacing. These are scientific settings saved with the workflow, unlike a
+display-only inspector histogram. The node is manual/cached by default.</p>
+<p>Its table contains bin edges, centres, widths, counts, fractions, densities,
+and cumulative values. Non-finite values are excluded; custom-range underflow
+and overflow and values excluded from logarithmic bins are recorded in metadata.
+Review those counts instead of assuming every pixel fell inside the plot.</p>
+<p>The inspector and histogram pop-out use the calculated table without rereading
+the source to redraw it. Switching between count, fraction, density, or cumulative
+views changes presentation, not the bin calculation. Use Results to inspect or
+export the exact values. A comparison between different images still needs an
+explicit shared range, common bin edges, and a justified normalization.</p>
+<p><img alt="The detached intensity-histogram window showing a synthetic distribution with labelled plot and export controls" src="../../assets/screenshots/workflows/intensity-histogram-window.png" /></p>
+<p><em>The histogram is a view of the cached scientific table. Retain its bin edges
+and excluded-value metadata when reporting the distribution.</em></p>
 <h2 id="basic-object-measurement">Basic Object Measurement<a class="headerlink" href="#basic-object-measurement" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>labels
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; Measure Objects
@@ -2877,6 +2965,15 @@ semantics. A one-pixel object's population standard deviation is exactly zero.</
 provider build or installation is required. See the
 <a href="../../getting-started/windows-cuda/">Windows NVIDIA GPU guide</a> and
 <a href="../../how-to/choose-compute/">choose and verify compute</a>.</p>
+<p>VIPP 0.15.0a1 additionally provides a hybrid GPU path for <strong>Measure 3D Mesh
+Morphology</strong> on supported non-negative native <code>int32</code> 3D labels. The GPU packs
+label regions; marching cubes, convex hulls, and exact public table construction
+remain authoritative CPU work. A GPU badge therefore does not mean every part
+of a mesh calculation ran on the device or that it must be faster.</p>
+<p><strong>Analyze Skeleton</strong> has a reviewed CuPyX path for Boolean, already-skeletonized
+2D/3D inputs. Requesting skeletonization first remains CPU work. Both providers
+retain dtype, shape, environment, memory, and scientific admission gates. See
+the <a href="../../how-to/choose-compute/#gpu-regions-in-0150a1">compute matrix</a> for scope.</p>
 <h2 id="3d-mesh-morphology">3D Mesh Morphology<a class="headerlink" href="#3d-mesh-morphology" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>3D labels
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; Measure 3D Mesh Morphology
@@ -2983,7 +3080,7 @@ reviewed before export.</em></p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 26, 2026 12:42:17 UTC">August 26, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     

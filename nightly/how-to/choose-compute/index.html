@@ -564,6 +564,8 @@
       
         
       
+        
+      
     
     
     
@@ -607,6 +609,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1574,9 +1599,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-regions-in-0140a3" class="md-nav__link">
+  <a href="#gpu-regions-in-0150a1" class="md-nav__link">
     <span class="md-ellipsis">
-      GPU regions in 0.14.0a3
+      GPU regions in 0.15.0a1
     </span>
   </a>
   
@@ -2814,9 +2839,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-regions-in-0140a3" class="md-nav__link">
+  <a href="#gpu-regions-in-0150a1" class="md-nav__link">
     <span class="md-ellipsis">
-      GPU regions in 0.14.0a3
+      GPU regions in 0.15.0a1
     </span>
   </a>
   
@@ -2874,7 +2899,7 @@
 
 
 <h1 id="choose-and-verify-cpu-or-gpu-compute">Choose and verify CPU or GPU compute<a class="headerlink" href="#choose-and-verify-cpu-or-gpu-compute" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.14.0a3 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
+<p>VIPP 0.15.0a1 lets one workflow request <strong>CPU</strong>, <strong>Auto</strong>, <strong>Prefer GPU</strong>, or
 <strong>Custom</strong> compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.</p>
 <p>CPU remains the portable scientific reference. GPU implementations are
@@ -2921,7 +2946,7 @@ admission remain mandatory. VIPP never inserts a cast or changes an authored
 parameter to place more work on GPU. Developer-hidden implementations remain
 excluded unless an advanced request explicitly enables experimental admission;
 that does not turn them into public support.</p>
-<p>Introduced in 0.14.0a1 and retained in 0.14.0a3, the planner preserves exact
+<p>Introduced in 0.14.0a1 and retained in 0.15.0a1, the planner preserves exact
 shape, dtype, finite-value, and axis
 facts across required CPU-only operations. A CPU Rescale Axes, Rescale
 Intensity, or Unsharp Mask decision does not by itself turn a reviewed
@@ -3052,8 +3077,15 @@ appropriate for the analysis.</p>
 <li><strong>Current operation</strong> tracks truthful checkpoints inside the active parity,
   cold-call, warmup, or timed call.</li>
 </ul>
+<p><strong>Elapsed</strong> shows total attempt time; <strong>Current stage</strong> shows time spent in the
+current node/backend/measurement phase. They continue while waiting for safe
+cancellation, stop when the attempt finishes, and reset on retry. A ticking
+clock indicates that the interface remains responsive, not a completion
+estimate or proof of forward progress inside an indivisible CPU call.</p>
 <p>A single NumPy, SciPy, CuPy, or CuPyX call can remain at one percentage
 until it returns because VIPP cannot observe a scientifically safe subdivision.
+The time limit is checked at safe stopping points; it cannot forcibly end
+every library call at the specified minute.
 A reached time limit means planned comparisons remain; it does <strong>not</strong> prove
 that the current assignment is optimal. The result identifies completed and
 remaining work, and complete records for the exact workload and environment
@@ -3089,8 +3121,9 @@ unrunnable descendant.</p>
 <a id="gpu-regions-in-0130a8"></a>
 <a id="gpu-regions-in-0130a9"></a>
 <a id="gpu-regions-in-0140a1"></a>
-<a id="gpu-regions-in-0140a2"></a></p>
-<h2 id="gpu-regions-in-0140a3">GPU regions in 0.14.0a3<a class="headerlink" href="#gpu-regions-in-0140a3" title="Permanent link">&para;</a></h2>
+<a id="gpu-regions-in-0140a2"></a>
+<a id="gpu-regions-in-0140a3"></a></p>
+<h2 id="gpu-regions-in-0150a1">GPU regions in 0.15.0a1<a class="headerlink" href="#gpu-regions-in-0150a1" title="Permanent link">&para;</a></h2>
 <p>The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.</p>
 <table>
@@ -3217,6 +3250,18 @@ VIPP's eligibility explanation is authoritative for the exact call.</p>
 <td>the same labels plus native-endian Boolean, <code>uint8</code>, <code>uint16</code>, or finite <code>float32</code> intensity</td>
 <td>Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU.</td>
 </tr>
+<tr>
+<td>Measure 3D Mesh Morphology</td>
+<td>CuPy (hybrid)</td>
+<td>native-endian, non-negative <code>int32</code> labels; true 3D, including independent leading blocks</td>
+<td>GPU label-region packing with authoritative CPU marching cubes, convex hulls, and typed table construction. Sparse positive label IDs are supported; the final table is a host boundary.</td>
+</tr>
+<tr>
+<td>Analyze Skeleton</td>
+<td>CuPyX</td>
+<td>Boolean, already-skeletonized input; resolved 2D/3D blocks</td>
+<td>Requesting skeletonization first remains CPU. The GPU candidate measures the authored skeleton and uses an exact typed host-table finalizer; spatial blocks must fit the reviewed index bounds.</td>
+</tr>
 </tbody>
 </table>
 <p>Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
@@ -3232,7 +3277,7 @@ benchmark look faster.</p>
 <h2 id="installation-and-platform-boundary">Installation and platform boundary<a class="headerlink" href="#installation-and-platform-boundary" title="Permanent link">&para;</a></h2>
 <p>The <code>gpu-cuda13</code> extra installs the pinned CuPy/CuPyX CUDA track and every
 current reviewed GPU provider, including background processing and basic
-measurements. No separate provider bundle or local source build is required;
+measurements, hybrid mesh packing, and supported skeleton measurement. No separate provider bundle or local source build is required;
 see the <a href="../../getting-started/windows-cuda/">Windows NVIDIA GPU guide</a>.</p>
 <p>Public admission requires native Windows, CPython 3.12, the pinned CUDA 13.2
 runtime and scientific/provider stack, driver API 13.3 or newer, and a probed
@@ -3241,7 +3286,7 @@ recorded in provenance rather than used as an allowlist. Auto, Prefer GPU, and
 Custom use the same device gate; each operation still has its own exact
 workload, memory, dependency, and cleanup requirements. The Linux CUDA command
 is useful for qualification/development but the current public policy resolves
-Linux GPU candidates to CPU. CUDA has no macOS path; both 0.14.0a3 macOS
+Linux GPU candidates to CPU. CUDA has no macOS path; both 0.15.0a1 macOS
 installer architectures are deliberately CPU-only.</p>
 <p>Hardware, driver, compiler, and reduction-order differences can produce minor
 floating-point variation across otherwise compatible GPUs within a provider's
@@ -3315,13 +3360,13 @@ dataset...</strong> serialize accepted cached values instead; they do not rerun 
 or create exact compute-provenance sidecars. Preserve:</p>
 <ul>
 <li>the schema-6 workflow and complete compute request;</li>
-<li>for batch, the version-5 config, finalized manifest/archive, and item
+<li>for batch, the version-6 config, finalized version-5 manifest/archive, and item
   sidecars;</li>
 <li>for generated outputs, requested <code>.vipp-provenance.json</code> sidecars;</li>
 <li>the actual implementation IDs/versions and environment fingerprint; and</li>
 <li>CPU decisions, classified fallbacks/OOM, cancellation, and cleanup outcome.</li>
 </ul>
-<p>Workflow schema 6, batch config schema 5, saved runners, and generated CLIs use
+<p>Workflow schema 6, batch config schema 6, saved runners, and generated CLIs use
 the stable value <code>prefer_gpu</code>. Saved per-node preferences remain present but
 dormant outside Custom; switching back to Custom reactivates them.
 <code>Benchmark node…</code> and <strong>Find fastest pipeline…</strong> are Custom-only. A CLI mode
@@ -3355,7 +3400,7 @@ publication, checkpoints, a durable manifest, or replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 17:43:46 UTC">August 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
   </span>
 
     
