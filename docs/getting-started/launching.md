@@ -67,7 +67,7 @@ information; the two surfaces have different owners and purposes.
 
 ## Open a bundled example
 
-Choose **Open example...** in the VIPP toolbar. The chooser opens a new workflow
+Choose **Gear menu → Open example…**. The chooser opens a new workflow
 tab, groups complete graph templates by task, and configures their `Image
 Source` nodes to use matching bundled samples.
 
@@ -106,4 +106,4 @@ if the plugin is installed but still not discovered.
 Repository scripts such as `scripts/launch_vipp_sample.py` and
 `scripts/launch_vipp_intensity_workflow.py --list` are for development,
 screenshots, and repeatable review. End users should normally use
-**Open example...** or **Load workflow...** inside VIPP.
+**Gear menu → Open example…** or **Open** inside VIPP.

@@ -1,8 +1,9 @@
 # Node Index
 
-This page lists all **114 operation specifications** registered by
-`NODE_LIBRARY` in the current manual track. Nightly parameter behavior can be
-newer than the latest tagged alpha.
+This page lists all **115 operation specifications** registered by
+`NODE_LIBRARY` in 0.15.0a1. The palette exposes **113**: the two legacy scatter
+raster operations remain loadable but are hidden from new-node selection.
+Nightly parameter behavior can be newer than the latest tagged alpha.
 
 !!! info "Scope of this reference"
     Titles and families were checked against the release registry. Input and
@@ -12,7 +13,7 @@ newer than the latest tagged alpha.
     release remain the source of truth until a generated parameter reference is
     published.
 
-Introduced in 0.14.0a1 and retained in 0.14.0a3, manual/cached nodes and nodes
+Introduced in 0.14.0a1 and retained in 0.15.0a1, manual/cached nodes and nodes
 selected for isolated tuning use the same graph-wide execution language.
 Bright amber identifies the node that needs action; dark amber identifies
 downstream nodes that are stale but waiting for that action. **Tune node in
@@ -27,7 +28,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.14.0a3 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0140a3)
+[0.15.0a1 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1)
 for the accelerated node families and their current public regions.
 
 | Family | Nodes |
@@ -36,12 +37,12 @@ for the accelerated node families and their current public regions.
 | Filtering | 18 |
 | Segmentation | 18 |
 | Morphology | 14 |
-| Measurements | 12 |
+| Measurements | 13 |
 | Colocalization & Spatial Analysis | 12 |
 | Label Operations | 7 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **114** |
+| **Total** | **115** |
 
 ## Image Data
 
@@ -115,10 +116,10 @@ choice.
 | `Gamma Correction` | image | Nonlinear brightness/contrast remapping. |
 | `Rescale Intensity` | image | Contrast stretch between input/output ranges. |
 | `Normalize` | image | Normalize intensity values. |
-| `Clip` | image | Clip intensity range. |
+| `Clamp Intensity` | image | Clamp values to the chosen lower and upper bounds. |
 
 `Rescale Intensity` offers exact full-input percentiles or saved explicit input
-values. `Clip` offers an unchanged full-data-range mode or saved explicit clamp
+values. `Clamp Intensity` offers an unchanged full-data-range mode or saved explicit clamp
 values. Integer percentiles and clipping preserve native int64/uint64 levels;
 unrepresentable fractional bounds or intervals too wide for faithful ratio
 arithmetic report an error rather than being silently rounded. Auto Contrast
@@ -159,7 +160,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes have been public since 0.14.0a1 and remain available in 0.14.0a3.
+These nodes have been public since 0.14.0a1 and remain available in 0.15.0a1.
 They have synthetic examples and automated coverage, but broad real-image
 restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
@@ -193,7 +194,7 @@ see [validation status](validation-status.md).
 | `Minimum Threshold` | mask |
 | `Binary Threshold` | mask |
 | `Hysteresis Threshold` | mask |
-| `ImageJ Auto Threshold (8-bit)` | mask |
+| `ImageJ Default Threshold (8-bit)` | mask |
 
 Otsu, Triangle, Yen, Isodata, and Minimum count every finite input value.
 Integers use exact native levels for observed spans up to 65,536; floats use the
@@ -261,6 +262,7 @@ it cannot identify a valid two-peak histogram. See
 
 | Node | Input | Output | Execution | Use |
 | --- | --- | --- | --- | --- |
+| `Intensity Histogram` | numeric image | table | manual | Reproducible full-data intensity distribution with saved bin definitions. |
 | `Measure Objects` | labels | table | manual | Object morphology. |
 | `Measure Objects + Intensity` | labels plus intensity image | table | manual | Object morphology plus intensity statistics. |
 | `Measure 3D Mesh Morphology` | labels | table | manual | Surface/mesh morphology for true 3D labels. |
@@ -294,8 +296,8 @@ it cannot identify a valid two-peak histogram. See
 | `Masked Colocalized Voxels` | channel 1 plus channel 2 plus ROI | image | automatic |
 | `RACC Index` | channel 1 plus channel 2 | image | manual |
 | `Masked RACC Index` | channel 1 plus channel 2 plus ROI | image | manual |
-| `Colocalization Scatter Plot` | channel 1 plus channel 2 | image | manual |
-| `Masked Colocalization Scatter Plot` | channel 1 plus channel 2 plus ROI | image | manual |
+| `Colocalization Scatter Plot` (legacy, hidden) | channel 1 plus channel 2 | image | manual |
+| `Masked Colocalization Scatter Plot` (legacy, hidden) | channel 1 plus channel 2 plus ROI | image | manual |
 | `Object Colocalization Metrics` | labels plus two channels | table | manual |
 | `Label Overlap Association` | reference plus target labels | table | manual |
 | `Nearest Object Distance` | reference plus target labels | table | manual |

@@ -5,6 +5,30 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.15.0a1 scope and evidence
+
+The [0.15.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1)
+is the canonical source for its exact assets, checksums, application revision,
+and release qualification evidence. Do not apply the older asset hashes below
+to a 0.15.0a1 download.
+
+This release changes batch execution and cancellation, configuration version 6,
+the inspector and diagnostic plots, source/axis presentation, and mesh/skeleton
+measurement providers. These changed areas need their own regression or
+device evidence; an unchanged CUDA installation alone does not qualify a new
+provider. Unaffected scientific regions retain their documented boundaries.
+
+The hybrid mesh path performs label preparation on GPU but retains CPU marching
+cubes, convex hulls, and table construction. Analyze Skeleton's device path
+measures an already-authored Boolean skeleton, not GPU thinning. See the
+[current operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1).
+
+The new synthetic threshold gallery and exhaustive inspector example add
+review coverage, not independent biological validation. The ImageJ Default
+implementation and Fiji-related colocalization methods retain their stated
+experimental source-aligned status; external golden parity is not implied by
+the UI refresh or version change.
+
 ## 0.14.0a3 exact application and artifact record
 
 The annotated `v0.14.0a3` tag resolves to
@@ -206,7 +230,7 @@ passes. Exact public artifacts and publication evidence are recorded in the
   OIR/OIB/VSI, and IMS routes. All 10 strict vendor cases passed, including the
   IMS case under portable Temurin 21. The corpus-manifest SHA-256 is
   `3365b4cec7a220f6399f3c030eb3ac751581bde730fac60f01c9fca3b823714d`;
-- 14 deterministic synthetic samples and 18 checked-in workflows support
+- 15 deterministic synthetic samples and 19 checked-in workflows support
   regression checks and inspection;
 - a generated two-source batch bundle exercises three paired items, nine exact
   NPY/TIFF/TSV outputs, workflow/config hashes, source identities, manifests,
@@ -220,13 +244,16 @@ passes. Exact public artifacts and publication evidence are recorded in the
   rejection of stale contrast/histogram results;
 - batch tests cover attached-config validation and round-trip, guarded source-
   axis declarations, representative scientific preflight, background
-  metadata-only restore without calculating representative pixels, inspected
+  source checking on restore without calculating representative pixels, inspected
   multi-series expansion and identity retention, direct
   plan-only execution, complete-item fast skips, transient
-  atomic-write retries, and continuing after a final item-sidecar failure;
+  atomic-write retries, and continuing after a final item-sidecar failure.
+  The current batch suite additionally covers individual existing-output
+  choices, reused Run preflight, selection and reset semantics, cooperative
+  cancellation, node progress, and the readable report;
 - compute tests cover import-safe CPU-only use, workflow-schema-6 and
-  batch-schema-5 intent, migration from workflow schemas 3/4/5 and batch
-  versions 1/2/3/4, eligibility planning, exact implementation identity,
+  batch-config-6 intent, migration from workflow schemas 3/4/5 and batch
+  versions 1/2/3/4/5, eligibility planning, exact implementation identity,
   resident device segments, memory admission, classified fallback, optimizer
   review/apply and grouped result inspection, visible dtype-repair proposals, Prefer-GPU
   selection/serialization/UI/durable behavior, progress, cancellation,
@@ -598,7 +625,7 @@ same as an external comparison or assay validation. The distinction matters:
 | Compute/GPU execution | Exact operation-region tests, immutable policy v10, regenerated a3 full-catalogue qualification for 19 CuPy/CuPyX implementations and 24 evidence owners on native Windows RTX 5090, focused a9 and 0.14 shared-planner/source-axis real-GPU evidence, OOM/cancellation/cleanup coverage, bounded M1 Max CPU and Windows UI smokes, a3 exact-main Windows and native macOS smokes, and exact-tag three-platform installer qualification | Qualify native Linux GPU, more NVIDIA architectures and compatible drivers, an Apple provider if pursued, and broader cross-platform manual GUI acceptance |
 | Sources and physical grids | Revision-change, owned-snapshot, stale-worker, semantic-axis, scale/unit/origin, mask-broadcast, and image/PSF grid tests | Independent corpus covering live readers, network filesystems, registration histories, and heterogeneous microscope metadata |
 | Large data/batch | Functional cache/path/memory tests plus deterministic attached/standalone config, planner, direct plan-only execution, source verification, complete-item fast skips, staging, retry, manifest/archive, sidecar, collision, replay, continuation, exact-output bundle, a bounded Windows acceptance pass, and bounded M1 Max CPU progress/cancellation evidence | Representative memory/time benchmarks, forced-process interruption studies, large collection stress tests, broader cross-platform/cloud-filesystem studies, semantic-axis iteration, and HCS traversal |
-| Workflow/export architecture | Workflow schema 6 with explicit schema-3/4/5 migration, batch config/manifest schema 5 with supported earlier-version migration, canonical SourceItems, typed per-sample overrides, safe authored and batch bypass intent, guarded source-axis declarations, optional batch-attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
+| Workflow/export architecture | Workflow schema 6 with explicit schema-3/4/5 migration, batch config 6 and manifest 5 with supported earlier-version migration, canonical SourceItems, typed per-sample overrides, exact-item output choices, safe authored and batch bypass intent, guarded source-axis declarations, attachment validation, snapshot materialization, atomic-write failure, shared-executor compute provenance, multi-source binding, cancellation, and runtime-version tests | Independent reproducibility exercises across archived environments and long-lived release migrations |
 | Usability | No release-pinned public usability study | Ethics-reviewed, preregistered task study with a controlled comparator and neutral outcomes |
 
 ## Release-specific limitations
@@ -628,9 +655,9 @@ same as an external comparison or assay validation. The distinction matters:
   a probed NVIDIA CUDA device with compute capability 7.5 or newer. macOS is
   CPU-only in this release; the bounded M1 Max CPU smoke above does not admit an
   Apple accelerator. The
-  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0140a3) is a
+  [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1) is a
   readable summary; the runtime policy/decision remains authoritative.
-- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.14.0a3 does not
+- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.15.0a1 does not
   install or execute cuCIM, and the retired private-wheel/source-build route
   must not be added to a current environment. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).

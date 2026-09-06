@@ -12,6 +12,24 @@ rather than treating a thumbnail as evidence for every decision.
 | Label-volume histogram | Size-filter cutoff review | Shape or identity correctness |
 | Table preview | Columns, rows, units, obvious missingness | Statistical validation of measurements |
 
+## Use the inspector for the selected data
+
+The inspector now presents sections according to the node's scientific role.
+Image operations show intensity distributions; masks show foreground occupancy;
+labels show object-size distributions rather than a misleading histogram of
+label IDs. **Filter Labels By Property** shows the selected measurement and
+range. Metadata-only nodes emphasize axes and calibration without duplicating
+an unchanged intensity histogram.
+
+Measurement nodes put **Results** near their settings. Colocalization nodes
+prioritize joint scatter and thresholds. Shared **Behavior**, **Compute**,
+**Output Metadata**, and history sections remain available below. Expand the
+section you need; the inspector is not a requirement to use every diagnostic.
+
+Connected inputs identify which branch supplies each named input. When a node
+has multiple outputs, select the output you intend to inspect or save. Always
+check whether the displayed result is current, stale, or still calculating.
+
 ## Read Display Summaries Correctly
 
 An inspector histogram counts every finite value in the chosen slice or stack,
@@ -23,8 +41,9 @@ mask.
 The colocalization scatter density, ROI population, and colocalized count are
 also calculated over every ROI voxel. Threshold-independent density remains
 visible while exact threshold-dependent counts are recalculated, but a
-calculating count is not final evidence. Interactive density is capped at 1,024
-bins per axis; dedicated graph scatter nodes can render up to 4,096. On a large
+calculating count is not final evidence. The compact inspector uses a
+mass-preserving representation of at most 1,024 bins per axis; the detached
+scatter window can retain and render up to 4,096 bins per axis. On a large
 input, wait for the exact background calculation to finish before capturing a
 QC screenshot or recording a count.
 
@@ -36,7 +55,7 @@ node output or downstream measurements.
 
 ## Tune Thumbnail Speed And Detail
 
-Use **Thumbnail detail** for the rendered image and **Contrast range** for the
+Use **Preview → Detail** for the rendered image and **Preview → Range** for the
 statistics workload; they solve different problems.
 
 | Goal | Setting |
@@ -114,15 +133,58 @@ or benchmarking implementations.
 
 ## Inspect colocalization scatter at useful resolution
 
-The inspector and resizable pop-out share a linked colormap selector. Changing
-it redraws the cached density and does not change thresholds or metrics. The
-pop-out can save PNG or TIFF at its current display resolution.
+Select `Colocalization Metrics` or its masked variant and use **Open in window**
+in the scatter section. The larger resizable view provides density bins,
+colormap, logarithmic density, populated-range zoom, equal-axis scales, and PNG
+or TIFF export at an explicit **Export size**.
 
-Use `Colocalization Scatter Plot` or its masked variant when the scatter itself
-must be a durable graph output. Those nodes support native populated axis
-ranges, optional symmetric percentile clipping, independent histogram bins and
-square output size up to 4,096. Threshold guides are drawn after density
-aggregation so downsampling does not erase them.
+![The detached scatter window with synthetic channel densities, threshold guides, and labelled display and export controls](../assets/screenshots/workflows/colocalization-scatter-window.png)
+
+*Display controls change the density picture. Moving and releasing a threshold
+guide changes a scientific parameter and requires a new exact count.*
+
+The default zero-inclusive shared axis range lets equal intensity differences
+have equal visual lengths. **Zoom to populated data** uses the chosen populated
+range percentile; **Equal axis scales** preserves equal intensity units per
+pixel. View bounds and density clipping change the picture, not the complete
+ROI used for exact counts and metric tables.
+
+Colormap and log-density changes redraw retained data immediately. Re-binning
+runs in the background with a memory preflight. The pop-out supports up to
+4,096 bins per axis; the smaller inspector uses a bounded mass-preserving
+derivative rather than sampling source voxels.
+
+Dragging a threshold guide previews its position and a density-derived count.
+Releasing it commits the scientific threshold and requests the exact full-ROI
+count. Wait for that exact result before recording it. Plot display settings
+alone do not change the workflow's thresholds.
+
+Legacy `Colocalization Scatter Plot` graph nodes remain executable in existing
+workflows and through headless calls when a durable raster is required, but
+are hidden from the palette. Use the metrics-node pop-out for new interactive
+scatter inspection.
+
+## Open a complete result table
+
+In a table-producing node's **Results** section, use **Open in window**. This
+opens the complete table in a resizable sortable view, not only the compact
+inspector preview. Click a column heading to sort ascending, then again to sort
+descending. Review units, missing values, and status/error columns alongside
+the measurements.
+
+![The resizable result-table window with synthetic object measurements and CSV/TSV export](../assets/screenshots/workflows/result-table-window.png)
+
+*Open the full result when a compact preview is insufficient. Sorting affects
+only this view; export retains the workflow table's scientific row order.*
+
+Sorting changes the view only. **Export CSV/TSV…** preserves the workflow's
+exact row order. A result made stale by an upstream edit remains explicitly
+labelled; use **Recalculate** before treating it as a new result.
+
+For a reproducible intensity distribution, add the manual **Intensity
+Histogram** node. Unlike a display-only histogram, its bin definition is part
+of the workflow and its full-resolution result is a table. See
+[histogram and table workflows](../workflows/object-measurements-tables.md#reproducible-intensity-histograms).
 
 ## Compare 3D data without hiding failures
 

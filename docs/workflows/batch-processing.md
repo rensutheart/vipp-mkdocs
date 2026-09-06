@@ -1,517 +1,356 @@
 # Process a folder
 
-The sole **Batch workspace...** button in the main toolbar configures and runs
-one validated workflow over paired collections of local files. It is visually
-separated between **Load workflow...** and the export actions because it opens
-a retained working setup rather than exporting an artifact. The interactive
-graph always represents one item; preview and execution cover the complete
-deterministic plan.
+Use **Batch** in the main workflow toolbar to apply one reviewed workflow to
+collections of local images. The **Batch workflow** window separates preparation
+from processing: checking files does not calculate images, and previewing one
+sample does not run the collection.
 
-!!! important "Representative is not the batch"
-
-    Moving the representative slider swaps every collection-bound `Image
-    Source` and calculates one item through the live graph. It does not save
-    outputs or run the rest of the collection.
-
-The Batch workspace and any active run belong to the workflow tab that started
-them. Other tabs remain editable while the background run proceeds, and all
-progress/completion returns to the origin tab. VIPP blocks closing that origin,
-starting a second batch, or exiting the application until execution finishes or
-cooperative cancellation completes and final state is persisted.
-
-## Recommended sequence
-
-1. Build, tune, and validate the graph on defined development data.
-2. Add explicit `Batch Output` nodes for every image, mask, label, RGB result,
-   or table to save.
-3. Open **Batch workspace...** and bind each varying `Image Source` to a local
-   folder and pattern.
-4. Leave **Image stack** at **Automatic (recommended)** for a new source unless
-   you already know what its TIFF pages mean. If VIPP suggests **Stack planes
-   are depth slices (Z stack)**, keep that choice only after confirming the
-   pages really are depth slices.
-5. Choose the intended toolbar compute request. New work defaults to Auto,
-   which uses reviewed safe GPU defaults without compatible history. An
-   accelerated-only batch timing makes the next matching global Auto batch run
-   measure CPU once on the same execution surface; incompatible interactive,
-   batch, and registry-lifecycle surfaces are never mixed. Choose CPU for an
-   explicit portable reference or Prefer GPU to place every scientifically
-   eligible reviewed operation on GPU regardless of speed. Choose Custom for reviewed
-   CPU/GPU per-node preferences and benchmarking.
-6. Choose an output folder, formats, naming, existing-file policy, fallback
-   policy, device, and accelerator-memory settings.
-7. Wait for the compact toolbar status to report the current item count. A
-   restored workspace performs this metadata-only discovery automatically;
-   **Preview batch** remains optional.
-8. Review any values in **Per-sample parameters (optional)**. Enter only
-   exceptions; blank cells inherit the shown workflow value.
-9. Optionally select **Preview batch** to review pairing and collision summaries.
-10. When previewing, navigate several representatives, including difficult and
-   boundary cases.
-11. Save the workflow and choose **Yes** to attach the Batch workspace, or use
-   **Save...** when a separate headless-replay configuration is needed.
-12. Select **Run batch**. It performs its own plan-only preflight and starts
-   directly when no reviewed plan is current. If a displayed plan changed
-   unexpectedly, review the refreshed plan and run again only after accepting it.
-13. Inspect outputs, final status, validation text, manifest, archive, item
-    sidecars, configured/effective compute requests, actual node
-    implementations, fallbacks, and cleanup evidence before treating the run as
-    complete.
-
-After the first source folder is bound, VIPP suggests its `output` subdirectory
-as the destination. Amber means that this is an unconfirmed suggestion, not an
-invalid path. Review it before running or previewing the batch. Focusing,
-clicking, editing, or choosing the output folder confirms it and restores the
-normal text colour; later source-folder changes then leave it unchanged. For
-multiple sources, the suggestion follows the first bound (primary) source.
-
-!!! caution "Recursive input patterns"
-
-    If a pattern searches subdirectories, such as `**/*.tif`, choose an output
-    folder outside the input tree. Otherwise, files from an earlier run could
-    match the next input search.
-
-## Deterministic source-item pairing
-
-VIPP sorts matched paths independently for every bound source, inspects formats
-that can contain several image series, expands each path into source items, and
-pairs those items by position. Every bound source must produce the same number
-of source items.
-
-```text
-source A: a_01.npy  a_02.npy  a_03.npy
-source B: b_01.npy  b_02.npy  b_03.npy
-items:    (a_01,b_01) (a_02,b_02) (a_03,b_03)
-```
-
-Directory names and filename similarity do not create biological pairing.
-Inspect the preview and retain an independent sample/field map when position is
-not sufficient evidence. A multi-series TIFF, NPZ, Zarr, LIF, IMS, or other
-inspectable container can therefore contribute several clearly labelled rows.
-Each row carries a canonical `SourceItem v1` stable selector plus the observed
-container revision and reader evidence. A changed file, missing companion,
-ambiguous legacy index, or unexpected item topology stops for review instead of
-silently reassigning the old row. Time, channel, and Z remain axes inside each
-item; VIPP does not iterate semantic-axis combinations or discover
-plate/well/field HCS structure.
-
-The first bound source is the primary source used by default naming. Fixed
-file-path Image Sources can remain unbound; napari-layer and bundled-sample
-sources must be replaced by collection bindings for a headless batch.
-
-## Tell VIPP what TIFF pages mean
-
-For a new source, **Image stack** begins at **Automatic (recommended)**. Most
-users can leave it there. On Preview or Run, VIPP checks one representative and
-changes the choice only in one narrow case: an ordinary TIFF reports exactly
-`QYX`, and the workflow then proves that it needs `ZYX` for 3D processing. VIPP
-visibly selects **Stack planes are depth slices (Z stack)**, explains the change, and
-retries the check once.
-
-That suggestion is useful, but it is not proof that the pages are depth slices.
-Confirm it from the acquisition or another trusted source. If the pages are not
-Z, choose **Use the file's labels unchanged**; VIPP respects that opt-out.
-**Something else (advanced)...** exposes uncommon mappings without making
-novices type an axis expression for the ordinary Z-stack case.
-
-Once accepted, the friendly choice is saved as the guarded declaration
-`QYX -> ZYX`. Every item must report the exact same source axes and rank before
-VIPP can apply it. The declaration changes axis names in place: pixel order and
-array shape do not change. `Reorder Axes` solves a different problem by
-transposing pixels and their metadata; moving Q cannot rename it to Z.
-
-The declaration also cannot discover the physical distance between slices.
-Verify Z spacing, unit, and origin in **Output Metadata**, and use `Set Pixel
-Size / Units` when calibration is missing or wrong.
-
-Automatic is a conservative GUI convenience, not a headless guess. If no
-suggestion was needed, saving stores no declaration and reopening shows **Use
-the file's labels unchanged**. Historic and headless blank configurations behave
-the same way. Once the visible Z-stack suggestion has been accepted, saving and
-headless replay use the concrete `QYX -> ZYX` decision.
-
-## Mark outputs explicitly
-
-`Batch Output` passes data through during interactive execution and marks one
-specific output for batch saving. It can define a tag, subfolder, filename
-template, format override, and overwrite choice.
-
-Use clear tags, for example:
-
-```text
-labels_cleaned
-rl_tv_restored
-object_measurements
-colocalization_metrics
-```
-
-If a graph has no `Batch Output` nodes, VIPP offers a warned compatibility
-fallback for terminal graph nodes. An image-like terminal uses the selected
-batch image format and a table uses CSV. A terminal with multiple ports is
-rejected because the intended port is ambiguous. Add explicit markers before
-saving a reproducible configuration.
-
-Enabled `Save Image` nodes are rejected in a batch workflow. Their recompute
-side effects are not part of collision-checked batch publication.
-
-## Names and collision policy
-
-Default explicit-output naming is:
-
-```text
-{source_stem}__{tag}
-```
-
-Templates can use:
-
-- `{batch_id}` and `{batch_index}`;
-- `{source_name}` and `{source_stem}`;
-- `{primary_source_stem}`;
-- `{tag}`, `{node_id}`, and `{node_title}`.
-
-VIPP appends the appropriate extension when the template has no known one.
-Preview detects duplicate destinations, paths that already exist, overlap with
-inputs, and collisions within the plan before graph execution.
-
-Choose the batch default deliberately:
-
-| Policy | Existing destination |
+| Tab | What to do here |
 | --- | --- |
-| `Ask before overwrite (recommended)` | In the Batch workspace, list the exact existing outputs and require one-run consent before replacement. Cancel keeps every file. Headless execution remains fail-closed because it cannot ask. |
-| `Skip existing` | Keep the file unchanged and record the output as skipped. |
-| `Overwrite without asking` | Replace the destination and record the new write. |
+| **Setup** | Choose source folders, pairing, destination, image format, and run policy. |
+| **Items & outputs** | Review the exact samples and outputs, inspect a representative, and decide what to do with existing files. |
+| **Overrides** | Change supported numeric values for particular samples, or Run/Bypass behavior for every sample. |
+| **Run & results** | Review the final plan, run it, and read the results and failure explanations. |
 
-When every resolved output for an item already exists under `Skip existing`, VIPP records
-that no-op without loading the source pixels or calculating the graph. If an
-item has a mixture of existing and missing outputs, it still calculates once so
-the missing outputs can be produced correctly.
+The footer keeps the current activity and next action visible. You can return to
+an earlier tab without starting a check or a run merely by opening that tab.
 
-An explicit overwrite choice on a `Batch Output` node takes precedence over
-the batch default. Duplicate destinations, outputs overlapping inputs, and
-explicitly protected outputs remain hard errors and cannot be approved through
-the overwrite dialog.
+## 1. Set up sources and destination
 
-## Override a reviewed numeric value for one sample
+Start with a workflow that you have already validated on representative data.
+Add an explicit `Batch Output` node for each image, mask, label image, RGB image,
+or table you want to save. Open **Batch**, then in **Setup**:
 
-After a fresh plan resolves stable SourceItems, **Per-sample parameters
-(optional)** shows eligible authored numeric scientific controls as columns and
-primary SourceItems as rows. A blank cell visibly says that it inherits the
-workflow value. Enter only a value that differs for that item.
+1. Bind each varying `Image Source` to a folder and filename pattern.
+2. Review the **Image axes** choice. Use file labels unless the acquisition
+   requires a deliberate interpretation; see [TIFF pages and axes](#tell-vipp-what-tiff-pages-mean).
+3. Choose the output folder and default image format.
+4. Choose the existing-file policy and whether to continue after an item fails.
+5. Review the compute request. It describes the requested policy, not proof that
+   a GPU will be used; actual implementations are recorded with the run.
+6. Select **Check batch**.
 
-The value uses the node's normal integer or floating-point contract. Source
-paths/selectors, output destinations, compute/cache controls, derived fields,
-expressions, and graph topology cannot be overridden. Duplicate, stale,
-zero-match, multi-match, or invalid rows stop preflight before outputs are
-published.
+![Batch Setup with one synthetic image-source collection and a separate output destination](../assets/screenshots/workflows/batch-setup.png)
 
-Selecting a representative applies its values to a detached effective workflow;
-the authored graph and saved defaults do not change. When the selected item
-actually overrides the inspected node, its inspector labels the **Effective
-batch preview** value and the authored default. That block is absent when the
-item has no override for that node. Preview, execution, checkpoints, manifests,
-and provenance retain the same effective values and workflow hashes.
+*Setup makes source bindings and output policy visible before processing. These
+interface examples use three synthetic fields and image/table outputs, not
+research data. The paired Red/Green walkthrough below is a separate bundled demo.*
 
-![The Batch workspace with a global Gaussian Blur bypass profile, two resolved source items, inherited workflow values, and one per-sample threshold override](../assets/screenshots/workflows/batch-workspace-overrides.png)
+The suggested `output` subfolder of the primary source is only a suggestion.
+Review and confirm it. With recursive input patterns such as `**/*.tif`, choose
+a destination outside the input tree so a future search cannot include results
+from an earlier run.
 
-*Node behavior applies the reviewed Run or Bypass profile to every sample; this
-capture bypasses Gaussian Blur without editing the authored workflow. Blank
-cells inherit the authored workflow value, and only the second synthetic sample
-overrides Binary Threshold. The compact toolbar reports workspace planning
-activity, while detailed run progress remains lower in the window.*
+### Why checking can take time
 
-## Review representatives
+The first stage lists filenames and opens **Items & outputs** quickly. VIPP then
+reads image metadata and verifies exact source content in the background. Follow
+the active-file indicator and checked-file count. Content fingerprints read the
+source bytes, so a large CZI or TIFF can take substantially longer than listing
+its name.
 
-After preview, the retained strip above the graph shows `Item N of M`, the
-batch ID, paired filenames and selected series where applicable, Previous/Next
-buttons, and a full-plan slider. The table displays a limited row sample for
-large plans, but its selected-row preview and the slider control the same
-complete representative session.
+One file may contain several image series. The initial file inventory is not
+yet the final sample list; wait for checking to finish before previewing, editing
+sample overrides, or running. Check does not calculate workflow images or save
+processing outputs.
 
-VIPP atomically replaces every collection-bound source path and calculates the
-selected item with the ordinary verified source/execution path. Fixed sources
-remain fixed. The transient pairing does not change serialized source
-parameters or the scientific workflow hash.
+### Deterministic pairing
 
-The UI distinguishes a requested position from a successfully committed one.
-It labels a new representative only after matching source loading and graph
-calculation succeed. Rapid slider changes, failed inputs, stale workers, or a
-changed graph therefore cannot falsely claim that the requested item is the
-one displayed.
+VIPP sorts matched paths independently for every bound source, expands
+inspectable containers into source items, and pairs those items by position.
+Every bound source must produce the same number of items.
 
-Representative arrays are cached within a bounded session. Their file
-identities stay pinned so a file overwritten after review is rejected on
-revisit or Run. Use **Refresh** to accept a new revision deliberately.
+```text
+Red source:   field_01.npy  field_02.npy  field_03.npy
+Green source: field_01.npy  field_02.npy  field_03.npy
+Batch items:  (Red 01, Green 01), (Red 02, Green 02), (Red 03, Green 03)
+```
 
-Choose **Leave batch mode** when the tab should return to ordinary single-image
-work. It discards the retained representative source overrides but does not
-delete collection files, outputs, or saved configurations. The action is
-unavailable during an active run.
+Filename similarity does not establish biological pairing. Compare the list
+with an independent sample map. Time, channel, and Z remain axes inside an item;
+VIPP does not automatically iterate axis combinations or discover HCS
+plate/well/field structure.
 
-## Stale plans and fresh preflight
+Each resolved `SourceItem` includes a stable selector, the observed container
+revision, and reader evidence. Changed sources, missing companions, or changed
+series topology require review instead of silently reassigning an old override
+to a different sample. Fixed file-backed sources can remain unbound; live napari
+layers and bundled sample sources need file collection bindings for headless
+batch execution.
 
-Changing batch settings or the scientific graph marks the runnable plan stale.
-The previous representative pairing remains available and is labelled as
-historical, but it is not authorization to run the old plan.
+### Tell VIPP what TIFF pages mean
 
-Run always performs a fresh preflight. If sources, files, destinations,
-collision states, output declarations, or workflow hash differ from the plan
-you reviewed, VIPP refreshes the workspace and stops for review. Select Run
-again only after confirming the new plan. When there is no current reviewed
-plan - for example, immediately after loading a config or deliberately editing
-a setting - the same Run click uses the fresh plan and starts execution. It does
-not calculate a graph representative first; **Preview batch** remains optional.
+For a new source, **Automatic (recommended)** can suggest a Z stack in one
+narrow case: an ordinary TIFF reports exactly `QYX`, and the workflow proves
+that it needs `ZYX`. VIPP visibly selects **Stack planes are depth slices
+(Z stack)** and retries the check once. Confirm that those pages genuinely are
+depth slices. Choose **Use the file's labels unchanged** to opt out.
 
-That fresh preflight inspects one representative through the same source-axis
-declarations and scientific axis checks used during execution. The guarded
-`QYX` to `ZYX` suggestion can therefore appear from either Preview or Run.
-Other deterministic axis mismatches stop with one concise setup message before
-VIPP creates the output directory, writes run artifacts, or initializes CPU or
-GPU devices. Every later item is still checked when read; one representative is
-not evidence that a collection is uniform.
+The accepted decision is saved as `QYX -> ZYX`. Every item must match the
+declared original axes and rank. This renames axes without moving pixels;
+`Reorder Axes` instead transposes data and metadata. Neither action discovers
+the physical slice spacing. Review scale and units separately.
 
-The fixed Batch toolbar also shows its own compact status and activity at the
-right. Metadata-only source discovery and preflight use an indeterminate
-indicator; a full run mirrors overall item progress there while detailed
-per-item and per-operation progress remains in the lower run section. This is
-separate from the main VIPP graph-calculation bar because source discovery and
-graph calculation can overlap.
+Automatic is a conservative GUI convenience, not a headless guess. Saving
+without a needed suggestion records no declaration. **Something else
+(advanced)…** exposes less common explicit interpretations.
 
-## Save and replay a configuration
+## 2. Review items and outputs
 
-When Batch workspace is active, **Save workflow** offers three choices:
+Click a row to read its sources, image axes, parameter exceptions, and outputs.
+The output list emphasizes **what will be saved**—the producing node, data kind,
+and format. Use **Show file paths** when exact filenames matter. **Find in File
+Explorer** or **Find in Finder** reveals an existing file; Linux opens its
+containing folder.
 
-- **Yes** attaches the current versioned batch configuration to the workflow
-  JSON. It records collection bindings, local input/output paths, patterns,
-  formats, and run policies, but no source pixels, calculated results, or batch
-  outputs.
-- **No** saves an ordinary graph-only workflow.
-- **Cancel** does not save a file.
+![The checked synthetic batch with a selected sample, its image source, and planned image and table outputs](../assets/screenshots/workflows/batch-items-outputs.png)
 
-Loading a workflow with a valid attachment restores and opens Batch workspace
-with its fields populated, then performs background metadata-only sample
-discovery. Exact saved SourceItems and per-sample overrides are restored when
-they match; changed or missing sources stay quarantined for review. VIPP does
-not load representative pixels or calculate the graph as part of this restore.
-Use optional **Preview batch** for inspection, or choose **Run batch** for the
-full run. An invalid or mismatched attachment is not silently applied; the
-scientific workflow can still load while VIPP reports that the Batch workspace
-was not restored.
+*The highlighted row controls the details panel. Checkboxes independently select
+samples for actions, so selecting a row need not navigate away from the list.*
 
-For command-line replay or when workflow and automation settings should remain
-separate, use **Save...**. It writes a standalone versioned
-`vipp_batch_config.json` containing:
+Search and filter the list before selecting samples. Checkboxes choose samples
+for multi-item actions; the highlighted row determines the details being shown.
+The list uses 50-row pages, and selections can include samples on another page.
 
-- source-node bindings, folders, and patterns;
-- reviewed source-axis declarations, when present;
-- output folder and default image format;
-- filename/output declarations and existing-file policy;
-- continue-after-failure behavior;
-- complete compute mode, per-node preferences, fallback policy,
-  runtime/device selection, and accelerator memory limits;
-- per-node **Use workflow / Run / Bypass** execution profiles;
-- the required workflow companion and optional runner;
-- the canonical scientific workflow hash.
+**Recheck selected** verifies the chosen source revisions and output presence;
+it does not replace full scientific preflight for the whole collection. Use
+**Recheck all** after a scientific setting or source-definition change.
+**Load overrides** opens the selected samples in the override editor—it is not
+an import-file action.
 
-Batch config schema 5 retains canonical SourceItems, guarded source-axis
-declarations, typed per-sample numeric overrides, and the configured compute
-request. It adds whole-batch Run/Bypass profiles as separate
-`node_execution_overrides`. A
-version-1 config had no compute fields and loads as explicit CPU; version 2
-retains its compute request; version 3 retains its source declarations and
-acquires SourceItems when resolved; version 4 adds SourceItems and typed numeric
-overrides. Earlier supported versions become version 5 only after review and
-save. A blank declaration
-displays as **Use the file's labels unchanged**, not the automatic policy of a
-new unsaved row. Loading a config does not
-silently replace the toolbar request; it retains its saved request until the
-user changes a toolbar compute setting, at which point the current complete
-toolbar request is used for the next preview, save, or run.
+### Preview one sample
 
-For a compatible processing node, **Use workflow** preserves the authored
-bypass choice for every item, **Run** clears it in the detached effective
-workflow, and **Bypass** applies the exact topology-safe splice. These profiles
-do not mutate the interactive graph. Preflight rejects an unsafe effective
-splice, and the chosen profile, effective workflow hash, and bypass provenance
-remain visible in version-5 run evidence.
+**Preview selected** calculates the chosen item through the live graph, including
+its effective parameter and node overrides. It does not write batch outputs.
+The **Batch representative** strip above the graph lets you move between samples
+and return to the current item in the Batch workflow window to inspect its
+details or load its overrides.
 
-**Load...** validates it against the current workflow. A hash or resolved
-output mismatch fails rather than silently applying stale selections.
+Representative selection replaces all collection-bound sources together; fixed
+sources remain fixed. The authored workflow defaults do not change. A requested
+representative becomes the displayed item only after its source loading and
+calculation succeed. **Leave batch** returns to ordinary single-image work
+without deleting files or saved configurations.
 
-The optional `vipp_batch_pipeline.py` is a thin command-line launcher. It
-defaults to its sibling config, resolves the recorded workflow, and delegates
-to the same headless batch core as the workspace. It is different from
-**Export Python...**, whose immutable embedded workflow and primary-source
-folder helper serve a different automation use case.
+### Keep some existing files and overwrite others
 
-The runner uses the config request by default. Its CLI can overlay explicitly
-supplied `--compute-mode`, `--fallback-policy`, and repeatable
-`--node-preference NODE_ID=PREFERENCE` options without mutating the saved
-config. Use `--progress` to print both overall-item and current-operation
-updates. Exit code `0` means no recorded failures, `1` means a finalized batch
-contains failures, `2` means setup/execution failed before a normal result, and
-`130` means cooperative cancellation.
+The **Existing files · batch default** control is available in both
+**Items & outputs** and **Run & results**. You do not need to return to Setup
+or repeat the full source check just to change this policy.
 
-Run the saved request with:
+| Choice | Meaning |
+| --- | --- |
+| **Ask before overwrite** | Existing destinations need a decision. Pressing Run presents the overwrite review; no replacement occurs before explicit consent. Headless execution cannot ask and fails closed. |
+| **Skip existing** | Keep each existing output unchanged; create missing outputs. |
+| **Overwrite without asking** | Permit replacement when the batch is explicitly run. |
+
+For an individual exception, **right-click that item's row** and choose:
+
+- **Keep existing outputs**;
+- **Rerun and overwrite outputs**; or
+- **Use batch default** to remove its exception.
+
+These actions affect the clicked item, not every checked row. **Reset item
+choices** removes all individual file-policy exceptions; it does not reset
+scientific parameter or node overrides. Choices survive save/load and changes
+to the default, and are bound to exact source identities and destination paths.
+
+An item whose outputs will all be kept needs no source-pixel calculation.
+If only some outputs exist, it can still calculate once to create the missing
+ones. The run count excludes fully kept items; existing files are not relabelled
+as newly saved results. Keeping files does not prove that an earlier analysis
+finished successfully or used the current workflow.
+
+Duplicate output destinations, outputs overlapping inputs, and explicitly
+protected outputs remain errors. An item-level overwrite choice cannot bypass
+those protections. Final Run validation still checks current disk state.
+
+## 3. Review overrides
+
+### Per-sample parameter overrides
+
+Rows are samples and columns are eligible numeric scientific parameters. The
+node name identifies the column; the displayed workflow value is its inherited
+default. Leave a cell blank to inherit that value, or enter an exception.
+
+![The current Overrides tab with labelled search controls, inherited numeric values, and a separate expandable Run or bypass section](../assets/screenshots/workflows/batch-workspace-overrides.png)
+
+*Parameter exceptions belong to individual samples. Run/Bypass choices below
+apply to the entire batch; neither edits the authored workflow defaults.*
+
+Use **Find samples**, **Show samples**, and **Find node or parameter** to narrow
+the view. **Show columns…** controls which parameters are visible; hiding a
+column does not delete its values.
+
+For several samples, check their rows and choose **Edit selected…**. First choose
+the parameters to change, then choose **Set value** or **Use workflow value**
+for each. **Apply to selected samples** commits the validated draft.
+**Discard edits** changes nothing. Unchosen parameters retain their existing
+overrides.
+
+The selection and reset controls have different jobs:
+
+- **Select this page** changes checkboxes on the visible page.
+- **Select all matching** selects every sample matching the filters, including
+  other pages. Check the selected count before applying an edit.
+- **Deselect all** only removes selection; no parameter values change.
+- **Reset selected…** restores all parameter defaults for checked samples,
+  including hidden columns and selected samples on other pages.
+- **Reset all overrides…** restores all sample parameters **and** all batch
+  Run/Bypass choices. It does not change the original workflow.
+
+Resets ask for confirmation. Numeric overrides use the normal parameter bounds
+and types. Choice settings, source selectors, destinations, compute controls,
+expressions, and graph topology are not per-sample parameters.
+
+### Run or bypass nodes
+
+Expand **Run or bypass nodes**, the second section of Overrides. Its choices
+apply to **every sample**: inherit the workflow, force Run, or force Bypass.
+Explicit Run and Bypass choices use distinct highlighting so exceptions are
+easy to find. Bypass forwards a compatible primary input without applying the
+operation; unsafe splices are rejected. The authored graph stays unchanged.
+
+Parameter or node changes make the scientific plan stale. Use the warning's
+**Check batch** action, or **Recheck all**, before running. A representative
+preview is useful for visual review but is not required to run a checked batch.
+
+## 4. Run and read the report
+
+Review the destination, sample and output counts, effective existing-file policy,
+and overrides in **Run & results**, then press the Run button. VIPP performs
+**one final collection validation** to detect disk changes since Check. Its
+worker reuses that fresh plan; it does not repeat the same collection discovery
+as a second preparation phase. Full-content fingerprints and large containers
+can still make this preparation take time.
+
+If sources or the reviewed plan changed unexpectedly, VIPP stops for review.
+Per-item source verification and guarded publication remain active during
+processing. A checked plan is not permission to use subsequently changed files.
+
+The upper progress bar reports the sample, status, and current node number, for
+example **Running (node 12/32)**. The lower bar reports the friendly node name
+and operation checkpoint. Elapsed time is shown separately. A long atomic
+library or file-writer call may not report intermediate percentages; VIPP does
+not invent progress inside that call.
+
+### Stop safely
+
+**Stop safely** requests cooperative cancellation. The current library call may
+finish before cancellation is observed. Wait for finalization and cleanup;
+**Hide window** does not cancel a run. Completed earlier outputs remain saved.
+An item interrupted before publication is distinguished from an item that
+failed; later unstarted items are recorded separately as skipped.
+
+There is no automatic resume button. To continue deliberately, return to Setup,
+review settings, check again, and choose which existing outputs to keep or
+overwrite. “Skip existing” preserves files; it is not a guarantee that unfinished
+work from an earlier item resumes exactly where it stopped.
+
+### The readable run report
+
+The report appears **inside Run & results** after completion or cancellation.
+It summarizes items, elapsed time, saved and kept outputs, failed/cancelled
+outputs, and the destination. Failure details identify affected items and
+outputs and explain recorded causes. Expand **Show all details** for longer
+messages. An absent recorded reason is reported as such, not guessed.
+
+![An illustrative in-page run report with completed, kept, and failed synthetic items and a readable destination error](../assets/screenshots/workflows/batch-run-report.png)
+
+*Illustrative synthetic outcomes show how saved, kept, and failed outputs differ;
+the read-only destination error is included to demonstrate failure reporting.
+This is an interface example, not a recorded performance benchmark. Read the
+summary first, then select an item for its individual output records.*
+
+Below it, select a batch row to see that item's outputs. Clicking the underlined
+item name navigates to **Items & outputs**; clicking the blank part of the row
+only changes the selected output list. **View run report** in the footer returns
+to the report after browsing and never starts another run or check.
+
+**Output folder** opens the destination. **Refresh file status** checks whether
+files still exist on disk; it neither recalculates images nor validates a new
+scientific run plan. Presence is also refreshed automatically where file
+notifications are available; the manual action is useful for external or
+network-drive changes. An existing file is not proof of scientific success.
+
+**Find manifest JSON** locates the machine-readable technical record for audit
+and automation. It is secondary to the readable summary, not another report
+window. Keep the archived manifest: a successful new Check replaces the previous
+run view in this workspace.
+
+## Save and replay
+
+Use **Save config** for a standalone batch configuration and **Open config** to
+reload it against the current workflow. Saving the main workflow also offers
+to attach the batch configuration. Attachments contain settings and local paths,
+not source pixels or calculated results. A valid attachment reopens the Batch
+workflow window and checks sources in the background; it does not automatically
+calculate a representative or start processing.
+
+Batch configuration schema **6** adds exact-item file-policy choices to the
+existing source selectors, axis declarations, numeric overrides, whole-batch
+node profiles, and compute request. Supported earlier configurations load
+without inventing these choices. Changed source identities or destinations
+cannot silently receive old exceptions. Review paths after moving a configuration
+to another computer. See [versions and compatibility](../reference/versioning.md).
+
+The optional `vipp_batch_pipeline.py` is a thin launcher for the saved config
+and workflow, using the same headless batch core:
 
 ```text
 python vipp_batch_pipeline.py --progress
 ```
 
-Override only a deliberate difference from the saved config, for example:
+It uses the saved compute request unless explicit CLI options override it.
+Exit code `0` means no recorded failures, `1` means a finalized batch contains
+failures, `2` means setup/execution failed before a normal result, and `130`
+means cooperative cancellation. See [save, share, and export](../how-to/save-share-export.md)
+for the distinction between this runner and an exported standalone workflow.
 
-```text
-python vipp_batch_pipeline.py --progress --compute-mode custom --fallback-policy visible --node-preference gaussian_blur_1=library:cupyx --node-preference otsu_threshold_1=cpu
-```
+## Outputs and provenance
 
-To use every reviewed eligible GPU implementation without benchmarking first:
+`Batch Output` marks the exact port to save and supports tags, subfolders,
+templates, format overrides, and overwrite protections. Default naming uses
+`{source_stem}__{tag}`. Templates can also use `{batch_id}`, `{batch_index}`,
+`{source_name}`, `{primary_source_stem}`, `{node_id}`, and `{node_title}`.
+Use explicit markers. A warned terminal-node fallback exists for older graphs;
+ambiguous multi-output terminals and side-effecting `Save Image` nodes are not
+accepted as a reproducible batch definition.
 
-```text
-python vipp_batch_pipeline.py --progress --compute-mode prefer_gpu
-```
+For each item, VIPP verifies the sources, calculates the required graph, stages
+outputs privately, reverifies source identities and device cleanup, and then
+promotes the outputs to final paths. A source-change failure before publication
+does not publish that item's staged files. Promotion is not a multi-file
+transaction: a later write failure can leave a **partial** item with some
+successfully saved outputs, which the report and manifest retain explicitly.
 
-An omitted fallback override becomes `visible` for `prefer_gpu`. An explicit
-`--fallback-policy strict` combination is invalid and fails before calculation
-or publication.
+Every run retains a latest `vipp_batch_manifest.json`, a run-id archive, and
+per-item/output sidecars. These record source revisions, workflow/configuration
+hashes, effective overrides and file policies, implementation provenance,
+errors, timing, and output states. Preserve them with the results. Sidecars are
+a recovery trail, not a promise of crash-proof multi-file atomicity.
 
-Node IDs come from the reviewed workflow/config. Stable preferences include
-`auto`, `cpu`, `best_gpu`, `library:<library-id>`, and
-`implementation:<implementation-id>`. Prefer a library choice for portability;
-an exact implementation pin can be unavailable on another computer. Saved
-preferences round-trip in every mode but affect planning only in Custom.
+If actual CPU/GPU cleanup cannot be verified, VIPP blocks further compute in
+that process and requests restart. Already published outputs remain recorded;
+unpublished private outputs are not represented as successful writes.
 
-## Execution and publication safety
+## Try the synthetic walkthrough
 
-For each item, VIPP:
+From the Batch window's overflow menu, choose **Load demo configuration…**, or
+open **Deterministic Batch & Provenance** from the example browser. Select a
+writable location to create a unique working copy; the demo never overwrites a
+previous copy.
 
-1. verifies and materializes every bound source revision;
-2. runs the complete graph through the shared headless executor;
-3. writes all outputs to private staging paths;
-4. reverifies every source identity;
-5. synchronizes and verifies accelerator cleanup when device work occurred;
-6. promotes staged outputs to final paths one at a time;
-7. updates provenance status and checkpoints.
+1. In Setup, inspect the Red and Green source bindings and destination.
+2. Check the batch: three paired fields should appear.
+3. Select the middle field and preview it; confirm both channels change together.
+4. Open Overrides and inspect inherited values before trying a numeric exception.
+   Reset your experiment and check again to return to the reference demo.
+5. Run the reference configuration and read the in-page report.
+6. Inspect the nine outputs: combined images, overlap labels, and measurement
+   tables for three fields. Check again to explore keeping existing outputs.
 
-If a source changes before publication, none of that item's outputs are
-promoted. A failure during later promotion can leave earlier outputs from the
-same item successfully published; the item is recorded as `partial` rather
-than hidden. Successful earlier items remain available. With **Continue after
-item failures** enabled, later items continue.
-
-Batch displays two progress levels. **Overall** reports the item number, batch
-ID, and final item status. **Current operation** reports the containing item,
-node/operation, completed checkpoint, total checkpoints, and message. A
-monolithic NumPy, SciPy, CuPy, CuPyX, or writer call can still remain at one
-percentage until it returns because VIPP does not invent internal progress.
-
-**Cancel** requests cooperative cancellation between nodes, device segments,
-iterative/tiled checkpoints, output staging, source verification, and items.
-The active operation may finish its current atomic library call first. On the
-normal cancellation path, the active item and its unpublished outputs become
-`cancelled`, later unstarted items become `skipped`, manifest/archive/checkpoint
-evidence is finalized, and the runner exits `130`. Once the short multi-output
-promotion boundary begins, VIPP completes it to avoid an avoidable partial set.
-
-This provider-neutral progress/cancellation path received a bounded M1 Max CPU
-smoke in addition to focused cancellation tests. See
-[validation status](../reference/validation-status.md) for the exact evidence
-boundary; it is not an Apple GPU claim.
-
-With **visible** fallback, a complete transactional GPU segment can be retried
-once on CPU only after a classified, retryable OOM and proven GPU cleanup.
-**Strict** returns the typed memory failure. Other device errors are not silently
-renamed or retried. Each later item is replanned independently.
-
-Prefer GPU always uses visible fallback. A node for which no reviewed GPU
-candidate passes every scientific, dtype, parameter, dependency, environment,
-and memory gate receives an explained ordinary CPU decision; that preflight
-decision is not a failed GPU attempt.
-
-If accelerator cleanup fails while an item is still executing, that item's
-private outputs remain unpublished. If the terminal batch runtime fails to
-close only after completed items were already published, those durable outputs
-remain published and are listed in the manifest; VIPP does not pretend that a
-successful atomic promotion never happened. In either case the originating
-VIPP process requests cooperative cancellation of every other active compute
-owner, preserves its last valid interactive results, and quarantines all
-further calculation, policy changes, benchmarks, optimizer work, and new batch
-starts until restart. This is a process-safety response, not an ordinary
-visible fallback or a request merely to increase a memory budget.
-
-## Provenance artifacts
-
-A workspace-started run writes the resolved configuration beside its outputs.
-Every workspace or headless run writes:
-
-- `vipp_batch_manifest.json` — latest finalized run;
-- a run-id manifest archive — preserves prior finalized runs;
-- a run-id sidecar directory — per-item/output checkpoints during execution.
-
-The version-5 manifest records:
-
-- canonical workflow/config and their hashes;
-- VIPP, Python, and relevant runtime package versions;
-- each canonical SourceItem, exact source revision, reader evidence, and
-  available metadata;
-- for each source successfully read, its raw axes, effective axes, and applied
-  declaration; the embedded config retains an intended declaration when an item
-  is skipped or fails before reading;
-- every planned output path, format, and collision policy;
-- errors and item/output states;
-- requested/effective per-sample parameter overrides and effective workflow
-  hashes;
-- the configured and effective compute requests, whether a CLI/UI override was
-  used, and their fingerprints;
-- for every calculated item, the formal execution document and digest with
-  actual CPU/CuPy decisions, implementation IDs/versions, memory
-  estimates, fallbacks, outcome, and cleanup; and
-- an execution-provenance digest on every published output record that links it
-  to that exact item execution.
-
-Output states are `pending`, `completed`, `skipped`, `cancelled`, or `failed`.
-Item states can also be `running` or `partial`. Final summaries count completed,
-partial, skipped, cancelled, and failed items separately.
-
-Sidecars reduce ambiguity after interruption, but there is a small window
-between output promotion and checkpoint replacement. They are a recovery trail,
-not a multi-file transaction log. Inspect files and sidecars before deciding
-what to rerun.
-
-VIPP retries transient Windows and cloud-sync locks during atomic replacement.
-If a final per-item sidecar still cannot be written, the authoritative run
-manifest records that item as partial; **Continue after item failures** controls
-whether later items run. Failure to finalize the run manifest itself remains a
-run-level error because VIPP must not report success without durable provenance.
-
-## Deterministic batch demo
-
-From Batch workspace, choose the secondary **Demo...** shortcut. Alternatively,
-choose **Open example... → Deterministic Batch & Provenance → Open batch
-demo...**. Select a writable location; VIPP creates a unique working copy and
-does not overwrite an earlier demo.
-
-The bundle contains two NumPy source collections, a workflow, config, thin
-runner, exact ground truth, and an empty results folder. The graph initially
-shows the first of three paired 8 × 8 fields. Navigate all three pairs, then
-select **Run demo batch**.
-
-A successful run produces nine outputs—combined images, overlap labels, and
-measurement tables—and validates exact decoded arrays/rows, source identities,
-hashes, runtime versions, latest/archive manifests, and three finalized item
-sidecars. This is an end-to-end regression fixture for its defined data; it is
-not evidence that another assay or naming scheme is valid.
-
-## Before accepting a run
-
-- Pairing and item identifiers match an independent sample map.
-- Every intended output has an explicit `Batch Output` marker.
-- Representative navigation changes all paired sources together.
-- Axes, channels, physical scale, origin, and units are appropriate.
-- Output names, formats, subfolders, and collision policy are intentional.
-- The fresh preflight matches the reviewed plan.
-- The configured and effective compute requests match the intended run, and
-  the version-5 manifest and item execution provenance explain the actual CPU,
-  GPU, and fallback decisions. Interactive node badges describe the last
-  accepted interactive calculation, not every detached batch item.
-- Completed/partial/skipped/cancelled/failed counts match expectations.
-- Manifests, archives, sidecars, environment, exclusions, QC, and validation
-  evidence are retained with the outputs.
+The bundled ground truth supports exact array/table and provenance checks for
+this defined synthetic fixture. It does not validate another assay or filename
+pairing scheme. Before accepting your own run, confirm pairing, axes, scale,
+QC, intended outputs, and the reported outcomes independently.

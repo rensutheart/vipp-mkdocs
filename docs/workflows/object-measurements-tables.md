@@ -2,6 +2,42 @@
 
 Measurement workflows start from labels and produce tables.
 
+## Inspect and export the complete table
+
+Select a calculated measurement node and expand **Results**. The compact table
+provides a quick preview; **Open in window** opens every row in a resizable
+result-table window. Click column headings to sort and inspect outliers, units,
+missing values, and per-object status/error fields.
+
+Sorting is display-only. **Export CSV/TSV…** writes the exact scientific table
+in workflow row order, not the sorted presentation order. If upstream data or
+parameters changed, recalculate the stale manual result before exporting it.
+The result window shows the stale/current state rather than silently treating
+an old table as a new calculation.
+
+## Reproducible intensity histograms
+
+`Intensity Histogram` produces a full-data table from one connected numeric
+array. Choose bin count, data-derived or custom bounds, and linear or logarithmic
+bin spacing. These are scientific settings saved with the workflow, unlike a
+display-only inspector histogram. The node is manual/cached by default.
+
+Its table contains bin edges, centres, widths, counts, fractions, densities,
+and cumulative values. Non-finite values are excluded; custom-range underflow
+and overflow and values excluded from logarithmic bins are recorded in metadata.
+Review those counts instead of assuming every pixel fell inside the plot.
+
+The inspector and histogram pop-out use the calculated table without rereading
+the source to redraw it. Switching between count, fraction, density, or cumulative
+views changes presentation, not the bin calculation. Use Results to inspect or
+export the exact values. A comparison between different images still needs an
+explicit shared range, common bin edges, and a justified normalization.
+
+![The detached intensity-histogram window showing a synthetic distribution with labelled plot and export controls](../assets/screenshots/workflows/intensity-histogram-window.png)
+
+*The histogram is a view of the cached scientific table. Retain its bin edges
+and excluded-value metadata when reporting the distribution.*
+
 ## Basic Object Measurement
 
 ```text
@@ -51,6 +87,17 @@ The standard `gpu-cuda13` extra includes these CuPy providers. No separate
 provider build or installation is required. See the
 [Windows NVIDIA GPU guide](../getting-started/windows-cuda.md) and
 [choose and verify compute](../how-to/choose-compute.md).
+
+VIPP 0.15.0a1 additionally provides a hybrid GPU path for **Measure 3D Mesh
+Morphology** on supported non-negative native `int32` 3D labels. The GPU packs
+label regions; marching cubes, convex hulls, and exact public table construction
+remain authoritative CPU work. A GPU badge therefore does not mean every part
+of a mesh calculation ran on the device or that it must be faster.
+
+**Analyze Skeleton** has a reviewed CuPyX path for Boolean, already-skeletonized
+2D/3D inputs. Requesting skeletonization first remains CPU work. Both providers
+retain dtype, shape, environment, memory, and scientific admission gates. See
+the [compute matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1) for scope.
 
 ## 3D Mesh Morphology
 

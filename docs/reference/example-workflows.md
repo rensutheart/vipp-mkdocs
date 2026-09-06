@@ -1,6 +1,6 @@
 # Example Workflows
 
-The release contains **18** example workflows under:
+The release contains **19** example workflows under:
 
 ```text
 examples/
@@ -12,17 +12,18 @@ review.
 In VIPP, open them with:
 
 ```text
-Open example...
+Gear menu → Open example…
 ```
 
 The chooser groups workflows by task and opens each template with its bundled
-sample `Image Source` nodes already configured. Use `Load workflow...` for
+sample `Image Source` nodes already configured. Use **Open** for
 custom or external workflow JSON files.
 
 ## Workflow Index
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
+| `exhaustive-inspector-showcase.json` | seven synthetic-data lanes including the threshold gallery | Comprehensive manual review of every palette operation, connected-input summaries, scientific controls, and result sections. Use a focused tutorial for a first workflow; this is a broad inspector acceptance example. |
 | `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, one-step undo/redo, and a qualified GPU dtype repair. Its deliberately loose demonstration fragments are not calculated. |
 | `responsive-volume-crop-acceptance.json` | synthetic time-lapse multichannel | Numbered TCZYX checks for explicit-Z crop margins, immediate 2D/3D ROI feedback, one committed calculation and undo gesture, preserved T/C and physical origins, QYX safety, and truthful CPU/GPU status. |
 | `safe-node-bypass-acceptance.json` | synthetic volume | Focused Crop Stack checks for exact pass-through data, would-run thumbnails, bypass styling, undo/save/export, GPU-neutral status, and batch Run/Bypass profiles. |
@@ -50,10 +51,11 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.14.0a3 they are:
+Use `--list` to print the release's exact IDs. In 0.15.0a1 they are:
 
 | ID | Example title |
 | --- | --- |
+| `exhaustive-inspector` | Exhaustive Inspector Showcase |
 | `graph-authoring` | Graph Editing Acceptance Check |
 | `responsive-crop` | Responsive Volumetric Crop Acceptance |
 | `safe-node-bypass` | Safe Node Bypass Acceptance |

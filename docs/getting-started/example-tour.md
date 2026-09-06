@@ -8,7 +8,7 @@ you can learn the interface before dealing with graph editing.
 Choose:
 
 ```text
-Open example... → Segmentation & Labels → Red-Channel Label Cleanup
+Gear menu → Open example… → Segmentation & Labels → Red-Channel Label Cleanup
 ```
 
 The `Image Source` is set to `VIPP synthetic multichannel volume`. Its channels
@@ -86,7 +86,7 @@ button may read **Recalculate**.
 ## Save a copy
 
 Choose **Save workflow** and save the JSON under a new name. Reopen it with
-**Load workflow...**. The graph and settings should return; cached images and
+**Open**. The graph and settings should return; cached images and
 tables are deliberately recomputed from a source.
 
 Next, [build the small graph yourself](build-workflow.md).
