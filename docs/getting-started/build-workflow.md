@@ -71,7 +71,7 @@ Choose **Save workflow** and use a name that communicates its purpose and
 release, for example:
 
 ```text
-nuclei-segmentation-vipp-0.14.0a3.json
+nuclei-segmentation-vipp-0.15.0a1.json
 ```
 
 Also record:
@@ -87,7 +87,7 @@ does not preserve.
 
 ## 6. Test that the workflow reopens
 
-Create another workflow tab, then load the saved JSON. **Load workflow...** opens
+Create another workflow tab, then load the saved JSON. **Open** opens
 another session rather than replacing the active graph. Confirm the source,
 graph, parameters, connections, and authored compute request before relying on
 the file as an analysis record.

@@ -5,11 +5,11 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.14.0a3; optionally restore an attached versioned Batch workspace configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.15.0a1; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
-| Batch config (version 5) | Recreate source bindings, stable SourceItems, guarded source-axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, output declarations, naming, collision policy, workflow association, and configured compute request | Input bytes, actual run decisions, finalized outcome |
+| Batch config (version 6) | Recreate source bindings, stable SourceItems, axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, individual existing-output choices, output definitions, naming, policy, workflow association, and compute request | Input bytes, actual run decisions, finalized outcome |
 | Batch manifest/archive (version 5) and sidecars | Audit planned inputs/outputs, SourceItems, raw and effective source axes, effective values and bypass choices, identities, hashes, configured/effective compute, exact node implementations, fallbacks, cleanup, errors, and per-item/output status | One atomic transaction or proof of biological validity |
 
 ## Save a workflow
@@ -34,15 +34,15 @@ If a Batch workspace is active, VIPP asks what to save:
   workflow JSON. This includes source bindings, local input/output paths,
   patterns, formats, and run policies. It does not include input pixels,
   computed arrays, or output files.
-- **No** writes the ordinary graph-only workflow. Use **Save...** in
-  Batch workspace if a separate configuration is required.
+- **No** writes the ordinary graph-only workflow. Use **Save config** in
+  Batch workflow if a separate configuration is required.
 - **Cancel** writes nothing.
 
 Loading a workflow with a valid attachment restores and opens Batch workspace
-with those settings, then starts metadata-only source discovery in the
-background. This rematches saved SourceItems and per-sample overrides without
-loading representative pixels or calculating the graph. **Preview batch**
-remains optional, and **Run batch** performs a fresh preflight. If the
+with those settings, then checks sources in the background. This rematches
+saved SourceItems, per-sample overrides, and exact-item file policies without
+loading representative pixels or calculating the graph. **Preview selected**
+remains optional, and Run performs a final validation. If the
 attachment is unsupported or does not match the workflow, VIPP loads the
 scientific workflow but reports that its Batch workspace could not be restored
 rather than silently applying the settings.
@@ -58,7 +58,7 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.14.0a3 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
+0.15.0a1 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
 load with explicit CPU intent. Schema-4 and schema-5 workflows retain authored
 compute intent; schema 5 also retains canonical SourceItems, while schema-4
 sources acquire them when they resolve. Schema 6 adds persisted safe-node bypass
@@ -150,20 +150,22 @@ the embedded workflow request.
 
 ## Save a batch configuration and evidence
 
-Use **Batch workspace... → Save...** to write
+Use **Batch → Save config** to write
 `vipp_batch_config.json`. Keep it with its required workflow companion. After a
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
 
-Version-5 configs store the complete configured compute request, reviewed
+Version-6 configs store the complete configured compute request, reviewed
 source-axis declarations, stable SourceItems, typed per-sample numeric
-overrides, and whole-batch **Use workflow / Run / Bypass** profiles. Profiles
+overrides, whole-batch **Use workflow / Run / Bypass** profiles, and exact-item
+existing-file choices. Profiles
 apply to detached effective workflows without mutating authored graph intent
 and are recorded in manifests and hashes. Version-1 configs load as explicit
 CPU; version-2 retains its saved compute request; version-3 also retains
 reviewed source declarations; version 4 adds SourceItems and numeric overrides.
-Earlier supported versions are written as version 5 only after review and save.
+Version 5 adds node profiles; version 6 adds item file policies. Earlier
+supported versions are written as version 6 only after review and save.
 The runner uses its saved request by default and can overlay explicit
 compute/fallback/per-node CLI choices. `--progress` prints both overall-item and
 current-operation progress. One `Ctrl+C` requests normal cooperative

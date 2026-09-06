@@ -71,15 +71,15 @@ branch; Cancel restores the calculated session-start result.*
 
 ## Choose intensity cutoffs deliberately
 
-`Rescale Intensity` and `Clip` expose modes that look similar but make different
+`Rescale Intensity` and `Clamp Intensity` expose modes that look similar but make different
 scientific promises.
 
 | Node and mode | What VIPP does | When it is useful |
 | --- | --- | --- |
 | `Rescale Intensity` — **Percentiles (exact)** | Calculates the requested percentiles from every finite input value, then maps those cutoffs to the output range. Values outside the cutoffs are clipped to the output limits. | Adapting to the distribution of each input while keeping the percentile rule fixed. |
 | `Rescale Intensity` — **Explicit values** | Uses the saved low and high intensities directly; no percentile is estimated. | Applying common calibrated cutoffs to comparable acquisitions. |
-| `Clip` — **Full data range** | Preserves the complete input range; it does not infer hidden percentile cutoffs. | Keeping a no-clipping starting state while the node remains in the graph. |
-| `Clip` — **Explicit values** | Clamps intensities to the saved minimum and maximum. | Enforcing a justified measurement or acquisition range. |
+| `Clamp Intensity` — **Full data range** | Preserves the complete input range; it does not infer hidden percentile cutoffs. | Keeping a no-clipping starting state while the node remains in the graph. |
+| `Clamp Intensity` — **Explicit values** | Clamps intensities to the saved minimum and maximum. | Enforcing a justified measurement or acquisition range. |
 
 Boolean masks pass through both nodes without changing their foreground and
 background decisions.
@@ -87,7 +87,7 @@ background decisions.
 For integer images, VIPP calculates percentile order statistics on the native
 integer values and retains fractional interpolation exactly. Rescaling is done
 after subtracting an integer origin, so adjacent int64/uint64 levels do not
-collapse merely because their absolute values are large. Integer `Clip` accepts
+collapse merely because their absolute values are large. Integer `Clamp Intensity` accepts
 whole-number bounds and clamps in the native dtype; convert to floating point
 first if a fractional bound is intended.
 
@@ -108,7 +108,7 @@ the biological method requires the same absolute cutoffs across samples.
   distribution-relative stretch that saturates the lowest and highest 0.5%.
 - `Rescale Intensity`, values `120` and `3,500`, output `0` to `1`: the same
   absolute input window for every compatible image.
-- `Clip`, values `0` and `4,095`: explicit clipping to a justified 12-bit
+- `Clamp Intensity`, values `0` and `4,095`: explicit clipping to a justified 12-bit
   acquisition range stored in a wider integer container.
 
 Record why the chosen rule is appropriate. Avoid changing between percentiles

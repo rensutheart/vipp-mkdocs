@@ -33,7 +33,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.14.0a3 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
+VIPP 0.15.0a1 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 `execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
 logical selector, observed container revision, reader/backend evidence,
@@ -92,12 +92,15 @@ multiple outputs, and incompatible splices fail closed.
 
 ### Optional Batch workspace attachment
 
-A 0.14.0a3 workflow can carry an optional top-level `batch_config`. The
-version-5 attachment contains canonical SourceItems, reviewed typed per-sample
+A 0.15.0a1 workflow can carry an optional top-level `batch_config`. The
+version-6 attachment contains canonical SourceItems, reviewed typed per-sample
 numeric overrides, and whole-batch **Use workflow / Run / Bypass** profiles in
 addition to source bindings, local paths, patterns, guarded source-axis
 declarations, formats, output policy, run settings, and the complete compute
-request. It contains no source pixels, calculated arrays, output files,
+request. It also stores exact-item existing-output choices, so one sample can
+keep existing outputs while another reruns and overwrites. These choices bind
+the source identity and resolved destinations, not a row position.
+It contains no source pixels, calculated arrays, output files,
 manifests, or item sidecars.
 
 A version-1 batch config had no compute request and loads as explicit CPU. A
@@ -105,7 +108,8 @@ version-2 config retains its saved compute request. A version-3 config retains
 its guarded source declarations and acquires SourceItems when resolved. Older
 versions contain no per-sample overrides; version 4 adds SourceItems and typed
 numeric overrides but no batch execution profiles. Earlier supported records
-are written as version 5 only after review and save. VIPP never guesses
+are written as version 6 only after review and save. Version 5 contains node
+execution profiles but no item-specific file policies. VIPP never guesses
 accelerator intent, a different axis interpretation, which historic item
 should receive an override, or whether a node should run or bypass.
 
@@ -121,12 +125,13 @@ that the graph's scientific operations changed. An invalid, unsupported, or
 mismatched attachment is not silently applied; VIPP can still load the
 scientific graph while reporting that Batch workspace was not restored.
 
-Restoring a valid attachment opens Batch workspace and starts a metadata-only
-background scan. Exact saved SourceItems and per-sample overrides are restored
+Restoring a valid attachment opens Batch workflow and checks sources in the
+background. Exact saved SourceItems and per-sample overrides are restored
 only when they match the fresh inventory; changed or missing sources remain
 quarantined for review. This does not load representative pixels or calculate
-the graph. **Preview batch** remains optional and **Run batch** always performs
-a fresh preflight. Because paths are local configuration, review and repair
+the graph. **Preview selected** remains optional and Run performs one final
+collection validation before the worker reuses that fresh plan. Because paths
+are local configuration, review and repair
 them after moving a workflow to another computer.
 
 ### Scientific parameters versus inspector state
@@ -137,7 +142,7 @@ The workflow saves parameters that can change calculations, including:
 - the threshold scope (`Stack histogram` or `Slice histogram`);
 - Minimum's maximum smoothing iterations;
 - `Rescale Intensity` cutoff mode plus its percentile or explicit-value fields;
-- `Clip` cutoff mode and explicit values;
+- `Clamp Intensity` cutoff mode and explicit values;
 - `Linear Scale + Offset` values written by Auto Contrast;
 - required channel-axis choices for channel-sensitive operations;
 - Composite-to-RGB `channel_axis_mode`, `mapping_mode`, ordered per-source
@@ -212,7 +217,7 @@ convenience or an arbitrary generated-Python array caller.
 
 ## Batch artifacts
 
-A batch run uses either a standalone version-5 `vipp_batch_config.json` or the
+A batch run uses either a standalone version-6 `vipp_batch_config.json` or the
 equivalent validated configuration attached to a workflow. It records
 collection bindings, canonical SourceItems, any reviewed source-axis
 declarations, typed per-sample numeric overrides, output policy, resolved output

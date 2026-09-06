@@ -6,20 +6,24 @@ data.
 
 ## Current public alpha
 
-- [0.14.0a3](0.14.0a3.md) — responsive volumetric Crop Stack, exact bounded
-  local OME-Zarr reads for the sole-direct-Crop case, topology-safe bypass,
-  improved save/undo behavior, and napari 0.9 compatibility.
+- [0.15.0a1](0.15.0a1.md) — task-based batch workflow, per-item output decisions,
+  readable run reports, redesigned inspector and plots, reproducible intensity
+  histograms, and hybrid mesh/skeleton measurement acceleration.
 
-The immutable a3 alpha is distributed on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3) and
-[PyPI](https://pypi.org/project/napari-vipp/0.14.0a3/). Use only the exact
+The alpha is distributed on
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1) and
+[PyPI](https://pypi.org/project/napari-vipp/0.15.0a1/). Use only the exact
 release assets and their matching checksum files.
 
-0.14.0a3 writes workflow schema 6 and batch config/manifest schema 5. Valid
+0.15.0a1 writes workflow schema 6, batch config 6, and manifest schema 5. Valid
 supported earlier records retain explicit migration paths; recalculate and
 validate consequential results after upgrading.
 
 ## Earlier releases
+
+- [0.14.0a3](0.14.0a3.md) — responsive volumetric Crop Stack, exact bounded
+  local OME-Zarr reads for the sole-direct-Crop case, topology-safe bypass,
+  improved save/undo behavior, and napari 0.9 compatibility.
 
 - [0.14.0a2](0.14.0a2.md) — native unsigned CPU-only macOS installers for
   Apple Silicon and Intel, detached-window resizing, cross-Qt compatibility,

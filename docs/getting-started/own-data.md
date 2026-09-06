@@ -19,6 +19,13 @@ Source card's live subtitle shows the current layer, sample, file, or collection
 representative; hover the card for the complete binding when the subtitle is
 elided.
 
+You can also drop a supported image file directly onto an `Image Source` card.
+With that card selected, ++ctrl+v++ (Windows/Linux) or ++cmd+v++ (macOS) opens a
+copied image file or pasted image pixels. File paths remain file-backed inputs
+with their reader metadata. Raw clipboard pixels become a normal napari layer;
+RGB/RGBA colour semantics are preserved, but microscope calibration is not
+invented. Review scale, axes, and units before measuring pasted pixels.
+
 For a multi-image file or store, choose the intended **Series / image**. VIPP
 records a stable `SourceItem v1` selector together with the reader/backend,
 normalized axes and shape, and exact container revision. On reopen, a changed
@@ -118,7 +125,7 @@ images from the new acquisition family:
 Changes in objective, exposure, stain, detector, bit depth, sampling, tissue,
 or preprocessing can invalidate parameters that worked previously.
 
-When moving to 0.14.0a3, keep the original workflow and open a duplicate. Valid
+When moving to 0.15.0a1, keep the original workflow and open a duplicate. Valid
 schema-3, schema-4, and schema-5 files migrate to schema 6. Schema-3/4 sources
 acquire canonical SourceItems when they resolve, while schema 5 retains its
 saved SourceItems; schema 6 preserves safe-node bypass intent. Inspect graph

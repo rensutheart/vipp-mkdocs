@@ -36,7 +36,7 @@ Image Source
 | Channel selection | `Extract Channel`, `Split Channels` |
 | Smoothing | `Gaussian Blur`, `Gaussian Blur 3D`, `Median Filter`, `Sigma Filter`, `Non-Local Means` |
 | Background | `Rolling-Ball Background`, `Subtract Background` |
-| Threshold | `Otsu Threshold`, `Triangle Threshold`, `Li Threshold`, `Yen Threshold`, `Binary Threshold`, `ImageJ Auto Threshold (8-bit)`, local threshold nodes |
+| Threshold | `Otsu Threshold`, `Triangle Threshold`, `Li Threshold`, `Yen Threshold`, `Binary Threshold`, `ImageJ Default Threshold (8-bit)`, local threshold nodes |
 | Mask cleanup | `Fill Holes`, `Remove Outliers (Binary)`, `Remove Small Objects`, morphology nodes |
 | Label creation | `Label Connected Components`, watershed nodes |
 | Label cleanup | `Clear Border Objects`, `Filter Labels By Volume`, `Filter Labels By Property`, `Relabel Sequential` |
@@ -88,13 +88,25 @@ For example, a methods record might state: “Otsu thresholding used the complet
 `float32` stack with 1,024 histogram bins; non-finite pixels were treated as
 background.”
 
-### ImageJ Auto Threshold is a separate conversion path
+### ImageJ Default Threshold is a separate conversion path
 
-`ImageJ Auto Threshold (8-bit)` is an explicit experimental compatibility node
-targeting ImageJ 1.54p `Default` or `Triangle` behavior. It first follows the
+`ImageJ Default Threshold (8-bit)` is an explicit experimental compatibility node
+targeting ImageJ 1.54p's modified IsoData (`Default`) behavior. It first follows the
 declared per-plane 8-bit conversion for scalar `uint8`, `uint16`, or `float32`,
 then thresholds that result. It does not change the generic VIPP Otsu,
 Triangle, Li, Yen, Isodata, or Minimum nodes.
+
+The public node no longer exposes a method dropdown. An older saved workflow
+that selected ImageJ `Triangle` retains that distinct calculation as fixed
+legacy compatibility; loading does not silently replace it with Default. Use
+the new public node deliberately when choosing the Default method.
+
+For **Minimum Threshold**, “Minimum” means the valley between two histogram
+peaks, not the image's minimum pixel value. Its smoothing operates on the
+histogram, not the image. The convergence limit is an early-stopping safety
+limit, not smoothing strength; a distribution that does not resolve two peaks
+can fail. Keep the scientific Stack/Slice threshold scope separate from the
+inspector histogram's display scope.
 
 Boolean handling and RGB/RGBA luma reduction are VIPP extensions and are not
 claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Independent

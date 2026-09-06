@@ -8,17 +8,17 @@ packages.
 
 **[Check the official VIPP releases](https://github.com/rensutheart/napari-vipp/releases)**
 
-!!! warning "Use only the exact qualified 0.14.0a3 files"
-    The `v0.14.0a3` prerelease carries the installers, checksums, wheel, and
+!!! warning "Use only the exact qualified 0.15.0a1 files"
+    The `v0.15.0a1` prerelease carries the installers, checksums, wheel, and
     source archive on the
-    [official release page](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3).
+    [official release page](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1).
     The release manifest identifies the exact immutable tag and embedded wheel.
     Do not use a similarly named file from another site.
 
 !!! warning "Unsigned alpha — verify before running"
     Download
-    `VIPP-Setup-0.14.0a3-Windows-x86_64-UNSIGNED.exe` only from the official
-    `v0.14.0a3` entry on the
+    `VIPP-Setup-0.15.0a1-Windows-x86_64-UNSIGNED.exe` only from the official
+    `v0.15.0a1` entry on the
     [VIPP GitHub releases page](https://github.com/rensutheart/napari-vipp/releases).
     This alpha is intentionally not Authenticode-signed, so Windows will report
     **Unknown publisher**. The `-UNSIGNED` filename is intentional. Do
@@ -27,17 +27,17 @@ packages.
 ### Verify the download and pass the Windows warning
 
 1. Download the installer and
-   `SHA256SUMS-Windows-0.14.0a3.txt` from the same
+   `SHA256SUMS-Windows-0.15.0a1.txt` from the same
    official GitHub release.
 2. Open PowerShell in the download folder and run:
 
     ```powershell
     Get-FileHash -Algorithm SHA256 `
-      .\VIPP-Setup-0.14.0a3-Windows-x86_64-UNSIGNED.exe
+      .\VIPP-Setup-0.15.0a1-Windows-x86_64-UNSIGNED.exe
     ```
 
 3. Compare the full 64-character result with the line for the installer in
-   `SHA256SUMS-Windows-0.14.0a3.txt`. If it differs, stop and delete the file.
+   `SHA256SUMS-Windows-0.15.0a1.txt`. If it differs, stop and delete the file.
 4. Double-click the installer. At **Windows protected your PC**, choose **More
    info**, check that the app name ends in `-UNSIGNED.exe` and the publisher is
    **Unknown publisher**, then choose **Run anyway**.
@@ -74,7 +74,7 @@ and lets you check again after installing it.
    **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** shortcuts; begin
    with **VIPP Automatic**.
 
-!!! important "CUDA location in 0.14.0a3"
+!!! important "CUDA location in 0.15.0a1"
     One-click setup obtains canonical Windows Local App Data through
     `SHGetKnownFolderPath(FOLDERID_LocalAppData)` and accepts only
     `VIPP\environments\cpu` or `VIPP\environments\cuda13` beneath it. A custom
@@ -130,7 +130,7 @@ The installer does not silently replace an existing installation:
 - managed CPU and CUDA installations can coexist.
 
 An installer-owned CUDA copy already stored under a non-ASCII path cannot be
-updated or repaired in place by 0.14.0a3. Setup may first complete and record
+updated or repaired in place by 0.15.0a1. Setup may first complete and record
 recovery from an earlier interrupted transaction; after that separate
 recovery, the newly blocked selection performs no new mutation of the old
 environment, shortcuts, or ownership record. Do not move or rename that
@@ -147,7 +147,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ## macOS installer — recommended
 
-VIPP 0.14.0a3 has separate offline packages for Apple Silicon and Intel Macs.
+VIPP 0.15.0a1 has separate offline packages for Apple Silicon and Intel Macs.
 Each package includes Python and napari, installs a private CPU-only environment
 under `~/Library/vipp`, and creates `~/Applications/VIPP.app`. No terminal or
 separate Python installation is required for the normal route.
@@ -160,11 +160,11 @@ launch, and removal.
 
 ## Linux and advanced manual installation
 
-VIPP 0.14.0a3 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
+VIPP 0.15.0a1 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
 environment, then install the exact alpha. An exact prerelease pin does not need
 pip's `--pre` option.
 
-The commands below use the exact `0.14.0a3` package pin.
+The commands below use the exact `0.15.0a1` package pin.
 
 === "Windows manual"
 
@@ -173,7 +173,7 @@ The commands below use the exact `0.14.0a3` package pin.
     & ".\.venv-vipp\Scripts\python.exe" -m pip install --upgrade pip
     & ".\.venv-vipp\Scripts\python.exe" -m pip install `
       "napari[pyqt6]>=0.6" `
-      "napari-vipp==0.14.0a3"
+      "napari-vipp==0.15.0a1"
     & ".\.venv-vipp\Scripts\vipp.exe"
     ```
 
@@ -183,8 +183,8 @@ The commands below use the exact `0.14.0a3` package pin.
     python3.12 -m venv vipp-env
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install "napari[pyqt6]>=0.6" \
-      "napari-vipp==0.14.0a3"
+    python -m pip install "napari[pyside6]>=0.6" \
+      "napari-vipp==0.15.0a1"
     vipp
     ```
 
@@ -195,7 +195,7 @@ The commands below use the exact `0.14.0a3` package pin.
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
     python -m pip install "napari[pyqt6]>=0.6" \
-      "napari-vipp==0.14.0a3"
+      "napari-vipp==0.15.0a1"
     vipp
     ```
 
@@ -210,7 +210,7 @@ VIPP checkout, or an environment with multiple Qt bindings.
 ## Confirm the installation
 
 For an installer-managed copy, open the created VIPP shortcut and choose
-**Open example...**. For a manually managed environment, you can also run:
+**Gear menu → Open example…**. For a manually managed environment, you can also run:
 
 ```text
 python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
@@ -219,7 +219,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.14.0a3
+0.15.0a1
 ```
 
 Inside napari, choose **Plugins → VIPP Workflow (napari-vipp)**.
@@ -247,7 +247,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.14.0a3"
+  "napari-vipp[gpu-cuda13]==0.15.0a1"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -258,7 +258,7 @@ than moving or renaming one whose complete path is incompatible.
 
 Read the complete [Windows NVIDIA GPU guide](windows-cuda.md) before adding GPU
 packages manually. Do not install an old cuCIM bundle or private wheel into a
-0.14.0a3 environment: background processing and basic measurements use the
+0.15.0a1 environment: background processing and basic measurements use the
 standard CuPy installation.
 
 If you are evaluating this alpha for the project, use the short
@@ -273,10 +273,10 @@ launches VIPP, then restart napari.
 
 | File family | Command |
 | --- | --- |
-| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.14.0a3"` |
-| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.14.0a3"` |
-| Mixed microscope formats, including Imaris IMS | `python -m pip install "napari-vipp[microscope]==0.14.0a3"` |
-| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.14.0a3"` |
+| Nikon ND2 | `python -m pip install "napari-vipp[nd2]==0.15.0a1"` |
+| Zeiss CZI | `python -m pip install "napari-vipp[czi]==0.15.0a1"` |
+| Mixed microscope formats, including Imaris IMS | `python -m pip install "napari-vipp[microscope]==0.15.0a1"` |
+| BioIO/Bio-Formats fallback | `python -m pip install "napari-vipp[bioformats]==0.15.0a1"` |
 
 A reader opening a file is not proof that every axis, unit, timestamp, or
 acquisition field was interpreted correctly. Check representative facility

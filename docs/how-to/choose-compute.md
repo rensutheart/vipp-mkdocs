@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.14.0a3 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.15.0a1 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -27,7 +27,7 @@ parameter to place more work on GPU. Developer-hidden implementations remain
 excluded unless an advanced request explicitly enables experimental admission;
 that does not turn them into public support.
 
-Introduced in 0.14.0a1 and retained in 0.14.0a3, the planner preserves exact
+Introduced in 0.14.0a1 and retained in 0.15.0a1, the planner preserves exact
 shape, dtype, finite-value, and axis
 facts across required CPU-only operations. A CPU Rescale Axes, Rescale
 Intensity, or Unsharp Mask decision does not by itself turn a reviewed
@@ -171,8 +171,16 @@ Whole-pipeline optimization shows two progress streams:
 - **Current operation** tracks truthful checkpoints inside the active parity,
   cold-call, warmup, or timed call.
 
+**Elapsed** shows total attempt time; **Current stage** shows time spent in the
+current node/backend/measurement phase. They continue while waiting for safe
+cancellation, stop when the attempt finishes, and reset on retry. A ticking
+clock indicates that the interface remains responsive, not a completion
+estimate or proof of forward progress inside an indivisible CPU call.
+
 A single NumPy, SciPy, CuPy, or CuPyX call can remain at one percentage
 until it returns because VIPP cannot observe a scientifically safe subdivision.
+The time limit is checked at safe stopping points; it cannot forcibly end
+every library call at the specified minute.
 A reached time limit means planned comparisons remain; it does **not** prove
 that the current assignment is optimal. The result identifies completed and
 remaining work, and complete records for the exact workload and environment
@@ -213,8 +221,9 @@ unrunnable descendant.
 <a id="gpu-regions-in-0130a9"></a>
 <a id="gpu-regions-in-0140a1"></a>
 <a id="gpu-regions-in-0140a2"></a>
+<a id="gpu-regions-in-0140a3"></a>
 
-## GPU regions in 0.14.0a3
+## GPU regions in 0.15.0a1
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
@@ -240,6 +249,8 @@ VIPP's eligibility explanation is authoritative for the exact call.
 | Label Connected Components | CuPyX | Boolean mask; resolved 2D or 3D | Preserves exact deterministic `int32` label numbering. Numeric masks and oversized 2D/3D blocks use CPU. In non-CPU planning, a Boolean call not resolved as 2D or 3D is a typed preflight failure in this alpha. |
 | Measure Objects | CuPy | native-endian, non-negative `int32` labels; 2D or 3D | Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU. |
 | Measure Objects + Intensity | CuPy | the same labels plus native-endian Boolean, `uint8`, `uint16`, or finite `float32` intensity | Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU. |
+| Measure 3D Mesh Morphology | CuPy (hybrid) | native-endian, non-negative `int32` labels; true 3D, including independent leading blocks | GPU label-region packing with authoritative CPU marching cubes, convex hulls, and typed table construction. Sparse positive label IDs are supported; the final table is a host boundary. |
+| Analyze Skeleton | CuPyX | Boolean, already-skeletonized input; resolved 2D/3D blocks | Requesting skeletonization first remains CPU. The GPU candidate measures the authored skeleton and uses an exact typed host-table finalizer; spatial blocks must fit the reviewed index bounds. |
 
 Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
 handling where the underlying dtype/profile is admitted. An ambiguous or
@@ -257,7 +268,7 @@ benchmark look faster.
 
 The `gpu-cuda13` extra installs the pinned CuPy/CuPyX CUDA track and every
 current reviewed GPU provider, including background processing and basic
-measurements. No separate provider bundle or local source build is required;
+measurements, hybrid mesh packing, and supported skeleton measurement. No separate provider bundle or local source build is required;
 see the [Windows NVIDIA GPU guide](../getting-started/windows-cuda.md).
 
 Public admission requires native Windows, CPython 3.12, the pinned CUDA 13.2
@@ -267,7 +278,7 @@ recorded in provenance rather than used as an allowlist. Auto, Prefer GPU, and
 Custom use the same device gate; each operation still has its own exact
 workload, memory, dependency, and cleanup requirements. The Linux CUDA command
 is useful for qualification/development but the current public policy resolves
-Linux GPU candidates to CPU. CUDA has no macOS path; both 0.14.0a3 macOS
+Linux GPU candidates to CPU. CUDA has no macOS path; both 0.15.0a1 macOS
 installer architectures are deliberately CPU-only.
 
 Hardware, driver, compiler, and reduction-order differences can produce minor
@@ -355,13 +366,13 @@ dataset...** serialize accepted cached values instead; they do not rerun the gra
 or create exact compute-provenance sidecars. Preserve:
 
 - the schema-6 workflow and complete compute request;
-- for batch, the version-5 config, finalized manifest/archive, and item
+- for batch, the version-6 config, finalized version-5 manifest/archive, and item
   sidecars;
 - for generated outputs, requested `.vipp-provenance.json` sidecars;
 - the actual implementation IDs/versions and environment fingerprint; and
 - CPU decisions, classified fallbacks/OOM, cancellation, and cleanup outcome.
 
-Workflow schema 6, batch config schema 5, saved runners, and generated CLIs use
+Workflow schema 6, batch config schema 6, saved runners, and generated CLIs use
 the stable value `prefer_gpu`. Saved per-node preferences remain present but
 dormant outside Custom; switching back to Custom reactivates them.
 `Benchmark node…` and **Find fastest pipeline…** are Custom-only. A CLI mode

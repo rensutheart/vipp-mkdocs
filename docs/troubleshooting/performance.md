@@ -114,7 +114,7 @@ coherent view.
 Exact interior percentiles require one native-dtype working buffer for the
 order-statistic selection. The common integer `0..100` percentile pair uses
 exact extrema without that buffer. Integer Rescale maps the output in bounded
-chunks, while integer Clip stays in the native dtype and avoids a whole-image
+chunks, while integer Clamp Intensity stays in the native dtype and avoids a whole-image
 float temporary.
 
 The `Cancel` button cancels queued reruns and asks cooperative operations to

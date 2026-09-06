@@ -1,6 +1,6 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.14.0a3 uses one standard CUDA 13 installation for every current
+VIPP 0.15.0a1 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, `nvcc`, cuCIM
@@ -8,9 +8,9 @@ bundle, or locally built provider wheel is required.
 
 !!! warning "Use the exact a3 release"
     Download the installer and checksum only from the
-    [official v0.14.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3).
-    Verify `VIPP-Setup-0.14.0a3-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.14.0a3.txt` before opening it. This alpha is
+    [official v0.15.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1).
+    Verify `VIPP-Setup-0.15.0a1-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.15.0a1.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
 
 ## Choose the standard NVIDIA route
@@ -20,7 +20,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.14.0a3 boundary |
+| Requirement | 0.15.0a1 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -101,7 +101,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.14.0a3"
+  "napari-vipp[gpu-cuda13]==0.15.0a1"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -156,7 +156,7 @@ compute mode explicitly rather than expecting VIPP to guess.
 
 !!! danger "Do not reuse an old provider add-on"
     Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-    earlier VIPP release into 0.14.0a3. Those assets describe an older release
+    earlier VIPP release into 0.15.0a1. Those assets describe an older release
     boundary and are not required by the current application.
 
 ## Runtime behavior and provenance
@@ -185,7 +185,7 @@ This is often correct. Inspect the node's compute explanation for a dtype,
 rank, parameter, memory, workload, or parity exclusion. Do not change a
 scientific parameter merely to unlock GPU execution.
 
-In 0.14.0a3, Prefer GPU preserves exact workload facts across intervening
+In 0.15.0a1, Prefer GPU preserves exact workload facts across intervening
 CPU-only nodes. A required CPU Rescale Axes, Rescale Intensity, or Unsharp Mask
 step therefore does not by itself make reviewed downstream GPU work
 ineligible. If an affected downstream node still uses CPU, its compute details
@@ -221,4 +221,4 @@ that procedure to a3. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
 preserved as the historical record.
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[official v0.14.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.14.0a3).
+[official v0.15.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1).

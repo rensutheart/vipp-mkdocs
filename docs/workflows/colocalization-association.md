@@ -66,27 +66,39 @@ the analysis population:
 Large datasets are processed in bounded chunks and off the user-interface
 thread. Chunking limits temporary memory; it is not sampling. The density image,
 ROI count, and colocalized count all represent the complete ROI population.
-Interactive density is capped and reported at 1,024 bins per axis. Dedicated
-`Colocalization Scatter Plot` and `Masked Colocalization Scatter Plot` nodes
-can request independent histogram bins and square output size up to 4,096,
-native populated axis ranges, and optional symmetric percentile clipping.
+The detached scatter window supports up to 4,096 bins per axis with a host-memory
+preflight. The compact inspector uses a mass-preserving derivative of at most
+1,024 bins per axis, not a sample of source voxels. Existing graph scatter nodes
+also support independently configured histogram bins and square output size.
 
 For example, a summary such as `Exact colocalized count: 18,420/251,006` means
 that all 251,006 ROI voxels contributed to both the count and the displayed
 density. The scatter grid is a visual QC summary; the metric table and
 `Colocalized Voxels` output remain the appropriate quantitative artifacts.
 
-Dragging a threshold guide switches the node to manual thresholds. The guides
-move immediately and compatible threshold-independent density remains visible,
-while the old exact count becomes a calculating state and the complete ROI is
-recounted. Rapid requests are coalesced. This is a scientific parameter change,
-not merely a plot adjustment, so wait for the exact count, recalculate stale
-manual outputs, and save the workflow afterward.
+Dragging a threshold guide previews its position and an immediate
+density-derived count without invalidating the workflow on every movement.
+Releasing it commits the threshold, switches the node to manual thresholds,
+and recounts the complete ROI. This is a scientific parameter change, not merely
+a plot adjustment: wait for the exact count, recalculate stale manual outputs,
+and save the workflow afterward.
 
-The inspector and resizable pop-out have linked colormap selectors. Changing
-the colormap redraws cached density without recalculating metrics. The pop-out
-can save PNG or TIFF at its current display resolution; use a graph scatter node
-when the chosen scatter definition and image need to remain in the workflow.
+Use **Open in window** in the scatter section of `Colocalization Metrics` or
+its masked variant for a larger interactive view. Colormap and log-density
+changes redraw cached density; bin changes calculate a new density in the
+background. **Export size** controls square PNG or TIFF output independently
+of the window's size.
+
+Both axes use a zero-inclusive shared range by default. **Zoom to populated
+data** uses the selected percentile range; **Equal axis scales** makes equal
+intensity differences occupy equal distances. The range readout identifies
+what is visible. These display choices never clip the population used for
+exact counts or metrics.
+
+The old `Colocalization Scatter Plot` and masked graph nodes are hidden from the
+palette, but remain executable in saved workflows and headless programs that
+require their durable raster output. New interactive work should use the
+metrics-node pop-out.
 
 ## Native intensity and metric names in 0.13 and later
 

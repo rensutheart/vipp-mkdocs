@@ -27,7 +27,7 @@ Report:
 - for automatic thresholds: method, stack/slice scope, and the saved float
   histogram-bin count where applicable; for Minimum, also the maximum smoothing
   iterations;
-- for `Rescale Intensity` or `Clip`: percentile/data-range/explicit-value mode
+- for `Rescale Intensity` or `Clamp Intensity`: percentile/data-range/explicit-value mode
   and its saved cutoffs;
 - every explicit dtype conversion and its preserve/rescale policy, especially
   when it enabled a floating-point GPU region;

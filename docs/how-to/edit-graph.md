@@ -55,7 +55,7 @@ Pasted graph nodes receive fresh identities. Connections to nodes outside the
 copied selection are not silently recreated. Inspect the pasted fragment before
 using it for a consequential calculation.
 
-Open **Graph Editing Acceptance Check** from **Open example...** for numbered
+Open **Graph Editing Acceptance Check** from **Gear menu → Open example…** for numbered
 notes that exercise tunnel insertion, value transfer, fragment copy/paste,
 group movement, and undo/redo.
 
@@ -99,7 +99,7 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 - Arrange flow from left to right.
 - Put alternative methods on parallel branches, not one after another.
 - Keep source, QC, and output nodes visually distinct.
-- Use **Structure** (shown as **Auto structure graph** when space permits) as a
+- Use **Auto Arrange** in the graph context row (or gear menu on narrow windows) as a
   starting point, then preserve meaningful
   parallel alignment.
 - Add graph notes at decisions: why a channel was selected, how a threshold was
@@ -119,8 +119,8 @@ The **Port labels** setting has three display modes:
 Long names are elided on the card and show their full text in a tooltip. Labels
 reserve card space but deliberately do not reposition the graph when the mode
 changes. If existing cards now overlap, the VIPP message strip reports how many
-pairs overlap. Run **Structure** to rebuild a size-aware source-to-sink
-layout, or move those cards manually. Auto structure remains a one-shot,
+pairs overlap. Run **Auto Arrange** to rebuild a size-aware source-to-sink
+layout, or move those cards manually. Auto Arrange remains a one-shot,
 undoable layout edit; port-label visibility does not change the workflow's
 connections or scientific calculation.
 
