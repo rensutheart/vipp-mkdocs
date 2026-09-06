@@ -2888,7 +2888,7 @@
 <ul>
 <li><strong>Complete measurement tables.</strong> Resizable windows offer numeric/natural sorting, units, missing and non-finite value diagnostics, and background CSV/TSV export. Sorting changes only the view; exports preserve the original scientific rows and values.</li>
 <li><strong>New Intensity Histogram node.</strong> Calculate reproducible scalar or multichannel distributions with shared bin edges, explicit ranges, and linear or logarithmic spacing. Results include counts, fractions, densities, and cumulative values, with excluded and out-of-range values recorded in metadata. Display changes reuse the calculated table instead of rescanning the image.</li>
-<li><strong>Improved colocalization and histogram exploration.</strong> Metric-node scatter pop-outs gain interactive threshold guides, zero-inclusive shared axes, equal-axis and populated-data zoom, and up to 4096 density bins per axis through background, memory-gated calculation. Plot controls do not change the full ROI used for exact metrics. Overlapping channel histograms have clearer colours and translucent fills.</li>
+<li><strong>Improved colocalization and histogram exploration.</strong> Metric-node scatter pop-outs gain smoother threshold-guide interaction, zero-inclusive shared axes, equal-axis and populated-data zoom, and up to 4096 density bins per axis through background, memory-gated calculation. Plot controls do not change the full ROI used for exact metrics. Overlapping channel histograms have clearer colours and translucent fills.</li>
 <li><strong>Four additional Normalize methods.</strong> Robust z-score (median/MAD), maximum-absolute scaling, reference z-score using saved mean/standard deviation, and percentile-based 0–1 scaling join the existing min–max and z-score methods. Fitted statistics use the whole input, not separate per-channel fits; signed methods should not be mistaken for 0–1 scaling. Existing methods retain their previous calculation.</li>
 <li><strong>Faster object measurements.</strong> CPU mesh and skeleton analysis reduce work to relevant object regions, and nearest-object calculations use spatial indexing while retaining coordinate, calibration, and tie-breaking rules.</li>
 <li><strong>New GPU measurement paths.</strong> Eligible NVIDIA workflows gain hybrid <strong>Measure 3D Mesh Morphology</strong> for non-negative int32 3D labels and GPU <strong>Analyze Skeleton</strong> measurement for already-skeletonized boolean 2D/3D inputs. Mesh preparation is accelerated while marching cubes and convex hulls remain CPU work. Skeleton measurement retains the CPU reference's voxel-graph and calibration rules; it does not add GPU thinning.</li>
@@ -2951,7 +2951,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 20:58:13 UTC">September 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 21:00:00 UTC">September 6, 2026</span>
   </span>
 
     
