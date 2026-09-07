@@ -969,6 +969,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1027,6 +1031,52 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/updating/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Check for updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/reader-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microscope reader support
     
   </span>
   
@@ -1230,6 +1280,8 @@
       
         
       
+        
+      
     
     
     
@@ -1288,6 +1340,29 @@
   
   <span class="md-ellipsis">
     Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/mask-to-mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create and export 3D meshes
     
   </span>
   
@@ -2242,6 +2317,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#binary-threshold-cutoff-or-intensity-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binary Threshold: cutoff or intensity range
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#automatic-threshold-histograms" class="md-nav__link">
     <span class="md-ellipsis">
       Automatic Threshold Histograms
@@ -3013,6 +3097,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#binary-threshold-cutoff-or-intensity-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binary Threshold: cutoff or intensity range
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#automatic-threshold-histograms" class="md-nav__link">
     <span class="md-ellipsis">
       Automatic Threshold Histograms
@@ -3115,6 +3208,64 @@
 <p>Use this reference when cutoff choice, histogram scope, or numeric precision
 could change your analysis. For a first segmentation, start with the
 <a href="../../workflows/segmentation-label-cleanup/">label-cleanup tutorial</a>.</p>
+<h2 id="binary-threshold-cutoff-or-intensity-range">Binary Threshold: cutoff or intensity range<a class="headerlink" href="#binary-threshold-cutoff-or-intensity-range" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">After 0.15.0a1 — development version</p>
+<p>Binary Threshold adds <strong>Foreground: Above / Below / In range / Outside range</strong>. Existing workflows
+keep <strong>Above</strong> and produce the same mask as before.</p>
+</div>
+<p>Choose <strong>Foreground</strong>, then adjust the slider or drag a histogram guide:</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Becomes foreground</th>
+<th>Useful for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Above</strong> (default)</td>
+<td>Values strictly greater than the threshold</td>
+<td>Bright structures on a darker background</td>
+</tr>
+<tr>
+<td><strong>Below</strong></td>
+<td>Values strictly less than the threshold</td>
+<td>Dark structures on a brighter background</td>
+</tr>
+<tr>
+<td><strong>In range</strong></td>
+<td><code>low ≤ value ≤ high</code></td>
+<td>Keep an intensity band, including its limits</td>
+</tr>
+<tr>
+<td><strong>Outside range</strong></td>
+<td><code>value &lt; low</code> or <code>value &gt; high</code></td>
+<td>Exclude an intensity band and its limits</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Above/Below</strong> show one <strong>Threshold</strong> slider; values exactly equal to it stay
+background. <strong>In range/Outside range</strong> instead show <strong>Low threshold</strong> and
+<strong>High threshold</strong>, with orange and blue histogram guides. The controls keep
+low ≤ high. Equal limits select exactly that intensity with In range, or every
+other non-NaN value with Outside range.</p>
+<p>NaN pixels stay background in all four modes, so Outside range is not simply
+an inversion of In range. Loaded or scripted ranges with non-finite or reversed
+limits are rejected, not silently corrected.</p>
+<p>The cutoff applies throughout the supplied image or volume; it does not fit a
+separate cutoff per slice. Declared RGB/RGBA input uses the existing explicit
+luminance conversion. The choice is saved and used by batch and Python exports.</p>
+<p>With a finite cutoff, positive infinity is foreground only in Above, and
+negative infinity only in Below. With finite range limits, both infinities are
+outside the range. Automatic threshold nodes use the different
+non-finite policy described below.</p>
+<p>These are elementwise comparisons, preserving 2D, 3D, and leading time/channel
+axes and returning a Boolean mask without changing the input. The CPU path
+uses NumPy's <a href="https://numpy.org/doc/stable/reference/generated/numpy.greater_equal.html">inclusive</a>
+and <a href="https://numpy.org/doc/stable/reference/generated/numpy.less.html">strict</a>
+comparison rules; the supported scalar float32 CuPy path follows the same rules.</p>
 <h2 id="automatic-threshold-histograms">Automatic Threshold Histograms<a class="headerlink" href="#automatic-threshold-histograms" title="Permanent link">&para;</a></h2>
 <p>Otsu, Triangle, Yen, Isodata, and Minimum calculate their cutoff from every
 finite pixel in the selected scope. VIPP does not silently sample a large image
@@ -3215,6 +3366,26 @@ and Clamp Intensity additionally show their cutoff guides; the other three
 input histograms are read-only
 context for judging the transformation.</p>
 <h2 id="rescale-intensity-cutoffs">Rescale Intensity Cutoffs<a class="headerlink" href="#rescale-intensity-cutoffs" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">After 0.15.0a1 — development version</p>
+<p>Low and high input controls cannot cross. Rescale allows equal input cutoffs;
+Normalize's percentile limits must remain distinct. Rescale also keeps
+<strong>Output min ≤ Output max</strong>; use <strong>Invert intensity</strong> to reverse the mapping.</p>
+</div>
+<p>Normally, the low input cutoff maps to <strong>Output min</strong> and the high cutoff to
+<strong>Output max</strong>. With <strong>Invert intensity</strong> checked, these destinations reverse:
+dark values become bright and bright values become dark, within the same output
+bounds. The checkbox defaults to off and is saved for batch runs and Python
+exports. Editing either bound never moves the other one.</p>
+<p>Equal output bounds produce a constant numeric image. Equal input cutoffs fill
+Output min normally, or Output max when inverted. Boolean masks keep their
+True/False values normally; inversion swaps True and False, without rescaling
+them to the numeric output bounds. Other inputs retain their dtype; NaNs remain
+NaN for distinct input cutoffs, and infinities map to the corresponding endpoints.</p>
+<p>Older workflows with reversed output bounds need a one-time correction: enter
+the smaller value as Output min, the larger as Output max, then check
+Invert intensity if the reversed mapping was intentional. VIPP leaves the
+saved values untouched and reports this guidance instead of guessing.</p>
 <p><code>Rescale Intensity</code> makes the cutoff source explicit:</p>
 <table>
 <thead>
@@ -3301,7 +3472,7 @@ modes actually process.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
   </span>
 
     

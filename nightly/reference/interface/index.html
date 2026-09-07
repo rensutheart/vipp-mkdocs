@@ -969,6 +969,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1027,6 +1031,52 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/updating/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Check for updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/reader-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microscope reader support
     
   </span>
   
@@ -1230,6 +1280,8 @@
       
         
       
+        
+      
     
     
     
@@ -1288,6 +1340,29 @@
   
   <span class="md-ellipsis">
     Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/mask-to-mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create and export 3D meshes
     
   </span>
   
@@ -2211,6 +2286,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Workflow toolbar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finding nodes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toolbar-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toolbar controls
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3109,6 +3208,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Workflow toolbar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finding nodes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toolbar-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toolbar controls
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3281,12 +3404,19 @@ freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.</p>
 <h2 id="workflow-tabs">Workflow tabs<a class="headerlink" href="#workflow-tabs" title="Permanent link">&para;</a></h2>
+<p>In unreleased nightly builds, table- and mesh-only graph nodes do not reserve
+a thumbnail area or show <strong>No preview</strong>, even before calculation. Their
+results remain available in the inspector or napari surface view.</p>
 <p>The movable tab bar holds independent live workflow sessions. Each tab retains
 its graph, calculated results, ancillary caches, undo/redo history, inspector
 state, file path, dirty baseline, display choices, compute request, and Batch
 workspace. <strong>New</strong> and <strong>Open</strong> create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.</p>
+<p>In unreleased nightly builds, right-click a tab and choose <strong>Open in File
+Explorer</strong> (Windows) or <strong>Open in Finder</strong> (macOS) to select its saved workflow
+file. Linux offers <strong>Open containing folder</strong>. This does not switch tabs or save
+pending edits; save a new workflow first to enable the action.</p>
 <p>Switching tabs restores retained state and does not recalculate scientific
 results. The selected tab is acknowledged immediately and can show an
 indeterminate restoration state while its retained graph, inspector,
@@ -3300,6 +3430,16 @@ and compute, then Undo/Redo and the gear menu. Below the workflow tabs, the
 graph context row holds sidebar toggles, <strong>Find in workflow</strong>, <strong>Refresh</strong>,
 <strong>Focus</strong>, <strong>Auto Arrange</strong>, <strong>Tunnels…</strong>, and zoom. This keeps graph navigation
 separate from file and execution actions.</p>
+<h3 id="finding-nodes">Finding nodes<a class="headerlink" href="#finding-nodes" title="Permanent link">&para;</a></h3>
+<p>Use <strong>Find a node to add…</strong> in the Nodes panel to add an operation, or
+<strong>Find in workflow</strong> to locate a node already in your graph.</p>
+<p>In the unreleased version after 0.15.0a1, these searches and the insert-node
+picker also accept common alternative names: <strong>dilate → Dilation</strong>,
+<strong>erode → Erosion</strong>, <strong>thinning → Skeletonize</strong>, <strong>NLM → Non-Local Means</strong>,
+and <strong>clipping → Clamp Intensity</strong>. British spellings such as
+<strong>normalise</strong> and <strong>skeletonisation</strong> work too. Results keep their usual node
+names; searching does not change the workflow or its calculations.</p>
+<h3 id="toolbar-controls">Toolbar controls<a class="headerlink" href="#toolbar-controls" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -3630,6 +3770,20 @@ volume distribution, colocalization scatter, table preview, auto contrast,
 <strong>Pin selected</strong>, <strong>Save selected output...</strong>, and an explicit reset of the
 selected output's remembered display profile.</p>
 <h3 id="numeric-parameter-entry">Numeric parameter entry<a class="headerlink" href="#numeric-parameter-entry" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">After 0.15.0a1 — development version</p>
+<p>Odd-only filter windows and PSF support sizes advance through odd numbers,
+including when dragged or typed. Linked low/high controls stop at their
+partner's limit; widen the high limit first when moving both values upward.
+Editing one value does not move the other. Percentages and counts stay
+within their supported ranges, and tiny positive minima remain selectable.</p>
+<p>Fractional settings retain their declared precision, including <strong>Smooth Mesh</strong>
+strength, <strong>Simplify Mesh</strong> percentage/aggressiveness and <strong>Filter Mesh Objects</strong>
+measurement limits. Counts, IDs and odd-only sizes remain whole numbers.</p>
+<p>These controls prevent invalid interactive edits, not every possible
+calculation error. Input shape, dtype and metadata still need to match the
+operation. Loading or displaying a workflow does not repair its parameters.</p>
+</div>
 <p>Numeric spinners accept direct keyboard entry as well as their step buttons and
 paired sliders. Floating-point fields accept decimal points or commas and
 scientific notation such as <code>2e-4</code>; sufficiently small non-zero values are also
@@ -3724,6 +3878,12 @@ layer contrast changes downstream arrays, masks, thresholds, or measurements.</p
 <p>The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved <strong>Float histogram bins</strong> parameter.</p>
+<p><em>Unreleased:</em> Hover within a compact histogram's bin column to see its count,
+including tiny or empty bars. Object-size and property plots also show the
+range in the original units, even with <strong>Log size axis</strong> enabled. These values
+reuse the calculated histogram; hovering does not scan the image or change
+analysis. If the inspector is too narrow to draw individual bins, widen it to
+enable hover. Tooltips pause while you drag a parameter guide.</p>
 <p>Every node in the <strong>Intensity &amp; Contrast</strong> palette family shows both its input
 and output histogram when an array result is available. Input and output scope
 controls remain independent, so changing a histogram from the current slice to
@@ -3827,7 +3987,7 @@ of ordinary graph progress. See <a href="../../workflows/batch-processing/">proc
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
   </span>
 
     

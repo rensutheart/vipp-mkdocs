@@ -12,13 +12,13 @@
         <meta name="author" content="Rensu P. Theart">
       
       
-        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/getting-started/macos/">
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/nightly/workflows/mask-to-mesh/">
       
       
-        <link rel="prev" href="../reader-support/">
+        <link rel="prev" href="../segmentation-label-cleanup/">
       
       
-        <link rel="next" href="../windows-cuda/">
+        <link rel="next" href="../object-measurements-tables/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Install on macOS - VIPP — Visual Image Processing Platform</title>
+        <title>Create and export 3D meshes - VIPP — Visual Image Processing Platform</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#install-vipp-on-macos" class="md-skip">
+        <a href="#create-colour-and-export-3d-mesh-objects" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Install on macOS
+              Create and export 3D meshes
             
           </span>
         </div>
@@ -285,13 +285,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../getting-started/" class="md-tabs__link">
           
   
   
@@ -309,11 +307,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../workflows/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -944,8 +944,6 @@
       
   
   
-    
-  
   
   
     
@@ -959,6 +957,317 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Start here
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Start here
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/updating/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Check for updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/reader-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microscope reader support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows NVIDIA GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-field-acceptance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test a Windows install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/launching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Launch VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/example-tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour a finished workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/build-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build your first workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/own-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use your own images
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
         
       
         
@@ -991,7 +1300,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -1000,7 +1309,7 @@
   
   
   <span class="md-ellipsis">
-    Start here
+    Tutorials
     
   </span>
   
@@ -1008,16 +1317,16 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Start here
+            Tutorials
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1030,58 +1339,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../segmentation-label-cleanup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Install VIPP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../updating/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Check for updates
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../reader-support/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Microscope reader support
+    Segment and clean labels
     
   </span>
   
@@ -1113,7 +1376,7 @@
   
   
   <span class="md-ellipsis">
-    Install on macOS
+    Create and export 3D meshes
     
   </span>
   
@@ -1126,7 +1389,7 @@
   
   
   <span class="md-ellipsis">
-    Install on macOS
+    Create and export 3D meshes
     
   </span>
   
@@ -1151,45 +1414,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#choose-the-correct-package" class="md-nav__link">
+  <a href="#create-the-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
-      Choose the correct package
+      Create the surfaces
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-the-download" class="md-nav__link">
+  <a href="#colour-by-identity-or-measurement" class="md-nav__link">
     <span class="md-ellipsis">
-      Verify the download
+      Colour by identity or measurement
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-and-pass-the-macos-warning" class="md-nav__link">
+  <a href="#combine-split-or-select-objects" class="md-nav__link">
     <span class="md-ellipsis">
-      Install and pass the macOS warning
+      Combine, split or select objects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combine, split or select objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-filter-limits-from-the-input-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose filter limits from the input distribution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smooth-or-reduce-triangles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smooth or reduce triangles
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#open-vipp" class="md-nav__link">
+  <a href="#measure-the-current-geometry" class="md-nav__link">
     <span class="md-ellipsis">
-      Open VIPP
+      Measure the current geometry
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-or-remove-this-alpha" class="md-nav__link">
+  <a href="#save-the-mesh" class="md-nav__link">
     <span class="md-ellipsis">
-      Update or remove this alpha
+      Save the mesh
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
     </span>
   </a>
   
@@ -1211,270 +1507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-cuda/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Windows NVIDIA GPU
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../windows-field-acceptance/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Test a Windows install
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../launching/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Launch VIPP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../example-tour/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Tour a finished workflow
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../build-workflow/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Build your first workflow
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../own-data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Use your own images
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../workflows/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Tutorials
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Tutorials
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../workflows/segmentation-label-cleanup/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Segment and clean labels
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../workflows/mask-to-mesh/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Create and export 3D meshes
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../workflows/object-measurements-tables/" class="md-nav__link">
+      <a href="../object-measurements-tables/" class="md-nav__link">
         
   
   
@@ -1497,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/skeleton-network-analysis/" class="md-nav__link">
+      <a href="../skeleton-network-analysis/" class="md-nav__link">
         
   
   
@@ -1520,7 +1553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/colocalization-association/" class="md-nav__link">
+      <a href="../colocalization-association/" class="md-nav__link">
         
   
   
@@ -1543,7 +1576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/psf-deconvolution/" class="md-nav__link">
+      <a href="../psf-deconvolution/" class="md-nav__link">
         
   
   
@@ -1566,7 +1599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/batch-processing/" class="md-nav__link">
+      <a href="../batch-processing/" class="md-nav__link">
         
   
   
@@ -3058,45 +3091,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#choose-the-correct-package" class="md-nav__link">
+  <a href="#create-the-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
-      Choose the correct package
+      Create the surfaces
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-the-download" class="md-nav__link">
+  <a href="#colour-by-identity-or-measurement" class="md-nav__link">
     <span class="md-ellipsis">
-      Verify the download
+      Colour by identity or measurement
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-and-pass-the-macos-warning" class="md-nav__link">
+  <a href="#combine-split-or-select-objects" class="md-nav__link">
     <span class="md-ellipsis">
-      Install and pass the macOS warning
+      Combine, split or select objects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combine, split or select objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-filter-limits-from-the-input-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose filter limits from the input distribution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smooth-or-reduce-triangles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smooth or reduce triangles
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#open-vipp" class="md-nav__link">
+  <a href="#measure-the-current-geometry" class="md-nav__link">
     <span class="md-ellipsis">
-      Open VIPP
+      Measure the current geometry
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-or-remove-this-alpha" class="md-nav__link">
+  <a href="#save-the-mesh" class="md-nav__link">
     <span class="md-ellipsis">
-      Update or remove this alpha
+      Save the mesh
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
     </span>
   </a>
   
@@ -3118,7 +3184,7 @@
 
 
   
-    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/getting-started/macos.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/workflows/mask-to-mesh.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3126,79 +3192,245 @@
   
 
 
-<h1 id="install-vipp-on-macos">Install VIPP on macOS<a class="headerlink" href="#install-vipp-on-macos" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.15.0a1 provides separate offline packages for Apple Silicon and Intel
-Macs. The package includes Python, napari, Qt, and VIPP, so the normal install
-does not require Terminal or a separately installed Python.</p>
-<p>The macOS package is CPU-only, supports macOS 13 or newer, installs for the
-current user, and needs approximately 3 GB of free disk space.</p>
-<h2 id="choose-the-correct-package">Choose the correct package<a class="headerlink" href="#choose-the-correct-package" title="Permanent link">&para;</a></h2>
-<p>Open <strong>Apple menu → About This Mac</strong>, then choose the matching download from
-the <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1">official v0.15.0a1 release</a>:</p>
-<ul>
-<li><strong>Apple Silicon</strong> — the Mac reports a chip such as Apple M1, M2, M3, or M4:
-  download <code>VIPP-0.15.0a1-macOS-arm64-UNSIGNED.pkg</code> and
-  <code>SHA256SUMS-macOS-arm64-0.15.0a1.txt</code>.</li>
-<li><strong>Intel</strong> — the Mac reports an Intel processor: download
-  <code>VIPP-0.15.0a1-macOS-x86_64-UNSIGNED.pkg</code> and
-  <code>SHA256SUMS-macOS-x86_64-0.15.0a1.txt</code>.</li>
-</ul>
-<p>Do not use a package from another site or change architectures to work around
-an installation error. These are native, architecture-specific packages, not
-one Universal 2 package.</p>
-<h2 id="verify-the-download">Verify the download<a class="headerlink" href="#verify-the-download" title="Permanent link">&para;</a></h2>
-<p>This alpha is explicitly unsigned and not notarized. Verify its SHA-256 before
-approving macOS's warning. If you are comfortable using Terminal, open it in
-the download folder and run the command for your architecture:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Apple Silicon</label><label for="__tabbed_1_2">Intel</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>VIPP-0.15.0a1-macOS-arm64-UNSIGNED.pkg
-</span></code></pre></div>
+<h1 id="create-colour-and-export-3d-mesh-objects">Create, colour and export 3D mesh objects<a class="headerlink" href="#create-colour-and-export-3d-mesh-objects" title="Permanent link">&para;</a></h1>
+<p>Turn segmented volumes into separate coloured surfaces, inspect them in napari,
+and export their geometry without losing object identity.</p>
+<div class="admonition info">
+<p class="admonition-title">Unreleased — nightly</p>
+<p>The <strong>3D Meshes</strong> category sits beside <strong>Morphology</strong>. Its nodes are manual/
+cached and run on CPU. <strong>Measure 3D Mesh Morphology</strong> remains under
+<strong>Measurements</strong> and also accepts their mesh outputs.</p>
 </div>
-<div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>VIPP-0.15.0a1-macOS-x86_64-UNSIGNED.pkg
-</span></code></pre></div>
-</div>
-</div>
-</div>
-<p>Compare all 64 characters with the line for the PKG in the matching
-<code>SHA256SUMS-macOS-*.txt</code> file. Stop and delete the package if they differ.
-Terminal is only used here as an optional checksum tool; it is not needed to
-install or run VIPP.</p>
-<h2 id="install-and-pass-the-macos-warning">Install and pass the macOS warning<a class="headerlink" href="#install-and-pass-the-macos-warning" title="Permanent link">&para;</a></h2>
+<h2 id="create-the-surfaces">Create the surfaces<a class="headerlink" href="#create-the-surfaces" title="Permanent link">&para;</a></h2>
+<p>To try a ready-made workflow in nightly, open <strong>Open example → 3D Meshes →
+Mesh Objects — Tuned Refinement</strong>, then <strong>Calculate all</strong>. It uses a bundled
+five-object sample, Turbo colours by triangle count, two smoothing iterations
+at strength 1, and 10% simplification at aggressiveness 4. These are saved
+sample-specific choices, not recommended settings for every specimen. Compare
+upstream geometry and measurements before accepting the refined result.
+Calculating the example does not save output files.</p>
 <ol>
-<li>Double-click the verified <code>-UNSIGNED.pkg</code>.</li>
-<li>If macOS says the developer cannot be verified, choose <strong>Done</strong>.</li>
-<li>Open <strong>System Settings → Privacy &amp; Security</strong>.</li>
-<li>Under <strong>Security</strong>, find the blocked VIPP package, choose <strong>Open Anyway</strong>,
-   and confirm the exact package name.</li>
-<li>Approve the Installer prompt and let installation finish.</li>
-</ol>
-<p>Never disable Gatekeeper globally or remove quarantine from unrelated files.
-A managed work or school Mac may not offer <strong>Open Anyway</strong>; ask its
-administrator or use the <a href="../installation/#linux-and-advanced-manual-installation">advanced manual route</a>
-instead of weakening security settings.</p>
-<h2 id="open-vipp">Open VIPP<a class="headerlink" href="#open-vipp" title="Permanent link">&para;</a></h2>
-<p>The package creates:</p>
+<li>Prepare a <strong>Boolean mask</strong> or <strong>integer labels</strong>. Select one channel/time
+   point upstream: the input needs exactly three explicit spatial axes, Z/Y/X,
+   with at least two voxels each. A 2D mask is not extruded into invented depth.</li>
+<li>Check calibration with <strong>Set Pixel Size / Units</strong> before extracting a mesh.
+   Physical units are required for 3MF export.</li>
+<li>
+<p>Choose the object grouping:</p>
+<table>
+<thead>
+<tr>
+<th>Node and choice</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mask to 3D Mesh → Objects: Single object</strong></td>
+<td>All foreground, including disconnected pieces, has one ID. This preserves existing workflows.</td>
+</tr>
+<tr>
+<td><strong>Mask to 3D Mesh → Objects: Connected objects</strong></td>
+<td>Each face-connected foreground component gets its own ID and colour. Cavities remain part of their foreground object.</td>
+</tr>
+<tr>
+<td><strong>Labels to 3D Mesh</strong></td>
+<td>Each positive label keeps its ID and gets a colour. Zero is background; disconnected regions with the same label remain one object.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Choose <strong>Image border</strong>:</p>
 <ul>
-<li>a private managed environment at <code>~/Library/vipp</code>; and</li>
-<li>the application <code>~/Applications/VIPP.app</code>.</li>
+<li><strong>Close at image border</strong> adds background outside the volume. It closes
+  cut objects, assuming they end there; it does not recover missing biology.</li>
+<li><strong>Leave open at image border</strong> makes no outside-background assumption.
+  Border-touching objects can have open surfaces.</li>
 </ul>
-<p>Open your user <strong>Applications</strong> folder and double-click <strong>VIPP</strong>. First launch
-may take longer while napari loads. macOS remains CPU-only in this alpha.</p>
-<p>The package does not alter the system Python or shell startup files. It is a
-PKG rather than a DMG because the PKG already performs the installation and
-creates the application.</p>
-<h2 id="update-or-remove-this-alpha">Update or remove this alpha<a class="headerlink" href="#update-or-remove-this-alpha" title="Permanent link">&para;</a></h2>
-<p>There is no graphical updater or uninstaller in 0.15.0a1. Unless a later
-release explicitly documents a supported in-place update, remove both
-installer-owned paths before reinstalling:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>~/Applications/VIPP.app
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>~/Library/vipp
-</span></code></pre></div>
-<p>Move only those two paths to Trash. They contain the managed application and
-environment; your research images and saved workflows should live elsewhere.</p>
+</li>
+<li>
+<p>Click <strong>Calculate</strong>, then select or pin the result to inspect it in napari's
+   <strong>3D Surface</strong> viewer. The graph card shows object, vertex and triangle
+   counts instead of an image thumbnail. Mesh and table cards have no thumbnail
+   placeholder, including while bypassed or before their first calculation.</p>
+</li>
+</ol>
+<p>Extraction uses full-resolution Lewiner marching cubes, level 0.5 and step 1,
+without smoothing or repair. Empty masks have no surface; an entirely filled
+volume with open borders has no internal interface. Large volumes need substantial
+memory, and cancellation waits for the current extraction call to finish.</p>
+<h2 id="colour-by-identity-or-measurement">Colour by identity or measurement<a class="headerlink" href="#colour-by-identity-or-measurement" title="Permanent link">&para;</a></h2>
+<p>Add <strong>Colour Mesh Objects</strong> after extraction:</p>
+<ul>
+<li><strong>Colour by → Object ID</strong> gives repeatable categorical colours.</li>
+<li><strong>Volume</strong>, <strong>Surface area</strong>, <strong>Sphericity</strong> or <strong>Triangle count</strong> colours each
+  object from its current geometry. Choose <strong>Viridis</strong>, <strong>Plasma</strong>, <strong>Magma</strong> or
+  <strong>Turbo</strong> for the gradient. Unavailable measurements are grey.</li>
+</ul>
+<p>Measurement colours span the finite minimum and maximum in this mesh collection;
+they are not a fixed scale shared between different samples. Equal values use the
+middle of the gradient. The node changes colours, not triangles, and does not
+accept a separate measurement table in this version.</p>
+<h2 id="combine-split-or-select-objects">Combine, split or select objects<a class="headerlink" href="#combine-split-or-select-objects" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>What to do</th>
+<th>Important distinction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Combine Meshes</strong></td>
+<td>Set <strong>Input meshes</strong> from 2–16 and connect each mesh.</td>
+<td>Retains separate objects, colours and physical positions. Compatible units convert to the first input's frame; incompatible calibration is rejected. No alignment, vertex welding or geometric union occurs.</td>
+</tr>
+<tr>
+<td><strong>Split Mesh Objects</strong></td>
+<td>Connect an existing mesh with disconnected pieces.</td>
+<td>Gives edge-connected surface pieces separate IDs. Touching at a vertex alone does not join pieces.</td>
+</tr>
+<tr>
+<td><strong>Filter Mesh Objects</strong></td>
+<td>Choose <strong>Measure</strong>, <strong>Minimum</strong>, <strong>Maximum</strong> and <strong>Keep objects</strong>.</td>
+<td>Select by Volume, Surface area, Sphericity, Triangle count or Object ID. <strong>In range</strong> includes both bounds; <strong>Outside range</strong> excludes them. Missing measurements are excluded in both modes.</td>
+</tr>
+</tbody>
+</table>
+<p>Splitting a hollow object separates its disconnected inner cavity wall too.
+Prefer <strong>Connected objects</strong> during mask extraction when you want a hollow
+foreground object to keep its walls together.</p>
+<p>Filtering retains the kept IDs and colours. Combining preserves IDs unless they
+collide, then assigns new IDs and records the original identities. Split parts
+retain their parent identity in metadata. These are object-management operations,
+not a method for registering different acquisitions.</p>
+<h3 id="choose-filter-limits-from-the-input-distribution">Choose filter limits from the input distribution<a class="headerlink" href="#choose-filter-limits-from-the-input-distribution" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Unreleased — nightly</p>
+<p><strong>Filter Mesh Objects</strong> shows a histogram of the <strong>input</strong> objects for the
+selected <strong>Measure</strong>, before filtering. Measurements run in the background
+from the cached input mesh and use the same current-geometry calculation as
+the filter. Calculate the upstream mesh first if no cached input is available.</p>
+</div>
+<p>Hover over a bin to see its measurement range and object count. Drag the linked
+minimum/maximum markers or edit <strong>Minimum</strong> and <strong>Maximum</strong> to choose the bounds.
+The plotted span follows the finite input measurements, so a distant bound such
+as the default maximum of <code>1e12</code> does not flatten the distribution. Logarithmic
+display changes only the plot, not measurements, bounds or filtering.
+Unavailable values, including volume from open or invalid surfaces, are excluded
+from the histogram and reported; they are also excluded by either filter mode.</p>
+<p>The horizontal axis and filter bounds use the measurement's units. Volume is in
+the mesh's X-axis unit cubed and surface area in that unit squared: an X axis in
+<code>nm</code> gives <code>nm^3</code>/<code>nm^2</code>, and one in <code>mm</code> gives <code>mm^3</code>/<code>mm^2</code>. Compatible Z/Y units
+are converted to X units; non-micrometer units do <strong>not</strong> fall back to voxels.
+Without spatial units, these are geometric <code>voxel^3</code>/<code>voxel^2</code>, still using the
+declared axis scales—not a count of foreground mask voxels. VIPP does not assume
+a micrometer calibration. Sphericity is a dimensionless ratio; triangle count
+and object ID are counts and identifiers, respectively.</p>
+<h2 id="smooth-or-reduce-triangles">Smooth or reduce triangles<a class="headerlink" href="#smooth-or-reduce-triangles" title="Permanent link">&para;</a></h2>
+<p>Keep the original mesh on an upstream branch for comparison. Both refinement
+nodes return new geometry and retain object IDs and colours; neither overwrites
+the input or promises unchanged shape, volume or measurements.</p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Starting settings</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Smooth Mesh</strong></td>
+<td><strong>Iterations: 10</strong>, <strong>Strength: 0.5</strong></td>
+<td>Taubin-style smoothing in calibrated coordinates. More iterations or strength change the surface more. Strength 0 leaves geometry unchanged.</td>
+</tr>
+<tr>
+<td><strong>Simplify Mesh</strong></td>
+<td><strong>Triangles to keep (%): 50</strong>, <strong>Aggressiveness: 7</strong></td>
+<td>Approximate quadric-error reduction per object/component. The percentage is what to <strong>keep</strong>, not remove; 100 leaves geometry unchanged. Higher aggressiveness favours faster reduction over fidelity.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Strength</strong> controls smoothing per iteration, from <strong>0 to 1</strong> in <strong>0.01</strong> steps.
+Start at <strong>0.5</strong>; higher values smooth more strongly. It is not a percentage of
+volume reduction. Hover over the control for a reminder.</p>
+<p><strong>Simplify Mesh</strong> accepts fractional percentages (down to <strong>0.01%</strong>) and
+aggressiveness in <strong>0.1</strong> steps; neither is restricted to whole numbers.</p>
+<p><strong>Keep open boundaries fixed</strong> is on by default for both. Locked boundaries and
+small components can prevent reaching the requested triangle count. Review the
+actual result, then recalculate measurements from that branch.</p>
+<p>Invalid edges, duplicate/degenerate triangles and detected collapses are rejected
+rather than repaired. These checks are not a complete topology or self-intersection
+guarantee. Simplification may finish its current component before cancellation.</p>
+<p>If refinement fails, the message identifies the object and whether the defect
+was in the <strong>input</strong> or the <strong>new result</strong>:</p>
+<ul>
+<li><strong>Invalid input:</strong> inspect the upstream mesh or regenerate it from the mask/
+  labels. Changing refinement settings does not repair an existing defect.</li>
+<li><strong>Invalid simplified result:</strong> increase <strong>Triangles to keep (%)</strong>, or try lower
+  <strong>Aggressiveness</strong>. A valid slider value is not a guarantee for every geometry;
+  there is no universal safe minimum percentage.</li>
+<li><strong>Invalid smoothed result:</strong> reduce <strong>Strength</strong> or <strong>Iterations</strong>.</li>
+</ul>
+<p>No new mesh is returned on failure. VIPP does not automatically delete duplicate
+faces, since that can change surface validity and measurements. Any older cached
+output remains stale until a successful calculation.</p>
+<h2 id="measure-the-current-geometry">Measure the current geometry<a class="headerlink" href="#measure-the-current-geometry" title="Permanent link">&para;</a></h2>
+<p>Connect any mesh result to
+<a href="../object-measurements-tables/#3d-mesh-morphology">Measure 3D Mesh Morphology</a>
+and click <strong>Calculate</strong>. It produces one row per mesh object, keyed by <code>mesh_id</code>,
+without running marching cubes again. An already-cached mesh can be measured
+with <strong>CPU</strong>, <strong>Auto</strong> or <strong>Prefer GPU</strong> selected; this path remains CPU work.</p>
+<p>Open or invalid surfaces have unavailable volume-derived measurements. Check
+<code>mesh_status</code> and <code>mesh_error</code> before comparing objects or using a volume filter.</p>
+<h2 id="save-the-mesh">Save the mesh<a class="headerlink" href="#save-the-mesh" title="Permanent link">&para;</a></h2>
+<p>Select <strong>Save mesh…</strong> in the inspector:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Preserves</th>
+<th>Check in the receiving application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3MF</strong></td>
+<td>Physical units, separate named objects and display colours in one file; original IDs and calibration in metadata.</td>
+<td>Objects are exported as scientific <strong>surfaces</strong>, not certified printable solids. Colour is display colour, not a printer-material assignment.</td>
+</tr>
+<tr>
+<td><strong>Wavefront OBJ</strong></td>
+<td>Triangle geometry and separate object groups; IDs, colours and calibration in VIPP comments.</td>
+<td>OBJ has no standard unit field, and this export does not write a material file. Other readers may ignore the metadata and colours.</td>
+</tr>
+</tbody>
+</table>
+<p>Both use calibrated <strong>XYZ</strong> coordinates and retain relative positions—no printing
+scale, centring or packing is applied. For uncalibrated data, choose OBJ to retain
+voxel coordinates or correct calibration upstream and recalculate before 3MF.</p>
+<p>For automatic saving during interactive calculation, connect <strong>Save Image</strong>:
+it also accepts meshes in nightly builds. Set a <strong>Path</strong> ending in <code>.obj</code> or
+<code>.3mf</code>, choose <strong>auto</strong> or the matching format, and set <strong>Auto-save on update</strong>
+to <strong>on</strong>. <strong>Overwrite: no</strong> protects an existing file. The mesh passes through
+unchanged for downstream processing.</p>
+<p>For batch work, use <strong>Batch Output</strong> instead and select <strong>3mf</strong> or <strong>obj</strong>.
+<strong>batch default</strong> remains OBJ for existing workflows. Generated Python exports
+support both formats. See <a href="../../reference/import-export/#mesh-export-nightly">mesh export details</a>
+for unit conversion and format limits.</p>
+<p>Both nodes list formats for their connected input: mesh formats for meshes,
+image formats for images, and CSV/TSV for batch tables. If reconnecting makes a
+saved format incompatible, choose a replacement explicitly. Check the <strong>Path</strong>
+as well; VIPP will not write image pixels into an old mesh filename.</p>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.marching_cubes">scikit-image marching cubes</a></li>
+<li><a href="https://doi.org/10.1145/218380.218473">Taubin's surface-smoothing method</a></li>
+<li><a href="https://github.com/pyvista/fast-simplification">fast-simplification's quadric-error implementation</a></li>
+</ul>
 
 
 
@@ -3219,7 +3451,7 @@ environment; your research images and saved workflows should live elsewhere.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
   </span>
 
     
@@ -3257,7 +3489,7 @@ environment; your research images and saved workflows should live elsewhere.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../reader-support/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Microscope reader support">
+          <a href="../segmentation-label-cleanup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Segment and clean labels">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3267,20 +3499,20 @@ environment; your research images and saved workflows should live elsewhere.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Microscope reader support
+                Segment and clean labels
               </div>
             </div>
           </a>
         
         
           
-          <a href="../windows-cuda/" class="md-footer__link md-footer__link--next" aria-label="Next: Windows NVIDIA GPU">
+          <a href="../object-measurements-tables/" class="md-footer__link md-footer__link--next" aria-label="Next: Measure objects and tables">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Windows NVIDIA GPU
+                Measure objects and tables
               </div>
             </div>
             <div class="md-footer__button md-icon">

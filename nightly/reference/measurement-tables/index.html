@@ -969,6 +969,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1027,6 +1031,52 @@
   
   <span class="md-ellipsis">
     Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/updating/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Check for updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/reader-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microscope reader support
     
   </span>
   
@@ -1230,6 +1280,8 @@
       
         
       
+        
+      
     
     
     
@@ -1288,6 +1340,29 @@
   
   <span class="md-ellipsis">
     Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/mask-to-mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create and export 3D meshes
     
   </span>
   
@@ -2321,6 +2396,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3D mesh morphology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-mesh-objects-nightly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Existing mesh objects (nightly)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3016,6 +3106,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3D mesh morphology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-mesh-objects-nightly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Existing mesh objects (nightly)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3062,7 +3167,7 @@ per-column units where the calculation defines them.</p>
 <p>Keep the keys that distinguish observations:</p>
 <ul>
 <li>leading-axis indices, such as <code>t_index</code>, <code>c_index</code>, and <code>z_index</code>;</li>
-<li>object/graph IDs, such as <code>label_id</code>, <code>component_id</code>, <code>branch_id</code>, <code>node_id</code>,
+<li>object/graph IDs, such as <code>label_id</code>, <code>mesh_id</code>, <code>component_id</code>, <code>branch_id</code>, <code>node_id</code>,
   and <code>edge_id</code>;</li>
 <li>experimental fields added with <strong>Add Metadata Columns</strong>, such as treatment,
   replicate, and batch.</li>
@@ -3112,8 +3217,8 @@ columns remain <code>NaN</code>; VIPP does not apply a misleading single scale f
 <p><strong>Measure Objects + Intensity</strong> takes matching <strong>Labels</strong> and <strong>Intensity image</strong>
 inputs and adds per-object mean, minimum, maximum, sum, and standard deviation.</p>
 <h2 id="3d-mesh-morphology">3D mesh morphology<a class="headerlink" href="#3d-mesh-morphology" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Measure 3D Mesh Morphology</strong> only with true 3D labels and correct Z/Y/X
-spacing. It extracts a marching-cubes surface for each object.</p>
+<p>With true 3D labels and correct Z/Y/X spacing, <strong>Measure 3D Mesh Morphology</strong>
+extracts a marching-cubes surface for each object.</p>
 <table>
 <thead>
 <tr>
@@ -3144,8 +3249,45 @@ spacing. It extracts a marching-cubes surface for each object.</p>
 explanatory status. Check those fields before summarizing results.</p>
 <p>Segmentation, voxel spacing, and surface approximation all affect these
 measurements. Very small or flat objects may not support stable mesh or hull
-metrics. Mesh export, preview, and specialist repair are not supplied by this
-measurement node.</p>
+metrics. Mesh viewing/export belongs to the separate
+<a href="../../workflows/mask-to-mesh/">3D Meshes nodes</a>; specialist repair is not supplied.</p>
+<h3 id="existing-mesh-objects-nightly">Existing mesh objects (nightly)<a class="headerlink" href="#existing-mesh-objects-nightly" title="Permanent link">&para;</a></h3>
+<p>The mesh input measures current geometry directly, with one row per explicit
+object. It never remeshes, rejoins disconnected shells, or infers voxel counts.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mesh_id</code></td>
+<td>Stable mesh object identity, not a row number. Label extraction retains source label IDs.</td>
+</tr>
+<tr>
+<td><code>vertex_count</code>, <code>triangle_count</code></td>
+<td>Counts in that mesh object.</td>
+</tr>
+<tr>
+<td><code>watertight</code></td>
+<td>Edge/orientation checks passed; not a general self-intersection or print-validity certificate.</td>
+</tr>
+<tr>
+<td><code>mesh_status</code>, <code>mesh_error</code></td>
+<td>Explain empty or invalid geometry and unavailable metrics.</td>
+</tr>
+</tbody>
+</table>
+<p>Physical metrics use compatible units converted to the mesh X-axis unit;
+uncalibrated data remains in voxel-coordinate units. Open, degenerate,
+non-manifold or inconsistently wound surfaces keep area/extents where defined,
+but volume-derived fields are <code>NaN</code>. Smoothing and simplification can change
+measurements, even when the object ID stays the same.</p>
+<p>Filtering retains IDs; combining remaps collisions, and splitting assigns IDs
+to additional parts. Keep source/parent IDs from mesh metadata when tracing
+those changes. Do not join pre- and post-operation tables by row position.</p>
 <h2 id="skeleton-and-association-tables">Skeleton and association tables<a class="headerlink" href="#skeleton-and-association-tables" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../skeleton-nodes/">Skeleton reference</a>: component, branch, graph-node/edge,
@@ -3176,7 +3318,7 @@ results before export; changing table sorting does not recalculate the data.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
   </span>
 
     
