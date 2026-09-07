@@ -1614,6 +1614,8 @@
       
         
       
+        
+      
     
     
     
@@ -1695,6 +1697,29 @@
   
   <span class="md-ellipsis">
     Edit and organize a graph
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/crop-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Crop an image or volume
     
   </span>
   
@@ -2192,6 +2217,22 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2273,6 +2314,190 @@
   
   <span class="md-ellipsis">
     Toolbar and settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/display-settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/intensity-thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intensity and thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/channel-axis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel and axis controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/measurement-tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measurement tables and units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/skeleton-nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skeleton node outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/colocalization-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Colocalization metric definitions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/racc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RACC-like index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/association-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Object association metrics
     
   </span>
   
@@ -2978,7 +3203,7 @@
 
 <h1 id="restore-with-a-psf">Restore with a PSF<a class="headerlink" href="#restore-with-a-psf" title="Permanent link">&para;</a></h1>
 <p>Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.14.0a1. The
+RL with total-variation regularization (RL-TV) are available in 0.15.0a1. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
 stale, its descendants wait and retain their last coherent cached results when
@@ -3019,7 +3244,7 @@ structures against an appropriate reference.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Backend agreement is not restoration validity</p>
-<p>The current RL/RL-TV v2 policy, introduced in a7, requires equal shape and
+<p>The current RL/RL-TV v2 policy, introduced in 0.13.0a7, requires equal shape and
 <code>float32</code> dtype,
 identical finite masks, finite non-negative clipped outputs, NRMSE no
 greater than <code>0.005</code>, and maximum absolute error no greater than
@@ -3357,7 +3582,7 @@ evidence gap; see <a href="../../reference/validation-status/">validation status
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 27, 2026 09:43:16 UTC">August 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 06:56:34 UTC">September 7, 2026</span>
   </span>
 
     
