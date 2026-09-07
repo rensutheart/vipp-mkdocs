@@ -69,7 +69,7 @@ Use this when you want measurements such as:
 
 ## CPU and GPU measurement coverage
 
-The 0.14.0a1 CuPy candidates cover only the basic `Measure Objects` and
+In 0.15.0a1, the CuPy candidates for label-table measurements cover only the basic `Measure Objects` and
 `Measure Objects + Intensity` schemas. They require native-endian,
 non-negative `int32` labels in resolved 2D/3D leading blocks. The intensity
 variant additionally accepts matching Boolean, `uint8`, `uint16`, or finite
@@ -119,7 +119,7 @@ demonstration—not biological validation.*
 
 ## Table Assembly
 
-Manual/cached sibling measurements can be calculated in either order. In
+Manual/cached sibling measurements can be calculated in either order. Since
 0.14.0a1, re-reading or re-materializing the same unchanged file revision does
 not stale a ready sibling merely because Python created a different array
 wrapper. For example:

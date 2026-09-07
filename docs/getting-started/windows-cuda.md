@@ -6,7 +6,7 @@ route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, `nvcc`, cuCIM
 bundle, or locally built provider wheel is required.
 
-!!! warning "Use the exact a3 release"
+!!! warning "Use the exact 0.15.0a1 release"
     Download the installer and checksum only from the
     [official v0.15.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1).
     Verify `VIPP-Setup-0.15.0a1-Windows-x86_64-UNSIGNED.exe` against
@@ -120,8 +120,15 @@ Reviewed GPU candidates cover operation-specific regions of:
 - Richardson-Lucy and Richardson-Lucy TV deconvolution;
 - fixed Binary, Canny, and Otsu thresholding;
 - boolean Remove Small Objects, Fill Holes, and Remove Outliers;
-- Connected Components; and
-- the basic **Measure Objects** and **Measure Objects + Intensity** schemas.
+- Connected Components;
+- the basic **Measure Objects** and **Measure Objects + Intensity** schemas;
+- GPU label preparation for hybrid **Measure 3D Mesh Morphology**; and
+- **Analyze Skeleton** on already-skeletonized Boolean inputs.
+
+Mesh morphology retains CPU marching cubes, convex hulls, and table construction.
+Skeletonization itself remains CPU work. See the
+[compute matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1) for the exact
+regions and requirements.
 
 Coverage is region-specific, not node-wide. Unsupported dtypes, dimensionality,
 parameters, extended measurement columns, scientific parity, or memory needs
@@ -129,10 +136,10 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. Current a3 GPU providers
+The completed-node badge reports what actually ran. GPU providers in 0.15.0a1
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but a3 does not install or execute that provider.
+historical cuCIM identities, but 0.15.0a1 does not install or execute that provider.
 
 ## Background and basic measurements are CuPy-only
 
@@ -217,7 +224,7 @@ changes. Run **Find fastest pipeline…** again and review the new evidence.
 ### Need the previous cuCIM procedure
 
 Use the matching archived release page for the old environment. Do not apply
-that procedure to a3. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
+that procedure to 0.15.0a1. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
 preserved as the historical record.
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the

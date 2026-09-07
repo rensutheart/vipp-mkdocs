@@ -1,7 +1,7 @@
 # Restore with a PSF
 
 Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are public in 0.14.0a1. The
+RL with total-variation regularization (RL-TV) are available in 0.15.0a1. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
 stale, its descendants wait and retain their last coherent cached results when
@@ -46,7 +46,7 @@ scientific region or environment gate is not satisfied.
     structures against an appropriate reference.
 
 !!! note "Backend agreement is not restoration validity"
-    The current RL/RL-TV v2 policy, introduced in a7, requires equal shape and
+    The current RL/RL-TV v2 policy, introduced in 0.13.0a7, requires equal shape and
     `float32` dtype,
     identical finite masks, finite non-negative clipped outputs, NRMSE no
     greater than `0.005`, and maximum absolute error no greater than

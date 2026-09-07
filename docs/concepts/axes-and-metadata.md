@@ -109,7 +109,7 @@ reviewed declaration, a node that only needs a 2D spatial interpretation can
 use inferred trailing Y/X and displays that inference; it does not silently
 promote Q to Z.
 
-In 0.14.0a1, changing the Image Source declaration immediately refreshes the
+Since 0.14.0a1, changing the Image Source declaration immediately refreshes the
 effective metadata along its active branch before a full pixel calculation.
 For a branch such as **Subtract Background -> Rescale Intensity -> Gaussian
 Blur 3D**, declaring `QYX -> ZYX` makes the Gaussian Sigma Z control visible at

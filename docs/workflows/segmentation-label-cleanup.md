@@ -122,7 +122,7 @@ Extract Channel, exact Preserve dtype conversion, Gaussian, Binary Threshold,
 Boolean Remove Small Objects, Boolean Fill Holes, connected components, Otsu,
 Canny, median, Sigma Filter, Remove Outliers (Binary), and background correction
 have GPU candidates only inside declared regions. The portable corridor
-introduced in a8 can use an explicitly described
+introduced in 0.13.0a8 can use an explicitly described
 channel, convert `uint8`/`uint16` to `float32` without rescaling, apply Gaussian
 Blur and an exact finite Binary Threshold, clean the Boolean mask, and label it
 without an intermediate host transfer.
