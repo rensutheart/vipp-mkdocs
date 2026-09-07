@@ -16,6 +16,9 @@ The dialog offers notes for the latest eligible release. Offline or rate-limit
 errors stay in this dialog; they do not interrupt image processing. Cached
 release information can remain visible when GitHub is unavailable.
 
+On narrower windows or with larger fonts, the download buttons stack vertically;
+the dialog scrolls without hiding its **Check for updates** and **Close** buttons.
+
 ## Update safely
 
 1. Read the release notes and save your workflows.
