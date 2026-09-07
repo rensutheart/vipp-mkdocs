@@ -1,10 +1,6 @@
 # Open microscope files and check reader support
 
-!!! info "Unreleased — after 0.15.0a1"
-    New plugin and desktop installations include the native microscope readers
-    below. The **Reader support** section and guided setup described here are
-    not present in 0.15.0a1. See the [older installation instructions](installation.md#optional-microscope-readers)
-    if you are still using that version.
+VIPP 0.15.0a2 includes native microscope readers in plugin and desktop installations. Use **Image Source → Reader support** to check this environment or arrange missing-package setup. For older software, use its [versioned installation manual](https://rensutheart.github.io/vipp-mkdocs/0.15.0a1/getting-started/installation/).
 
 ## What is included?
 

@@ -8,12 +8,12 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-VIPP **0.15.0a1** is the current alpha. The
-[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1)
+VIPP **0.15.0a2** is the current alpha. The
+[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2)
 carries the exact qualified manual-install wheel, the intentionally unsigned
 Windows installer, separate intentionally unsigned Apple Silicon and Intel
 macOS packages, checksums, release manifests, and supporting evidence. The
-[PyPI 0.15.0a1 page](https://pypi.org/project/napari-vipp/0.15.0a1/) provides
+[PyPI 0.15.0a2 page](https://pypi.org/project/napari-vipp/0.15.0a2/) provides
 the exact package pin for manual installations. The nightly manual may describe
 later unreleased work.
 
@@ -33,7 +33,7 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.15.0a1 writes workflow schema version 6, batch configuration version 6,
+VIPP 0.15.0a2 writes workflow schema version 6, batch configuration version 6,
 and manifest schema version 5; workflow versions 1 and 2 are rejected. Valid schema-3
 workflows load with explicit CPU intent, schema-4 workflows retain authored
 compute intent, and schema-5 workflows retain canonical SourceItem evidence.
@@ -43,6 +43,22 @@ cached scientific results. Recalculate and compare graph structure, parameters,
 selected items, reader/backend, axes, channels, physical grids, dynamic ports,
 compute request, node behavior, actual backend, and results on known sample
 data. See the [workflow contract](workflow-contract.md).
+
+## Move from 0.15.0a1 to 0.15.0a2
+
+The workflow, batch-config and manifest schema numbers remain 6, 6 and 5. New node types and parameters nevertheless require 0.15.0a2; a shared schema number is not a promise that an older runtime understands new operations.
+
+Legacy threshold and rescaling defaults retain equivalent batch-workflow identity after restore. Explicit non-default choices still affect that identity. Range-threshold history records both bounds and the endpoint rule; retain earlier manifests as the original execution record rather than rewriting their history.
+
+1. Preserve original data, environments, workflows, batch configurations and decisive outputs. Open a duplicate for review and recalculate representative data.
+2. Review Binary Threshold foreground choices. Above and Below are strict; In range includes both endpoints and Outside range excludes them. Existing nodes retain Above unless authored otherwise; saved range limits matter only in a range mode.
+3. Use **Rescale Intensity → Invert intensity** for reversed mapping with ordered output bounds. Old reversed bounds are retained but must be corrected explicitly before calculation. Merely opening a workflow does not swap them.
+4. Check reader/backend, selected series, axes, channels and calibration after moving to included native readers. **Reader support** checks installation health, not acquisition interpretation.
+5. Review source **Channel display** and **Display settings** independently of scientific parameters. These presentation changes do not resample data or change processing.
+6. Recalculate mesh measurements after smoothing or simplification; compare the changed geometry with the original branch. Inspect open-surface status and confirm units before 3MF export.
+7. Regenerate Python exports using the exact installed VIPP version, and check batch plans and outputs before a large run.
+
+See the [0.15.0a2 release notes](../releases/0.15.0a2.md) for the full change summary and limits.
 
 ## Move from 0.14.0a3 to 0.15.0a1
 
@@ -263,10 +279,10 @@ python -m pip install --pre napari-vipp
 
 To reproduce a specific alpha exactly, use a fresh environment and record the
 distribution surface as well as the version. An exact prerelease does not need
-`--pre`. For the current 0.15.0a1 release, use the exact package pin:
+`--pre`. For the current 0.15.0a2 release, use the exact package pin:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.15.0a1"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.15.0a2"
 ```
 
 On macOS use `napari[pyside6]` instead of `napari[pyqt6]`; macOS remains CPU-only.
@@ -274,7 +290,7 @@ On macOS use `napari[pyside6]` instead of `napari[pyqt6]`; macOS remains CPU-onl
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.15.0a1"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.15.0a2"
 vipp-compute-doctor --track cuda13
 ```
 

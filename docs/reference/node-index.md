@@ -1,26 +1,24 @@
 # Node Index
 
-This page lists all **115 operation specifications** registered by
-`NODE_LIBRARY` in 0.15.0a1. The palette exposes **113**: the two legacy scatter
+This page lists all **124 operation specifications** registered by
+`NODE_LIBRARY` in 0.15.0a2. The palette exposes **122**: the two legacy scatter
 raster operations remain loadable but are hidden from new-node selection.
-Nightly adds **Convex Hull** and eight nodes in **3D Meshes** (124 specifications;
-122 palette entries). The family counts below describe the tagged release.
-Nightly parameter behavior can be newer than the latest tagged alpha.
+This includes **Convex Hull** and eight nodes in **3D Meshes**.
 
-In nightly builds, **Save Image** also accepts 3D meshes and passes the connected
+**Save Image** accepts images or 3D meshes and passes the connected
 image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families were checked against the release registry. Input and
-    output summaries describe the ordinary/default ports; `Split Channels`,
+    Titles and families were checked against the 0.15.0a2 source registry.
+    Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
     release remain the source of truth until a generated parameter reference is
     published.
 
-Introduced in 0.14.0a1 and retained in 0.15.0a1, manual/cached nodes and nodes
-selected for isolated tuning use the same graph-wide execution language.
+Since 0.14.0a1, manual/cached nodes and nodes selected for isolated tuning use
+the same graph-wide execution language.
 Bright amber identifies the node that needs action; dark amber identifies
 downstream nodes that are stale but waiting for that action. **Tune node in
 isolation** recalculates only the selected node until
@@ -34,7 +32,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.15.0a1 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1)
+[0.15.0a2 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a2)
 for the accelerated node families and their current public regions.
 
 | Family | Nodes |
@@ -42,13 +40,14 @@ for the accelerated node families and their current public regions.
 | Image Data | 25 |
 | Filtering | 18 |
 | Segmentation | 18 |
-| Morphology | 14 |
+| Morphology | 15 |
+| 3D Meshes | 8 |
 | Measurements | 13 |
 | Colocalization & Spatial Analysis | 12 |
 | Label Operations | 7 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **115** |
+| **Total** | **124** |
 
 ## Image Data
 
@@ -57,7 +56,7 @@ for the accelerated node families and their current public regions.
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
 | `Image Source` | none | image | Load a napari layer, file, store, or bundled sample. |
-| `Save Image` | array | any | Save an image-like output during interactive recompute. |
+| `Save Image` | array or mesh | same as input | Save an image or mesh during interactive recompute. |
 | `Batch Output` | any | same as input | Mark an output for folder batch execution. |
 
 ### Axes & Regions
@@ -166,7 +165,7 @@ and is not merely a display adjustment. See
 
 ### Restoration And PSF
 
-These nodes have been public since 0.14.0a1 and remain available in 0.15.0a1.
+These nodes have been public since 0.14.0a1 and remain available in 0.15.0a2.
 They have synthetic examples and automated coverage, but broad real-image
 restoration validation remains an evidence gap;
 see [validation status](validation-status.md).
@@ -234,7 +233,7 @@ it cannot identify a valid two-peak histogram. See
 | --- | --- | --- | --- |
 | `Dilation` | array | mask | Expand foreground. |
 | `Erosion` | array | mask | Shrink foreground. |
-| `Convex Hull` (unreleased) | Boolean mask | mask | Fill one convex hull around all foreground per 2D slice or 3D volume. See [scope and caveats](../workflows/segmentation-label-cleanup.md#convex-hull). |
+| `Convex Hull` | Boolean mask | mask | Fill one convex hull around all foreground per 2D slice or 3D volume. See [scope and caveats](../workflows/segmentation-label-cleanup.md#convex-hull). |
 | `Opening` | array | mask | Remove small foreground structures. |
 | `Closing` | array | mask | Close small gaps. |
 | `Top Hat` | array | mask | Binary top-hat operation. |
@@ -253,10 +252,12 @@ it cannot identify a valid two-peak histogram. See
 | `Skeleton Graph Overlay` | mask | RGB image |
 | `Prune Skeleton Branches` | mask | mask |
 
-## 3D Meshes (nightly)
+<span id="3d-meshes-nightly"></span>
 
-All eight nodes are manual/cached CPU operations. Mesh outputs are inspected
-as napari surfaces, not graph thumbnails. See the
+## 3D Meshes
+
+All eight nodes are CPU operations, manual/cached by default. Mesh outputs are
+inspected as napari surfaces, not graph thumbnails. See the
 [mesh-object tutorial](../workflows/mask-to-mesh.md) for grouping, calibration,
 refinement caveats and 3MF/OBJ export.
 
@@ -290,7 +291,7 @@ refinement caveats and 3MF/OBJ export.
 | `Intensity Histogram` | numeric image | table | manual | Reproducible full-data intensity distribution with saved bin definitions. |
 | `Measure Objects` | labels | table | manual | Object morphology. |
 | `Measure Objects + Intensity` | labels plus intensity image | table | manual | Object morphology plus intensity statistics. |
-| `Measure 3D Mesh Morphology` | labels; mask or mesh in nightly | table | manual | Surface morphology; existing meshes are measured per object without remeshing. |
+| `Measure 3D Mesh Morphology` | labels, Boolean mask or mesh | table | manual | Surface morphology; existing meshes are measured per object without remeshing. |
 
 ### Skeleton / Network QC
 

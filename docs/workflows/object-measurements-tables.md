@@ -1,7 +1,6 @@
 # Object Measurements And Tables
 
-Measurement workflows start from labels or, in nightly, mesh objects and
-produce tables.
+Measurement workflows turn labels, Boolean masks or mesh objects into tables.
 
 ## Inspect and export the complete table
 
@@ -70,8 +69,8 @@ Use this when you want measurements such as:
 
 ## CPU and GPU measurement coverage
 
-In 0.15.0a1, the CuPy candidates for label-table measurements cover only the basic `Measure Objects` and
-`Measure Objects + Intensity` schemas. They require native-endian,
+In 0.15.0a2, the CuPy candidates for label-table measurements cover only the
+basic `Measure Objects` and `Measure Objects + Intensity` schemas. They require native-endian,
 non-negative `int32` labels in resolved 2D/3D leading blocks. The intensity
 variant additionally accepts matching Boolean, `uint8`, `uint16`, or finite
 `float32` intensity data.
@@ -89,7 +88,7 @@ provider build or installation is required. See the
 [Windows NVIDIA GPU guide](../getting-started/windows-cuda.md) and
 [choose and verify compute](../how-to/choose-compute.md).
 
-VIPP 0.15.0a1 additionally provides a hybrid GPU path for **Measure 3D Mesh
+Since 0.15.0a1, VIPP also provides a hybrid GPU path for **Measure 3D Mesh
 Morphology** on supported non-negative native `int32` 3D labels. The GPU packs
 label regions; marching cubes, convex hulls, and exact public table construction
 remain authoritative CPU work. A GPU badge therefore does not mean every part
@@ -98,7 +97,7 @@ of a mesh calculation ran on the device or that it must be faster.
 **Analyze Skeleton** has a reviewed CuPyX path for Boolean, already-skeletonized
 2D/3D inputs. Requesting skeletonization first remains CPU work. Both providers
 retain dtype, shape, environment, memory, and scientific admission gates. See
-the [compute matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1) for scope.
+the [compute matrix](../how-to/choose-compute.md#gpu-regions-in-0150a2) for scope.
 
 ## 3D Mesh Morphology
 
@@ -112,21 +111,20 @@ convex hull metrics, or 3D solidity matter.
 
 This node is manual/cached because mesh calculations can be expensive.
 
-!!! info "Unreleased — additional inputs in nightly"
-    You can also connect a **Boolean mask** or an existing **Mesh**.
+You can also connect a **Boolean mask** or an existing **Mesh**.
 
-    - **Mask:** all foreground is one object. Use **Label Connected Components**
-      first when you need a separate row per object.
-    - **Mesh:** measures the supplied triangles directly, with one row per
-      explicit mesh object and its stable `mesh_id`. Disconnected parts with
-      the same ID stay in that row. Spatial mode and Minimum voxel count do not
-      apply. Calibration is retained and compatible units convert to the
-      X-axis unit; voxel counts and voxel volume are not inferred.
+- **Mask:** all foreground is one object. Use **Label Connected Components**
+  first when you need a separate row per object.
+- **Mesh:** measures the supplied triangles directly, with one row per
+  explicit mesh object and its stable `mesh_id`. Disconnected parts with
+  the same ID stay in that row. Spatial mode and Minimum voxel count do not
+  apply. Calibration is retained and compatible units convert to the
+  X-axis unit; voxel counts and voxel volume are not inferred.
 
-    Open, degenerate, non-manifold or inconsistently wound surfaces have `NaN`
-    volume-derived fields and an explanation in `mesh_status`/`mesh_error`.
-    Area and extents remain available. These checks do not detect every possible
-    self-intersection or certify a mesh for printing.
+Open, degenerate, non-manifold or inconsistently wound surfaces have `NaN`
+volume-derived fields and an explanation in `mesh_status`/`mesh_error`.
+Area and extents remain available. These checks do not detect every possible
+self-intersection or certify a mesh for printing.
 
 Use [3D Meshes](mask-to-mesh.md) to create surfaces, retain label IDs, assign
 colours, combine, split, filter or refine objects, and export 3MF/OBJ. Mesh
@@ -201,6 +199,8 @@ reviewed before export.*
 | `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. |
 | `synthetic-derived-object-morphology.json` | Derived 2D morphology, circularity, and Hu moments. |
 | `synthetic-3d-mesh-morphology.json` | True-3D mesh morphology on anisotropic synthetic objects. |
+| `synthetic-mesh-objects.json` | Current-geometry measurements after object colouring, filtering, combining and refinement. |
+| `synthetic-mesh-refinement-tuned.json` | Saved sample-specific refinement choices, followed by current-mesh measurements. |
 
 ## What To Check Before Export
 

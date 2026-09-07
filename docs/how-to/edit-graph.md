@@ -108,17 +108,16 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 
 ### Choose a port-label mode
 
-Nightly builds after 0.15.0a1 call this **Display settings → Input/output labels**,
-with **When needed**, **Always**, and **Never**. The behavior is unchanged; see
+Open **Display settings → Input/output labels**, with **When needed**, **Always**, and **Never**. The behavior is unchanged from earlier labels; see
 [Graph display settings](../reference/display-settings.md) for the label mapping.
 
-The **Port labels** setting has three display modes:
+The setting has three display modes:
 
 | Mode | Behavior |
 | --- | --- |
-| `Ambiguous only` | Default. Show persistent names on nodes with more than one input or output, where choosing the correct port matters. |
-| `Show all` | Label every input and output port. Useful while learning or reviewing a workflow. |
-| `Hide all` | Hide persistent labels for the most compact graph; hover and connection behavior are unchanged. |
+| `When needed` | Default. Show persistent names on nodes with more than one input or output, where choosing the correct port matters. |
+| `Always` | Label every input and output port. Useful while learning or reviewing a workflow. |
+| `Never` | Hide persistent labels for the most compact graph; hover and connection behavior are unchanged. |
 
 Long names are elided on the card and show their full text in a tooltip. Labels
 reserve card space but deliberately do not reposition the graph when the mode
@@ -134,7 +133,7 @@ Use **Find in workflow** to match node titles, operation IDs, tunnel names,
 and output tags. Press Enter or the adjacent **Focus** to move through matches.
 Tunnel matches reveal the source and its subscribers.
 
-In nightly builds after 0.15.0a1, both workflow search and the node-library
+Both workflow search and the node-library
 search have an in-field magnifier. Workflow search widens with the window.
 **Ctrl+F** (**Cmd+F** on macOS) focuses it and selects the existing query only
 when napari or another host shortcut has not claimed the key. Existing bindings

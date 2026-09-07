@@ -6,24 +6,24 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
-!!! info "Unreleased — reader packaging after 0.15.0a1"
+!!! info "Included microscope readers"
     Native CZI, Leica, ND2 and Olympus readers are now default dependencies for
     plugin and desktop installations; Bio-Formats remains optional. See
     [Reader support in Image Source](../getting-started/reader-support.md).
     This changes installation, not the scientific format guarantees below.
 
-| Source | Behavior in 0.15.0a1 |
+| Source | Behavior in 0.15.0a2 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
 | Bundled sample | Loads one of 15 deterministic VIPP samples. |
 | OME-TIFF | Reads image series and supported semantic axes, scale, channel, and selected acquisition fields from OME metadata. |
 | ImageJ TIFF | Reads supported hyperstack axes, XY resolution, z spacing, frame interval, and unit fields where present. |
 | Conventional TIFF | Reads TIFF series and infers basic axes where explicit semantic metadata is absent. |
-| Nikon ND2 with the optional `nd2` reader | Exposes stable items, lazy inspection/data access, decoded-size estimates, calibration, channels, and selected objective metadata in the qualified corpus. |
+| Nikon ND2 with the included `nd2` reader | Exposes stable items, lazy inspection/data access, decoded-size estimates, calibration, channels, and selected objective metadata in the qualified corpus. |
 | Local OME-Zarr 0.4/0.5 | Discovers image/label groups and declared levels/transforms. A sliced lower level can be displayed while analysis remains fixed to level 0; label previews retain label semantics. One strictly eligible sole direct Crop Stack can also read its exact retained level-0 window before materialization. |
 | NPY / NPZ | Reads one NPY array or a selected NPZ member; semantic microscopy metadata is not inherent. |
 | PNG, JPEG, BMP, GIF, WebP, TGA, PNM | Reads ordinary raster images; animated rasters use a leading time axis. |
-| Optional microscope readers | Qualified corpus routes cover CZI/LSM, ND2, LIF, OIR/OIB/OIF/VSI, and IMS with normalized inspection/read metadata. Native LIF, CZI, OIR/OIB, and LSM pixels remain eager; broad advertised extensions are not all qualified claims. |
+| Microscope readers | Qualified corpus routes cover CZI/LSM, ND2, LIF, OIR/OIB/OIF/VSI, and IMS with normalized inspection/read metadata. Native readers are included; the Bio-Formats IMS/VSI route remains optional. Native LIF, CZI, OIR/OIB, and LSM pixels remain eager; broad advertised extensions are not all qualified claims. |
 
 Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
@@ -37,7 +37,7 @@ manifests, and provenance retain that identity. Changed bytes, missing
 companions, ambiguous legacy indices, or an unexpected reader topology stop for
 review instead of selecting a different image by position.
 
-For every optional reader, actively move the T, Z, and C controls on a
+For every microscope reader, actively move the T, Z, and C controls on a
 representative acquisition and verify that the expected content changes. Check
 the selected item, reader/backend, calibration, channels, and decoded shape
 against acquisition records. A normalized contract cannot prove that a
@@ -76,8 +76,8 @@ input, generated execution, or output provenance.
 | NPY | Exact array/dtype exchange in Python | Axes, scale, units, and channel semantics must be stored separately |
 | Ordinary raster | A 2D display image is required | Display-oriented only; not a quantitative stack/archive format |
 | CSV / TSV | A table will be analyzed elsewhere | Units, identity columns, missing values, and delimiter handling |
-| 3MF (unreleased/nightly) | [Mesh objects](../workflows/mask-to-mesh.md) need portable units and display colours | Scientific surfaces, not print-validated solids; physical calibration is required. |
-| OBJ (unreleased/nightly) | Mesh geometry/object groups are needed, including uncalibrated voxel coordinates | Units, original IDs and colours are in VIPP comments; no standard unit field or material file. |
+| 3MF | [Mesh objects](../workflows/mask-to-mesh.md) need portable units and display colours | Scientific surfaces, not print-validated solids; physical calibration is required. |
+| OBJ | Mesh geometry/object groups are needed, including uncalibrated voxel coordinates | Units, original IDs and colours are in VIPP comments; no standard unit field or material file. |
 
 ### Format details
 
@@ -89,7 +89,9 @@ format when axes, calibration, stacks, or exact label identity matter.
 
 For additional readers, see [optional format packages](../getting-started/installation.md).
 
-### Mesh export (nightly)
+<span id="mesh-export-nightly"></span>
+
+### Mesh export
 
 **Save Image** also accepts mesh inputs, with **auto**, **obj** and **3mf** format
 choices. **Auto** follows `.obj`/`.3mf` in the path (OBJ when no suffix is given).
@@ -164,7 +166,7 @@ shared executor or create an exact compute-provenance sidecar.
 - Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.15.0a1.
+  0.15.0a2.
 
 ## Execution provenance for saved outputs
 

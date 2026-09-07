@@ -16,6 +16,8 @@ are blue, green, and red; this workflow uses the red/TRITC-like channel.
 
 ![Napari with a docked VIPP label-cleanup graph and the volume-filter node selected](../assets/screenshots/workflows/first-workflow-overview.png)
 
+The overview was captured in 0.15.0a1; its **Preview** menu is named **Display settings** in 0.15.0a2. The demonstrated workflow remains the same.
+
 *Full interface context for the tour: the graph runs left to right below the
 napari viewer, and the selected volume filter is editable in the inspector.*
 

@@ -55,7 +55,7 @@ node output or downstream measurements.
 
 ## Tune Thumbnail Speed And Detail
 
-Use **Preview → Detail** for the rendered image and **Preview → Range** for the
+Use **Display settings → Thumbnail resolution** for the rendered image and **Display settings → Contrast based on** for the
 statistics workload; they solve different problems.
 
 | Goal | Setting |

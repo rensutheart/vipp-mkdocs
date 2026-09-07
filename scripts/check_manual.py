@@ -95,7 +95,8 @@ REQUIRED = {
     ),
     "reference/display-settings.md": (
         "0.15.0a1",
-        "nightly",
+        "0.15.0a2",
+        "Display settings",
         "Current slice",
         "Entire stack",
         "90 × 55",

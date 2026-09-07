@@ -4,7 +4,7 @@ VIPP is primarily an eager interactive workflow builder. Its accepted public
 cache uses host NumPy-like in-memory outputs so thumbnails, inspection, pinned
 layers, and downstream edits feel immediate. Eligible nodes may use private
 device-resident segments during a run, but those values cross a verified host
-boundary before they become public results. VIPP 0.15.0a1 has one deliberately
+boundary before they become public results. VIPP 0.15.0a2 has one deliberately
 narrow read-time exception: an eligible direct local OME-Zarr `Image Source →
 Crop Stack` path can materialize only the exact retained level-0 window.
 
@@ -94,7 +94,7 @@ while allowing separate device keys to proceed independently.
 NVIDIA GPU. In the bounded M1 Max CPU smoke, VIPP presented host memory once as
 system RAM and did not fabricate or add a separate VRAM total. A future Apple
 or other accelerator provider that reports unified topology must instead use
-one shared CPU/GPU budget row. macOS remains CPU-only in 0.15.0a1, including
+one shared CPU/GPU budget row. macOS remains CPU-only in 0.15.0a2, including
 the Apple Silicon and Intel installer-managed environments.
 
 With **visible** fallback, one complete device segment may retry once on CPU
@@ -232,7 +232,7 @@ back to a hidden complete allocation.
 
 ## Large-Data Direction
 
-VIPP 0.15.0a1 retains the lower-level presentation path introduced in
+VIPP 0.15.0a2 retains the lower-level presentation path introduced in
 0.14.0a1: it can slice a declared lower local OME-Zarr 0.4/0.5 level
 for presentation before computing that preview. The layer name states that
 analysis remains full resolution. Separately, the strictly eligible direct

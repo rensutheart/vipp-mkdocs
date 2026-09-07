@@ -46,9 +46,8 @@ Image Source
 
 ## Convex Hull
 
-!!! info "Unreleased · after 0.15.0a1"
-    **Morphology → Convex Hull** fills the smallest convex envelope around
-    the foreground of a Boolean mask, such as a threshold output.
+**Morphology → Convex Hull** fills the smallest convex envelope around
+the foreground of a Boolean mask, such as a threshold output.
 
 1. Connect your threshold or other Boolean mask to **Convex Hull**.
 2. Choose **Spatial processing** when working with a stack:
@@ -184,7 +183,7 @@ button inserts a visible, undoable Convert Dtype node; review its memory,
 threshold, and scientific consequences before accepting it.
 
 Read each node badge after calculation and see the
-[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0140a1)
+[CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a2)
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.
@@ -192,7 +191,7 @@ your assay.
 ## Minimum Threshold Failure Is Explicit
 
 `Minimum Threshold` repeatedly smooths the exact histogram until two maxima
-remain, then selects the valley between them. **Maximum smoothing iterations**
+remain, then selects the valley between them. **Histogram smoothing pass limit**
 is a saved parameter from 1 to 10,000; the default is 10,000.
 
 Some distributions do not have a suitable two-peak solution. If two maxima
@@ -227,7 +226,7 @@ For a compact single-node starting point, use `Auto Watershed From Mask`.
 ## Reference Workflow
 
 To turn a finished volume mask into a viewable/exportable surface, see
-[View and export a 3D mesh](mask-to-mesh.md) (unreleased/nightly).
+[Create, colour and export 3D mesh objects](mask-to-mesh.md).
 
 Use the general cleanup example:
 

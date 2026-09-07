@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.15.0a1. Some labels shorten to icons and
+Labels below match napari-vipp 0.15.0a2. Some labels shorten to icons and
 graph-local controls move into the gear menu when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -10,7 +10,7 @@ floating window.
 
 ## Workflow tabs
 
-In unreleased nightly builds, table- and mesh-only graph nodes do not reserve
+Table- and mesh-only graph nodes do not reserve
 a thumbnail area or show **No preview**, even before calculation. Their
 results remain available in the inspector or napari surface view.
 
@@ -21,7 +21,7 @@ workspace. **New** and **Open** create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.
 
-In unreleased nightly builds, right-click a tab and choose **Open in File
+Right-click a tab and choose **Open in File
 Explorer** (Windows) or **Open in Finder** (macOS) to select its saved workflow
 file. Linux offers **Open containing folder**. This does not switch tabs or save
 pending edits; save a new workflow first to enable the action.
@@ -47,8 +47,7 @@ separate from file and execution actions.
 Use **Find a node to add…** in the Nodes panel to add an operation, or
 **Find in workflow** to locate a node already in your graph.
 
-In the unreleased version after 0.15.0a1, these searches and the insert-node
-picker also accept common alternative names: **dilate → Dilation**,
+These searches and the insert-node picker also accept common alternative names: **dilate → Dilation**,
 **erode → Erosion**, **thinning → Skeletonize**, **NLM → Non-Local Means**,
 and **clipping → Clamp Intensity**. British spellings such as
 **normalise** and **skeletonisation** work too. Results keep their usual node
@@ -58,12 +57,12 @@ names; searching does not change the workflow or its calculations.
 
 | Control | Effect |
 | --- | --- |
-| **New** | Create a new workflow tab. Open one of 19 bundled examples through **Gear menu → Open example…**. |
+| **New** | Create a new workflow tab. Open one of 21 bundled examples through **Gear menu → Open example…**. |
 | **Open** | Open an external or saved workflow JSON. A valid attached batch configuration restores Batch workflow and checks sources without calculating a representative. |
 | **Save / Ctrl+S** | Save the active tab's graph, parameters, layout, compute request, bypass choices, and presentation profiles—not calculated arrays. The first save asks for a path; later saves follow the configured save policy. **Save workflow as…** or ++ctrl+shift+s++ chooses another path. An active batch can be attached to the workflow JSON. |
 | **Batch** | Open or return to **Setup**, **Items & outputs**, **Overrides**, and **Run & results** in the retained Batch workflow window. |
 | **Leave batch** | Discard the representative's transient collection-source overrides and return the tab to ordinary single-image mode. It does not delete files and is unavailable during a run. |
-| **Preview** | Change graph-card presentation: thumbnail mode, contrast, range, colormap, detail, and port labels. It does not run a batch representative. |
+| **Display settings** | Change graph-card presentation: thumbnail view, contrast method and scope, colour map, resolution, and input/output labels. It does not run a batch representative. |
 | **Export Python…** (gear menu) | Generate a headless script using the shared workflow executor. |
 | **Export OME dataset…** (gear menu) | Save one reference image with associated graph label outputs. |
 | **Tunnels...** | Manage named graph outputs and subscribers. |
@@ -219,11 +218,11 @@ duplicate that purpose in its message strip.
 
 ## Display settings
 
-Open **Preview** in 0.15.0a1 for graph thumbnails, contrast, colour, resolution,
+Open **Display settings** for graph thumbnails, contrast, colour, resolution,
 and port names. These settings never alter scientific arrays.
 
 See [Graph display settings](display-settings.md) for the options, exact-statistics
-behavior, and the clearer **Display settings** labels in post-0.15.0a1 nightly builds.
+behavior, and the mapping from earlier interface labels.
 
 ## Execution and memory settings
 
@@ -326,7 +325,7 @@ selected output's remembered display profile.
 
 ### Numeric parameter entry
 
-!!! note "After 0.15.0a1 — development version"
+!!! note "Constrained editing"
     Odd-only filter windows and PSF support sizes advance through odd numbers,
     including when dragged or typed. Linked low/high controls stop at their
     partner's limit; widen the high limit first when moving both values upward.
@@ -367,6 +366,8 @@ deconvolution.
 | Dark amber | This downstream node is also stale, but it is waiting for the bright-amber upstream barrier. VIPP retains its last coherent cached result when one exists; otherwise it remains unavailable. | Resolve the bright-amber node first; this node will then run or become the next actionable barrier. |
 
 ![Two bright-amber deconvolution frontiers, darker-amber waiting descendants, and the amber Calculate all control](../assets/screenshots/workflows/manual-execution-frontier.png)
+
+This earlier-release capture illustrates execution states. Current toolbar labels are listed above; **Display settings** replaces **Preview**.
 
 *The two deconvolution branches are actionable. Rescale Intensity and Otsu
 Threshold wait behind the selected RL-TV branch and are not the source of the
@@ -435,7 +436,7 @@ The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved **Float histogram bins** parameter.
 
-*Unreleased:* Hover within a compact histogram's bin column to see its count,
+Hover within a compact histogram's bin column to see its count,
 including tiny or empty bars. Object-size and property plots also show the
 range in the original units, even with **Log size axis** enabled. These values
 reuse the calculated histogram; hovering does not scan the image or change

@@ -1,6 +1,6 @@
 # Example Workflows
 
-The release contains **19** example workflows under:
+VIPP 0.15.0a2 contains **21** registered example workflows under:
 
 ```text
 examples/
@@ -36,6 +36,8 @@ custom or external workflow JSON files.
 | `synthetic-measurement-summary.json` | synthetic measurement summary | Grouped object-count and area summaries. |
 | `synthetic-derived-object-morphology.json` | synthetic object morphology | Derived 2D morphology, circularity, perimeter/area ratio, Hu moments, and column selection. |
 | `synthetic-3d-mesh-morphology.json` | synthetic 3D mesh morphology | Surface area, mesh volume, convex hull, sphericity, and tiny-object status. |
+| `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Five calibrated mesh objects, volume colours, disjoint filtering and recombination, original/refined geometry comparison, current-mesh measurements, and a declared 3MF batch output. |
+| `synthetic-mesh-refinement-tuned.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
 | `synthetic-skeleton-qc.json` | synthetic skeleton network | Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries. |
 | `synthetic-advanced-skeleton-network.json` | synthetic advanced skeleton network | Time-indexed 3D skeleton graph stress test. |
 | `synthetic-colocalization-racc.json` | synthetic colocalization | Pixel and ROI-masked colocalization, scatter thresholds, colocalized voxels, and RACC-like output. |
@@ -51,7 +53,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.15.0a1 they are:
+Use `--list` to print the release's exact IDs. In 0.15.0a2 they are:
 
 | ID | Example title |
 | --- | --- |
@@ -68,6 +70,8 @@ Use `--list` to print the release's exact IDs. In 0.15.0a1 they are:
 | `summary-table` | Grouped Measurement Summary |
 | `derived-morphology` | Derived 2D Object Morphology |
 | `mesh-morphology` | 3D Mesh Morphology |
+| `mesh-objects` | Mesh Objects, Colours & Refinement |
+| `mesh-refinement-tuned` | Mesh Objects — Tuned Refinement |
 | `skeleton-qc` | Skeleton QC |
 | `advanced-skeleton` | Advanced Skeleton Network |
 | `racc-colocalization` | RACC Colocalization |

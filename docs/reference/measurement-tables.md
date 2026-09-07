@@ -69,7 +69,9 @@ measurements. Very small or flat objects may not support stable mesh or hull
 metrics. Mesh viewing/export belongs to the separate
 [3D Meshes nodes](../workflows/mask-to-mesh.md); specialist repair is not supplied.
 
-### Existing mesh objects (nightly)
+<span id="existing-mesh-objects-nightly"></span>
+
+### Existing mesh objects
 
 The mesh input measures current geometry directly, with one row per explicit
 object. It never remeshes, rejoins disconnected shells, or infers voxel counts.

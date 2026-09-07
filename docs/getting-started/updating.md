@@ -1,9 +1,6 @@
 # Check for updates
 
-!!! info "Development feature after 0.15.0a1"
-
-    The clickable update badge is not in 0.15.0a1. In that release, visit
-    [GitHub releases](https://github.com/rensutheart/napari-vipp/releases) directly.
+Use the version badge in VIPP 0.15.0a2 to check release notes and update guidance. Older releases can use [GitHub releases](https://github.com/rensutheart/napari-vipp/releases) directly.
 
 ## Notice an update without an interruption
 

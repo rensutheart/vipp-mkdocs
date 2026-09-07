@@ -3,12 +3,11 @@
 These controls change graph-card presentation, not image data or analysis results.
 They are separate from the main napari viewer's display controls.
 
-In **0.15.0a1**, open **Preview**. In **nightly builds after 0.15.0a1**, the
-button is **Display settings**, shortened to **Display** in narrower windows.
+Open **Display settings**, shortened to **Display** in narrower windows. This menu was called **Preview** in 0.15.0a1.
 
 ## Menu labels
 
-| 0.15.0a1 label | Nightly label |
+| Earlier label | 0.15.0a2 label |
 | --- | --- |
 | Mode | Thumbnail view |
 | Contrast | Contrast method |
@@ -17,12 +16,12 @@ button is **Display settings**, shortened to **Display** in narrower windows.
 | Detail | Thumbnail resolution |
 | Port labels | Input/output labels |
 
-The options below use the nightly wording. **Slice / MIP / Off** in 0.15.0a1
+The options below use the current wording. **Slice / MIP / Off** in 0.15.0a1
 correspond to **Current slice / Maximum-intensity projection (MIP) / Hidden**.
 **Percentile / Min-max / Raw** become **Percentile (0.5–99.9%) /
 Minimum–maximum / Raw**; these are label changes, not new calculations.
 
-Nightly builds disable **Entire stack** when no available graph preview contains
+VIPP disables **Entire stack** when no available graph preview contains
 a stack or series. The view-dependent label describes what is displayed; this
 does not change the saved preference for use when a stack becomes available.
 
@@ -49,7 +48,7 @@ and Minimum–maximum; Raw also displays those 8-bit values as 0–255. Switchin
 between them can therefore look unchanged. Label colours and already encoded
 8-bit RGB colours are preserved rather than contrast-stretched.
 
-Nightly builds after 0.15.0a1 label these controls **Applies immediately.**
+These controls are labelled **Applies immediately.**
 
 ## Resolution and exact statistics
 
@@ -126,7 +125,7 @@ fastest path on every dataset or machine.
 
 ## Port-label layout
 
-**When needed / Always / Never** in nightly builds correspond to
+**When needed / Always / Never** correspond to
 **Ambiguous only / Show all / Hide all** in 0.15.0a1.
 
 Long port names are shortened on the card and retain their full text in a
