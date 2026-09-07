@@ -36,6 +36,21 @@ does not change the saved preference for use when a stack becomes available.
 - Use current-slice/view contrast for quicker local inspection. Its limits can
   differ between slices; do not read equal brightness as equal intensity.
 
+## When a contrast change looks unchanged
+
+Changes refresh available thumbnails automatically, even with automatic node
+calculation off. **Calculate** is not required. Larger **Entire stack** scans
+finish in the background; the previous thumbnail stays visible until its new
+contrast limits are ready. See **Thumbnail contrast** in the inspector for progress.
+
+Different choices can produce the same display range. For example, the startup
+synthetic volume and its middle slices have a 0–255 range under both Percentile
+and Minimum–maximum; Raw also displays those 8-bit values as 0–255. Switching
+between them can therefore look unchanged. Label colours and already encoded
+8-bit RGB colours are preserved rather than contrast-stretched.
+
+Nightly builds after 0.15.0a1 label these controls **Applies immediately.**
+
 ## Resolution and exact statistics
 
 | Resolution | Backing pixels |

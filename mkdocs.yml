@@ -137,6 +137,8 @@ nav:
   - Start here:
       - Start here: getting-started/index.md
       - Install VIPP: getting-started/installation.md
+      - Check for updates: getting-started/updating.md
+      - Microscope reader support: getting-started/reader-support.md
       - Install on macOS: getting-started/macos.md
       - Windows NVIDIA GPU: getting-started/windows-cuda.md
       - Test a Windows install: getting-started/windows-field-acceptance.md
@@ -147,6 +149,7 @@ nav:
   - Tutorials:
       - Choose a tutorial: workflows/index.md
       - Segment and clean labels: workflows/segmentation-label-cleanup.md
+      - Create and export 3D meshes: workflows/mask-to-mesh.md
       - Measure objects and tables: workflows/object-measurements-tables.md
       - Analyze skeleton networks: workflows/skeleton-network-analysis.md
       - Measure colocalization: workflows/colocalization-association.md

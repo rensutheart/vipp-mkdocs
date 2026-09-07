@@ -4,6 +4,46 @@ Use this reference when cutoff choice, histogram scope, or numeric precision
 could change your analysis. For a first segmentation, start with the
 [label-cleanup tutorial](../workflows/segmentation-label-cleanup.md).
 
+## Binary Threshold: cutoff or intensity range
+
+!!! note "After 0.15.0a1 — development version"
+    Binary Threshold adds **Foreground: Above / Below / In range / Outside range**. Existing workflows
+    keep **Above** and produce the same mask as before.
+
+Choose **Foreground**, then adjust the slider or drag a histogram guide:
+
+| Choice | Becomes foreground | Useful for |
+| --- | --- | --- |
+| **Above** (default) | Values strictly greater than the threshold | Bright structures on a darker background |
+| **Below** | Values strictly less than the threshold | Dark structures on a brighter background |
+| **In range** | `low ≤ value ≤ high` | Keep an intensity band, including its limits |
+| **Outside range** | `value < low` or `value > high` | Exclude an intensity band and its limits |
+
+**Above/Below** show one **Threshold** slider; values exactly equal to it stay
+background. **In range/Outside range** instead show **Low threshold** and
+**High threshold**, with orange and blue histogram guides. The controls keep
+low ≤ high. Equal limits select exactly that intensity with In range, or every
+other non-NaN value with Outside range.
+
+NaN pixels stay background in all four modes, so Outside range is not simply
+an inversion of In range. Loaded or scripted ranges with non-finite or reversed
+limits are rejected, not silently corrected.
+
+The cutoff applies throughout the supplied image or volume; it does not fit a
+separate cutoff per slice. Declared RGB/RGBA input uses the existing explicit
+luminance conversion. The choice is saved and used by batch and Python exports.
+
+With a finite cutoff, positive infinity is foreground only in Above, and
+negative infinity only in Below. With finite range limits, both infinities are
+outside the range. Automatic threshold nodes use the different
+non-finite policy described below.
+
+These are elementwise comparisons, preserving 2D, 3D, and leading time/channel
+axes and returning a Boolean mask without changing the input. The CPU path
+uses NumPy's [inclusive](https://numpy.org/doc/stable/reference/generated/numpy.greater_equal.html)
+and [strict](https://numpy.org/doc/stable/reference/generated/numpy.less.html)
+comparison rules; the supported scalar float32 CuPy path follows the same rules.
+
 ## Automatic Threshold Histograms
 
 Otsu, Triangle, Yen, Isodata, and Minimum calculate their cutoff from every
@@ -106,6 +146,28 @@ input histograms are read-only
 context for judging the transformation.
 
 ## Rescale Intensity Cutoffs
+
+!!! note "After 0.15.0a1 — development version"
+    Low and high input controls cannot cross. Rescale allows equal input cutoffs;
+    Normalize's percentile limits must remain distinct. Rescale also keeps
+    **Output min ≤ Output max**; use **Invert intensity** to reverse the mapping.
+
+Normally, the low input cutoff maps to **Output min** and the high cutoff to
+**Output max**. With **Invert intensity** checked, these destinations reverse:
+dark values become bright and bright values become dark, within the same output
+bounds. The checkbox defaults to off and is saved for batch runs and Python
+exports. Editing either bound never moves the other one.
+
+Equal output bounds produce a constant numeric image. Equal input cutoffs fill
+Output min normally, or Output max when inverted. Boolean masks keep their
+True/False values normally; inversion swaps True and False, without rescaling
+them to the numeric output bounds. Other inputs retain their dtype; NaNs remain
+NaN for distinct input cutoffs, and infinities map to the corresponding endpoints.
+
+Older workflows with reversed output bounds need a one-time correction: enter
+the smaller value as Output min, the larger as Output max, then check
+Invert intensity if the reversed mapping was intentional. VIPP leaves the
+saved values untouched and reports this guidance instead of guessing.
 
 `Rescale Intensity` makes the cutoff source explicit:
 

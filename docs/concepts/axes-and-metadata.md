@@ -59,6 +59,41 @@ Workflow schema 6 retains those records and adds topology-safe node bypass
 intent. Bypass does not rename axes or change metadata: a safe bypass aliases
 the exact primary input state to the output.
 
+## Choose how source channels appear
+
+!!! info "Unreleased — after 0.15.0a1"
+
+    Select an **Image Source** and use **Channel display**:
+
+    - **Stack (C slider)** — the default. Use C to select an individual channel.
+    - **Separate coloured layers** — show one napari layer per channel, using
+      the same channel colours as VIPP's thumbnail. Use the layers' eye icons
+      to show or hide channels; there is no C slider in this mode.
+
+The choice applies immediately to the full-resolution viewer and pinned source,
+and is saved with the workflow. It does not change pixels, processing, or the
+**Image stack** axis interpretation. Editing channel colours does not switch modes.
+Lower-resolution source previews have their own display path.
+
+The choice requires an explicit multi-channel C axis. It does not split encoded
+RGB/RGBA components. A colour-composite thumbnail can still show all channels
+while the stack viewer shows only the selected channel.
+
+## Channels in the 3D viewer
+
+!!! info "Development fix after 0.15.0a1"
+
+    VIPP-managed views use explicit spatial axes for 3D rendering, even when
+    the file stores channels between them (for example, Olympus OIR's `ZCYX`).
+    Z becomes part of the volume; C remains a channel slider. With
+    **Link napari/VIPP sliders** enabled, channel changes work in either place.
+
+This changes only the viewing order, not image data or calibration. Switching
+back to 2D restores Z navigation. Colour-composite thumbnails can show several
+channels together while a scalar viewer layer shows the selected channel;
+channels presented as separate coloured layers are controlled through those
+layers instead of a C slider.
+
 ## TIFF page labels at an image source
 
 Some ordinary TIFF files report a page dimension as generic `Q` because the

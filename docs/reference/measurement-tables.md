@@ -13,7 +13,7 @@ per-column units where the calculation defines them.
 Keep the keys that distinguish observations:
 
 - leading-axis indices, such as `t_index`, `c_index`, and `z_index`;
-- object/graph IDs, such as `label_id`, `component_id`, `branch_id`, `node_id`,
+- object/graph IDs, such as `label_id`, `mesh_id`, `component_id`, `branch_id`, `node_id`,
   and `edge_id`;
 - experimental fields added with **Add Metadata Columns**, such as treatment,
   replicate, and batch.
@@ -51,8 +51,8 @@ inputs and adds per-object mean, minimum, maximum, sum, and standard deviation.
 
 ## 3D mesh morphology
 
-Use **Measure 3D Mesh Morphology** only with true 3D labels and correct Z/Y/X
-spacing. It extracts a marching-cubes surface for each object.
+With true 3D labels and correct Z/Y/X spacing, **Measure 3D Mesh Morphology**
+extracts a marching-cubes surface for each object.
 
 | Field group | Outputs |
 | --- | --- |
@@ -66,8 +66,30 @@ explanatory status. Check those fields before summarizing results.
 
 Segmentation, voxel spacing, and surface approximation all affect these
 measurements. Very small or flat objects may not support stable mesh or hull
-metrics. Mesh export, preview, and specialist repair are not supplied by this
-measurement node.
+metrics. Mesh viewing/export belongs to the separate
+[3D Meshes nodes](../workflows/mask-to-mesh.md); specialist repair is not supplied.
+
+### Existing mesh objects (nightly)
+
+The mesh input measures current geometry directly, with one row per explicit
+object. It never remeshes, rejoins disconnected shells, or infers voxel counts.
+
+| Field | Meaning |
+| --- | --- |
+| `mesh_id` | Stable mesh object identity, not a row number. Label extraction retains source label IDs. |
+| `vertex_count`, `triangle_count` | Counts in that mesh object. |
+| `watertight` | Edge/orientation checks passed; not a general self-intersection or print-validity certificate. |
+| `mesh_status`, `mesh_error` | Explain empty or invalid geometry and unavailable metrics. |
+
+Physical metrics use compatible units converted to the mesh X-axis unit;
+uncalibrated data remains in voxel-coordinate units. Open, degenerate,
+non-manifold or inconsistently wound surfaces keep area/extents where defined,
+but volume-derived fields are `NaN`. Smoothing and simplification can change
+measurements, even when the object ID stays the same.
+
+Filtering retains IDs; combining remaps collisions, and splitting assigns IDs
+to additional parts. Keep source/parent IDs from mesh metadata when tracing
+those changes. Do not join pre- and post-operation tables by row position.
 
 ## Skeleton and association tables
 

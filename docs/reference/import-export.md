@@ -6,6 +6,12 @@ support does not imply lossless preservation of every source metadata field.
 
 ## Input routes
 
+!!! info "Unreleased — reader packaging after 0.15.0a1"
+    Native CZI, Leica, ND2 and Olympus readers are now default dependencies for
+    plugin and desktop installations; Bio-Formats remains optional. See
+    [Reader support in Image Source](../getting-started/reader-support.md).
+    This changes installation, not the scientific format guarantees below.
+
 | Source | Behavior in 0.15.0a1 |
 | --- | --- |
 | Napari layer | Detaches supported NumPy data and metadata into a revision-tracked snapshot; stale results are rejected. |
@@ -70,6 +76,8 @@ input, generated execution, or output provenance.
 | NPY | Exact array/dtype exchange in Python | Axes, scale, units, and channel semantics must be stored separately |
 | Ordinary raster | A 2D display image is required | Display-oriented only; not a quantitative stack/archive format |
 | CSV / TSV | A table will be analyzed elsewhere | Units, identity columns, missing values, and delimiter handling |
+| 3MF (unreleased/nightly) | [Mesh objects](../workflows/mask-to-mesh.md) need portable units and display colours | Scientific surfaces, not print-validated solids; physical calibration is required. |
+| OBJ (unreleased/nightly) | Mesh geometry/object groups are needed, including uncalibrated voxel coordinates | Units, original IDs and colours are in VIPP comments; no standard unit field or material file. |
 
 ### Format details
 
@@ -80,6 +88,42 @@ grayscale values and label IDs up to 65,535; other ordinary raster routes are
 format when axes, calibration, stacks, or exact label identity matter.
 
 For additional readers, see [optional format packages](../getting-started/installation.md).
+
+### Mesh export (nightly)
+
+**Save Image** also accepts mesh inputs, with **auto**, **obj** and **3mf** format
+choices. **Auto** follows `.obj`/`.3mf` in the path (OBJ when no suffix is given).
+**Batch Output** offers **batch default**, **obj** and **3mf** for meshes. Their
+menus switch to image formats for image inputs; batch tables get CSV/TSV.
+Incompatible saved choices are flagged rather than silently changed. Auto-saving
+**Save Image** nodes remain prohibited in batch runs; use **Batch Output** there.
+
+Both formats retain object placement and export calibrated XYZ coordinates with
+outward winding preserved. Export does not register, weld, unite, smooth, repair
+or scale a specimen for printing. Batch **batch default** stays OBJ; choose
+**3mf** explicitly when required.
+
+**3MF** stores separate objects in one assembly, retaining their relative
+positions. Micrometre, millimetre, centimetre and metre coordinates use native
+3MF units. Compatible mixed units are converted; nanometres, picometres and
+angstroms use microns. Missing, pixel-only or incompatible physical units are
+rejected instead of being interpreted as millimetres.
+
+Display colours use 8-bit sRGB/RGBA. Per-object VIPP metadata also retains the
+original floating-point RGBA, names, IDs, source/parent IDs and source
+calibration/history. Receiving software may ignore custom metadata or alpha.
+
+The [3MF Core specification](https://github.com/3MFConsortium/spec_core/blob/master/3MF%20Core%20Specification.md)
+permits open geometry with the **surface** object type used here. This is not
+a claim of watertightness, print readiness or printer-material colour matching.
+Representative open/closed two-object outputs were checked against the
+Consortium's Core XSD; that checks document structure, not biological validity
+or every receiving application's behaviour. Reopen a representative export in
+your intended software before a large batch.
+
+**OBJ** stores separate object groups. Units, colours and provenance are comments
+rather than portable material/unit declarations; no `.mtl` file is generated.
+Confirm import units manually, or use 3MF for standard display colours and units.
 
 ## OME analysis dataset
 

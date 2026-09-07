@@ -3,7 +3,13 @@
 This page lists all **115 operation specifications** registered by
 `NODE_LIBRARY` in 0.15.0a1. The palette exposes **113**: the two legacy scatter
 raster operations remain loadable but are hidden from new-node selection.
+Nightly adds **Convex Hull** and eight nodes in **3D Meshes** (124 specifications;
+122 palette entries). The family counts below describe the tagged release.
 Nightly parameter behavior can be newer than the latest tagged alpha.
+
+In nightly builds, **Save Image** also accepts 3D meshes and passes the connected
+image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
+the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
     Titles and families were checked against the release registry. Input and
@@ -228,6 +234,7 @@ it cannot identify a valid two-peak histogram. See
 | --- | --- | --- | --- |
 | `Dilation` | array | mask | Expand foreground. |
 | `Erosion` | array | mask | Shrink foreground. |
+| `Convex Hull` (unreleased) | Boolean mask | mask | Fill one convex hull around all foreground per 2D slice or 3D volume. See [scope and caveats](../workflows/segmentation-label-cleanup.md#convex-hull). |
 | `Opening` | array | mask | Remove small foreground structures. |
 | `Closing` | array | mask | Close small gaps. |
 | `Top Hat` | array | mask | Binary top-hat operation. |
@@ -245,6 +252,24 @@ it cannot identify a valid two-peak histogram. See
 | `Skeleton Keypoints` | mask | endpoints, junctions, isolated masks |
 | `Skeleton Graph Overlay` | mask | RGB image |
 | `Prune Skeleton Branches` | mask | mask |
+
+## 3D Meshes (nightly)
+
+All eight nodes are manual/cached CPU operations. Mesh outputs are inspected
+as napari surfaces, not graph thumbnails. See the
+[mesh-object tutorial](../workflows/mask-to-mesh.md) for grouping, calibration,
+refinement caveats and 3MF/OBJ export.
+
+| Group | Node | Input → output | Use |
+| --- | --- | --- | --- |
+| Create surfaces | `Mask to 3D Mesh` | Boolean 3D mask → mesh | One foreground object or separate face-connected objects. |
+| Create surfaces | `Labels to 3D Mesh` | 3D labels → mesh | One mesh object per positive label, retaining IDs. |
+| Objects & colours | `Colour Mesh Objects` | mesh → mesh | Categorical IDs or current-geometry measurement colours. |
+| Objects & colours | `Combine Meshes` | 2–16 meshes → mesh | Collect objects and colours in one calibrated frame; no union or registration. |
+| Objects & colours | `Split Mesh Objects` | mesh → mesh | Separate shared-edge components; cavity walls split too. |
+| Objects & colours | `Filter Mesh Objects` | mesh → mesh | Keep objects inside/outside a measurement or ID range. |
+| Refine geometry | `Smooth Mesh` | mesh → mesh | Explicit Taubin-style surface smoothing. |
+| Refine geometry | `Simplify Mesh` | mesh → mesh | Approximate quadric-error triangle reduction. |
 
 ## Label Operations
 
@@ -265,7 +290,7 @@ it cannot identify a valid two-peak histogram. See
 | `Intensity Histogram` | numeric image | table | manual | Reproducible full-data intensity distribution with saved bin definitions. |
 | `Measure Objects` | labels | table | manual | Object morphology. |
 | `Measure Objects + Intensity` | labels plus intensity image | table | manual | Object morphology plus intensity statistics. |
-| `Measure 3D Mesh Morphology` | labels | table | manual | Surface/mesh morphology for true 3D labels. |
+| `Measure 3D Mesh Morphology` | labels; mask or mesh in nightly | table | manual | Surface morphology; existing meshes are measured per object without remeshing. |
 
 ### Skeleton / Network QC
 

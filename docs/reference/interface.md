@@ -10,12 +10,21 @@ floating window.
 
 ## Workflow tabs
 
+In unreleased nightly builds, table- and mesh-only graph nodes do not reserve
+a thumbnail area or show **No preview**, even before calculation. Their
+results remain available in the inspector or napari surface view.
+
 The movable tab bar holds independent live workflow sessions. Each tab retains
 its graph, calculated results, ancillary caches, undo/redo history, inspector
 state, file path, dirty baseline, display choices, compute request, and Batch
 workspace. **New** and **Open** create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.
+
+In unreleased nightly builds, right-click a tab and choose **Open in File
+Explorer** (Windows) or **Open in Finder** (macOS) to select its saved workflow
+file. Linux offers **Open containing folder**. This does not switch tabs or save
+pending edits; save a new workflow first to enable the action.
 
 Switching tabs restores retained state and does not recalculate scientific
 results. The selected tab is acknowledged immediately and can show an
@@ -32,6 +41,20 @@ and compute, then Undo/Redo and the gear menu. Below the workflow tabs, the
 graph context row holds sidebar toggles, **Find in workflow**, **Refresh**,
 **Focus**, **Auto Arrange**, **Tunnels…**, and zoom. This keeps graph navigation
 separate from file and execution actions.
+
+### Finding nodes
+
+Use **Find a node to add…** in the Nodes panel to add an operation, or
+**Find in workflow** to locate a node already in your graph.
+
+In the unreleased version after 0.15.0a1, these searches and the insert-node
+picker also accept common alternative names: **dilate → Dilation**,
+**erode → Erosion**, **thinning → Skeletonize**, **NLM → Non-Local Means**,
+and **clipping → Clamp Intensity**. British spellings such as
+**normalise** and **skeletonisation** work too. Results keep their usual node
+names; searching does not change the workflow or its calculations.
+
+### Toolbar controls
 
 | Control | Effect |
 | --- | --- |
@@ -303,6 +326,21 @@ selected output's remembered display profile.
 
 ### Numeric parameter entry
 
+!!! note "After 0.15.0a1 — development version"
+    Odd-only filter windows and PSF support sizes advance through odd numbers,
+    including when dragged or typed. Linked low/high controls stop at their
+    partner's limit; widen the high limit first when moving both values upward.
+    Editing one value does not move the other. Percentages and counts stay
+    within their supported ranges, and tiny positive minima remain selectable.
+
+    Fractional settings retain their declared precision, including **Smooth Mesh**
+    strength, **Simplify Mesh** percentage/aggressiveness and **Filter Mesh Objects**
+    measurement limits. Counts, IDs and odd-only sizes remain whole numbers.
+
+    These controls prevent invalid interactive edits, not every possible
+    calculation error. Input shape, dtype and metadata still need to match the
+    operation. Loading or displaying a workflow does not repair its parameters.
+
 Numeric spinners accept direct keyboard entry as well as their step buttons and
 paired sliders. Floating-point fields accept decimal points or commas and
 scientific notation such as `2e-4`; sufficiently small non-zero values are also
@@ -396,6 +434,13 @@ layer contrast changes downstream arrays, masks, thresholds, or measurements.
 The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved **Float histogram bins** parameter.
+
+*Unreleased:* Hover within a compact histogram's bin column to see its count,
+including tiny or empty bars. Object-size and property plots also show the
+range in the original units, even with **Log size axis** enabled. These values
+reuse the calculated histogram; hovering does not scan the image or change
+analysis. If the inspector is too narrow to draw individual bins, widen it to
+enable hover. Tooltips pause while you drag a parameter guide.
 
 Every node in the **Intensity & Contrast** palette family shows both its input
 and output histogram when an array result is available. Input and output scope

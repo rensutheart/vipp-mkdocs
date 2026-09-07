@@ -44,6 +44,42 @@ Image Source
 | Label creation | `Label Connected Components`, watershed nodes |
 | Label cleanup | `Clear Border Objects`, `Filter Labels By Volume`, `Filter Labels By Property`, `Relabel Sequential` |
 
+## Convex Hull
+
+!!! info "Unreleased · after 0.15.0a1"
+    **Morphology → Convex Hull** fills the smallest convex envelope around
+    the foreground of a Boolean mask, such as a threshold output.
+
+1. Connect your threshold or other Boolean mask to **Convex Hull**.
+2. Choose **Spatial processing** when working with a stack:
+
+    | Choice | Result |
+    | --- | --- |
+    | **Auto from axes** | Uses the declared image axes to choose planes or volumes. Ambiguous stack axes must be resolved first. |
+    | **2D YX** | Forms a separate hull in each slice; does not fill between slices. |
+    | **3D ZYX** | Forms a volume hull, including foreground across Z slices. |
+
+3. Inspect the result before using it for measurements. **All foreground in
+    each plane or volume contributes to one hull**: separate objects can join,
+    and concavities and enclosed gaps can be filled. This is not a per-label
+    operation or a replacement for ordinary hole filling.
+
+Time points and channels are processed independently. The output is a Boolean
+mask on the unchanged image grid, with the original spacing, units and origin.
+Empty masks remain empty; isolated points, lines and flat 3D masks are supported.
+Intensity and label images must be thresholded explicitly first.
+
+The CPU implementation follows scikit-image's
+[binary hull convention](https://scikit-image.org/docs/stable/api/skimage.morphology.html#skimage.morphology.convex_hull_image):
+half-pixel offsets along each spatial axis, with hull borders included. Tests
+cover analytical shapes and reference parity; flat 3D inputs have additional
+handling.
+
+Rasterization is chunked, but large or complex hulls can still need
+substantial time and memory. Cancellation is checked between stages and chunks;
+an active native hull calculation must return first. Applying this rasterized
+hull repeatedly can expand its boundary further, so normally use one hull node.
+
 ## How Global Automatic Thresholds Use The Data
 
 `Otsu Threshold`, `Triangle Threshold`, `Yen Threshold`, `Isodata Threshold`,
@@ -189,6 +225,9 @@ mask
 For a compact single-node starting point, use `Auto Watershed From Mask`.
 
 ## Reference Workflow
+
+To turn a finished volume mask into a viewable/exportable surface, see
+[View and export a 3D mesh](mask-to-mesh.md) (unreleased/nightly).
 
 Use the general cleanup example:
 

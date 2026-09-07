@@ -266,6 +266,13 @@ novice check into a pass.
 
 ## Optional microscope readers
 
+!!! info "Unreleased reader packaging"
+    After 0.15.0a1, native CZI, Leica, ND2 and Olympus readers are included in
+    both plugin and desktop installations. **Image Source → Reader support**
+    provides checks and guided setup for missing packages. See
+    [microscope reader support](reader-support.md). The commands below describe
+    the released **0.15.0a1**, not the new defaults.
+
 Install an optional reader with the Python from the exact environment that
 launches VIPP, then restart napari.
 

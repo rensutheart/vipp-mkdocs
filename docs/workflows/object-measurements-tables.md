@@ -1,6 +1,7 @@
 # Object Measurements And Tables
 
-Measurement workflows start from labels and produce tables.
+Measurement workflows start from labels or, in nightly, mesh objects and
+produce tables.
 
 ## Inspect and export the complete table
 
@@ -110,6 +111,33 @@ Use this for true `ZYX` labels when surface area, mesh volume, sphericity,
 convex hull metrics, or 3D solidity matter.
 
 This node is manual/cached because mesh calculations can be expensive.
+
+!!! info "Unreleased — additional inputs in nightly"
+    You can also connect a **Boolean mask** or an existing **Mesh**.
+
+    - **Mask:** all foreground is one object. Use **Label Connected Components**
+      first when you need a separate row per object.
+    - **Mesh:** measures the supplied triangles directly, with one row per
+      explicit mesh object and its stable `mesh_id`. Disconnected parts with
+      the same ID stay in that row. Spatial mode and Minimum voxel count do not
+      apply. Calibration is retained and compatible units convert to the
+      X-axis unit; voxel counts and voxel volume are not inferred.
+
+    Open, degenerate, non-manifold or inconsistently wound surfaces have `NaN`
+    volume-derived fields and an explanation in `mesh_status`/`mesh_error`.
+    Area and extents remain available. These checks do not detect every possible
+    self-intersection or certify a mesh for printing.
+
+Use [3D Meshes](mask-to-mesh.md) to create surfaces, retain label IDs, assign
+colours, combine, split, filter or refine objects, and export 3MF/OBJ. Mesh
+measurements use the current triangles, including any smoothing or
+simplification, without extracting a new surface. The cached-mesh path stays
+on CPU with **Auto** or **Prefer GPU** as well.
+
+Keep `mesh_id` when exporting tables. Filtering and refinement retain IDs;
+combining can remap duplicate IDs, and splitting creates additional IDs.
+Recalculate measurements after those operations instead of joining an older
+table by row position. Original/parent identities remain in mesh metadata.
 
 ![A napari 3D rendering of the synthetic anisotropic label objects used for mesh-morphology review](../assets/screenshots/workflows/mesh-3d-result.png)
 

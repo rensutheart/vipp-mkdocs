@@ -7,6 +7,7 @@ visible.
 | Workflow | Use when |
 | --- | --- |
 | [Segmentation And Label Cleanup](segmentation-label-cleanup.md) | You need masks, labels, and object IDs. |
+| [Create, colour and export 3D mesh objects](mask-to-mesh.md) | You need separate surfaces from masks/labels, object management, refinement or 3MF/OBJ export (nightly). |
 | [Object Measurements And Tables](object-measurements-tables.md) | You need morphology, intensity, metadata columns, summaries, or CSV output. |
 | [Skeleton And Network Analysis](skeleton-network-analysis.md) | You need curvilinear structure QC and network measurements. |
 | [Colocalization And Association](colocalization-association.md) | You need pixel, ROI, object, or label association analysis. |
