@@ -657,9 +657,7 @@ same as an external comparison or assay validation. The distinction matters:
   Apple accelerator. The
   [CPU/GPU matrix](../how-to/choose-compute.md#gpu-regions-in-0150a1) is a
   readable summary; the runtime policy/decision remains authoritative.
-- The current public GPU catalogue is CuPy/CuPyX-only. VIPP 0.15.0a1 does not
-  install or execute cuCIM, and the retired private-wheel/source-build route
-  must not be added to a current environment. See the
+- The current public GPU catalogue uses CuPy/CuPyX. See the
   [Windows CUDA guide](../getting-started/windows-cuda.md).
 - Batch processing remains local-file and pairs source lists positionally,
   although each resolved item is pinned to a canonical SourceItem rather than

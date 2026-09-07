@@ -133,9 +133,6 @@ Complete this only if the installer offered the NVIDIA CUDA route.
 - [ ] **Find fastest pipeline…** kept grouped results readable and inspectable, including
       when it could not choose a winner.
 
-- [ ] The release contained no separate cuCIM ZIP, source-build helper, or
-      provider-install step.
-
 What was confusing or did not work:
 
 ## Repair, rollback, and removal

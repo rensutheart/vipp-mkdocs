@@ -257,9 +257,7 @@ installer does not move or edit it. Create a fresh manual environment rather
 than moving or renaming one whose complete path is incompatible.
 
 Read the complete [Windows NVIDIA GPU guide](windows-cuda.md) before adding GPU
-packages manually. Do not install an old cuCIM bundle or private wheel into a
-0.15.0a1 environment: background processing and basic measurements use the
-standard CuPy installation.
+packages manually.
 
 If you are evaluating this alpha for the project, use the short
 [Windows installer field checklist](windows-field-acceptance.md). It records

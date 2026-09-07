@@ -3,8 +3,7 @@
 VIPP 0.15.0a1 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
-private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, `nvcc`, cuCIM
-bundle, or locally built provider wheel is required.
+private VIPP environment; no separate CUDA Toolkit or build tools are required.
 
 !!! warning "Use the exact 0.15.0a1 release"
     Download the installer and checksum only from the
@@ -138,33 +137,7 @@ fallback.
 
 The completed-node badge reports what actually ran. GPU providers in 0.15.0a1
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
-ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but 0.15.0a1 does not install or execute that provider.
-
-## Background and basic measurements are CuPy-only
-
-Rolling-Ball Background and Subtract Background no longer need a separately
-built provider. **Measure Objects** and **Measure Objects + Intensity** also use
-the standard CuPy installation. Their reviewed evidence covers 2D and 3D label
-tables, leading blocks, reordered/calibrated axes, sparse and repeated IDs,
-zero-row tables, supported intensity dtypes, cancellation, deterministic
-repeats, and zero private-pool residue.
-
-Exact saved basic-measurement pins migrate automatically:
-
-| Former saved identity | Current identity |
-| --- | --- |
-| `cucim-measure-objects-basic-v1` | `cupy-measure-objects-basic-v1` |
-| `cucim-measure-objects-intensity-basic-v1` | `cupy-measure-objects-intensity-basic-v1` |
-
-A broad saved `library:cucim` preference is not one unambiguous operation and
-therefore remains visibly unavailable. Choose a current implementation or
-compute mode explicitly rather than expecting VIPP to guess.
-
-!!! danger "Do not reuse an old provider add-on"
-    Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-    earlier VIPP release into 0.15.0a1. Those assets describe an older release
-    boundary and are not required by the current application.
+ineligible accelerator request.
 
 ## Runtime behavior and provenance
 
@@ -221,11 +194,22 @@ Machine-local evidence is invalidated when the graph, source revision,
 parameters, compute intent, implementation catalogue, environment, or device
 changes. Run **Find fastest pipeline…** again and review the new evidence.
 
-### Need the previous cuCIM procedure
+## Earlier cuCIM support
 
-Use the matching archived release page for the old environment. Do not apply
-that procedure to 0.15.0a1. The [0.13.0a7 release page](../releases/0.13.0a7.md) is
-preserved as the historical record.
+[VIPP 0.13.0a7](../releases/0.13.0a7.md) was the last release with optional
+cuCIM support. Current releases use CuPy/CuPyX for GPU processing.
+
+In the historical RTX 5090 comparison, the clearest cuCIM gain over a ready
+CuPy/CuPyX equivalent was the **Median Filter** primitive with a `uint16`
+31 × 31 window: **1.42× faster** (57.2 ms versus 81.3 ms, including transfers).
+Gaussian, small-window median, Sobel, and binary closing showed little benefit.
+These were library-primitive timings on one machine, not complete VIPP-node
+benchmarks. See the
+[comparison benchmark table](https://github.com/rensutheart/napari-vipp/blob/b4ef16e100143336a5f7488aca8879b667204361/docs/cucim-windows-source-evaluation.md#standard-benchmark-results).
+
+The later **Measure Objects** and **Measure Objects + Intensity** comparison
+favored CuPy in all 14 matched cases; see the
+[measurement benchmarks](https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison).
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
 [official v0.15.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1).

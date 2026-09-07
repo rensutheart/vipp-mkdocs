@@ -17,6 +17,9 @@ records when engineering detail is useful. Do not duplicate a user guide there.
   requires it, not as a substitute for organization.
 - Link to an existing explanation instead of repeating it in several pages.
 - Remove temporary status updates and development history from task guides.
+- Keep retired alpha-provider details in release history or a brief linked
+  historical note. Avoid repeated migration tables and warnings about obsolete
+  installers in current guides unless they address a current user need.
 
 ## Match the software
 
