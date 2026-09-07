@@ -1169,15 +1169,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#background-and-basic-measurements-are-cupy-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      Background and basic measurements are CuPy-only
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#runtime-behavior-and-provenance" class="md-nav__link">
     <span class="md-ellipsis">
       Runtime behavior and provenance
@@ -1232,17 +1223,17 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#need-the-previous-cucim-procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Need the previous cuCIM procedure
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earlier-cucim-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earlier cuCIM support
+    </span>
+  </a>
   
 </li>
       
@@ -3106,15 +3097,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#background-and-basic-measurements-are-cupy-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      Background and basic measurements are CuPy-only
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#runtime-behavior-and-provenance" class="md-nav__link">
     <span class="md-ellipsis">
       Runtime behavior and provenance
@@ -3169,17 +3151,17 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#need-the-previous-cucim-procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Need the previous cuCIM procedure
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earlier-cucim-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earlier cuCIM support
+    </span>
+  </a>
   
 </li>
       
@@ -3211,8 +3193,7 @@
 <p>VIPP 0.15.0a1 uses one standard CUDA 13 installation for every current
 reviewed GPU implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
-private VIPP environment; no CUDA Toolkit, Visual Studio, CMake, <code>nvcc</code>, cuCIM
-bundle, or locally built provider wheel is required.</p>
+private VIPP environment; no separate CUDA Toolkit or build tools are required.</p>
 <div class="admonition warning">
 <p class="admonition-title">Use the exact 0.15.0a1 release</p>
 <p>Download the installer and checksum only from the
@@ -3351,43 +3332,7 @@ complete workload is faster there. <strong>Prefer GPU</strong> still allows visi
 fallback.</p>
 <p>The completed-node badge reports what actually ran. GPU providers in 0.15.0a1
 appear as <strong>GPU · CuPy</strong>; an amber <strong>CPU fallback</strong> badge identifies a failed or
-ineligible accelerator request. Old workflows or provenance can still contain
-historical cuCIM identities, but 0.15.0a1 does not install or execute that provider.</p>
-<h2 id="background-and-basic-measurements-are-cupy-only">Background and basic measurements are CuPy-only<a class="headerlink" href="#background-and-basic-measurements-are-cupy-only" title="Permanent link">&para;</a></h2>
-<p>Rolling-Ball Background and Subtract Background no longer need a separately
-built provider. <strong>Measure Objects</strong> and <strong>Measure Objects + Intensity</strong> also use
-the standard CuPy installation. Their reviewed evidence covers 2D and 3D label
-tables, leading blocks, reordered/calibrated axes, sparse and repeated IDs,
-zero-row tables, supported intensity dtypes, cancellation, deterministic
-repeats, and zero private-pool residue.</p>
-<p>Exact saved basic-measurement pins migrate automatically:</p>
-<table>
-<thead>
-<tr>
-<th>Former saved identity</th>
-<th>Current identity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>cucim-measure-objects-basic-v1</code></td>
-<td><code>cupy-measure-objects-basic-v1</code></td>
-</tr>
-<tr>
-<td><code>cucim-measure-objects-intensity-basic-v1</code></td>
-<td><code>cupy-measure-objects-intensity-basic-v1</code></td>
-</tr>
-</tbody>
-</table>
-<p>A broad saved <code>library:cucim</code> preference is not one unambiguous operation and
-therefore remains visibly unavailable. Choose a current implementation or
-compute mode explicitly rather than expecting VIPP to guess.</p>
-<div class="admonition danger">
-<p class="admonition-title">Do not reuse an old provider add-on</p>
-<p>Do not install a cuCIM ZIP, private wheel, or source-build helper from an
-earlier VIPP release into 0.15.0a1. Those assets describe an older release
-boundary and are not required by the current application.</p>
-</div>
+ineligible accelerator request.</p>
 <h2 id="runtime-behavior-and-provenance">Runtime behavior and provenance<a class="headerlink" href="#runtime-behavior-and-provenance" title="Permanent link">&para;</a></h2>
 <p>VIPP checks RAM, Windows commit headroom, VRAM, transfers, workspaces, and
 retained outputs before admitting work. Cancellation completes only after
@@ -3430,10 +3375,19 @@ and result-finalization time. A cold first run is not a stable speed claim.</p>
 <p>Machine-local evidence is invalidated when the graph, source revision,
 parameters, compute intent, implementation catalogue, environment, or device
 changes. Run <strong>Find fastest pipeline…</strong> again and review the new evidence.</p>
-<h3 id="need-the-previous-cucim-procedure">Need the previous cuCIM procedure<a class="headerlink" href="#need-the-previous-cucim-procedure" title="Permanent link">&para;</a></h3>
-<p>Use the matching archived release page for the old environment. Do not apply
-that procedure to 0.15.0a1. The <a href="../../releases/0.13.0a7/">0.13.0a7 release page</a> is
-preserved as the historical record.</p>
+<h2 id="earlier-cucim-support">Earlier cuCIM support<a class="headerlink" href="#earlier-cucim-support" title="Permanent link">&para;</a></h2>
+<p><a href="../../releases/0.13.0a7/">VIPP 0.13.0a7</a> was the last release with optional
+cuCIM support. Current releases use CuPy/CuPyX for GPU processing.</p>
+<p>In the historical RTX 5090 comparison, the clearest cuCIM gain over a ready
+CuPy/CuPyX equivalent was the <strong>Median Filter</strong> primitive with a <code>uint16</code>
+31 × 31 window: <strong>1.42× faster</strong> (57.2 ms versus 81.3 ms, including transfers).
+Gaussian, small-window median, Sobel, and binary closing showed little benefit.
+These were library-primitive timings on one machine, not complete VIPP-node
+benchmarks. See the
+<a href="https://github.com/rensutheart/napari-vipp/blob/b4ef16e100143336a5f7488aca8879b667204361/docs/cucim-windows-source-evaluation.md#standard-benchmark-results">comparison benchmark table</a>.</p>
+<p>The later <strong>Measure Objects</strong> and <strong>Measure Objects + Intensity</strong> comparison
+favored CuPy in all 14 matched cases; see the
+<a href="https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison">measurement benchmarks</a>.</p>
 <p>Continue with <a href="../../how-to/choose-compute/">Choose CPU or GPU compute</a> and the
 <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1">official v0.15.0a1 release</a>.</p>
 
@@ -3456,7 +3410,7 @@ preserved as the historical record.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 06:56:34 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 07:07:46 UTC">September 7, 2026</span>
   </span>
 
     
