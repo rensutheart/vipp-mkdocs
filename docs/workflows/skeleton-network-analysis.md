@@ -107,6 +107,9 @@ Pruning removes short terminal spurs and optionally isolated skeleton voxels.
 
 ## What To Check
 
+The [skeleton node reference](../reference/skeleton-nodes.md) lists each node's
+outputs, units, graph terms, and pruning behavior.
+
 - Is the input a binary mask or an already skeletonized mask?
 - Should analysis be 2D per slice or 3D volumetric?
 - Is z-spacing correct before reporting physical lengths?

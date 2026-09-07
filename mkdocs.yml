@@ -156,6 +156,7 @@ nav:
       - How-to guides: how-to/index.md
       - Choose CPU or GPU compute: how-to/choose-compute.md
       - Edit and organize a graph: how-to/edit-graph.md
+      - Crop an image or volume: how-to/crop-images.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
       - Save, share, and export: how-to/save-share-export.md
       - Work with files and stores: reference/import-export.md
@@ -177,6 +178,14 @@ nav:
       - Reference: reference/index.md
       - All nodes: reference/node-index.md
       - Toolbar and settings: reference/interface.md
+      - Graph display settings: reference/display-settings.md
+      - Intensity and thresholds: reference/intensity-thresholds.md
+      - Channel and axis controls: reference/channel-axis-controls.md
+      - Measurement tables and units: reference/measurement-tables.md
+      - Skeleton node outputs: reference/skeleton-nodes.md
+      - Colocalization metric definitions: reference/colocalization-metrics.md
+      - RACC-like index: reference/racc-index.md
+      - Object association metrics: reference/association-metrics.md
       - Example workflows: reference/example-workflows.md
       - Bundled sample data: reference/sample-data.md
       - Workflow and export contract: reference/workflow-contract.md

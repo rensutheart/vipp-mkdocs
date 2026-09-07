@@ -5,6 +5,9 @@ labels.
 
 ## Basic Pattern
 
+For exact histogram populations, Minimum/ImageJ behavior, and numeric limits,
+see [intensity and threshold controls](../reference/intensity-thresholds.md).
+
 ```text
 Image Source
   -> Extract Channel or Split Channels

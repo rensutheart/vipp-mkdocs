@@ -71,6 +71,16 @@ input, generated execution, or output provenance.
 | Ordinary raster | A 2D display image is required | Display-oriented only; not a quantitative stack/archive format |
 | CSV / TSV | A table will be analyzed elsewhere | Units, identity columns, missing values, and delimiter handling |
 
+### Format details
+
+OME-TIFF is the default quick-save format; the OME-Zarr writer defaults to 0.4.
+ImageJ TIFF encodes binary masks as `uint8` 0/255. PNG can preserve 16-bit
+grayscale values and label IDs up to 65,535; other ordinary raster routes are
+8-bit display exports, and JPEG cannot store alpha. Use a scientific image
+format when axes, calibration, stacks, or exact label identity matter.
+
+For additional readers, see [optional format packages](../getting-started/installation.md).
+
 ## OME analysis dataset
 
 **Export OME dataset...** writes one reference image and graph label outputs into

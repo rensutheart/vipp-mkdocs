@@ -176,6 +176,9 @@ reviewed before export.*
 
 ## What To Check Before Export
 
+Use [measurement tables and units](../reference/measurement-tables.md) for
+identity keys, unit propagation, physical-column limits, and mesh-status fields.
+
 - Are labels correct?
 - Are label IDs stable after filtering?
 - Are scale and units correct?

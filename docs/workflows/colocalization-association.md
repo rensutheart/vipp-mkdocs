@@ -163,6 +163,10 @@ events / puncta + regions / ROIs
 
 ## Reporting Checklist
 
+For exact exported definitions, see [Pearson, Manders, and Costes](../reference/colocalization-metrics.md),
+the [RACC-like index](../reference/racc-index.md), and
+[object-association fields](../reference/association-metrics.md).
+
 Report:
 
 - channels analyzed;

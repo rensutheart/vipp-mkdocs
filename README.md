@@ -8,6 +8,13 @@ Image Processing Platform**, distributed for napari as
 separate from the application repository so documentation releases and the
 software release cycle can be managed independently.
 
+This is the **single source for public user documentation**. Do not copy the
+manual back into napari-vipp. That repository keeps implementation plans,
+architecture/contracts, tests, examples, qualification evidence, and release
+procedures. Its former user-guide files are relocation notes only.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the writing and ownership rules.
+
 ## Preview locally
 
 ```powershell
@@ -22,6 +29,13 @@ printed by MkDocs. A production-equivalent check is:
 
 ```text
 mkdocs build --strict
+```
+
+Check public content and, when both repositories are available, their links:
+
+```text
+python scripts/check_manual.py
+python scripts/check_manual.py --application-repo ../napari-vipp
 ```
 
 ## Versions

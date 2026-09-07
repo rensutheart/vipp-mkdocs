@@ -196,81 +196,11 @@ duplicate that purpose in its message strip.
 
 ## Display settings
 
-| Setting | Choices / meaning |
-| --- | --- |
-| Preview mode | `Slice`, `MIP`, or `Off` for graph/inspector previews. |
-| Thumbnail detail | `Low (90 × 55)`, `Standard (180 × 110)`, `High (360 × 220)`, or `Very High (720 × 440)` backing detail. The card keeps the same on-screen size; High and Very High can improve HiDPI display, downsampling, or maximum graph zoom. |
-| Thumbnail contrast | Controls thumbnail contrast behavior; it does not alter processed data. |
-| Contrast range | `Stack` caches one exact full-output, resolution-independent range; `Slice` normalizes the selected detail's spatially sampled current view and avoids a full-output scan. |
-| Thumbnail statistics | `Auto`, `CPU`, or `Prefer GPU` for presentation-only Stack contrast work. |
-| Monochrome colormap | Changes display of monochrome previews only. |
-| Link napari/VIPP sliders | Synchronizes napari dimensions and VIPP preview sliders. |
-| Save thumbnail visibility in workflows | Includes per-node thumbnail visibility in workflow UI state. |
-| Port labels | `Ambiguous only` (default) labels multi-input or multi-output nodes, `Show all` labels every port, and `Hide all` removes persistent labels. |
-| Graph zoom | Scales graph cards; reset returns to 100%. |
-| Workflow saving | Overwrite the active JSON, confirm before every overwrite, or create a timestamped copy for each save. |
+Open **Preview** in 0.15.0a1 for graph thumbnails, contrast, colour, resolution,
+and port names. These settings never alter scientific arrays.
 
-Thumbnail detail and thumbnail statistics are independent. Low/Standard/High/Very High
-changes only the retained source image for the fixed card viewport; it neither
-recalculates a node nor changes the complete output population used by Stack
-contrast. High and Very High do not guarantee more physical on-screen pixels;
-Very High retains four times the backing pixels of High. Changing
-detail retains cached exact Stack limits, but may slightly change Slice limits
-because Slice normalizes the selected resolution's spatial sample. The choices
-are local presentation settings, not workflow parameters or scientific
-provenance.
-
-For Stack Percentile contrast, native `uint8` and `uint16` results use an exact
-dtype-aware histogram. CPU and CuPy produce the same display limits, including
-the NumPy-linear 0.5th/99.9th-percentile result. Min-max uses an exact native CPU
-reduction rather than constructing a histogram. Float and other-dtype
-percentiles use the exact NumPy-compatible CPU path in this release. Raw integer
-contrast, masks, labels, tables, and other scan-free previews do not launch an
-unnecessary statistics scan.
-
-Presentation **Auto** decides per eligible Percentile result from the full
-output's dtype and byte size, not its backing thumbnail resolution. Before the
-first successful thumbnail GPU calculation, it uses a conservative 384-MiB
-crossover for `uint8` and 512 MiB for `uint16`; both become 32 MiB while that
-path is warm. These measured default heuristics are not a universal fastest
-guarantee because data distribution, hardware, CUDA startup, residency, and
-competing work can move the crossover. Presentation **CPU** never initializes
-CUDA. Presentation **Prefer GPU** is the explicit override: it attempts every
-eligible CuPy histogram and visibly falls back to CPU when safe.
-
-Very small batches that are guaranteed to remain on CPU complete immediately
-without occupying the toolbar progress strip: at most 1 MiB total, eight
-requests, and eight aggregate scalar/channel lanes. Larger work, high-channel
-data, and selected GPU paths stay in the cancellable background worker. This is
-an internal scheduling boundary, not a different contrast algorithm or a
-CPU/GPU speed claim; the selected-node contrast status records the result in the
-same way.
-
-The main compute policy is authoritative: main **CPU** hard-forces presentation
-CPU; main **Prefer GPU** biases presentation Auto toward GPU; main **Auto** and
-**Custom** leave it adaptive. Selecting a node reveals a compact **Thumbnail
-contrast** row near the top of its inspector: **Calculating…**, **CPU · NumPy**,
-**GPU · CuPy**, amber **CPU fallback**, or red **Error**. Ordinary success is
-muted, and the graph card stays compact. This never replaces the card's
-scientific **CPU**, **GPU · CuPy**, or **CPU fallback** badge.
-Hover the inspector row or thumbnail for scope, render detail, algorithm, byte
-count, elapsed time, selection reason, threshold, fallback, and failure
-information; keyboard What's This help and screen readers receive the same text.
-
-The shared toolbar reports the active node, backend, and statistics phase. CPU
-integer histogram and min-max paths advance and cancel between bounded chunks.
-An active GPU kernel/synchronization or exact float/other-dtype NumPy percentile
-may contain a non-interruptible inner call; that phase is identified and
-`Cancel` takes effect at the next cooperative boundary. No partial contrast
-limit is published.
-
-Long port names are shortened on the card and retain their full text in a
-tooltip. Changing the label mode can make an already tightly packed layout
-overlap; VIPP reports the number of overlapping card pairs in its message strip.
-Use **Auto Arrange** to make
-label-aware space, or move the affected
-cards manually. Label visibility is a graph-display choice and never changes
-connections or processed data.
+See [Graph display settings](display-settings.md) for the options, exact-statistics
+behavior, and the clearer **Display settings** labels in post-0.15.0a1 nightly builds.
 
 ## Execution and memory settings
 

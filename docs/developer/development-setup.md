@@ -61,7 +61,7 @@ the source of truth for implementation boundaries:
 
 - [`docs/architecture.md`](https://github.com/rensutheart/napari-vipp/blob/main/docs/architecture.md)
 - [`docs/developer-notes.md`](https://github.com/rensutheart/napari-vipp/blob/main/docs/developer-notes.md)
-- [`docs/cache-and-memory.md`](https://github.com/rensutheart/napari-vipp/blob/main/docs/cache-and-memory.md)
+- [Cache and memory](../reference/cache-memory.md)
 
 Read only the relevant plan/history material; do not copy speculative roadmap
 claims into the public manual as current capability.

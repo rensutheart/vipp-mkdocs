@@ -57,6 +57,11 @@ a lower layer.
 
 ## Update the manual
 
+Public documentation is maintained only in **vipp-mkdocs**. The application
+repository keeps plans, implementation contracts, and evidence—not another
+manual. Follow the [writing checklist](https://github.com/rensutheart/vipp-mkdocs/blob/main/CONTRIBUTING.md)
+and link companion application/documentation changes in their pull requests.
+
 Write for the user's task first. Put exact lists and settings in reference;
 explain scientific decisions in the task page where they occur. Qualify claims
 about validation, metadata, scalability, batch provenance, and compatibility.
@@ -73,6 +78,10 @@ For UI images:
 
 Run `mkdocs build --strict` and inspect both light and dark manual themes at
 desktop and narrow widths. Follow links from the page, not only search results.
+
+Run `python scripts/check_manual.py` as well. With both repositories available,
+add `--application-repo ../napari-vipp` to verify README and relocation-note
+destinations against this checkout.
 
 ## Keep reference counts honest
 

@@ -108,6 +108,10 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 
 ### Choose a port-label mode
 
+Nightly builds after 0.15.0a1 call this **Display settings → Input/output labels**,
+with **When needed**, **Always**, and **Never**. The behavior is unchanged; see
+[Graph display settings](../reference/display-settings.md) for the label mapping.
+
 The **Port labels** setting has three display modes:
 
 | Mode | Behavior |
@@ -123,6 +127,18 @@ pairs overlap. Run **Auto Arrange** to rebuild a size-aware source-to-sink
 layout, or move those cards manually. Auto Arrange remains a one-shot,
 undoable layout edit; port-label visibility does not change the workflow's
 connections or scientific calculation.
+
+## Search the workflow
+
+Use **Find in workflow** to match node titles, operation IDs, tunnel names,
+and output tags. Press Enter or the adjacent **Focus** to move through matches.
+Tunnel matches reveal the source and its subscribers.
+
+In nightly builds after 0.15.0a1, both workflow search and the node-library
+search have an in-field magnifier. Workflow search widens with the window.
+**Ctrl+F** (**Cmd+F** on macOS) focuses it and selects the existing query only
+when napari or another host shortcut has not claimed the key. Existing bindings
+retain priority, including those added after VIPP opens.
 
 ## Use tunnels for repeated sources
 

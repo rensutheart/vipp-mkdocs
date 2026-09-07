@@ -9,6 +9,10 @@ maintained in separate repositories:
 | [`napari-vipp`](https://github.com/rensutheart/napari-vipp) | Application, operation registry, examples, tests, release metadata |
 | [`vipp-mkdocs`](https://github.com/rensutheart/vipp-mkdocs) | Public, versioned user manual |
 
+Public instructions have one home: this manual. The application keeps its
+[plans, architecture, contracts, and evidence](https://github.com/rensutheart/napari-vipp/blob/main/docs/README.md)
+for contributors and coding agents. Its old user guides now point here.
+
 Publication plans, private datasets, ethics material, unpublished results, and
 internal screenshot roadmaps do not belong in either public manual page.
 
