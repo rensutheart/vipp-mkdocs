@@ -18,7 +18,7 @@
         <link rel="prev" href="../choose-compute/">
       
       
-        <link rel="next" href="../inspect-outputs/">
+        <link rel="next" href="../crop-images/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -1447,6 +1447,8 @@
       
         
       
+        
+      
     
     
     
@@ -1655,6 +1657,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#search-the-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search the workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#use-tunnels-for-repeated-sources" class="md-nav__link">
     <span class="md-ellipsis">
       Use tunnels for repeated sources
@@ -1685,6 +1696,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crop-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Crop an image or volume
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -2177,6 +2211,22 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2258,6 +2308,190 @@
   
   <span class="md-ellipsis">
     Toolbar and settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/display-settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/intensity-thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intensity and thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/channel-axis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel and axis controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/measurement-tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measurement tables and units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/skeleton-nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skeleton node outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/colocalization-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Colocalization metric definitions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/racc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RACC-like index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/association-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Object association metrics
     
   </span>
   
@@ -2896,6 +3130,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#search-the-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search the workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#use-tunnels-for-repeated-sources" class="md-nav__link">
     <span class="md-ellipsis">
       Use tunnels for repeated sources
@@ -3035,6 +3278,9 @@ step was omitted and recalculate decisive outputs before accepting the branch.</
 <li>Use graph search to find titles, operation IDs, tunnel names, and batch tags.</li>
 </ul>
 <h3 id="choose-a-port-label-mode">Choose a port-label mode<a class="headerlink" href="#choose-a-port-label-mode" title="Permanent link">&para;</a></h3>
+<p>Nightly builds after 0.15.0a1 call this <strong>Display settings → Input/output labels</strong>,
+with <strong>When needed</strong>, <strong>Always</strong>, and <strong>Never</strong>. The behavior is unchanged; see
+<a href="../../reference/display-settings/">Graph display settings</a> for the label mapping.</p>
 <p>The <strong>Port labels</strong> setting has three display modes:</p>
 <table>
 <thead>
@@ -3065,6 +3311,15 @@ pairs overlap. Run <strong>Auto Arrange</strong> to rebuild a size-aware source-
 layout, or move those cards manually. Auto Arrange remains a one-shot,
 undoable layout edit; port-label visibility does not change the workflow's
 connections or scientific calculation.</p>
+<h2 id="search-the-workflow">Search the workflow<a class="headerlink" href="#search-the-workflow" title="Permanent link">&para;</a></h2>
+<p>Use <strong>Find in workflow</strong> to match node titles, operation IDs, tunnel names,
+and output tags. Press Enter or the adjacent <strong>Focus</strong> to move through matches.
+Tunnel matches reveal the source and its subscribers.</p>
+<p>In nightly builds after 0.15.0a1, both workflow search and the node-library
+search have an in-field magnifier. Workflow search widens with the window.
+<strong>Ctrl+F</strong> (<strong>Cmd+F</strong> on macOS) focuses it and selects the existing query only
+when napari or another host shortcut has not claimed the key. Existing bindings
+retain priority, including those added after VIPP opens.</p>
 <h2 id="use-tunnels-for-repeated-sources">Use tunnels for repeated sources<a class="headerlink" href="#use-tunnels-for-repeated-sources" title="Permanent link">&para;</a></h2>
 <p>Named tunnels let one output feed distant nodes without long crossing wires.
 Create a tunnel from an output, give it a semantic name such as <code>nuclei_labels</code>
@@ -3117,7 +3372,7 @@ workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
   </span>
 
     
@@ -3172,13 +3427,13 @@ workflow.</p>
         
         
           
-          <a href="../inspect-outputs/" class="md-footer__link md-footer__link--next" aria-label="Next: Inspect and compare outputs">
+          <a href="../crop-images/" class="md-footer__link md-footer__link--next" aria-label="Next: Crop an image or volume">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Inspect and compare outputs
+                Crop an image or volume
               </div>
             </div>
             <div class="md-footer__button md-icon">
