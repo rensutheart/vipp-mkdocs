@@ -2595,6 +2595,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#unreleased-rl-gpu-admission-with-advisories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unreleased RL GPU admission with advisories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0150a2-scope-and-evidence" class="md-nav__link">
     <span class="md-ellipsis">
       0.15.0a2 scope and evidence
@@ -3200,6 +3209,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#unreleased-rl-gpu-admission-with-advisories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unreleased RL GPU admission with advisories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#0150a2-scope-and-evidence" class="md-nav__link">
     <span class="md-ellipsis">
       0.15.0a2 scope and evidence
@@ -3390,6 +3408,18 @@
 qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.</p>
+<h2 id="unreleased-rl-gpu-admission-with-advisories">Unreleased RL GPU admission with advisories<a class="headerlink" href="#unreleased-rl-gpu-admission-with-advisories" title="Permanent link">&para;</a></h2>
+<p>Nightly builds after 0.15.0a2 broaden RL/RL-TV GPU execution to the
+<a href="../../how-to/choose-compute/#unreleased-rl-and-rl-tv-gpu-ranges">authored ranges and PSF options</a>
+without requiring a CPU comparison before execution. Numerical-difference
+advisories identify settings outside the earlier prequalified region and are
+retained in execution provenance.</p>
+<p>This is an execution-policy change, not a claim of CPU equivalence throughout
+the new region. Even-sized PSFs can change convolution centering. Historical
+benchmarks below retain their original settings and environments; they do not
+qualify every newly admitted combination. Memory, runtime, finite-input and
+geometry checks still apply. Optional benchmark/optimizer comparisons keep
+their own acceptance criteria.</p>
 <h2 id="0150a2-scope-and-evidence">0.15.0a2 scope and evidence<a class="headerlink" href="#0150a2-scope-and-evidence" title="Permanent link">&para;</a></h2>
 <p>The <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2">0.15.0a2 release</a> is the canonical source for exact assets, checksums and qualification records. This page describes scope; it does not assert a check passed without its release evidence.</p>
 <p>Changed areas include included native-reader dependencies and guided setup, update discovery, workflow/search/display controls, threshold directions and ranges, intensity inversion and numeric guards, Convex Hull, and the mesh-object lifecycle from extraction to export. Dependency and packaging changes require clean-install checks; Windows and the two native macOS architectures have separate qualification boundaries. Changed GPU threshold and shared compute/provenance behavior need matching evidence; unchanged provider kernels may retain earlier evidence only within their recorded environment and contract.</p>
@@ -4137,7 +4167,7 @@ limitation or produce the required evidence before making the claim.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 8, 2026 01:04:54 UTC">September 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 8, 2026 09:42:04 UTC">September 8, 2026</span>
   </span>
 
     
