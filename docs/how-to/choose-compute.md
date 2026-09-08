@@ -4,6 +4,13 @@ VIPP 0.15.0a2 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
+!!! info "Unreleased nightly: broader Richardson–Lucy GPU execution"
+
+    After 0.15.0a2, RL and RL-TV can run with numerical-difference advisories
+    outside their earlier CPU/GPU comparison ranges. Choose **Prefer GPU** or
+    pin the GPU in **Custom** to run without a prerequisite CPU comparison.
+    See [the new ranges and warnings](#unreleased-rl-and-rl-tv-gpu-ranges).
+
 CPU remains the portable scientific reference. GPU implementations are
 considered only inside operation-specific regions that preserve the declared
 CPU contract. An unsupported dtype, parameter, shape, dependency, memory
@@ -267,6 +274,41 @@ inspect downstream thresholds/writers, and report it. Conversion can unlock
 larger GPU gains across filtering, deconvolution, and segmentation, but it
 changes the authored data representation. Never convert only to make a
 benchmark look faster.
+
+## Unreleased RL and RL-TV GPU ranges
+
+These changes apply to nightly builds after **0.15.0a2**. The released operation
+matrix above retains its original limits.
+
+Select **Prefer GPU**, or choose the GPU for the node in **Custom**, then
+calculate. CPU agreement is not a prerequisite for these settings:
+
+| Setting | Ordinary RL | RL-TV |
+| --- | --- | --- |
+| Iterations | 1–500 | 1–100 |
+| Filter epsilon | 0–1 | 0–0.001 |
+| TV regularization | — | 0–0.1 |
+| TV epsilon | — | 1e-12–0.01 |
+| Denominator floor | — | 1e-6–1 |
+
+Even-sized PSFs, PSFs larger than the image, and changes to normalization,
+clipping or scale-preservation options also remain eligible. VIPP preserves
+your authored settings. Finite `float32` Image and PSF inputs, compatible
+2D/3D axes, positive PSF mass, a supported environment and enough memory remain
+required. Positive TV needs at least two samples on each spatial axis.
+
+Select the calculated node and open **Compute** to read any **GPU result:
+numerical differences** advisory. Even-sized PSFs can produce different
+convolution centering on CPU and GPU. Broader settings may also change numerical
+results. The warning keeps GPU execution enabled and is saved with execution
+provenance. **Previous GPU result** means the note describes an older result;
+a CPU fallback does not retain a GPU-result advisory.
+
+**Auto** retains its separate speed-learning behavior, including possible CPU
+timing runs. **Benchmark node…** and **Find fastest pipeline…** retain their
+comparison criteria. A rejected comparison does not prevent a direct GPU
+choice. Keeping a GPU result does not certify CPU equivalence or restoration
+quality; inspect the reconstruction for your intended analysis.
 
 ## Installation and platform boundary
 

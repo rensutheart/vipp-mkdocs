@@ -5,6 +5,21 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## Unreleased RL GPU admission with advisories
+
+Nightly builds after 0.15.0a2 broaden RL/RL-TV GPU execution to the
+[authored ranges and PSF options](../how-to/choose-compute.md#unreleased-rl-and-rl-tv-gpu-ranges)
+without requiring a CPU comparison before execution. Numerical-difference
+advisories identify settings outside the earlier prequalified region and are
+retained in execution provenance.
+
+This is an execution-policy change, not a claim of CPU equivalence throughout
+the new region. Even-sized PSFs can change convolution centering. Historical
+benchmarks below retain their original settings and environments; they do not
+qualify every newly admitted combination. Memory, runtime, finite-input and
+geometry checks still apply. Optional benchmark/optimizer comparisons keep
+their own acceptance criteria.
+
 ## 0.15.0a2 scope and evidence
 
 The [0.15.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2) is the canonical source for exact assets, checksums and qualification records. This page describes scope; it does not assert a check passed without its release evidence.
