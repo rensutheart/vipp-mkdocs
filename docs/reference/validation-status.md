@@ -651,7 +651,7 @@ same as an external comparison or assay validation. The distinction matters:
   saved compute request; and version-3 configs retain guarded source-axis
   declarations and acquire SourceItems when resolved; version 4 adds SourceItems
   and typed numeric overrides. Earlier versions have no batch execution-profile
-  override and are written as version 5 only after review and save. A saved
+  override and are written as version 6 only after review and save. A saved
   Auto, Prefer GPU, or Custom request is intent; actual
   implementation provenance must be retained from each run. Auto uses reviewed GPU defaults
   without compatible history; accelerated-only history schedules one
