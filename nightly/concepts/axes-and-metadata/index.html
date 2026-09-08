@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3290,8 +3315,6 @@ states how positions in that image should be interpreted.</p>
 intent. Bypass does not rename axes or change metadata: a safe bypass aliases
 the exact primary input state to the output.</p>
 <h2 id="choose-how-source-channels-appear">Choose how source channels appear<a class="headerlink" href="#choose-how-source-channels-appear" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p class="admonition-title">Unreleased — after 0.15.0a1</p>
 <p>Select an <strong>Image Source</strong> and use <strong>Channel display</strong>:</p>
 <ul>
 <li><strong>Stack (C slider)</strong> — the default. Use C to select an individual channel.</li>
@@ -3299,7 +3322,6 @@ the exact primary input state to the output.</p>
   the same channel colours as VIPP's thumbnail. Use the layers' eye icons
   to show or hide channels; there is no C slider in this mode.</li>
 </ul>
-</div>
 <p>The choice applies immediately to the full-resolution viewer and pinned source,
 and is saved with the workflow. It does not change pixels, processing, or the
 <strong>Image stack</strong> axis interpretation. Editing channel colours does not switch modes.
@@ -3308,13 +3330,10 @@ Lower-resolution source previews have their own display path.</p>
 RGB/RGBA components. A colour-composite thumbnail can still show all channels
 while the stack viewer shows only the selected channel.</p>
 <h2 id="channels-in-the-3d-viewer">Channels in the 3D viewer<a class="headerlink" href="#channels-in-the-3d-viewer" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p class="admonition-title">Development fix after 0.15.0a1</p>
 <p>VIPP-managed views use explicit spatial axes for 3D rendering, even when
 the file stores channels between them (for example, Olympus OIR's <code>ZCYX</code>).
 Z becomes part of the volume; C remains a channel slider. With
 <strong>Link napari/VIPP sliders</strong> enabled, channel changes work in either place.</p>
-</div>
 <p>This changes only the viewing order, not image data or calibration. Switching
 back to 2D restores Z navigation. Colour-composite thumbnails can show several
 channels together while a scalar viewer layer shows the selected channel;
@@ -3455,7 +3474,7 @@ triggers for replacement guesses.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

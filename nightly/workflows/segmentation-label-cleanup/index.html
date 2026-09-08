@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3347,11 +3372,8 @@ see <a href="../../reference/intensity-thresholds/">intensity and threshold cont
 </tbody>
 </table>
 <h2 id="convex-hull">Convex Hull<a class="headerlink" href="#convex-hull" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p class="admonition-title">Unreleased · after 0.15.0a1</p>
 <p><strong>Morphology → Convex Hull</strong> fills the smallest convex envelope around
 the foreground of a Boolean mask, such as a threshold output.</p>
-</div>
 <ol>
 <li>Connect your threshold or other Boolean mask to <strong>Convex Hull</strong>.</li>
 <li>
@@ -3507,13 +3529,13 @@ blocker, the node may show a <strong>GPU tip</strong> and an <strong>Add convers
 button inserts a visible, undoable Convert Dtype node; review its memory,
 threshold, and scientific consequences before accepting it.</p>
 <p>Read each node badge after calculation and see the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0140a1">CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0150a2">CPU/GPU operation matrix</a>
 before authoring a provider choice. GPU eligibility says that an implementation
 matches its declared CPU contract; it does not validate the segmentation for
 your assay.</p>
 <h2 id="minimum-threshold-failure-is-explicit">Minimum Threshold Failure Is Explicit<a class="headerlink" href="#minimum-threshold-failure-is-explicit" title="Permanent link">&para;</a></h2>
 <p><code>Minimum Threshold</code> repeatedly smooths the exact histogram until two maxima
-remain, then selects the valley between them. <strong>Maximum smoothing iterations</strong>
+remain, then selects the valley between them. <strong>Histogram smoothing pass limit</strong>
 is a saved parameter from 1 to 10,000; the default is 10,000.</p>
 <p>Some distributions do not have a suitable two-peak solution. If two maxima
 cannot be found, or the saved iteration limit is reached, the node reports a
@@ -3539,7 +3561,7 @@ method is unsuitable for that input or that preprocessing needs review.</p>
 <p>For a compact single-node starting point, use <code>Auto Watershed From Mask</code>.</p>
 <h2 id="reference-workflow">Reference Workflow<a class="headerlink" href="#reference-workflow" title="Permanent link">&para;</a></h2>
 <p>To turn a finished volume mask into a viewable/exportable surface, see
-<a href="../mask-to-mesh/">View and export a 3D mesh</a> (unreleased/nightly).</p>
+<a href="../mask-to-mesh/">Create, colour and export 3D mesh objects</a>.</p>
 <p>Use the general cleanup example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>examples/otsu-red-channel-labels.json
 </span></code></pre></div>
@@ -3585,7 +3607,7 @@ histogram scope is recorded in the inspector history.</em></p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

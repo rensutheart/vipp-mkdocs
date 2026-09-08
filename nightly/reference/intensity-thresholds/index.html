@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3209,11 +3234,9 @@
 could change your analysis. For a first segmentation, start with the
 <a href="../../workflows/segmentation-label-cleanup/">label-cleanup tutorial</a>.</p>
 <h2 id="binary-threshold-cutoff-or-intensity-range">Binary Threshold: cutoff or intensity range<a class="headerlink" href="#binary-threshold-cutoff-or-intensity-range" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">After 0.15.0a1 — development version</p>
-<p>Binary Threshold adds <strong>Foreground: Above / Below / In range / Outside range</strong>. Existing workflows
-keep <strong>Above</strong> and produce the same mask as before.</p>
-</div>
+<p>Binary Threshold offers <strong>Foreground: Above / Below / In range / Outside range</strong>.
+Older workflows without a saved <strong>Foreground</strong> choice use <strong>Above</strong> and produce
+the same mask as before.</p>
 <p>Choose <strong>Foreground</strong>, then adjust the slider or drag a histogram guide:</p>
 <table>
 <thead>
@@ -3366,12 +3389,9 @@ and Clamp Intensity additionally show their cutoff guides; the other three
 input histograms are read-only
 context for judging the transformation.</p>
 <h2 id="rescale-intensity-cutoffs">Rescale Intensity Cutoffs<a class="headerlink" href="#rescale-intensity-cutoffs" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">After 0.15.0a1 — development version</p>
 <p>Low and high input controls cannot cross. Rescale allows equal input cutoffs;
 Normalize's percentile limits must remain distinct. Rescale also keeps
 <strong>Output min ≤ Output max</strong>; use <strong>Invert intensity</strong> to reverse the mapping.</p>
-</div>
 <p>Normally, the low input cutoff maps to <strong>Output min</strong> and the high cutoff to
 <strong>Output max</strong>. With <strong>Invert intensity</strong> checked, these destinations reverse:
 dark values become bright and bright values become dark, within the same output
@@ -3472,7 +3492,7 @@ modes actually process.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

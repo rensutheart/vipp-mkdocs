@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3213,14 +3238,13 @@
 <h1 id="graph-display-settings">Graph display settings<a class="headerlink" href="#graph-display-settings" title="Permanent link">&para;</a></h1>
 <p>These controls change graph-card presentation, not image data or analysis results.
 They are separate from the main napari viewer's display controls.</p>
-<p>In <strong>0.15.0a1</strong>, open <strong>Preview</strong>. In <strong>nightly builds after 0.15.0a1</strong>, the
-button is <strong>Display settings</strong>, shortened to <strong>Display</strong> in narrower windows.</p>
+<p>Open <strong>Display settings</strong>, shortened to <strong>Display</strong> in narrower windows. This menu was called <strong>Preview</strong> in 0.15.0a1.</p>
 <h2 id="menu-labels">Menu labels<a class="headerlink" href="#menu-labels" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>0.15.0a1 label</th>
-<th>Nightly label</th>
+<th>Earlier label</th>
+<th>0.15.0a2 label</th>
 </tr>
 </thead>
 <tbody>
@@ -3250,11 +3274,11 @@ button is <strong>Display settings</strong>, shortened to <strong>Display</stron
 </tr>
 </tbody>
 </table>
-<p>The options below use the nightly wording. <strong>Slice / MIP / Off</strong> in 0.15.0a1
+<p>The options below use the current wording. <strong>Slice / MIP / Off</strong> in 0.15.0a1
 correspond to <strong>Current slice / Maximum-intensity projection (MIP) / Hidden</strong>.
 <strong>Percentile / Min-max / Raw</strong> become <strong>Percentile (0.5–99.9%) /
 Minimum–maximum / Raw</strong>; these are label changes, not new calculations.</p>
-<p>Nightly builds disable <strong>Entire stack</strong> when no available graph preview contains
+<p>VIPP disables <strong>Entire stack</strong> when no available graph preview contains
 a stack or series. The view-dependent label describes what is displayed; this
 does not change the saved preference for use when a stack becomes available.</p>
 <h2 id="choose-a-useful-view">Choose a useful view<a class="headerlink" href="#choose-a-useful-view" title="Permanent link">&para;</a></h2>
@@ -3277,7 +3301,7 @@ synthetic volume and its middle slices have a 0–255 range under both Percentil
 and Minimum–maximum; Raw also displays those 8-bit values as 0–255. Switching
 between them can therefore look unchanged. Label colours and already encoded
 8-bit RGB colours are preserved rather than contrast-stretched.</p>
-<p>Nightly builds after 0.15.0a1 label these controls <strong>Applies immediately.</strong></p>
+<p>These controls are labelled <strong>Applies immediately.</strong></p>
 <h2 id="resolution-and-exact-statistics">Resolution and exact statistics<a class="headerlink" href="#resolution-and-exact-statistics" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3361,7 +3385,7 @@ bounded chunks. Scheduling changes neither the population nor the contrast
 algorithm.</p>
 </details>
 <h2 id="port-label-layout">Port-label layout<a class="headerlink" href="#port-label-layout" title="Permanent link">&para;</a></h2>
-<p><strong>When needed / Always / Never</strong> in nightly builds correspond to
+<p><strong>When needed / Always / Never</strong> correspond to
 <strong>Ambiguous only / Show all / Hide all</strong> in 0.15.0a1.</p>
 <p>Long port names are shortened on the card and retain their full text in a
 tooltip. Changing the label mode can make an already tightly packed layout
@@ -3396,7 +3420,7 @@ Both remain in the gear menu; neither changes pixels.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

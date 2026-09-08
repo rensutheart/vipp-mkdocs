@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3091,7 +3116,7 @@
 
 
 <h1 id="example-workflows">Example Workflows<a class="headerlink" href="#example-workflows" title="Permanent link">&para;</a></h1>
-<p>The release contains <strong>19</strong> example workflows under:</p>
+<p>VIPP 0.15.0a2 contains <strong>21</strong> registered example workflows under:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>examples/
 </span></code></pre></div>
 <p>They are intended for regression tests, screenshots, tutorials, and manual
@@ -3178,6 +3203,16 @@ custom or external workflow JSON files.</p>
 <td>Surface area, mesh volume, convex hull, sphericity, and tiny-object status.</td>
 </tr>
 <tr>
+<td><code>synthetic-mesh-objects.json</code></td>
+<td>synthetic 3D mesh morphology</td>
+<td>Five calibrated mesh objects, volume colours, disjoint filtering and recombination, original/refined geometry comparison, current-mesh measurements, and a declared 3MF batch output.</td>
+</tr>
+<tr>
+<td><code>synthetic-mesh-refinement-tuned.json</code></td>
+<td>synthetic 3D mesh morphology</td>
+<td>Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse.</td>
+</tr>
+<tr>
 <td><code>synthetic-skeleton-qc.json</code></td>
 <td>synthetic skeleton network</td>
 <td>Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries.</td>
@@ -3213,7 +3248,7 @@ custom or external workflow JSON files.</p>
 <p>Use:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">python</span> <span class="n">scripts</span><span class="p">\</span><span class="n">launch_vipp_intensity_workflow</span><span class="p">.</span><span class="n">py</span> <span class="p">&lt;</span><span class="n">name</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p>Use <code>--list</code> to print the release's exact IDs. In 0.15.0a1 they are:</p>
+<p>Use <code>--list</code> to print the release's exact IDs. In 0.15.0a2 they are:</p>
 <table>
 <thead>
 <tr>
@@ -3275,6 +3310,14 @@ custom or external workflow JSON files.</p>
 <td>3D Mesh Morphology</td>
 </tr>
 <tr>
+<td><code>mesh-objects</code></td>
+<td>Mesh Objects, Colours &amp; Refinement</td>
+</tr>
+<tr>
+<td><code>mesh-refinement-tuned</code></td>
+<td>Mesh Objects — Tuned Refinement</td>
+</tr>
+<tr>
 <td><code>skeleton-qc</code></td>
 <td>Skeleton QC</td>
 </tr>
@@ -3333,7 +3376,7 @@ ID is an error; it does not silently open another example.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

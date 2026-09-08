@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3127,21 +3152,21 @@
 
 
 <h1 id="install-vipp-on-macos">Install VIPP on macOS<a class="headerlink" href="#install-vipp-on-macos" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.15.0a1 provides separate offline packages for Apple Silicon and Intel
+<p>VIPP 0.15.0a2 provides separate offline packages for Apple Silicon and Intel
 Macs. The package includes Python, napari, Qt, and VIPP, so the normal install
 does not require Terminal or a separately installed Python.</p>
 <p>The macOS package is CPU-only, supports macOS 13 or newer, installs for the
 current user, and needs approximately 3 GB of free disk space.</p>
 <h2 id="choose-the-correct-package">Choose the correct package<a class="headerlink" href="#choose-the-correct-package" title="Permanent link">&para;</a></h2>
 <p>Open <strong>Apple menu → About This Mac</strong>, then choose the matching download from
-the <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1">official v0.15.0a1 release</a>:</p>
+the <a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2">official v0.15.0a2 release</a>:</p>
 <ul>
 <li><strong>Apple Silicon</strong> — the Mac reports a chip such as Apple M1, M2, M3, or M4:
-  download <code>VIPP-0.15.0a1-macOS-arm64-UNSIGNED.pkg</code> and
-  <code>SHA256SUMS-macOS-arm64-0.15.0a1.txt</code>.</li>
+  download <code>VIPP-0.15.0a2-macOS-arm64-UNSIGNED.pkg</code> and
+  <code>SHA256SUMS-macOS-arm64-0.15.0a2.txt</code>.</li>
 <li><strong>Intel</strong> — the Mac reports an Intel processor: download
-  <code>VIPP-0.15.0a1-macOS-x86_64-UNSIGNED.pkg</code> and
-  <code>SHA256SUMS-macOS-x86_64-0.15.0a1.txt</code>.</li>
+  <code>VIPP-0.15.0a2-macOS-x86_64-UNSIGNED.pkg</code> and
+  <code>SHA256SUMS-macOS-x86_64-0.15.0a2.txt</code>.</li>
 </ul>
 <p>Do not use a package from another site or change architectures to work around
 an installation error. These are native, architecture-specific packages, not
@@ -3153,11 +3178,11 @@ the download folder and run the command for your architecture:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Apple Silicon</label><label for="__tabbed_1_2">Intel</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>VIPP-0.15.0a1-macOS-arm64-UNSIGNED.pkg
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>VIPP-0.15.0a2-macOS-arm64-UNSIGNED.pkg
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>VIPP-0.15.0a1-macOS-x86_64-UNSIGNED.pkg
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>VIPP-0.15.0a2-macOS-x86_64-UNSIGNED.pkg
 </span></code></pre></div>
 </div>
 </div>
@@ -3191,7 +3216,7 @@ may take longer while napari loads. macOS remains CPU-only in this alpha.</p>
 PKG rather than a DMG because the PKG already performs the installation and
 creates the application.</p>
 <h2 id="update-or-remove-this-alpha">Update or remove this alpha<a class="headerlink" href="#update-or-remove-this-alpha" title="Permanent link">&para;</a></h2>
-<p>There is no graphical updater or uninstaller in 0.15.0a1. Unless a later
+<p>The version badge offers release notes and download guidance, not an in-place macOS updater or uninstaller. Unless a later
 release explicitly documents a supported in-place update, remove both
 installer-owned paths before reinstalling:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>~/Applications/VIPP.app
@@ -3219,7 +3244,7 @@ environment; your research images and saved workflows should live elsewhere.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

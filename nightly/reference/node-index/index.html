@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2443,9 +2468,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3d-meshes-nightly" class="md-nav__link">
+  <a href="#3d-meshes" class="md-nav__link">
     <span class="md-ellipsis">
-      3D Meshes (nightly)
+      3D Meshes
     </span>
   </a>
   
@@ -3463,9 +3488,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3d-meshes-nightly" class="md-nav__link">
+  <a href="#3d-meshes" class="md-nav__link">
     <span class="md-ellipsis">
-      3D Meshes (nightly)
+      3D Meshes
     </span>
   </a>
   
@@ -3547,26 +3572,24 @@
 
 
 <h1 id="node-index">Node Index<a class="headerlink" href="#node-index" title="Permanent link">&para;</a></h1>
-<p>This page lists all <strong>115 operation specifications</strong> registered by
-<code>NODE_LIBRARY</code> in 0.15.0a1. The palette exposes <strong>113</strong>: the two legacy scatter
+<p>This page lists all <strong>124 operation specifications</strong> registered by
+<code>NODE_LIBRARY</code> in 0.15.0a2. The palette exposes <strong>122</strong>: the two legacy scatter
 raster operations remain loadable but are hidden from new-node selection.
-Nightly adds <strong>Convex Hull</strong> and eight nodes in <strong>3D Meshes</strong> (124 specifications;
-122 palette entries). The family counts below describe the tagged release.
-Nightly parameter behavior can be newer than the latest tagged alpha.</p>
-<p>In nightly builds, <strong>Save Image</strong> also accepts 3D meshes and passes the connected
+This includes <strong>Convex Hull</strong> and eight nodes in <strong>3D Meshes</strong>.</p>
+<p><strong>Save Image</strong> accepts images or 3D meshes and passes the connected
 image/mesh type downstream. Its format menu and <strong>Batch Output</strong>'s menu follow
 the connected input; see <a href="../../workflows/mask-to-mesh/#save-the-mesh">mesh saving</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Scope of this reference</p>
-<p>Titles and families were checked against the release registry. Input and
-output summaries describe the ordinary/default ports; <code>Split Channels</code>,
+<p>Titles and families were checked against the 0.15.0a2 source registry.
+Input and output summaries describe the ordinary/default ports; <code>Split Channels</code>,
 <code>Split Axis</code>, <code>Born-Wolf PSF</code>, and other multi-output nodes can resolve ports
 from runtime data. Parameter widgets, defaults, and bounds in the installed
 release remain the source of truth until a generated parameter reference is
 published.</p>
 </div>
-<p>Introduced in 0.14.0a1 and retained in 0.15.0a1, manual/cached nodes and nodes
-selected for isolated tuning use the same graph-wide execution language.
+<p>Since 0.14.0a1, manual/cached nodes and nodes selected for isolated tuning use
+the same graph-wide execution language.
 Bright amber identifies the node that needs action; dark amber identifies
 downstream nodes that are stale but waiting for that action. <strong>Tune node in
 isolation</strong> recalculates only the selected node until
@@ -3579,7 +3602,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0150a1">0.15.0a1 CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0150a2">0.15.0a2 CPU/GPU operation matrix</a>
 for the accelerated node families and their current public regions.</p>
 <table>
 <thead>
@@ -3603,7 +3626,11 @@ for the accelerated node families and their current public regions.</p>
 </tr>
 <tr>
 <td>Morphology</td>
-<td style="text-align: right;">14</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>3D Meshes</td>
+<td style="text-align: right;">8</td>
 </tr>
 <tr>
 <td>Measurements</td>
@@ -3627,7 +3654,7 @@ for the accelerated node families and their current public regions.</p>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
-<td style="text-align: right;"><strong>115</strong></td>
+<td style="text-align: right;"><strong>124</strong></td>
 </tr>
 </tbody>
 </table>
@@ -3651,9 +3678,9 @@ for the accelerated node families and their current public regions.</p>
 </tr>
 <tr>
 <td><code>Save Image</code></td>
-<td>array</td>
-<td>any</td>
-<td>Save an image-like output during interactive recompute.</td>
+<td>array or mesh</td>
+<td>same as input</td>
+<td>Save an image or mesh during interactive recompute.</td>
 </tr>
 <tr>
 <td><code>Batch Output</code></td>
@@ -4011,7 +4038,7 @@ and is not merely a display adjustment. See
 </tbody>
 </table>
 <h3 id="restoration-and-psf">Restoration And PSF<a class="headerlink" href="#restoration-and-psf" title="Permanent link">&para;</a></h3>
-<p>These nodes have been public since 0.14.0a1 and remain available in 0.15.0a1.
+<p>These nodes have been public since 0.14.0a1 and remain available in 0.15.0a2.
 They have synthetic examples and automated coverage, but broad real-image
 restoration validation remains an evidence gap;
 see <a href="../validation-status/">validation status</a>.</p>
@@ -4231,7 +4258,7 @@ it cannot identify a valid two-peak histogram. See
 <td>Shrink foreground.</td>
 </tr>
 <tr>
-<td><code>Convex Hull</code> (unreleased)</td>
+<td><code>Convex Hull</code></td>
 <td>Boolean mask</td>
 <td>mask</td>
 <td>Fill one convex hull around all foreground per 2D slice or 3D volume. See <a href="../../workflows/segmentation-label-cleanup/#convex-hull">scope and caveats</a>.</td>
@@ -4318,9 +4345,10 @@ it cannot identify a valid two-peak histogram. See
 </tr>
 </tbody>
 </table>
-<h2 id="3d-meshes-nightly">3D Meshes (nightly)<a class="headerlink" href="#3d-meshes-nightly" title="Permanent link">&para;</a></h2>
-<p>All eight nodes are manual/cached CPU operations. Mesh outputs are inspected
-as napari surfaces, not graph thumbnails. See the
+<p><span id="3d-meshes-nightly"></span></p>
+<h2 id="3d-meshes">3D Meshes<a class="headerlink" href="#3d-meshes" title="Permanent link">&para;</a></h2>
+<p>All eight nodes are CPU operations, manual/cached by default. Mesh outputs are
+inspected as napari surfaces, not graph thumbnails. See the
 <a href="../../workflows/mask-to-mesh/">mesh-object tutorial</a> for grouping, calibration,
 refinement caveats and 3MF/OBJ export.</p>
 <table>
@@ -4473,7 +4501,7 @@ refinement caveats and 3MF/OBJ export.</p>
 </tr>
 <tr>
 <td><code>Measure 3D Mesh Morphology</code></td>
-<td>labels; mask or mesh in nightly</td>
+<td>labels, Boolean mask or mesh</td>
 <td>table</td>
 <td>manual</td>
 <td>Surface morphology; existing meshes are measured per object without remeshing.</td>
@@ -4659,7 +4687,7 @@ refinement caveats and 3MF/OBJ export.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3397,14 +3422,14 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.15.0a1. Some labels shorten to icons and
+<p>Labels below match napari-vipp 0.15.0a2. Some labels shorten to icons and
 graph-local controls move into the gear menu when the window is narrow.</p>
 <p>When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.</p>
 <h2 id="workflow-tabs">Workflow tabs<a class="headerlink" href="#workflow-tabs" title="Permanent link">&para;</a></h2>
-<p>In unreleased nightly builds, table- and mesh-only graph nodes do not reserve
+<p>Table- and mesh-only graph nodes do not reserve
 a thumbnail area or show <strong>No preview</strong>, even before calculation. Their
 results remain available in the inspector or napari surface view.</p>
 <p>The movable tab bar holds independent live workflow sessions. Each tab retains
@@ -3413,7 +3438,7 @@ state, file path, dirty baseline, display choices, compute request, and Batch
 workspace. <strong>New</strong> and <strong>Open</strong> create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.</p>
-<p>In unreleased nightly builds, right-click a tab and choose <strong>Open in File
+<p>Right-click a tab and choose <strong>Open in File
 Explorer</strong> (Windows) or <strong>Open in Finder</strong> (macOS) to select its saved workflow
 file. Linux offers <strong>Open containing folder</strong>. This does not switch tabs or save
 pending edits; save a new workflow first to enable the action.</p>
@@ -3433,8 +3458,7 @@ separate from file and execution actions.</p>
 <h3 id="finding-nodes">Finding nodes<a class="headerlink" href="#finding-nodes" title="Permanent link">&para;</a></h3>
 <p>Use <strong>Find a node to add…</strong> in the Nodes panel to add an operation, or
 <strong>Find in workflow</strong> to locate a node already in your graph.</p>
-<p>In the unreleased version after 0.15.0a1, these searches and the insert-node
-picker also accept common alternative names: <strong>dilate → Dilation</strong>,
+<p>These searches and the insert-node picker also accept common alternative names: <strong>dilate → Dilation</strong>,
 <strong>erode → Erosion</strong>, <strong>thinning → Skeletonize</strong>, <strong>NLM → Non-Local Means</strong>,
 and <strong>clipping → Clamp Intensity</strong>. British spellings such as
 <strong>normalise</strong> and <strong>skeletonisation</strong> work too. Results keep their usual node
@@ -3450,7 +3474,7 @@ names; searching does not change the workflow or its calculations.</p>
 <tbody>
 <tr>
 <td><strong>New</strong></td>
-<td>Create a new workflow tab. Open one of 19 bundled examples through <strong>Gear menu → Open example…</strong>.</td>
+<td>Create a new workflow tab. Open one of 21 bundled examples through <strong>Gear menu → Open example…</strong>.</td>
 </tr>
 <tr>
 <td><strong>Open</strong></td>
@@ -3469,8 +3493,8 @@ names; searching does not change the workflow or its calculations.</p>
 <td>Discard the representative's transient collection-source overrides and return the tab to ordinary single-image mode. It does not delete files and is unavailable during a run.</td>
 </tr>
 <tr>
-<td><strong>Preview</strong></td>
-<td>Change graph-card presentation: thumbnail mode, contrast, range, colormap, detail, and port labels. It does not run a batch representative.</td>
+<td><strong>Display settings</strong></td>
+<td>Change graph-card presentation: thumbnail view, contrast method and scope, colour map, resolution, and input/output labels. It does not run a batch representative.</td>
 </tr>
 <tr>
 <td><strong>Export Python…</strong> (gear menu)</td>
@@ -3654,10 +3678,10 @@ implementation and fallback decisions.</p>
 viewer and reports coordinates, values, and layer interaction; VIPP does not
 duplicate that purpose in its message strip.</p>
 <h2 id="display-settings">Display settings<a class="headerlink" href="#display-settings" title="Permanent link">&para;</a></h2>
-<p>Open <strong>Preview</strong> in 0.15.0a1 for graph thumbnails, contrast, colour, resolution,
+<p>Open <strong>Display settings</strong> for graph thumbnails, contrast, colour, resolution,
 and port names. These settings never alter scientific arrays.</p>
 <p>See <a href="../display-settings/">Graph display settings</a> for the options, exact-statistics
-behavior, and the clearer <strong>Display settings</strong> labels in post-0.15.0a1 nightly builds.</p>
+behavior, and the mapping from earlier interface labels.</p>
 <h2 id="execution-and-memory-settings">Execution and memory settings<a class="headerlink" href="#execution-and-memory-settings" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3771,7 +3795,7 @@ volume distribution, colocalization scatter, table preview, auto contrast,
 selected output's remembered display profile.</p>
 <h3 id="numeric-parameter-entry">Numeric parameter entry<a class="headerlink" href="#numeric-parameter-entry" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
-<p class="admonition-title">After 0.15.0a1 — development version</p>
+<p class="admonition-title">Constrained editing</p>
 <p>Odd-only filter windows and PSF support sizes advance through odd numbers,
 including when dragged or typed. Linked low/high controls stop at their
 partner's limit; widen the high limit first when moving both values upward.
@@ -3822,6 +3846,7 @@ deconvolution.</p>
 </tbody>
 </table>
 <p><img alt="Two bright-amber deconvolution frontiers, darker-amber waiting descendants, and the amber Calculate all control" src="../../assets/screenshots/workflows/manual-execution-frontier.png" /></p>
+<p>This earlier-release capture illustrates execution states. Current toolbar labels are listed above; <strong>Display settings</strong> replaces <strong>Preview</strong>.</p>
 <p><em>The two deconvolution branches are actionable. Rescale Intensity and Otsu
 Threshold wait behind the selected RL-TV branch and are not the source of the
 problem.</em></p>
@@ -3878,7 +3903,7 @@ layer contrast changes downstream arrays, masks, thresholds, or measurements.</p
 <p>The histogram panel is also a display summary. It counts every finite value,
 but its chart bins are independent of a floating-point automatic-threshold
 node's saved <strong>Float histogram bins</strong> parameter.</p>
-<p><em>Unreleased:</em> Hover within a compact histogram's bin column to see its count,
+<p>Hover within a compact histogram's bin column to see its count,
 including tiny or empty bars. Object-size and property plots also show the
 range in the original units, even with <strong>Log size axis</strong> enabled. These values
 reuse the calculated histogram; hovering does not scan the image or change
@@ -3987,7 +4012,7 @@ of ordinary graph progress. See <a href="../../workflows/batch-processing/">proc
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     

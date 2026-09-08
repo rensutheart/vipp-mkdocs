@@ -566,6 +566,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1778,9 +1803,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mesh-export-nightly" class="md-nav__link">
+  <a href="#mesh-export" class="md-nav__link">
     <span class="md-ellipsis">
-      Mesh export (nightly)
+      Mesh export
     </span>
   </a>
   
@@ -2715,9 +2740,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mesh-export-nightly" class="md-nav__link">
+  <a href="#mesh-export" class="md-nav__link">
     <span class="md-ellipsis">
-      Mesh export (nightly)
+      Mesh export
     </span>
   </a>
   
@@ -3268,9 +3293,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mesh-export-nightly" class="md-nav__link">
+  <a href="#mesh-export" class="md-nav__link">
     <span class="md-ellipsis">
-      Mesh export (nightly)
+      Mesh export
     </span>
   </a>
   
@@ -3347,7 +3372,7 @@ outputs, and generated scripts through a shared headless I/O layer. Format
 support does not imply lossless preservation of every source metadata field.</p>
 <h2 id="input-routes">Input routes<a class="headerlink" href="#input-routes" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<p class="admonition-title">Unreleased — reader packaging after 0.15.0a1</p>
+<p class="admonition-title">Included microscope readers</p>
 <p>Native CZI, Leica, ND2 and Olympus readers are now default dependencies for
 plugin and desktop installations; Bio-Formats remains optional. See
 <a href="../../getting-started/reader-support/">Reader support in Image Source</a>.
@@ -3357,7 +3382,7 @@ This changes installation, not the scientific format guarantees below.</p>
 <thead>
 <tr>
 <th>Source</th>
-<th>Behavior in 0.15.0a1</th>
+<th>Behavior in 0.15.0a2</th>
 </tr>
 </thead>
 <tbody>
@@ -3382,7 +3407,7 @@ This changes installation, not the scientific format guarantees below.</p>
 <td>Reads TIFF series and infers basic axes where explicit semantic metadata is absent.</td>
 </tr>
 <tr>
-<td>Nikon ND2 with the optional <code>nd2</code> reader</td>
+<td>Nikon ND2 with the included <code>nd2</code> reader</td>
 <td>Exposes stable items, lazy inspection/data access, decoded-size estimates, calibration, channels, and selected objective metadata in the qualified corpus.</td>
 </tr>
 <tr>
@@ -3398,8 +3423,8 @@ This changes installation, not the scientific format guarantees below.</p>
 <td>Reads ordinary raster images; animated rasters use a leading time axis.</td>
 </tr>
 <tr>
-<td>Optional microscope readers</td>
-<td>Qualified corpus routes cover CZI/LSM, ND2, LIF, OIR/OIB/OIF/VSI, and IMS with normalized inspection/read metadata. Native LIF, CZI, OIR/OIB, and LSM pixels remain eager; broad advertised extensions are not all qualified claims.</td>
+<td>Microscope readers</td>
+<td>Qualified corpus routes cover CZI/LSM, ND2, LIF, OIR/OIB/OIF/VSI, and IMS with normalized inspection/read metadata. Native readers are included; the Bio-Formats IMS/VSI route remains optional. Native LIF, CZI, OIR/OIB, and LSM pixels remain eager; broad advertised extensions are not all qualified claims.</td>
 </tr>
 </tbody>
 </table>
@@ -3413,7 +3438,7 @@ revision. Interactive browsing, collision-safe output names, batch planning,
 manifests, and provenance retain that identity. Changed bytes, missing
 companions, ambiguous legacy indices, or an unexpected reader topology stop for
 review instead of selecting a different image by position.</p>
-<p>For every optional reader, actively move the T, Z, and C controls on a
+<p>For every microscope reader, actively move the T, Z, and C controls on a
 representative acquisition and verify that the expected content changes. Check
 the selected item, reader/backend, calibration, channels, and decoded shape
 against acquisition records. A normalized contract cannot prove that a
@@ -3481,12 +3506,12 @@ input, generated execution, or output provenance.</p>
 <td>Units, identity columns, missing values, and delimiter handling</td>
 </tr>
 <tr>
-<td>3MF (unreleased/nightly)</td>
+<td>3MF</td>
 <td><a href="../../workflows/mask-to-mesh/">Mesh objects</a> need portable units and display colours</td>
 <td>Scientific surfaces, not print-validated solids; physical calibration is required.</td>
 </tr>
 <tr>
-<td>OBJ (unreleased/nightly)</td>
+<td>OBJ</td>
 <td>Mesh geometry/object groups are needed, including uncalibrated voxel coordinates</td>
 <td>Units, original IDs and colours are in VIPP comments; no standard unit field or material file.</td>
 </tr>
@@ -3499,7 +3524,8 @@ grayscale values and label IDs up to 65,535; other ordinary raster routes are
 8-bit display exports, and JPEG cannot store alpha. Use a scientific image
 format when axes, calibration, stacks, or exact label identity matter.</p>
 <p>For additional readers, see <a href="../../getting-started/installation/">optional format packages</a>.</p>
-<h3 id="mesh-export-nightly">Mesh export (nightly)<a class="headerlink" href="#mesh-export-nightly" title="Permanent link">&para;</a></h3>
+<p><span id="mesh-export-nightly"></span></p>
+<h3 id="mesh-export">Mesh export<a class="headerlink" href="#mesh-export" title="Permanent link">&para;</a></h3>
 <p><strong>Save Image</strong> also accepts mesh inputs, with <strong>auto</strong>, <strong>obj</strong> and <strong>3mf</strong> format
 choices. <strong>Auto</strong> follows <code>.obj</code>/<code>.3mf</code> in the path (OBJ when no suffix is given).
 <strong>Batch Output</strong> offers <strong>batch default</strong>, <strong>obj</strong> and <strong>3mf</strong> for meshes. Their
@@ -3562,7 +3588,7 @@ shared executor or create an exact compute-provenance sidecar.</p>
 <li>Local batch processing pairs sorted source items by position. It expands
   inspectable multi-series containers, but selected semantic-axis iteration,
   remote collection input, and plate/well/field HCS traversal remain outside
-  0.15.0a1.</li>
+  0.15.0a2.</li>
 </ul>
 <h2 id="execution-provenance-for-saved-outputs">Execution provenance for saved outputs<a class="headerlink" href="#execution-provenance-for-saved-outputs" title="Permanent link">&para;</a></h2>
 <p>The interactive <strong>Save selected output...</strong> action writes the selected cached
@@ -3620,7 +3646,7 @@ silently resample, register, reorder, or repair a transform.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:18:27 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
   </span>
 
     
