@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.15.0a1 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.15.0a2 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -27,7 +27,7 @@ parameter to place more work on GPU. Developer-hidden implementations remain
 excluded unless an advanced request explicitly enables experimental admission;
 that does not turn them into public support.
 
-Introduced in 0.14.0a1 and retained in 0.15.0a1, the planner preserves exact
+Introduced in 0.14.0a1 and retained in 0.15.0a2, the planner preserves exact
 shape, dtype, finite-value, and axis
 facts across required CPU-only operations. A CPU Rescale Axes, Rescale
 Intensity, or Unsharp Mask decision does not by itself turn a reviewed
@@ -223,7 +223,9 @@ unrunnable descendant.
 <a id="gpu-regions-in-0140a2"></a>
 <a id="gpu-regions-in-0140a3"></a>
 
-## GPU regions in 0.15.0a1
+<span id="gpu-regions-in-0150a1"></span>
+
+## GPU regions in 0.15.0a2
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
@@ -241,7 +243,7 @@ VIPP's eligibility explanation is authoritative for the exact call.
 | Richardson-Lucy TV Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Lambda zero inherits ordinary RL's expanded region. Positive TV retains the shipped tuple (`lambda=0.002`, TV epsilon `1e-6`, filter epsilon `1e-12`, denominator floor `0.05`) at 10 or 25 iterations. |
 | Canny Edges | CuPy/CuPyX | Boolean, `uint8`, or `uint16`; independent `YX` planes | Sigma 0–12 and finite ordered quantile thresholds. Floating-point input remains CPU in this exact-mask region. |
 | Otsu Threshold | CuPy/CuPyX | Boolean, signed/unsigned integers, and `float16`/`float32`/`float64` | Integer occupied span must be at most 65,536 levels; wide integers and per-slice cases need sufficient exact facts. Float histograms use 2–65,536 saved bins. |
-| Binary Threshold | CuPy | scalar finite `float32` images | Uses the exact authored finite threshold and returns a resident Boolean mask. Unsupported dtype/channel semantics use CPU; VIPP does not round or replace the threshold. |
+| Binary Threshold | CuPy | scalar finite `float32` images | Above/Below use the exact authored finite threshold; In range includes both saved bounds and Outside range excludes them. Returns a resident Boolean mask. Unsupported dtype/channel semantics use CPU; VIPP does not round or replace thresholds. |
 | Sigma Filter | CuPy | native-endian `uint8`, `uint16`, or finite `float32`; independent `YX` planes | Radius 0.5–10 and reviewed finite value/parameter facts. ROI/mask behavior is outside version 1. |
 | Remove Small Objects | CuPyX | Boolean mask; resolved 2D or 3D | Face or Full connectivity. Integer-label cleanup remains CPU. |
 | Fill Holes | CuPyX | Boolean mask; resolved 2D or 3D | Face or Full connectivity with `Maximum hole size = 0` (fill every enclosed hole). Positive bounded-hole-size cleanup remains CPU. |
@@ -249,8 +251,10 @@ VIPP's eligibility explanation is authoritative for the exact call.
 | Label Connected Components | CuPyX | Boolean mask; resolved 2D or 3D | Preserves exact deterministic `int32` label numbering. Numeric masks and oversized 2D/3D blocks use CPU. In non-CPU planning, a Boolean call not resolved as 2D or 3D is a typed preflight failure in this alpha. |
 | Measure Objects | CuPy | native-endian, non-negative `int32` labels; 2D or 3D | Basic measurement schema only. Extended shape, axis, boundary, moment, and derived-ratio groups remain CPU. |
 | Measure Objects + Intensity | CuPy | the same labels plus native-endian Boolean, `uint8`, `uint16`, or finite `float32` intensity | Matching shapes and the basic table schema are required; extended columns or unsupported intensity data use CPU. |
-| Measure 3D Mesh Morphology | CuPy (hybrid) | native-endian, non-negative `int32` labels; true 3D, including independent leading blocks | GPU label-region packing with authoritative CPU marching cubes, convex hulls, and typed table construction. Sparse positive label IDs are supported; the final table is a host boundary. |
+| Measure 3D Mesh Morphology | CuPy (hybrid) | native-endian, non-negative `int32` labels; true 3D, including independent leading blocks | GPU label-region packing with authoritative CPU marching cubes, convex hulls, and typed table construction. Sparse positive label IDs are supported; the final table is a host boundary. Boolean masks and existing mesh inputs use CPU. |
 | Analyze Skeleton | CuPyX | Boolean, already-skeletonized input; resolved 2D/3D blocks | Requesting skeletonization first remains CPU. The GPU candidate measures the authored skeleton and uses an exact typed host-table finalizer; spatial blocks must fit the reviewed index bounds. |
+
+The new **3D Meshes** creation, object-management and refinement nodes are manual/cached CPU operations. Selecting Prefer GPU does not turn them into GPU geometry processing.
 
 Canny and Otsu retain the CPU node's explicitly declared RGB/RGBA BT.601 luma
 handling where the underlying dtype/profile is admitted. An ambiguous or
@@ -278,7 +282,7 @@ recorded in provenance rather than used as an allowlist. Auto, Prefer GPU, and
 Custom use the same device gate; each operation still has its own exact
 workload, memory, dependency, and cleanup requirements. The Linux CUDA command
 is useful for qualification/development but the current public policy resolves
-Linux GPU candidates to CPU. CUDA has no macOS path; both 0.15.0a1 macOS
+Linux GPU candidates to CPU. CUDA has no macOS path; both 0.15.0a2 macOS
 installer architectures are deliberately CPU-only.
 
 Hardware, driver, compiler, and reduction-order differences can produce minor

@@ -3,20 +3,20 @@
 Turn segmented volumes into separate coloured surfaces, inspect them in napari,
 and export their geometry without losing object identity.
 
-!!! info "Unreleased — nightly"
-    The **3D Meshes** category sits beside **Morphology**. Its nodes are manual/
-    cached and run on CPU. **Measure 3D Mesh Morphology** remains under
-    **Measurements** and also accepts their mesh outputs.
+The **3D Meshes** category sits beside **Morphology**. Its nodes are manual/
+cached by default and run on CPU. **Measure 3D Mesh Morphology** remains under
+**Measurements** and also accepts their mesh outputs.
 
 ## Create the surfaces
 
-To try a ready-made workflow in nightly, open **Open example → 3D Meshes →
+To try a ready-made workflow, open **Open example → 3D Meshes →
 Mesh Objects — Tuned Refinement**, then **Calculate all**. It uses a bundled
 five-object sample, Turbo colours by triangle count, two smoothing iterations
-at strength 1, and 10% simplification at aggressiveness 4. These are saved
-sample-specific choices, not recommended settings for every specimen. Compare
-upstream geometry and measurements before accepting the refined result.
-Calculating the example does not save output files.
+at strength 1, and a target of 10% of triangles kept at aggressiveness 4.
+Colour, Smooth and Simplify have **Auto Recalculate** enabled in this example.
+These are saved sample-specific choices, not recommended settings for every
+specimen. Compare upstream geometry and measurements before accepting the
+refined result. Calculating the example does not save output files.
 
 1. Prepare a **Boolean mask** or **integer labels**. Select one channel/time
    point upstream: the input needs exactly three explicit spatial axes, Z/Y/X,
@@ -81,11 +81,10 @@ not a method for registering different acquisitions.
 
 ### Choose filter limits from the input distribution
 
-!!! info "Unreleased — nightly"
-    **Filter Mesh Objects** shows a histogram of the **input** objects for the
-    selected **Measure**, before filtering. Measurements run in the background
-    from the cached input mesh and use the same current-geometry calculation as
-    the filter. Calculate the upstream mesh first if no cached input is available.
+**Filter Mesh Objects** shows a histogram of the **input** objects for the
+selected **Measure**, before filtering. Measurements run in the background
+from the cached input mesh and use the same current-geometry calculation as
+the filter. Calculate the upstream mesh first if no cached input is available.
 
 Hover over a bin to see its measurement range and object count. Drag the linked
 minimum/maximum markers or edit **Minimum** and **Maximum** to choose the bounds.
@@ -169,14 +168,14 @@ scale, centring or packing is applied. For uncalibrated data, choose OBJ to reta
 voxel coordinates or correct calibration upstream and recalculate before 3MF.
 
 For automatic saving during interactive calculation, connect **Save Image**:
-it also accepts meshes in nightly builds. Set a **Path** ending in `.obj` or
+it accepts images or meshes. Set a **Path** ending in `.obj` or
 `.3mf`, choose **auto** or the matching format, and set **Auto-save on update**
 to **on**. **Overwrite: no** protects an existing file. The mesh passes through
 unchanged for downstream processing.
 
 For batch work, use **Batch Output** instead and select **3mf** or **obj**.
 **batch default** remains OBJ for existing workflows. Generated Python exports
-support both formats. See [mesh export details](../reference/import-export.md#mesh-export-nightly)
+support both formats. See [mesh export details](../reference/import-export.md#mesh-export)
 for unit conversion and format limits.
 
 Both nodes list formats for their connected input: mesh formats for meshes,

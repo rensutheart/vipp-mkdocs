@@ -1,9 +1,6 @@
 # Check for updates
 
-!!! info "Development feature after 0.15.0a1"
-
-    The clickable update badge is not in 0.15.0a1. In that release, visit
-    [GitHub releases](https://github.com/rensutheart/napari-vipp/releases) directly.
+Use the version badge in VIPP 0.15.0a2 to check release notes and update guidance. Older releases can use [GitHub releases](https://github.com/rensutheart/napari-vipp/releases) directly.
 
 ## Notice an update without an interruption
 
@@ -18,6 +15,9 @@ and no installer or package is downloaded or installed automatically.
 The dialog offers notes for the latest eligible release. Offline or rate-limit
 errors stay in this dialog; they do not interrupt image processing. Cached
 release information can remain visible when GitHub is unavailable.
+
+On narrower windows or with larger fonts, the download buttons stack vertically;
+the dialog scrolls without hiding its **Check for updates** and **Close** buttons.
 
 ## Update safely
 

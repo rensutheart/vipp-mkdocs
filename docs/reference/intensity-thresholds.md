@@ -6,9 +6,9 @@ could change your analysis. For a first segmentation, start with the
 
 ## Binary Threshold: cutoff or intensity range
 
-!!! note "After 0.15.0a1 — development version"
-    Binary Threshold adds **Foreground: Above / Below / In range / Outside range**. Existing workflows
-    keep **Above** and produce the same mask as before.
+Binary Threshold offers **Foreground: Above / Below / In range / Outside range**.
+Older workflows without a saved **Foreground** choice use **Above** and produce
+the same mask as before.
 
 Choose **Foreground**, then adjust the slider or drag a histogram guide:
 
@@ -147,10 +147,9 @@ context for judging the transformation.
 
 ## Rescale Intensity Cutoffs
 
-!!! note "After 0.15.0a1 — development version"
-    Low and high input controls cannot cross. Rescale allows equal input cutoffs;
-    Normalize's percentile limits must remain distinct. Rescale also keeps
-    **Output min ≤ Output max**; use **Invert intensity** to reverse the mapping.
+Low and high input controls cannot cross. Rescale allows equal input cutoffs;
+Normalize's percentile limits must remain distinct. Rescale also keeps
+**Output min ≤ Output max**; use **Invert intensity** to reverse the mapping.
 
 Normally, the low input cutoff maps to **Output min** and the high cutoff to
 **Output max**. With **Invert intensity** checked, these destinations reverse:

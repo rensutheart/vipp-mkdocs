@@ -1,13 +1,13 @@
 # Try the VIPP Windows installer
 
-Use this checklist when someone asks you to test the tagged VIPP `0.15.0a1`
+Use this checklist when someone asks you to test the tagged VIPP `0.15.0a2`
 installer on Windows. You do not need Python knowledge. Check only what you
 actually tried; leave everything else as **not run**.
 
 !!! warning "Use the exact tagged installer"
-    Use this checklist only with the exact `v0.15.0a1` GitHub asset and its
+    Use this checklist only with the exact `v0.15.0a2` GitHub asset and its
     checksum from the
-    [official release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1).
+    [official release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2).
     Do not use an untagged build or a similarly named file from another site.
 
     A display-independent production-backend install, repair, scientific
@@ -44,19 +44,19 @@ Record these facts without including your account or computer name:
 - GPU model, if testing CUDA:
 - Start time:
 
-Download the installer and checksum file only from the official `v0.15.0a1`
+Download the installer and checksum file only from the official `v0.15.0a2`
 entry on the
 [VIPP releases page](https://github.com/rensutheart/napari-vipp/releases).
 The filename should be
-`VIPP-Setup-0.15.0a1-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
+`VIPP-Setup-0.15.0a2-Windows-x86_64-UNSIGNED.exe`. In PowerShell, run:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 `
-  .\VIPP-Setup-0.15.0a1-Windows-x86_64-UNSIGNED.exe
+  .\VIPP-Setup-0.15.0a2-Windows-x86_64-UNSIGNED.exe
 ```
 
 Compare all 64 characters with the installer line in
-`SHA256SUMS-Windows-0.15.0a1.txt`. Stop and delete the file if they differ. This
+`SHA256SUMS-Windows-0.15.0a2.txt`. Stop and delete the file if they differ. This
 alpha is intentionally unsigned, so **Unknown publisher** is expected; an
 antivirus threat warning is not expected and must not be bypassed.
 
@@ -173,4 +173,4 @@ What was confusing or did not work:
 - Most important remaining problem:
 
 Automated tests, an older development installer, WSL, or a different VIPP
-version do not count as a pass for this downloaded `0.15.0a1` installer.
+version do not count as a pass for this downloaded `0.15.0a2` installer.

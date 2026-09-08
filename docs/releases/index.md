@@ -6,20 +6,20 @@ data.
 
 ## Current public alpha
 
-- [0.15.0a1](0.15.0a1.md) — task-based batch workflow, per-item output decisions,
-  readable run reports, redesigned inspector and plots, reproducible intensity
-  histograms, and hybrid mesh/skeleton measurement acceleration.
+- [0.15.0a2](0.15.0a2.md) — included microscope readers and diagnostics, quiet update guidance, four threshold modes, explicit intensity inversion, safer controls, Convex Hull, and mesh-object creation/refinement/export.
 
 The alpha is distributed on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1) and
-[PyPI](https://pypi.org/project/napari-vipp/0.15.0a1/). Use only the exact
+[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2) and
+[PyPI](https://pypi.org/project/napari-vipp/0.15.0a2/). Use only the exact
 release assets and their matching checksum files.
 
-0.15.0a1 writes workflow schema 6, batch config 6, and manifest schema 5. Valid
+0.15.0a2 writes workflow schema 6, batch config 6, and manifest schema 5. Valid
 supported earlier records retain explicit migration paths; recalculate and
 validate consequential results after upgrading.
 
 ## Earlier releases
+
+- [0.15.0a1](0.15.0a1.md) — task-based batch workflow, per-item output decisions, readable run reports, redesigned inspector and plots, reproducible intensity histograms, and hybrid mesh/skeleton measurement acceleration.
 
 - [0.14.0a3](0.14.0a3.md) — responsive volumetric Crop Stack, exact bounded
   local OME-Zarr reads for the sole-direct-Crop case, topology-safe bypass,

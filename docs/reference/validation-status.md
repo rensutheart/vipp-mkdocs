@@ -5,6 +5,16 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.15.0a2 scope and evidence
+
+The [0.15.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2) is the canonical source for exact assets, checksums and qualification records. This page describes scope; it does not assert a check passed without its release evidence.
+
+Changed areas include included native-reader dependencies and guided setup, update discovery, workflow/search/display controls, threshold directions and ranges, intensity inversion and numeric guards, Convex Hull, and the mesh-object lifecycle from extraction to export. Dependency and packaging changes require clean-install checks; Windows and the two native macOS architectures have separate qualification boundaries. Changed GPU threshold and shared compute/provenance behavior need matching evidence; unchanged provider kernels may retain earlier evidence only within their recorded environment and contract.
+
+Reader diagnostics verify support loading, not a vendor acquisition's pixels, axes or calibration. Mesh extraction and refinement are CPU, full-resolution operations; smoothing and approximate simplification change geometry. Mesh tests and synthetic examples do not establish biological validity, complete self-intersection detection or print readiness. Existing mesh inputs are measured directly on CPU; the label-morphology GPU route remains hybrid.
+
+Use the [current operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a2) and each node's admitted region. No Apple GPU execution, general lazy/chunked graph execution, signed/notarized installers or broad assay validation is claimed. Earlier exact records below remain historical; their asset hashes must not be applied to a2 downloads.
+
 ## 0.15.0a1 scope and evidence
 
 The [0.15.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a1)
@@ -641,7 +651,7 @@ same as an external comparison or assay validation. The distinction matters:
   saved compute request; and version-3 configs retain guarded source-axis
   declarations and acquire SourceItems when resolved; version 4 adds SourceItems
   and typed numeric overrides. Earlier versions have no batch execution-profile
-  override and are written as version 5 only after review and save. A saved
+  override and are written as version 6 only after review and save. A saved
   Auto, Prefer GPU, or Custom request is intent; actual
   implementation provenance must be retained from each run. Auto uses reviewed GPU defaults
   without compatible history; accelerated-only history schedules one
