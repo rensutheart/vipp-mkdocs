@@ -21,8 +21,8 @@ These are saved sample-specific choices, not recommended settings for every
 specimen. Compare upstream geometry and measurements before accepting the
 refined result. Calculating the example does not save output files.
 
-!!! note "Unreleased example consolidation"
-    Nightly keeps the saved interactive workflow under the original example
+!!! note "Example consolidation in 0.15.0a3"
+    0.15.0a3 keeps the saved interactive workflow under the original example
     name. The two mesh-object examples shipped in 0.15.0a2 are now one;
     its saved parameters and layout are unchanged.
 

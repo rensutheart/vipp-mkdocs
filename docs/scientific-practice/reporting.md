@@ -87,7 +87,7 @@ reproducibility, metadata fidelity, or biological correctness.
 ## Archive an analysis bundle
 
 The [reproducibility package](../how-to/export-reproducibility-package.md)
-(unreleased after 0.15.0a2) provides a reviewed offline report, portable recipe,
+(new in 0.15.0a3) provides a reviewed offline report, portable recipe,
 version summaries and sanitized available run evidence. It can be one component
 of the archive below, but does not include data/results, original resume
 receipts, an environment lockfile or an installer. A current-workflow package
@@ -121,7 +121,7 @@ evidence as well as successful outputs. Sidecars are a recovery trail and
 should be interpreted with the finalized manifest after an interruption.
 
 If using [verified resume](../workflows/batch-processing.md#resume-an-interrupted-run)
-(unreleased after 0.15.0a2), retain the original and continuation archives and
+(new in 0.15.0a3), retain the original and continuation archives and
 their sidecars. Report verified reused outputs separately from newly calculated
 ones.
 

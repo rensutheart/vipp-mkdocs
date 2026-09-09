@@ -5,10 +5,16 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
-## Unreleased RL GPU admission with advisories
+## 0.15.0a3 scope and evidence
 
-Nightly builds after 0.15.0a2 broaden RL/RL-TV GPU execution to the
-[authored ranges and PSF options](../how-to/choose-compute.md#unreleased-rl-and-rl-tv-gpu-ranges)
+Use the [0.15.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a3)
+for exact assets and qualification records. Verified batch recovery,
+reproducibility packages, input checking, object QC and desktop startup have
+separate behavioral boundaries; user acceptance does not establish independent
+output equivalence, cross-machine reproducibility or biological validity.
+
+0.15.0a3 broadens RL/RL-TV GPU execution to the
+[authored ranges and PSF options](../how-to/choose-compute.md#rl-and-rl-tv-gpu-ranges)
 without requiring a CPU comparison before execution. Numerical-difference
 advisories identify settings outside the earlier prequalified region and are
 retained in execution provenance.

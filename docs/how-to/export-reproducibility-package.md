@@ -4,8 +4,8 @@ Create a local ZIP containing a readable methods/evidence report and a portable
 workflow with its explanatory notes. Review the exact contents before sharing
 it with a collaborator or including it in an analysis archive.
 
-!!! note "Unreleased after 0.15.0a2"
-    This export is available in nightly builds after 0.15.0a2. It does not
+!!! note "New in 0.15.0a3"
+    This export requires VIPP 0.15.0a3 or newer. It does not
     calculate the graph, upload anything, or include raw images, output images,
     tables, meshes, thumbnails or previews.
 

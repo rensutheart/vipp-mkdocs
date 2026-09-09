@@ -47,11 +47,11 @@ Image Source
 | Mask cleanup | `Fill Holes`, `Remove Outliers (Binary)`, `Remove Small Objects`, morphology nodes |
 | Label creation | `Label Connected Components`, watershed nodes |
 | Label cleanup | `Clear Border Objects`, `Filter Labels By Volume`, `Filter Labels By Property`, `Relabel Sequential` |
-| Boundary QC | `Find Label Boundaries` (unreleased after 0.15.0a2) |
+| Boundary QC | `Find Label Boundaries` (new in 0.15.0a3) |
 
 ## Read object counts
 
-!!! note "Unreleased after 0.15.0a2"
+!!! note "New in 0.15.0a3"
     Select **Remove Small Objects**, **Clear Border Objects**, **Filter Labels
     By Volume**, or **Filter Labels By Property** to review input, kept, and
     removed object counts in the inspector's **Filter result** section, after
@@ -73,7 +73,7 @@ is biological or whether the chosen filter is appropriate.
 
 ## Inspect label boundaries
 
-!!! note "Unreleased after 0.15.0a2"
+!!! note "New in 0.15.0a3"
     **Label Operations → Find Label Boundaries** creates a
     Boolean boundary mask for QC overlays or saving. It does not create a mesh
     or detect edges in an intensity image.

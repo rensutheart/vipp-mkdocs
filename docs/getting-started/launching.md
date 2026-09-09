@@ -27,16 +27,17 @@ an explanation.
 
 ## During startup
 
-In **nightly (unreleased)**, drag the **Starting VIPP** title bar to move the
-progress window, or minimize it while you work elsewhere. Other windows can
-cover it; minimizing or closing this progress window does not cancel startup.
-It closes automatically when VIPP is ready.
+In **0.15.0a3**, the startup progress window has no native title
+bar. Drag its background to move it, or use the small minimize button at the
+top right while you work elsewhere. Other windows can cover it; minimizing or
+closing this progress window does not cancel startup. It closes automatically
+when VIPP is ready.
 
 New or updated Windows installer shortcuts use the VIPP icon. Installed desktop
 launches also use VIPP's running-app icon; macOS retains its branded `VIPP.app`.
 Opening VIPP inside a separately launched napari session does not replace
 napari's branding. Existing shortcuts need an updated installer to receive
-these unreleased changes.
+these 0.15.0a3 changes.
 
 ## Open the napari widget from a manual environment
 
@@ -95,7 +96,7 @@ sample menu.
 
 ## Give the graph enough space
 
-In **nightly (unreleased)**, the workflow dock initially aims for two-thirds of
+In **0.15.0a3**, the workflow dock initially aims for two-thirds of
 the available window height. If napari's layer controls need more space, VIPP
 uses the maximum height those controls allow. Drag the divider between the
 viewer and workflow to adjust this balance; VIPP does not keep resetting it

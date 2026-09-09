@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.15.0a2. Some labels shorten to icons and
+Labels below match napari-vipp 0.15.0a3. Some labels shorten to icons and
 graph-local controls move into the gear menu when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -38,7 +38,7 @@ the active run finishes or cooperatively cancels.
 
 The command bar contains **New / Open / Save**, **Batch workflow**, **Display
 settings**, calculation and compute, then Undo/Redo and the gear menu.
-In nightly (unreleased), a vertical divider also separates batch actions from
+In 0.15.0a3, a vertical divider also separates batch actions from
 display settings. Below the workflow tabs, the
 graph context row holds sidebar toggles, **Find in workflow**, **Refresh**,
 **Focus**, **Auto Arrange**, **Tunnels…**, and zoom. This keeps graph navigation
@@ -66,7 +66,7 @@ names; searching does not change the workflow or its calculations.
 | **Leave batch** | Discard the representative's transient collection-source overrides and return the tab to ordinary single-image mode. It does not delete files and is unavailable during a run. |
 | **Display settings** | Change graph-card presentation: thumbnail view, contrast method and scope, colour map, resolution, and input/output labels. It does not run a batch representative. |
 | **Export Python…** (gear menu) | Generate a headless script using the shared workflow executor. |
-| **Export reproducibility package…** (gear → Workflow actions; unreleased after 0.15.0a2) | [Review and export](../how-to/export-reproducibility-package.md) an offline report and portable current-workflow recipe. For archived run evidence, use the Batch Run & results report card or its finished-run **Export package…** footer action. |
+| **Export reproducibility package…** (gear → Workflow actions; new in 0.15.0a3) | [Review and export](../how-to/export-reproducibility-package.md) an offline report and portable current-workflow recipe. For archived run evidence, use the Batch Run & results report card or its finished-run **Export package…** footer action. |
 | **Export OME dataset…** (gear menu) | Save one reference image with associated graph label outputs. |
 | **Tunnels...** | Manage named graph outputs and subscribers. |
 | **Auto Arrange** | Apply a one-shot source-to-sink layout; undo restores positions. |

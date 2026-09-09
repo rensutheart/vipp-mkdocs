@@ -1,10 +1,9 @@
 # Node Index
 
 This page lists all **125 operation specifications** registered by
-`NODE_LIBRARY` in nightly, including **Find Label Boundaries**, unreleased after
-0.15.0a2. The palette exposes **123**: the two legacy scatter raster operations
-remain loadable but are hidden from new-node selection. The 0.15.0a2 release has
-124 specifications and 122 palette nodes. This includes **Convex Hull** and
+`NODE_LIBRARY` in 0.15.0a3, including **Find Label Boundaries**. The palette
+exposes **123**: the two legacy scatter raster operations remain loadable but
+are hidden from new-node selection. This includes **Convex Hull** and
 eight nodes in **3D Meshes**.
 
 **Save Image** accepts images or 3D meshes and passes the connected
@@ -12,8 +11,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the source registry; post-0.15.0a2 additions are
-    marked unreleased.
+    Titles and families follow the 0.15.0a3 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -35,7 +33,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-[0.15.0a2 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a2)
+[0.15.0a3 CPU/GPU operation matrix](../how-to/choose-compute.md#gpu-regions-in-0150a3)
 for the accelerated node families and their current public regions.
 
 | Family | Nodes |
@@ -284,7 +282,7 @@ refinement caveats and 3MF/OBJ export.
 | `Filter Labels By Volume` | labels | labels | Keep/remove labels by pixel/voxel count. |
 | `Filter Labels By Property` | labels plus table | labels | Filter labels using table columns. |
 | `Relabel Sequential` | labels | labels | Compact labels after filtering. |
-| `Find Label Boundaries` (unreleased after 0.15.0a2) | labels or Boolean mask | Boolean mask | Same-grid boundary QC with inside/outside/both placement; no retained IDs or mesh. |
+| `Find Label Boundaries` (new in 0.15.0a3) | labels or Boolean mask | Boolean mask | Same-grid boundary QC with inside/outside/both placement; no retained IDs or mesh. |
 | `Label Skeleton Components` | mask | labels | Label connected skeleton components. |
 | `Label Skeleton Branches` | mask | labels | Label skeleton branch paths. |
 

@@ -4,8 +4,8 @@ Follow one image through segmentation, binary logic and two coloured 3D meshes.
 This is a worked synthetic example, not a general method for separating mixed
 signals.
 
-!!! note "Unreleased example"
-    In nightly, open **Gear menu → Open example → Segmentation & Labels →
+!!! note "New in 0.15.0a3"
+    In 0.15.0a3, open **Gear menu → Open example → Segmentation & Labels →
     Separate Overlapping Objects**, then **Calculate all**. No external files
     are needed. Six canvas notes follow the saved workflow from left to right.
 

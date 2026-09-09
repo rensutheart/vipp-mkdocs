@@ -1,6 +1,6 @@
 # Example Workflows
 
-The nightly version contains **21** registered example workflows under:
+VIPP 0.15.0a3 contains **21** registered example workflows under:
 
 ```text
 examples/
@@ -9,8 +9,8 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
-!!! note "Unreleased catalog updates"
-    VIPP 0.15.0a2 shipped 21 examples. Nightly retains the saved interactive
+!!! note "Catalog updates in 0.15.0a3"
+    VIPP 0.15.0a2 shipped 21 examples. 0.15.0a3 retains the saved interactive
     mesh workflow as **Mesh Objects, Colours & Refinement** and removes the
     duplicate entry. It also adds **Separate Overlapping Objects**, combining
     segmentation, binary logic and meshes. The inventory below reflects both changes.
@@ -59,7 +59,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. In nightly they are:
+Use `--list` to print your version's exact IDs. In 0.15.0a3 they are:
 
 | ID | Example title |
 | --- | --- |

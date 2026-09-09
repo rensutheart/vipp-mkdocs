@@ -1,15 +1,15 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.15.0a2 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.15.0a3 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
-!!! info "Unreleased nightly: broader Richardson–Lucy GPU execution"
+!!! info "0.15.0a3: broader Richardson–Lucy GPU execution"
 
-    After 0.15.0a2, RL and RL-TV can run with numerical-difference advisories
+    In 0.15.0a3, RL and RL-TV can run with numerical-difference advisories
     outside their earlier CPU/GPU comparison ranges. Choose **Prefer GPU** or
     pin the GPU in **Custom** to run without a prerequisite CPU comparison.
-    See [the new ranges and warnings](#unreleased-rl-and-rl-tv-gpu-ranges).
+    See [the new ranges and warnings](#rl-and-rl-tv-gpu-ranges).
 
 CPU remains the portable scientific reference. GPU implementations are
 considered only inside operation-specific regions that preserve the declared
@@ -232,7 +232,9 @@ unrunnable descendant.
 
 <span id="gpu-regions-in-0150a1"></span>
 
-## GPU regions in 0.15.0a2
+<span id="gpu-regions-in-0150a2"></span>
+
+## GPU regions in 0.15.0a3
 
 The table is a readable summary, not a substitute for the executable policy.
 VIPP's eligibility explanation is authoritative for the exact call.
@@ -246,8 +248,8 @@ VIPP's eligibility explanation is authoritative for the exact call.
 | Median Filter | CuPyX | `uint8`, `uint16`, or finite `float32` with complete facts proving no negative zero; independent `YX` planes | Canonical odd footprint 1–51; unsupported float facts or footprint use CPU. |
 | Gaussian Blur | CuPyX | finite `float32`; independent `YX` planes | Sigma 0–12. Native integer and `float64` Gaussian calls remain CPU. |
 | Gaussian Blur 3D | CuPyX | finite `float32`; resolved `ZYX` volumes | Each spatial sigma 0–12. Native integer and `float64` calls remain CPU. |
-| Richardson-Lucy Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Odd PSF extents, default-safe options, authored `filter_epsilon` from `1e-12` through `1e-6`, and 1–100 iterations. The v2 backend-agreement gate does not validate restoration quality. |
-| Richardson-Lucy TV Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | Lambda zero inherits ordinary RL's expanded region. Positive TV retains the shipped tuple (`lambda=0.002`, TV epsilon `1e-6`, filter epsilon `1e-12`, denominator floor `0.05`) at 10 or 25 iterations. |
+| Richardson-Lucy Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | 1–500 iterations and filter epsilon 0–1; even/larger PSFs and authored normalization/clipping options are admitted with numerical-difference advisories where relevant. See [ranges and warnings](#rl-and-rl-tv-gpu-ranges); admission does not certify CPU equivalence. |
+| Richardson-Lucy TV Deconvolution | CuPy/CuPyX | finite `float32` Image and PSF; 2D or 3D | 1–100 iterations, regularization 0–0.1, TV epsilon `1e-12`–0.01, filter epsilon 0–0.001 and denominator floor `1e-6`–1. Positive TV needs two samples on each spatial axis; see [ranges and warnings](#rl-and-rl-tv-gpu-ranges). |
 | Canny Edges | CuPy/CuPyX | Boolean, `uint8`, or `uint16`; independent `YX` planes | Sigma 0–12 and finite ordered quantile thresholds. Floating-point input remains CPU in this exact-mask region. |
 | Otsu Threshold | CuPy/CuPyX | Boolean, signed/unsigned integers, and `float16`/`float32`/`float64` | Integer occupied span must be at most 65,536 levels; wide integers and per-slice cases need sufficient exact facts. Float histograms use 2–65,536 saved bins. |
 | Binary Threshold | CuPy | scalar finite `float32` images | Above/Below use the exact authored finite threshold; In range includes both saved bounds and Outside range excludes them. Returns a resident Boolean mask. Unsupported dtype/channel semantics use CPU; VIPP does not round or replace thresholds. |
@@ -275,10 +277,12 @@ larger GPU gains across filtering, deconvolution, and segmentation, but it
 changes the authored data representation. Never convert only to make a
 benchmark look faster.
 
-## Unreleased RL and RL-TV GPU ranges
+<span id="unreleased-rl-and-rl-tv-gpu-ranges"></span>
 
-These changes apply to nightly builds after **0.15.0a2**. The released operation
-matrix above retains its original limits.
+## RL and RL-TV GPU ranges
+
+These execution ranges apply to **0.15.0a3**. Historical CPU/GPU comparisons
+retain their original settings; they do not establish parity across this region.
 
 Select **Prefer GPU**, or choose the GPU for the node in **Custom**, then
 calculate. CPU agreement is not a prerequisite for these settings:

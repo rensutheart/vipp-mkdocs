@@ -1,6 +1,6 @@
 # Install VIPP on macOS
 
-VIPP 0.15.0a2 provides separate offline packages for Apple Silicon and Intel
+VIPP 0.15.0a3 provides separate offline packages for Apple Silicon and Intel
 Macs. The package includes Python, napari, Qt, and VIPP, so the normal install
 does not require Terminal or a separately installed Python.
 
@@ -10,14 +10,14 @@ current user, and needs approximately 3 GB of free disk space.
 ## Choose the correct package
 
 Open **Apple menu → About This Mac**, then choose the matching download from
-the [official v0.15.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2):
+the [official v0.15.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a3):
 
 - **Apple Silicon** — the Mac reports a chip such as Apple M1, M2, M3, or M4:
-  download `VIPP-0.15.0a2-macOS-arm64-UNSIGNED.pkg` and
-  `SHA256SUMS-macOS-arm64-0.15.0a2.txt`.
+  download `VIPP-0.15.0a3-macOS-arm64-UNSIGNED.pkg` and
+  `SHA256SUMS-macOS-arm64-0.15.0a3.txt`.
 - **Intel** — the Mac reports an Intel processor: download
-  `VIPP-0.15.0a2-macOS-x86_64-UNSIGNED.pkg` and
-  `SHA256SUMS-macOS-x86_64-0.15.0a2.txt`.
+  `VIPP-0.15.0a3-macOS-x86_64-UNSIGNED.pkg` and
+  `SHA256SUMS-macOS-x86_64-0.15.0a3.txt`.
 
 Do not use a package from another site or change architectures to work around
 an installation error. These are native, architecture-specific packages, not
@@ -32,13 +32,13 @@ the download folder and run the command for your architecture:
 === "Apple Silicon"
 
     ```bash
-    shasum -a 256 VIPP-0.15.0a2-macOS-arm64-UNSIGNED.pkg
+    shasum -a 256 VIPP-0.15.0a3-macOS-arm64-UNSIGNED.pkg
     ```
 
 === "Intel"
 
     ```bash
-    shasum -a 256 VIPP-0.15.0a2-macOS-x86_64-UNSIGNED.pkg
+    shasum -a 256 VIPP-0.15.0a3-macOS-x86_64-UNSIGNED.pkg
     ```
 
 Compare all 64 characters with the line for the PKG in the matching

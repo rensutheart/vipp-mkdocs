@@ -33,7 +33,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.15.0a2 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
+VIPP 0.15.0a3 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 `execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
 logical selector, observed container revision, reader/backend evidence,
@@ -92,7 +92,7 @@ multiple outputs, and incompatible splices fail closed.
 
 ### Optional Batch workspace attachment
 
-A 0.15.0a2 workflow can carry an optional top-level `batch_config`. The
+A 0.15.0a3 workflow can carry an optional top-level `batch_config`. The
 version-6 attachment contains canonical SourceItems, reviewed typed per-sample
 numeric overrides, and whole-batch **Use workflow / Run / Bypass** profiles in
 addition to source bindings, local paths, patterns, guarded source-axis
@@ -273,7 +273,7 @@ retries short-lived access failures. If a final item sidecar still cannot be
 written, that item is partial and **Continue after item failures** controls
 whether later items run; final run-manifest persistence remains mandatory.
 
-**Unreleased after 0.15.0a2 — verified resume:** manifest schema 6 adds
+**New in 0.15.0a3 — verified resume:** manifest schema 6 adds
 output-content digests and recovery evidence. Resume validates these against current source
 bytes and selectors, effective scientific settings, software environment, and
 planned destinations. Only completely verified, completed items are reusable;
