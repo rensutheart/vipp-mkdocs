@@ -18,7 +18,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../mask-to-mesh/">
+        <link rel="next" href="../separate-overlapping-objects/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -568,6 +568,8 @@
       
         
       
+        
+      
     
     
     
@@ -611,6 +613,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1309,6 +1334,8 @@
       
         
       
+        
+      
     
     
     
@@ -1443,6 +1470,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#read-object-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read object counts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-label-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect label boundaries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#convex-hull" class="md-nav__link">
     <span class="md-ellipsis">
       Convex Hull
@@ -1542,6 +1587,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../separate-overlapping-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Separate overlapping objects
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1719,6 +1787,8 @@
       
         
       
+        
+      
     
     
     
@@ -1869,6 +1939,29 @@
   
   <span class="md-ellipsis">
     Save, share, and export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/export-reproducibility-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export a reproducibility package
     
   </span>
   
@@ -3188,6 +3281,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#read-object-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read object counts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspect-label-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect label boundaries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#convex-hull" class="md-nav__link">
     <span class="md-ellipsis">
       Convex Hull
@@ -3310,6 +3421,9 @@
 <h1 id="segmentation-and-label-cleanup">Segmentation And Label Cleanup<a class="headerlink" href="#segmentation-and-label-cleanup" title="Permanent link">&para;</a></h1>
 <p>Segmentation workflows usually turn an intensity image into a mask, then into
 labels.</p>
+<p>For a cross-cutting worked example, see <a href="../separate-overlapping-objects/">Separate overlapping
+objects</a>: segment two structures from one
+synthetic image, reconstruct a curve with binary logic, then create meshes.</p>
 <h2 id="basic-pattern">Basic Pattern<a class="headerlink" href="#basic-pattern" title="Permanent link">&para;</a></h2>
 <p>For exact histogram populations, Minimum/ImageJ behavior, and numeric limits,
 see <a href="../../reference/intensity-thresholds/">intensity and threshold controls</a>.</p>
@@ -3369,8 +3483,95 @@ see <a href="../../reference/intensity-thresholds/">intensity and threshold cont
 <td>Label cleanup</td>
 <td><code>Clear Border Objects</code>, <code>Filter Labels By Volume</code>, <code>Filter Labels By Property</code>, <code>Relabel Sequential</code></td>
 </tr>
+<tr>
+<td>Boundary QC</td>
+<td><code>Find Label Boundaries</code> (new in 0.15.0a3)</td>
+</tr>
 </tbody>
 </table>
+<h2 id="read-object-counts">Read object counts<a class="headerlink" href="#read-object-counts" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">New in 0.15.0a3</p>
+<p>Select <strong>Remove Small Objects</strong>, <strong>Clear Border Objects</strong>, <strong>Filter Labels
+By Volume</strong>, or <strong>Filter Labels By Property</strong> to review input, kept, and
+removed object counts in the inspector's <strong>Filter result</strong> section, after
+the input/object histogram so <strong>Parameters</strong> and the histogram stay together.</p>
+</div>
+<p>The counts compare the node's <strong>actual input and current calculated output</strong>.
+They are not a prediction from the sliders. After changing settings, calculate
+the node if needed; an old or missing output cannot provide current kept/removed
+counts. Bypassing the node does not claim that its filter was applied.</p>
+<p>For label images, objects are distinct positive label IDs, not the largest ID.
+For Boolean masks, they are connected components using the operation's connectivity.
+Counts follow the selected 2D/3D processing scope, with independent time points,
+channels, or slices counted separately. Background is excluded.</p>
+<p>Counting runs in the background and does not change the segmentation. Continue
+to inspect the result: a kept/removed count cannot determine whether an object
+is biological or whether the chosen filter is appropriate.</p>
+<h2 id="inspect-label-boundaries">Inspect label boundaries<a class="headerlink" href="#inspect-label-boundaries" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">New in 0.15.0a3</p>
+<p><strong>Label Operations → Find Label Boundaries</strong> creates a
+Boolean boundary mask for QC overlays or saving. It does not create a mesh
+or detect edges in an intensity image.</p>
+</div>
+<ol>
+<li>Branch a label output into <strong>Find Label Boundaries</strong>. Boolean masks are also
+    accepted; integer labels must be non-negative, with <code>0</code> as background.</li>
+<li>
+<p>Choose <strong>Boundary placement</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>What is marked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Inside objects</strong> (default)</td>
+<td>Object-side boundary pixels/voxels, including interfaces between different labels.</td>
+</tr>
+<tr>
+<td><strong>Outside objects</strong></td>
+<td>Background-side boundaries, plus interfaces between touching non-zero labels; this is not strictly a background-only mask.</td>
+</tr>
+<tr>
+<td><strong>Both sides</strong></td>
+<td>Both sides of a label transition, giving a thicker boundary.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>For stacks, review <strong>Spatial processing</strong>. <strong>Auto from axes</strong> follows the
+    interpreted axes; resolve ambiguous axes first. <strong>2D per XY slice
+    (advanced)</strong> treats each plane independently; <strong>3D ZYX volume</strong> includes
+    changes along Z. These may appear as <strong>2D YX</strong>/<strong>3D ZYX</strong> before axes resolve.
+    Time points and channels are always processed independently. If axes are
+    interleaved (for example ZCYX for volume processing), use <strong>Reorder Axes</strong>
+    explicitly when requested; the node does not rearrange them automatically.</p>
+</li>
+<li>Use <strong>Face connected</strong> for side/face-sharing neighbors (4 in 2D, 6 in 3D),
+    or <strong>Full connectivity</strong> to include diagonal neighbors (8 in 2D, 26 in 3D).</li>
+<li>Inspect or pin the mask over the source image, or connect <strong>Save Image</strong> or
+    <strong>Batch Output</strong> as with any other mask.</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>filtered labels
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  ├─&gt; Measure Objects
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  └─&gt; Find Label Boundaries -&gt; inspect / pin / Save Image
+</span></code></pre></div>
+<p>Keep the original labels for object measurements: the boundary output has
+only true/false values and <strong>does not retain object IDs</strong>. It has the same shape,
+axes, spacing, units and origin as the input; calculation leaves upstream labels
+unchanged and runs on CPU.</p>
+<p>VIPP does not pad the image with imaginary background. An object touching the
+crop edge is not automatically outlined along that edge; only transitions
+within the image are available. Boundary thickness is defined on the pixel/voxel
+grid, not by a physical-distance setting, so anisotropic voxels do not make a
+uniform physical-width shell. The placement modes follow scikit-image's
+<a href="https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries"><code>find_boundaries</code></a>
+(<code>inner</code>, <code>outer</code>, <code>thick</code> respectively, with background <code>0</code>).</p>
 <h2 id="convex-hull">Convex Hull<a class="headerlink" href="#convex-hull" title="Permanent link">&para;</a></h2>
 <p><strong>Morphology → Convex Hull</strong> fills the smallest convex envelope around
 the foreground of a Boolean mask, such as a threshold output.</p>
@@ -3552,24 +3753,24 @@ method is unsuitable for that input or that preprocessing needs review.</p>
 </ul>
 <h2 id="split-touching-objects">Split Touching Objects<a class="headerlink" href="#split-touching-objects" title="Permanent link">&para;</a></h2>
 <p>Use watershed when simple connected components merge neighboring objects:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mask
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; Euclidean Distance Transform
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  -&gt; H-Maxima Markers
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  -&gt; Marker-Controlled Watershed
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  -&gt; Filter Labels By Volume
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mask
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  -&gt; Euclidean Distance Transform
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  -&gt; H-Maxima Markers
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  -&gt; Marker-Controlled Watershed
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  -&gt; Filter Labels By Volume
 </span></code></pre></div>
 <p>For a compact single-node starting point, use <code>Auto Watershed From Mask</code>.</p>
 <h2 id="reference-workflow">Reference Workflow<a class="headerlink" href="#reference-workflow" title="Permanent link">&para;</a></h2>
 <p>To turn a finished volume mask into a viewable/exportable surface, see
 <a href="../mask-to-mesh/">Create, colour and export 3D mesh objects</a>.</p>
 <p>Use the general cleanup example:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>examples/otsu-red-channel-labels.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>examples/otsu-red-channel-labels.json
 </span></code></pre></div>
 <p>This demonstrates red/TRITC-like channel segmentation, mask cleanup, labels,
 border clearing, volume filtering, and inspectable outputs.</p>
 <p>To inspect the coherent Prefer-GPU corridor and its CPU fallbacks, open
 <strong>Portable GPU Segmentation Bridge</strong> or use:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>examples/synthetic-gpu-segmentation-bridge.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>examples/synthetic-gpu-segmentation-bridge.json
 </span></code></pre></div>
 <p>Its deterministic sample contains four retained 3D objects, one 19-voxel
 speck removed by the authored 22-voxel cutoff, and one 31-voxel enclosed cavity
@@ -3607,7 +3808,7 @@ histogram scope is recorded in the inspector history.</em></p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 12:07:21 UTC">September 9, 2026</span>
   </span>
 
     
@@ -3662,13 +3863,13 @@ histogram scope is recorded in the inspector history.</em></p>
         
         
           
-          <a href="../mask-to-mesh/" class="md-footer__link md-footer__link--next" aria-label="Next: Create and export 3D meshes">
+          <a href="../separate-overlapping-objects/" class="md-footer__link md-footer__link--next" aria-label="Next: Separate overlapping objects">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Create and export 3D meshes
+                Separate overlapping objects
               </div>
             </div>
             <div class="md-footer__button md-icon">

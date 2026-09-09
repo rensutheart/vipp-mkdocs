@@ -568,6 +568,8 @@
       
         
       
+        
+      
     
     
     
@@ -611,6 +613,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1307,6 +1332,8 @@
       
         
       
+        
+      
     
     
     
@@ -1365,6 +1392,29 @@
   
   <span class="md-ellipsis">
     Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/separate-overlapping-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Separate overlapping objects
     
   </span>
   
@@ -1547,6 +1597,8 @@
       
         
       
+        
+      
     
     
     
@@ -1697,6 +1749,29 @@
   
   <span class="md-ellipsis">
     Save, share, and export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/export-reproducibility-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export a reproducibility package
     
   </span>
   
@@ -3572,16 +3647,17 @@
 
 
 <h1 id="node-index">Node Index<a class="headerlink" href="#node-index" title="Permanent link">&para;</a></h1>
-<p>This page lists all <strong>124 operation specifications</strong> registered by
-<code>NODE_LIBRARY</code> in 0.15.0a2. The palette exposes <strong>122</strong>: the two legacy scatter
-raster operations remain loadable but are hidden from new-node selection.
-This includes <strong>Convex Hull</strong> and eight nodes in <strong>3D Meshes</strong>.</p>
+<p>This page lists all <strong>125 operation specifications</strong> registered by
+<code>NODE_LIBRARY</code> in 0.15.0a3, including <strong>Find Label Boundaries</strong>. The palette
+exposes <strong>123</strong>: the two legacy scatter raster operations remain loadable but
+are hidden from new-node selection. This includes <strong>Convex Hull</strong> and
+eight nodes in <strong>3D Meshes</strong>.</p>
 <p><strong>Save Image</strong> accepts images or 3D meshes and passes the connected
 image/mesh type downstream. Its format menu and <strong>Batch Output</strong>'s menu follow
 the connected input; see <a href="../../workflows/mask-to-mesh/#save-the-mesh">mesh saving</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Scope of this reference</p>
-<p>Titles and families were checked against the 0.15.0a2 source registry.
+<p>Titles and families follow the 0.15.0a3 source registry.
 Input and output summaries describe the ordinary/default ports; <code>Split Channels</code>,
 <code>Split Axis</code>, <code>Born-Wolf PSF</code>, and other multi-output nodes can resolve ports
 from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -3602,7 +3678,7 @@ choice appears for an operation with a declared provider; it is not filtered by
 the current dtype, parameters, shape, memory, dependencies, or environment.
 Call-specific admission happens during planning and can select CPU, visibly
 fall back, or fail. See the
-<a href="../../how-to/choose-compute/#gpu-regions-in-0150a2">0.15.0a2 CPU/GPU operation matrix</a>
+<a href="../../how-to/choose-compute/#gpu-regions-in-0150a3">0.15.0a3 CPU/GPU operation matrix</a>
 for the accelerated node families and their current public regions.</p>
 <table>
 <thead>
@@ -3642,7 +3718,7 @@ for the accelerated node families and their current public regions.</p>
 </tr>
 <tr>
 <td>Label Operations</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">8</td>
 </tr>
 <tr>
 <td>Intensity &amp; Contrast</td>
@@ -3654,7 +3730,7 @@ for the accelerated node families and their current public regions.</p>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
-<td style="text-align: right;"><strong>124</strong></td>
+<td style="text-align: right;"><strong>125</strong></td>
 </tr>
 </tbody>
 </table>
@@ -4453,6 +4529,12 @@ refinement caveats and 3MF/OBJ export.</p>
 <td>Compact labels after filtering.</td>
 </tr>
 <tr>
+<td><code>Find Label Boundaries</code> (new in 0.15.0a3)</td>
+<td>labels or Boolean mask</td>
+<td>Boolean mask</td>
+<td>Same-grid boundary QC with inside/outside/both placement; no retained IDs or mesh.</td>
+</tr>
+<tr>
 <td><code>Label Skeleton Components</code></td>
 <td>mask</td>
 <td>labels</td>
@@ -4466,6 +4548,9 @@ refinement caveats and 3MF/OBJ export.</p>
 </tr>
 </tbody>
 </table>
+<p>See <a href="../../workflows/segmentation-label-cleanup/#inspect-label-boundaries">Inspect label boundaries</a>
+for placement, connectivity, spatial scope and crop-border caveats. Find Label
+Boundaries runs on CPU and preserves the input calibration.</p>
 <h2 id="measurements">Measurements<a class="headerlink" href="#measurements" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4687,7 +4772,7 @@ refinement caveats and 3MF/OBJ export.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 12:07:21 UTC">September 9, 2026</span>
   </span>
 
     

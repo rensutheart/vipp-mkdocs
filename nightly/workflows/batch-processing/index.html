@@ -568,6 +568,8 @@
       
         
       
+        
+      
     
     
     
@@ -611,6 +613,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1309,6 +1334,8 @@
       
         
       
+        
+      
     
     
     
@@ -1370,6 +1397,29 @@
   
   <span class="md-ellipsis">
     Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../separate-overlapping-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Separate overlapping objects
     
   </span>
   
@@ -1681,6 +1731,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#resume-an-interrupted-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resume an interrupted run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-readable-run-report" class="md-nav__link">
     <span class="md-ellipsis">
       The readable run report
@@ -1748,6 +1807,8 @@
       
         
           
+        
+      
         
       
         
@@ -1914,6 +1975,29 @@
   
   <span class="md-ellipsis">
     Save, share, and export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/export-reproducibility-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export a reproducibility package
     
   </span>
   
@@ -3333,6 +3417,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#resume-an-interrupted-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resume an interrupted run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-readable-run-report" class="md-nav__link">
     <span class="md-ellipsis">
       The readable run report
@@ -3625,10 +3718,43 @@ finish before cancellation is observed. Wait for finalization and cleanup;
 <strong>Hide window</strong> does not cancel a run. Completed earlier outputs remain saved.
 An item interrupted before publication is distinguished from an item that
 failed; later unstarted items are recorded separately as skipped.</p>
-<p>There is no automatic resume button. To continue deliberately, return to Setup,
-review settings, check again, and choose which existing outputs to keep or
-overwrite. “Skip existing” preserves files; it is not a guarantee that unfinished
-work from an earlier item resumes exactly where it stopped.</p>
+<h3 id="resume-an-interrupted-run">Resume an interrupted run<a class="headerlink" href="#resume-an-interrupted-run" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">New in 0.15.0a3</p>
+<p>This feature requires VIPP 0.15.0a3 or newer; it is not included in
+0.15.0a2. Runs made by older versions lack the required
+verification evidence and cannot use it.</p>
+</div>
+<ol>
+<li>Open <strong>Batch workflow → Run &amp; results → Resume saved run…</strong>. The same action
+   is available in the Batch window's overflow menu.</li>
+<li>Select the previous run's <code>vipp_batch_manifest.json</code> or its run-id archive.
+   Keep its item-sidecar folder beside it.</li>
+<li>Review the confirmation, then choose <strong>Verify and resume</strong>. VIPP uses the
+   workflow and settings recorded for that run; it does not change your open
+   workflow.</li>
+<li>Follow background verification and processing. The report distinguishes
+   <strong>verified reused</strong> items and files from newly saved results.</li>
+</ol>
+<p>Use a trusted manifest on the <strong>same computer</strong>, with the original file
+locations and software environment. Moving a run or upgrading packages is not
+supported by this first resume implementation.</p>
+<p>VIPP checks source contents and selectors, effective parameters and compute
+settings, the software environment, and every completed output's contents and
+destination. Verification reads bytes and can take time on large datasets.
+Only fully completed, verified items are reused. An interrupted item starts
+again; this does not restore a calculation partway through a node.</p>
+<p><strong>Skip existing is not resume.</strong> A file's presence, size, or name does not prove
+that it came from the recorded analysis. Resume refuses changed or incompatible
+evidence and existing outputs belonging to incomplete or unverified work; it
+does not overwrite those files to make the check pass.</p>
+<p>If verification refuses, read the reason first. Restore genuinely missing
+original files or sidecars and try again, or prepare a <strong>new run in a new output
+folder</strong> after reviewing the inputs and settings. Do not edit the manifest to
+silence a mismatch. Older versions can still keep existing files through the
+ordinary file policy, but cannot verify them as completed work.</p>
+<p>A continuation creates its own run archive and checkpoints linked to the prior
+run. Preserve both; the original evidence is not rewritten.</p>
 <h3 id="the-readable-run-report">The readable run report<a class="headerlink" href="#the-readable-run-report" title="Permanent link">&para;</a></h3>
 <p>The report appears <strong>inside Run &amp; results</strong> after completion or cancellation.
 It summarizes items, elapsed time, saved and kept outputs, failed/cancelled
@@ -3639,20 +3765,32 @@ messages. An absent recorded reason is reported as such, not guessed.</p>
 <p><em>Illustrative synthetic outcomes show how saved, kept, and failed outputs differ;
 the read-only destination error is included to demonstrate failure reporting.
 This is an interface example, not a recorded performance benchmark. Read the
-summary first, then select an item for its individual output records.</em></p>
+summary first, then select an item for its individual output records. The image
+shows earlier action labels; 0.15.0a3 controls are described below.</em></p>
 <p>Below it, select a batch row to see that item's outputs. Clicking the underlined
 item name navigates to <strong>Items &amp; outputs</strong>; clicking the blank part of the row
-only changes the selected output list. <strong>View run report</strong> in the footer returns
-to the report after browsing and never starts another run or check.</p>
-<p><strong>Output folder</strong> opens the destination. <strong>Refresh file status</strong> checks whether
+only changes the selected output list.</p>
+<p><strong>New in 0.15.0a3:</strong> the compact toolbar has <strong>Resume saved run…</strong>,
+then a separator, <strong>Output folder</strong>, and <strong>Refresh file status</strong>. <strong>Output
+folder</strong> opens the destination. <strong>Refresh file status</strong> checks whether
 files still exist on disk; it neither recalculates images nor validates a new
 scientific run plan. Presence is also refreshed automatically where file
 notifications are available; the manual action is useful for external or
 network-drive changes. An existing file is not proof of scientific success.</p>
-<p><strong>Find manifest JSON</strong> locates the machine-readable technical record for audit
-and automation. It is secondary to the readable summary, not another report
-window. Keep the archived manifest: a successful new Check replaces the previous
-run view in this workspace.</p>
+<p><strong>New in 0.15.0a3:</strong> the run report card offers <strong>Export reproducibility
+package…</strong> in place of <strong>Find manifest JSON</strong>. It opens a review of this recorded
+run's workflow, settings, software versions and run records—not the currently
+edited graph. Images and outputs are excluded. The action is available after a
+recorded run while processing is idle; opening it does not save or share a ZIP.
+Review filenames, retained text and omissions before exporting.
+See <a href="../../how-to/export-reproducibility-package/">Export a reproducibility package</a>.</p>
+<p>After a finished report, the <strong>Run &amp; results</strong> footer offers <strong>Export package…</strong>
+to open the same review. <strong>View run report</strong> in the <strong>Items &amp; outputs</strong> and
+<strong>Overrides</strong> footers returns to the report without starting another run or
+check. <strong>Setup</strong> keeps <strong>Check batch</strong> for preparing a new run. Keep the archived
+manifest and original resume receipts separately: the package excludes original
+resume receipts, and a successful new Check replaces the previous run view in
+this workspace.</p>
 <h2 id="save-and-replay">Save and replay<a class="headerlink" href="#save-and-replay" title="Permanent link">&para;</a></h2>
 <p>Use <strong>Save config</strong> for a standalone batch configuration and <strong>Open config</strong> to
 reload it against the current workflow. Saving the main workflow also offers
@@ -3675,6 +3813,12 @@ Exit code <code>0</code> means no recorded failures, <code>1</code> means a fina
 failures, <code>2</code> means setup/execution failed before a normal result, and <code>130</code>
 means cooperative cancellation. See <a href="../../how-to/save-share-export/">save, share, and export</a>
 for the distinction between this runner and an exported standalone workflow.</p>
+<p>For <a href="#resume-an-interrupted-run">verified resume</a>, a runner generated by
+VIPP 0.15.0a3 also accepts:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python vipp_batch_pipeline.py --resume path/to/vipp_batch_manifest.json --progress
+</span></code></pre></div>
+<p>Do not combine <code>--resume</code> with config, workflow, or compute overrides. Resume uses the
+recorded run settings; a changed analysis needs a new run.</p>
 <h2 id="outputs-and-provenance">Outputs and provenance<a class="headerlink" href="#outputs-and-provenance" title="Permanent link">&para;</a></h2>
 <p><code>Batch Output</code> marks the exact port to save and supports tags, subfolders,
 templates, format overrides, and overwrite protections. Default naming uses
@@ -3736,7 +3880,7 @@ QC, intended outputs, and the reported outcomes independently.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 6, 2026 17:00:35 UTC">September 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 12:07:21 UTC">September 9, 2026</span>
   </span>
 
     
