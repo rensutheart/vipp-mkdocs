@@ -1,0 +1,3998 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Visual workflows for reproducible bioimage analysis.">
+      
+      
+        <meta name="author" content="Rensu P. Theart">
+      
+      
+        <link rel="canonical" href="https://rensutheart.github.io/vipp-mkdocs/0.15.0a3/workflows/batch-processing/">
+      
+      
+        <link rel="prev" href="../psf-deconvolution/">
+      
+      
+        <link rel="next" href="../../how-to/">
+      
+      
+      <link rel="icon" href="../../assets/branding/vipp-mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Process a folder - VIPP — Visual Image Processing Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#process-a-folder" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            
+            
+  VIPP is alpha software. Confirm that this manual's version matches the plugin version shown in VIPP before following release-specific instructions.
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="VIPP — Visual Image Processing Platform" class="md-header__button md-logo" aria-label="VIPP — Visual Image Processing Platform" data-md-component="logo">
+      
+  <img src="../../assets/branding/vipp-mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VIPP — Visual Image Processing Platform
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Process a folder
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rensutheart/vipp-mkdocs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rensutheart/vipp-mkdocs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../releases/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Release notes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start here
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../how-to/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  How-to guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../scientific-practice/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scientific practice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshooting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributors
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="VIPP — Visual Image Processing Platform" class="md-nav__button md-logo" aria-label="VIPP — Visual Image Processing Platform" data-md-component="logo">
+      
+  <img src="../../assets/branding/vipp-mark.svg" alt="logo">
+
+    </a>
+    VIPP — Visual Image Processing Platform
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rensutheart/vipp-mkdocs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rensutheart/vipp-mkdocs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../releases/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Release notes
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Release notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.14.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.14.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.13.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.13.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.12.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.12.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Start here
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Start here
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/updating/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Check for updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/reader-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microscope reader support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install on macOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows NVIDIA GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/windows-field-acceptance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test a Windows install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/launching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Launch VIPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/example-tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour a finished workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/build-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build your first workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/own-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use your own images
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segmentation-label-cleanup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../separate-overlapping-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Separate overlapping objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mask-to-mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create and export 3D meshes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../object-measurements-tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measure objects and tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skeleton-network-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analyze skeleton networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../colocalization-association/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measure colocalization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../psf-deconvolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Restore with a PSF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Process a folder
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Process a folder
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-set-up-sources-and-destination" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Set up sources and destination
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Set up sources and destination">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-checking-can-take-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why checking can take time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deterministic-pairing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deterministic pairing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tell-vipp-what-tiff-pages-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tell VIPP what TIFF pages mean
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-review-items-and-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Review items and outputs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Review items and outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preview-one-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preview one sample
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-some-existing-files-and-overwrite-others" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep some existing files and overwrite others
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-review-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Review overrides
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Review overrides">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-sample-parameter-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-sample parameter overrides
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-or-bypass-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run or bypass nodes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-run-and-read-the-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Run and read the report
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Run and read the report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stop-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stop safely
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-an-interrupted-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resume an interrupted run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-readable-run-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      The readable run report
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-and-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save and replay
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs-and-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs and provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-the-synthetic-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      Try the synthetic walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../how-to/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    How-to guides
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/choose-compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose CPU or GPU compute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/edit-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Edit and organize a graph
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/crop-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Crop an image or volume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/inspect-outputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/save-share-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Save, share, and export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/export-reproducibility-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export a reproducibility package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/import-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with files and stores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cache-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manage memory and speed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../concepts/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Concepts
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/graph-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Images, masks, labels, tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/axes-and-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Axes, scale, and metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/inspection-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspection and calculation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/examples-and-samples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples and examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../scientific-practice/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Scientific practice
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Scientific practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/choosing-dimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Choose 2D or 3D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/parameter-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tune without fooling yourself
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Validate a workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-practice/reporting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Report a VIPP analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/node-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    All nodes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toolbar and settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/display-settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/intensity-thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intensity and thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/channel-axis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel and axis controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/measurement-tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Measurement tables and units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/skeleton-nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skeleton node outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/colocalization-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Colocalization metric definitions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/racc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RACC-like index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/association-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Object association metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/example-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Example workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/sample-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bundled sample data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/workflow-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflow and export contract
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/import-export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with files and stores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/validation-status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Validation status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versions and compatibility
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Privacy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Licence and reuse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../troubleshooting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Troubleshooting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/common-pitfalls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Common problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance and memory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/report-a-problem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get help or report a problem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../developer/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Contributors
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Contributors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture and scientific boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/development-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Set up a development environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Add or change an operation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/testing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test and document changes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/docs-releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-set-up-sources-and-destination" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Set up sources and destination
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Set up sources and destination">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-checking-can-take-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why checking can take time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deterministic-pairing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deterministic pairing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tell-vipp-what-tiff-pages-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tell VIPP what TIFF pages mean
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-review-items-and-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Review items and outputs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Review items and outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preview-one-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preview one sample
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-some-existing-files-and-overwrite-others" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep some existing files and overwrite others
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-review-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Review overrides
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Review overrides">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-sample-parameter-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-sample parameter overrides
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-or-bypass-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run or bypass nodes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-run-and-read-the-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Run and read the report
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Run and read the report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stop-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stop safely
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-an-interrupted-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resume an interrupted run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-readable-run-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      The readable run report
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-and-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save and replay
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs-and-provenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs and provenance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-the-synthetic-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      Try the synthetic walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/rensutheart/vipp-mkdocs/edit/main/docs/workflows/batch-processing.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="process-a-folder">Process a folder<a class="headerlink" href="#process-a-folder" title="Permanent link">&para;</a></h1>
+<p>Use <strong>Batch</strong> in the main workflow toolbar to apply one reviewed workflow to
+collections of local images. The <strong>Batch workflow</strong> window separates preparation
+from processing: checking files does not calculate images, and previewing one
+sample does not run the collection.</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What to do here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Setup</strong></td>
+<td>Choose source folders, pairing, destination, image format, and run policy.</td>
+</tr>
+<tr>
+<td><strong>Items &amp; outputs</strong></td>
+<td>Review the exact samples and outputs, inspect a representative, and decide what to do with existing files.</td>
+</tr>
+<tr>
+<td><strong>Overrides</strong></td>
+<td>Change supported numeric values for particular samples, or Run/Bypass behavior for every sample.</td>
+</tr>
+<tr>
+<td><strong>Run &amp; results</strong></td>
+<td>Review the final plan, run it, and read the results and failure explanations.</td>
+</tr>
+</tbody>
+</table>
+<p>The footer keeps the current activity and next action visible. You can return to
+an earlier tab without starting a check or a run merely by opening that tab.</p>
+<h2 id="1-set-up-sources-and-destination">1. Set up sources and destination<a class="headerlink" href="#1-set-up-sources-and-destination" title="Permanent link">&para;</a></h2>
+<p>Start with a workflow that you have already validated on representative data.
+Add an explicit <code>Batch Output</code> node for each image, mask, label image, RGB image,
+or table you want to save. Open <strong>Batch</strong>, then in <strong>Setup</strong>:</p>
+<ol>
+<li>Bind each varying <code>Image Source</code> to a folder and filename pattern.</li>
+<li>Review the <strong>Image axes</strong> choice. Use file labels unless the acquisition
+   requires a deliberate interpretation; see <a href="#tell-vipp-what-tiff-pages-mean">TIFF pages and axes</a>.</li>
+<li>Choose the output folder and default image format.</li>
+<li>Choose the existing-file policy and whether to continue after an item fails.</li>
+<li>Review the compute request. It describes the requested policy, not proof that
+   a GPU will be used; actual implementations are recorded with the run.</li>
+<li>Select <strong>Check batch</strong>.</li>
+</ol>
+<p><img alt="Batch Setup with one synthetic image-source collection and a separate output destination" src="../../assets/screenshots/workflows/batch-setup.png" /></p>
+<p><em>Setup makes source bindings and output policy visible before processing. These
+interface examples use three synthetic fields and image/table outputs, not
+research data. The paired Red/Green walkthrough below is a separate bundled demo.</em></p>
+<p>The suggested <code>output</code> subfolder of the primary source is only a suggestion.
+Review and confirm it. With recursive input patterns such as <code>**/*.tif</code>, choose
+a destination outside the input tree so a future search cannot include results
+from an earlier run.</p>
+<h3 id="why-checking-can-take-time">Why checking can take time<a class="headerlink" href="#why-checking-can-take-time" title="Permanent link">&para;</a></h3>
+<p>The first stage lists filenames and opens <strong>Items &amp; outputs</strong> quickly. VIPP then
+reads image metadata and verifies exact source content in the background. Follow
+the active-file indicator and checked-file count. Content fingerprints read the
+source bytes, so a large CZI or TIFF can take substantially longer than listing
+its name.</p>
+<p>One file may contain several image series. The initial file inventory is not
+yet the final sample list; wait for checking to finish before previewing, editing
+sample overrides, or running. Check does not calculate workflow images or save
+processing outputs.</p>
+<h3 id="deterministic-pairing">Deterministic pairing<a class="headerlink" href="#deterministic-pairing" title="Permanent link">&para;</a></h3>
+<p>VIPP sorts matched paths independently for every bound source, expands
+inspectable containers into source items, and pairs those items by position.
+Every bound source must produce the same number of items.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Red source:   field_01.npy  field_02.npy  field_03.npy
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Green source: field_01.npy  field_02.npy  field_03.npy
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Batch items:  (Red 01, Green 01), (Red 02, Green 02), (Red 03, Green 03)
+</span></code></pre></div>
+<p>Filename similarity does not establish biological pairing. Compare the list
+with an independent sample map. Time, channel, and Z remain axes inside an item;
+VIPP does not automatically iterate axis combinations or discover HCS
+plate/well/field structure.</p>
+<p>Each resolved <code>SourceItem</code> includes a stable selector, the observed container
+revision, and reader evidence. Changed sources, missing companions, or changed
+series topology require review instead of silently reassigning an old override
+to a different sample. Fixed file-backed sources can remain unbound; live napari
+layers and bundled sample sources need file collection bindings for headless
+batch execution.</p>
+<h3 id="tell-vipp-what-tiff-pages-mean">Tell VIPP what TIFF pages mean<a class="headerlink" href="#tell-vipp-what-tiff-pages-mean" title="Permanent link">&para;</a></h3>
+<p>For a new source, <strong>Automatic (recommended)</strong> can suggest a Z stack in one
+narrow case: an ordinary TIFF reports exactly <code>QYX</code>, and the workflow proves
+that it needs <code>ZYX</code>. VIPP visibly selects <strong>Stack planes are depth slices
+(Z stack)</strong> and retries the check once. Confirm that those pages genuinely are
+depth slices. Choose <strong>Use the file's labels unchanged</strong> to opt out.</p>
+<p>The accepted decision is saved as <code>QYX -&gt; ZYX</code>. Every item must match the
+declared original axes and rank. This renames axes without moving pixels;
+<code>Reorder Axes</code> instead transposes data and metadata. Neither action discovers
+the physical slice spacing. Review scale and units separately.</p>
+<p>Automatic is a conservative GUI convenience, not a headless guess. Saving
+without a needed suggestion records no declaration. <strong>Something else
+(advanced)…</strong> exposes less common explicit interpretations.</p>
+<h2 id="2-review-items-and-outputs">2. Review items and outputs<a class="headerlink" href="#2-review-items-and-outputs" title="Permanent link">&para;</a></h2>
+<p>Click a row to read its sources, image axes, parameter exceptions, and outputs.
+The output list emphasizes <strong>what will be saved</strong>—the producing node, data kind,
+and format. Use <strong>Show file paths</strong> when exact filenames matter. <strong>Find in File
+Explorer</strong> or <strong>Find in Finder</strong> reveals an existing file; Linux opens its
+containing folder.</p>
+<p><img alt="The checked synthetic batch with a selected sample, its image source, and planned image and table outputs" src="../../assets/screenshots/workflows/batch-items-outputs.png" /></p>
+<p><em>The highlighted row controls the details panel. Checkboxes independently select
+samples for actions, so selecting a row need not navigate away from the list.</em></p>
+<p>Search and filter the list before selecting samples. Checkboxes choose samples
+for multi-item actions; the highlighted row determines the details being shown.
+The list uses 50-row pages, and selections can include samples on another page.</p>
+<p><strong>Recheck selected</strong> verifies the chosen source revisions and output presence;
+it does not replace full scientific preflight for the whole collection. Use
+<strong>Recheck all</strong> after a scientific setting or source-definition change.
+<strong>Load overrides</strong> opens the selected samples in the override editor—it is not
+an import-file action.</p>
+<h3 id="preview-one-sample">Preview one sample<a class="headerlink" href="#preview-one-sample" title="Permanent link">&para;</a></h3>
+<p><strong>Preview selected</strong> calculates the chosen item through the live graph, including
+its effective parameter and node overrides. It does not write batch outputs.
+The <strong>Batch representative</strong> strip above the graph lets you move between samples
+and return to the current item in the Batch workflow window to inspect its
+details or load its overrides.</p>
+<p>Representative selection replaces all collection-bound sources together; fixed
+sources remain fixed. The authored workflow defaults do not change. A requested
+representative becomes the displayed item only after its source loading and
+calculation succeed. <strong>Leave batch</strong> returns to ordinary single-image work
+without deleting files or saved configurations.</p>
+<h3 id="keep-some-existing-files-and-overwrite-others">Keep some existing files and overwrite others<a class="headerlink" href="#keep-some-existing-files-and-overwrite-others" title="Permanent link">&para;</a></h3>
+<p>The <strong>Existing files · batch default</strong> control is available in both
+<strong>Items &amp; outputs</strong> and <strong>Run &amp; results</strong>. You do not need to return to Setup
+or repeat the full source check just to change this policy.</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ask before overwrite</strong></td>
+<td>Existing destinations need a decision. Pressing Run presents the overwrite review; no replacement occurs before explicit consent. Headless execution cannot ask and fails closed.</td>
+</tr>
+<tr>
+<td><strong>Skip existing</strong></td>
+<td>Keep each existing output unchanged; create missing outputs.</td>
+</tr>
+<tr>
+<td><strong>Overwrite without asking</strong></td>
+<td>Permit replacement when the batch is explicitly run.</td>
+</tr>
+</tbody>
+</table>
+<p>For an individual exception, <strong>right-click that item's row</strong> and choose:</p>
+<ul>
+<li><strong>Keep existing outputs</strong>;</li>
+<li><strong>Rerun and overwrite outputs</strong>; or</li>
+<li><strong>Use batch default</strong> to remove its exception.</li>
+</ul>
+<p>These actions affect the clicked item, not every checked row. <strong>Reset item
+choices</strong> removes all individual file-policy exceptions; it does not reset
+scientific parameter or node overrides. Choices survive save/load and changes
+to the default, and are bound to exact source identities and destination paths.</p>
+<p>An item whose outputs will all be kept needs no source-pixel calculation.
+If only some outputs exist, it can still calculate once to create the missing
+ones. The run count excludes fully kept items; existing files are not relabelled
+as newly saved results. Keeping files does not prove that an earlier analysis
+finished successfully or used the current workflow.</p>
+<p>Duplicate output destinations, outputs overlapping inputs, and explicitly
+protected outputs remain errors. An item-level overwrite choice cannot bypass
+those protections. Final Run validation still checks current disk state.</p>
+<h2 id="3-review-overrides">3. Review overrides<a class="headerlink" href="#3-review-overrides" title="Permanent link">&para;</a></h2>
+<h3 id="per-sample-parameter-overrides">Per-sample parameter overrides<a class="headerlink" href="#per-sample-parameter-overrides" title="Permanent link">&para;</a></h3>
+<p>Rows are samples and columns are eligible numeric scientific parameters. The
+node name identifies the column; the displayed workflow value is its inherited
+default. Leave a cell blank to inherit that value, or enter an exception.</p>
+<p><img alt="The current Overrides tab with labelled search controls, inherited numeric values, and a separate expandable Run or bypass section" src="../../assets/screenshots/workflows/batch-workspace-overrides.png" /></p>
+<p><em>Parameter exceptions belong to individual samples. Run/Bypass choices below
+apply to the entire batch; neither edits the authored workflow defaults.</em></p>
+<p>Use <strong>Find samples</strong>, <strong>Show samples</strong>, and <strong>Find node or parameter</strong> to narrow
+the view. <strong>Show columns…</strong> controls which parameters are visible; hiding a
+column does not delete its values.</p>
+<p>For several samples, check their rows and choose <strong>Edit selected…</strong>. First choose
+the parameters to change, then choose <strong>Set value</strong> or <strong>Use workflow value</strong>
+for each. <strong>Apply to selected samples</strong> commits the validated draft.
+<strong>Discard edits</strong> changes nothing. Unchosen parameters retain their existing
+overrides.</p>
+<p>The selection and reset controls have different jobs:</p>
+<ul>
+<li><strong>Select this page</strong> changes checkboxes on the visible page.</li>
+<li><strong>Select all matching</strong> selects every sample matching the filters, including
+  other pages. Check the selected count before applying an edit.</li>
+<li><strong>Deselect all</strong> only removes selection; no parameter values change.</li>
+<li><strong>Reset selected…</strong> restores all parameter defaults for checked samples,
+  including hidden columns and selected samples on other pages.</li>
+<li><strong>Reset all overrides…</strong> restores all sample parameters <strong>and</strong> all batch
+  Run/Bypass choices. It does not change the original workflow.</li>
+</ul>
+<p>Resets ask for confirmation. Numeric overrides use the normal parameter bounds
+and types. Choice settings, source selectors, destinations, compute controls,
+expressions, and graph topology are not per-sample parameters.</p>
+<h3 id="run-or-bypass-nodes">Run or bypass nodes<a class="headerlink" href="#run-or-bypass-nodes" title="Permanent link">&para;</a></h3>
+<p>Expand <strong>Run or bypass nodes</strong>, the second section of Overrides. Its choices
+apply to <strong>every sample</strong>: inherit the workflow, force Run, or force Bypass.
+Explicit Run and Bypass choices use distinct highlighting so exceptions are
+easy to find. Bypass forwards a compatible primary input without applying the
+operation; unsafe splices are rejected. The authored graph stays unchanged.</p>
+<p>Parameter or node changes make the scientific plan stale. Use the warning's
+<strong>Check batch</strong> action, or <strong>Recheck all</strong>, before running. A representative
+preview is useful for visual review but is not required to run a checked batch.</p>
+<h2 id="4-run-and-read-the-report">4. Run and read the report<a class="headerlink" href="#4-run-and-read-the-report" title="Permanent link">&para;</a></h2>
+<p>Review the destination, sample and output counts, effective existing-file policy,
+and overrides in <strong>Run &amp; results</strong>, then press the Run button. VIPP performs
+<strong>one final collection validation</strong> to detect disk changes since Check. Its
+worker reuses that fresh plan; it does not repeat the same collection discovery
+as a second preparation phase. Full-content fingerprints and large containers
+can still make this preparation take time.</p>
+<p>If sources or the reviewed plan changed unexpectedly, VIPP stops for review.
+Per-item source verification and guarded publication remain active during
+processing. A checked plan is not permission to use subsequently changed files.</p>
+<p>The upper progress bar reports the sample, status, and current node number, for
+example <strong>Running (node 12/32)</strong>. The lower bar reports the friendly node name
+and operation checkpoint. Elapsed time is shown separately. A long atomic
+library or file-writer call may not report intermediate percentages; VIPP does
+not invent progress inside that call.</p>
+<h3 id="stop-safely">Stop safely<a class="headerlink" href="#stop-safely" title="Permanent link">&para;</a></h3>
+<p><strong>Stop safely</strong> requests cooperative cancellation. The current library call may
+finish before cancellation is observed. Wait for finalization and cleanup;
+<strong>Hide window</strong> does not cancel a run. Completed earlier outputs remain saved.
+An item interrupted before publication is distinguished from an item that
+failed; later unstarted items are recorded separately as skipped.</p>
+<h3 id="resume-an-interrupted-run">Resume an interrupted run<a class="headerlink" href="#resume-an-interrupted-run" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">New in 0.15.0a3</p>
+<p>This feature requires VIPP 0.15.0a3 or newer; it is not included in
+0.15.0a2. Runs made by older versions lack the required
+verification evidence and cannot use it.</p>
+</div>
+<ol>
+<li>Open <strong>Batch workflow → Run &amp; results → Resume saved run…</strong>. The same action
+   is available in the Batch window's overflow menu.</li>
+<li>Select the previous run's <code>vipp_batch_manifest.json</code> or its run-id archive.
+   Keep its item-sidecar folder beside it.</li>
+<li>Review the confirmation, then choose <strong>Verify and resume</strong>. VIPP uses the
+   workflow and settings recorded for that run; it does not change your open
+   workflow.</li>
+<li>Follow background verification and processing. The report distinguishes
+   <strong>verified reused</strong> items and files from newly saved results.</li>
+</ol>
+<p>Use a trusted manifest on the <strong>same computer</strong>, with the original file
+locations and software environment. Moving a run or upgrading packages is not
+supported by this first resume implementation.</p>
+<p>VIPP checks source contents and selectors, effective parameters and compute
+settings, the software environment, and every completed output's contents and
+destination. Verification reads bytes and can take time on large datasets.
+Only fully completed, verified items are reused. An interrupted item starts
+again; this does not restore a calculation partway through a node.</p>
+<p><strong>Skip existing is not resume.</strong> A file's presence, size, or name does not prove
+that it came from the recorded analysis. Resume refuses changed or incompatible
+evidence and existing outputs belonging to incomplete or unverified work; it
+does not overwrite those files to make the check pass.</p>
+<p>If verification refuses, read the reason first. Restore genuinely missing
+original files or sidecars and try again, or prepare a <strong>new run in a new output
+folder</strong> after reviewing the inputs and settings. Do not edit the manifest to
+silence a mismatch. Older versions can still keep existing files through the
+ordinary file policy, but cannot verify them as completed work.</p>
+<p>A continuation creates its own run archive and checkpoints linked to the prior
+run. Preserve both; the original evidence is not rewritten.</p>
+<h3 id="the-readable-run-report">The readable run report<a class="headerlink" href="#the-readable-run-report" title="Permanent link">&para;</a></h3>
+<p>The report appears <strong>inside Run &amp; results</strong> after completion or cancellation.
+It summarizes items, elapsed time, saved and kept outputs, failed/cancelled
+outputs, and the destination. Failure details identify affected items and
+outputs and explain recorded causes. Expand <strong>Show all details</strong> for longer
+messages. An absent recorded reason is reported as such, not guessed.</p>
+<p><img alt="An illustrative in-page run report with completed, kept, and failed synthetic items and a readable destination error" src="../../assets/screenshots/workflows/batch-run-report.png" /></p>
+<p><em>Illustrative synthetic outcomes show how saved, kept, and failed outputs differ;
+the read-only destination error is included to demonstrate failure reporting.
+This is an interface example, not a recorded performance benchmark. Read the
+summary first, then select an item for its individual output records. The image
+shows earlier action labels; 0.15.0a3 controls are described below.</em></p>
+<p>Below it, select a batch row to see that item's outputs. Clicking the underlined
+item name navigates to <strong>Items &amp; outputs</strong>; clicking the blank part of the row
+only changes the selected output list.</p>
+<p><strong>New in 0.15.0a3:</strong> the compact toolbar has <strong>Resume saved run…</strong>,
+then a separator, <strong>Output folder</strong>, and <strong>Refresh file status</strong>. <strong>Output
+folder</strong> opens the destination. <strong>Refresh file status</strong> checks whether
+files still exist on disk; it neither recalculates images nor validates a new
+scientific run plan. Presence is also refreshed automatically where file
+notifications are available; the manual action is useful for external or
+network-drive changes. An existing file is not proof of scientific success.</p>
+<p><strong>New in 0.15.0a3:</strong> the run report card offers <strong>Export reproducibility
+package…</strong> in place of <strong>Find manifest JSON</strong>. It opens a review of this recorded
+run's workflow, settings, software versions and run records—not the currently
+edited graph. Images and outputs are excluded. The action is available after a
+recorded run while processing is idle; opening it does not save or share a ZIP.
+Review filenames, retained text and omissions before exporting.
+See <a href="../../how-to/export-reproducibility-package/">Export a reproducibility package</a>.</p>
+<p>After a finished report, the <strong>Run &amp; results</strong> footer offers <strong>Export package…</strong>
+to open the same review. <strong>View run report</strong> in the <strong>Items &amp; outputs</strong> and
+<strong>Overrides</strong> footers returns to the report without starting another run or
+check. <strong>Setup</strong> keeps <strong>Check batch</strong> for preparing a new run. Keep the archived
+manifest and original resume receipts separately: the package excludes original
+resume receipts, and a successful new Check replaces the previous run view in
+this workspace.</p>
+<h2 id="save-and-replay">Save and replay<a class="headerlink" href="#save-and-replay" title="Permanent link">&para;</a></h2>
+<p>Use <strong>Save config</strong> for a standalone batch configuration and <strong>Open config</strong> to
+reload it against the current workflow. Saving the main workflow also offers
+to attach the batch configuration. Attachments contain settings and local paths,
+not source pixels or calculated results. A valid attachment reopens the Batch
+workflow window and checks sources in the background; it does not automatically
+calculate a representative or start processing.</p>
+<p>Batch configuration schema <strong>6</strong> adds exact-item file-policy choices to the
+existing source selectors, axis declarations, numeric overrides, whole-batch
+node profiles, and compute request. Supported earlier configurations load
+without inventing these choices. Changed source identities or destinations
+cannot silently receive old exceptions. Review paths after moving a configuration
+to another computer. See <a href="../../reference/versioning/">versions and compatibility</a>.</p>
+<p>The optional <code>vipp_batch_pipeline.py</code> is a thin launcher for the saved config
+and workflow, using the same headless batch core:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python vipp_batch_pipeline.py --progress
+</span></code></pre></div>
+<p>It uses the saved compute request unless explicit CLI options override it.
+Exit code <code>0</code> means no recorded failures, <code>1</code> means a finalized batch contains
+failures, <code>2</code> means setup/execution failed before a normal result, and <code>130</code>
+means cooperative cancellation. See <a href="../../how-to/save-share-export/">save, share, and export</a>
+for the distinction between this runner and an exported standalone workflow.</p>
+<p>For <a href="#resume-an-interrupted-run">verified resume</a>, a runner generated by
+VIPP 0.15.0a3 also accepts:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python vipp_batch_pipeline.py --resume path/to/vipp_batch_manifest.json --progress
+</span></code></pre></div>
+<p>Do not combine <code>--resume</code> with config, workflow, or compute overrides. Resume uses the
+recorded run settings; a changed analysis needs a new run.</p>
+<h2 id="outputs-and-provenance">Outputs and provenance<a class="headerlink" href="#outputs-and-provenance" title="Permanent link">&para;</a></h2>
+<p><code>Batch Output</code> marks the exact port to save and supports tags, subfolders,
+templates, format overrides, and overwrite protections. Default naming uses
+<code>{source_stem}__{tag}</code>. Templates can also use <code>{batch_id}</code>, <code>{batch_index}</code>,
+<code>{source_name}</code>, <code>{primary_source_stem}</code>, <code>{node_id}</code>, and <code>{node_title}</code>.
+Use explicit markers. A warned terminal-node fallback exists for older graphs;
+ambiguous multi-output terminals and side-effecting <code>Save Image</code> nodes are not
+accepted as a reproducible batch definition.</p>
+<p>For each item, VIPP verifies the sources, calculates the required graph, stages
+outputs privately, reverifies source identities and device cleanup, and then
+promotes the outputs to final paths. A source-change failure before publication
+does not publish that item's staged files. Promotion is not a multi-file
+transaction: a later write failure can leave a <strong>partial</strong> item with some
+successfully saved outputs, which the report and manifest retain explicitly.</p>
+<p>Every run retains a latest <code>vipp_batch_manifest.json</code>, a run-id archive, and
+per-item/output sidecars. These record source revisions, workflow/configuration
+hashes, effective overrides and file policies, implementation provenance,
+errors, timing, and output states. Preserve them with the results. Sidecars are
+a recovery trail, not a promise of crash-proof multi-file atomicity.</p>
+<p>If actual CPU/GPU cleanup cannot be verified, VIPP blocks further compute in
+that process and requests restart. Already published outputs remain recorded;
+unpublished private outputs are not represented as successful writes.</p>
+<h2 id="try-the-synthetic-walkthrough">Try the synthetic walkthrough<a class="headerlink" href="#try-the-synthetic-walkthrough" title="Permanent link">&para;</a></h2>
+<p>From the Batch window's overflow menu, choose <strong>Load demo configuration…</strong>, or
+open <strong>Deterministic Batch &amp; Provenance</strong> from the example browser. Select a
+writable location to create a unique working copy; the demo never overwrites a
+previous copy.</p>
+<ol>
+<li>In Setup, inspect the Red and Green source bindings and destination.</li>
+<li>Check the batch: three paired fields should appear.</li>
+<li>Select the middle field and preview it; confirm both channels change together.</li>
+<li>Open Overrides and inspect inherited values before trying a numeric exception.
+   Reset your experiment and check again to return to the reference demo.</li>
+<li>Run the reference configuration and read the in-page report.</li>
+<li>Inspect the nine outputs: combined images, overlap labels, and measurement
+   tables for three fields. Check again to explore keeping existing outputs.</li>
+</ol>
+<p>The bundled ground truth supports exact array/table and provenance checks for
+this defined synthetic fixture. It does not validate another assay or filename
+pairing scheme. Before accepting your own run, confirm pairing, axes, scale,
+QC, intended outputs, and the reported outcomes independently.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 12:07:21 UTC">September 9, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../psf-deconvolution/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Restore with a PSF">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Restore with a PSF
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../how-to/" class="md-footer__link md-footer__link--next" aria-label="Next: How-to guides">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                How-to guides
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Rensu P. Theart. Documentation text and original screenshots are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rensutheart/napari-vipp" target="_blank" rel="noopener" title="napari-vipp source code" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "stable", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
