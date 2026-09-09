@@ -242,10 +242,46 @@ finish before cancellation is observed. Wait for finalization and cleanup;
 An item interrupted before publication is distinguished from an item that
 failed; later unstarted items are recorded separately as skipped.
 
-There is no automatic resume button. To continue deliberately, return to Setup,
-review settings, check again, and choose which existing outputs to keep or
-overwrite. “Skip existing” preserves files; it is not a guarantee that unfinished
-work from an earlier item resumes exactly where it stopped.
+### Resume an interrupted run
+
+!!! note "Unreleased after 0.15.0a2"
+    This feature requires a development build containing verified resume; it
+    is not included in 0.15.0a2. Runs made by older versions lack the required
+    verification evidence and cannot use it.
+
+1. Open **Batch workflow → Run & results → Resume saved run…**. The same action
+   is available in the Batch window's overflow menu.
+2. Select the previous run's `vipp_batch_manifest.json` or its run-id archive.
+   Keep its item-sidecar folder beside it.
+3. Review the confirmation, then choose **Verify and resume**. VIPP uses the
+   workflow and settings recorded for that run; it does not change your open
+   workflow.
+4. Follow background verification and processing. The report distinguishes
+   **verified reused** items and files from newly saved results.
+
+Use a trusted manifest on the **same computer**, with the original file
+locations and software environment. Moving a run or upgrading packages is not
+supported by this first resume implementation.
+
+VIPP checks source contents and selectors, effective parameters and compute
+settings, the software environment, and every completed output's contents and
+destination. Verification reads bytes and can take time on large datasets.
+Only fully completed, verified items are reused. An interrupted item starts
+again; this does not restore a calculation partway through a node.
+
+**Skip existing is not resume.** A file's presence, size, or name does not prove
+that it came from the recorded analysis. Resume refuses changed or incompatible
+evidence and existing outputs belonging to incomplete or unverified work; it
+does not overwrite those files to make the check pass.
+
+If verification refuses, read the reason first. Restore genuinely missing
+original files or sidecars and try again, or prepare a **new run in a new output
+folder** after reviewing the inputs and settings. Do not edit the manifest to
+silence a mismatch. Older versions can still keep existing files through the
+ordinary file policy, but cannot verify them as completed work.
+
+A continuation creates its own run archive and checkpoints linked to the prior
+run. Preserve both; the original evidence is not rewritten.
 
 ### The readable run report
 
@@ -260,23 +296,36 @@ messages. An absent recorded reason is reported as such, not guessed.
 *Illustrative synthetic outcomes show how saved, kept, and failed outputs differ;
 the read-only destination error is included to demonstrate failure reporting.
 This is an interface example, not a recorded performance benchmark. Read the
-summary first, then select an item for its individual output records.*
+summary first, then select an item for its individual output records. The image
+shows earlier action labels; nightly controls are described below.*
 
 Below it, select a batch row to see that item's outputs. Clicking the underlined
 item name navigates to **Items & outputs**; clicking the blank part of the row
-only changes the selected output list. **View run report** in the footer returns
-to the report after browsing and never starts another run or check.
+only changes the selected output list.
 
-**Output folder** opens the destination. **Refresh file status** checks whether
+**Unreleased after 0.15.0a2:** the compact toolbar has **Resume saved run…**,
+then a separator, **Output folder**, and **Refresh file status**. **Output
+folder** opens the destination. **Refresh file status** checks whether
 files still exist on disk; it neither recalculates images nor validates a new
 scientific run plan. Presence is also refreshed automatically where file
 notifications are available; the manual action is useful for external or
 network-drive changes. An existing file is not proof of scientific success.
 
-**Find manifest JSON** locates the machine-readable technical record for audit
-and automation. It is secondary to the readable summary, not another report
-window. Keep the archived manifest: a successful new Check replaces the previous
-run view in this workspace.
+**Unreleased after 0.15.0a2:** the run report card offers **Export reproducibility
+package…** in place of **Find manifest JSON**. It opens a review of this recorded
+run's workflow, settings, software versions and run records—not the currently
+edited graph. Images and outputs are excluded. The action is available after a
+recorded run while processing is idle; opening it does not save or share a ZIP.
+Review filenames, retained text and omissions before exporting.
+See [Export a reproducibility package](../how-to/export-reproducibility-package.md).
+
+After a finished report, the **Run & results** footer offers **Export package…**
+to open the same review. **View run report** in the **Items & outputs** and
+**Overrides** footers returns to the report without starting another run or
+check. **Setup** keeps **Check batch** for preparing a new run. Keep the archived
+manifest and original resume receipts separately: the package excludes original
+resume receipts, and a successful new Check replaces the previous run view in
+this workspace.
 
 ## Save and replay
 
@@ -306,6 +355,16 @@ Exit code `0` means no recorded failures, `1` means a finalized batch contains
 failures, `2` means setup/execution failed before a normal result, and `130`
 means cooperative cancellation. See [save, share, and export](../how-to/save-share-export.md)
 for the distinction between this runner and an exported standalone workflow.
+
+For [verified resume](#resume-an-interrupted-run), a runner generated by the
+unreleased build also accepts:
+
+```text
+python vipp_batch_pipeline.py --resume path/to/vipp_batch_manifest.json --progress
+```
+
+Do not combine `--resume` with config, workflow, or compute overrides. Resume uses the
+recorded run settings; a changed analysis needs a new run.
 
 ## Outputs and provenance
 

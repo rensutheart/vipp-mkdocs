@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.15.0a3 candidate: releases/0.15.0a3.md
       - 0.15.0a2: releases/0.15.0a2.md
       - 0.15.0a1: releases/0.15.0a1.md
       - 0.14.0a3: releases/0.14.0a3.md
@@ -150,6 +151,7 @@ nav:
   - Tutorials:
       - Choose a tutorial: workflows/index.md
       - Segment and clean labels: workflows/segmentation-label-cleanup.md
+      - Separate overlapping objects: workflows/separate-overlapping-objects.md
       - Create and export 3D meshes: workflows/mask-to-mesh.md
       - Measure objects and tables: workflows/object-measurements-tables.md
       - Analyze skeleton networks: workflows/skeleton-network-analysis.md
@@ -163,6 +165,7 @@ nav:
       - Crop an image or volume: how-to/crop-images.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
       - Save, share, and export: how-to/save-share-export.md
+      - Export a reproducibility package: how-to/export-reproducibility-package.md
       - Work with files and stores: reference/import-export.md
       - Manage memory and speed: reference/cache-memory.md
   - Concepts:

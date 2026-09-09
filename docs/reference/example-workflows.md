@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.15.0a2 contains **21** registered example workflows under:
+The nightly version contains **21** registered example workflows under:
 
 ```text
 examples/
@@ -8,6 +8,12 @@ examples/
 
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
+
+!!! note "Unreleased catalog updates"
+    VIPP 0.15.0a2 shipped 21 examples. Nightly retains the saved interactive
+    mesh workflow as **Mesh Objects, Colours & Refinement** and removes the
+    duplicate entry. It also adds **Separate Overlapping Objects**, combining
+    segmentation, binary logic and meshes. The inventory below reflects both changes.
 
 In VIPP, open them with:
 
@@ -30,14 +36,14 @@ custom or external workflow JSON files.
 | `general-node-bypass-acceptance.json` | synthetic deconvolution image plus measured PSF | Generalized unary and multi-input bypass checks, including RL-TV forwarding Image port 0 while retaining but ignoring its PSF input and refusing unsafe boundaries. |
 | `synthetic-batch-provenance.json` | generated two-source NumPy collection | Three paired items, explicit NPY/TIFF/TSV outputs, representative navigation, saved config/runner, exact ground truth, manifests, archives, and item sidecars. Open it through the chooser and create a writable working copy. |
 | `otsu-red-channel-labels.json` | synthetic multichannel volume | Label cleanup: split the red/TRITC-like channel, blur, Otsu threshold, mask cleanup, connected components, border clearing, and volume filtering. |
+| `synthetic-separate-overlapping-objects.json` | synthetic volume | [Separate overlapping objects](../workflows/separate-overlapping-objects.md): compare intensity masks, reconstruct a curve with XOR/OR and morphology, then create, measure and colour two meshes. Six notes explain the saved sample-specific choices. |
 | `synthetic-gpu-segmentation-bridge.json` | synthetic GPU segmentation cleanup | Annotated portable path through Extract Channel, exact float32 Preserve conversion, Gaussian Blur, fixed Binary Threshold, Boolean Remove Small Objects and Fill Holes, and 3D Connected Components. Unsupported GPU regions fall back visibly to CPU. |
 | `red-channel-object-intensity-measurements.json` | synthetic multichannel volume | Multi-input object measurement using labels plus matching intensity image. |
 | `red-channel-merged-measurement-table.json` | synthetic multichannel volume | Morphology, intensity, table merge, and metadata columns. |
 | `synthetic-measurement-summary.json` | synthetic measurement summary | Grouped object-count and area summaries. |
 | `synthetic-derived-object-morphology.json` | synthetic object morphology | Derived 2D morphology, circularity, perimeter/area ratio, Hu moments, and column selection. |
 | `synthetic-3d-mesh-morphology.json` | synthetic 3D mesh morphology | Surface area, mesh volume, convex hull, sphericity, and tiny-object status. |
-| `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Five calibrated mesh objects, volume colours, disjoint filtering and recombination, original/refined geometry comparison, current-mesh measurements, and a declared 3MF batch output. |
-| `synthetic-mesh-refinement-tuned.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
+| `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
 | `synthetic-skeleton-qc.json` | synthetic skeleton network | Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries. |
 | `synthetic-advanced-skeleton-network.json` | synthetic advanced skeleton network | Time-indexed 3D skeleton graph stress test. |
 | `synthetic-colocalization-racc.json` | synthetic colocalization | Pixel and ROI-masked colocalization, scatter thresholds, colocalized voxels, and RACC-like output. |
@@ -53,7 +59,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print the release's exact IDs. In 0.15.0a2 they are:
+Use `--list` to print your version's exact IDs. In nightly they are:
 
 | ID | Example title |
 | --- | --- |
@@ -64,6 +70,7 @@ Use `--list` to print the release's exact IDs. In 0.15.0a2 they are:
 | `general-node-bypass` | General Node Bypass Acceptance |
 | `batch-provenance` | Deterministic Batch & Provenance |
 | `label-cleanup` | Red-Channel Label Cleanup |
+| `separate-overlapping-objects` | Separate Overlapping Objects |
 | `gpu-segmentation` | Portable GPU Segmentation Bridge |
 | `object-intensity` | Object Intensity Measurements |
 | `merged-measurements` | Merged Measurement Table |
@@ -71,7 +78,6 @@ Use `--list` to print the release's exact IDs. In 0.15.0a2 they are:
 | `derived-morphology` | Derived 2D Object Morphology |
 | `mesh-morphology` | 3D Mesh Morphology |
 | `mesh-objects` | Mesh Objects, Colours & Refinement |
-| `mesh-refinement-tuned` | Mesh Objects — Tuned Refinement |
 | `skeleton-qc` | Skeleton QC |
 | `advanced-skeleton` | Advanced Skeleton Network |
 | `racc-colocalization` | RACC Colocalization |

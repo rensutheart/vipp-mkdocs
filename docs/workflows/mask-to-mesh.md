@@ -9,14 +9,22 @@ cached by default and run on CPU. **Measure 3D Mesh Morphology** remains under
 
 ## Create the surfaces
 
+For an end-to-end segmentation-to-mesh example, see
+[Separate overlapping objects](separate-overlapping-objects.md).
+
 To try a ready-made workflow, open **Open example → 3D Meshes →
-Mesh Objects — Tuned Refinement**, then **Calculate all**. It uses a bundled
+Mesh Objects, Colours & Refinement**, then **Calculate all**. It uses a bundled
 five-object sample, Turbo colours by triangle count, two smoothing iterations
 at strength 1, and a target of 10% of triangles kept at aggressiveness 4.
 Colour, Smooth and Simplify have **Auto Recalculate** enabled in this example.
 These are saved sample-specific choices, not recommended settings for every
 specimen. Compare upstream geometry and measurements before accepting the
 refined result. Calculating the example does not save output files.
+
+!!! note "Unreleased example consolidation"
+    Nightly keeps the saved interactive workflow under the original example
+    name. The two mesh-object examples shipped in 0.15.0a2 are now one;
+    its saved parameters and layout are unchanged.
 
 1. Prepare a **Boolean mask** or **integer labels**. Select one channel/time
    point upstream: the input needs exactly three explicit spatial axes, Z/Y/X,

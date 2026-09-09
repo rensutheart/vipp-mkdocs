@@ -37,7 +37,7 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in 0.15.0a1. In 0.15.0a2, the pictured Preview menu is called Display settings. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual describes the public **napari-vipp 0.15.0a2** alpha. Download
+    The current public alpha is **napari-vipp 0.15.0a2**. Download
     only from the canonical
     [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2)
     or [PyPI page](https://pypi.org/project/napari-vipp/0.15.0a2/).
@@ -48,6 +48,12 @@ hide:
     alpha releases.
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
+
+!!! note "Nightly candidate: 0.15.0a3"
+    Nightly also documents the unreleased [0.15.0a3 candidate](releases/0.15.0a3.md),
+    including reproducibility packages and verified batch resume. Candidate
+    behavior is marked separately; this is not a public a3 release or a claim
+    that the stable manual has moved.
 
 !!! important "Upgrading to 0.15"
     0.15.0a2 writes workflow schema 6. Valid schema-3, schema-4, and schema-5

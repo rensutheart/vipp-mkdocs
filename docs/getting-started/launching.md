@@ -25,6 +25,19 @@ Prefer-GPU session requests every scientifically and operationally eligible GPU
 implementation, but operations outside the reviewed region still use CPU with
 an explanation.
 
+## During startup
+
+In **nightly (unreleased)**, drag the **Starting VIPP** title bar to move the
+progress window, or minimize it while you work elsewhere. Other windows can
+cover it; minimizing or closing this progress window does not cancel startup.
+It closes automatically when VIPP is ready.
+
+New or updated Windows installer shortcuts use the VIPP icon. Installed desktop
+launches also use VIPP's running-app icon; macOS retains its branded `VIPP.app`.
+Opening VIPP inside a separately launched napari session does not replace
+napari's branding. Existing shortcuts need an updated installer to receive
+these unreleased changes.
+
 ## Open the napari widget from a manual environment
 
 Activate the environment used for installation and run:
@@ -81,6 +94,12 @@ This route does not require an external file or a layer opened through napari's
 sample menu.
 
 ## Give the graph enough space
+
+In **nightly (unreleased)**, the workflow dock initially aims for two-thirds of
+the available window height. If napari's layer controls need more space, VIPP
+uses the maximum height those controls allow. Drag the divider between the
+viewer and workflow to adjust this balance; VIPP does not keep resetting it
+while you work.
 
 For a long workflow, drag the **VIPP Workflow** dock title bar out of napari (or
 double-click the title bar) and maximize the floating window. Hide the node

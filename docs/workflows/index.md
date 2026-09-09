@@ -7,6 +7,7 @@ visible.
 | Workflow | Use when |
 | --- | --- |
 | [Segmentation And Label Cleanup](segmentation-label-cleanup.md) | You need masks, labels, and object IDs. |
+| [Separate overlapping objects](separate-overlapping-objects.md) | You want a worked example combining intensity masks, XOR/OR reconstruction and two coloured meshes. |
 | [Create, colour and export 3D mesh objects](mask-to-mesh.md) | You need separate surfaces from masks/labels, object management, refinement or 3MF/OBJ export. |
 | [Object Measurements And Tables](object-measurements-tables.md) | You need morphology, intensity, metadata columns, summaries, or CSV output. |
 | [Skeleton And Network Analysis](skeleton-network-analysis.md) | You need curvilinear structure QC and network measurements. |

@@ -17,6 +17,13 @@ macOS packages, checksums, release manifests, and supporting evidence. The
 the exact package pin for manual installations. The nightly manual may describe
 later unreleased work.
 
+The [0.15.0a3 candidate](../releases/0.15.0a3.md) is unreleased. It retains
+workflow/batch-config schema 6 and adds manifest schema 6 for verified resume.
+Earlier manifests cannot supply the new recovery evidence. New operations and
+reproduction references still require a compatible runtime; unchanged schema
+numbers do not promise backward compatibility. Candidate instructions do not
+establish public installer availability or a numbered-manual deployment.
+
 Application publication and manual deployment are separate operations. Always
 confirm the version shown by the manual selector; do not assume that the
 **stable** alias moved merely because a new package was published.

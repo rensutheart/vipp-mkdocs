@@ -3,6 +3,10 @@
 Segmentation workflows usually turn an intensity image into a mask, then into
 labels.
 
+For a cross-cutting worked example, see [Separate overlapping
+objects](separate-overlapping-objects.md): segment two structures from one
+synthetic image, reconstruct a curve with binary logic, then create meshes.
+
 ## Basic Pattern
 
 For exact histogram populations, Minimum/ImageJ behavior, and numeric limits,
@@ -43,6 +47,77 @@ Image Source
 | Mask cleanup | `Fill Holes`, `Remove Outliers (Binary)`, `Remove Small Objects`, morphology nodes |
 | Label creation | `Label Connected Components`, watershed nodes |
 | Label cleanup | `Clear Border Objects`, `Filter Labels By Volume`, `Filter Labels By Property`, `Relabel Sequential` |
+| Boundary QC | `Find Label Boundaries` (unreleased after 0.15.0a2) |
+
+## Read object counts
+
+!!! note "Unreleased after 0.15.0a2"
+    Select **Remove Small Objects**, **Clear Border Objects**, **Filter Labels
+    By Volume**, or **Filter Labels By Property** to review input, kept, and
+    removed object counts in the inspector's **Filter result** section, after
+    the input/object histogram so **Parameters** and the histogram stay together.
+
+The counts compare the node's **actual input and current calculated output**.
+They are not a prediction from the sliders. After changing settings, calculate
+the node if needed; an old or missing output cannot provide current kept/removed
+counts. Bypassing the node does not claim that its filter was applied.
+
+For label images, objects are distinct positive label IDs, not the largest ID.
+For Boolean masks, they are connected components using the operation's connectivity.
+Counts follow the selected 2D/3D processing scope, with independent time points,
+channels, or slices counted separately. Background is excluded.
+
+Counting runs in the background and does not change the segmentation. Continue
+to inspect the result: a kept/removed count cannot determine whether an object
+is biological or whether the chosen filter is appropriate.
+
+## Inspect label boundaries
+
+!!! note "Unreleased after 0.15.0a2"
+    **Label Operations → Find Label Boundaries** creates a
+    Boolean boundary mask for QC overlays or saving. It does not create a mesh
+    or detect edges in an intensity image.
+
+1. Branch a label output into **Find Label Boundaries**. Boolean masks are also
+    accepted; integer labels must be non-negative, with `0` as background.
+2. Choose **Boundary placement**:
+
+    | Choice | What is marked |
+    | --- | --- |
+    | **Inside objects** (default) | Object-side boundary pixels/voxels, including interfaces between different labels. |
+    | **Outside objects** | Background-side boundaries, plus interfaces between touching non-zero labels; this is not strictly a background-only mask. |
+    | **Both sides** | Both sides of a label transition, giving a thicker boundary. |
+
+3. For stacks, review **Spatial processing**. **Auto from axes** follows the
+    interpreted axes; resolve ambiguous axes first. **2D per XY slice
+    (advanced)** treats each plane independently; **3D ZYX volume** includes
+    changes along Z. These may appear as **2D YX**/**3D ZYX** before axes resolve.
+    Time points and channels are always processed independently. If axes are
+    interleaved (for example ZCYX for volume processing), use **Reorder Axes**
+    explicitly when requested; the node does not rearrange them automatically.
+4. Use **Face connected** for side/face-sharing neighbors (4 in 2D, 6 in 3D),
+    or **Full connectivity** to include diagonal neighbors (8 in 2D, 26 in 3D).
+5. Inspect or pin the mask over the source image, or connect **Save Image** or
+    **Batch Output** as with any other mask.
+
+```text
+filtered labels
+  ├─> Measure Objects
+  └─> Find Label Boundaries -> inspect / pin / Save Image
+```
+
+Keep the original labels for object measurements: the boundary output has
+only true/false values and **does not retain object IDs**. It has the same shape,
+axes, spacing, units and origin as the input; calculation leaves upstream labels
+unchanged and runs on CPU.
+
+VIPP does not pad the image with imaginary background. An object touching the
+crop edge is not automatically outlined along that edge; only transitions
+within the image are available. Boundary thickness is defined on the pixel/voxel
+grid, not by a physical-distance setting, so anisotropic voxels do not make a
+uniform physical-width shell. The placement modes follow scikit-image's
+[`find_boundaries`](https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries)
+(`inner`, `outer`, `thick` respectively, with background `0`).
 
 ## Convex Hull
 

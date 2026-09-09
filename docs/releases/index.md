@@ -4,6 +4,15 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## Candidate in nightly
+
+- [0.15.0a3 candidate](0.15.0a3.md) — reviewed reproducibility packages,
+  original-input checks, verified batch resume, object QC, broader RL GPU
+  execution with advisories, and desktop/workflow presentation fixes.
+
+This candidate is unreleased. Local installation or documentation checks do not
+establish public availability or completion of release qualification.
+
 ## Current public alpha
 
 - [0.15.0a2](0.15.0a2.md) — included microscope readers and diagnostics, quiet update guidance, four threshold modes, explicit intensity inversion, safer controls, Convex Hull, and mesh-object creation/refinement/export.
