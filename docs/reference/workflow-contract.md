@@ -33,7 +33,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.15.0a2 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
+VIPP 0.15.0a3 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 `execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
 logical selector, observed container revision, reader/backend evidence,
@@ -92,7 +92,7 @@ multiple outputs, and incompatible splices fail closed.
 
 ### Optional Batch workspace attachment
 
-A 0.15.0a2 workflow can carry an optional top-level `batch_config`. The
+A 0.15.0a3 workflow can carry an optional top-level `batch_config`. The
 version-6 attachment contains canonical SourceItems, reviewed typed per-sample
 numeric overrides, and whole-batch **Use workflow / Run / Bypass** profiles in
 addition to source bindings, local paths, patterns, guarded source-axis
@@ -254,7 +254,7 @@ changes semantic names in place without moving pixels or changing shape.
 does not rename Q to Z. Existing calibration stays attached by position, so a
 declaration cannot discover a missing Z step, unit, or origin.
 
-Each run writes a latest version-5 manifest, a run-id archive, and item sidecars
+Each run writes a latest manifest, a run-id archive, and item sidecars
 recording software versions, canonical SourceItem/revision evidence, metadata,
 hashes, planned outputs, policies, errors, and status. It records raw/effective
 axes and declarations plus requested/effective per-sample overrides and
@@ -272,6 +272,19 @@ loading source pixels or calculating the graph. Atomic artifact replacement
 retries short-lived access failures. If a final item sidecar still cannot be
 written, that item is partial and **Continue after item failures** controls
 whether later items run; final run-manifest persistence remains mandatory.
+
+**New in 0.15.0a3 — verified resume:** manifest schema 6 adds
+output-content digests and recovery evidence. Resume validates these against current source
+bytes and selectors, effective scientific settings, software environment, and
+planned destinations. Only completely verified, completed items are reusable;
+an existing filename or a partial publication is insufficient. Incompatible or
+changed evidence stops resume without overwriting outputs. A new continuation
+run records which items were reused and links to the original run; preserve
+both archives and their sidecars. Recovery requires the original locations and
+local software environment; checksums establish integrity, not the authorship
+of an untrusted manifest. This is item-level recovery, not restoration of
+in-memory node calculations. See [resume an interrupted run](../workflows/batch-processing.md#resume-an-interrupted-run)
+for the UI and saved-runner procedure.
 
 See [process a folder](../workflows/batch-processing.md) for the complete user
 contract.

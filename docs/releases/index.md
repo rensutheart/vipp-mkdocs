@@ -4,20 +4,24 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Current public alpha
+## 0.15.0a3 alpha
 
-- [0.15.0a2](0.15.0a2.md) — included microscope readers and diagnostics, quiet update guidance, four threshold modes, explicit intensity inversion, safer controls, Convex Hull, and mesh-object creation/refinement/export.
+- [0.15.0a3](0.15.0a3.md) — reviewed reproducibility packages,
+  original-input checks, verified batch resume, object QC, broader RL GPU
+  execution with advisories, and desktop/workflow presentation fixes.
 
-The alpha is distributed on
-[GitHub](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a2) and
-[PyPI](https://pypi.org/project/napari-vipp/0.15.0a2/). Use only the exact
+Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a3) and
+[PyPI page](https://pypi.org/project/napari-vipp/0.15.0a3/). Use only the exact
 release assets and their matching checksum files.
 
-0.15.0a2 writes workflow schema 6, batch config 6, and manifest schema 5. Valid
+0.15.0a3 writes workflow schema 6, batch config 6, and manifest schema 6. Valid
 supported earlier records retain explicit migration paths; recalculate and
 validate consequential results after upgrading.
 
 ## Earlier releases
+
+- [0.15.0a2](0.15.0a2.md) — included microscope readers and diagnostics, quiet update guidance, four threshold modes, explicit intensity inversion, safer controls, Convex Hull, and mesh-object creation/refinement/export.
 
 - [0.15.0a1](0.15.0a1.md) — task-based batch workflow, per-item output decisions, readable run reports, redesigned inspector and plots, reproducible intensity histograms, and hybrid mesh/skeleton measurement acceleration.
 

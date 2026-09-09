@@ -86,6 +86,13 @@ reproducibility, metadata fidelity, or biological correctness.
 
 ## Archive an analysis bundle
 
+The [reproducibility package](../how-to/export-reproducibility-package.md)
+(new in 0.15.0a3) provides a reviewed offline report, portable recipe,
+version summaries and sanitized available run evidence. It can be one component
+of the archive below, but does not include data/results, original resume
+receipts, an environment lockfile or an installer. A current-workflow package
+describes a recipe, not a verified past execution.
+
 Prefer a DOI-backed repository for final artifacts. Include:
 
 ```text
@@ -112,6 +119,11 @@ For a batch analysis, preserve the exact workflow/config pair and their hashes;
 do not archive only the thin runner. Retain partial, skipped, and failed status
 evidence as well as successful outputs. Sidecars are a recovery trail and
 should be interpreted with the finalized manifest after an interruption.
+
+If using [verified resume](../workflows/batch-processing.md#resume-an-interrupted-run)
+(new in 0.15.0a3), retain the original and continuation archives and
+their sidecars. Report verified reused outputs separately from newly calculated
+ones.
 
 ## Cite VIPP
 

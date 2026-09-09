@@ -199,8 +199,7 @@ reviewed before export.*
 | `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. |
 | `synthetic-derived-object-morphology.json` | Derived 2D morphology, circularity, and Hu moments. |
 | `synthetic-3d-mesh-morphology.json` | True-3D mesh morphology on anisotropic synthetic objects. |
-| `synthetic-mesh-objects.json` | Current-geometry measurements after object colouring, filtering, combining and refinement. |
-| `synthetic-mesh-refinement-tuned.json` | Saved sample-specific refinement choices, followed by current-mesh measurements. |
+| `synthetic-mesh-objects.json` | Saved sample-specific colouring, filtering, combining and refinement choices, followed by current-mesh measurements. 0.15.0a3 keeps this as the single mesh-object example. |
 
 ## What To Check Before Export
 

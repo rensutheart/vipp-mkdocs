@@ -5,7 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.15.0a2 release notes](../releases/0.15.0a2.md) | Review included readers, update guidance, threshold/intensity controls, mesh-object workflows, compatibility and limitations. |
+| [0.15.0a3 release notes](../releases/0.15.0a3.md) | Review reproducibility packages, verified batch resume, object QC, GPU advisories, desktop changes and compatibility limits. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
 | [All nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
 | [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |

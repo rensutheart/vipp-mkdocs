@@ -1,7 +1,7 @@
 # Restore with a PSF
 
 Born-Wolf PSF generation, measured-PSF preparation, Richardson–Lucy (RL), and
-RL with total-variation regularization (RL-TV) are available in 0.15.0a2. The
+RL with total-variation regularization (RL-TV) are available in 0.15.0a3. The
 deconvolution nodes are manual/cached so parameter changes do not repeatedly
 start expensive work without an explicit calculation. While a deconvolution is
 stale, its descendants wait and retain their last coherent cached results when
@@ -12,21 +12,22 @@ Recalculating the deconvolution resumes that downstream branch.
 
 Both deconvolution nodes have public GPU candidates only for finite `float32`
 Image and PSF inputs in resolved 2D or 3D, with compatible non-empty extents,
-positive PSF mass, odd PSF sizes, and the reviewed normalization/clipping/scale
-options. VIPP never converts the inputs or changes restoration parameters to
-enter that region.
+positive PSF mass, a supported environment and sufficient memory. VIPP never
+converts inputs or changes restoration parameters to make them GPU-eligible.
 
-For ordinary RL, the reviewed GPU region accepts finite authored
-`filter_epsilon` values from `1e-12` through `1e-6` and 1–100 iterations. The
-authoritative CPU default `1e-12` is therefore eligible when the remaining
-image, PSF, option, environment, and memory gates pass. Values outside the
-region remain CPU; VIPP does not round epsilon or shorten the run.
+In 0.15.0a3, **Prefer GPU** and explicit **Custom** GPU choices admit broader
+authored iteration/epsilon ranges, even-sized or larger PSFs, and the supported
+normalization/clipping/scale options. See the exact
+[RL and RL-TV ranges](../how-to/choose-compute.md#rl-and-rl-tv-gpu-ranges).
+Positive TV still needs at least two samples on every spatial axis.
 
-For RL-TV, lambda zero inherits ordinary RL's expanded region. Positive TV is
-admitted only for `TV regularization=0.002`, `TV epsilon=1e-6`,
-`filter epsilon=1e-12`, `denominator floor=0.05`, and exactly 10 or 25
-iterations. Other authored profiles remain CPU and are never rounded or
-truncated to make them eligible.
+Read **Compute → GPU result: numerical differences** after calculation.
+Execution outside an earlier CPU-comparison region can produce different
+results; even-sized PSFs can change convolution centering. The advisory is
+recorded in execution provenance. A direct GPU run does not require a prior
+CPU comparison, but it does not establish CPU equivalence or restoration
+quality. Auto learning and optional benchmark/optimizer comparisons retain
+their separate acceptance criteria.
 
 If finite `float32` is appropriate, add explicit `Convert Dtype` nodes and
 review their scaling mode; this can produce major GPU gains on large stacks.
