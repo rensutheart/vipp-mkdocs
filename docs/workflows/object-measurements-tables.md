@@ -33,7 +33,7 @@ views changes presentation, not the bin calculation. Use Results to inspect or
 export the exact values. A comparison between different images still needs an
 explicit shared range, common bin edges, and a justified normalization.
 
-!!! info "Unreleased — after 0.15.0a3"
+!!! info "Improved in 0.15.0a4"
 
     In the detailed histogram window, overlapping channels use faint fills
     with a stepped outline for each channel. All outlines sit above the fills,

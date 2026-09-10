@@ -1,7 +1,7 @@
 # Node Index
 
 This page lists all **125 operation specifications** registered by
-`NODE_LIBRARY` in 0.15.0a3, including **Find Label Boundaries**. The palette
+`NODE_LIBRARY` in 0.15.0a4, including **Find Label Boundaries**. The palette
 exposes **123**: the two legacy scatter raster operations remain loadable but
 are hidden from new-node selection. This includes **Convex Hull** and
 eight nodes in **3D Meshes**.
@@ -11,7 +11,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.15.0a3 source registry.
+    Titles and families follow the 0.15.0a4 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
