@@ -33,6 +33,14 @@ views changes presentation, not the bin calculation. Use Results to inspect or
 export the exact values. A comparison between different images still needs an
 explicit shared range, common bin edges, and a justified normalization.
 
+!!! info "Unreleased — after 0.15.0a3"
+
+    In the detailed histogram window, overlapping channels use faint fills
+    with a stepped outline for each channel. All outlines sit above the fills,
+    making both distributions easier to follow. PNG/TIFF exports use the same
+    style. Single-channel plots keep their bars. This does not smooth or change
+    the bin values; zero-count bins still leave gaps on a logarithmic y axis.
+
 ![The detached intensity-histogram window showing a synthetic distribution with labelled plot and export controls](../assets/screenshots/workflows/intensity-histogram-window.png)
 
 *The histogram is a view of the cached scientific table. Retain its bin edges
