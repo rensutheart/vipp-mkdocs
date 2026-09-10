@@ -570,6 +570,8 @@
       
         
       
+        
+      
     
     
     
@@ -613,6 +615,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2702,6 +2727,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#move-from-0150a3-to-0150a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.15.0a3 to 0.15.0a4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-from-0150a2-to-0150a3" class="md-nav__link">
     <span class="md-ellipsis">
       Move from 0.15.0a2 to 0.15.0a3
@@ -3239,6 +3273,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#move-from-0150a3-to-0150a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move from 0.15.0a3 to 0.15.0a4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-from-0150a2-to-0150a3" class="md-nav__link">
     <span class="md-ellipsis">
       Move from 0.15.0a2 to 0.15.0a3
@@ -3398,14 +3441,14 @@
 </tr>
 </tbody>
 </table>
-<p>This manual covers VIPP <strong>0.15.0a3</strong>. Use the
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a3">canonical GitHub release</a>
+<p>This manual covers VIPP <strong>0.15.0a4</strong>. Use the
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a4">canonical GitHub release</a>
 for the exact manual-install wheel, unsigned Windows installer, separate
 unsigned Apple Silicon and Intel macOS packages, checksums and qualification
-evidence. Use the <a href="https://pypi.org/project/napari-vipp/0.15.0a3/">PyPI 0.15.0a3 page</a>
+evidence. Use the <a href="https://pypi.org/project/napari-vipp/0.15.0a4/">PyPI 0.15.0a4 page</a>
 for an exact package pin. The nightly manual may describe later unreleased work.</p>
-<p><a href="../../releases/0.15.0a3/">0.15.0a3</a> retains
-workflow/batch-config schema 6 and adds manifest schema 6 for verified resume.
+<p><a href="../../releases/0.15.0a4/">0.15.0a4</a> retains
+workflow, batch-config and manifest schema 6 from a3, including verified resume.
 Earlier manifests cannot supply the new recovery evidence. New operations and
 reproduction references still require a compatible runtime; unchanged schema
 numbers do not promise backward compatibility.</p>
@@ -3422,7 +3465,7 @@ selector in the site header. If they differ:</p>
 <li>install the release described by the manual in a separate environment.</li>
 </ul>
 <p>Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.15.0a3 writes workflow schema version 6, batch configuration version 6,
+VIPP 0.15.0a4 writes workflow schema version 6, batch configuration version 6,
 and manifest schema version 6; workflow versions 1 and 2 are rejected. Valid schema-3
 workflows load with explicit CPU intent, schema-4 workflows retain authored
 compute intent, and schema-5 workflows retain canonical SourceItem evidence.
@@ -3432,6 +3475,13 @@ cached scientific results. Recalculate and compare graph structure, parameters,
 selected items, reader/backend, axes, channels, physical grids, dynamic ports,
 compute request, node behavior, actual backend, and results on known sample
 data. See the <a href="../workflow-contract/">workflow contract</a>.</p>
+<h2 id="move-from-0150a3-to-0150a4">Move from 0.15.0a3 to 0.15.0a4<a class="headerlink" href="#move-from-0150a3-to-0150a4" title="Permanent link">&para;</a></h2>
+<p>This is a presentation-fix update: clearer graph-wire routing and detailed
+multichannel histogram outlines, including PNG/TIFF exports. Scientific
+calculations, histogram values and schema versions are unchanged. Preserve
+original analyses and environments, regenerate exported Python for the new
+runtime, and recheck consequential results. See
+<a href="../../releases/0.15.0a4/">0.15.0a4 release notes</a>.</p>
 <h2 id="move-from-0150a2-to-0150a3">Move from 0.15.0a2 to 0.15.0a3<a class="headerlink" href="#move-from-0150a2-to-0150a3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Preserve original workflows, inputs, outputs, environments and batch
@@ -3668,12 +3718,12 @@ without testing it.</p>
 </span></code></pre></div>
 <p>To reproduce a specific alpha exactly, use a fresh environment and record the
 distribution surface as well as the version. An exact prerelease does not need
-<code>--pre</code>. For 0.15.0a3, use the exact package pin:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp==0.15.0a3"
+<code>--pre</code>. For 0.15.0a4, use the exact package pin:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp==0.15.0a4"
 </span></code></pre></div>
 <p>On macOS use <code>napari[pyside6]</code> instead of <code>napari[pyqt6]</code>; macOS remains CPU-only.</p>
 <p>For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp[gpu-cuda13]==0.15.0a3"
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m pip install "napari[pyqt6]&gt;=0.6" "napari-vipp[gpu-cuda13]==0.15.0a4"
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vipp-compute-doctor --track cuda13
 </span></code></pre></div>
 <p>The extra installs a reproducible CUDA/CuPy track; it does not make an
@@ -3706,7 +3756,7 @@ and environment—not only a nominal package version.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 12:07:21 UTC">September 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 10, 2026 12:28:40 UTC">September 10, 2026</span>
   </span>
 
     
