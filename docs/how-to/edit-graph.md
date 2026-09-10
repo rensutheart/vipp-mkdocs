@@ -106,7 +106,7 @@ step was omitted and recalculate decisive outputs before accepting the branch.
   chosen, or what an exclusion means.
 - Use graph search to find titles, operation IDs, tunnel names, and batch tags.
 
-!!! info "Unreleased — after 0.15.0a3"
+!!! info "Improved in 0.15.0a4"
 
     Wires now go around their source and destination cards when a connection
     runs back to the left or between cards in the same column. They also avoid

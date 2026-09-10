@@ -5,6 +5,16 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.15.0a4 scope and evidence
+
+Use the [0.15.0a4 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a4)
+for its exact assets, checksums and qualification declaration. This release
+changes graph-wire routing and detailed multichannel histogram drawing/export,
+not scientific operations, histogram bin calculations or GPU execution policy.
+Changed-domain checks and installed-package smoke checks are distinct from
+the unchanged scientific evidence carried forward from a3. Neither a new
+version number nor a clearer plot establishes new assay or GPU qualification.
+
 ## 0.15.0a3 scope and evidence
 
 Use the [0.15.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a3)

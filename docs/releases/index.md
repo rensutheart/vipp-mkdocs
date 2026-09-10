@@ -4,22 +4,26 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## 0.15.0a3 alpha
+## 0.15.0a4 alpha
 
-- [0.15.0a3](0.15.0a3.md) — reviewed reproducibility packages,
-  original-input checks, verified batch resume, object QC, broader RL GPU
-  execution with advisories, and desktop/workflow presentation fixes.
+- [0.15.0a4](0.15.0a4.md) — clearer graph-wire routing and overlapping
+  multichannel histograms, including PNG/TIFF exports. Scientific calculations
+  are unchanged from a3.
 
 Use the canonical
-[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a3) and
-[PyPI page](https://pypi.org/project/napari-vipp/0.15.0a3/). Use only the exact
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a4) and
+[PyPI page](https://pypi.org/project/napari-vipp/0.15.0a4/). Use only the exact
 release assets and their matching checksum files.
 
-0.15.0a3 writes workflow schema 6, batch config 6, and manifest schema 6. Valid
+0.15.0a4 writes workflow schema 6, batch config 6, and manifest schema 6. Valid
 supported earlier records retain explicit migration paths; recalculate and
 validate consequential results after upgrading.
 
 ## Earlier releases
+
+- [0.15.0a3](0.15.0a3.md) — reviewed reproducibility packages,
+  original-input checks, verified batch resume, object QC, broader RL GPU
+  execution with advisories, and desktop/workflow presentation fixes.
 
 - [0.15.0a2](0.15.0a2.md) — included microscope readers and diagnostics, quiet update guidance, four threshold modes, explicit intensity inversion, safer controls, Convex Hull, and mesh-object creation/refinement/export.
 

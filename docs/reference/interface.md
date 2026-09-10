@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.15.0a3. Some labels shorten to icons and
+Labels below match napari-vipp 0.15.0a4. Some labels shorten to icons and
 graph-local controls move into the gear menu when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized

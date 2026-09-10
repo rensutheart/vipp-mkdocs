@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.15.0a3 contains **21** registered example workflows under:
+VIPP 0.15.0a4 contains **21** registered example workflows under:
 
 ```text
 examples/
@@ -59,7 +59,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. In 0.15.0a3 they are:
+Use `--list` to print your version's exact IDs. In 0.15.0a4 they are:
 
 | ID | Example title |
 | --- | --- |
