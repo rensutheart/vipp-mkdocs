@@ -106,6 +106,15 @@ step was omitted and recalculate decisive outputs before accepting the branch.
   chosen, or what an exclusion means.
 - Use graph search to find titles, operation IDs, tunnel names, and batch tags.
 
+!!! info "Unreleased — after 0.15.0a3"
+
+    Wires now go around their source and destination cards when a connection
+    runs back to the left or between cards in the same column. They also avoid
+    nearby cards where space allows, including between closely placed ports.
+    While dragging, attached wires keep clear of their endpoint cards; routes
+    around other cards settle when you release. Overlapping cards can still
+    hide connections: separate them or use **Auto Arrange**.
+
 ### Choose a port-label mode
 
 Open **Display settings → Input/output labels**, with **When needed**, **Always**, and **Never**. The behavior is unchanged from earlier labels; see
