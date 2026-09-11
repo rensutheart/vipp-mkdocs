@@ -118,6 +118,11 @@ connection recovers, review the current settings, and install again.
 
 ### Update, repair, or remove
 
+**Unreleased after 0.15.0a4:** an ownership-verified Windows desktop app can
+[download, verify and open its update installer](updating.md#download-and-open-a-windows-update)
+with the current installation folder and CPU/CUDA track selected. Setup still
+requires review and approval; this does not silently install or restart VIPP.
+
 The installer does not silently replace an existing installation:
 
 - an older installer-owned copy is offered as **Update** and remains usable

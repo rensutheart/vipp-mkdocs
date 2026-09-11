@@ -33,6 +33,10 @@ top right while you work elsewhere. Other windows can cover it; minimizing or
 closing this progress window does not cancel startup. It closes automatically
 when VIPP is ready.
 
+**Unreleased after 0.15.0a4:** when automatic checking is enabled, each launch
+also starts a quiet [update check](updating.md). A previous session's check does
+not suppress it. Checking alone never downloads or opens an installer.
+
 New or updated Windows installer shortcuts use the VIPP icon. Installed desktop
 launches also use VIPP's running-app icon; macOS retains its branded `VIPP.app`.
 Opening VIPP inside a separately launched napari session does not replace
