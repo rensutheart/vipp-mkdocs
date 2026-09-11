@@ -1189,9 +1189,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-safely" class="md-nav__link">
+  <a href="#read-the-check-result" class="md-nav__link">
     <span class="md-ellipsis">
-      Update safely
+      Read the check result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-and-open-a-windows-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download and open a Windows update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser-and-manual-update-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser and manual update routes
     </span>
   </a>
   
@@ -3174,9 +3192,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-safely" class="md-nav__link">
+  <a href="#read-the-check-result" class="md-nav__link">
     <span class="md-ellipsis">
-      Update safely
+      Read the check result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-and-open-a-windows-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download and open a Windows update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser-and-manual-update-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser and manual update routes
     </span>
   </a>
   
@@ -3216,42 +3252,105 @@
 
 
 <h1 id="check-for-updates">Check for updates<a class="headerlink" href="#check-for-updates" title="Permanent link">&para;</a></h1>
-<p>Use the version badge in VIPP 0.15.0a2 to check release notes and update guidance. Older releases can use <a href="https://github.com/rensutheart/napari-vipp/releases">GitHub releases</a> directly.</p>
+<p>Use the version badge to check release notes and update guidance. Older
+releases can use <a href="https://github.com/rensutheart/napari-vipp/releases">GitHub releases</a>
+directly.</p>
 <h2 id="notice-an-update-without-an-interruption">Notice an update without an interruption<a class="headerlink" href="#notice-an-update-without-an-interruption" title="Permanent link">&para;</a></h2>
-<p>VIPP checks GitHub quietly, at most once a day. A highlighted version badge
-with an <strong>↑</strong> means a newer release was found. Nothing opens automatically,
-and no installer or package is downloaded or installed automatically.</p>
+<p>A highlighted version badge with an <strong>↑</strong> means a newer eligible release was
+found. Checking does not download an installer, start setup, or interrupt
+image processing.</p>
+<div class="admonition note">
+<p class="admonition-title">Unreleased after 0.15.0a4</p>
+<p>With automatic checking enabled, VIPP checks quietly on <strong>every launch</strong>,
+even if an earlier session checked that day. A session left open continues
+to check periodically. The released 0.15.0a4 behavior checks at most once a
+day across sessions.</p>
+</div>
 <ul>
 <li><strong>Click the badge</strong> to open <strong>VIPP updates</strong>.</li>
 <li><strong>Right-click → Release notes on GitHub</strong> opens notes for your installed version.</li>
 <li><strong>Right-click → Check for updates…</strong> checks now and shows the result.</li>
 </ul>
-<p>The dialog offers notes for the latest eligible release. Offline or rate-limit
-errors stay in this dialog; they do not interrupt image processing. Cached
-release information can remain visible when GitHub is unavailable.</p>
 <p>On narrower windows or with larger fonts, the download buttons stack vertically;
-the dialog scrolls without hiding its <strong>Check for updates</strong> and <strong>Close</strong> buttons.</p>
-<h2 id="update-safely">Update safely<a class="headerlink" href="#update-safely" title="Permanent link">&para;</a></h2>
+the dialog scrolls without hiding its check and <strong>Close</strong> buttons. The check
+button is <strong>Check again</strong> in the unreleased dialog (<strong>Check for updates</strong> in
+released 0.15.0a4).</p>
+<h2 id="read-the-check-result">Read the check result<a class="headerlink" href="#read-the-check-result" title="Permanent link">&para;</a></h2>
+<p><strong>Unreleased after 0.15.0a4:</strong> the dialog distinguishes the latest check from
+the release information it already knows.</p>
+<table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A successful fresh check</td>
+<td>GitHub answered the latest request. The result reflects the chosen prerelease preference.</td>
+</tr>
+<tr>
+<td>A failed check</td>
+<td>VIPP could not establish the current result. This does <strong>not</strong> mean the installed version is up to date.</td>
+</tr>
+<tr>
+<td>Cached release information</td>
+<td>Notes from an earlier successful check remain available; they are not proof that the latest request succeeded.</td>
+</tr>
+</tbody>
+</table>
+<p>Connection, DNS, proxy, verified-HTTPS, timeout, GitHub access and request-limit
+failures have different explanations. Follow the reported guidance, retry
+when appropriate, or use the official release page. Do not disable HTTPS
+verification or security software to make a check succeed. Failure does not
+interrupt calculations or change the installation.</p>
+<h2 id="download-and-open-a-windows-update">Download and open a Windows update<a class="headerlink" href="#download-and-open-a-windows-update" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Unreleased after 0.15.0a4 — managed desktop installations only</p>
+<p><strong>Download &amp; open update</strong> is offered only when VIPP can verify that the
+running Windows desktop app is the active installation recorded by its
+managed installer. It does not select a nearby or retired environment.</p>
+</div>
 <ol>
 <li>Read the release notes and save your workflows.</li>
-<li>For an installer-managed application, use <strong>Download installer</strong> and
-   <strong>Download checksums</strong> when offered. Both open official GitHub assets in
-   your browser. Verify the download using the
-   <a href="../installation/#verify-the-download-and-pass-the-windows-warning">Windows</a>
-   or <a href="../macos/">macOS</a> instructions.</li>
-<li>Finish or safely stop processing, then close VIPP/napari.</li>
-<li>Run setup and review the installation options. Keep the intended Windows
-   CPU/GPU installation; an installer may create a separate installation
-   instead of updating a pip/conda environment or source checkout.</li>
-<li>Reopen VIPP and confirm the version badge. Test a saved workflow before
-   resuming a large batch.</li>
+<li>Complete a successful fresh check, then choose <strong>Download &amp; open update</strong>.
+   A cached result alone does not enable this action. VIPP downloads the
+   matching official installer and checksum, shows progress, and verifies the installer's
+   <strong>SHA-256</strong> before opening it. A failed download, checksum mismatch, or
+   changed installation ownership prevents the handoff.</li>
+<li>Review the existing guided installer. VIPP passes the current installation
+   folder and CPU/CUDA track; setup still requires your review and approval.
+   Opening setup is <strong>not</strong> confirmation that an update was installed.</li>
+<li>Finish or safely stop processing and save work before restarting VIPP.
+   The updater does not quit VIPP, install in
+   the live environment, or restart the application automatically. Your current
+   session remains unchanged by the download-and-open action.</li>
+<li>After completing the guided update, reopen VIPP, confirm the version badge,
+   and test a saved workflow before resuming a large batch.</li>
 </ol>
-<p>No matching installer? Follow the <a href="../installation/">installation guide</a> for
-your platform/environment. The dialog never runs pip inside a live session
-or executes a downloaded installer for you.</p>
+<p>Checksum verification does not add a digital signature to an unsigned alpha.
+Follow the normal <a href="../installation/#verify-the-download-and-pass-the-windows-warning">Windows warning guidance</a>.</p>
+<h2 id="browser-and-manual-update-routes">Browser and manual update routes<a class="headerlink" href="#browser-and-manual-update-routes" title="Permanent link">&para;</a></h2>
+<p>In released 0.15.0a4, <strong>Download installer</strong> and <strong>Download checksums</strong> open
+official GitHub assets in your browser. This route also remains available for
+macOS and environments that cannot use the unreleased managed-Windows action.</p>
+<p>The unreleased dialog calls these buttons <strong>Download in browser</strong> and
+<strong>Checksums</strong>. For a managed Windows installation, expand <strong>Other download
+options</strong> to show them.</p>
+<p>Verify the download using the <a href="../installation/#verify-the-download-and-pass-the-windows-warning">Windows</a>
+or <a href="../macos/">macOS</a> instructions, save your work, close VIPP/napari, then open
+setup yourself. Keep the intended installation and compute track.</p>
+<p>Pip, conda and source environments require their <a href="../installation/">manual installation route</a>.
+The updater never runs pip inside a live session or silently converts one of
+these environments into an installer-managed copy. If no matching official
+installer is offered, use the release notes and platform instructions.</p>
 <h2 id="choose-what-to-check">Choose what to check<a class="headerlink" href="#choose-what-to-check" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Check automatically once a day</strong> can be turned off; manual checks remain available.</li>
+<li><strong>Check for updates on startup</strong> is the unreleased automatic-check setting;
+  turn it off to keep only manual checks. Checks also continue periodically
+  during a long session. In released 0.15.0a4 the setting is
+  <strong>Check automatically once a day</strong>.</li>
 <li><strong>Include pre-release versions</strong> includes alpha, beta and release candidates.
   It starts enabled for prerelease installations and disabled for final releases.</li>
 </ul>
@@ -3260,6 +3359,9 @@ automatic checks. An explicit manual check still contacts GitHub.</p>
 <p>Checks send no images, workflows, file paths, installed version or hardware
 inventory. GitHub still receives ordinary connection information, such as
 your IP address, when serving the public release list.</p>
+<p>The unreleased <strong>Download &amp; open update</strong> action additionally contacts the
+official GitHub asset service to fetch the installer and checksum. It does not
+upload your workflows or send the managed installation folder to GitHub.</p>
 
 
 
@@ -3280,7 +3382,7 @@ your IP address, when serving the public release list.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 22:25:04 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 11, 2026 07:01:07 UTC">September 11, 2026</span>
   </span>
 
     
