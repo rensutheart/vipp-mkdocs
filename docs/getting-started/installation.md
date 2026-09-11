@@ -69,9 +69,14 @@ and lets you check again after installing it.
 3. Under **Reviewed settings**, confirm the fixed installation location, compute
    route, and whether to add a Desktop shortcut.
 4. Select **Install VIPP** and wait for setup and its final acceptance checks.
-5. Open **VIPP** for a CPU installation. A CUDA installation provides
-   **VIPP Automatic**, **VIPP CPU**, and **VIPP Prefer GPU** shortcuts; begin
-   with **VIPP Automatic**.
+5. Open the installed VIPP launcher. See [Launch VIPP](launching.md) for the
+   shortcut names in the released and unreleased versions.
+
+**Unreleased after 0.15.0a4:** both CPU and CUDA installations create one
+**VIPP** launcher that starts in **Auto**. Choose a compute mode inside the
+app, not by opening a different shortcut. The CPU and CUDA dependency
+installations remain separate; the common launcher does not add GPU packages
+to a CPU-only installation.
 
 !!! important "CUDA location in 0.15.0a4"
     One-click setup obtains canonical Windows Local App Data through
@@ -132,6 +137,12 @@ The installer does not silently replace an existing installation:
 - unrelated folders and manually managed napari environments are never
   overwritten; and
 - managed CPU and CUDA installations can coexist.
+
+**Unreleased after 0.15.0a4:** only one installation may own the **VIPP**
+shortcut in a given folder. Setup does not overwrite another installation's
+shortcut. A same-track update replaces the old compute-mode shortcuts only
+when they are unchanged and recorded as owned by that installation; modified
+or unrelated shortcuts are not silently replaced.
 
 An installer-owned CUDA copy already stored under a non-ASCII path cannot be
 updated or repaired in place by 0.15.0a4. Setup may first complete and record

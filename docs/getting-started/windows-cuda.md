@@ -68,9 +68,12 @@ underlying dependency tool reports a trustworthy byte total.
 
 ## Verify the installation
 
-A managed CUDA installation creates **VIPP Automatic**, **VIPP CPU**, and
-**VIPP Prefer GPU** shortcuts. Start with **VIPP Automatic**. Open **Compute
-setup and memory** to refresh the concise qualification rows:
+Open the [installed VIPP launcher](launching.md#use-the-installed-shortcut-on-windows).
+**Unreleased after 0.15.0a4:** CUDA installations use one **VIPP** shortcut and
+start in **Auto**; choose other compute modes inside the app. The separate
+CUDA installation is still required for its optional GPU dependencies.
+
+Open **Compute setup and memory** to refresh the concise qualification rows:
 
 1. **CUDA and GPU** — can the pinned CUDA/CuPy runtime allocate and execute;
 2. **VIPP GPU coverage** — which reviewed operation regions are available.

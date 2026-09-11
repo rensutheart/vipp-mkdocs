@@ -20,6 +20,12 @@ failure; some invalid or non-fallback-safe calls fail under either policy.
 
 ## Choose a pipeline policy
 
+**Unreleased after 0.15.0a4:** the installed **VIPP** launcher starts in
+**Auto** on both CPU and CUDA installations. Use the toolbar to change modes;
+there are no separate CPU or Prefer-GPU desktop shortcuts. Selecting a GPU
+mode does not install optional GPU packages or make an unsupported environment
+eligible. See [Windows GPU setup](../getting-started/windows-cuda.md).
+
 | Mode | Use it when | What to expect |
 | --- | --- | --- |
 | **Auto** | The recommended, learning new-session default | With no exact compatible history, use reviewed GPU defaults. Accelerated-only history makes the next global Auto run measure CPU once on the same execution surface; a later matching run applies the 1.20x/20-ms gate to the pair. Auto never silently benchmarks multiple implementations. |

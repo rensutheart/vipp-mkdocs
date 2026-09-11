@@ -1,5 +1,11 @@
 # Launch VIPP
 
+!!! note "Unreleased after 0.15.0a4 — one VIPP launcher"
+    Open **VIPP** on either Windows or macOS. Managed installations start in
+    **Auto**; choose **CPU**, **Prefer GPU**, or **Custom** inside the app when
+    needed. A CPU-only installation still needs the optional GPU dependencies
+    and a supported environment before it can use GPU compute.
+
 ## Open the installed app on macOS
 
 The macOS package creates `~/Applications/VIPP.app`. Open your user
@@ -13,19 +19,23 @@ verification and the **Open Anyway** steps for this unsigned, unnotarized alpha.
 
 ## Use the installed shortcut on Windows
 
-The Windows installer creates launchers for the managed installation:
+The unreleased Windows installer creates one **VIPP** launcher in the Start
+menu and, if selected during setup, on the Desktop. CPU and CUDA installations
+use the same name; they do not create separate compute-mode shortcuts. See
+[installation ownership](installation.md#update-repair-or-remove) when more
+than one managed installation exists.
 
-- a CPU installation provides **VIPP**;
-- a CUDA installation provides **VIPP Automatic**, **VIPP CPU**, and
-  **VIPP Prefer GPU**.
-
-Begin with **VIPP Automatic** after a CUDA installation. Startup shows the VIPP
-brand, real progress milestones, elapsed time, and retained diagnostics. A
-Prefer-GPU session requests every scientifically and operationally eligible GPU
-implementation, but operations outside the reviewed region still use CPU with
-an explanation.
+In released **0.15.0a4**, a CPU installation already uses **VIPP**. A CUDA
+installation instead provides **VIPP Automatic**, **VIPP CPU**, and
+**VIPP Prefer GPU**; begin with **VIPP Automatic** for that release.
 
 ## During startup
+
+Startup shows the VIPP brand, real progress milestones, elapsed time, and
+retained diagnostics. **Unreleased after 0.15.0a4:** the normal Auto launch no
+longer adds an **Automatic** label or a compute-profile description to the
+splash. This simplifies the startup display, not the compute controls or
+actual-run reporting inside VIPP.
 
 In **0.15.0a3**, the startup progress window has no native title
 bar. Drag its background to move it, or use the small minimize button at the

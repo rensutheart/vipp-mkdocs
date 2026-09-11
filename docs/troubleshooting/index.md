@@ -16,3 +16,14 @@ Before debugging your own file, open the matching bundled example. If the
 example works, compare source type, axes, scale, dtype, channel mapping, shape,
 and release version. If the example fails, capture the exact error and version
 without changing multiple settings at once.
+
+## A result appears, but its display reports a problem
+
+**Unreleased (after 0.15.0a4):** a short **Result calculated** warning means
+the calculation finished, but the napari view could not fully update. Reselect
+the node to retry its display. You do not need to recalculate the mesh just to
+clear the message.
+
+Use **Details…** to view and copy the technical message, or **Dismiss** to hide
+the warning without changing results or node errors. If it returns, include
+those details and your VIPP version when [reporting the problem](report-a-problem.md).
