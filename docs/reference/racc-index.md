@@ -4,6 +4,11 @@ Use **RACC Index** or **Masked RACC Index** for an intensity-relationship image,
 not as a substitute for a reported metric table. See the
 [colocalization tutorial](../workflows/colocalization-association.md) for setup.
 
+**Unreleased:** VIPP displays both RACC variants with **Magma** in node
+thumbnails, Inspect and pinned layers, including when reopening workflows with
+older saved colour maps. This changes only the colours, not the index values.
+Bypassed views retain the colours of the source data passing through.
+
 ## Dependency And Scope Statement
 
 VIPP does not depend on the standalone RACC napari plugin. RACC is not listed

@@ -9,6 +9,14 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
+**Unreleased layout refresh:** the full catalogue has been reviewed for clearer
+left-to-right flow, separate analysis branches, and readable notes and tunnel
+labels. Spacing also allows for the controls shown after calculation. The
+examples keep their existing analysis settings and coverage, including the
+recent [RACC example settings](../workflows/colocalization-association.md).
+Reopen an example from the chooser to use its revised layout; your saved copies
+are not rearranged automatically.
+
 !!! note "Catalog updates in 0.15.0a3"
     VIPP 0.15.0a2 shipped 21 examples. 0.15.0a3 retains the saved interactive
     mesh workflow as **Mesh Objects, Colours & Refinement** and removes the

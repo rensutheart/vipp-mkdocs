@@ -3,6 +3,13 @@
 VIPP supports pixel, ROI-masked, object-restricted, and label-association
 workflows.
 
+**Unreleased example update:** **RACC Colocalization** has wider spacing for
+its channel tunnels. Binary Threshold selects the red-channel ROI at **30,000**.
+Both RACC nodes use **Manual** thresholds: **Ch1 43,970.51** and
+**Ch2 48,073.03**, with [Magma index images](../reference/racc-index.md).
+The metric and voxel-overlay nodes still use **Costes auto**. These settings
+are for the supplied synthetic data; review them before using other images.
+
 !!! warning "0.13 and later colocalization results can differ from 0.12"
 
     VIPP 0.13 and later retain finite native channel intensities rather than jointly

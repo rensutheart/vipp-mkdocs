@@ -38,6 +38,12 @@ of the saved **Float histogram bins** used by histogram-based automatic
 threshold nodes. Changing plot log scale or appearance does not change the
 mask.
 
+**Unreleased (after 0.15.0a4):** the **Intensity Histogram** node's inspector
+plot grows vertically to keep the graph, axis labels and wrapped channel legend
+readable in a narrow panel or with larger fonts. Scroll the inspector to reach
+the sections below it. **Open in window** still provides a resizable detailed
+view; resizing does not recalculate or change the histogram values.
+
 The colocalization scatter density, ROI population, and colocalized count are
 also calculated over every ROI voxel. Threshold-independent density remains
 visible while exact threshold-dependent counts are recalculated, but a
