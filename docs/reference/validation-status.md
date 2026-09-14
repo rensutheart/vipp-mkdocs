@@ -5,6 +5,21 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.15.0a5 scope and evidence
+
+Use the [0.15.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a5)
+for exact assets, checksums and its qualification declaration. Changed areas
+include the CPU Colocalization Mask operation, its example workflow, the guided
+example chooser, histogram and mesh display, desktop launchers and the verified
+Windows installer handoff. These require their own checks; earlier installer
+or UI evidence does not alone qualify the new paths.
+
+The mask shares the existing unmasked threshold predicate and preserves the
+input grid. Its synthetic tests do not establish organelle identity, mitophagy
+or biological validity. RACC's revised example thresholds and Magma colour map
+are demonstration/display choices, not a new method or a quantitative shared
+colour scale. GPU execution policy and schema versions are unchanged.
+
 ## 0.15.0a4 scope and evidence
 
 Use the [0.15.0a4 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a4)

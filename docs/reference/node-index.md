@@ -1,8 +1,8 @@
 # Node Index
 
-This page lists all **125 operation specifications** registered by
-`NODE_LIBRARY` in 0.15.0a4, including **Find Label Boundaries**. The palette
-exposes **123**: the two legacy scatter raster operations remain loadable but
+This page lists all **126 operation specifications** registered by
+`NODE_LIBRARY` in 0.15.0a5, including **Colocalization Mask**. The palette
+exposes **124**: the two legacy scatter raster operations remain loadable but
 are hidden from new-node selection. This includes **Convex Hull** and
 eight nodes in **3D Meshes**.
 
@@ -11,7 +11,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.15.0a4 source registry.
+    Titles and families follow the 0.15.0a5 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -326,6 +326,7 @@ Boundaries runs on CPU and preserves the input calibration.
 | `Masked Colocalization Metrics` | channel 1 plus channel 2 plus ROI | table | manual |
 | `Colocalized Voxels` | channel 1 plus channel 2 | image | automatic |
 | `Masked Colocalized Voxels` | channel 1 plus channel 2 plus ROI | image | automatic |
+| `Colocalization Mask` (new in 0.15.0a5) | channel 1 plus channel 2 | Boolean mask | automatic |
 | `RACC Index` | channel 1 plus channel 2 | image | manual |
 | `Masked RACC Index` | channel 1 plus channel 2 plus ROI | image | manual |
 | `Colocalization Scatter Plot` (legacy, hidden) | channel 1 plus channel 2 | image | manual |

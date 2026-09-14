@@ -11,6 +11,17 @@ Choose:
 Gear menu → Open example… → Segmentation & Labels → Red-Channel Label Cleanup
 ```
 
+**New in 0.15.0a5:** Select an example to read its purpose, **Input data**,
+short **What to explore** and **What you'll get** bullet lists, and a **Try this**
+suggestion. Each action or expected output is listed separately. Search by
+name or task to narrow the list, then click **Open example** (or press Enter)
+to open it in a new workflow tab. **Cancel** is to the left of **Open example**
+at the bottom of the chooser. Browsing the descriptions does not calculate
+anything. Compact margins leave more room for the list and description, which
+have contrasting backgrounds in both light and dark themes. Drag the divider
+to adjust their widths; in a narrow window,
+the description moves below the list.
+
 The `Image Source` is set to `VIPP synthetic multichannel volume`. Its channels
 are blue, green, and red; this workflow uses the red/TRITC-like channel.
 

@@ -4,7 +4,20 @@ Use **RACC Index** or **Masked RACC Index** for an intensity-relationship image,
 not as a substitute for a reported metric table. See the
 [colocalization tutorial](../workflows/colocalization-association.md) for setup.
 
-**Unreleased:** VIPP displays both RACC variants with **Magma** in node
+RACC stands for **Regression adjusted colocalisation colour mapping**. The
+method uses the relationship between two channels' intensities to create a
+graded spatial visualisation, emphasising stronger combined signal close to
+the fitted relationship. It adds information beyond a yes/no overlap mask;
+it is not a probability of colocalisation.
+
+Method reference: [Theart RP, Loos B, Niesler TR (2019), *Regression adjusted
+colocalisation colour mapping (RACC): A novel biological visual analysis method
+for qualitative colocalisation analysis of 3D fluorescence micrographs*,
+PLOS ONE 14(11): e0225141](https://doi.org/10.1371/journal.pone.0225141).
+The implementation scope below describes VIPP's own calculation; this citation
+does not establish numerical equivalence with the standalone RACC tool.
+
+**New in 0.15.0a5:** VIPP displays both RACC variants with **Magma** in node
 thumbnails, Inspect and pinned layers, including when reopening workflows with
 older saved colour maps. This changes only the colours, not the index values.
 Bypassed views retain the colours of the source data passing through.

@@ -56,6 +56,16 @@ Manual thresholds use the threshold values supplied by the user. `Costes auto`
 calculates `T1` and `T2` automatically, as described below, and writes the
 calculated values back into the visible node parameters.
 
+**New in 0.15.0a5 — Colocalization Mask:** outputs the set `C` directly as a Boolean
+image (`True` inside, `False` outside), preserving the input grid and calibration
+without an RGB axis. It accepts two scalar channels and uses the same Manual or
+whole-image Costes thresholds as the unmasked metrics and white voxel overlay.
+Non-finite values and integer intensities outside −2⁵³ to 2⁵³ are rejected;
+the latter avoids silently rounding large 64-bit integers during threshold
+comparisons. Normal 8-, 16- and 32-bit image intensities are unaffected.
+See [segmenting and counting overlap regions](../workflows/colocalization-association.md#segment-and-count-overlap-regions)
+for the cleanup and measurement workflow.
+
 ## Pearson Correlation
 
 VIPP reports Pearson correlation for the selected intensity population:

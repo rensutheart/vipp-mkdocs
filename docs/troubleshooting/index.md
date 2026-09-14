@@ -19,7 +19,7 @@ without changing multiple settings at once.
 
 ## A result appears, but its display reports a problem
 
-**Unreleased (after 0.15.0a4):** a short **Result calculated** warning means
+**New in 0.15.0a5:** a short **Result calculated** warning means
 the calculation finished, but the napari view could not fully update. Reselect
 the node to retry its display. You do not need to recalculate the mesh just to
 clear the message.
