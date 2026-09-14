@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.15.0a4 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.15.0a5 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -19,6 +19,12 @@ Custom GPU choice can instead produce an amber visible fallback or a typed
 failure; some invalid or non-fallback-safe calls fail under either policy.
 
 ## Choose a pipeline policy
+
+**New in 0.15.0a5:** the installed **VIPP** launcher starts in
+**Auto** on both CPU and CUDA installations. Use the toolbar to change modes;
+there are no separate CPU or Prefer-GPU desktop shortcuts. Selecting a GPU
+mode does not install optional GPU packages or make an unsupported environment
+eligible. See [Windows GPU setup](../getting-started/windows-cuda.md).
 
 | Mode | Use it when | What to expect |
 | --- | --- | --- |

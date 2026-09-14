@@ -5,7 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.15.0a4 release notes](../releases/0.15.0a4.md) | Review clearer graph connections and overlapping histograms, with unchanged scientific calculations. |
+| [0.15.0a5 release notes](../releases/0.15.0a5.md) | Review guided examples, colocalization masks, simpler desktop updates and display fixes. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
 | [All nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
 | [Toolbar and settings](interface.md) | Look up controls, preview, execution, and memory settings. |
@@ -17,7 +17,7 @@ task sequences.
 | [Colocalization metrics](colocalization-metrics.md) | Read exact Pearson, Manders, and Costes definitions and compatibility limits. |
 | [RACC-like index](racc-index.md) | Understand the regression geometry, parameters, and failure cases. |
 | [Object association](association-metrics.md) | Distinguish overlap, nearest-centroid, and event-region measurements. |
-| [Example workflows](example-workflows.md) | Choose one of 19 graph templates, including the exhaustive inspector showcase, responsive crop, portable GPU segmentation, graph-editing acceptance, and deterministic batch checks. |
+| [Example workflows](example-workflows.md) | Choose one of 22 guided examples, including segmentation, colocalization, measurements, meshes and separate developer/testing workflows. |
 | [Bundled sample data](sample-data.md) | Choose one of 15 deterministic samples. |
 | [Workflow and export contract](workflow-contract.md) | Understand schema 6 SourceItems, compute and bypass intent, shared-executor Python/CLI, and version-5 batch artifacts. |
 | [Supported input and output](import-export.md) | Select a format and review metadata/dtype limitations. |

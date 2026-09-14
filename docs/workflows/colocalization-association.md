@@ -3,6 +3,29 @@
 VIPP supports pixel, ROI-masked, object-restricted, and label-association
 workflows.
 
+## Choose An Example
+
+**New in 0.15.0a5:** The combined example is now two focused workflows under
+**Colocalization & Association** in **Open example…**:
+
+- **RACC Colocalization** shows whole-image and ROI-masked RACC. Both nodes
+  retain **Manual** thresholds of **Ch1 43,970.51** and **Ch2 48,073.03**;
+  Binary Threshold selects the red-channel ROI at **30,000**. Inspect the
+  [Magma index images](../reference/racc-index.md), then change **Theta** to
+  explore the distance penalty. The notes include the method's full name and
+  [paper](https://doi.org/10.1371/journal.pone.0225141).
+- **Colocalization, Overlap & Object Counts** shows whole-image and ROI-masked
+  overlays and Pearson/Manders metrics, using **Costes auto**. Its separate
+  **Colocalization Mask → Remove Small Objects → Label Connected Components →
+  Measure Objects** branch matches the unmasked white overlap. Cleanup keeps
+  face-connected 3D regions of at least **20 voxels**. Select **Measure Objects**
+  to see one row per retained region; lower the minimum size to **1 voxel** and
+  recalculate to include the small regions too.
+
+The counting branch is not restricted by the ROI. These settings are tailored
+to the synthetic sample, not defaults for other images. Reopen the examples
+from the catalogue for these changes; previously saved workflows are unchanged.
+
 !!! warning "0.13 and later colocalization results can differ from 0.12"
 
     VIPP 0.13 and later retain finite native channel intensities rather than jointly
@@ -30,6 +53,39 @@ is the input to the next.
 `Colocalization Scatter Plot` produces a durable density-and-guides image in
 the graph. Use it in parallel too; it is a presentation/QC output, not a
 preprocessing input to the metric calculation.
+
+## Segment And Count Overlap Regions
+
+**New in 0.15.0a5:** Use **Colocalization Mask**, under **Colocalization & Spatial
+Analysis**, to turn
+the white overlap region into a binary segmentation mask rather than an RGB
+picture.
+
+1. Connect the two scalar channel images, for example from **Split Channels**.
+2. Choose **Manual** thresholds in the original intensity units, or **Costes
+   auto**. Review both thresholds in the scatter inspector. A voxel is included
+   when **both channels are at or above their respective thresholds**.
+3. Connect the mask to **Remove Small Objects** if needed, then **Label
+   Connected Components** and **Measure Objects**. Choose 2D or 3D processing to match
+   what you want to count; the mask retains the input axes and calibration.
+
+```text
+Two channels → Colocalization Mask → Remove Small Objects
+             → Label Connected Components → Measure Objects
+```
+
+The measurement table contains one row per connected overlap region. Those
+regions are not necessarily whole mitochondria or autophagosomes: one organelle
+can have several disconnected overlaps. To count which separately segmented
+objects overlap another object set, use **Label Overlap Association** instead.
+Image overlap alone does not establish a biological event such as mitophagy.
+
+For an ROI, combine the output mask with a binary ROI using **Logical AND**.
+This restricts the output, not the population used to estimate Costes thresholds:
+this node estimates those over the complete input images. To match an existing
+ROI-masked overlay, use its resolved thresholds in **Manual** mode and then
+apply the same ROI. Ordinary **Colocalized Voxels** remains a visual overlay;
+even its **White on black** mode is an RGB image, not a binary mask.
 
 ## ROI-Masked Colocalization
 
@@ -158,7 +214,8 @@ events / puncta + regions / ROIs
 
 | Workflow | Purpose |
 | --- | --- |
-| `synthetic-colocalization-racc.json` | Pixel and ROI-masked metrics, scatter threshold review, colocalized voxels, and RACC-like index output. |
+| `synthetic-colocalization-racc.json` | **New in 0.15.0a5:** focused whole-image and ROI-masked RACC-like index output, threshold review, method explanation and citation. |
+| `synthetic-colocalization-overlap.json` | **New in 0.15.0a5:** whole-image and ROI-masked overlays/metrics, Boolean overlap masks, 3D cleanup and connected-region measurements. |
 | `synthetic-object-colocalization-association.json` | Object colocalization rows, label overlap, nearest-object distance, event localization, and merged tables. |
 
 ## Reporting Checklist

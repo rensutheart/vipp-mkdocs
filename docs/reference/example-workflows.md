@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.15.0a4 contains **21** registered example workflows under:
+VIPP 0.15.0a5 contains **22** registered example workflows under:
 
 ```text
 examples/
@@ -8,6 +8,19 @@ examples/
 
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
+
+**New in 0.15.0a5:** **RACC Colocalization** focuses
+on the RACC method; the new **Colocalization, Overlap & Object Counts** contains
+the general overlays, metrics and overlap-region counting workflow. See
+[which example to choose](../workflows/colocalization-association.md#choose-an-example).
+
+**Improved in 0.15.0a5:** the full catalogue has been reviewed for clearer
+left-to-right flow, separate analysis branches, and readable notes and tunnel
+labels. Spacing also allows for the controls shown after calculation. The
+examples keep their existing analysis settings and coverage, including the
+recent [RACC example settings](../workflows/colocalization-association.md).
+Reopen an example from the chooser to use its revised layout; your saved copies
+are not rearranged automatically.
 
 !!! note "Catalog updates in 0.15.0a3"
     VIPP 0.15.0a2 shipped 21 examples. 0.15.0a3 retains the saved interactive
@@ -24,6 +37,17 @@ Gear menu → Open example…
 The chooser groups workflows by task and opens each template with its bundled
 sample `Image Source` nodes already configured. Use **Open** for
 custom or external workflow JSON files.
+
+**New in 0.15.0a5:** Every example has a description, short
+plain-language **What to explore** and **What you'll get** bullet lists, and a
+**Try this** suggestion. **Developer & testing workflows**, at the bottom
+of the list, groups the five interface-checking examples separately from the
+analysis tutorials. Search also finds their descriptions when the group is
+collapsed. The RACC entry explains the method and offers **Read the paper**,
+which opens the original publication in your browser only when clicked.
+
+Choose **Open example** to create a new workflow tab. **Open batch demo...**
+instead asks for a working folder before opening the configured batch workspace.
 
 ## Workflow Index
 
@@ -46,7 +70,8 @@ custom or external workflow JSON files.
 | `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
 | `synthetic-skeleton-qc.json` | synthetic skeleton network | Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries. |
 | `synthetic-advanced-skeleton-network.json` | synthetic advanced skeleton network | Time-indexed 3D skeleton graph stress test. |
-| `synthetic-colocalization-racc.json` | synthetic colocalization | Pixel and ROI-masked colocalization, scatter thresholds, colocalized voxels, and RACC-like output. |
+| `synthetic-colocalization-racc.json` | synthetic colocalization | **New in 0.15.0a5:** focused whole-image and ROI-masked RACC, with tuned manual thresholds, Magma output, method notes and paper citation. |
+| `synthetic-colocalization-overlap.json` | synthetic colocalization | **New in 0.15.0a5:** whole-image and ROI-masked overlays/metrics, Boolean overlap masks, 3D cleanup and connected-region measurements. |
 | `synthetic-object-colocalization-association.json` | synthetic colocalization | Object colocalization, label overlap, nearest distance, event localization, and merged tables. |
 | `synthetic-deconvolution-rl-tv.json` | 2D deconvolution image plus measured PSF | 2D measured-PSF restoration with ordinary RL and RL-TV. |
 | `synthetic-3d-deconvolution-rl-tv.json` | 3D deconvolution volume plus 3D measured PSF | Volumetric PSF-aware restoration with one shared visible float32 Preserve conversion feeding both 25-iteration branches at the authored `1e-12` filter epsilon. |
@@ -59,7 +84,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. In 0.15.0a4 they are:
+Use `--list` to print your version's exact IDs. The table lists the 0.15.0a5 IDs:
 
 | ID | Example title |
 | --- | --- |
@@ -81,6 +106,7 @@ Use `--list` to print your version's exact IDs. In 0.15.0a4 they are:
 | `skeleton-qc` | Skeleton QC |
 | `advanced-skeleton` | Advanced Skeleton Network |
 | `racc-colocalization` | RACC Colocalization |
+| `colocalization-overlap` | Colocalization, Overlap & Object Counts (**New in 0.15.0a5**) |
 | `object-colocalization` | Object Colocalization Association |
 | `deconvolution-2d` | 2D Richardson-Lucy / TV Deconvolution |
 | `deconvolution-3d` | 3D Richardson-Lucy / TV Deconvolution |

@@ -10,25 +10,22 @@ A highlighted version badge with an **↑** means a newer eligible release was
 found. Checking does not download an installer, start setup, or interrupt
 image processing.
 
-!!! note "Unreleased after 0.15.0a4"
+!!! note "New in 0.15.0a5"
     With automatic checking enabled, VIPP checks quietly on **every launch**,
     even if an earlier session checked that day. A session left open continues
-    to check periodically. The released 0.15.0a4 behavior checks at most once a
-    day across sessions.
+    to check periodically.
 
 - **Click the badge** to open **VIPP updates**.
 - **Right-click → Release notes on GitHub** opens notes for your installed version.
 - **Right-click → Check for updates…** checks now and shows the result.
 
 On narrower windows or with larger fonts, the download buttons stack vertically;
-the dialog scrolls without hiding its check and **Close** buttons. The check
-button is **Check again** in the unreleased dialog (**Check for updates** in
-released 0.15.0a4).
+the dialog scrolls without hiding its **Check again** and **Close** buttons.
 
 ## Read the check result
 
-**Unreleased after 0.15.0a4:** the dialog distinguishes the latest check from
-the release information it already knows.
+The dialog distinguishes the latest check from the release information it
+already knows.
 
 | What you see | What it means |
 | --- | --- |
@@ -44,7 +41,7 @@ interrupt calculations or change the installation.
 
 ## Download and open a Windows update
 
-!!! note "Unreleased after 0.15.0a4 — managed desktop installations only"
+!!! note "Managed Windows desktop installations only"
     **Download & open update** is offered only when VIPP can verify that the
     running Windows desktop app is the active installation recorded by its
     managed installer. It does not select a nearby or retired environment.
@@ -70,13 +67,10 @@ Follow the normal [Windows warning guidance](installation.md#verify-the-download
 
 ## Browser and manual update routes
 
-In released 0.15.0a4, **Download installer** and **Download checksums** open
-official GitHub assets in your browser. This route also remains available for
-macOS and environments that cannot use the unreleased managed-Windows action.
-
-The unreleased dialog calls these buttons **Download in browser** and
-**Checksums**. For a managed Windows installation, expand **Other download
-options** to show them.
+**Download in browser** and **Checksums** open official GitHub assets in your
+browser. Use this route for macOS and environments that cannot use the managed
+Windows action. For a managed Windows installation, expand **Other download
+options** to show these buttons.
 
 Verify the download using the [Windows](installation.md#verify-the-download-and-pass-the-windows-warning)
 or [macOS](macos.md) instructions, save your work, close VIPP/napari, then open
@@ -89,10 +83,9 @@ installer is offered, use the release notes and platform instructions.
 
 ## Choose what to check
 
-- **Check for updates on startup** is the unreleased automatic-check setting;
+- **Check for updates on startup** controls automatic checking;
   turn it off to keep only manual checks. Checks also continue periodically
-  during a long session. In released 0.15.0a4 the setting is
-  **Check automatically once a day**.
+  during a long session.
 - **Include pre-release versions** includes alpha, beta and release candidates.
   It starts enabled for prerelease installations and disabled for final releases.
 
@@ -103,6 +96,6 @@ Checks send no images, workflows, file paths, installed version or hardware
 inventory. GitHub still receives ordinary connection information, such as
 your IP address, when serving the public release list.
 
-The unreleased **Download & open update** action additionally contacts the
+The **Download & open update** action additionally contacts the
 official GitHub asset service to fetch the installer and checksum. It does not
 upload your workflows or send the managed installation folder to GitHub.
