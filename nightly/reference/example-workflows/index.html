@@ -572,6 +572,8 @@
       
         
       
+        
+      
     
     
     
@@ -615,6 +617,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3216,11 +3241,22 @@
 
 
 <h1 id="example-workflows">Example Workflows<a class="headerlink" href="#example-workflows" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.15.0a4 contains <strong>21</strong> registered example workflows under:</p>
+<p>VIPP 0.15.0a5 contains <strong>22</strong> registered example workflows under:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>examples/
 </span></code></pre></div>
 <p>They are intended for regression tests, screenshots, tutorials, and manual
 review.</p>
+<p><strong>New in 0.15.0a5:</strong> <strong>RACC Colocalization</strong> focuses
+on the RACC method; the new <strong>Colocalization, Overlap &amp; Object Counts</strong> contains
+the general overlays, metrics and overlap-region counting workflow. See
+<a href="../../workflows/colocalization-association/#choose-an-example">which example to choose</a>.</p>
+<p><strong>Improved in 0.15.0a5:</strong> the full catalogue has been reviewed for clearer
+left-to-right flow, separate analysis branches, and readable notes and tunnel
+labels. Spacing also allows for the controls shown after calculation. The
+examples keep their existing analysis settings and coverage, including the
+recent <a href="../../workflows/colocalization-association/">RACC example settings</a>.
+Reopen an example from the chooser to use its revised layout; your saved copies
+are not rearranged automatically.</p>
 <div class="admonition note">
 <p class="admonition-title">Catalog updates in 0.15.0a3</p>
 <p>VIPP 0.15.0a2 shipped 21 examples. 0.15.0a3 retains the saved interactive
@@ -3234,6 +3270,15 @@ segmentation, binary logic and meshes. The inventory below reflects both changes
 <p>The chooser groups workflows by task and opens each template with its bundled
 sample <code>Image Source</code> nodes already configured. Use <strong>Open</strong> for
 custom or external workflow JSON files.</p>
+<p><strong>New in 0.15.0a5:</strong> Every example has a description, short
+plain-language <strong>What to explore</strong> and <strong>What you'll get</strong> bullet lists, and a
+<strong>Try this</strong> suggestion. <strong>Developer &amp; testing workflows</strong>, at the bottom
+of the list, groups the five interface-checking examples separately from the
+analysis tutorials. Search also finds their descriptions when the group is
+collapsed. The RACC entry explains the method and offers <strong>Read the paper</strong>,
+which opens the original publication in your browser only when clicked.</p>
+<p>Choose <strong>Open example</strong> to create a new workflow tab. <strong>Open batch demo...</strong>
+instead asks for a working folder before opening the configured batch workspace.</p>
 <h2 id="workflow-index">Workflow Index<a class="headerlink" href="#workflow-index" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3332,7 +3377,12 @@ custom or external workflow JSON files.</p>
 <tr>
 <td><code>synthetic-colocalization-racc.json</code></td>
 <td>synthetic colocalization</td>
-<td>Pixel and ROI-masked colocalization, scatter thresholds, colocalized voxels, and RACC-like output.</td>
+<td><strong>New in 0.15.0a5:</strong> focused whole-image and ROI-masked RACC, with tuned manual thresholds, Magma output, method notes and paper citation.</td>
+</tr>
+<tr>
+<td><code>synthetic-colocalization-overlap.json</code></td>
+<td>synthetic colocalization</td>
+<td><strong>New in 0.15.0a5:</strong> whole-image and ROI-masked overlays/metrics, Boolean overlap masks, 3D cleanup and connected-region measurements.</td>
 </tr>
 <tr>
 <td><code>synthetic-object-colocalization-association.json</code></td>
@@ -3355,7 +3405,7 @@ custom or external workflow JSON files.</p>
 <p>Use:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">python</span> <span class="n">scripts</span><span class="p">\</span><span class="n">launch_vipp_intensity_workflow</span><span class="p">.</span><span class="n">py</span> <span class="p">&lt;</span><span class="n">name</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p>Use <code>--list</code> to print your version's exact IDs. In 0.15.0a4 they are:</p>
+<p>Use <code>--list</code> to print your version's exact IDs. The table lists the 0.15.0a5 IDs:</p>
 <table>
 <thead>
 <tr>
@@ -3437,6 +3487,10 @@ custom or external workflow JSON files.</p>
 <td>RACC Colocalization</td>
 </tr>
 <tr>
+<td><code>colocalization-overlap</code></td>
+<td>Colocalization, Overlap &amp; Object Counts (<strong>New in 0.15.0a5</strong>)</td>
+</tr>
+<tr>
 <td><code>object-colocalization</code></td>
 <td>Object Colocalization Association</td>
 </tr>
@@ -3483,7 +3537,7 @@ ID is an error; it does not silently open another example.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 10, 2026 12:28:40 UTC">September 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 14, 2026 11:19:13 UTC">September 14, 2026</span>
   </span>
 
     

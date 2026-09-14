@@ -572,6 +572,8 @@
       
         
       
+        
+      
     
     
     
@@ -615,6 +617,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.15.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.15.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1583,9 +1608,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#choose-an-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose An Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pixel-colocalization" class="md-nav__link">
     <span class="md-ellipsis">
       Pixel Colocalization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#segment-and-count-overlap-regions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Segment And Count Overlap Regions
     </span>
   </a>
   
@@ -3219,9 +3262,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#choose-an-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose An Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pixel-colocalization" class="md-nav__link">
     <span class="md-ellipsis">
       Pixel Colocalization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#segment-and-count-overlap-regions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Segment And Count Overlap Regions
     </span>
   </a>
   
@@ -3326,6 +3387,27 @@
 <h1 id="colocalization-and-association">Colocalization And Association<a class="headerlink" href="#colocalization-and-association" title="Permanent link">&para;</a></h1>
 <p>VIPP supports pixel, ROI-masked, object-restricted, and label-association
 workflows.</p>
+<h2 id="choose-an-example">Choose An Example<a class="headerlink" href="#choose-an-example" title="Permanent link">&para;</a></h2>
+<p><strong>New in 0.15.0a5:</strong> The combined example is now two focused workflows under
+<strong>Colocalization &amp; Association</strong> in <strong>Open example…</strong>:</p>
+<ul>
+<li><strong>RACC Colocalization</strong> shows whole-image and ROI-masked RACC. Both nodes
+  retain <strong>Manual</strong> thresholds of <strong>Ch1 43,970.51</strong> and <strong>Ch2 48,073.03</strong>;
+  Binary Threshold selects the red-channel ROI at <strong>30,000</strong>. Inspect the
+  <a href="../../reference/racc-index/">Magma index images</a>, then change <strong>Theta</strong> to
+  explore the distance penalty. The notes include the method's full name and
+  <a href="https://doi.org/10.1371/journal.pone.0225141">paper</a>.</li>
+<li><strong>Colocalization, Overlap &amp; Object Counts</strong> shows whole-image and ROI-masked
+  overlays and Pearson/Manders metrics, using <strong>Costes auto</strong>. Its separate
+  <strong>Colocalization Mask → Remove Small Objects → Label Connected Components →
+  Measure Objects</strong> branch matches the unmasked white overlap. Cleanup keeps
+  face-connected 3D regions of at least <strong>20 voxels</strong>. Select <strong>Measure Objects</strong>
+  to see one row per retained region; lower the minimum size to <strong>1 voxel</strong> and
+  recalculate to include the small regions too.</li>
+</ul>
+<p>The counting branch is not restricted by the ROI. These settings are tailored
+to the synthetic sample, not defaults for other images. Reopen the examples
+from the catalogue for these changes; previously saved workflows are unchanged.</p>
 <div class="admonition warning">
 <p class="admonition-title">0.13 and later colocalization results can differ from 0.12</p>
 <p>VIPP 0.13 and later retain finite native channel intensities rather than jointly
@@ -3348,6 +3430,34 @@ is the input to the next.</p>
 <p><code>Colocalization Scatter Plot</code> produces a durable density-and-guides image in
 the graph. Use it in parallel too; it is a presentation/QC output, not a
 preprocessing input to the metric calculation.</p>
+<h2 id="segment-and-count-overlap-regions">Segment And Count Overlap Regions<a class="headerlink" href="#segment-and-count-overlap-regions" title="Permanent link">&para;</a></h2>
+<p><strong>New in 0.15.0a5:</strong> Use <strong>Colocalization Mask</strong>, under <strong>Colocalization &amp; Spatial
+Analysis</strong>, to turn
+the white overlap region into a binary segmentation mask rather than an RGB
+picture.</p>
+<ol>
+<li>Connect the two scalar channel images, for example from <strong>Split Channels</strong>.</li>
+<li>Choose <strong>Manual</strong> thresholds in the original intensity units, or <strong>Costes
+   auto</strong>. Review both thresholds in the scatter inspector. A voxel is included
+   when <strong>both channels are at or above their respective thresholds</strong>.</li>
+<li>Connect the mask to <strong>Remove Small Objects</strong> if needed, then <strong>Label
+   Connected Components</strong> and <strong>Measure Objects</strong>. Choose 2D or 3D processing to match
+   what you want to count; the mask retains the input axes and calibration.</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Two channels → Colocalization Mask → Remove Small Objects
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>             → Label Connected Components → Measure Objects
+</span></code></pre></div>
+<p>The measurement table contains one row per connected overlap region. Those
+regions are not necessarily whole mitochondria or autophagosomes: one organelle
+can have several disconnected overlaps. To count which separately segmented
+objects overlap another object set, use <strong>Label Overlap Association</strong> instead.
+Image overlap alone does not establish a biological event such as mitophagy.</p>
+<p>For an ROI, combine the output mask with a binary ROI using <strong>Logical AND</strong>.
+This restricts the output, not the population used to estimate Costes thresholds:
+this node estimates those over the complete input images. To match an existing
+ROI-masked overlay, use its resolved thresholds in <strong>Manual</strong> mode and then
+apply the same ROI. Ordinary <strong>Colocalized Voxels</strong> remains a visual overlay;
+even its <strong>White on black</strong> mode is an RGB image, not a binary mask.</p>
 <h2 id="roi-masked-colocalization">ROI-Masked Colocalization<a class="headerlink" href="#roi-masked-colocalization" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart LR
   C1["Channel 1"] --&gt; M["Masked metrics"]
@@ -3424,23 +3534,23 @@ Archive both fields and the exact column names used in analysis. Independent
 Fiji-generated golden parity remains pending, so validate this path externally
 before consequential use.</p>
 <h2 id="object-colocalization">Object Colocalization<a class="headerlink" href="#object-colocalization" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>labels + channel 1 + channel 2
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  -&gt; Object Colocalization Metrics
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>labels + channel 1 + channel 2
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  -&gt; Object Colocalization Metrics
 </span></code></pre></div>
 <p>This produces one row per object and is designed to merge with object
 morphology and intensity tables.</p>
 <h2 id="label-association">Label Association<a class="headerlink" href="#label-association" title="Permanent link">&para;</a></h2>
 <p>Overlap between two object sets:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>reference labels + target labels
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  -&gt; Label Overlap Association
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>reference labels + target labels
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; Label Overlap Association
 </span></code></pre></div>
 <p>Nearest centroid association:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>reference labels + target labels
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  -&gt; Nearest Object Distance
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>reference labels + target labels
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  -&gt; Nearest Object Distance
 </span></code></pre></div>
 <p>Event or puncta assignment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>events / puncta + regions / ROIs
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  -&gt; Event Localization
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>events / puncta + regions / ROIs
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  -&gt; Event Localization
 </span></code></pre></div>
 <h2 id="reference-workflows">Reference Workflows<a class="headerlink" href="#reference-workflows" title="Permanent link">&para;</a></h2>
 <table>
@@ -3453,7 +3563,11 @@ morphology and intensity tables.</p>
 <tbody>
 <tr>
 <td><code>synthetic-colocalization-racc.json</code></td>
-<td>Pixel and ROI-masked metrics, scatter threshold review, colocalized voxels, and RACC-like index output.</td>
+<td><strong>New in 0.15.0a5:</strong> focused whole-image and ROI-masked RACC-like index output, threshold review, method explanation and citation.</td>
+</tr>
+<tr>
+<td><code>synthetic-colocalization-overlap.json</code></td>
+<td><strong>New in 0.15.0a5:</strong> whole-image and ROI-masked overlays/metrics, Boolean overlap masks, 3D cleanup and connected-region measurements.</td>
 </tr>
 <tr>
 <td><code>synthetic-object-colocalization-association.json</code></td>
@@ -3505,7 +3619,7 @@ comparisons, positive/negative controls, and assay-specific validation.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 14, 2026 11:19:13 UTC">September 14, 2026</span>
   </span>
 
     
