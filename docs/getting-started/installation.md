@@ -120,6 +120,22 @@ After a temporary connection failure, the incomplete candidate is rolled back
 and any previous working VIPP remains active. Choose **Try again** after the
 connection recovers, review the current settings, and install again.
 
+### Read the live installation log
+
+!!! note "Unreleased — after 0.15.0a5"
+    **Installation log** appears above **Advanced details** and shows package
+    download and installation messages as setup receives them. The installation
+    status and settings remain separate from this read-only log.
+
+    - Leave the log at the bottom to follow new messages automatically.
+    - Scroll up to read earlier messages without being pulled back down.
+    - Select **Jump to latest**, or scroll to the bottom, to resume following.
+
+    The on-screen view keeps only recent output and redacts sensitive details.
+    For the full record, use **Advanced details → Open setup log**. Review any
+    log or screenshot before sharing it. The log does not estimate how much
+    time is left or let you enter terminal commands.
+
 ### Update, repair, or remove
 
 **New in 0.15.0a5:** an ownership-verified Windows desktop app can
@@ -224,7 +240,8 @@ VIPP checkout, or an environment with multiple Qt bindings.
 ## Confirm the installation
 
 For an installer-managed copy, open the created VIPP shortcut and choose
-**Gear menu → Open example…**. For a manually managed environment, you can also run:
+**Open example…** from the [workflow actions menu](../reference/interface.md#workflow-actions-menu).
+For a manually managed environment, you can also run:
 
 ```text
 python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"

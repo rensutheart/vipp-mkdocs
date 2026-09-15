@@ -1,12 +1,34 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.15.0a5. Some labels shorten to icons and
-graph-local controls move into the gear menu when the window is narrow.
+Unless marked unreleased, labels below match napari-vipp 0.15.0a5. Some labels
+shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.
+
+## Dialog buttons
+
+!!! note "Unreleased — after 0.15.0a5"
+    VIPP uses the same bottom-button order throughout its example, plot,
+    results, batch and setup windows. The primary action and dismissal stay
+    together on the right:
+
+    | Window | Windows, left to right | macOS, left to right |
+    | --- | --- | --- |
+    | Open an example | **Open example · Cancel** | **Cancel · Open example** |
+    | Export settings | **Export · Cancel** | **Cancel · Export** |
+    | View a plot or table | **Export… · Close** | **Close · Export…** |
+    | Batch workflow | **Check/Continue/Run · Close** | **Close · Check/Continue/Run** |
+
+    Secondary utilities remain farther left. Native file pickers keep the
+    operating system's own layout.
+
+    **Cancel** abandons an unconfirmed action. **Close** dismisses a window;
+    it does not undo completed work or settings already applied. Controls such
+    as **Stop safely**, **Cancel download** and **Cancel check** stop active
+    work and remain distinct from closing the window.
 
 ## Workflow tabs
 
@@ -44,6 +66,29 @@ graph context row holds sidebar toggles, **Find in workflow**, **Refresh**,
 **Focus**, **Auto Arrange**, **Tunnels…**, and zoom. This keeps graph navigation
 separate from file and execution actions.
 
+### Workflow actions menu
+
+!!! note "Unreleased — after 0.15.0a5"
+    The three-dot **Workflow actions** button sits immediately after **Save**,
+    before **Batch workflow**. It separates commands for the active workflow
+    from the gear menu's settings. Its menu is grouped in this order:
+
+    - **Open example…**
+    - **Save workflow as…**
+    - **Export Python…**, **Export reproducibility package…**, then
+      **Export OME dataset…**
+
+    Separators divide these three groups. The gear still holds preferences such
+    as **Workflow saving**. **Save**, ++ctrl+s++ and ++ctrl+shift+s++ keep their
+    existing behavior; only the menu locations change.
+
+    When the graph controls are hidden in a narrow window, **Auto Arrange graph**
+    and **Tunnels…** appear below the exports in a separate group.
+    **Leave batch mode** also appears when a batch is active. Zoom and compute
+    preferences stay in the gear menu.
+
+    In 0.15.0a5, these workflow actions are still in the gear menu.
+
 ### Finding nodes
 
 Use **Find a node to add…** in the Nodes panel to add an operation, or
@@ -59,15 +104,15 @@ names; searching does not change the workflow or its calculations.
 
 | Control | Effect |
 | --- | --- |
-| **New** | Create a new workflow tab. Open a bundled example through **Gear menu → Open example…**; see the [example inventory](example-workflows.md) for your version. |
+| **New** | Create a new workflow tab. Use **Open example…** in the [workflow actions menu](#workflow-actions-menu) for bundled templates; see the [example inventory](example-workflows.md). |
 | **Open** | Open an external or saved workflow JSON. A valid attached batch configuration restores Batch workflow and checks sources without calculating a representative. |
 | **Save / Ctrl+S** | Save the active tab's graph, parameters, layout, compute request, bypass choices, and presentation profiles—not calculated arrays. The first save asks for a path; later saves follow the configured save policy. **Save workflow as…** or ++ctrl+shift+s++ chooses another path. An active batch can be attached to the workflow JSON. |
 | **Batch** | Open or return to **Setup**, **Items & outputs**, **Overrides**, and **Run & results** in the retained Batch workflow window. |
 | **Leave batch** | Discard the representative's transient collection-source overrides and return the tab to ordinary single-image mode. It does not delete files and is unavailable during a run. |
 | **Display settings** | Change graph-card presentation: thumbnail view, contrast method and scope, colour map, resolution, and input/output labels. It does not run a batch representative. |
-| **Export Python…** (gear menu) | Generate a headless script using the shared workflow executor. |
-| **Export reproducibility package…** (gear → Workflow actions; new in 0.15.0a3) | [Review and export](../how-to/export-reproducibility-package.md) an offline report and portable current-workflow recipe. For archived run evidence, use the Batch Run & results report card or its finished-run **Export package…** footer action. |
-| **Export OME dataset…** (gear menu) | Save one reference image with associated graph label outputs. |
+| **Export Python…** ([workflow actions menu](#workflow-actions-menu)) | Generate a headless script using the shared workflow executor. |
+| **Export reproducibility package…** ([workflow actions menu](#workflow-actions-menu); new in 0.15.0a3) | [Review and export](../how-to/export-reproducibility-package.md) an offline report and portable current-workflow recipe. For archived run evidence, use the Batch Run & results report card or its finished-run **Export package…** footer action. |
+| **Export OME dataset…** ([workflow actions menu](#workflow-actions-menu)) | Save one reference image with associated graph label outputs. |
 | **Tunnels...** | Manage named graph outputs and subscribers. |
 | **Auto Arrange** | Apply a one-shot source-to-sink layout; undo restores positions. |
 | **Focus** | Recover the graph center without changing zoom, selection, layout, cache state, or undo history. |

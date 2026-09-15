@@ -66,6 +66,12 @@ the latest concrete activity visible through quiet periods, and exposes its log
 under **Advanced details**. A determinate percentage appears only when the
 underlying dependency tool reports a trustworthy byte total.
 
+!!! note "Unreleased — after 0.15.0a5"
+    The visible **Installation log** shows package download and installation
+    messages. Scroll up without losing your place, then select **Jump to latest**
+    to follow new messages again. See [Read the live installation
+    log](installation.md#read-the-live-installation-log) for the full-log option.
+
 ## Verify the installation
 
 Open the [installed VIPP launcher](launching.md#use-the-installed-shortcut-on-windows).

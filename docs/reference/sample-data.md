@@ -8,6 +8,10 @@ new bimodal threshold gallery. They are available inside
 Image Source > Source = sample
 ```
 
+Unreleased 0.16 development adds a sixteenth sample, **VIPP synthetic
+measurement plots**: 60 isolated ellipses in one calibrated image for the
+[plotting example](../how-to/plot-measurement-results.md).
+
 This is the normal route when building or adapting a workflow. The sample menu
 then lists every bundled sample without adding raw layers to napari first.
 
@@ -27,6 +31,7 @@ File > Open Sample > VIPP synthetic microscopy samples
 | `VIPP synthetic time-lapse multichannel` | `TCZYX` | Preferred starter sample with time, channel, z, y, and x axes. |
 | `VIPP synthetic measurement summary` | `TYX` | Known object counts/areas per timepoint for summary validation. |
 | `VIPP synthetic object morphology` | `YX` | Circle, ellipse, rectangle, and concave 2D objects for derived morphology. |
+| `VIPP synthetic measurement plots` | `YX` | Unreleased: 60 separated ellipses at 0.5 micrometer/pixel, with varied size/elongation and a deliberately generated size–brightness association. |
 | `VIPP synthetic 3D mesh morphology` | `ZYX` | Anisotropic 3D objects for mesh volume, surface, convex hull, and sphericity checks. |
 | `VIPP synthetic skeleton network` | `ZYX` | Sparse 3D skeleton-style network with known endpoints, junctions, spur, fragment, and isolated voxel. |
 | `VIPP synthetic advanced skeleton network` | `TZYX` | Multi-timepoint skeleton stress test with loops, fragments, graph tables, and anisotropic scale. |

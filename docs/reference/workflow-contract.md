@@ -22,6 +22,13 @@ Workflow tabs are independent live sessions, not one multi-workflow file.
 caches, undo/redo histories, transient viewport, and in-flight state are not
 bundled into that JSON.
 
+!!! info "Collected results — unreleased after 0.15.0a5"
+    A results workflow's **Table Source** references an external
+    [measurement dataset](../how-to/collect-measurement-results.md) by path and
+    expected hash. Its typed measurements and collection inventory stay in the
+    separate `.vipp-results.json` file. Share that file separately; saving the
+    workflow or exporting a reproducibility package does not embed its results.
+
 ### Current schema: version 6
 
 A current file identifies itself with:

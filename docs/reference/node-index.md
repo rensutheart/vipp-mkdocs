@@ -317,6 +317,11 @@ Boundaries runs on CPU and preserves the input calibration.
 | `Add Metadata Columns` | table | table | Add treatment, replicate, condition, batch, or other fields. |
 | `Select Table Columns` | table | table | Keep and reorder columns. |
 | `Summarize Measurements` | table | table | Group rows and calculate summary statistics. |
+| `Plot Results` (unreleased 0.16 development) | table | plot | Compare individual/grouped points, histograms, cumulative distributions and scatter plots; open an editable window and export a sized figure. |
+
+See [Plot measurement results](../how-to/plot-measurement-results.md) for
+single-image examples, image means, exclusions and export. Plot Results is
+descriptive; it does not add statistical tests.
 
 ## Colocalization And Spatial Analysis
 

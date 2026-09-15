@@ -55,7 +55,8 @@ Pasted graph nodes receive fresh identities. Connections to nodes outside the
 copied selection are not silently recreated. Inspect the pasted fragment before
 using it for a consequential calculation.
 
-Open **Graph Editing Acceptance Check** from **Gear menu → Open example…** for numbered
+Open **Graph Editing Acceptance Check** through **Open example…** in the
+[workflow actions menu](../reference/interface.md#workflow-actions-menu) for numbered
 notes that exercise tunnel insertion, value transfer, fragment copy/paste,
 group movement, and undo/redo.
 
@@ -99,7 +100,9 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 - Arrange flow from left to right.
 - Put alternative methods on parallel branches, not one after another.
 - Keep source, QC, and output nodes visually distinct.
-- Use **Auto Arrange** in the graph context row (or gear menu on narrow windows) as a
+- Use **Auto Arrange** in the graph context row (or the
+  [workflow actions menu](../reference/interface.md#workflow-actions-menu) when
+  the control is hidden in a narrow window) as a
   starting point, then preserve meaningful
   parallel alignment.
 - Add graph notes at decisions: why a channel was selected, how a threshold was

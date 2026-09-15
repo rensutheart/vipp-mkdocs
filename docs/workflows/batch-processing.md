@@ -329,6 +329,16 @@ this workspace.
 
 ## Save and replay
 
+!!! info "Collect measurements — unreleased after 0.15.0a5"
+    **Collect measurement results…** in **Run & results** brings one saved table
+    output across the batch into a reusable results dataset. Review verified,
+    empty, missing or unusable results and any exclusions; add missing sample
+    annotations without reprocessing images. Export CSV/TSV or Excel directly;
+    saving a native VIPP collection and opening a results workflow are optional.
+    Keep the image summary to account for empty and excluded images. See
+    [Collect measurements from a batch](../how-to/collect-measurement-results.md).
+    This is separate from saving the batch configuration below.
+
 Use **Save config** for a standalone batch configuration and **Open config** to
 reload it against the current workflow. Saving the main workflow also offers
 to attach the batch configuration. Attachments contain settings and local paths,

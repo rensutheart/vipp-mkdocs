@@ -8,6 +8,8 @@ How-to guides answer a focused question once you know the basic interface.
 | insert, duplicate, arrange, annotate, or simplify nodes | [Edit and organize a graph](edit-graph.md) |
 | retain a smaller image region without dropping time points or channels | [Crop an image or volume](crop-images.md) |
 | compare intermediate outputs in napari | [Inspect and compare outputs](inspect-outputs.md) |
+| collect and export saved measurements from many images | [Collect batch measurements](collect-measurement-results.md) (unreleased after 0.15.0a5) |
+| plot object measurements or compare collected results | [Plot measurement results](plot-measurement-results.md) (unreleased 0.16 development) |
 | keep a workflow, send it to someone, or generate Python | [Save, share, and export](save-share-export.md) |
 | review a readable report and portable recipe before sharing | [Export a reproducibility package](export-reproducibility-package.md) (new in 0.15.0a3) |
 | choose an input/output format | [Work with files and stores](../reference/import-export.md) |

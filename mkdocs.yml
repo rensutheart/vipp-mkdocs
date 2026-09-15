@@ -166,6 +166,8 @@ nav:
       - Edit and organize a graph: how-to/edit-graph.md
       - Crop an image or volume: how-to/crop-images.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
+      - Collect batch measurements: how-to/collect-measurement-results.md
+      - Plot measurement results: how-to/plot-measurement-results.md
       - Save, share, and export: how-to/save-share-export.md
       - Export a reproducibility package: how-to/export-reproducibility-package.md
       - Work with files and stores: reference/import-export.md

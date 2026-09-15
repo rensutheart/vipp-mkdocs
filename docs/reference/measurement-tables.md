@@ -29,7 +29,40 @@ Equal row counts are not proof that two tables describe the same observations.
 | Add Metadata Columns | Keeps existing units; new metadata columns are unitless. |
 | Summarize Measurements | Propagates numeric units except for count statistics. |
 
+## Collected batch tables
+
+!!! info "Unreleased — after 0.15.0a5"
+    [Batch measurement collection](../how-to/collect-measurement-results.md)
+    exports CSV/TSV or an Excel workbook directly. Saving a typed
+    `.vipp-results.json` dataset and opening it through **Table Source** are
+    separate, optional steps. Ordinary workflow JSON keeps only the external
+    dataset reference and its hash, not the collected rows.
+
+The collector checks recorded output contents, column types and units before
+appending rows. It does not silently mix incompatible tables or convert pixels
+to physical units. Existing annotation and local object-ID columns are
+preserved alongside their image/source identity.
+
+The item inventory distinguishes a valid zero-row table from a missing,
+changed, unsupported or failed output, and retains deliberate exclusions.
+Zero-row images add no artificial object. Historical CSV/TSV files without
+typed output records are not imported by guessing; a new, explicitly requested
+batch run is needed to produce collectable records.
+
+Excel includes **Measurements**, **Image summary** and **About this
+collection** sheets: rows, per-image outcomes/annotations, and units/run
+information respectively. CSV/TSV offers an optional `-image-summary`
+companion, selected by default, to keep empty and excluded images visible.
+These exports do not rerun measurements. Keep the native VIPP dataset for a
+typed round trip; **Table Source → Export table…** remains CSV/TSV-only.
+
 ## Object morphology
+
+In unreleased 0.16 development builds, connect a measurement table directly to
+**Plot Results** to explore individual points, histograms, cumulative
+distributions or scatter plots. A single labelled image is sufficient; batch
+collection is optional. See [Plot measurement results](../how-to/plot-measurement-results.md)
+for image means, exclusions and figure export.
 
 **Measure Objects** returns one row per label object. Basic fields include ID,
 pixel/voxel area or volume, centroid, bounding box, equivalent diameter, extent,

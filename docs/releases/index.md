@@ -4,6 +4,27 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## Unreleased — after 0.15.0a5
+
+- [Dialog buttons](../reference/interface.md#dialog-buttons) follow one
+  platform-appropriate order: the main action then **Cancel**/**Close** on
+  Windows, and the reverse pair on macOS. Stopping active work stays separate
+  from dismissing its window; native file pickers are unchanged.
+- [Collect batch measurements](../how-to/collect-measurement-results.md) into
+  one reviewed table and export CSV/TSV or Excel directly, without reprocessing
+  images. Preserve image/object identities and annotations; retain empty and
+  excluded images in the optional CSV/TSV image summary or the workbook's
+  always-present **Image summary** sheet. Excel also includes **Measurements**
+  and **About this collection** with units and run information. Saving a native
+  VIPP dataset and opening it through **Table Source** are separate, optional
+  steps. No new plots or statistical tests are included.
+- A separate three-dot [Workflow actions menu](../reference/interface.md#workflow-actions-menu)
+  after **Save** holds examples, **Save workflow as…** and exports, keeping them
+  separate from the gear menu's settings. Saving and export behavior is unchanged.
+- Windows setup shows a [live installation log](../getting-started/installation.md#read-the-live-installation-log)
+  for package downloads and installation. Scrolling up pauses automatic following;
+  **Jump to latest** resumes it. This is not part of the numbered 0.15.0a5 release.
+
 ## 0.15.0a5 alpha
 
 - [0.15.0a5](0.15.0a5.md) — guided examples, a Boolean colocalization mask and

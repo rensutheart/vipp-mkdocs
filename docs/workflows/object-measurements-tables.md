@@ -200,12 +200,24 @@ reviewed before export.*
 
 ## Reference Workflows
 
+For figures from one image or a collected table, see
+[Plot measurement results](../how-to/plot-measurement-results.md) (unreleased
+0.16 development). The **Morphology & Intensity Plots** example measures 60
+synthetic objects and compares four plot types without a batch run.
+
+For results from several images, use
+[Collect measurements from a batch](../how-to/collect-measurement-results.md)
+(unreleased after 0.15.0a5). It appends compatible saved observations into one
+dataset while preserving image identity; **Merge Tables** above joins fields
+describing matching observations within the analysis.
+
 | Workflow | Purpose |
 | --- | --- |
 | `red-channel-object-intensity-measurements.json` | Labels plus matching intensity image into `Measure Objects + Intensity`. |
 | `red-channel-merged-measurement-table.json` | Object morphology, intensity, table merge, and metadata columns. |
 | `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. |
 | `synthetic-derived-object-morphology.json` | Derived 2D morphology, circularity, and Hu moments. |
+| `synthetic-measurement-plots.json` | Unreleased: calibrated shape/intensity measurements from 60 objects, followed by histogram, scatter, individual-point and cumulative plots. |
 | `synthetic-3d-mesh-morphology.json` | True-3D mesh morphology on anisotropic synthetic objects. |
 | `synthetic-mesh-objects.json` | Saved sample-specific colouring, filtering, combining and refinement choices, followed by current-mesh measurements. 0.15.0a3 keeps this as the single mesh-object example. |
 
