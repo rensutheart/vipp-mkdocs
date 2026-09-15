@@ -24,16 +24,45 @@ edit the same saved settings; changing plot settings does not rerun the source
 image or its measurements. Save the workflow to keep your choices. Recalculate
 if the measurement table itself becomes stale.
 
+While an update is queued, preparing measurements or calculating, the inspector
+and plot window show an activity indicator and the current stage, not an
+estimated percentage. Any previous drawing is out of date and cannot be
+exported until the updated plot is ready.
+The activity row stays reserved when its indicator is hidden, so starting and
+finishing an update does not shift the plot or controls.
+
 | Plot type | Use it to | Useful choices |
 | --- | --- | --- |
 | Compare groups | See individual measurements, with or without groups | Mean, median or no summary line; each visible point remains an observation. |
 | Distribution | See which values are common or how many fall below a value | Histogram with shared bins, or Cumulative; histogram count or percentage. |
 | Scatter | Compare two measurements, such as area and mean intensity | X and Y measurement; optional group colours. No fitted line or significance test is added. |
 
-Units from the measurement table appear on the axes. Missing, nonnumeric and
-non-finite measurements are not treated as zero; review the included/excluded
+Axis titles use readable measurement names and show the declared unit once.
+Long numeric tick labels are shortened for display without changing their
+values. Category labels wrap, rotate or spread out to fit the window or export;
+a note appears if some labels must be omitted. All groups remain plotted.
+Click a point or choose **View plotted data…** to inspect exact group values.
+
+Histogram **Count** axes and object measurements explicitly recorded in count
+units, such as branch counts, use whole-number ticks. Percentages, cumulative
+proportions and other measurements retain decimals where useful; **Mean per
+image** can be fractional even when the original measurements are counts.
+
+Missing, nonnumeric and non-finite measurements are not treated as zero;
+review the included/excluded
 counts. Logarithmic axes cannot show zero or negative values, and report those
 exclusions. They do not change the original measurements.
+
+### Choose categories or a numeric axis
+
+**Compare groups** treats every distinct **Group by** value as a separate,
+equally spaced category—even when the values are numbers. VIPP never silently
+bins or merges those values, or changes your plot type. More than 12 numeric
+groups triggers a warning to review this choice.
+
+To compare two numeric measurements, choose **Scatter**, put the numeric field
+in **X measurement**, and leave **Group by** unset or choose a category such as
+treatment. This makes horizontal distances represent numerical differences.
 
 ## Try the guided example
 
@@ -88,6 +117,24 @@ right independent unit depends on how the experiment was sampled or treated.
 Plot Results does not infer biological replication or perform statistical
 tests. An empty image contributes no invented zero-valued object or mean;
 review the collection's image summary separately for missing or empty images.
+
+### If image means cannot be calculated
+
+**Mean per image** needs one group per image. A **Group by** measurement such
+as minor axis length can vary between objects in that image, so it cannot
+define the image's group.
+
+- For individual objects, set **Each point represents** to **Objects**.
+- For image means, set **Group by** to **None**, or choose an image-level
+  category such as treatment that is the same for every object in each image.
+- If different images reuse an ID, choose an **Image identity column** that
+  uniquely identifies each image.
+
+The inspector and plot window show the problem beside the controls. Choose
+**Review plot…** to reopen a failed plot; the compact workflow status offers
+**Details…** for the full message. Correct the settings and calculate again.
+VIPP does not silently regroup objects or change the averaging rule, and an
+outdated plot stays unavailable for export.
 
 ## Export a figure
 
