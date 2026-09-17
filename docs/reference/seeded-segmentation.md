@@ -46,6 +46,8 @@ regularization in Centrosome and VIPP. It does not establish that the whole
 CellProfiler **IdentifySecondaryObjects** workflow has been reproduced.
 Normalization, smoothing, thresholding, excluded seed objects, hole filling,
 border filtering and cytoplasm construction must each be matched separately.
+The unreleased [CellProfiler compartment profile](cellprofiler-compartments.md)
+provides those surrounding stages for the statistics paper's specific settings.
 
 See the [Centrosome API implementation](https://github.com/CellProfiler/centrosome/blob/fb6881b5c07221bbe80ff356beeb04d2273ecd78/centrosome/propagate.py)
 and the original method, [Jones, Carpenter and Golland (2005)](https://doi.org/10.1007/11569541_54).

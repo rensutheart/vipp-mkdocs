@@ -53,6 +53,11 @@ to 0–1. Make any rescaling an explicit upstream step and save its settings.
 The node uses manual/cached execution; recalculate it after changing an input
 or parameter.
 
+For the statistics paper's complete nuclei/cell/cytoplasm segmentation, follow
+[Reproduce the statistics-paper compartments](../workflows/statistics-paper-compartments.md).
+It adds the CellProfiler-specific smoothing, seed exclusions, hole filling and
+cytoplasm definition around this growth step.
+
 ## Use watershed on a 3D volume
 
 1. Prepare aligned **ZYX** image, marker-label and Boolean mask volumes. Select

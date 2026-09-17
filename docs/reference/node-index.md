@@ -1,10 +1,11 @@
 # Node Index
 
-This page lists all **127 operation specifications** registered by
-`NODE_LIBRARY` in nightly development. The palette exposes **125**: the two
+This page lists all **133 operation specifications** registered by
+`NODE_LIBRARY` in nightly development. The palette exposes **131**: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
-selection. The unreleased addition is **Grow Regions from Seeds — CellProfiler
-Propagation**; 0.15.0a5 has **126** specifications and **124** palette nodes.
+selection. The unreleased additions are **Grow Regions from Seeds — CellProfiler
+Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
+0.15.0a5 has **126** specifications and **124** palette nodes.
 
 **Save Image** accepts images or 3D meshes and passes the connected
 image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
@@ -40,16 +41,16 @@ for the accelerated node families and their current public regions.
 | Family | Nodes |
 | --- | ---: |
 | Image Data | 25 |
-| Filtering | 18 |
-| Segmentation | 19 |
+| Filtering | 19 |
+| Segmentation | 22 |
 | Morphology | 15 |
 | 3D Meshes | 8 |
 | Measurements | 13 |
 | Colocalization & Spatial Analysis | 13 |
-| Label Operations | 8 |
+| Label Operations | 10 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **127** |
+| **Total** | **133** |
 
 ## Image Data
 
@@ -149,6 +150,7 @@ and is not merely a display adjustment. See
 | --- | --- | --- |
 | `Average Blur` | image | Simple local averaging. |
 | `Gaussian Blur` | image | Gaussian smoothing. |
+| `Smooth — CellProfiler Gaussian` (unreleased) | image | One YX float32 plane; diameter-to-sigma conversion and normalized borders from CP4.2.6. See [profile](cellprofiler-compartments.md). |
 | `Gaussian Blur 3D` | image | Volumetric Gaussian smoothing. |
 | `Median Filter` | image | Remove salt-and-pepper noise. |
 | `Sigma Filter` | image | Edge-preserving local smoothing using a sigma-selected circular neighborhood. |
@@ -196,6 +198,7 @@ see [validation status](validation-status.md).
 | `Otsu Threshold` | mask |
 | `Triangle Threshold` | mask |
 | `Li Threshold` | mask |
+| `Threshold — CellProfiler Minimum Cross-Entropy` (unreleased) | mask; normalized float32 YX profile with threshold calculated before optional smoothing |
 | `Yen Threshold` | mask |
 | `Isodata Threshold` | mask |
 | `Minimum Threshold` | mask |
@@ -227,6 +230,8 @@ it cannot identify a valid two-peak histogram. See
 | `Euclidean Distance Transform` | array | image | Distance map for watershed. |
 | `H-Maxima Markers` | array | labels | Marker generation. |
 | `Marker-Controlled Watershed` | image/distance plus markers plus mask | labels | Split touching objects. |
+| `Segment Nuclei — CellProfiler Shape` (unreleased) | normalized float32 nuclear image | retained and pre-filter labels | Manual/cached 2D CP4.2.6 shape profile. |
+| `Prepare Seeds — CellProfiler Propagation` (unreleased) | pre-filter plus retained nuclei | labels | Preserve excluded border competitors for faithful cell growth. |
 | `Grow Regions from Seeds — CellProfiler Propagation` (unreleased) | guidance image plus seed labels plus Boolean foreground mask | labels | Manual/cached CPU growth on one YX plane using Centrosome. See [inputs and compatibility](seeded-segmentation.md). |
 | `Expand Labels` | labels | labels | Grow labels without overlap. |
 
@@ -279,6 +284,8 @@ refinement caveats and 3MF/OBJ export.
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
+| `Finish Cell Regions — CellProfiler` (unreleased) | grown regions plus retained nuclei | labels | Fill labelled holes and map cells to retained nucleus IDs. |
+| `Extract Cytoplasm — CellProfiler` (unreleased) | cells plus nuclei | labels | Subtract nuclei, optionally retaining their one-pixel outline. |
 | `Label Connected Components` | mask | labels | Convert mask to object IDs. |
 | `Clear Border Objects` | mask or labels | same type | Remove objects touching image boundary. |
 | `Filter Labels By Volume` | labels | labels | Keep/remove labels by pixel/voxel count. |

@@ -6,6 +6,13 @@ data.
 
 ## Unreleased / nightly
 
+- Six **CellProfiler compartment profile** nodes add the statistics paper's
+  explicit 2D smoothing, thresholding, nuclear segmentation, seed preparation,
+  cell-region finishing and cytoplasm construction. See the
+  [worked workflow](../workflows/statistics-paper-compartments.md) and
+  [input and parameter reference](../reference/cellprofiler-compartments.md).
+  Agreement with the original CellProfiler runtime is recorded separately
+  from reproduction of published measurements.
 - **Grow Regions from Seeds — CellProfiler Propagation** adds the 2D CPU
   Centrosome method with image, seed-label and Boolean mask inputs. It preserves
   seed IDs, requires one aligned YX plane and exposes regularization without

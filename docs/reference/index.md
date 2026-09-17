@@ -12,6 +12,7 @@ task sequences.
 | [Graph display settings](display-settings.md) | Choose thumbnail view, contrast population, resolution, and port labels. |
 | [Intensity and thresholds](intensity-thresholds.md) | Check histogram populations, cutoff modes, and precision limits. |
 | [Seeded segmentation](seeded-segmentation.md) | Compare unreleased CellProfiler Propagation with existing 3D watershed; check inputs, intensity scale and calibration limits. |
+| [CellProfiler compartment profile](cellprofiler-compartments.md) | Match the statistics paper's smoothing, nuclear objects, competing seeds, cell filtering and cytoplasm definition. |
 | [Channel and axis controls](channel-axis-controls.md) | Split/extract channels, compose RGB, resize axes, and supply acquisition metadata. |
 | [Measurement tables and units](measurement-tables.md) | Preserve identity keys and understand physical-column and mesh limits. |
 | [Skeleton nodes](skeleton-nodes.md) | Interpret component, branch, graph, and whole-network outputs. |
