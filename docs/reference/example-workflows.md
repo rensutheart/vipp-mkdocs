@@ -53,7 +53,7 @@ instead asks for a working folder before opening the configured batch workspace.
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
-| `exhaustive-inspector-showcase.json` | seven synthetic-data lanes including the threshold gallery and label-boundary QC | Comprehensive manual review of every palette operation, connected-input summaries, scientific controls, and result sections. Use a focused tutorial for a first workflow; this is a broad inspector acceptance example. |
+| `exhaustive-inspector-showcase.json` | eight synthetic-data lanes including the threshold gallery, label-boundary QC, and 2D CellProfiler Propagation | Comprehensive manual review of every palette operation, connected-input summaries, scientific controls, and result sections. The Propagation lane is unreleased. Use a focused tutorial for a first workflow; this is a broad inspector acceptance example. |
 | `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, one-step undo/redo, and a qualified GPU dtype repair. Its deliberately loose demonstration fragments are not calculated. |
 | `responsive-volume-crop-acceptance.json` | synthetic time-lapse multichannel | Numbered TCZYX checks for explicit-Z crop margins, immediate 2D/3D ROI feedback, one committed calculation and undo gesture, preserved T/C and physical origins, QYX safety, and truthful CPU/GPU status. |
 | `safe-node-bypass-acceptance.json` | synthetic volume | Focused Crop Stack checks for exact pass-through data, would-run thumbnails, bypass styling, undo/save/export, GPU-neutral status, and batch Run/Bypass profiles. |
