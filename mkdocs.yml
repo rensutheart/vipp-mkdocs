@@ -165,6 +165,7 @@ nav:
       - Choose CPU or GPU compute: how-to/choose-compute.md
       - Edit and organize a graph: how-to/edit-graph.md
       - Crop an image or volume: how-to/crop-images.md
+      - Grow regions from seeds: how-to/grow-regions-from-seeds.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
       - Save, share, and export: how-to/save-share-export.md
       - Export a reproducibility package: how-to/export-reproducibility-package.md
@@ -189,6 +190,7 @@ nav:
       - Toolbar and settings: reference/interface.md
       - Graph display settings: reference/display-settings.md
       - Intensity and thresholds: reference/intensity-thresholds.md
+      - Seeded segmentation: reference/seeded-segmentation.md
       - Channel and axis controls: reference/channel-axis-controls.md
       - Measurement tables and units: reference/measurement-tables.md
       - Skeleton node outputs: reference/skeleton-nodes.md

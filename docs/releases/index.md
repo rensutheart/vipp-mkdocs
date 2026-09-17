@@ -4,6 +4,17 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## Unreleased / nightly
+
+- **Grow Regions from Seeds — CellProfiler Propagation** adds the 2D CPU
+  Centrosome method with image, seed-label and Boolean mask inputs. It preserves
+  seed IDs, requires one aligned YX plane and exposes regularization without
+  hidden intensity normalization. See the
+  [task guide](../how-to/grow-regions-from-seeds.md) and
+  [compatibility boundary](../reference/seeded-segmentation.md).
+- The seeded-segmentation guide also explains existing 3D watershed, including
+  its voxel-grid distance and anisotropic-calibration limits.
+
 ## 0.15.0a5 alpha
 
 - [0.15.0a5](0.15.0a5.md) — guided examples, a Boolean colocalization mask and

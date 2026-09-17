@@ -1,17 +1,18 @@
 # Node Index
 
-This page lists all **126 operation specifications** registered by
-`NODE_LIBRARY` in 0.15.0a5, including **Colocalization Mask**. The palette
-exposes **124**: the two legacy scatter raster operations remain loadable but
-are hidden from new-node selection. This includes **Convex Hull** and
-eight nodes in **3D Meshes**.
+This page lists all **127 operation specifications** registered by
+`NODE_LIBRARY` in nightly development. The palette exposes **125**: the two
+legacy scatter raster operations remain loadable but are hidden from new-node
+selection. The unreleased addition is **Grow Regions from Seeds — CellProfiler
+Propagation**; 0.15.0a5 has **126** specifications and **124** palette nodes.
 
 **Save Image** accepts images or 3D meshes and passes the connected
 image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.15.0a5 source registry.
+    Titles and families follow the source registry, with unreleased additions
+    marked explicitly.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -40,15 +41,15 @@ for the accelerated node families and their current public regions.
 | --- | ---: |
 | Image Data | 25 |
 | Filtering | 18 |
-| Segmentation | 18 |
+| Segmentation | 19 |
 | Morphology | 15 |
 | 3D Meshes | 8 |
 | Measurements | 13 |
-| Colocalization & Spatial Analysis | 12 |
+| Colocalization & Spatial Analysis | 13 |
 | Label Operations | 8 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **125** |
+| **Total** | **127** |
 
 ## Image Data
 
@@ -226,6 +227,7 @@ it cannot identify a valid two-peak histogram. See
 | `Euclidean Distance Transform` | array | image | Distance map for watershed. |
 | `H-Maxima Markers` | array | labels | Marker generation. |
 | `Marker-Controlled Watershed` | image/distance plus markers plus mask | labels | Split touching objects. |
+| `Grow Regions from Seeds — CellProfiler Propagation` (unreleased) | guidance image plus seed labels plus Boolean foreground mask | labels | Manual/cached CPU growth on one YX plane using Centrosome. See [inputs and compatibility](seeded-segmentation.md). |
 | `Expand Labels` | labels | labels | Grow labels without overlap. |
 
 ## Morphology
