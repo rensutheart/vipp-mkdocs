@@ -10,6 +10,12 @@ Measurement nodes produce tables, not images. Each table carries ordered
 columns, a table kind, row/column counts, a source name where available, and
 per-column units where the calculation defines them.
 
+Unreleased [Results Workspace](../how-to/results-workspace.md) combines table
+viewing, Statistics controls and Plot Results without a new table type. Search
+and visible columns affect only the view; exports retain the complete current
+table. Plot inputs explicitly distinguish the source measurements from a
+selected summary table.
+
 Keep the keys that distinguish observations:
 
 - leading-axis indices, such as `t_index`, `c_index`, and `z_index`;
@@ -28,6 +34,13 @@ Equal row counts are not proof that two tables describe the same observations.
 | Select Table Columns | Preserves the selected columns' units. |
 | Add Metadata Columns | Keeps existing units; new metadata columns are unitless. |
 | Summarize Measurements | Propagates numeric units except for count statistics. |
+
+In unreleased 0.16 development builds, **Statistics** expands Summarize
+Measurements with explicit object/image/sample levels and counts. It retains
+each measurement's units in separate result columns. Old recipes retain their
+calculations until explicitly upgraded. See
+[Summarize measurements](../how-to/summarize-measurements.md) and the
+[method/count reference](statistics.md).
 
 ## Collected batch tables
 

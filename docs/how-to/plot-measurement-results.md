@@ -24,6 +24,26 @@ edit the same saved settings; changing plot settings does not rerun the source
 image or its measurements. Save the workflow to keep your choices. Recalculate
 if the measurement table itself becomes stale.
 
+For controls beside tables, summaries and figures in one window, choose
+**Open Results Workspace…**. Its **Plots** view edits the same Plot Results
+node. The top selection bar (**Data source → Statistics node → Plot**) browses
+connected nodes without changing the workflow; choose **None — use input
+data** for plots directly connected to the data source. Tabs only change the
+view. **Change plot input…** opens controls to deliberately reconnect the
+selected plot; see [Results Workspace](results-workspace.md#choose-what-the-plot-uses)
+before interpreting the plotted values.
+
+**Plot settings** groups the measurement, grouping and observation choices.
+**Appearance** contains the title, axis and styling controls. Bold text marks
+these section headings; individual field labels use regular text. Its outlined
+chevron points right when collapsed and down when expanded, and stays readable
+in light and dark themes across the inspector, plot window and Results Workspace.
+
+In Results Workspace, the figure fits the available preview area while the
+settings scroll independently. Enlarge the window or drag the divider for a
+larger preview. This changes only the on-screen view, not the data, saved plot
+recipe or exported figure size.
+
 While an update is queued, preparing measurements or calculating, the inspector
 and plot window show an activity indicator and the current stage, not an
 estimated percentage. Any previous drawing is out of date and cannot be
@@ -48,6 +68,27 @@ units, such as branch counts, use whole-number ticks. Percentages, cumulative
 proportions and other measurements retain decimals where useful; **Mean per
 image** can be fractional even when the original measurements are counts.
 
+### Set grid and axis-label spacing
+
+Under **Appearance**, leave **X axis label interval** and **Y axis label
+interval** on **Auto** to let VIPP choose readable spacing. Uncheck **Auto**
+and enter a positive interval for evenly spaced numeric labels and matching
+grid lines: for example, `100` for area ticks at 100-unit steps or `2` for count
+ticks at two-count steps.
+
+This changes the axis markings, not histogram bins, measurements or summary
+values. The same saved interval is used in the inspector, plot window,
+Results Workspace and exported figures.
+
+- Count axes require whole-number intervals of at least 1.
+- The **Compare groups** horizontal axis is categorical, so numeric X
+  intervals do not apply. Category label spacing remains automatic.
+- Logarithmic axes use **Auto**; switch the corresponding interval to Auto
+  before using a log scale. A saved incompatible interval is reported rather
+  than silently replaced.
+- If a custom interval would make the axis too dense, increase it or use
+  Auto. VIPP does not silently substitute a different custom interval.
+
 Missing, nonnumeric and non-finite measurements are not treated as zero;
 review the included/excluded
 counts. Logarithmic axes cannot show zero or negative values, and report those
@@ -59,6 +100,10 @@ exclusions. They do not change the original measurements.
 equally spaced category—even when the values are numbers. VIPP never silently
 bins or merges those values, or changes your plot type. More than 12 numeric
 groups triggers a warning to review this choice.
+
+Read the highlighted warning beside the plot before interpreting it. Warning
+text adapts to light/dark themes and wraps to the inspector width, expanding
+vertically so the full message remains available.
 
 To compare two numeric measurements, choose **Scatter**, put the numeric field
 in **X measurement**, and leave **Group by** unset or choose a category such as
@@ -151,5 +196,8 @@ not save files; export requires an explicit destination. A stale plot cannot
 be exported as a current result. Keep the original measurement table and
 workflow alongside any figure you share.
 
-Paired/time-course views, object-count/fraction plots, confidence intervals and
-inferential tests are not part of this first plotting release.
+For a reusable descriptive summary table, use
+[Statistics](summarize-measurements.md) with explicit object/image/sample
+aggregation. Paired/time-course views and object-count/fraction plots are not
+included here. Confidence intervals and inferential tests are outside the
+0.16 results scope; they are not a promised next phase.

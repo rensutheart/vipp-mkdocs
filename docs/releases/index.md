@@ -6,6 +6,25 @@ data.
 
 ## Unreleased — after 0.15.0a5
 
+- [Results Workspace](../how-to/results-workspace.md) keeps Data, Summary and
+  Plots beside their controls. Add or edit ordinary Statistics/Plot Results
+  nodes with synchronized inspectors and windows, and explicitly choose
+  original measurements or summary rows as the plot source. Table search and
+  visible columns do not change the analysis or full-table exports.
+- [Plot axis spacing](../how-to/plot-measurement-results.md#set-grid-and-axis-label-spacing)
+  offers Auto or custom positive numeric tick intervals, with grid lines at
+  those ticks and the same settings in exported figures. Count-axis intervals
+  remain integers; category spacing and log axes use automatic ticks.
+- [Statistics](../how-to/summarize-measurements.md) expands Summarize
+  Measurements with descriptive object, image-mean and sample-mean summaries,
+  explicit within-sample weighting, exclusion counts and retained units.
+  New recipes report singleton sample SD as undefined; old summaries retain
+  their previous behavior until explicit upgrade. No tests, p-values,
+  significance labels or confidence intervals are added.
+- [Plot measurement results](../how-to/plot-measurement-results.md) as grouped
+  points, histograms, cumulative distributions or scatter plots, with an
+  editable window and sized raster/vector figure export. Distinguish objects
+  from equally weighted image means; plots are descriptive.
 - [Dialog buttons](../reference/interface.md#dialog-buttons) follow one
   platform-appropriate order: the main action then **Cancel**/**Close** on
   Windows, and the reverse pair on macOS. Stopping active work stays separate

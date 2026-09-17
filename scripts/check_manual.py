@@ -74,6 +74,20 @@ REQUIRED = {
         "anisotropic",
         "mesh_status",
     ),
+    "how-to/results-workspace.md": (
+        "Unreleased",
+        "Original measurements",
+        "Summary table",
+        "does not create nodes",
+        "complete current table",
+        "does not discard edits",
+    ),
+    "how-to/plot-measurement-results.md": (
+        "Auto",
+        "Count axes require whole-number intervals",
+        "Logarithmic axes use",
+        "not histogram bins",
+    ),
     "reference/intensity-thresholds.md": (
         "65,536",
         "2^53",

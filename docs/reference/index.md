@@ -13,6 +13,7 @@ task sequences.
 | [Intensity and thresholds](intensity-thresholds.md) | Check histogram populations, cutoff modes, and precision limits. |
 | [Channel and axis controls](channel-axis-controls.md) | Split/extract channels, compose RGB, resize axes, and supply acquisition metadata. |
 | [Measurement tables and units](measurement-tables.md) | Preserve identity keys and understand physical-column and mesh limits. |
+| [Statistics methods and counts](statistics.md) | Define descriptive summaries, weighting, exclusions and legacy behavior (unreleased 0.16 development). |
 | [Skeleton nodes](skeleton-nodes.md) | Interpret component, branch, graph, and whole-network outputs. |
 | [Colocalization metrics](colocalization-metrics.md) | Read exact Pearson, Manders, and Costes definitions and compatibility limits. |
 | [RACC-like index](racc-index.md) | Understand the regression geometry, parameters, and failure cases. |

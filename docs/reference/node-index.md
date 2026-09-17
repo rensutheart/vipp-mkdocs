@@ -316,12 +316,14 @@ Boundaries runs on CPU and preserves the input calibration.
 | `Merge Tables` | tables | table | Join measurement branches. |
 | `Add Metadata Columns` | table | table | Add treatment, replicate, condition, batch, or other fields. |
 | `Select Table Columns` | table | table | Keep and reorder columns. |
-| `Summarize Measurements` | table | table | Group rows and calculate summary statistics. |
+| `Summarize Measurements` / `Statistics` (new name and recipe unreleased) | table | table | Descriptive summaries; new recipes explicitly distinguish objects, image means and sample means with weighting, exclusions and counts. |
 | `Plot Results` (unreleased 0.16 development) | table | plot | Compare individual/grouped points, histograms, cumulative distributions and scatter plots; open an editable window and export a sized figure. |
 
 See [Plot measurement results](../how-to/plot-measurement-results.md) for
 single-image examples, image means, exclusions and export. Plot Results is
-descriptive; it does not add statistical tests.
+descriptive; it does not add statistical tests. See
+[Summarize measurements](../how-to/summarize-measurements.md) for Statistics;
+older summaries retain their legacy calculations until explicit upgrade.
 
 ## Colocalization And Spatial Analysis
 

@@ -167,7 +167,9 @@ nav:
       - Crop an image or volume: how-to/crop-images.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
       - Collect batch measurements: how-to/collect-measurement-results.md
+      - Explore the Results Workspace: how-to/results-workspace.md
       - Plot measurement results: how-to/plot-measurement-results.md
+      - Summarize measurements: how-to/summarize-measurements.md
       - Save, share, and export: how-to/save-share-export.md
       - Export a reproducibility package: how-to/export-reproducibility-package.md
       - Work with files and stores: reference/import-export.md
@@ -193,6 +195,7 @@ nav:
       - Intensity and thresholds: reference/intensity-thresholds.md
       - Channel and axis controls: reference/channel-axis-controls.md
       - Measurement tables and units: reference/measurement-tables.md
+      - Statistics methods and counts: reference/statistics.md
       - Skeleton node outputs: reference/skeleton-nodes.md
       - Colocalization metric definitions: reference/colocalization-metrics.md
       - RACC-like index: reference/racc-index.md

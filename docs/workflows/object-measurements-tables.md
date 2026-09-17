@@ -200,6 +200,16 @@ reviewed before export.*
 
 ## Reference Workflows
 
+To build tables, summaries and figures interactively in one window, use
+[Results Workspace](../how-to/results-workspace.md) (unreleased 0.16
+development). Its controls edit the ordinary workflow nodes; existing
+inspectors and table/plot windows remain available.
+
+For descriptive counts, mean/median, spread or range, see
+[Summarize measurements](../how-to/summarize-measurements.md) (unreleased
+0.16 development). Choose objects, image means or declared-sample means
+explicitly; no inferential tests or confidence intervals are added.
+
 For figures from one image or a collected table, see
 [Plot measurement results](../how-to/plot-measurement-results.md) (unreleased
 0.16 development). The **Morphology & Intensity Plots** example measures 60
@@ -215,7 +225,7 @@ describing matching observations within the analysis.
 | --- | --- |
 | `red-channel-object-intensity-measurements.json` | Labels plus matching intensity image into `Measure Objects + Intensity`. |
 | `red-channel-merged-measurement-table.json` | Object morphology, intensity, table merge, and metadata columns. |
-| `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. |
+| `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. Unreleased builds use the new descriptive recipe, including undefined singleton sample SD. |
 | `synthetic-derived-object-morphology.json` | Derived 2D morphology, circularity, and Hu moments. |
 | `synthetic-measurement-plots.json` | Unreleased: calibrated shape/intensity measurements from 60 objects, followed by histogram, scatter, individual-point and cumulative plots. |
 | `synthetic-3d-mesh-morphology.json` | True-3D mesh morphology on anisotropic synthetic objects. |
