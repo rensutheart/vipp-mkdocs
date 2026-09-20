@@ -4,7 +4,15 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Unreleased — after 0.15.0a5
+## 0.16.0a1 — unreleased preparation
+
+[Read the 0.16.0a1 overview](0.16.0a1.md) for the combined measurement,
+Results Workspace and seeded-segmentation features, suggested first examples,
+and compatibility limits. This preparation does not announce a published
+package or completed release qualification. The current published
+installation instructions remain on 0.15.0a5.
+
+### Changes after 0.15.0a5
 
 - [Name graph nodes](../how-to/edit-graph.md#name-a-node) through the inspector's
   **Name** field or **Rename…**. Table Source, Statistics and Plot Results also
@@ -53,6 +61,21 @@ data.
 - Windows setup shows a [live installation log](../getting-started/installation.md#read-the-live-installation-log)
   for package downloads and installation. Scrolling up pauses automatic following;
   **Jump to latest** resumes it. This is not part of the numbered 0.15.0a5 release.
+- Six **CellProfiler compartment profile** nodes add the statistics paper's
+  explicit 2D smoothing, thresholding, nuclear segmentation, seed preparation,
+  cell-region finishing and cytoplasm construction. See the
+  [worked workflow](../workflows/statistics-paper-compartments.md) and
+  [input and parameter reference](../reference/cellprofiler-compartments.md).
+  Agreement with the original CellProfiler runtime is recorded separately
+  from reproduction of published measurements.
+- **Grow Regions from Seeds — CellProfiler Propagation** adds the 2D CPU
+  Centrosome method with image, seed-label and Boolean mask inputs. It preserves
+  seed IDs, requires one aligned YX plane and exposes regularization without
+  hidden intensity normalization. See the
+  [task guide](../how-to/grow-regions-from-seeds.md) and
+  [compatibility boundary](../reference/seeded-segmentation.md).
+- The seeded-segmentation guide also explains existing 3D watershed, including
+  its voxel-grid distance and anisotropic-calibration limits.
 
 ## 0.15.0a5 alpha
 

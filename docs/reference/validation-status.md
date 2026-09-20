@@ -5,6 +5,72 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## Unreleased CellProfiler compartment profile
+
+The six new [compartment stages](cellprofiler-compartments.md) implement the
+specific CellProfiler 4.2.6 settings recovered from the statistics-paper
+authors' original run records. An independent synthetic reference captured
+from the official CellProfiler 4.2.6 executable checks smoothed images,
+threshold masks, retained and excluded nuclei, cell regions and cytoplasm.
+VIPP matches every captured stage exactly on that fixture. Across 376 acquired
+fields (40 IDR0139 and 336 IDR0028), all 1,128 nuclei, cell and cytoplasm label
+images agree exactly with the independent runtime: 455,209,920 label pixels
+compared. All 93,246 compared compartment mean-intensity values also agree
+exactly. The comparison verified each field's execution and artifact receipts
+against one consistent execution contract.
+
+These acquired-field checks found two Actin threshold-mask pixel differences:
+one in IDR0139 J05 field 003 and one in IDR0028 plate 2B, C13 field 023. The
+historical and current NumPy float32 Li iterations give slightly different
+thresholds; all final compartment labels still agree exactly. This profile
+therefore does not promise bitwise identity for every intermediate across
+dependency versions.
+
+These checks use an independent historical runtime, rather than calling the
+same installed function twice. Published-result comparison is separate.
+All 336 IDR0028 source files match the authors' recorded digests; field counts
+total 9,550 cells, and nuclear/cytoplasmic means agree with the exported
+measurements to CSV precision (maximum absolute difference below 1e-16).
+IDR0139's eight fields in N12 and O02 also match the recorded files and
+measurements. The other 32 IDR0139 fields have different file digests and
+produce different thresholds or counts, leaving full published-result
+reproduction unresolved. The pinned full exported table and notebook subset
+agree with each other.
+
+The author code's ratio uses nuclear mean divided by nuclear mean plus
+cytoplasmic mean; the supplementary prose describes a different denominator.
+Published summary conventions also need to be preserved explicitly. Do not
+alter segmentation parameters merely to force agreement with a printed value.
+The [application evidence record](https://github.com/rensutheart/napari-vipp/blob/main/docs/validation/statistics-paper-reproduction.md)
+records data identity and the separate implementation and paper comparisons.
+
+## Unreleased seeded segmentation
+
+The new 2D **Grow Regions from Seeds — CellProfiler Propagation** node calls
+Centrosome 1.3.4. Its checks compare identical inputs with the reference backend
+and cover input immutability, numeric ranges, axes, grids, graph execution,
+workflow/export and batch provenance. This is kernel and integration evidence;
+it does not reproduce CellProfiler's full object-segmentation pipeline.
+Four acquired 996-by-996 DNA/Actin fields also show zero differing pixels against
+Centrosome through both the shared executor and generated Python. Their seed
+preparation is an illustrative workflow, not the paper's complete cell analysis.
+
+Existing **3D watershed** was exercised on an analytical touching-spheres
+phantom and seven acquired mitochondrial volumes: one Nellie yeast time point
+and six mammalian stacks. All seven VIPP outputs exactly matched direct
+scikit-image watershed with the same prepared inputs and settings. This checks
+the wrapper and volumetric execution around the shared backend. The retained
+calibration does not make the distance transform or watershed spacing-aware.
+
+The bounded **Random Walker** comparison did not establish a quality benefit.
+A mammalian crop with 17 seed labels exceeded the 45-second cutoff; Random
+Walker remains a possible additional method and is not a VIPP node.
+
+See the [implementation contract and evidence records](https://github.com/rensutheart/napari-vipp/blob/main/docs/seeded-segmentation.md)
+for data identity, frozen preprocessing, reference comparisons and benchmark
+limits. These exercises do not establish biological ground truth, Fiji
+agreement or reproduction of the original papers' biological results.
+
 ## 0.15.0a5 scope and evidence
 
 Use the [0.15.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a5)
@@ -673,7 +739,8 @@ same as an external comparison or assay validation. The distinction matters:
 
 | Area | Current in-repository evidence | Next evidence needed |
 | --- | --- | --- |
-| Watershed/object separation | Touching-disk split tests, exported-workflow execution, and 3D-default behavior tests | Broader 3D phantoms, split/merge metrics, external comparison, representative real images |
+| Watershed/object separation | Touching-disk and volumetric phantom checks, exported-workflow execution, 3D-default behavior tests, and same-backend equality on seven acquired volumes in nightly evidence above | Independent annotated split/merge metrics, Fiji comparison, additional acquisitions and assay validation |
+| CellProfiler Propagation and compartment profile (unreleased) | Pinned Centrosome kernel checks, graph/export/batch integration and independent CellProfiler 4.2.6 comparison on the 376 fields described above | Resolve remaining IDR0139 author-image identity and published-result differences; independently reviewed biological labels and broader dependency/platform checks |
 | Colocalization/association | Deterministic metric, overlap, distance, and association tests plus synthetic examples | External numerical comparisons and assay-specific positive/negative controls |
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests plus strict public-corpus v4 qualification across 20 frozen artifacts, 97 biological fields, and the claimed microscope-reader routes | Broader independent facility files, negative controls for unusual vendor dimensions, network/remote filesystems, and cross-reader comparisons outside the frozen corpus |
