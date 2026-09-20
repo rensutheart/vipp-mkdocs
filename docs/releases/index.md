@@ -6,11 +6,21 @@ data.
 
 ## Unreleased — after 0.15.0a5
 
+- [Name graph nodes](../how-to/edit-graph.md#name-a-node) through the inspector's
+  **Name** field or **Rename…**. Table Source, Statistics and Plot Results also
+  receive descriptive automatic labels. Names stay consistent in the graph,
+  Results Workspace, workflow search and connected-input descriptions, with
+  source context and stable identifiers for matching names. Save, undo and
+  copy names with the workflow; renaming leaves calculations and figure titles
+  unchanged.
 - [Results Workspace](../how-to/results-workspace.md) keeps Data, Summary and
   Plots beside their controls. Add or edit ordinary Statistics/Plot Results
   nodes with synchronized inspectors and windows, and explicitly choose
   original measurements or summary rows as the plot source. Table search and
   visible columns do not change the analysis or full-table exports.
+  Maximize the window from its title bar, and use **Workflow** to choose any
+  open workflow before browsing its data sources. Edits and calculations stay
+  with the selected workflow.
 - [Plot axis spacing](../how-to/plot-measurement-results.md#set-grid-and-axis-label-spacing)
   offers Auto or custom positive numeric tick intervals, with grid lines at
   those ticks and the same settings in exported figures. Count-axis intervals

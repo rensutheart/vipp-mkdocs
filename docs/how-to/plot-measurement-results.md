@@ -26,8 +26,9 @@ if the measurement table itself becomes stale.
 
 For controls beside tables, summaries and figures in one window, choose
 **Open Results Workspace…**. Its **Plots** view edits the same Plot Results
-node. The top selection bar (**Data source → Statistics node → Plot**) browses
-connected nodes without changing the workflow; choose **None — use input
+node. The top selection bar (**Workflow → Data source → Statistics node →
+Plot**) lets you activate any open workflow and browse its connected nodes
+without changing graph connections; choose **None — use input
 data** for plots directly connected to the data source. Tabs only change the
 view. **Change plot input…** opens controls to deliberately reconnect the
 selected plot; see [Results Workspace](results-workspace.md#choose-what-the-plot-uses)
@@ -39,8 +40,14 @@ these section headings; individual field labels use regular text. Its outlined
 chevron points right when collapsed and down when expanded, and stays readable
 in light and dark themes across the inspector, plot window and Results Workspace.
 
+The node's optional **Name** is for navigating the workflow and Results
+Workspace. It does not replace the figure's **Title** under **Appearance**.
+Without a custom name, VIPP uses a meaningful figure title or derives a label
+from the selected plot settings. See [Name a node](edit-graph.md#name-a-node).
+
 In Results Workspace, the figure fits the available preview area while the
-settings scroll independently. Enlarge the window or drag the divider for a
+settings scroll independently. Use the title-bar **Maximize** button, resize
+the window or drag the divider for a
 larger preview. This changes only the on-screen view, not the data, saved plot
 recipe or exported figure size.
 

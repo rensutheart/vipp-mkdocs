@@ -56,6 +56,26 @@ collection batch remains owned by its originating tab; VIPP blocks
 closing that origin, launching a second batch, or closing the application until
 the active run finishes or cooperatively cancels.
 
+### Results Workspace
+
+!!! note "Unreleased — after 0.15.0a5"
+    [Results Workspace](../how-to/results-workspace.md) has a native title-bar
+    **Maximize/Restore** button. Its selection bar reads **Workflow → Data
+    source → Statistics node → Plot**.
+
+    **Workflow** lists all open workflow tabs, adding tab numbers to repeated
+    names. Choosing a workflow activates that tab; the remaining selectors
+    show its table outputs and connected results nodes. A workflow with no
+    table sources displays an explanation. Settings edits, added nodes and
+    calculations belong to the selected workflow. Selecting another workflow
+    does not copy data or create connections between workflow graphs.
+
+    Source, summary and plot choices use descriptive automatic names or the
+    node's custom **Name**. Source context and a stable identifier distinguish
+    collisions. Operation type and current settings remain available as
+    context; **Show node** locates that exact node. See
+    [Name a node](../how-to/edit-graph.md#name-a-node).
+
 ## Workflow toolbar
 
 The command bar contains **New / Open / Save**, **Batch workflow**, **Display
@@ -99,6 +119,14 @@ These searches and the insert-node picker also accept common alternative names: 
 and **clipping → Clamp Intensity**. British spellings such as
 **normalise** and **skeletonisation** work too. Results keep their usual node
 names; searching does not change the workflow or its calculations.
+
+!!! note "Unreleased — after 0.15.0a5"
+    Every node has an optional **Name** field in its inspector and a
+    **Rename…** context action. **Reset**, or an empty name,
+    restores its automatic label. Workflow search finds the same descriptive
+    names shown in the graph and Results Workspace. Renaming changes
+    presentation only; operation type, calculation settings and plot figure
+    titles remain independent.
 
 ### Toolbar controls
 

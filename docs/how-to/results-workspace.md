@@ -14,15 +14,23 @@ in **Results Workspace**, without replacing your workflow nodes.
    Tables** or **Table Source**.
 2. Select it and choose **Open Results Workspace…** in the inspector.
    You can also open the workspace from **Statistics** or **Plot Results**.
-3. Use the selection bar above the tabs: **Data source → Statistics node →
-   Plot**. Bold headings, thick cyan arrows and a subtle border highlight this
-   global connection bar, which stays visible in every view.
+3. Use the selection bar above the tabs: **Workflow → Data source → Statistics
+   node → Plot**. Matching blue arrows join all four selectors. Bold headings
+   and a subtle border highlight this global connection bar, which stays
+   visible in every view.
 4. Choose **Data**, **Summary** or **Plots** using the full-width icon tabs.
    Tabs change the view, not the selected source, summary or plot. Controls
    are on the left and the relevant table or figure is on the right.
 
+Use the window's title-bar **Maximize** button for more room. **Restore**
+returns it to its previous size; both actions leave the analysis unchanged.
+
 Choose the chain you want to explore:
 
+- **Workflow** lists every open workflow. Selecting one activates its workflow
+  tab and lists its table sources. Repeated workflow names include their tab
+  number so you can tell them apart. A workflow with no table-producing nodes
+  remains selectable and explains why no data sources are available.
 - **Data source** identifies an exact table output, including its named port
   when relevant. Filtered and merged tables remain separate choices from
   their upstream measurements.
@@ -32,16 +40,34 @@ Choose the chain you want to explore:
   output, or to the data source when Statistics is **None**. If none exist,
   VIPP shows **No connected plots**, not a plot from another branch.
 
-The relationship caption confirms the selected chain. These selections only
-change what you browse; they do not edit graph connections. The editing
+The relationship caption confirms the selected chain. These selections change
+what you browse; they do not edit graph connections. Settings changes,
+**+** actions and calculations apply to the selected workflow. The editing
 heading identifies the node for the current tab, and **Show node** locates it
 in the workflow.
+
+Selectors use descriptive node names instead of relying on numbered labels
+such as **Statistics 1**. Table Source uses the dataset title or filename;
+Statistics uses the measurements and grouping, adding **Image averages** or
+**Sample averages** for those observation levels; Plot Results uses a meaningful
+figure title or its plot settings. For example, a summary might read
+**3 measurements by Well**, while a plot might read **area distribution**.
+These examples depend on the actual selected columns.
+
+Operation type and current settings remain available alongside the name or
+in its tooltip. If names match, VIPP adds source context and, when necessary,
+a short stable identifier. Use **Show node**, then the inspector's **Name**
+field or the node's **Rename…** action to give it your own description. See
+[Name a node](edit-graph.md#name-a-node) for automatic naming, reset and
+save behavior. A custom plot-node name is independent of the exported
+figure's title.
 
 For multiple sources, first [merge matching
 measurements](../workflows/object-measurements-tables.md) or [collect batch
 measurements](collect-measurement-results.md). Merging adds fields for matching
 objects; collection brings observations from several images into one dataset.
-Browsing data sources does not combine tables or change graph connections.
+Browsing another workflow does not copy its data, combine tables or create
+connections between workflows.
 
 ## Review the data
 
@@ -131,8 +157,8 @@ to that plot in this workspace window; calculations, exports, inspector and
 separate plot-window warnings are unchanged. Errors, setup prompts and
 out-of-date status remain visible and cannot be dismissed this way.
 
-The figure fits the available preview area, including its axes. Enlarge the
-window or drag the divider to give it more room; the settings scroll
+The figure fits the available preview area, including its axes. Maximize or
+resize the window, or drag the divider to give it more room; the settings scroll
 independently. Resizing the preview does not change the measurements, saved
 plot recipe or export dimensions. Set the exported figure's width and height
 in **Export figure…**.
@@ -148,8 +174,8 @@ in **Export figure…**.
   It targets the exact node shown in the editing heading and is disabled when
   there is no selected node, such as a summary with no connected plot.
   Different summary/plot nodes keep independent settings.
-- Save the workflow to keep nodes, connections and settings. Closing the
-  workspace does not discard edits.
+- Save each edited workflow to keep its nodes, connections and settings.
+  Closing the workspace does not discard edits.
 - Table export saves the complete current table as **CSV/TSV**, including
   summary counts and method fields. Excel export remains available in the
   separate batch collection window.
