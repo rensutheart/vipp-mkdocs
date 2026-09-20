@@ -17,7 +17,8 @@ in **Results Workspace**, without replacing your workflow nodes.
 3. Use the selection bar above the tabs: **Workflow → Data source → Statistics
    node → Plot**. Matching blue arrows join all four selectors. Bold headings
    and a subtle border highlight this global connection bar, which stays
-   visible in every view.
+   visible in every view. All four dropdowns share one aligned row, with **+**
+   beside Statistics node and Plot to add a connected summary or plot.
 4. Choose **Data**, **Summary** or **Plots** using the full-width icon tabs.
    Tabs change the view, not the selected source, summary or plot. Controls
    are on the left and the relevant table or figure is on the right.
