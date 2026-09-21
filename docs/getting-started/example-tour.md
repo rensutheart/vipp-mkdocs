@@ -5,22 +5,27 @@ you can learn the interface before dealing with graph editing.
 
 ## Open the example
 
-Choose:
+Choose **Open example…** from the [workflow actions menu](../reference/interface.md#workflow-actions-menu),
+then select:
 
 ```text
-Gear menu → Open example… → Segmentation & Labels → Red-Channel Label Cleanup
+Segmentation & Labels → Red-Channel Label Cleanup
 ```
 
 **New in 0.15.0a5:** Select an example to read its purpose, **Input data**,
 short **What to explore** and **What you'll get** bullet lists, and a **Try this**
 suggestion. Each action or expected output is listed separately. Search by
 name or task to narrow the list, then click **Open example** (or press Enter)
-to open it in a new workflow tab. **Cancel** is to the left of **Open example**
-at the bottom of the chooser. Browsing the descriptions does not calculate
+to open it in a new workflow tab. Browsing the descriptions does not calculate
 anything. Compact margins leave more room for the list and description, which
 have contrasting backgrounds in both light and dark themes. Drag the divider
 to adjust their widths; in a narrow window,
 the description moves below the list.
+
+!!! note "New in 0.16.0a1"
+    The bottom buttons follow VIPP's [dialog-button convention](../reference/interface.md#dialog-buttons):
+    **Open example · Cancel** on Windows, and **Cancel · Open example** on
+    macOS. In 0.15.0a5, Cancel precedes Open example on both platforms.
 
 The `Image Source` is set to `VIPP synthetic multichannel volume`. Its channels
 are blue, green, and red; this workflow uses the red/TRITC-like channel.

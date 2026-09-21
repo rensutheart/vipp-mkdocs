@@ -37,10 +37,10 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in 0.15.0a1. In 0.15.0a2, the pictured Preview menu is called Display settings. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual covers **napari-vipp 0.15.0a5**. Download
+    This manual covers **napari-vipp 0.16.0a1**. Download
     only from the canonical
-    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a5)
-    or [PyPI page](https://pypi.org/project/napari-vipp/0.15.0a5/).
+    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a1)
+    or [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a1/).
     Verify every intentionally unsigned Windows or macOS installer against its
     official checksum before opening it.
     Do not treat unperformed external fresh-machine or novice checks as passes.
@@ -49,16 +49,17 @@ hide:
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
-!!! note "New in 0.15.0a5"
-    [Guided examples, overlap masks and simpler desktop updates](releases/0.15.0a5.md)
-    make it easier to explore workflows and count connected overlap regions.
-    Inspector histograms and mesh-display warnings are also clearer.
+!!! note "New in 0.16.0a1"
+    [Results Workspace, statistics, plots and seeded compartments](releases/0.16.0a1.md)
+    connect measured objects, descriptive summaries and figures. Collect saved
+    batch measurements, name nodes and adjust table display precision without
+    changing the underlying measurements.
 
-!!! important "Upgrading to 0.15"
-    0.15.0a5 writes workflow schema 6. Valid schema-3, schema-4, and schema-5
+!!! important "Upgrading to 0.16"
+    0.16.0a1 writes workflow schema 6. Valid schema-3, schema-4, and schema-5
     workflows migrate explicitly; cached results and source pixels are not
     saved in workflow JSON, and generated Python is pinned to its creator
-    version. Read the [0.15.0a3 release notes](releases/0.15.0a3.md) before upgrading and
+    version. Read the [0.16.0a1 release notes](releases/0.16.0a1.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 6. Verified resume requires a
@@ -108,7 +109,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in this alpha | [0.15.0a5 release notes](releases/0.15.0a5.md) |
+| Review everything changed in this alpha | [0.16.0a1 release notes](releases/0.16.0a1.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

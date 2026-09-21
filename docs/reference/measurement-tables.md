@@ -10,6 +10,12 @@ Measurement nodes produce tables, not images. Each table carries ordered
 columns, a table kind, row/column counts, a source name where available, and
 per-column units where the calculation defines them.
 
+[Results Workspace](../how-to/results-workspace.md) combines table
+viewing, Statistics controls and Plot Results without a new table type. Search
+and visible columns affect only the view; exports retain the complete current
+table. Plot inputs explicitly distinguish the source measurements from a
+selected summary table.
+
 Keep the keys that distinguish observations:
 
 - leading-axis indices, such as `t_index`, `c_index`, and `z_index`;
@@ -20,6 +26,25 @@ Keep the keys that distinguish observations:
 
 Equal row counts are not proof that two tables describe the same observations.
 
+## Decimal places in table views
+
+!!! info "New in 0.16.0a1"
+    Results Workspace tables and separate result-table windows provide
+    **Increase Decimal** and **Decrease Decimal** controls for easier reading.
+
+Floating-point values initially show **3 decimal places**. Use the controls to
+show more or fewer places, from **0 to 15**, throughout the current table view.
+Hover over a cell to inspect its full original value. Integers, Boolean values,
+text, missing values and non-finite values such as `NaN` are not reformatted.
+
+This is a display preference, not a measurement-accuracy setting. It does not
+round the stored values or change calculations, sorting, searching or exports:
+those still use the original full-precision data. Values that look identical
+after display rounding can therefore sort differently.
+
+The choice survives table refreshes in the current view. It is not saved as a
+workflow setting or shared with other table views.
+
 ## Units through table composition
 
 | Node | Unit handling |
@@ -29,7 +54,47 @@ Equal row counts are not proof that two tables describe the same observations.
 | Add Metadata Columns | Keeps existing units; new metadata columns are unitless. |
 | Summarize Measurements | Propagates numeric units except for count statistics. |
 
+In 0.16.0a1, **Statistics** expands Summarize
+Measurements with explicit object/image/sample levels and counts. It retains
+each measurement's units in separate result columns. Old recipes retain their
+calculations until explicitly upgraded. See
+[Summarize measurements](../how-to/summarize-measurements.md) and the
+[method/count reference](statistics.md).
+
+## Collected batch tables
+
+!!! info "New in 0.16.0a1"
+    [Batch measurement collection](../how-to/collect-measurement-results.md)
+    exports CSV/TSV or an Excel workbook directly. Saving a typed
+    `.vipp-results.json` dataset and opening it through **Table Source** are
+    separate, optional steps. Ordinary workflow JSON keeps only the external
+    dataset reference and its hash, not the collected rows.
+
+The collector checks recorded output contents, column types and units before
+appending rows. It does not silently mix incompatible tables or convert pixels
+to physical units. Existing annotation and local object-ID columns are
+preserved alongside their image/source identity.
+
+The item inventory distinguishes a valid zero-row table from a missing,
+changed, unsupported or failed output, and retains deliberate exclusions.
+Zero-row images add no artificial object. Historical CSV/TSV files without
+typed output records are not imported by guessing; a new, explicitly requested
+batch run is needed to produce collectable records.
+
+Excel includes **Measurements**, **Image summary** and **About this
+collection** sheets: rows, per-image outcomes/annotations, and units/run
+information respectively. CSV/TSV offers an optional `-image-summary`
+companion, selected by default, to keep empty and excluded images visible.
+These exports do not rerun measurements. Keep the native VIPP dataset for a
+typed round trip; **Table Source → Export table…** remains CSV/TSV-only.
+
 ## Object morphology
+
+In 0.16.0a1, connect a measurement table directly to
+**Plot Results** to explore individual points, histograms, cumulative
+distributions or scatter plots. A single labelled image is sufficient; batch
+collection is optional. See [Plot measurement results](../how-to/plot-measurement-results.md)
+for image means, exclusions and figure export.
 
 **Measure Objects** returns one row per label object. Basic fields include ID,
 pixel/voxel area or volume, centroid, bounding box, equivalent diameter, extent,

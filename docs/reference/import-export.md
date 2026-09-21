@@ -43,6 +43,25 @@ the selected item, reader/backend, calibration, channels, and decoded shape
 against acquisition records. A normalized contract cannot prove that a
 third-party reader's presentation matches the experiment.
 
+## Collected measurement datasets
+
+!!! info "New in 0.16.0a1"
+    **Table Source** opens typed `.vipp-results.json` files created by
+    [Collect measurement results…](../how-to/collect-measurement-results.md).
+    This is a measurement-data route, not a general CSV importer or an image
+    format. It preserves measurements, units and collection records without
+    loading the original images. A saved results workflow checks the expected
+    dataset hash and does not embed its rows.
+
+The same collection review also offers **Export results…** for
+CSV/TSV and Excel (`.xlsx`), without saving a native dataset or opening a
+results workflow first. CSV/TSV offers an optional `-image-summary` companion;
+Excel always includes **Measurements**, **Image summary** and **About this
+collection** sheets. Empty/excluded images and annotations belong in the image
+summary; units and run information are recorded in About this collection.
+This Excel route is specific to batch collection. Ordinary **Export table…**
+and per-item **Batch Output** tables still support CSV/TSV only.
+
 ## Source revision contract
 
 File and directory-store sources are identified from their path revision and
@@ -129,7 +148,8 @@ Confirm import units manually, or use 3MF for standard display colours and units
 
 ## OME analysis dataset
 
-**Export OME dataset...** writes one reference image and graph label outputs into
+**Export OME dataset…** in the [workflow actions menu](interface.md#workflow-actions-menu)
+writes one reference image and graph label outputs into
 one local `.ome.zarr` store:
 
 ```text

@@ -22,6 +22,13 @@ Workflow tabs are independent live sessions, not one multi-workflow file.
 caches, undo/redo histories, transient viewport, and in-flight state are not
 bundled into that JSON.
 
+!!! info "Collected results — new in 0.16.0a1"
+    A results workflow's **Table Source** references an external
+    [measurement dataset](../how-to/collect-measurement-results.md) by path and
+    expected hash. Its typed measurements and collection inventory stay in the
+    separate `.vipp-results.json` file. Share that file separately; saving the
+    workflow or exporting a reproducibility package does not embed its results.
+
 ### Current schema: version 6
 
 A current file identifies itself with:
@@ -33,7 +40,7 @@ A current file identifies itself with:
 }
 ```
 
-VIPP 0.15.0a5 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
+VIPP 0.16.0a1 accepts schema versions 3, 4, 5, and 6 and rejects versions 1 and 2
 with an explicit error. Schema 4 added portable authored compute intent under
 `execution.compute`. Schema 5 adds canonical `SourceItem v1` records: stable
 logical selector, observed container revision, reader/backend evidence,
@@ -92,7 +99,7 @@ multiple outputs, and incompatible splices fail closed.
 
 ### Optional Batch workspace attachment
 
-A 0.15.0a5 workflow can carry an optional top-level `batch_config`. The
+A 0.16.0a1 workflow can carry an optional top-level `batch_config`. The
 version-6 attachment contains canonical SourceItems, reviewed typed per-sample
 numeric overrides, and whole-batch **Use workflow / Run / Bypass** profiles in
 addition to source bindings, local paths, patterns, guarded source-axis

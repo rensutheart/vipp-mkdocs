@@ -38,6 +38,45 @@ node to move the group together. Group deletion and movement are single
 undoable edits; tunnels or external wires are changed only when the chosen
 action explicitly requires it.
 
+## Name a node
+
+!!! info "New in 0.16.0a1"
+    Table Source, Statistics and Plot Results receive descriptive automatic
+    names. You can give any node a custom name to explain its purpose.
+
+1. Select the node and edit **Name** at the top of its inspector, or right-click
+   the node and choose **Rename…**.
+2. Use a short description such as **Smooth nuclei**, **Nuclear intensity by
+   well** or **Cell-area distribution**. Names accept up to 200 characters on
+   one line.
+3. Clear **Name**, or choose **Reset**, to return to the automatic
+   label.
+
+The graph, Results Workspace, workflow search and connected-input descriptions
+use the same name. The operation type, such as **Statistics**, remains visible
+as context, and the settings summary follows the current measurements,
+grouping or plot choices even when a custom name stays unchanged. Hover when
+text is shortened to read the complete label and settings.
+
+Automatic labels use the dataset title or filename for **Table Source**,
+selected measurements and grouping for **Statistics**, and the figure title
+or selected plot settings for **Plot Results**. Column names are used as saved;
+VIPP does not infer that a generically named intensity column represents a
+particular cell compartment. Add a custom name when you know its meaning.
+
+Statistics adds **Image averages** or **Sample averages** to its automatic
+name when that observation level is selected, for example
+**3 measurements by Treatment · Sample averages**. The settings summary
+retains the full observation and weighting choices. In narrow inspectors the
+Name field uses the full width and the settings summary uses at most three
+lines; hover to read the full name or settings.
+
+Matching names gain source context, then a short stable identifier if needed.
+They still refer to distinct nodes. Save the workflow to retain custom names;
+renaming and resetting support undo/redo without recalculating the analysis.
+Renaming a Plot Results node does not edit its figure title. Change the title
+under the plot's **Appearance** controls when it should appear in the figure.
+
 ## Copy nodes, fragments, or values
 
 - Right-click a node and choose **Copy**, or use **Ctrl+C**.
@@ -55,7 +94,12 @@ Pasted graph nodes receive fresh identities. Connections to nodes outside the
 copied selection are not silently recreated. Inspect the pasted fragment before
 using it for a consequential calculation.
 
-Open **Graph Editing Acceptance Check** from **Gear menu → Open example…** for numbered
+In 0.16.0a1, copy/paste and duplication also retain custom node
+names. Repeated names are distinguished in the destination workflow.
+**Paste Values** keeps the destination node's name.
+
+Open **Graph Editing Acceptance Check** through **Open example…** in the
+[workflow actions menu](../reference/interface.md#workflow-actions-menu) for numbered
 notes that exercise tunnel insertion, value transfer, fragment copy/paste,
 group movement, and undo/redo.
 
@@ -99,7 +143,9 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 - Arrange flow from left to right.
 - Put alternative methods on parallel branches, not one after another.
 - Keep source, QC, and output nodes visually distinct.
-- Use **Auto Arrange** in the graph context row (or gear menu on narrow windows) as a
+- Use **Auto Arrange** in the graph context row (or the
+  [workflow actions menu](../reference/interface.md#workflow-actions-menu) when
+  the control is hidden in a narrow window) as a
   starting point, then preserve meaningful
   parallel alignment.
 - Add graph notes at decisions: why a channel was selected, how a threshold was
@@ -139,7 +185,8 @@ connections or scientific calculation.
 ## Search the workflow
 
 Use **Find in workflow** to match node titles, operation IDs, tunnel names,
-and output tags. Press Enter or the adjacent **Focus** to move through matches.
+and output tags. 0.16.0a1 also matches automatic and custom node names.
+Press Enter or the adjacent **Focus** to move through matches.
 Tunnel matches reveal the source and its subscribers.
 
 Both workflow search and the node-library

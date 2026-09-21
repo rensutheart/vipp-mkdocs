@@ -10,6 +10,7 @@ an image, mask, or table is appropriate for your biological question.
 | `mask` | Binary foreground/background image. | Labels-style overlay |
 | `labels` | Integer object IDs, with zero as background. | Labels layer |
 | `table` | Measurement or summary rows. | Inspector table preview and CSV/TSV output |
+| `plot` (new in 0.16.0a1) | A measurement-plot recipe with prepared values and inclusion counts, not a spatial image. | Inspector figure and editable plot window; PNG/TIFF/SVG/PDF export |
 | `array` | Generic array accepted by many processing nodes. | Depends on output node |
 | `mask_or_labels` | Input may be either a binary mask or label image. | Depends on connected input |
 | `any` | Pass-through or generic output where type is resolved from context. | Depends on connected input |
@@ -70,6 +71,11 @@ Common table nodes include:
 - `Summarize Measurements`
 
 ## Manual Calculation Nodes
+
+**Plot Results** accepts a table directly or from **Table Source**.
+Its figure does not acquire image axes or voxel calibration: the axes use the
+selected measurement columns' units. See
+[Plot measurement results](../how-to/plot-measurement-results.md).
 
 Expensive measurement, graph-analysis, RACC, and deconvolution nodes can be
 manual/cached. Select the node and click `Calculate` or use toolbar

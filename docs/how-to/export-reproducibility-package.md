@@ -11,9 +11,15 @@ it with a collaborator or including it in an analysis archive.
 
 ## Choose the right evidence
 
+!!! note "New in 0.16.0a1"
+    For a current-workflow package, open the three-dot **Workflow actions** menu
+    immediately after **Save**, then choose **Export reproducibility package…**.
+    In 0.15.0a5 this action is in the gear menu's **Workflow actions** group.
+    The batch-results export buttons have not moved.
+
 | Start here | What the package describes |
 | --- | --- |
-| Main toolbar gear → **Workflow actions → Export reproducibility package…** | The current workflow recipe, captured when the review window opens. This is not evidence that the graph was run or its outputs verified. |
+| Main toolbar [workflow actions menu](../reference/interface.md#workflow-actions-menu) → **Export reproducibility package…** | The current workflow recipe, captured when the review window opens. This is not evidence that the graph was run or its outputs verified. |
 | **Batch workflow → Run & results → run report card → Export reproducibility package…** (also **Export package…** in the finished-run footer) | The recorded run's archived workflow, settings and available item evidence—not the graph as edited afterward. The action is enabled after a recorded run, while no run is active. |
 
 Both batch actions open the same review window; neither immediately saves a ZIP.

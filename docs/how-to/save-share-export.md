@@ -3,9 +3,16 @@
 VIPP offers several outputs that solve different problems. They are not
 interchangeable.
 
+!!! note "New in 0.16.0a1"
+    Use the three-dot **Workflow actions** menu immediately after **Save** for
+    **Save workflow as…**, **Export Python…**, **Export reproducibility package…**
+    and **Export OME dataset…**. The gear keeps settings such as **Workflow
+    saving**. In 0.15.0a5, these actions were in the gear menu. See the
+    [toolbar guide](../reference/interface.md#workflow-actions-menu).
+
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.15.0a5; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a1; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
@@ -42,7 +49,7 @@ Under **Settings → Workflow saving**, choose confirmation on every overwrite o
 timestamped copies when that better matches the project's recordkeeping. A
 successful save clears the tab's dirty asterisk and reports **Saved workflow**.
 Bundled examples remain templates and are never overwritten in place.
-Use ++ctrl+shift+s++ or **Settings → Save workflow as…** when the active tab
+Use ++ctrl+shift+s++ or **Save workflow as…** when the active tab
 should be written to a different name or location without changing the normal
 save policy.
 If a Batch workspace is active, VIPP asks what to save:
@@ -75,7 +82,7 @@ Before sharing:
 Workflow compatibility can change between alpha releases. Keep an unmodified
 copy of the original and record the version that created it.
 
-0.15.0a5 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
+0.16.0a1 writes schema 6 and rejects versions 1 and 2. Valid schema-3 workflows
 load with explicit CPU intent. Schema-4 and schema-5 workflows retain authored
 compute intent; schema 5 also retains canonical SourceItems, while schema-4
 sources acquire them when they resolve. Schema 6 adds persisted safe-node bypass
@@ -103,7 +110,8 @@ durable batch runner, when the saved result must carry that record.
 
 ## Export an OME analysis dataset
 
-**Export OME dataset...** serializes the cached reference image and selected graph
+Choose **Export OME dataset…** from the [workflow actions menu](../reference/interface.md#workflow-actions-menu).
+It serializes the cached reference image and selected graph
 label outputs. It likewise does not rerun the graph or add exact per-node
 compute provenance. Use it for the documented image/label association, not as
 a substitute for generated-CLI provenance or a finalized batch manifest and
@@ -111,7 +119,8 @@ item sidecars.
 
 ## Export Python
 
-Choose **Export Python...** when a graph needs a reviewable headless program. The
+Choose **Export Python…** from the [workflow actions menu](../reference/interface.md#workflow-actions-menu)
+when a graph needs a reviewable headless program. The
 script embeds validated immutable workflow JSON, constructs a fresh pipeline
 per call, and uses the same headless executor as VIPP. It carries supported
 `ImageState`, accepts explicit multi-source bindings, and fails on missing,
