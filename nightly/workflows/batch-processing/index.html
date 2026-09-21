@@ -574,6 +574,8 @@
       
         
       
+        
+      
     
     
     
@@ -617,6 +619,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1386,6 +1411,8 @@
       
         
       
+        
+      
     
     
     
@@ -1447,6 +1474,29 @@
   
   <span class="md-ellipsis">
     Segment and clean labels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistics-paper-compartments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reproduce paper compartments
     
   </span>
   
@@ -1875,6 +1925,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1996,12 +2056,127 @@
   
   
     <li class="md-nav__item">
+      <a href="../../how-to/grow-regions-from-seeds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grow regions from seeds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../how-to/inspect-outputs/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/collect-measurement-results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collect batch measurements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/results-workspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explore the Results Workspace
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/plot-measurement-results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plot measurement results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/summarize-measurements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Summarize measurements
     
   </span>
   
@@ -2515,6 +2690,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2659,6 +2840,52 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/seeded-segmentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Seeded segmentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cellprofiler-compartments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CellProfiler compartment profile
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/channel-axis-controls/" class="md-nav__link">
         
   
@@ -2688,6 +2915,29 @@
   
   <span class="md-ellipsis">
     Measurement tables and units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Statistics methods and counts
     
   </span>
   
@@ -3842,6 +4092,17 @@ manifest and original resume receipts separately: the package excludes original
 resume receipts, and a successful new Check replaces the previous run view in
 this workspace.</p>
 <h2 id="save-and-replay">Save and replay<a class="headerlink" href="#save-and-replay" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Collect measurements — new in 0.16.0a1</p>
+<p><strong>Collect measurement results…</strong> in <strong>Run &amp; results</strong> brings one saved table
+output across the batch into a reusable results dataset. Review verified,
+empty, missing or unusable results and any exclusions; add missing sample
+annotations without reprocessing images. Export CSV/TSV or Excel directly;
+saving a native VIPP collection and opening a results workflow are optional.
+Keep the image summary to account for empty and excluded images. See
+<a href="../../how-to/collect-measurement-results/">Collect measurements from a batch</a>.
+This is separate from saving the batch configuration below.</p>
+</div>
 <p>Use <strong>Save config</strong> for a standalone batch configuration and <strong>Open config</strong> to
 reload it against the current workflow. Saving the main workflow also offers
 to attach the batch configuration. Attachments contain settings and local paths,
@@ -3930,7 +4191,7 @@ QC, intended outputs, and the reported outcomes independently.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 12:07:21 UTC">September 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 12:03:47 UTC">September 21, 2026</span>
   </span>
 
     
