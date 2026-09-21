@@ -15,6 +15,12 @@ parameters changed, recalculate the stale manual result before exporting it.
 The result window shows the stale/current state rather than silently treating
 an old table as a new calculation.
 
+**Increase Decimal** and **Decrease Decimal** controls in the result
+window let you show more or fewer decimal places without changing exported
+measurements. Hover over a cell to see its original value. See
+[Decimal places in table views](../reference/measurement-tables.md#decimal-places-in-table-views)
+for defaults, limits and display-only behavior.
+
 ## Reproducible intensity histograms
 
 `Intensity Histogram` produces a full-data table from one connected numeric
@@ -201,23 +207,23 @@ reviewed before export.*
 ## Reference Workflows
 
 To build tables, summaries and figures interactively in one window, use
-[Results Workspace](../how-to/results-workspace.md) (unreleased 0.16
-development). Its controls edit the ordinary workflow nodes; existing
+[Results Workspace](../how-to/results-workspace.md) (new in 0.16.0a1).
+Its controls edit the ordinary workflow nodes; existing
 inspectors and table/plot windows remain available.
 
 For descriptive counts, mean/median, spread or range, see
-[Summarize measurements](../how-to/summarize-measurements.md) (unreleased
-0.16 development). Choose objects, image means or declared-sample means
+[Summarize measurements](../how-to/summarize-measurements.md) (new in
+0.16.0a1). Choose objects, image means or declared-sample means
 explicitly; no inferential tests or confidence intervals are added.
 
 For figures from one image or a collected table, see
-[Plot measurement results](../how-to/plot-measurement-results.md) (unreleased
-0.16 development). The **Morphology & Intensity Plots** example measures 60
+[Plot measurement results](../how-to/plot-measurement-results.md) (new in
+0.16.0a1). The **Morphology & Intensity Plots** example measures 60
 synthetic objects and compares four plot types without a batch run.
 
 For results from several images, use
 [Collect measurements from a batch](../how-to/collect-measurement-results.md)
-(unreleased after 0.15.0a5). It appends compatible saved observations into one
+(new in 0.16.0a1). It appends compatible saved observations into one
 dataset while preserving image identity; **Merge Tables** above joins fields
 describing matching observations within the analysis.
 
@@ -225,9 +231,9 @@ describing matching observations within the analysis.
 | --- | --- |
 | `red-channel-object-intensity-measurements.json` | Labels plus matching intensity image into `Measure Objects + Intensity`. |
 | `red-channel-merged-measurement-table.json` | Object morphology, intensity, table merge, and metadata columns. |
-| `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. Unreleased builds use the new descriptive recipe, including undefined singleton sample SD. |
+| `synthetic-measurement-summary.json` | Grouped summaries with known object counts and areas. 0.16.0a1 uses the new descriptive recipe, including undefined singleton sample SD. |
 | `synthetic-derived-object-morphology.json` | Derived 2D morphology, circularity, and Hu moments. |
-| `synthetic-measurement-plots.json` | Unreleased: calibrated shape/intensity measurements from 60 objects, followed by histogram, scatter, individual-point and cumulative plots. |
+| `synthetic-measurement-plots.json` | New in 0.16.0a1: calibrated shape/intensity measurements from 60 objects, followed by histogram, scatter, individual-point and cumulative plots. |
 | `synthetic-3d-mesh-morphology.json` | True-3D mesh morphology on anisotropic synthetic objects. |
 | `synthetic-mesh-objects.json` | Saved sample-specific colouring, filtering, combining and refinement choices, followed by current-mesh measurements. 0.15.0a3 keeps this as the single mesh-object example. |
 

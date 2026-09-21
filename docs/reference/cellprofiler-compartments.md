@@ -5,10 +5,9 @@ the statistics paper. The [worked workflow](../workflows/statistics-paper-compar
 shows how to connect them. This is a specific nuclei/cell/cytoplasm profile,
 not an implementation of every CellProfiler module or setting.
 
-!!! info "Unreleased"
+!!! info "New in 0.16.0a1"
     The six profile nodes and **Grow Regions from Seeds — CellProfiler
-    Propagation** are documented for nightly development. They are not in
-    0.15.0a5.
+    Propagation** require 0.16.0a1 or newer.
 
 ## Inputs and execution
 

@@ -4,9 +4,10 @@ Bring saved measurements from many images into one table, then export them to
 CSV, TSV or Excel without reprocessing the images. Continuing in a VIPP results
 workflow is optional.
 
-!!! info "Unreleased — after 0.15.0a5"
-    This collection workflow is not available in the numbered 0.15.0a5 release.
-    It adds collection and export, not new plots or statistical tests.
+!!! info "New in 0.16.0a1"
+    Collection combines and exports saved measurements. It does not calculate
+    plots or statistical tests; use connected results nodes for descriptive
+    summaries and figures.
 
 ## Collect and review
 

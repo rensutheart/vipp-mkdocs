@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.15.0a5 contains **22** registered example workflows under:
+VIPP 0.16.0a1 contains **23** registered example workflows under:
 
 ```text
 examples/
@@ -9,7 +9,7 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
-!!! info "Unreleased — 0.16 development"
+!!! info "New in 0.16.0a1"
     The catalogue now has **23** examples. **Morphology & Intensity Plots**
     measures 60 objects in one calibrated synthetic image, joins shape and
     intensity measurements, and opens four descriptive plots. Follow
@@ -35,9 +35,8 @@ are not rearranged automatically.
     segmentation, binary logic and meshes. The inventory below reflects both changes.
 
 In VIPP, choose **Open example…** from the
-[workflow actions menu](interface.md#workflow-actions-menu). In 0.15.0a5 this
-action is in the gear; unreleased builds place it in the three-dot menu
-immediately after **Save**.
+[workflow actions menu](interface.md#workflow-actions-menu), the three-dot menu
+immediately after **Save**. In 0.15.0a5 this action was in the gear menu.
 
 The chooser groups workflows by task and opens each template with its bundled
 sample `Image Source` nodes already configured. Use **Open** for
@@ -58,7 +57,7 @@ instead asks for a working folder before opening the configured batch workspace.
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
-| `exhaustive-inspector-showcase.json` | nine lanes using eight synthetic samples, including thresholding, label boundaries, Propagation and the CellProfiler compartment profile | Broad inspector acceptance example covering scientific controls, connected inputs, measurements and Plot Results. Use a focused tutorial for a first workflow. **Table Source** is reviewed separately with a saved measurement dataset. Both CellProfiler lanes are unreleased; the compartment lane exercises controls on synthetic guidance, not paper-data reproduction. See the [paper workflow](../workflows/statistics-paper-compartments.md) for scientific wiring and comparison boundaries. |
+| `exhaustive-inspector-showcase.json` | nine lanes using eight synthetic samples, including thresholding, label boundaries, Propagation and the CellProfiler compartment profile | Broad inspector acceptance example covering scientific controls, connected inputs, measurements and Plot Results. Use a focused tutorial for a first workflow. **Table Source** is reviewed separately with a saved measurement dataset. Both CellProfiler lanes are new in 0.16.0a1; the compartment lane exercises controls on synthetic guidance, not paper-data reproduction. See the [paper workflow](../workflows/statistics-paper-compartments.md) for scientific wiring and comparison boundaries. |
 | `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, one-step undo/redo, and a qualified GPU dtype repair. Its deliberately loose demonstration fragments are not calculated. |
 | `responsive-volume-crop-acceptance.json` | synthetic time-lapse multichannel | Numbered TCZYX checks for explicit-Z crop margins, immediate 2D/3D ROI feedback, one committed calculation and undo gesture, preserved T/C and physical origins, QYX safety, and truthful CPU/GPU status. |
 | `safe-node-bypass-acceptance.json` | synthetic volume | Focused Crop Stack checks for exact pass-through data, would-run thumbnails, bypass styling, undo/save/export, GPU-neutral status, and batch Run/Bypass profiles. |
@@ -71,7 +70,7 @@ instead asks for a working folder before opening the configured batch workspace.
 | `red-channel-merged-measurement-table.json` | synthetic multichannel volume | Morphology, intensity, table merge, and metadata columns. |
 | `synthetic-measurement-summary.json` | synthetic measurement summary | Grouped object-count and area summaries. |
 | `synthetic-derived-object-morphology.json` | synthetic object morphology | Derived 2D morphology, circularity, perimeter/area ratio, Hu moments, and column selection. |
-| `synthetic-measurement-plots.json` | synthetic measurement plots | Unreleased: 60 isolated ellipses, calibrated morphology/intensity tables, histogram, scatter, points and cumulative Plot Results. Larger objects are deliberately brighter; these are not biological observations. |
+| `synthetic-measurement-plots.json` | synthetic measurement plots | New in 0.16.0a1: 60 isolated ellipses, calibrated morphology/intensity tables, histogram, scatter, points and cumulative Plot Results. Larger objects are deliberately brighter; these are not biological observations. |
 | `synthetic-3d-mesh-morphology.json` | synthetic 3D mesh morphology | Surface area, mesh volume, convex hull, sphericity, and tiny-object status. |
 | `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
 | `synthetic-skeleton-qc.json` | synthetic skeleton network | Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries. |
@@ -90,7 +89,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. The table lists the 0.15.0a5 IDs:
+Use `--list` to print your version's exact IDs. The table lists the 0.16.0a1 IDs:
 
 | ID | Example title |
 | --- | --- |
@@ -107,7 +106,7 @@ Use `--list` to print your version's exact IDs. The table lists the 0.15.0a5 IDs
 | `merged-measurements` | Merged Measurement Table |
 | `summary-table` | Grouped Measurement Summary |
 | `derived-morphology` | Derived 2D Object Morphology |
-| `plot-morphology` | Morphology & Intensity Plots (unreleased) |
+| `plot-morphology` | Morphology & Intensity Plots (new in 0.16.0a1) |
 | `mesh-morphology` | 3D Mesh Morphology |
 | `mesh-objects` | Mesh Objects, Colours & Refinement |
 | `skeleton-qc` | Skeleton QC |

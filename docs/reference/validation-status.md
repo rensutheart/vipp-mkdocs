@@ -5,7 +5,25 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
-## Unreleased CellProfiler compartment profile
+## 0.16.0a1 scope and evidence
+
+Use the [0.16.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a1)
+for exact assets and checksums, and its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a1/docs/release-qualification-baseline.md)
+for changed-domain checks and carried-forward evidence. The release adds
+measurement collection, descriptive Statistics, Plot Results, Results Workspace,
+node names and the 2D CellProfiler profile. Table decimal controls change only
+presentation, not measurement precision or exports.
+
+These results tools do not add inferential tests or establish independent
+biological replication. The new descriptive and compartment methods execute
+on CPU; this release does not broaden GPU qualification. Installer and dependency
+changes require their own exact-artifact evidence, not an inferred pass from
+an older release. The reference comparisons below retain their bounded claims.
+
+<span id="unreleased-cellprofiler-compartment-profile"></span>
+
+## 0.16.0a1 CellProfiler compartment profile
 
 The six new [compartment stages](cellprofiler-compartments.md) implement the
 specific CellProfiler 4.2.6 settings recovered from the statistics-paper
@@ -44,7 +62,9 @@ alter segmentation parameters merely to force agreement with a printed value.
 The [application evidence record](https://github.com/rensutheart/napari-vipp/blob/main/docs/validation/statistics-paper-reproduction.md)
 records data identity and the separate implementation and paper comparisons.
 
-## Unreleased seeded segmentation
+<span id="unreleased-seeded-segmentation"></span>
+
+## 0.16.0a1 seeded segmentation
 
 The new 2D **Grow Regions from Seeds — CellProfiler Propagation** node calls
 Centrosome 1.3.4. Its checks compare identical inputs with the reference backend
@@ -739,8 +759,8 @@ same as an external comparison or assay validation. The distinction matters:
 
 | Area | Current in-repository evidence | Next evidence needed |
 | --- | --- | --- |
-| Watershed/object separation | Touching-disk and volumetric phantom checks, exported-workflow execution, 3D-default behavior tests, and same-backend equality on seven acquired volumes in nightly evidence above | Independent annotated split/merge metrics, Fiji comparison, additional acquisitions and assay validation |
-| CellProfiler Propagation and compartment profile (unreleased) | Pinned Centrosome kernel checks, graph/export/batch integration and independent CellProfiler 4.2.6 comparison on the 376 fields described above | Resolve remaining IDR0139 author-image identity and published-result differences; independently reviewed biological labels and broader dependency/platform checks |
+| Watershed/object separation | Touching-disk and volumetric phantom checks, exported-workflow execution, 3D-default behavior tests, and same-backend equality on seven acquired volumes in the 0.16.0a1 evidence above | Independent annotated split/merge metrics, Fiji comparison, additional acquisitions and assay validation |
+| CellProfiler Propagation and compartment profile (new in 0.16.0a1) | Pinned Centrosome kernel checks, graph/export/batch integration and independent CellProfiler 4.2.6 comparison on the 376 fields described above | Resolve remaining IDR0139 author-image identity and published-result differences; independently reviewed biological labels and broader dependency/platform checks |
 | Colocalization/association | Deterministic metric, overlap, distance, and association tests plus synthetic examples | External numerical comparisons and assay-specific positive/negative controls |
 | Skeleton networks | Synthetic network workflows and focused operation tests | Prespecified topology and calibrated-length packs, perturbation tests, external comparison |
 | I/O and metadata | Focused format, dtype, validation, and round-trip tests plus strict public-corpus v4 qualification across 20 frozen artifacts, 97 biological fields, and the claimed microscope-reader routes | Broader independent facility files, negative controls for unusual vendor dimensions, network/remote filesystems, and cross-reader comparisons outside the frozen corpus |

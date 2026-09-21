@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Unless marked unreleased, labels below match napari-vipp 0.15.0a5. Some labels
+Labels below match napari-vipp 0.16.0a1. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -10,7 +10,7 @@ floating window.
 
 ## Dialog buttons
 
-!!! note "Unreleased — after 0.15.0a5"
+!!! note "New in 0.16.0a1"
     VIPP uses the same bottom-button order throughout its example, plot,
     results, batch and setup windows. The primary action and dismissal stay
     together on the right:
@@ -58,7 +58,7 @@ the active run finishes or cooperatively cancels.
 
 ### Results Workspace
 
-!!! note "Unreleased — after 0.15.0a5"
+!!! note "New in 0.16.0a1"
     [Results Workspace](../how-to/results-workspace.md) has a native title-bar
     **Maximize/Restore** button. Its selection bar reads **Workflow → Data
     source → Statistics node → Plot**.
@@ -88,7 +88,7 @@ separate from file and execution actions.
 
 ### Workflow actions menu
 
-!!! note "Unreleased — after 0.15.0a5"
+!!! note "New in 0.16.0a1"
     The three-dot **Workflow actions** button sits immediately after **Save**,
     before **Batch workflow**. It separates commands for the active workflow
     from the gear menu's settings. Its menu is grouped in this order:
@@ -107,7 +107,7 @@ separate from file and execution actions.
     **Leave batch mode** also appears when a batch is active. Zoom and compute
     preferences stay in the gear menu.
 
-    In 0.15.0a5, these workflow actions are still in the gear menu.
+    In 0.15.0a5, these workflow actions were in the gear menu.
 
 ### Finding nodes
 
@@ -120,7 +120,7 @@ and **clipping → Clamp Intensity**. British spellings such as
 **normalise** and **skeletonisation** work too. Results keep their usual node
 names; searching does not change the workflow or its calculations.
 
-!!! note "Unreleased — after 0.15.0a5"
+!!! note "New in 0.16.0a1"
     Every node has an optional **Name** field in its inspector and a
     **Rename…** context action. **Reset**, or an empty name,
     restores its automatic label. Workflow search finds the same descriptive

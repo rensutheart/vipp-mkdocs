@@ -45,7 +45,7 @@ third-party reader's presentation matches the experiment.
 
 ## Collected measurement datasets
 
-!!! info "Unreleased — after 0.15.0a5"
+!!! info "New in 0.16.0a1"
     **Table Source** opens typed `.vipp-results.json` files created by
     [Collect measurement results…](../how-to/collect-measurement-results.md).
     This is a measurement-data route, not a general CSV importer or an image
@@ -53,7 +53,7 @@ third-party reader's presentation matches the experiment.
     loading the original images. A saved results workflow checks the expected
     dataset hash and does not embed its rows.
 
-The same unreleased collection review also offers **Export results…** for
+The same collection review also offers **Export results…** for
 CSV/TSV and Excel (`.xlsx`), without saving a native dataset or opening a
 results workflow first. CSV/TSV offers an optional `-image-summary` companion;
 Excel always includes **Measurements**, **Image summary** and **About this

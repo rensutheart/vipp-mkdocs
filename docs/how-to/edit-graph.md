@@ -40,7 +40,7 @@ action explicitly requires it.
 
 ## Name a node
 
-!!! info "Unreleased — after 0.15.0a5"
+!!! info "New in 0.16.0a1"
     Table Source, Statistics and Plot Results receive descriptive automatic
     names. You can give any node a custom name to explain its purpose.
 
@@ -94,7 +94,7 @@ Pasted graph nodes receive fresh identities. Connections to nodes outside the
 copied selection are not silently recreated. Inspect the pasted fragment before
 using it for a consequential calculation.
 
-In unreleased builds, copy/paste and duplication also retain custom node
+In 0.16.0a1, copy/paste and duplication also retain custom node
 names. Repeated names are distinguished in the destination workflow.
 **Paste Values** keeps the destination node's name.
 
@@ -185,7 +185,7 @@ connections or scientific calculation.
 ## Search the workflow
 
 Use **Find in workflow** to match node titles, operation IDs, tunnel names,
-and output tags. Unreleased builds also match automatic and custom node names.
+and output tags. 0.16.0a1 also matches automatic and custom node names.
 Press Enter or the adjacent **Focus** to move through matches.
 Tunnel matches reveal the source and its subscribers.
 

@@ -300,7 +300,7 @@ For a compact single-node starting point, use `Auto Watershed From Mask`.
 
 For an intensity image, existing seed labels and a foreground mask, see
 [Grow regions from seeds](../how-to/grow-regions-from-seeds.md). That guide
-compares existing 3D watershed with the unreleased 2D **Grow Regions from
+compares existing 3D watershed with the 2D **Grow Regions from
 Seeds — CellProfiler Propagation** node and explains their calibration limits.
 
 ## Reference Workflow

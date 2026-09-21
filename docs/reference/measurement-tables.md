@@ -10,7 +10,7 @@ Measurement nodes produce tables, not images. Each table carries ordered
 columns, a table kind, row/column counts, a source name where available, and
 per-column units where the calculation defines them.
 
-Unreleased [Results Workspace](../how-to/results-workspace.md) combines table
+[Results Workspace](../how-to/results-workspace.md) combines table
 viewing, Statistics controls and Plot Results without a new table type. Search
 and visible columns affect only the view; exports retain the complete current
 table. Plot inputs explicitly distinguish the source measurements from a
@@ -26,6 +26,25 @@ Keep the keys that distinguish observations:
 
 Equal row counts are not proof that two tables describe the same observations.
 
+## Decimal places in table views
+
+!!! info "New in 0.16.0a1"
+    Results Workspace tables and separate result-table windows provide
+    **Increase Decimal** and **Decrease Decimal** controls for easier reading.
+
+Floating-point values initially show **3 decimal places**. Use the controls to
+show more or fewer places, from **0 to 15**, throughout the current table view.
+Hover over a cell to inspect its full original value. Integers, Boolean values,
+text, missing values and non-finite values such as `NaN` are not reformatted.
+
+This is a display preference, not a measurement-accuracy setting. It does not
+round the stored values or change calculations, sorting, searching or exports:
+those still use the original full-precision data. Values that look identical
+after display rounding can therefore sort differently.
+
+The choice survives table refreshes in the current view. It is not saved as a
+workflow setting or shared with other table views.
+
 ## Units through table composition
 
 | Node | Unit handling |
@@ -35,7 +54,7 @@ Equal row counts are not proof that two tables describe the same observations.
 | Add Metadata Columns | Keeps existing units; new metadata columns are unitless. |
 | Summarize Measurements | Propagates numeric units except for count statistics. |
 
-In unreleased 0.16 development builds, **Statistics** expands Summarize
+In 0.16.0a1, **Statistics** expands Summarize
 Measurements with explicit object/image/sample levels and counts. It retains
 each measurement's units in separate result columns. Old recipes retain their
 calculations until explicitly upgraded. See
@@ -44,7 +63,7 @@ calculations until explicitly upgraded. See
 
 ## Collected batch tables
 
-!!! info "Unreleased — after 0.15.0a5"
+!!! info "New in 0.16.0a1"
     [Batch measurement collection](../how-to/collect-measurement-results.md)
     exports CSV/TSV or an Excel workbook directly. Saving a typed
     `.vipp-results.json` dataset and opening it through **Table Source** are
@@ -71,7 +90,7 @@ typed round trip; **Table Source → Export table…** remains CSV/TSV-only.
 
 ## Object morphology
 
-In unreleased 0.16 development builds, connect a measurement table directly to
+In 0.16.0a1, connect a measurement table directly to
 **Plot Results** to explore individual points, histograms, cumulative
 distributions or scatter plots. A single labelled image is sufficient; batch
 collection is optional. See [Plot measurement results](../how-to/plot-measurement-results.md)

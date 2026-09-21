@@ -22,7 +22,7 @@ have contrasting backgrounds in both light and dark themes. Drag the divider
 to adjust their widths; in a narrow window,
 the description moves below the list.
 
-!!! note "Unreleased — after 0.15.0a5"
+!!! note "New in 0.16.0a1"
     The bottom buttons follow VIPP's [dialog-button convention](../reference/interface.md#dialog-buttons):
     **Open example · Cancel** on Windows, and **Cancel · Open example** on
     macOS. In 0.15.0a5, Cancel precedes Open example on both platforms.

@@ -3,7 +3,7 @@
 This reference defines the new descriptive **Statistics** recipe. For steps,
 see [Summarize measurements](../how-to/summarize-measurements.md).
 
-!!! info "Unreleased — 0.16 development, after 0.15.0a5"
+!!! info "New in 0.16.0a1"
     The new recipe is version 2. Older **Summarize Measurements** workflows
     retain version 1 until explicit upgrade. The node's saved operation
     identity remains `summarize_measurements`.

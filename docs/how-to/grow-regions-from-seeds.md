@@ -5,9 +5,9 @@ For example, nuclei can seed cell regions in an actin image. The seeds supply
 object identity; the image guides boundaries; the mask limits where growth is
 allowed.
 
-!!! info "Unreleased"
+!!! info "New in 0.16.0a1"
     **Grow Regions from Seeds — CellProfiler Propagation** is a new CPU node
-    documented for nightly development. It is not in 0.15.0a5.
+    for one aligned YX plane.
     **Marker-Controlled Watershed** is already available for 2D and 3D data.
 
 ## Choose the method

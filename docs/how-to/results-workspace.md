@@ -3,7 +3,7 @@
 Keep measurement tables, descriptive summaries and plots beside their controls
 in **Results Workspace**, without replacing your workflow nodes.
 
-!!! info "Unreleased — 0.16 development, after 0.15.0a5"
+!!! info "New in 0.16.0a1"
     Results Workspace brings existing table, Statistics and Plot Results
     tools into one window. It does not add statistical tests or change their
     calculation methods.
@@ -79,6 +79,13 @@ all columns at once, then select the individual columns you want.
 Export uses the complete table, not just the visible search results or columns.
 For a saved column selection used downstream, use **Select Table Columns** in
 the workflow.
+
+**Increase Decimal** and **Decrease Decimal** controls change how
+many decimal places the **Data**, **Summary** and **View plotted data** tables
+display, starting at 3. Hover over a cell for its full original value. Each table
+view keeps its own choice across refreshes; analysis and exports remain unchanged. See
+[Decimal places in table views](../reference/measurement-tables.md#decimal-places-in-table-views)
+for limits and precision details.
 
 ## Build a summary
 

@@ -3,9 +3,9 @@
 Turn object measurements into distributions, individual-point plots or scatter
 plots without leaving VIPP.
 
-!!! info "Unreleased — 0.16 development, after 0.15.0a5"
-    **Plot Results** is new in development builds. These are descriptive plots,
-    not statistical tests. Existing released workflows are unchanged.
+!!! info "New in 0.16.0a1"
+    **Plot Results** provides descriptive plots, not statistical tests.
+    Opening a plot does not change an existing summary recipe.
 
 ## Start with one image
 

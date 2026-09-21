@@ -11,7 +11,7 @@ it with a collaborator or including it in an analysis archive.
 
 ## Choose the right evidence
 
-!!! note "Unreleased — after 0.15.0a5"
+!!! note "New in 0.16.0a1"
     For a current-workflow package, open the three-dot **Workflow actions** menu
     immediately after **Save**, then choose **Export reproducibility package…**.
     In 0.15.0a5 this action is in the gear menu's **Workflow actions** group.

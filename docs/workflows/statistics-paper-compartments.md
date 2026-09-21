@@ -6,9 +6,9 @@ compare measurements on identified image fields. The workflow follows
 and its executable author pipeline. Its scientific target is a per-cell
 relative nuclear-localisation measurement.
 
-!!! info "Unreleased"
-    This workflow uses new CellProfiler profile nodes documented for nightly
-    development. They are not available in 0.15.0a5.
+!!! info "New in 0.16.0a1"
+    This workflow requires the CellProfiler profile nodes introduced in
+    0.16.0a1. Earlier versions do not contain them.
 
 !!! warning "Keep the comparison target explicit"
     Agreement with the original CellProfiler 4.2.6 runtime on the same inputs

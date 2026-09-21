@@ -3,7 +3,7 @@
 Use **Statistics** to summarize object measurements at the object, image or
 declared-sample level, while keeping counts, exclusions and units visible.
 
-!!! info "Unreleased — 0.16 development, after 0.15.0a5"
+!!! info "New in 0.16.0a1"
     **Statistics** expands **Summarize Measurements**. New nodes use the
     descriptive recipe below. Older saved summaries retain their previous
     calculations until you explicitly upgrade them. No inferential tests,

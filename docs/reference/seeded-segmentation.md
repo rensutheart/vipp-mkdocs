@@ -6,10 +6,9 @@ regions from labelled seeds. For wiring and inspection steps, see
 
 ## CellProfiler Propagation
 
-!!! info "Unreleased"
+!!! info "New in 0.16.0a1"
     **Grow Regions from Seeds — CellProfiler Propagation**
-    (`cellprofiler_propagation`) is documented for nightly development and is
-    not part of 0.15.0a5.
+    (`cellprofiler_propagation`) requires 0.16.0a1 or newer.
 
 VIPP calls **Centrosome 1.3.4**, the library that implements CellProfiler's
 Propagation method. It uses CPU execution and returns labels. It does not
@@ -46,7 +45,7 @@ regularization in Centrosome and VIPP. It does not establish that the whole
 CellProfiler **IdentifySecondaryObjects** workflow has been reproduced.
 Normalization, smoothing, thresholding, excluded seed objects, hole filling,
 border filtering and cytoplasm construction must each be matched separately.
-The unreleased [CellProfiler compartment profile](cellprofiler-compartments.md)
+The [CellProfiler compartment profile](cellprofiler-compartments.md)
 provides those surrounding stages for the statistics paper's specific settings.
 
 See the [Centrosome API implementation](https://github.com/CellProfiler/centrosome/blob/fb6881b5c07221bbe80ff356beeb04d2273ecd78/centrosome/propagate.py)

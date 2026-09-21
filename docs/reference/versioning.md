@@ -8,15 +8,15 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-This manual covers VIPP **0.15.0a5**. Use the
-[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.15.0a5)
+This manual covers VIPP **0.16.0a1**. Use the
+[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a1)
 for the exact manual-install wheel, unsigned Windows installer, separate
 unsigned Apple Silicon and Intel macOS packages, checksums and qualification
-evidence. Use the [PyPI 0.15.0a5 page](https://pypi.org/project/napari-vipp/0.15.0a5/)
+evidence. Use the [PyPI 0.16.0a1 page](https://pypi.org/project/napari-vipp/0.16.0a1/)
 for an exact package pin. The nightly manual may describe later unreleased work.
 
-[0.15.0a5](../releases/0.15.0a5.md) retains
-workflow, batch-config and manifest schema 6 from a3, including verified resume.
+[0.16.0a1](../releases/0.16.0a1.md) retains
+workflow, batch-config and manifest schema 6 from 0.15.0a3, including verified resume.
 Earlier manifests cannot supply the new recovery evidence. New operations and
 reproduction references still require a compatible runtime; unchanged schema
 numbers do not promise backward compatibility.
@@ -37,7 +37,7 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.15.0a5 writes workflow schema version 6, batch configuration version 6,
+VIPP 0.16.0a1 writes workflow schema version 6, batch configuration version 6,
 and manifest schema version 6; workflow versions 1 and 2 are rejected. Valid schema-3
 workflows load with explicit CPU intent, schema-4 workflows retain authored
 compute intent, and schema-5 workflows retain canonical SourceItem evidence.
@@ -47,6 +47,24 @@ cached scientific results. Recalculate and compare graph structure, parameters,
 selected items, reader/backend, axes, channels, physical grids, dynamic ports,
 compute request, node behavior, actual backend, and results on known sample
 data. See the [workflow contract](workflow-contract.md).
+
+## Move from 0.15.0a5 to 0.16.0a1
+
+Preserve original workflows and environments before resaving. Results Workspace,
+Plot Results, collected measurement datasets and the CellProfiler compartment
+nodes require a runtime that contains those features, even though the workflow,
+batch-config and manifest schemas remain 6.
+
+Existing **Summarize Measurements** nodes retain their version-1 calculations
+until explicit upgrade. New **Statistics** nodes use version 2 with explicit
+observation levels, weighting, exclusions and counts; singleton sample SD is
+undefined. Review representative outputs before upgrading an existing recipe.
+The decimal controls change only table display, never stored measurement precision.
+
+Regenerate Python exports with the installed version, retain source datasets
+beside their workflows, and review the [0.16.0a1 release notes](../releases/0.16.0a1.md).
+Descriptive statistics and reference-implementation comparisons do not establish
+independent biological replication or biological validity.
 
 ## Move from 0.15.0a4 to 0.15.0a5
 
@@ -324,10 +342,10 @@ python -m pip install --pre napari-vipp
 
 To reproduce a specific alpha exactly, use a fresh environment and record the
 distribution surface as well as the version. An exact prerelease does not need
-`--pre`. For 0.15.0a5, use the exact package pin:
+`--pre`. For 0.16.0a1, use the exact package pin:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.15.0a5"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.16.0a1"
 ```
 
 On macOS use `napari[pyside6]` instead of `napari[pyqt6]`; macOS remains CPU-only.
@@ -335,7 +353,7 @@ On macOS use `napari[pyside6]` instead of `napari[pyqt6]`; macOS remains CPU-onl
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.15.0a5"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.16.0a1"
 vipp-compute-doctor --track cuda13
 ```
 

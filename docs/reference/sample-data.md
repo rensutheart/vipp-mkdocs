@@ -1,14 +1,14 @@
 # Sample Data
 
-VIPP 0.15.0a2 ships **15** deterministic microscopy-style samples, including a
-new bimodal threshold gallery. They are available inside
+VIPP 0.16.0a1 ships **16** deterministic microscopy-style samples, including a
+bimodal threshold gallery. They are available inside
 `Image Source`:
 
 ```text
 Image Source > Source = sample
 ```
 
-Unreleased 0.16 development adds a sixteenth sample, **VIPP synthetic
+0.16.0a1 adds a sixteenth sample, **VIPP synthetic
 measurement plots**: 60 isolated ellipses in one calibrated image for the
 [plotting example](../how-to/plot-measurement-results.md).
 
@@ -31,7 +31,7 @@ File > Open Sample > VIPP synthetic microscopy samples
 | `VIPP synthetic time-lapse multichannel` | `TCZYX` | Preferred starter sample with time, channel, z, y, and x axes. |
 | `VIPP synthetic measurement summary` | `TYX` | Known object counts/areas per timepoint for summary validation. |
 | `VIPP synthetic object morphology` | `YX` | Circle, ellipse, rectangle, and concave 2D objects for derived morphology. |
-| `VIPP synthetic measurement plots` | `YX` | Unreleased: 60 separated ellipses at 0.5 micrometer/pixel, with varied size/elongation and a deliberately generated size–brightness association. |
+| `VIPP synthetic measurement plots` | `YX` | New in 0.16.0a1: 60 separated ellipses at 0.5 micrometer/pixel, with varied size/elongation and a deliberately generated size–brightness association. |
 | `VIPP synthetic 3D mesh morphology` | `ZYX` | Anisotropic 3D objects for mesh volume, surface, convex hull, and sphericity checks. |
 | `VIPP synthetic skeleton network` | `ZYX` | Sparse 3D skeleton-style network with known endpoints, junctions, spur, fragment, and isolated voxel. |
 | `VIPP synthetic advanced skeleton network` | `TZYX` | Multi-timepoint skeleton stress test with loops, fragments, graph tables, and anisotropic scale. |

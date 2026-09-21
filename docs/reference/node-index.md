@@ -1,9 +1,9 @@
 # Node Index
 
 This page lists all **133 operation specifications** registered by
-`NODE_LIBRARY` in nightly development. The palette exposes **131**: the two
+`NODE_LIBRARY` in 0.16.0a1. The palette exposes **131**: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
-selection. The unreleased additions are **Grow Regions from Seeds — CellProfiler
+selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
 0.15.0a5 has **126** specifications and **124** palette nodes.
 
@@ -12,8 +12,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the source registry, with unreleased additions
-    marked explicitly.
+    Titles and families follow the 0.16.0a1 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -150,7 +149,7 @@ and is not merely a display adjustment. See
 | --- | --- | --- |
 | `Average Blur` | image | Simple local averaging. |
 | `Gaussian Blur` | image | Gaussian smoothing. |
-| `Smooth — CellProfiler Gaussian` (unreleased) | image | One YX float32 plane; diameter-to-sigma conversion and normalized borders from CP4.2.6. See [profile](cellprofiler-compartments.md). |
+| `Smooth — CellProfiler Gaussian` (new in 0.16.0a1) | image | One YX float32 plane; diameter-to-sigma conversion and normalized borders from CP4.2.6. See [profile](cellprofiler-compartments.md). |
 | `Gaussian Blur 3D` | image | Volumetric Gaussian smoothing. |
 | `Median Filter` | image | Remove salt-and-pepper noise. |
 | `Sigma Filter` | image | Edge-preserving local smoothing using a sigma-selected circular neighborhood. |
@@ -198,7 +197,7 @@ see [validation status](validation-status.md).
 | `Otsu Threshold` | mask |
 | `Triangle Threshold` | mask |
 | `Li Threshold` | mask |
-| `Threshold — CellProfiler Minimum Cross-Entropy` (unreleased) | mask; normalized float32 YX profile with threshold calculated before optional smoothing |
+| `Threshold — CellProfiler Minimum Cross-Entropy` (new in 0.16.0a1) | mask; normalized float32 YX profile with threshold calculated before optional smoothing |
 | `Yen Threshold` | mask |
 | `Isodata Threshold` | mask |
 | `Minimum Threshold` | mask |
@@ -230,9 +229,9 @@ it cannot identify a valid two-peak histogram. See
 | `Euclidean Distance Transform` | array | image | Distance map for watershed. |
 | `H-Maxima Markers` | array | labels | Marker generation. |
 | `Marker-Controlled Watershed` | image/distance plus markers plus mask | labels | Split touching objects. |
-| `Segment Nuclei — CellProfiler Shape` (unreleased) | normalized float32 nuclear image | retained and pre-filter labels | Manual/cached 2D CP4.2.6 shape profile. |
-| `Prepare Seeds — CellProfiler Propagation` (unreleased) | pre-filter plus retained nuclei | labels | Preserve excluded border competitors for faithful cell growth. |
-| `Grow Regions from Seeds — CellProfiler Propagation` (unreleased) | guidance image plus seed labels plus Boolean foreground mask | labels | Manual/cached CPU growth on one YX plane using Centrosome. See [inputs and compatibility](seeded-segmentation.md). |
+| `Segment Nuclei — CellProfiler Shape` (new in 0.16.0a1) | normalized float32 nuclear image | retained and pre-filter labels | Manual/cached 2D CP4.2.6 shape profile. |
+| `Prepare Seeds — CellProfiler Propagation` (new in 0.16.0a1) | pre-filter plus retained nuclei | labels | Preserve excluded border competitors for faithful cell growth. |
+| `Grow Regions from Seeds — CellProfiler Propagation` (new in 0.16.0a1) | guidance image plus seed labels plus Boolean foreground mask | labels | Manual/cached CPU growth on one YX plane using Centrosome. See [inputs and compatibility](seeded-segmentation.md). |
 | `Expand Labels` | labels | labels | Grow labels without overlap. |
 
 ## Morphology
@@ -284,8 +283,8 @@ refinement caveats and 3MF/OBJ export.
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
-| `Finish Cell Regions — CellProfiler` (unreleased) | grown regions plus retained nuclei | labels | Fill labelled holes and map cells to retained nucleus IDs. |
-| `Extract Cytoplasm — CellProfiler` (unreleased) | cells plus nuclei | labels | Subtract nuclei, optionally retaining their one-pixel outline. |
+| `Finish Cell Regions — CellProfiler` (new in 0.16.0a1) | grown regions plus retained nuclei | labels | Fill labelled holes and map cells to retained nucleus IDs. |
+| `Extract Cytoplasm — CellProfiler` (new in 0.16.0a1) | cells plus nuclei | labels | Subtract nuclei, optionally retaining their one-pixel outline. |
 | `Label Connected Components` | mask | labels | Convert mask to object IDs. |
 | `Clear Border Objects` | mask or labels | same type | Remove objects touching image boundary. |
 | `Filter Labels By Volume` | labels | labels | Keep/remove labels by pixel/voxel count. |
@@ -325,8 +324,8 @@ Boundaries runs on CPU and preserves the input calibration.
 | `Merge Tables` | tables | table | Join measurement branches. |
 | `Add Metadata Columns` | table | table | Add treatment, replicate, condition, batch, or other fields. |
 | `Select Table Columns` | table | table | Keep and reorder columns. |
-| `Summarize Measurements` / `Statistics` (new name and recipe unreleased) | table | table | Descriptive summaries; new recipes explicitly distinguish objects, image means and sample means with weighting, exclusions and counts. |
-| `Plot Results` (unreleased 0.16 development) | table | plot | Compare individual/grouped points, histograms, cumulative distributions and scatter plots; open an editable window and export a sized figure. |
+| `Summarize Measurements` / `Statistics` (name and recipe new in 0.16.0a1) | table | table | Descriptive summaries; new recipes explicitly distinguish objects, image means and sample means with weighting, exclusions and counts. |
+| `Plot Results` (new in 0.16.0a1) | table | plot | Compare individual/grouped points, histograms, cumulative distributions and scatter plots; open an editable window and export a sized figure. |
 
 See [Plot measurement results](../how-to/plot-measurement-results.md) for
 single-image examples, image means, exclusions and export. Plot Results is

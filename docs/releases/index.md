@@ -4,13 +4,14 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## 0.16.0a1 — unreleased preparation
+## 0.16.0a1 alpha
 
 [Read the 0.16.0a1 overview](0.16.0a1.md) for the combined measurement,
 Results Workspace and seeded-segmentation features, suggested first examples,
-and compatibility limits. This preparation does not announce a published
-package or completed release qualification. The current published
-installation instructions remain on 0.15.0a5.
+and compatibility limits. Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a1)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a1/) with the
+[matching installation instructions](../getting-started/installation.md).
 
 ### Changes after 0.15.0a5
 
@@ -29,6 +30,8 @@ installation instructions remain on 0.15.0a5.
   Maximize the window from its title bar, and use **Workflow** to choose any
   open workflow before browsing its data sources. Edits and calculations stay
   with the selected workflow.
+  Decimal controls change table display precision without rounding stored
+  measurements or exports; hover over a cell for its original value.
 - [Plot axis spacing](../how-to/plot-measurement-results.md#set-grid-and-axis-label-spacing)
   offers Auto or custom positive numeric tick intervals, with grid lines at
   those ticks and the same settings in exported figures. Count-axis intervals
@@ -54,13 +57,13 @@ installation instructions remain on 0.15.0a5.
   always-present **Image summary** sheet. Excel also includes **Measurements**
   and **About this collection** with units and run information. Saving a native
   VIPP dataset and opening it through **Table Source** are separate, optional
-  steps. No new plots or statistical tests are included.
+  steps. Collection itself does not calculate plots or statistical tests.
 - A separate three-dot [Workflow actions menu](../reference/interface.md#workflow-actions-menu)
   after **Save** holds examples, **Save workflow as…** and exports, keeping them
   separate from the gear menu's settings. Saving and export behavior is unchanged.
 - Windows setup shows a [live installation log](../getting-started/installation.md#read-the-live-installation-log)
   for package downloads and installation. Scrolling up pauses automatic following;
-  **Jump to latest** resumes it. This is not part of the numbered 0.15.0a5 release.
+  **Jump to latest** resumes it.
 - Six **CellProfiler compartment profile** nodes add the statistics paper's
   explicit 2D smoothing, thresholding, nuclear segmentation, seed preparation,
   cell-region finishing and cytoplasm construction. See the
