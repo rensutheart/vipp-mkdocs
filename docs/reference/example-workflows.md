@@ -55,6 +55,20 @@ instead asks for a working folder before opening the configured batch workspace.
 
 ## Workflow Index
 
+### Unreleased registration examples
+
+Development/nightly adds three examples after 0.16.0a1, separate from its
+23-example release inventory below. Open **Registration & Alignment** in the
+example chooser and follow [Register images and correct drift](../how-to/register-images.md).
+
+| Example title | Launcher ID | Purpose |
+| --- | --- | --- |
+| Subpixel 2D Registration | `registration-translation` | Known fractional displacement, intensity changes, coverage and diagnostics. |
+| Anisotropic 3D Rigid Registration | `registration-rigid-3d` | Rotation/translation on a calibrated volume with unequal Z/Y/X spacing. |
+| Whole-volume XYZ Drift Correction | `registration-time-series` | Six TCZYX time points, one estimation channel, shared motion for two channels and companion labels. |
+
+### 0.16.0a1 inventory
+
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
 | `exhaustive-inspector-showcase.json` | nine lanes using eight synthetic samples, including thresholding, label boundaries, Propagation and the CellProfiler compartment profile | Broad inspector acceptance example covering scientific controls, connected inputs, measurements and Plot Results. Use a focused tutorial for a first workflow. **Table Source** is reviewed separately with a saved measurement dataset. Both CellProfiler lanes are new in 0.16.0a1; the compartment lane exercises controls on synthetic guidance, not paper-data reproduction. See the [paper workflow](../workflows/statistics-paper-compartments.md) for scientific wiring and comparison boundaries. |

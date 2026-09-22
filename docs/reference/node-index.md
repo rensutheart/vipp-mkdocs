@@ -53,6 +53,19 @@ for the accelerated node families and their current public regions.
 
 ## Image Data
 
+### Registration (unreleased)
+
+These three nodes are development/nightly additions after 0.16.0a1 and are not
+included in the release counts above. See
+[Register images and correct drift](../how-to/register-images.md) and the
+[registration reference](registration.md).
+
+| Node | Input | Output | Use |
+| --- | --- | --- | --- |
+| `Estimate Registration` | two images or one time series | transform and diagnostics table | Estimate translation, rigid or affine motion; whole XYZ volumes move as units. |
+| `Apply Transform` | array and transform | aligned array and valid coverage mask | Resample original data once and reuse motion across compatible channels/labels. |
+| `Compare Images` | two aligned arrays, optional coverage mask | table | Compare RMSE, correlation, SSIM and PSNR without implicit registration or normalization. |
+
 ### Source & Output
 
 | Node | Input | Output | Use |

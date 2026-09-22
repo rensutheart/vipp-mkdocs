@@ -9,6 +9,7 @@ How-to guides answer a focused question once you know the basic interface.
 | retain a smaller image region without dropping time points or channels | [Crop an image or volume](crop-images.md) |
 | grow labelled seeds into 2D regions or segment a 3D volume with watershed | [Grow regions from seeds](grow-regions-from-seeds.md) (Propagation is new in 0.16.0a1) |
 | compare intermediate outputs in napari | [Inspect and compare outputs](inspect-outputs.md) |
+| align two images or correct whole-volume time-lapse drift | [Register images and correct drift](register-images.md) (unreleased) |
 | collect and export saved measurements from many images | [Collect batch measurements](collect-measurement-results.md) (new in 0.16.0a1) |
 | work with tables, summaries and plots in one window | [Explore the Results Workspace](results-workspace.md) (new in 0.16.0a1) |
 | plot object measurements or compare collected results | [Plot measurement results](plot-measurement-results.md) (new in 0.16.0a1) |

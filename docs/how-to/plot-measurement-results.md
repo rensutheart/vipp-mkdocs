@@ -101,6 +101,10 @@ review the included/excluded
 counts. Logarithmic axes cannot show zero or negative values, and report those
 exclusions. They do not change the original measurements.
 
+!!! info "Unreleased: logarithmic axis labels"
+    Power-of-ten labels on logarithmic axes render with superscripts, such as
+    10², in the inspector, plot window, Results Workspace and exported figures.
+
 ### Choose categories or a numeric axis
 
 **Compare groups** treats every distinct **Group by** value as a separate,
