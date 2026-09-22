@@ -399,6 +399,14 @@ volume distribution, colocalization scatter, table preview, auto contrast,
 **Pin selected**, **Save selected output...**, and an explicit reset of the
 selected output's remembered display profile.
 
+### Scrolling past drop-downs
+
+!!! note "Unreleased (nightly)"
+    Using the mouse wheel over a **closed drop-down** scrolls the inspector
+    without changing the selected value, even when that control has keyboard
+    focus. Open the drop-down to scroll through its choices. Click and keyboard
+    selection still work normally.
+
 ### Numeric parameter entry
 
 !!! note "Constrained editing"

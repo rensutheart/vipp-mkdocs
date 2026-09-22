@@ -169,6 +169,7 @@ nav:
       - Crop an image or volume: how-to/crop-images.md
       - Grow regions from seeds: how-to/grow-regions-from-seeds.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
+      - Register images and correct drift: how-to/register-images.md
       - Collect batch measurements: how-to/collect-measurement-results.md
       - Explore the Results Workspace: how-to/results-workspace.md
       - Plot measurement results: how-to/plot-measurement-results.md
@@ -199,6 +200,7 @@ nav:
       - Seeded segmentation: reference/seeded-segmentation.md
       - CellProfiler compartment profile: reference/cellprofiler-compartments.md
       - Channel and axis controls: reference/channel-axis-controls.md
+      - Registration and image comparison: reference/registration.md
       - Measurement tables and units: reference/measurement-tables.md
       - Statistics methods and counts: reference/statistics.md
       - Skeleton node outputs: reference/skeleton-nodes.md

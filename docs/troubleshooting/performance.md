@@ -30,6 +30,18 @@ CPU decision or fallback. Do not infer GPU use from the selected mode. For the c
 
 ## CPU, Auto, Prefer GPU, and Custom compute
 
+!!! note "Nightly: CPU median acceleration (unreleased after 0.16.0a1)"
+
+    **Median Filter** can now use the bundled SimpleITK library on CPU for
+    qualified images. No new node or setting is needed. It keeps the same XY
+    footprint, reflected image borders and data type; it does not mix channels,
+    time points or Z planes. Small or unqualified inputs use the existing SciPy
+    implementation. The first accelerated call also loads the library.
+
+    This does not change GPU processing or speed up every filter. In particular,
+    rolling-ball background subtraction is not based on a median filter.
+    Gaussian filtering and deconvolution keep their existing implementations.
+
 - **CPU** runs the authoritative host implementation everywhere.
 - **Auto** starts with reviewed GPU defaults. Accelerated-only exact compatible
   history makes the next global Auto run measure CPU once on the same execution

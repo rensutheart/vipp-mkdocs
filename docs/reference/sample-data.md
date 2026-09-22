@@ -43,6 +43,18 @@ File > Open Sample > VIPP synthetic microscopy samples
 | `VIPP synthetic GPU segmentation cleanup` | `CZYX` | Four 3D objects, one removable 19-voxel speck, and one enclosed 31-voxel cavity for the portable GPU segmentation and Boolean mask-cleanup example. |
 | `VIPP synthetic threshold gallery` | `ZYX` | Compact noisy phantom with separated background and foreground populations for global/local threshold inspection, including Minimum Threshold. |
 
+## Unreleased registration samples
+
+Development/nightly adds six registration samples after 0.16.0a1: reference and
+moving images for a 2D subpixel pair, reference and moving volumes for a 3D rigid
+pair, a two-channel XYZ drift time series, and its companion label series. They
+are available through **Image Source** and the separate napari sample-data entry
+**VIPP synthetic registration samples**.
+
+Use the [registration examples](../how-to/register-images.md#start-with-a-known-answer-example)
+for their connected workflows and known synthetic motion. These six samples are
+not included in the numbered release inventory above.
+
 ## Documentation Samples Versus Core Samples
 
 Core samples should stay small, deterministic, testable, and broadly useful.
