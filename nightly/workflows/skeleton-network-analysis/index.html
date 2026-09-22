@@ -1659,6 +1659,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Measurement Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#join-skeleton-and-morphology-per-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Join skeleton and morphology per object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-skeleton-first-analysis-when-that-is-the-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep skeleton-first analysis when that is the question
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1784,6 +1808,8 @@
       
         
           
+        
+      
         
       
         
@@ -1962,6 +1988,29 @@
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/register-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Register images and correct drift
     
   </span>
   
@@ -2573,6 +2622,8 @@
       
         
       
+        
+      
     
     
     
@@ -2769,6 +2820,29 @@
   
   <span class="md-ellipsis">
     Channel and axis controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/registration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Registration and image comparison
     
   </span>
   
@@ -3491,6 +3565,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Measurement Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#join-skeleton-and-morphology-per-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Join skeleton and morphology per object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-skeleton-first-analysis-when-that-is-the-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep skeleton-first analysis when that is the question
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3583,6 +3681,59 @@ napari, then compare overlays, component counts, endpoints, junctions, and
 branch lengths. A bundled synthetic phantom is useful for regression, but it
 does not validate a biological segmentation or the acquisition's Z scale.</p>
 <h2 id="measurement-workflows">Measurement Workflows<a class="headerlink" href="#measurement-workflows" title="Permanent link">&para;</a></h2>
+<h3 id="join-skeleton-and-morphology-per-object">Join skeleton and morphology per object<a class="headerlink" href="#join-skeleton-and-morphology-per-object" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Unreleased after 0.16.0a1</p>
+<p><strong>Skeletonize Labels</strong> and <strong>Analyze Skeleton per Label</strong> preserve the
+object IDs needed for a reliable table join. Existing skeleton-first
+workflows remain supported.</p>
+</div>
+<p>Choose <strong>Open example… → Skeletons &amp; Networks → Per-label Skeleton &amp;
+Morphology</strong> to try a three-object synthetic image with calibrated spacing.</p>
+<ol>
+<li>Label the segmented mask and apply object filtering once.</li>
+<li>Connect the filtered labels to both <strong>Measure Objects</strong> and <strong>Skeletonize
+   Labels</strong>. Inspect the skeleton image: surviving skeleton voxels keep their
+   original object label.</li>
+<li>Connect those same filtered labels to <strong>Analyze Skeleton per Label →
+   Original labels</strong> and the labeled skeleton to its optional <strong>Skeleton</strong> input.</li>
+<li>Inspect the <strong>Objects</strong> summary table and <strong>Skeleton components</strong> output. The summary
+   keeps one row for every original object; component details retain both
+   <code>label_id</code> and a component ID within that object.</li>
+<li>Connect morphology and the per-label summary to <strong>Merge Tables</strong>. For this
+   single 3D image, join on <code>label_id</code>. Across images, timepoints, channels or
+   slices, include those identity columns too.</li>
+<li>Open the example's scatter plot to compare each object's volume with its
+   own skeleton length. Keep the full raw tables before selecting analysis
+   features.</li>
+</ol>
+<pre class="mermaid"><code>flowchart TB
+    A[Filtered object labels] --&gt; B[Measure Objects]
+    A --&gt; C[Skeletonize Labels]
+    A --&gt;|Original labels| D[Analyze Skeleton&lt;br/&gt;per Label]
+    C --&gt;|Skeleton| D
+    B --&gt; E[Merge Tables]
+    D --&gt;|Objects summary| E</code></pre>
+<p>The sample contains a branched network, a separate line and one isolated
+voxel. Its synthetic spacing is 0.45 micrometer on all three axes. Raise the
+minimum volume from 1 to 2 voxels and calculate again: the isolate is removed
+from <strong>both</strong> branches. These settings demonstrate consistent object
+selection; they are not segmentation settings validated for acquired images.</p>
+<p>Retain connected-component and isolate measurements. They describe different
+features: <code>skeleton_component_count</code> counts pieces within an object;
+<code>isolated_node_count</code> counts skeleton voxels with no neighbors. The latter
+does not count every separate mitochondrial object. For the cell's complete
+network, keep a separate <strong>Measure Overall Skeleton Network</strong> branch as
+needed. Adjacent skeletons from different labels can connect when treated
+as one binary mask, so its topology need not equal a sum of per-label metrics.</p>
+<p>See the <a href="../../reference/skeleton-nodes/#analyze-skeleton-per-label">per-label reference</a>
+for empty skeletons, calibration, graph connectivity and table identity.</p>
+<h3 id="keep-skeleton-first-analysis-when-that-is-the-question">Keep skeleton-first analysis when that is the question<a class="headerlink" href="#keep-skeleton-first-analysis-when-that-is-the-question" title="Permanent link">&para;</a></h3>
+<p>Use <strong>Skeletonize → Label Skeleton Components</strong> when you want to discover
+connected pieces of a binary skeleton. Its IDs describe skeleton pieces and
+remain independent of any earlier object labels. That existing behavior is
+unchanged. The label-first route above is preferred when the aim is to join
+measurements to original object morphology.</p>
 <p>Per-component measurements:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>binary mask
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  -&gt; Skeletonize
@@ -3626,6 +3777,10 @@ does not validate a biological segmentation or the acquisition's Z scale.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>synthetic-per-label-skeleton.json</code></td>
+<td>Unreleased after 0.16.0a1: retain original object labels, inspect skeleton summaries and components, and join morphology before plotting.</td>
+</tr>
+<tr>
 <td><code>synthetic-skeleton-qc.json</code></td>
 <td>Compact 3D skeleton QC with keypoints, branch/component labels, pruning, and tables.</td>
 </tr>
@@ -3665,7 +3820,7 @@ outputs, units, graph terms, and pruning behavior.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 22, 2026 21:41:21 UTC">September 22, 2026</span>
   </span>
 
     

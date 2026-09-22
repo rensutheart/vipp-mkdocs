@@ -1709,6 +1709,8 @@
       
         
       
+        
+      
     
     
     
@@ -1859,6 +1861,29 @@
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/register-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Register images and correct drift
     
   </span>
   
@@ -2472,6 +2497,8 @@
       
         
       
+        
+      
     
     
     
@@ -2688,6 +2715,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../registration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Registration and image comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../measurement-tables/" class="md-nav__link">
         
   
@@ -2784,6 +2834,33 @@
       On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-what-an-id-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose what an ID means
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skeletonize-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skeletonize Labels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analyze-skeleton-per-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyze Skeleton per Label
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#skeletonize" class="md-nav__link">
@@ -3539,6 +3616,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#choose-what-an-id-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose what an ID means
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skeletonize-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skeletonize Labels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analyze-skeleton-per-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyze Skeleton per Label
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#skeletonize" class="md-nav__link">
     <span class="md-ellipsis">
       Skeletonize
@@ -3692,6 +3796,111 @@
 <p>Start with the <a href="../../workflows/skeleton-network-analysis/">skeleton workflow tutorial</a>
 to choose 2D or 3D processing and inspect your segmentation. This page lists the
 outputs, units, and assumptions needed to interpret the resulting tables.</p>
+<div class="admonition info">
+<p class="admonition-title">Unreleased after 0.16.0a1</p>
+<p><strong>Skeletonize Labels</strong> and <strong>Analyze Skeleton per Label</strong> retain the
+original object IDs. Use this label-first route when joining skeleton
+measurements to object morphology. The existing mask-first nodes,
+including <strong>Label Skeleton Components</strong>, retain their behavior.</p>
+</div>
+<h2 id="choose-what-an-id-means">Choose what an ID means<a class="headerlink" href="#choose-what-an-id-means" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Meaning of an ID</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Labels → Skeletonize Labels → Analyze Skeleton per Label</td>
+<td>Original segmented object, retained even if its skeleton contains multiple pieces</td>
+<td>Join morphology and skeleton features for the same objects.</td>
+</tr>
+<tr>
+<td>Mask → Skeletonize → Label Skeleton Components / Analyze Skeleton</td>
+<td>Connected piece of the skeleton, assigned a new ID</td>
+<td>Inspect disconnected skeleton networks without requiring an original object segmentation.</td>
+</tr>
+</tbody>
+</table>
+<p>Skeleton component IDs from the second route do not identify the original
+objects. Do not merge them with morphology by matching their numeric IDs.</p>
+<h2 id="skeletonize-labels">Skeletonize Labels<a class="headerlink" href="#skeletonize-labels" title="Permanent link">&para;</a></h2>
+<p><strong>Unreleased after 0.16.0a1.</strong> Skeletonizes each nonzero integer label
+independently and writes that same label into its surviving skeleton voxels.
+Background remains zero. Shape, label dtype, spatial calibration and leading
+dimensions are retained; the input image is not changed.</p>
+<p>Labels must be non-negative integers. Boolean masks, floating-point images
+and negative labels are rejected. Label a binary segmentation before using
+these nodes; wide or sparse integer IDs retain their exact values.</p>
+<p>Different labels are never fused, including where their boundaries touch.
+Disconnected regions carrying the same label retain that shared identity.
+The node does not relabel objects or infer that two different IDs should be
+one biological object.</p>
+<p><strong>Spatial processing</strong> and <strong>Method</strong> follow <a href="#skeletonize">Skeletonize</a>:
+Auto uses Zhang in 2D and Lee in 3D, with independent leading-axis blocks.
+Thinning operates on the voxel grid; it does not resample anisotropic images
+or compute a physical medial axis. Inspect the segmentation and skeleton in
+all relevant orientations.</p>
+<h2 id="analyze-skeleton-per-label">Analyze Skeleton per Label<a class="headerlink" href="#analyze-skeleton-per-label" title="Permanent link">&para;</a></h2>
+<p><strong>Unreleased after 0.16.0a1.</strong> Connect the original label image to <strong>Original labels</strong>.
+Optionally connect its output from <strong>Skeletonize Labels</strong> to <strong>Skeleton</strong>.
+When Skeleton is unconnected, the node skeletonizes each original label
+internally using its <strong>Thinning method</strong> setting.</p>
+<p>A supplied skeleton must use the same grid and original label values. Every
+nonzero skeleton voxel must lie inside the matching original label. A binary
+mask or an independently relabeled skeleton is not a substitute for that
+mapping. Invalid matches fail instead of silently assigning measurements to
+the wrong objects.</p>
+<p>The two table outputs answer different questions:</p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Row identity</th>
+<th>Measurements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Objects</td>
+<td>Leading-axis block and original <code>label_id</code></td>
+<td>Per-label summary: component count, summed skeleton voxel/endpoint/junction/isolate/branch/graph/cycle counts, total skeleton length and skeleton status.</td>
+</tr>
+<tr>
+<td>Skeleton components</td>
+<td>Leading-axis block, original <code>label_id</code> and local <code>component_id</code></td>
+<td>Existing per-component skeleton measurements, with <code>component_count_in_label</code> and <code>component_voxel_fraction_in_label</code> describing that original label.</td>
+</tr>
+</tbody>
+</table>
+<p><code>skeleton_component_count</code> counts connected skeleton pieces <strong>inside one
+original label</strong>, using the full 8-neighbor graph in 2D or 26-neighbor graph
+in 3D. Neighbors belonging to another label are excluded. The component table
+may contain multiple rows for one object. Join morphology to the <strong>summary</strong>
+for one row per object; joining component details duplicates that object's
+morphology once per component.</p>
+<p>Every original nonzero label has a summary row, including when it has no
+surviving skeleton. <code>skeleton_status</code> is <code>ok</code> or <code>empty</code>; check it alongside zero measurements:
+zero length alone also occurs for a one-voxel isolate. An object with no
+skeleton has no component-detail row.</p>
+<p>Use <code>label_id</code> together with every applicable image, time, channel or slice
+identifier when joining tables. A label number is only unique within its
+source spatial block. IDs and status fields are identifiers, not numerical
+features to average or include in PCA.</p>
+<p>Physical length requires complete positive spatial spacing and recognized,
+compatible length units. Compatible units are converted to the X-axis unit.
+With no units or pixel units, the physical-length column is absent: use
+<code>skeleton_length_pixels</code> in 2D or <code>skeleton_length_voxels</code> in 3D. Partial,
+unknown or incompatible physical calibration is rejected. The node does not
+invent micrometer spacing. Calibration is inherited from the labels and must agree with a
+supplied skeleton. Copy calibration from an intensity image only after
+confirming acquisition identity, axes and any intervening resampling.</p>
+<p>Both new nodes currently calculate on CPU. The
+<a href="../../workflows/skeleton-network-analysis/#join-skeleton-and-morphology-per-object">worked example</a>
+shows filtering once and sharing the same objects between both branches.</p>
 <h2 id="skeletonize">Skeletonize<a class="headerlink" href="#skeletonize" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Input:</strong> binary mask.</li>
@@ -3854,6 +4063,9 @@ largest-component fraction, and normalized connectedness metrics.</p>
 <li><strong>Output:</strong> label image.</li>
 <li><strong>Purpose:</strong> Assigns a label ID to each connected skeleton component.</li>
 <li><strong>Use when:</strong> you need to inspect or count disconnected skeleton networks.</li>
+<li><strong>Identity:</strong> creates new IDs for connected skeleton pieces. This node
+  remains available and unchanged; choose <strong>Skeletonize Labels</strong> when the
+  output must retain previously segmented object IDs.</li>
 </ul>
 <h2 id="label-skeleton-branches">Label Skeleton Branches<a class="headerlink" href="#label-skeleton-branches" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3920,7 +4132,7 @@ largest-component fraction, and normalized connectedness metrics.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 05:39:53 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 22, 2026 21:41:21 UTC">September 22, 2026</span>
   </span>
 
     
