@@ -4,7 +4,7 @@ Start with the [skeleton workflow tutorial](../workflows/skeleton-network-analys
 to choose 2D or 3D processing and inspect your segmentation. This page lists the
 outputs, units, and assumptions needed to interpret the resulting tables.
 
-!!! info "Unreleased after 0.16.0a1"
+!!! info "New in 0.16.0a2"
     **Skeletonize Labels** and **Analyze Skeleton per Label** retain the
     original object IDs. Use this label-first route when joining skeleton
     measurements to object morphology. The existing mask-first nodes,
@@ -22,7 +22,7 @@ objects. Do not merge them with morphology by matching their numeric IDs.
 
 ## Skeletonize Labels
 
-**Unreleased after 0.16.0a1.** Skeletonizes each nonzero integer label
+**New in 0.16.0a2.** Skeletonizes each nonzero integer label
 independently and writes that same label into its surviving skeleton voxels.
 Background remains zero. Shape, label dtype, spatial calibration and leading
 dimensions are retained; the input image is not changed.
@@ -44,7 +44,7 @@ all relevant orientations.
 
 ## Analyze Skeleton per Label
 
-**Unreleased after 0.16.0a1.** Connect the original label image to **Original labels**.
+**New in 0.16.0a2.** Connect the original label image to **Original labels**.
 Optionally connect its output from **Skeletonize Labels** to **Skeleton**.
 When Skeleton is unconnected, the node skeletonizes each original label
 internally using its **Thinning method** setting.

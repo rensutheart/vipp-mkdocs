@@ -5,6 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
+| [0.16.0a2 release notes](../releases/0.16.0a2.md) | Review registration, reusable transforms, per-label skeletons and CPU median acceleration. |
 | [0.16.0a1 release notes](../releases/0.16.0a1.md) | Review Results Workspace, descriptive statistics and plots, batch measurement collection and seeded compartments. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
 | [All nodes](node-index.md) | Search release node titles, families, types, and execution policy. |
@@ -14,7 +15,7 @@ task sequences.
 | [Seeded segmentation](seeded-segmentation.md) | Compare CellProfiler Propagation with existing 3D watershed; check inputs, intensity scale and calibration limits. |
 | [CellProfiler compartment profile](cellprofiler-compartments.md) | Match the statistics paper's smoothing, nuclear objects, competing seeds, cell filtering and cytoplasm definition. |
 | [Channel and axis controls](channel-axis-controls.md) | Split/extract channels, compose RGB, resize axes, and supply acquisition metadata. |
-| [Registration and image comparison](registration.md) | Estimate and apply whole-volume transforms, preserve labels, and compare valid overlap (unreleased). |
+| [Registration and image comparison](registration.md) | Estimate and apply whole-volume transforms, preserve labels, and compare valid overlap (new in 0.16.0a2). |
 | [Measurement tables and units](measurement-tables.md) | Preserve identity keys and understand physical-column and mesh limits. |
 | [Statistics methods and counts](statistics.md) | Define descriptive summaries, weighting, exclusions and legacy behavior (new in 0.16.0a1). |
 | [Skeleton nodes](skeleton-nodes.md) | Interpret component, branch, graph, and whole-network outputs. |

@@ -1,17 +1,17 @@
 # Node Index
 
-This page lists all **133 operation specifications** registered by
-`NODE_LIBRARY` in 0.16.0a1. The palette exposes **131**: the two
+This page lists all **140 operation specifications** registered by
+`NODE_LIBRARY` in 0.16.0a2. The palette exposes **138**: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
 selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
 0.15.0a5 has **126** specifications and **124** palette nodes.
 
-!!! info "Unreleased after 0.16.0a1"
-    Development/nightly adds five nodes to the counts above: **Estimate
+!!! info "New in 0.16.0a2"
+    Five additions are included in the counts above: **Estimate
     Registration**, **Apply Transform**, **Compare Images**, **Skeletonize
     Labels** and **Analyze Skeleton per Label**. The registration nodes are
-    described [below](#registration-unreleased).
+    described [below](#registration).
 
     **Skeletonize Labels** and **Analyze Skeleton per Label** are marked
     separately below. They preserve original object IDs for morphology joins;
@@ -23,8 +23,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.16.0a1 source registry, with separately
-    marked unreleased additions.
+    Titles and families follow the 0.16.0a2 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -51,24 +50,23 @@ for the accelerated node families and their current public regions.
 
 | Family | Nodes |
 | --- | ---: |
-| Image Data | 25 |
+| Image Data | 28 |
 | Filtering | 19 |
 | Segmentation | 22 |
-| Morphology | 15 |
+| Morphology | 16 |
 | 3D Meshes | 8 |
-| Measurements | 13 |
+| Measurements | 16 |
 | Colocalization & Spatial Analysis | 13 |
 | Label Operations | 10 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **133** |
+| **Total** | **140** |
 
 ## Image Data
 
-### Registration (unreleased)
+### Registration
 
-These three nodes are development/nightly additions after 0.16.0a1 and are not
-included in the release counts above. See
+These three CPU nodes are new in 0.16.0a2. See
 [Register images and correct drift](../how-to/register-images.md) and the
 [registration reference](registration.md).
 
@@ -280,7 +278,7 @@ it cannot identify a valid two-peak histogram. See
 | Node | Input | Output |
 | --- | --- | --- |
 | `Skeletonize` | mask | mask |
-| `Skeletonize Labels` (unreleased after 0.16.0a1) | original labels | skeleton with original labels |
+| `Skeletonize Labels` (new in 0.16.0a2) | original labels | skeleton with original labels |
 | `Skeleton Keypoints` | mask | endpoints, junctions, isolated masks |
 | `Skeleton Graph Overlay` | mask | RGB image |
 | `Prune Skeleton Branches` | mask | mask |
@@ -338,7 +336,7 @@ Boundaries runs on CPU and preserves the input calibration.
 | Node | Output | Execution |
 | --- | --- | --- |
 | `Analyze Skeleton` | table | manual |
-| `Analyze Skeleton per Label` (unreleased after 0.16.0a1) | per-original-label summary and component-detail tables | manual |
+| `Analyze Skeleton per Label` (new in 0.16.0a2) | per-original-label summary and component-detail tables | manual |
 | `Measure Skeleton Branches` | table | manual |
 | `Summarize Skeleton Branches` | table | automatic |
 | `Skeleton Graph Tables` | graph-node table and graph-edge table | manual |
@@ -348,6 +346,7 @@ Boundaries runs on CPU and preserves the input calibration.
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
+| `Table Source` (new in 0.16.0a1) | saved VIPP measurement dataset | table | Load collected results with their retained types, units and identity records. |
 | `Merge Tables` | tables | table | Join measurement branches. |
 | `Add Metadata Columns` | table | table | Add treatment, replicate, condition, batch, or other fields. |
 | `Select Table Columns` | table | table | Keep and reorder columns. |

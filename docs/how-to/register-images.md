@@ -4,10 +4,9 @@ Align two images, or correct a time-lapse by moving each complete XY image or
 XYZ volume as one unit. Estimate the motion once, then reuse it for the original
 intensity data and compatible masks or labels.
 
-!!! info "Unreleased — after 0.16.0a1"
-    These registration nodes and examples are development/nightly functionality.
-    They are not available in the published 0.16.0a1 installer. Registration is
-    CPU-only in this implementation.
+!!! info "New in 0.16.0a2"
+    These registration nodes and examples require 0.16.0a2 or newer.
+    Registration is CPU-only in this implementation.
 
 ## Start with a known-answer example
 

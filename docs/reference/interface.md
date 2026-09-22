@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a1. Some labels
+Labels below match napari-vipp 0.16.0a2. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -401,7 +401,7 @@ selected output's remembered display profile.
 
 ### Scrolling past drop-downs
 
-!!! note "Unreleased (nightly)"
+!!! note "New in 0.16.0a2"
     Using the mouse wheel over a **closed drop-down** scrolls the inspector
     without changing the selected value, even when that control has keyboard
     focus. Open the drop-down to scroll through its choices. Click and keyboard

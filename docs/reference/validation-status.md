@@ -5,6 +5,31 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a2 scope and evidence
+
+Use the [0.16.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a2)
+for exact assets, checksums and recorded qualification, and its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a2/docs/release-qualification-baseline.md)
+for the boundaries between changed-domain checks and carried-forward evidence.
+
+The new CPU domains are registration, image-comparison metrics, label-preserving
+skeleton analysis and the exact median dispatcher. Registration qualification
+uses independent known-motion phantoms, including anisotropic 3D motion,
+whole-volume time series, valid coverage and label-ID preservation. Median
+qualification compares admitted inputs against the existing SciPy result
+contract. These are numerical and integration checks, not proof of biological
+correspondence or segmentation accuracy.
+
+Per-label skeleton summaries retain original identities, isolates and explicit
+empty-skeleton rows. Their joins require the correct image and leading-axis
+identifiers; physical calibration must be verified independently for acquired
+data. Shared cache/provenance integration and native SimpleITK packaging have
+their own release gates. Prior branch results and Windows user acceptance do
+not stand in for exact-candidate CI or native Linux/macOS and installer evidence.
+
+This release does not broaden GPU scientific qualification or introduce
+deformable registration, template matching or inferential statistics.
+
 ## 0.16.0a1 scope and evidence
 
 Use the [0.16.0a1 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a1)

@@ -11,7 +11,7 @@ an image, mask, or table is appropriate for your biological question.
 | `labels` | Integer object IDs, with zero as background. | Labels layer |
 | `table` | Measurement or summary rows. | Inspector table preview and CSV/TSV output |
 | `plot` (new in 0.16.0a1) | A measurement-plot recipe with prepared values and inclusion counts, not a spatial image. | Inspector figure and editable plot window; PNG/TIFF/SVG/PDF export |
-| `transform` (unreleased) | Reusable motion from moving coordinates to a reference, including a series with one transform per time point. | Metadata and JSON export; connect to Apply Transform to view aligned images. |
+| `transform` (new in 0.16.0a2) | Reusable motion from moving coordinates to a reference, including a series with one transform per time point. | Metadata and JSON export; connect to Apply Transform to view aligned images. |
 | `array` | Generic array accepted by many processing nodes. | Depends on output node |
 | `mask_or_labels` | Input may be either a binary mask or label image. | Depends on connected input |
 | `any` | Pass-through or generic output where type is resolved from context. | Depends on connected input |

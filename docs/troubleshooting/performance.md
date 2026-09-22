@@ -30,7 +30,7 @@ CPU decision or fallback. Do not infer GPU use from the selected mode. For the c
 
 ## CPU, Auto, Prefer GPU, and Custom compute
 
-!!! note "Nightly: CPU median acceleration (unreleased after 0.16.0a1)"
+!!! note "New in 0.16.0a2: CPU median acceleration"
 
     **Median Filter** can now use the bundled SimpleITK library on CPU for
     qualified images. No new node or setting is needed. It keeps the same XY
