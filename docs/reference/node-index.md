@@ -7,12 +7,19 @@ selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
 0.15.0a5 has **126** specifications and **124** palette nodes.
 
+!!! info "Unreleased after 0.16.0a1"
+    **Skeletonize Labels** and **Analyze Skeleton per Label** are marked
+    separately below. They preserve original object IDs for morphology joins;
+    see the [skeleton reference](skeleton-nodes.md#choose-what-an-id-means).
+    Existing **Label Skeleton Components** behavior is unchanged.
+
 **Save Image** accepts images or 3D meshes and passes the connected
 image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.16.0a1 source registry.
+    Titles and families follow the 0.16.0a1 source registry, with separately
+    marked unreleased additions.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -255,6 +262,7 @@ it cannot identify a valid two-peak histogram. See
 | Node | Input | Output |
 | --- | --- | --- |
 | `Skeletonize` | mask | mask |
+| `Skeletonize Labels` (unreleased after 0.16.0a1) | original labels | skeleton with original labels |
 | `Skeleton Keypoints` | mask | endpoints, junctions, isolated masks |
 | `Skeleton Graph Overlay` | mask | RGB image |
 | `Prune Skeleton Branches` | mask | mask |
@@ -312,6 +320,7 @@ Boundaries runs on CPU and preserves the input calibration.
 | Node | Output | Execution |
 | --- | --- | --- |
 | `Analyze Skeleton` | table | manual |
+| `Analyze Skeleton per Label` (unreleased after 0.16.0a1) | per-original-label summary and component-detail tables | manual |
 | `Measure Skeleton Branches` | table | manual |
 | `Summarize Skeleton Branches` | table | automatic |
 | `Skeleton Graph Tables` | graph-node table and graph-edge table | manual |

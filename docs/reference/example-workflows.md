@@ -9,6 +9,12 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
+!!! info "Unreleased after 0.16.0a1"
+    The nightly catalogue adds a 24th example, **Per-label Skeleton &
+    Morphology**. It preserves original object IDs through skeletonization,
+    joins skeleton features to morphology and plots the combined table.
+    Follow [Join skeleton and morphology per object](../workflows/skeleton-network-analysis.md#join-skeleton-and-morphology-per-object).
+
 !!! info "New in 0.16.0a1"
     The catalogue now has **23** examples. **Morphology & Intensity Plots**
     measures 60 objects in one calibrated synthetic image, joins shape and
@@ -74,6 +80,7 @@ instead asks for a working folder before opening the configured batch workspace.
 | `synthetic-3d-mesh-morphology.json` | synthetic 3D mesh morphology | Surface area, mesh volume, convex hull, sphericity, and tiny-object status. |
 | `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
 | `synthetic-skeleton-qc.json` | synthetic skeleton network | Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries. |
+| `synthetic-per-label-skeleton.json` | synthetic skeleton network | Unreleased after 0.16.0a1: original-label skeletonization, per-label summaries and component details, a morphology join and volume/length scatter plot. The three-object fixture retains an isolated voxel and 0.45 micrometer spacing. |
 | `synthetic-advanced-skeleton-network.json` | synthetic advanced skeleton network | Time-indexed 3D skeleton graph stress test. |
 | `synthetic-colocalization-racc.json` | synthetic colocalization | **New in 0.15.0a5:** focused whole-image and ROI-masked RACC, with tuned manual thresholds, Magma output, method notes and paper citation. |
 | `synthetic-colocalization-overlap.json` | synthetic colocalization | **New in 0.15.0a5:** whole-image and ROI-masked overlays/metrics, Boolean overlap masks, 3D cleanup and connected-region measurements. |
@@ -89,7 +96,8 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. The table lists the 0.16.0a1 IDs:
+Use `--list` to print your version's exact IDs. The table lists the 0.16.0a1 IDs
+and marks unreleased additions separately:
 
 | ID | Example title |
 | --- | --- |
@@ -110,6 +118,7 @@ Use `--list` to print your version's exact IDs. The table lists the 0.16.0a1 IDs
 | `mesh-morphology` | 3D Mesh Morphology |
 | `mesh-objects` | Mesh Objects, Colours & Refinement |
 | `skeleton-qc` | Skeleton QC |
+| `per-label-skeleton` | Per-label Skeleton & Morphology (unreleased after 0.16.0a1) |
 | `advanced-skeleton` | Advanced Skeleton Network |
 | `racc-colocalization` | RACC Colocalization |
 | `colocalization-overlap` | Colocalization, Overlap & Object Counts (**New in 0.15.0a5**) |

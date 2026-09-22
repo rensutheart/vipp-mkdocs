@@ -46,6 +46,67 @@ does not validate a biological segmentation or the acquisition's Z scale.
 
 ## Measurement Workflows
 
+### Join skeleton and morphology per object
+
+!!! info "Unreleased after 0.16.0a1"
+    **Skeletonize Labels** and **Analyze Skeleton per Label** preserve the
+    object IDs needed for a reliable table join. Existing skeleton-first
+    workflows remain supported.
+
+Choose **Open example… → Skeletons & Networks → Per-label Skeleton &
+Morphology** to try a three-object synthetic image with calibrated spacing.
+
+1. Label the segmented mask and apply object filtering once.
+2. Connect the filtered labels to both **Measure Objects** and **Skeletonize
+   Labels**. Inspect the skeleton image: surviving skeleton voxels keep their
+   original object label.
+3. Connect those same filtered labels to **Analyze Skeleton per Label →
+   Original labels** and the labeled skeleton to its optional **Skeleton** input.
+4. Inspect the **Objects** summary table and **Skeleton components** output. The summary
+   keeps one row for every original object; component details retain both
+   `label_id` and a component ID within that object.
+5. Connect morphology and the per-label summary to **Merge Tables**. For this
+   single 3D image, join on `label_id`. Across images, timepoints, channels or
+   slices, include those identity columns too.
+6. Open the example's scatter plot to compare each object's volume with its
+   own skeleton length. Keep the full raw tables before selecting analysis
+   features.
+
+```mermaid
+flowchart TB
+    A[Filtered object labels] --> B[Measure Objects]
+    A --> C[Skeletonize Labels]
+    A -->|Original labels| D[Analyze Skeleton<br/>per Label]
+    C -->|Skeleton| D
+    B --> E[Merge Tables]
+    D -->|Objects summary| E
+```
+
+The sample contains a branched network, a separate line and one isolated
+voxel. Its synthetic spacing is 0.45 micrometer on all three axes. Raise the
+minimum volume from 1 to 2 voxels and calculate again: the isolate is removed
+from **both** branches. These settings demonstrate consistent object
+selection; they are not segmentation settings validated for acquired images.
+
+Retain connected-component and isolate measurements. They describe different
+features: `skeleton_component_count` counts pieces within an object;
+`isolated_node_count` counts skeleton voxels with no neighbors. The latter
+does not count every separate mitochondrial object. For the cell's complete
+network, keep a separate **Measure Overall Skeleton Network** branch as
+needed. Adjacent skeletons from different labels can connect when treated
+as one binary mask, so its topology need not equal a sum of per-label metrics.
+
+See the [per-label reference](../reference/skeleton-nodes.md#analyze-skeleton-per-label)
+for empty skeletons, calibration, graph connectivity and table identity.
+
+### Keep skeleton-first analysis when that is the question
+
+Use **Skeletonize → Label Skeleton Components** when you want to discover
+connected pieces of a binary skeleton. Its IDs describe skeleton pieces and
+remain independent of any earlier object labels. That existing behavior is
+unchanged. The label-first route above is preferred when the aim is to join
+measurements to original object morphology.
+
 Per-component measurements:
 
 ```text
@@ -102,6 +163,7 @@ Pruning removes short terminal spurs and optionally isolated skeleton voxels.
 
 | Workflow | Purpose |
 | --- | --- |
+| `synthetic-per-label-skeleton.json` | Unreleased after 0.16.0a1: retain original object labels, inspect skeleton summaries and components, and join morphology before plotting. |
 | `synthetic-skeleton-qc.json` | Compact 3D skeleton QC with keypoints, branch/component labels, pruning, and tables. |
 | `synthetic-advanced-skeleton-network.json` | Time-indexed 3D skeleton/network stress test with loops, fragments, graph tables, and anisotropic scale. |
 
