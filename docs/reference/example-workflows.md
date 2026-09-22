@@ -10,10 +10,12 @@ They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
 !!! info "Unreleased after 0.16.0a1"
-    The nightly catalogue adds a 24th example, **Per-label Skeleton &
-    Morphology**. It preserves original object IDs through skeletonization,
-    joins skeleton features to morphology and plots the combined table.
-    Follow [Join skeleton and morphology per object](../workflows/skeleton-network-analysis.md#join-skeleton-and-morphology-per-object).
+    The development catalogue has **27** examples: the 23 released in 0.16.0a1,
+    three [registration examples](../how-to/register-images.md), and
+    **Per-label Skeleton & Morphology**. The latter preserves original object
+    IDs through skeletonization, joins skeleton features to morphology and
+    plots the combined table. Follow
+    [Join skeleton and morphology per object](../workflows/skeleton-network-analysis.md#join-skeleton-and-morphology-per-object).
 
 !!! info "New in 0.16.0a1"
     The catalogue now has **23** examples. **Morphology & Intensity Plots**
@@ -61,17 +63,18 @@ instead asks for a working folder before opening the configured batch workspace.
 
 ## Workflow Index
 
-### Unreleased registration examples
+### Unreleased additions
 
-Development/nightly adds three examples after 0.16.0a1, separate from its
-23-example release inventory below. Open **Registration & Alignment** in the
-example chooser and follow [Register images and correct drift](../how-to/register-images.md).
+Development/nightly adds four examples after 0.16.0a1, separate from its
+23-example release inventory below. Open **Registration & Alignment** for
+the first three, or **Skeletons & Networks** for the label-preserving example.
 
 | Example title | Launcher ID | Purpose |
 | --- | --- | --- |
 | Subpixel 2D Registration | `registration-translation` | Known fractional displacement, intensity changes, coverage and diagnostics. |
 | Anisotropic 3D Rigid Registration | `registration-rigid-3d` | Rotation/translation on a calibrated volume with unequal Z/Y/X spacing. |
 | Whole-volume XYZ Drift Correction | `registration-time-series` | Six TCZYX time points, one estimation channel, shared motion for two channels and companion labels. |
+| Per-label Skeleton & Morphology | `per-label-skeleton` | Original-label skeletonization, per-label summaries and component details, a morphology join and volume/length scatter plot. The three-object fixture retains an isolated voxel and 0.45 micrometer spacing. |
 
 ### 0.16.0a1 inventory
 
@@ -94,7 +97,6 @@ example chooser and follow [Register images and correct drift](../how-to/registe
 | `synthetic-3d-mesh-morphology.json` | synthetic 3D mesh morphology | Surface area, mesh volume, convex hull, sphericity, and tiny-object status. |
 | `synthetic-mesh-objects.json` | synthetic 3D mesh morphology | Saved interactive workflow with five split objects, Turbo colours by triangle count, two smoothing iterations at strength 1, and a target of 10% of triangles kept at aggressiveness 4. These are sample-specific choices; compare geometry and measurements before reuse. |
 | `synthetic-skeleton-qc.json` | synthetic skeleton network | Skeleton keypoints, component/branch labels, pruning, branch tables, graph tables, and network summaries. |
-| `synthetic-per-label-skeleton.json` | synthetic skeleton network | Unreleased after 0.16.0a1: original-label skeletonization, per-label summaries and component details, a morphology join and volume/length scatter plot. The three-object fixture retains an isolated voxel and 0.45 micrometer spacing. |
 | `synthetic-advanced-skeleton-network.json` | synthetic advanced skeleton network | Time-indexed 3D skeleton graph stress test. |
 | `synthetic-colocalization-racc.json` | synthetic colocalization | **New in 0.15.0a5:** focused whole-image and ROI-masked RACC, with tuned manual thresholds, Magma output, method notes and paper citation. |
 | `synthetic-colocalization-overlap.json` | synthetic colocalization | **New in 0.15.0a5:** whole-image and ROI-masked overlays/metrics, Boolean overlap masks, 3D cleanup and connected-region measurements. |
@@ -139,6 +141,9 @@ and marks unreleased additions separately:
 | `object-colocalization` | Object Colocalization Association |
 | `deconvolution-2d` | 2D Richardson-Lucy / TV Deconvolution |
 | `deconvolution-3d` | 3D Richardson-Lucy / TV Deconvolution |
+| `registration-translation` | Subpixel 2D Registration (unreleased after 0.16.0a1) |
+| `registration-rigid-3d` | Anisotropic 3D Rigid Registration (unreleased after 0.16.0a1) |
+| `registration-time-series` | Whole-volume XYZ Drift Correction (unreleased after 0.16.0a1) |
 
 Legacy launcher aliases such as `intensity`, `merged`, and `mesh` remain for
 maintainers, but documentation should use the canonical IDs above. An unknown

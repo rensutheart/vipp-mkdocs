@@ -8,6 +8,11 @@ Propagation** and six [CellProfiler compartment stages](cellprofiler-compartment
 0.15.0a5 has **126** specifications and **124** palette nodes.
 
 !!! info "Unreleased after 0.16.0a1"
+    Development/nightly adds five nodes to the counts above: **Estimate
+    Registration**, **Apply Transform**, **Compare Images**, **Skeletonize
+    Labels** and **Analyze Skeleton per Label**. The registration nodes are
+    described [below](#registration-unreleased).
+
     **Skeletonize Labels** and **Analyze Skeleton per Label** are marked
     separately below. They preserve original object IDs for morphology joins;
     see the [skeleton reference](skeleton-nodes.md#choose-what-an-id-means).
