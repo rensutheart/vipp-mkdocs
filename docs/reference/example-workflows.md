@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.16.0a1 contains **23** registered example workflows under:
+VIPP 0.16.0a2 contains **27** registered example workflows under:
 
 ```text
 examples/
@@ -9,8 +9,8 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
-!!! info "Unreleased after 0.16.0a1"
-    The development catalogue has **27** examples: the 23 released in 0.16.0a1,
+!!! info "New in 0.16.0a2"
+    The catalogue has **27** examples: the 23 released in 0.16.0a1,
     three [registration examples](../how-to/register-images.md), and
     **Per-label Skeleton & Morphology**. The latter preserves original object
     IDs through skeletonization, joins skeleton features to morphology and
@@ -63,11 +63,11 @@ instead asks for a working folder before opening the configured batch workspace.
 
 ## Workflow Index
 
-### Unreleased additions
+### New in 0.16.0a2
 
-Development/nightly adds four examples after 0.16.0a1, separate from its
-23-example release inventory below. Open **Registration & Alignment** for
-the first three, or **Skeletons & Networks** for the label-preserving example.
+0.16.0a2 adds four examples to the 23 existing examples listed below. Open
+**Registration & Alignment** for the first three, or **Skeletons & Networks**
+for the label-preserving example.
 
 | Example title | Launcher ID | Purpose |
 | --- | --- | --- |
@@ -76,7 +76,7 @@ the first three, or **Skeletons & Networks** for the label-preserving example.
 | Whole-volume XYZ Drift Correction | `registration-time-series` | Six TCZYX time points, one estimation channel, shared motion for two channels and companion labels. |
 | Per-label Skeleton & Morphology | `per-label-skeleton` | Original-label skeletonization, per-label summaries and component details, a morphology join and volume/length scatter plot. The three-object fixture retains an isolated voxel and 0.45 micrometer spacing. |
 
-### 0.16.0a1 inventory
+### Existing examples from 0.16.0a1
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
@@ -112,8 +112,8 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. The table lists the 0.16.0a1 IDs
-and marks unreleased additions separately:
+Use `--list` to print your version's exact IDs. The table lists the 0.16.0a2 IDs
+and marks newly added examples:
 
 | ID | Example title |
 | --- | --- |
@@ -134,16 +134,16 @@ and marks unreleased additions separately:
 | `mesh-morphology` | 3D Mesh Morphology |
 | `mesh-objects` | Mesh Objects, Colours & Refinement |
 | `skeleton-qc` | Skeleton QC |
-| `per-label-skeleton` | Per-label Skeleton & Morphology (unreleased after 0.16.0a1) |
+| `per-label-skeleton` | Per-label Skeleton & Morphology (new in 0.16.0a2) |
 | `advanced-skeleton` | Advanced Skeleton Network |
 | `racc-colocalization` | RACC Colocalization |
 | `colocalization-overlap` | Colocalization, Overlap & Object Counts (**New in 0.15.0a5**) |
 | `object-colocalization` | Object Colocalization Association |
 | `deconvolution-2d` | 2D Richardson-Lucy / TV Deconvolution |
 | `deconvolution-3d` | 3D Richardson-Lucy / TV Deconvolution |
-| `registration-translation` | Subpixel 2D Registration (unreleased after 0.16.0a1) |
-| `registration-rigid-3d` | Anisotropic 3D Rigid Registration (unreleased after 0.16.0a1) |
-| `registration-time-series` | Whole-volume XYZ Drift Correction (unreleased after 0.16.0a1) |
+| `registration-translation` | Subpixel 2D Registration (new in 0.16.0a2) |
+| `registration-rigid-3d` | Anisotropic 3D Rigid Registration (new in 0.16.0a2) |
+| `registration-time-series` | Whole-volume XYZ Drift Correction (new in 0.16.0a2) |
 
 Legacy launcher aliases such as `intensity`, `merged`, and `mesh` remain for
 maintainers, but documentation should use the canonical IDs above. An unknown

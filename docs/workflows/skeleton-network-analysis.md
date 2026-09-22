@@ -48,7 +48,7 @@ does not validate a biological segmentation or the acquisition's Z scale.
 
 ### Join skeleton and morphology per object
 
-!!! info "Unreleased after 0.16.0a1"
+!!! info "New in 0.16.0a2"
     **Skeletonize Labels** and **Analyze Skeleton per Label** preserve the
     object IDs needed for a reliable table join. Existing skeleton-first
     workflows remain supported.
@@ -163,7 +163,7 @@ Pruning removes short terminal spurs and optionally isolated skeleton voxels.
 
 | Workflow | Purpose |
 | --- | --- |
-| `synthetic-per-label-skeleton.json` | Unreleased after 0.16.0a1: retain original object labels, inspect skeleton summaries and components, and join morphology before plotting. |
+| `synthetic-per-label-skeleton.json` | New in 0.16.0a2: retain original object labels, inspect skeleton summaries and components, and join morphology before plotting. |
 | `synthetic-skeleton-qc.json` | Compact 3D skeleton QC with keypoints, branch/component labels, pruning, and tables. |
 | `synthetic-advanced-skeleton-network.json` | Time-indexed 3D skeleton/network stress test with loops, fragments, graph tables, and anisotropic scale. |
 

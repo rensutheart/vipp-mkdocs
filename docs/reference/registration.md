@@ -1,9 +1,9 @@
 # Registration and image comparison
 
-This reference defines the unreleased registration nodes. For a practical
+This reference defines the registration nodes introduced in 0.16.0a2. For a practical
 walkthrough, see [Register images and correct drift](../how-to/register-images.md).
 
-!!! info "Unreleased — after 0.16.0a1"
+!!! info "New in 0.16.0a2"
     These nodes run on the CPU. No GPU registration, deformable registration,
     stitching or object-tracking method is included in this first implementation.
 

@@ -4,6 +4,17 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a2 alpha
+
+[Read the 0.16.0a2 overview](0.16.0a2.md) for whole-volume registration and
+reusable transforms, same-grid image comparison, original-label skeleton
+measurements, exact CPU median acceleration and safer inspector scrolling.
+Four new examples bring the catalogue to 27. Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a2)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a2/) with the
+[matching installation instructions](../getting-started/installation.md).
+Scientific, platform and exact-artifact qualification remain separate claims.
+
 ## 0.16.0a1 alpha
 
 [Read the 0.16.0a1 overview](0.16.0a1.md) for the combined measurement,
