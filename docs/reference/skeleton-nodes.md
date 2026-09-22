@@ -4,6 +4,94 @@ Start with the [skeleton workflow tutorial](../workflows/skeleton-network-analys
 to choose 2D or 3D processing and inspect your segmentation. This page lists the
 outputs, units, and assumptions needed to interpret the resulting tables.
 
+!!! info "Unreleased after 0.16.0a1"
+    **Skeletonize Labels** and **Analyze Skeleton per Label** retain the
+    original object IDs. Use this label-first route when joining skeleton
+    measurements to object morphology. The existing mask-first nodes,
+    including **Label Skeleton Components**, retain their behavior.
+
+## Choose what an ID means
+
+| Route | Meaning of an ID | Use |
+| --- | --- | --- |
+| Labels → Skeletonize Labels → Analyze Skeleton per Label | Original segmented object, retained even if its skeleton contains multiple pieces | Join morphology and skeleton features for the same objects. |
+| Mask → Skeletonize → Label Skeleton Components / Analyze Skeleton | Connected piece of the skeleton, assigned a new ID | Inspect disconnected skeleton networks without requiring an original object segmentation. |
+
+Skeleton component IDs from the second route do not identify the original
+objects. Do not merge them with morphology by matching their numeric IDs.
+
+## Skeletonize Labels
+
+**Unreleased after 0.16.0a1.** Skeletonizes each nonzero integer label
+independently and writes that same label into its surviving skeleton voxels.
+Background remains zero. Shape, label dtype, spatial calibration and leading
+dimensions are retained; the input image is not changed.
+
+Labels must be non-negative integers. Boolean masks, floating-point images
+and negative labels are rejected. Label a binary segmentation before using
+these nodes; wide or sparse integer IDs retain their exact values.
+
+Different labels are never fused, including where their boundaries touch.
+Disconnected regions carrying the same label retain that shared identity.
+The node does not relabel objects or infer that two different IDs should be
+one biological object.
+
+**Spatial processing** and **Method** follow [Skeletonize](#skeletonize):
+Auto uses Zhang in 2D and Lee in 3D, with independent leading-axis blocks.
+Thinning operates on the voxel grid; it does not resample anisotropic images
+or compute a physical medial axis. Inspect the segmentation and skeleton in
+all relevant orientations.
+
+## Analyze Skeleton per Label
+
+**Unreleased after 0.16.0a1.** Connect the original label image to **Original labels**.
+Optionally connect its output from **Skeletonize Labels** to **Skeleton**.
+When Skeleton is unconnected, the node skeletonizes each original label
+internally using its **Thinning method** setting.
+
+A supplied skeleton must use the same grid and original label values. Every
+nonzero skeleton voxel must lie inside the matching original label. A binary
+mask or an independently relabeled skeleton is not a substitute for that
+mapping. Invalid matches fail instead of silently assigning measurements to
+the wrong objects.
+
+The two table outputs answer different questions:
+
+| Output | Row identity | Measurements |
+| --- | --- | --- |
+| Objects | Leading-axis block and original `label_id` | Per-label summary: component count, summed skeleton voxel/endpoint/junction/isolate/branch/graph/cycle counts, total skeleton length and skeleton status. |
+| Skeleton components | Leading-axis block, original `label_id` and local `component_id` | Existing per-component skeleton measurements, with `component_count_in_label` and `component_voxel_fraction_in_label` describing that original label. |
+
+`skeleton_component_count` counts connected skeleton pieces **inside one
+original label**, using the full 8-neighbor graph in 2D or 26-neighbor graph
+in 3D. Neighbors belonging to another label are excluded. The component table
+may contain multiple rows for one object. Join morphology to the **summary**
+for one row per object; joining component details duplicates that object's
+morphology once per component.
+
+Every original nonzero label has a summary row, including when it has no
+surviving skeleton. `skeleton_status` is `ok` or `empty`; check it alongside zero measurements:
+zero length alone also occurs for a one-voxel isolate. An object with no
+skeleton has no component-detail row.
+
+Use `label_id` together with every applicable image, time, channel or slice
+identifier when joining tables. A label number is only unique within its
+source spatial block. IDs and status fields are identifiers, not numerical
+features to average or include in PCA.
+
+Physical length requires complete positive spatial spacing and recognized,
+compatible length units. Compatible units are converted to the X-axis unit.
+With no units or pixel units, the physical-length column is absent: use
+`skeleton_length_pixels` in 2D or `skeleton_length_voxels` in 3D. Partial,
+unknown or incompatible physical calibration is rejected. The node does not
+invent micrometer spacing. Calibration is inherited from the labels and must agree with a
+supplied skeleton. Copy calibration from an intensity image only after
+confirming acquisition identity, axes and any intervening resampling.
+
+Both new nodes currently calculate on CPU. The
+[worked example](../workflows/skeleton-network-analysis.md#join-skeleton-and-morphology-per-object)
+shows filtering once and sharing the same objects between both branches.
+
 ## Skeletonize
 
 - **Input:** binary mask.
@@ -169,6 +257,9 @@ largest-component fraction, and normalized connectedness metrics.
 - **Output:** label image.
 - **Purpose:** Assigns a label ID to each connected skeleton component.
 - **Use when:** you need to inspect or count disconnected skeleton networks.
+- **Identity:** creates new IDs for connected skeleton pieces. This node
+  remains available and unchanged; choose **Skeletonize Labels** when the
+  output must retain previously segmented object IDs.
 
 ## Label Skeleton Branches
 
