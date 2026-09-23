@@ -72,7 +72,7 @@ cytoplasm definition around this growth step.
    object identity and split/merge errors, not only a maximum projection.
 
 The repository's
-[`seeded-3d-watershed.json`](https://github.com/rensutheart/napari-vipp/blob/main/examples/seeded-3d-watershed.json)
+[`seeded-3d-watershed.json`](https://github.com/rensutheart/napari-vipp/blob/main/examples/validation/seeded-3d-watershed.json)
 provides a runnable graph, initially bound to the bundled synthetic volume.
 Download and open that workflow, then replace its image source with a reviewed
 ZYX volume to try the same steps. Its saved parameters are a validation example,
