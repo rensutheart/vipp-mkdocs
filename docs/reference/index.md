@@ -16,6 +16,7 @@ task sequences.
 | [CellProfiler compartment profile](cellprofiler-compartments.md) | Match the statistics paper's smoothing, nuclear objects, competing seeds, cell filtering and cytoplasm definition. |
 | [Channel and axis controls](channel-axis-controls.md) | Split/extract channels, compose RGB, resize axes, and supply acquisition metadata. |
 | [Registration and image comparison](registration.md) | Estimate and apply whole-volume transforms, preserve labels, and compare valid overlap (new in 0.16.0a2). |
+| [Template matching and peaks](detection.md) | Locate fixed-orientation patterns, interpret calibrated scores and export detection tables (unreleased after 0.16.0a2). |
 | [Measurement tables and units](measurement-tables.md) | Preserve identity keys and understand physical-column and mesh limits. |
 | [Statistics methods and counts](statistics.md) | Define descriptive summaries, weighting, exclusions and legacy behavior (new in 0.16.0a1). |
 | [Skeleton nodes](skeleton-nodes.md) | Interpret component, branch, graph, and whole-network outputs. |

@@ -8,6 +8,14 @@ bimodal threshold gallery. They are available inside
 Image Source > Source = sample
 ```
 
+!!! info "Unreleased after 0.16.0a2"
+    The development catalogue has **24** samples. **VIPP synthetic 2D template
+    detection** (`TCYX`) and **VIPP synthetic 3D template detection** (`TCZYX`)
+    add known fixed-orientation patterns with seeded noise, a nearby pair, a
+    clipped border copy and a deliberately absent site. Select T=`1` and
+    **Repeated pattern** (C=`1`). The 3D spacing is Z=`1.5`, Y=`0.5`, X=`0.4`
+    micrometres. See the [detection examples](../how-to/detect-patterns.md).
+
 0.16.0a1 adds a sixteenth sample, **VIPP synthetic
 measurement plots**: 60 isolated ellipses in one calibrated image for the
 [plotting example](../how-to/plot-measurement-results.md).

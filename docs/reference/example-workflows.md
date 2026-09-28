@@ -9,6 +9,13 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
+!!! info "Unreleased after 0.16.0a2"
+    The development catalogue has **29** examples. **Detection & Peaks** adds
+    **Repeated 2D Pattern Detection** (`template-detection-2d`) and
+    **Anisotropic 3D Pattern Detection** (`template-detection-3d`). Follow
+    [Detect repeated patterns](../how-to/detect-patterns.md) to compare known
+    centers, correlation scores, nearby peaks and incomplete border support.
+
 !!! info "New in 0.16.0a2"
     The catalogue has **27** examples: the 23 released in 0.16.0a1,
     three [registration examples](../how-to/register-images.md), and

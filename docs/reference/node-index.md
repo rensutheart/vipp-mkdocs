@@ -7,6 +7,11 @@ selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
 0.15.0a5 has **126** specifications and **124** palette nodes.
 
+!!! info "Unreleased after 0.16.0a2"
+    The development registry has **142** specifications and **140** palette
+    nodes. **Template Match** and **Find Peaks** add two CPU nodes under
+    **Image Data → Detection**; the release counts below remain those of 0.16.0a2.
+
 !!! info "New in 0.16.0a2"
     Five additions are included in the counts above: **Estimate
     Registration**, **Apply Transform**, **Compare Images**, **Skeletonize
@@ -63,6 +68,17 @@ for the accelerated node families and their current public regions.
 | **Total** | **140** |
 
 ## Image Data
+
+### Detection — unreleased
+
+| Node | Input | Output | Use |
+| --- | --- | --- | --- |
+| `Template Match` | scalar YX/ZYX search and template images | calibrated match scores and Boolean valid scores | Match one fixed-size, fixed-orientation pattern over complete source windows. |
+| `Find Peaks` | scalar score/intensity image and optional valid mask | detection table | Retain local maxima with explicit cutoff, pixel/physical separation, border exclusion and result cap. |
+
+See [Detect repeated patterns](../how-to/detect-patterns.md) and the
+[coordinate, validity and separation rules](detection.md). No segmentation labels
+or editable points output are created.
 
 ### Registration
 

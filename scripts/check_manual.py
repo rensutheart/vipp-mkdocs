@@ -16,6 +16,23 @@ DOCS = ROOT / "docs"
 # These protect material safety/interpretation details formerly checked against
 # duplicate application guides. They belong beside the public text now.
 REQUIRED = {
+    "reference/detection.md": (
+        "Unreleased after 0.16.0a2",
+        "half-integer",
+        "Valid scores",
+        "lexicographically first",
+        "capped table is not the full count",
+        "constant template",
+        "not confidence or probability",
+        "not editable points",
+    ),
+    "how-to/detect-patterns.md": (
+        "Crop Stack",
+        "Extract Channel",
+        "Inspect detections on source",
+        "Add Find Peaks",
+        "independent validation",
+    ),
     "getting-started/installation.md": (
         "SHA256SUMS-Windows-",
         "Unknown publisher",
