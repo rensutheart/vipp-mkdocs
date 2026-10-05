@@ -33,6 +33,11 @@ VIPP also commits pending margins before calculation, saving, export, batch
 start, tab change, or close. Saved workflows therefore use the final visible
 crop, not an earlier intermediate slider value.
 
+In 0.16.0a3, switching workflow tabs removes the outgoing crop outline
+and restores the incoming tab's own preview view. Returning to Crop Stack
+recreates its outline from that workflow's retained settings. This does not
+recalculate the image or change the crop margins.
+
 ## Channels and calibration
 
 Crop Stack protects a known channel axis. **Channel axis override** appears

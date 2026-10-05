@@ -39,6 +39,12 @@ views changes presentation, not the bin calculation. Use Results to inspect or
 export the exact values. A comparison between different images still needs an
 explicit shared range, common bin edges, and a justified normalization.
 
+!!! info "New in 0.16.0a3"
+    **Open histogram…** on the **Intensity Histogram** graph card opens the
+    existing detailed window from its cached result without changing selection
+    or calculating. A result with binned values is required; stale results keep
+    their warning so you can recalculate before use.
+
 !!! info "Improved in 0.15.0a4"
 
     In the detailed histogram window, overlapping channels use faint fills

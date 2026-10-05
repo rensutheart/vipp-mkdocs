@@ -1,16 +1,16 @@
 # Node Index
 
-This page lists all **140 operation specifications** registered by
-`NODE_LIBRARY` in 0.16.0a2. The palette exposes **138**: the two
+This page lists all **144 operation specifications** registered by
+`NODE_LIBRARY` in 0.16.0a3. The palette exposes **142**: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
 selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
 0.15.0a5 has **126** specifications and **124** palette nodes.
 
-!!! info "Unreleased after 0.16.0a2"
-    The development registry has **142** specifications and **140** palette
-    nodes. **Template Match** and **Find Peaks** add two CPU nodes under
-    **Image Data → Detection**; the release counts below remain those of 0.16.0a2.
+!!! info "New in 0.16.0a3"
+    **Template Match**, **Find Peaks**, and **Detect Spots per Frame** are
+    CPU nodes under **Image Data → Detection**; **Build Tracks** is under
+    **Image Data → Tracking**. All four are included in the release counts below.
 
 !!! info "New in 0.16.0a2"
     Five additions are included in the counts above: **Estimate
@@ -28,7 +28,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.16.0a2 source registry.
+    Titles and families follow the 0.16.0a3 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -55,7 +55,7 @@ for the accelerated node families and their current public regions.
 
 | Family | Nodes |
 | --- | ---: |
-| Image Data | 28 |
+| Image Data | 32 |
 | Filtering | 19 |
 | Segmentation | 22 |
 | Morphology | 16 |
@@ -65,20 +65,29 @@ for the accelerated node families and their current public regions.
 | Label Operations | 10 |
 | Intensity & Contrast | 5 |
 | Projection | 3 |
-| **Total** | **140** |
+| **Total** | **144** |
 
 ## Image Data
 
-### Detection — unreleased
+### Detection
 
 | Node | Input | Output | Use |
 | --- | --- | --- | --- |
 | `Template Match` | scalar YX/ZYX search and template images | calibrated match scores and Boolean valid scores | Match one fixed-size, fixed-orientation pattern over complete source windows. |
 | `Find Peaks` | scalar score/intensity image and optional valid mask | detection table | Retain local maxima with explicit cutoff, pixel/physical separation, border exclusion and result cap. |
+| `Detect Spots per Frame` | scalar TYX/TZYX and optional fixed spatial template | frame-indexed observations | Detect independently per frame, retaining empty/capped-frame evidence. |
 
 See [Detect repeated patterns](../how-to/detect-patterns.md) and the
 [coordinate, validity and separation rules](detection.md). No segmentation labels
 or editable points output are created.
+
+### Tracking
+
+**Build Tracks** consumes a complete calibrated observation series from Detect
+Spots per Frame or time-series object measurements. It outputs **Tracked
+observations** and **Track summary** tables with one-to-one links, explicit gaps and review
+flags. See [Track objects and spots](../how-to/track-objects.md) and
+[tracking rules](tracking.md). It does not infer divisions or fusions.
 
 ### Registration
 

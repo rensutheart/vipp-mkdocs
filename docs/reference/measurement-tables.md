@@ -10,6 +10,22 @@ Measurement nodes produce tables, not images. Each table carries ordered
 columns, a table kind, row/column counts, a source name where available, and
 per-column units where the calculation defines them.
 
+!!! info "New in 0.16.0a3"
+    **Open measurements…** on table-producing measurement, colocalization-metrics,
+    detection and tracking cards opens the existing result-table window from
+    cached data, without calculating or changing selection. Multi-output nodes
+    use the last displayed table output, or the first table output if the
+    displayed output is not a table. Table sources, transforms and writers have
+    no new graph shortcut; use the inspector's **Open in window** for their
+    table results.
+    See [inspect outputs](../how-to/inspect-outputs.md#open-a-complete-result-table)
+    for missing and stale results.
+
+**Measure Objects** and **Measure Objects + Intensity** cards also
+offer **Review trajectories…** when their cached output carries time-series
+observations, not for ordinary static tables. See [source review](tracking.md#source-review)
+for availability and read-only behavior.
+
 [Results Workspace](../how-to/results-workspace.md) combines table
 viewing, Statistics controls and Plot Results without a new table type. Search
 and visible columns affect only the view; exports retain the complete current

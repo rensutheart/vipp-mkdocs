@@ -4,9 +4,11 @@
 valid-support mask. **Find Peaks** returns a table of retained local maxima.
 For a worked sequence, see [Detect repeated patterns](../how-to/detect-patterns.md).
 
-!!! info "Unreleased after 0.16.0a2"
+!!! info "New in 0.16.0a3"
     This first implementation is CPU-only, fixed-size and fixed-orientation.
-    It adds no registration, resampling, segmentation or object tracking.
+    These two single-image nodes add no registration, resampling, segmentation
+    or object tracking. For complete time series, use the separate
+    [Detect Spots per Frame and Build Tracks](tracking.md) nodes.
 
 ## Inputs and score coordinates
 
@@ -43,6 +45,15 @@ an ordinary intensity image, not an asserted template response.
 | **Separation units** | **Pixels** uses index distance; **Physical (micrometers)** uses calibrated axis spacing. The latter requires compatible physical length units. |
 | **Maximum detections** | Maximum retained rows after ordering and suppression. Default `1000`; this is a result cap, not evidence that no more candidates exist. |
 | **Border exclusion (score-grid pixels)** | Number of score-image samples excluded from each edge. Default `0`. Template Match already excludes placements that extend outside the source. |
+
+The sliders use fixed practical windows of `-1` to `1`
+for **Minimum value**, `0` to `100` for **Minimum separation**, `1` to `10,000`
+for **Maximum detections**, and `0` to `100` for **Border exclusion**. Numeric
+spinners accept the full valid ranges: enter higher or lower intensity cutoffs,
+larger distances, detection caps or border widths directly. Accepted values
+outside a slider window remain unchanged when reopening the inspector or
+workflow. **Detect Spots per Frame** inherits these windows, with its detection
+cap applied per frame; these are tuning windows, not new scientific limits.
 
 Local maxima use the full 3 × 3 neighborhood in 2D or 3 × 3 × 3 neighborhood in
 3D. Each connected equal-valued local-maximum plateau contributes its

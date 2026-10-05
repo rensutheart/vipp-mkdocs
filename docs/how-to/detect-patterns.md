@@ -4,9 +4,8 @@ Locate repeated structures with **Template Match**, then turn score peaks into
 a coordinate table with **Find Peaks**. This detects locations; it does not
 segment object boundaries or create labels.
 
-!!! info "Unreleased after 0.16.0a2"
-    These CPU-only nodes and two examples are available in the development
-    version. Matching uses one fixed template size and orientation.
+!!! info "New in 0.16.0a3"
+    These CPU-only nodes and two examples require 0.16.0a3 or newer. Matching uses one fixed template size and orientation.
 
 ## Start with a known-answer example
 

@@ -1,6 +1,6 @@
 # Sample Data
 
-VIPP 0.16.0a2 includes **22** deterministic microscopy-style samples, including a
+VIPP 0.16.0a3 includes **26** deterministic microscopy-style samples, including a
 bimodal threshold gallery. They are available inside
 `Image Source`:
 
@@ -8,13 +8,20 @@ bimodal threshold gallery. They are available inside
 Image Source > Source = sample
 ```
 
-!!! info "Unreleased after 0.16.0a2"
-    The development catalogue has **24** samples. **VIPP synthetic 2D template
+!!! info "New in 0.16.0a3"
+    **VIPP synthetic 2D template
     detection** (`TCYX`) and **VIPP synthetic 3D template detection** (`TCZYX`)
     add known fixed-orientation patterns with seeded noise, a nearby pair, a
     clipped border copy and a deliberately absent site. Select T=`1` and
     **Repeated pattern** (C=`1`). The 3D spacing is Z=`1.5`, Y=`0.5`, X=`0.4`
     micrometres. See the [detection examples](../how-to/detect-patterns.md).
+
+    **VIPP synthetic 2D spot tracking** (`TCYX`) adds moving spots, an empty
+    frame and an ambiguous crossing. **VIPP synthetic 3D label tracking**
+    (`TZYX`) adds anisotropic objects with changing frame-local labels, a missed
+    observation and a later appearance. Their
+    [tracking examples](../how-to/track-objects.md#try-the-synthetic-examples)
+    show the complete detection/measurement and linking routes.
 
 0.16.0a1 adds a sixteenth sample, **VIPP synthetic
 measurement plots**: 60 isolated ellipses in one calibrated image for the
@@ -50,6 +57,10 @@ File > Open Sample > VIPP synthetic microscopy samples
 | `VIPP synthetic 3D measured PSF` | `ZYX` | 3D measured-PSF-like kernel for volumetric deconvolution. |
 | `VIPP synthetic GPU segmentation cleanup` | `CZYX` | Four 3D objects, one removable 19-voxel speck, and one enclosed 31-voxel cavity for the portable GPU segmentation and Boolean mask-cleanup example. |
 | `VIPP synthetic threshold gallery` | `ZYX` | Compact noisy phantom with separated background and foreground populations for global/local threshold inspection, including Minimum Threshold. |
+| `VIPP synthetic 2D template detection` | `TCYX` | New in 0.16.0a3: known repeated patterns, a nearby pair, incomplete border copy and an absent site. Select T=1 and C=1. |
+| `VIPP synthetic 3D template detection` | `TCZYX` | New in 0.16.0a3: volumetric patterns with anisotropic sampling and known calibrated centers. Select T=1 and C=1. |
+| `VIPP synthetic 2D spot tracking` | `TCYX` | New in 0.16.0a3: moving spots, an empty frame and a crossing that is ambiguous for position-only linking. |
+| `VIPP synthetic 3D label tracking` | `TZYX` | New in 0.16.0a3: anisotropic objects with changing frame-local labels, a missed observation and a later appearance. |
 
 ## Registration samples — new in 0.16.0a2
 
@@ -61,7 +72,8 @@ are available through **Image Source** and the separate napari sample-data entry
 
 Use the [registration examples](../how-to/register-images.md#start-with-a-known-answer-example)
 for their connected workflows and known synthetic motion. Together with the
-16 microscopy samples above, these form the 22-sample catalogue.
+16 original microscopy samples and four detection/tracking samples above,
+these form the 26-sample catalogue in 0.16.0a3.
 
 ## Documentation Samples Versus Core Samples
 

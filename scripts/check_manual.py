@@ -17,7 +17,7 @@ DOCS = ROOT / "docs"
 # duplicate application guides. They belong beside the public text now.
 REQUIRED = {
     "reference/detection.md": (
-        "Unreleased after 0.16.0a2",
+        "New in 0.16.0a3",
         "half-integer",
         "Valid scores",
         "lexicographically first",
@@ -32,6 +32,26 @@ REQUIRED = {
         "Inspect detections on source",
         "Add Find Peaks",
         "independent validation",
+    ),
+    "reference/tracking.md": (
+        "Detect Spots per Frame",
+        "Build Tracks",
+        "position-only",
+        "one-to-one",
+        "CPU-only",
+        "truncated observations",
+        "Maximum missing frames",
+        "review_flag",
+        "Track IDs can repeat",
+        "no splitting/fusion",
+    ),
+    "how-to/track-objects.md": (
+        "Detect Spots per Frame",
+        "Build Tracks",
+        "Review trajectories",
+        "Crossing objects can exchange identities",
+        "not a probability",
+        "does not start a calculation",
     ),
     "getting-started/installation.md": (
         "SHA256SUMS-Windows-",
