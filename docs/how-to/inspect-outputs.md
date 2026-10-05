@@ -44,6 +44,11 @@ readable in a narrow panel or with larger fonts. Scroll the inspector to reach
 the sections below it. **Open in window** still provides a resizable detailed
 view; resizing does not recalculate or change the histogram values.
 
+!!! info "New in 0.16.0a3"
+    Use **Open histogram…** on an **Intensity Histogram** graph card to open
+    the same detailed window without selecting the node or calculating again.
+    Calculate the node first if no histogram with binned values is available.
+
 The colocalization scatter density, ROI population, and colocalized count are
 also calculated over every ROI voxel. Threshold-independent density remains
 visible while exact threshold-dependent counts are recalculated, but a
@@ -178,6 +183,14 @@ inspector preview. Click a column heading to sort ascending, then again to sort
 descending. Review units, missing values, and status/error columns alongside
 the measurements.
 
+!!! info "New in 0.16.0a3"
+    Table-producing measurement, colocalization-metrics, detection and tracking
+    cards provide **Open measurements…** for their cached tables. Opening a
+    window does not calculate or change the selected node. If no result is
+    available, VIPP asks you to calculate first; retained stale results remain
+    clearly labelled.
+    For multiple table outputs, the shortcut uses the last displayed table.
+
 ![The resizable result-table window with synthetic object measurements and CSV/TSV export](../assets/screenshots/workflows/result-table-window.png)
 
 *Open the full result when a compact preview is insufficient. Sorting affects
@@ -191,6 +204,19 @@ For a reproducible intensity distribution, add the manual **Intensity
 Histogram** node. Unlike a display-only histogram, its bin definition is part
 of the workflow and its full-resolution result is a table. See
 [histogram and table workflows](../workflows/object-measurements-tables.md#reproducible-intensity-histograms).
+
+## Review time-series observations on the source
+
+!!! info "New in 0.16.0a3"
+    **Review trajectories…** beside **Open measurements…** opens the existing
+    read-only source/table review for a time-series detection, tracking or
+    eligible object-measurement node. It does not calculate or change selection.
+    The source and cached result must still be current and available; pending
+    updates prevent review of old results.
+
+Follow [Track objects and spots](track-objects.md) for review controls and
+[source-review availability](../reference/tracking.md#source-review) for eligible
+cards and source requirements.
 
 ## Compare 3D data without hiding failures
 

@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.16.0a2 contains **27** registered example workflows under:
+VIPP 0.16.0a3 contains **31** registered example workflows under:
 
 ```text
 examples/
@@ -9,8 +9,26 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
+!!! info "New in 0.16.0a3"
+    **Detection & Peaks** adds
+    **Repeated 2D Pattern Detection** (`template-detection-2d`) and
+    **Anisotropic 3D Pattern Detection** (`template-detection-3d`). Follow
+    [Detect repeated patterns](../how-to/detect-patterns.md) to compare known
+    centers, correlation scores, nearby peaks and incomplete border support.
+    **Tracking** adds a 2D spot sequence (`tracking-spots-2d`) and a 3D
+    object sequence (`tracking-labels-3d`), with missing observations,
+    calibrated motion and explicit crossing ambiguity. Follow
+    [Track objects and spots](../how-to/track-objects.md).
+
+    The **Exhaustive Inspector Showcase** now has twelve independent lanes using
+    twelve bundled samples. Its added tracking lane selects the spot channel
+    while retaining all timepoints, detects 24 observations and links four tracks
+    through an empty frame. Review the crossing flags; they are not confidence
+    scores or proof of biological identity. Both tracking output tables remain
+    available, with the summary passed unchanged through Select Table Columns.
+
 !!! info "New in 0.16.0a2"
-    The catalogue has **27** examples: the 23 released in 0.16.0a1,
+    0.16.0a2 expanded the catalogue to **27** examples: the 23 released in 0.16.0a1,
     three [registration examples](../how-to/register-images.md), and
     **Per-label Skeleton & Morphology**. The latter preserves original object
     IDs through skeletonization, joins skeleton features to morphology and
@@ -18,7 +36,7 @@ review.
     [Join skeleton and morphology per object](../workflows/skeleton-network-analysis.md#join-skeleton-and-morphology-per-object).
 
 !!! info "New in 0.16.0a1"
-    The catalogue now has **23** examples. **Morphology & Intensity Plots**
+    0.16.0a1 expanded the catalogue to **23** examples. **Morphology & Intensity Plots**
     measures 60 objects in one calibrated synthetic image, joins shape and
     intensity measurements, and opens four descriptive plots. Follow
     [Plot measurement results](../how-to/plot-measurement-results.md).
@@ -63,6 +81,20 @@ instead asks for a working folder before opening the configured batch workspace.
 
 ## Workflow Index
 
+### New in 0.16.0a3
+
+0.16.0a3 adds four examples to the 27 previously released examples. Open
+**Detection & Peaks** for fixed-template matching, or **Tracking** for
+frame-local detections and position-based links. These examples contain known
+synthetic geometry, not biological identity ground truth.
+
+| Example title | Launcher ID | Purpose |
+| --- | --- | --- |
+| Repeated 2D Pattern Detection | `template-detection-2d` | Five fixed-orientation patterns, a nearby pair, clipped border support and an absent site. |
+| Anisotropic 3D Pattern Detection | `template-detection-3d` | Four volumetric patterns and calibrated physical separation with unequal Z/Y/X spacing. |
+| 2D Spots, Missing Frame and Crossing Review | `tracking-spots-2d` | Independent frame detections, gap reconnection and explicit crossing ambiguity. |
+| Anisotropic 3D Object Trajectories | `tracking-labels-3d` | Original object centroids, changing frame-local IDs, calibrated trajectories, a missed observation and later appearance. |
+
 ### New in 0.16.0a2
 
 0.16.0a2 adds four examples to the 23 existing examples listed below. Open
@@ -80,7 +112,7 @@ for the label-preserving example.
 
 | Workflow | Input sample | Purpose |
 | --- | --- | --- |
-| `exhaustive-inspector-showcase.json` | nine lanes using eight synthetic samples, including thresholding, label boundaries, Propagation and the CellProfiler compartment profile | Broad inspector acceptance example covering scientific controls, connected inputs, measurements and Plot Results. Use a focused tutorial for a first workflow. **Table Source** is reviewed separately with a saved measurement dataset. Both CellProfiler lanes are new in 0.16.0a1; the compartment lane exercises controls on synthetic guidance, not paper-data reproduction. See the [paper workflow](../workflows/statistics-paper-compartments.md) for scientific wiring and comparison boundaries. |
+| `exhaustive-inspector-showcase.json` | twelve lanes using twelve synthetic samples, including thresholding, label boundaries, Propagation, the CellProfiler compartment profile, registration, detection and tracking | Broad inspector acceptance example covering scientific controls, connected inputs, measurements and Plot Results. Use a focused tutorial for a first workflow. **Table Source** is reviewed separately with a saved measurement dataset. The compartment lane exercises controls on synthetic guidance, not paper-data reproduction; tracking flags expose crossing ambiguity, not biological identity. See the [paper workflow](../workflows/statistics-paper-compartments.md) for scientific wiring and comparison boundaries. |
 | `graph-authoring-acceptance.json` | synthetic object morphology | Numbered canvas notes for tunnel insertion, value transfer, graph-fragment copy/paste, group movement, one-step undo/redo, and a qualified GPU dtype repair. Its deliberately loose demonstration fragments are not calculated. |
 | `responsive-volume-crop-acceptance.json` | synthetic time-lapse multichannel | Numbered TCZYX checks for explicit-Z crop margins, immediate 2D/3D ROI feedback, one committed calculation and undo gesture, preserved T/C and physical origins, QYX safety, and truthful CPU/GPU status. |
 | `safe-node-bypass-acceptance.json` | synthetic volume | Focused Crop Stack checks for exact pass-through data, would-run thumbnails, bypass styling, undo/save/export, GPU-neutral status, and batch Run/Bypass profiles. |
@@ -112,7 +144,7 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. The table lists the 0.16.0a2 IDs
+Use `--list` to print your version's exact IDs. The table lists the 0.16.0a3 IDs
 and marks newly added examples:
 
 | ID | Example title |
@@ -144,6 +176,10 @@ and marks newly added examples:
 | `registration-translation` | Subpixel 2D Registration (new in 0.16.0a2) |
 | `registration-rigid-3d` | Anisotropic 3D Rigid Registration (new in 0.16.0a2) |
 | `registration-time-series` | Whole-volume XYZ Drift Correction (new in 0.16.0a2) |
+| `template-detection-2d` | Repeated 2D Pattern Detection (new in 0.16.0a3) |
+| `template-detection-3d` | Anisotropic 3D Pattern Detection (new in 0.16.0a3) |
+| `tracking-spots-2d` | 2D Spots, Missing Frame and Crossing Review (new in 0.16.0a3) |
+| `tracking-labels-3d` | Anisotropic 3D Object Trajectories (new in 0.16.0a3) |
 
 Legacy launcher aliases such as `intensity`, `merged`, and `mesh` remain for
 maintainers, but documentation should use the canonical IDs above. An unknown

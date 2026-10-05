@@ -16,6 +16,43 @@ DOCS = ROOT / "docs"
 # These protect material safety/interpretation details formerly checked against
 # duplicate application guides. They belong beside the public text now.
 REQUIRED = {
+    "reference/detection.md": (
+        "New in 0.16.0a3",
+        "half-integer",
+        "Valid scores",
+        "lexicographically first",
+        "capped table is not the full count",
+        "constant template",
+        "not confidence or probability",
+        "not editable points",
+    ),
+    "how-to/detect-patterns.md": (
+        "Crop Stack",
+        "Extract Channel",
+        "Inspect detections on source",
+        "Add Find Peaks",
+        "independent validation",
+    ),
+    "reference/tracking.md": (
+        "Detect Spots per Frame",
+        "Build Tracks",
+        "position-only",
+        "one-to-one",
+        "CPU-only",
+        "truncated observations",
+        "Maximum missing frames",
+        "review_flag",
+        "Track IDs can repeat",
+        "no splitting/fusion",
+    ),
+    "how-to/track-objects.md": (
+        "Detect Spots per Frame",
+        "Build Tracks",
+        "Review trajectories",
+        "Crossing objects can exchange identities",
+        "not a probability",
+        "does not start a calculation",
+    ),
     "getting-started/installation.md": (
         "SHA256SUMS-Windows-",
         "Unknown publisher",

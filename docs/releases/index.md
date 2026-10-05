@@ -4,6 +4,19 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a3 alpha
+
+[Read the 0.16.0a3 overview](0.16.0a3.md) for fixed-template detection,
+calibrated basic tracking, read-only trajectory review and previous-frame
+registration. Four new examples bring the catalogue to 31. Node-card result
+shortcuts, practical slider windows and independent workflow-tab previews
+make review easier without changing scientific values. Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a3)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a3/) with the
+[matching installation instructions](../getting-started/installation.md).
+This alpha adds no predictive or morphology-based tracking and no GPU
+detection/tracking operations.
+
 ## 0.16.0a2 alpha
 
 [Read the 0.16.0a2 overview](0.16.0a2.md) for whole-volume registration and

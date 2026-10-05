@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.16.0a3: releases/0.16.0a3.md
       - 0.16.0a2: releases/0.16.0a2.md
       - 0.16.0a1: releases/0.16.0a1.md
       - 0.15.0a5: releases/0.15.0a5.md
@@ -171,6 +172,8 @@ nav:
       - Grow regions from seeds: how-to/grow-regions-from-seeds.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
       - Register images and correct drift: how-to/register-images.md
+      - Detect repeated patterns: how-to/detect-patterns.md
+      - Track objects and spots: how-to/track-objects.md
       - Collect batch measurements: how-to/collect-measurement-results.md
       - Explore the Results Workspace: how-to/results-workspace.md
       - Plot measurement results: how-to/plot-measurement-results.md
@@ -202,6 +205,8 @@ nav:
       - CellProfiler compartment profile: reference/cellprofiler-compartments.md
       - Channel and axis controls: reference/channel-axis-controls.md
       - Registration and image comparison: reference/registration.md
+      - Template matching and peaks: reference/detection.md
+      - Time-series tracking: reference/tracking.md
       - Measurement tables and units: reference/measurement-tables.md
       - Statistics methods and counts: reference/statistics.md
       - Skeleton node outputs: reference/skeleton-nodes.md

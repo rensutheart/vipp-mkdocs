@@ -5,6 +5,40 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a3 scope and evidence
+
+Use the [0.16.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a3)
+for exact assets, checksums and recorded qualification, and its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a3/docs/release-qualification-baseline.md)
+for changed-domain versus carried-forward evidence.
+
+The new CPU domains are fixed-template correlation, deterministic peak
+detection, complete time-series observations, position-only one-to-one links
+and previous-frame whole-volume registration. Independent synthetic checks
+cover known 2D/3D centers and motion, unequal spatial sampling, empty/capped
+frames, gaps, competing links, calibrated coverage, persistence and stale
+review. Their contracts and local evidence are recorded in the
+[detection implementation record](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a3/docs/detection-implementation.md)
+and [tracking implementation record](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a3/docs/tracking-implementation.md).
+
+These are bounded numerical and integration checks, not microscopy accuracy,
+biological identity or performance guarantees. Position-only tracking can
+exchange crossing identities; review flags identify competing feasible links,
+not confidence probabilities. Adjacent registration errors can accumulate
+despite good local fits. Inspect the original data and independent annotations
+or landmarks before consequential use.
+
+Changed-domain cross-platform CI and native packaging checks must be read from
+the release's exact-artifact evidence. Branch-local Windows tests, provider-free
+device lifecycle tests and prior installer lifecycles are distinct from native
+Linux/macOS numerical acceptance, physical CUDA runs and a fresh frozen-installer
+GUI lifecycle. Minimum-dependency environments, large-volume memory/performance
+and acquired-microscopy accuracy remain separate qualification work.
+
+This release does not expand admitted GPU operation regions or add deformable
+registration, rotation/scale template banks, predictive/appearance tracking,
+lineages or inferential statistics.
+
 ## 0.16.0a2 scope and evidence
 
 Use the [0.16.0a2 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a2)

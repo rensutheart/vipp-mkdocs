@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a2. Some labels
+Labels below match napari-vipp 0.16.0a3. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -42,6 +42,15 @@ state, file path, dirty baseline, display choices, compute request, and Batch
 workspace. **New** and **Open** create sessions rather than
 discarding another open graph. Tabs can be renamed, reordered, and closed with
 Save/Discard/Cancel handling.
+
+!!! info "New in 0.16.0a3: independent preview views"
+
+    Each open tab remembers its preview zoom, position, 2D/3D mode, rotation and
+    slice position for this session. A newly viewed tab fits its selected image,
+    even if another workflow has a much larger image. Crop outlines belong only
+    to the selected Crop Stack in the active tab; switching or closing a tab
+    removes its transient outline. These view settings do not change calculated
+    data and are not saved in workflow files.
 
 Right-click a tab and choose **Open in File
 Explorer** (Windows) or **Open in Finder** (macOS) to select its saved workflow
@@ -399,6 +408,10 @@ volume distribution, colocalization scatter, table preview, auto contrast,
 **Pin selected**, **Save selected output...**, and an explicit reset of the
 selected output's remembered display profile.
 
+The settings summary below **Name** wraps to show
+its full text, and unchanged connected-input details stay steady while you
+adjust parameters.
+
 ### Scrolling past drop-downs
 
 !!! note "New in 0.16.0a2"
@@ -428,7 +441,11 @@ Numeric spinners accept direct keyboard entry as well as their step buttons and
 paired sliders. Floating-point fields accept decimal points or commas and
 scientific notation such as `2e-4`; sufficiently small non-zero values are also
 displayed in scientific notation. A slider is an exploration window, not
-necessarily the full valid entry range. Right-click a numeric field and choose
+necessarily the full valid entry range. In **Find Peaks**, **Detect
+Spots per Frame**, **Build Tracks** and registration tuning, fixed practical
+windows leave the full valid range available in the spinner; accepted values outside
+the window remain unchanged when reopening the inspector or workflow.
+Right-click a numeric field and choose
 **Reset to default** to restore that operation's declared default.
 
 When an image-dependent bound acts on integer data, the corresponding slider

@@ -8,6 +8,10 @@ intensity data and compatible masks or labels.
     These registration nodes and examples require 0.16.0a2 or newer.
     Registration is CPU-only in this implementation.
 
+!!! info "New in 0.16.0a3"
+    **Time-series strategy → Previous frame** is available in
+    version 0.16.0a3. Version 0.16.0a2 uses only the fixed-reference strategy.
+
 ## Start with a known-answer example
 
 Choose **Open example…** from the three-dot workflow menu after **Save**, then
@@ -32,8 +36,9 @@ success does not validate a biological experiment.
    the time series. Set **Register** to **Time series**.
 3. Start with **Motion model → Translation**. Choose the **Estimation channel**
    that shows stable, distinctive structures. Channel indices start at `0`.
-4. Choose **Reference time**, also starting at `0`. Every volume is aligned
-   directly to this one time point, not to the preceding time point.
+4. Choose **Reference time**, also starting at `0`. Leave **Time-series strategy →
+   Fixed reference** to estimate every volume directly against this anchor.
+   For the adjacent-volume alternative, see below.
 5. Calculate the node. Review the **Diagnostics** table in its inspector for
    overlap, displacement and optimization messages. The transform summary
    describes the motion instructions; it is not an image preview.
@@ -46,6 +51,31 @@ success does not validate a biological experiment.
 One transform is estimated for each complete spatial volume. It is shared by
 every channel at that time. T and C are never treated as spatial axes, and Z
 slices are never independently registered.
+
+### When adjacent frames share more structure
+
+Choose **Time-series strategy → Previous frame** when
+adjacent time points are easier to match than distant time points. VIPP estimates
+each original volume against its neighbour toward the chosen reference time,
+then combines the motion instructions. Above the reference it uses the preceding
+frame; below a nonzero reference it uses the following frame. It still aligns
+every result onto the same reference grid and resamples original data only once.
+
+The displacement and overlap limits always apply to each adjacent pair. Choose
+**Previous-frame cumulative quality** deliberately:
+
+- **Report only** reports the combined motion and remaining coverage at the
+  reference without rejecting it. This allows total drift to exceed the local
+  limit, but can leave very little or no valid coverage.
+- **Require local limits** also applies those same displacement and overlap
+  limits to the combined motion at the reference.
+
+Review the separate **pair** and **cumulative** diagnostics. A failed adjacent
+pair stops the whole series; VIPP does not skip a frame or replace it with zero
+motion. Small estimation errors can accumulate far from the reference, even
+when every adjacent pair looks convincing. Check overlays and independent
+landmarks across the series. See the [strategy and diagnostic
+reference](../reference/registration.md#time-series-strategies).
 
 !!! warning "Choose a reference that answers your question"
     Correct acquisition drift; do not force genuinely changing structures to
