@@ -578,6 +578,8 @@
       
         
       
+        
+      
     
     
     
@@ -621,6 +623,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1738,6 +1763,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -2000,6 +2029,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#review-time-series-observations-on-the-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review time-series observations on the source
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compare-3d-data-without-hiding-failures" class="md-nav__link">
     <span class="md-ellipsis">
       Compare 3D data without hiding failures
@@ -2048,6 +2086,52 @@
   
   <span class="md-ellipsis">
     Register images and correct drift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../detect-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Detect repeated patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../track-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Track objects and spots
     
   </span>
   
@@ -2661,6 +2745,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -2880,6 +2968,52 @@
   
   <span class="md-ellipsis">
     Registration and image comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Template matching and peaks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Time-series tracking
     
   </span>
   
@@ -3641,6 +3775,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#review-time-series-observations-on-the-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review time-series observations on the source
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compare-3d-data-without-hiding-failures" class="md-nav__link">
     <span class="md-ellipsis">
       Compare 3D data without hiding failures
@@ -3760,6 +3903,12 @@ plot grows vertically to keep the graph, axis labels and wrapped channel legend
 readable in a narrow panel or with larger fonts. Scroll the inspector to reach
 the sections below it. <strong>Open in window</strong> still provides a resizable detailed
 view; resizing does not recalculate or change the histogram values.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a3</p>
+<p>Use <strong>Open histogram…</strong> on an <strong>Intensity Histogram</strong> graph card to open
+the same detailed window without selecting the node or calculating again.
+Calculate the node first if no histogram with binned values is available.</p>
+</div>
 <p>The colocalization scatter density, ROI population, and colocalized count are
 also calculated over every ROI voxel. Threshold-independent density remains
 visible while exact threshold-dependent counts are recalculated, but a
@@ -3897,6 +4046,15 @@ opens the complete table in a resizable sortable view, not only the compact
 inspector preview. Click a column heading to sort ascending, then again to sort
 descending. Review units, missing values, and status/error columns alongside
 the measurements.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a3</p>
+<p>Table-producing measurement, colocalization-metrics, detection and tracking
+cards provide <strong>Open measurements…</strong> for their cached tables. Opening a
+window does not calculate or change the selected node. If no result is
+available, VIPP asks you to calculate first; retained stale results remain
+clearly labelled.
+For multiple table outputs, the shortcut uses the last displayed table.</p>
+</div>
 <p><img alt="The resizable result-table window with synthetic object measurements and CSV/TSV export" src="../../assets/screenshots/workflows/result-table-window.png" /></p>
 <p><em>Open the full result when a compact preview is insufficient. Sorting affects
 only this view; export retains the workflow table's scientific row order.</em></p>
@@ -3907,6 +4065,18 @@ labelled; use <strong>Recalculate</strong> before treating it as a new result.</
 Histogram</strong> node. Unlike a display-only histogram, its bin definition is part
 of the workflow and its full-resolution result is a table. See
 <a href="../../workflows/object-measurements-tables/#reproducible-intensity-histograms">histogram and table workflows</a>.</p>
+<h2 id="review-time-series-observations-on-the-source">Review time-series observations on the source<a class="headerlink" href="#review-time-series-observations-on-the-source" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a3</p>
+<p><strong>Review trajectories…</strong> beside <strong>Open measurements…</strong> opens the existing
+read-only source/table review for a time-series detection, tracking or
+eligible object-measurement node. It does not calculate or change selection.
+The source and cached result must still be current and available; pending
+updates prevent review of old results.</p>
+</div>
+<p>Follow <a href="../track-objects/">Track objects and spots</a> for review controls and
+<a href="../../reference/tracking/#source-review">source-review availability</a> for eligible
+cards and source requirements.</p>
 <h2 id="compare-3d-data-without-hiding-failures">Compare 3D data without hiding failures<a class="headerlink" href="#compare-3d-data-without-hiding-failures" title="Permanent link">&para;</a></h2>
 <p>A maximum-intensity projection can make a workflow look persuasive while
 hiding slice-specific noise or z-merging. Review at least:</p>
@@ -3955,7 +4125,7 @@ replacement for them.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 14, 2026 11:19:13 UTC">September 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 5, 2026 05:38:24 UTC">October 5, 2026</span>
   </span>
 
     
