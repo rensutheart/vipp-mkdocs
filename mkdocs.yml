@@ -201,6 +201,7 @@ nav:
       - Toolbar and settings: reference/interface.md
       - Graph display settings: reference/display-settings.md
       - Intensity and thresholds: reference/intensity-thresholds.md
+      - Fiji/ImageJ compatibility: reference/fiji-imagej-compatibility.md
       - Seeded segmentation: reference/seeded-segmentation.md
       - CellProfiler compartment profile: reference/cellprofiler-compartments.md
       - Channel and axis controls: reference/channel-axis-controls.md

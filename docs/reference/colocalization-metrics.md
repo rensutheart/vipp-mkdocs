@@ -271,6 +271,9 @@ stochastic calculation. If added in a future release, its PSF/block size,
 randomization count, and reproducibility policy must be recorded and validated
 statistically rather than described as bitwise Fiji output parity.
 
+For the separate preprocessing and filtering targets, see
+[Fiji/ImageJ compatibility](fiji-imagej-compatibility.md).
+
 ## Validation Status
 
 The implementation is covered by automated tests for whole-image/ROI metrics,

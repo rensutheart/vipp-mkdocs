@@ -222,9 +222,11 @@ can fail. Keep the scientific Stack/Slice threshold scope separate from the
 inspector histogram's display scope.
 
 Boolean handling and RGB/RGBA luma reduction are VIPP extensions and are not
-claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Independent
-ImageJ-generated golden parity is pending, so record the node explicitly and
-compare against the intended ImageJ reference before consequential use.
+claimed as ImageJ-exact. Infinite floating-point inputs are rejected. Broad
+independent ImageJ-generated golden parity remains pending. See the
+[Fiji/ImageJ compatibility reference](../reference/fiji-imagej-compatibility.md#imagej-default-threshold),
+record the node explicitly and compare against the intended ImageJ reference
+before consequential use.
 
 ## CPU and GPU boundaries in this workflow
 

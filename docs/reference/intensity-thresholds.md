@@ -4,6 +4,23 @@ Use this reference when cutoff choice, histogram scope, or numeric precision
 could change your analysis. For a first segmentation, start with the
 [label-cleanup tutorial](../workflows/segmentation-label-cleanup.md).
 
+## ImageJ Gaussian Blur compatibility
+
+**Unreleased after 0.16.0a3:** Choose **ImageJ Gaussian Blur** when reproducing
+an ImageJ 1.54p slice-wise Gaussian step before thresholding. Its **Sigma
+(pixels)** is the standard deviation, with a supported range of 0–8.5 pixels.
+Larger sigma requires ImageJ's downsampling algorithm and is rejected.
+
+This CPU operation accepts scalar uint8, uint16 and finite float32 images with
+trailing YX axes. Extract the nuclear channel first when building a tissue ROI.
+Leading Z, time or channel positions are processed independently; they are
+never blurred together. Input arrays and spatial calibration are preserved.
+Unsupported types and non-finite input require an explicit conversion or
+correction before running the operation.
+
+For the kernel, independent evidence and unsupported ImageJ behavior, see
+[Fiji/ImageJ compatibility](fiji-imagej-compatibility.md#imagej-gaussian-blur).
+
 ## Binary Threshold: cutoff or intensity range
 
 Binary Threshold offers **Foreground: Above / Below / In range / Outside range**.
@@ -103,8 +120,9 @@ method dropdown.
 Existing workflows saved with the former ImageJ `Triangle`
 choice retain that source-derived calculation as fixed legacy compatibility;
 it is not interchangeable with VIPP's generic `Triangle Threshold`, whose
-conversion and histogram contract differs. Independent ImageJ-generated golden
-parity is pending.
+conversion and histogram contract differs. Broad independent ImageJ-generated
+golden parity remains pending; the [compatibility reference](fiji-imagej-compatibility.md#imagej-default-threshold)
+distinguishes that gap from bounded acquired-workflow evidence.
 
 Bool handling, other floating dtypes, and RGB/RGBA luma
 reduction are VIPP extensions and are not claimed as ImageJ-exact. NaNs become

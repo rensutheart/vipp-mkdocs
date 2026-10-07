@@ -110,6 +110,41 @@ regions, tissue, or user-defined ROIs.
 *The same red/green channel outputs feed independent metric, voxel, and RACC
 branches. The selected calculated node exposes its threshold scatter for QC.*
 
+### Build an independent tissue ROI from nuclei
+
+Use an independent nuclear channel to define the analysis population when the
+question concerns tissue or cell clusters. A nuclear-derived mask is a proxy
+for tissue presence: review whether it includes the relevant sparsely
+nucleated regions and excludes genuine gaps. It retains nuclei and does not
+segment individual cells or their cytoplasm.
+
+**Unreleased after 0.16.0a3:** A slice-specific ImageJ-style mask can use
+**ImageJ Gaussian Blur → ImageJ Default Threshold (8-bit) → Dilate → Closing →
+Fill Holes**. Extract a scalar nuclear channel first, record the Gaussian sigma
+and threshold policy, and choose **2D per XY slice (advanced)** for Fill Holes.
+Dilate and Closing operate per XY plane. Match the source macro's kernel size, repetitions and
+Fiji Binary Options; saved Fiji preferences can change morphology. The
+[Fiji/ImageJ compatibility reference](../reference/fiji-imagej-compatibility.md)
+states the supported numeric regions and separate evidence boundaries for
+Gaussian, threshold, cleanup and measurement operations.
+
+For uint16 or float32 nuclear images, ImageJ Default converts each slice to
+8-bit using its own min/max range before thresholding. Inspect
+raw nuclear intensity and ROI coverage through Z so faint slices are not
+mistaken for convincing tissue segmentation. These independent slice masks
+form a volumetric ROI; the workflow does not perform 3D morphology.
+
+Connect the final Boolean mask to **Masked Colocalization Metrics**, with the
+two confirmed marker channels on the other inputs. Review the mask over all
+relevant channels before fixing the settings. Keep marker background correction
+as a separate, consistently applied preprocessing decision. If cropping is
+needed, apply the same recorded crop to both markers and the mask; a rectangular
+crop alone does not restrict analysis to the irregular tissue ROI.
+
+For Fiji Coloc 2, supply the matching XYZ binary stack as its mask input;
+nonzero voxels define the population. A conventional 2D selection instead
+applies across Z. See [Coloc 2 mask semantics](https://imagej.net/plugins/coloc-2).
+
 ## What The Scatter Inspector Calculates
 
 The colocalization inspector calculates all three summaries over every voxel in

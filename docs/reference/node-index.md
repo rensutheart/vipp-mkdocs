@@ -197,10 +197,11 @@ and is not merely a display adjustment. See
 | --- | --- | --- |
 | `Average Blur` | image | Simple local averaging. |
 | `Gaussian Blur` | image | Gaussian smoothing. |
+| `ImageJ Gaussian Blur` (unreleased after 0.16.0a3) | image | CPU ImageJ 1.54p direct Gaussian on scalar uint8/uint16/finite float32 YX planes, sigma 0–8.5 pixels. See [compatibility limits](fiji-imagej-compatibility.md#imagej-gaussian-blur). |
 | `Smooth — CellProfiler Gaussian` (new in 0.16.0a1) | image | One YX float32 plane; diameter-to-sigma conversion and normalized borders from CP4.2.6. See [profile](cellprofiler-compartments.md). |
 | `Gaussian Blur 3D` | image | Volumetric Gaussian smoothing. |
 | `Median Filter` | image | Remove salt-and-pepper noise. |
-| `Sigma Filter` | image | Edge-preserving local smoothing using a sigma-selected circular neighborhood. |
+| `Sigma Filter` | image | Edge-preserving local smoothing using a sigma-selected circular neighborhood; see [Sigma Filter Plus compatibility](fiji-imagej-compatibility.md#sigma-filter). |
 | `Bilateral Filtering` | image | Edge-preserving smoothing. |
 | `Non-Local Means` | image | Denoising for suitable data. |
 
@@ -251,7 +252,7 @@ see [validation status](validation-status.md).
 | `Minimum Threshold` | mask |
 | `Binary Threshold` | mask |
 | `Hysteresis Threshold` | mask |
-| `ImageJ Default Threshold (8-bit)` | mask |
+| `ImageJ Default Threshold (8-bit)` ([experimental compatibility](fiji-imagej-compatibility.md#imagej-default-threshold)) | mask |
 
 Otsu, Triangle, Yen, Isodata, and Minimum count every finite input value.
 Integers use exact native levels for observed spans up to 65,536; floats use the
@@ -296,7 +297,7 @@ it cannot identify a valid two-peak histogram. See
 | `Morphological Gradient` | array | mask | Boundary-like morphology response. |
 | `Fill Holes` | mask | mask | Fill enclosed holes by area/volume. |
 | `Remove Small Objects` | mask or labels | same type | Remove connected objects below size threshold. |
-| `Remove Outliers (Binary)` | mask | mask | Remove foreground specks or fill background notches with Fiji-compatible circular YX neighborhoods. |
+| `Remove Outliers (Binary)` | mask | mask | Remove foreground specks or fill background notches with circular YX neighborhoods; see [ImageJ compatibility limits](fiji-imagej-compatibility.md#remove-outliers-binary). |
 
 ### Skeleton / Network QC
 
