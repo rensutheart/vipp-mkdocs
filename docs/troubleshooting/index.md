@@ -27,3 +27,19 @@ clear the message.
 Use **Details…** to view and copy the technical message, or **Dismiss** to hide
 the warning without changing results or node errors. If it returns, include
 those details and your VIPP version when [reporting the problem](report-a-problem.md).
+
+## Repeated layer-list loading errors
+
+!!! note "Nightly: layer-list repaint recovery (unreleased after 0.16.0a3)"
+
+    VIPP now guards napari's layer-list loading indicator and thumbnail when a
+    layer row disappears during a display update. This addresses repeated
+    `'NoneType' object has no attribute 'height'` errors from
+    `LayerDelegate._paint_loading`. It changes display handling only; workflow
+    parameters and calculated image or mask arrays are unchanged.
+
+If an older version repeatedly shows this error, save the workflow, close VIPP,
+and reopen it in a build containing the fix. A different traceback, or an error
+that persists in that build, needs separate investigation. Include the complete
+traceback and VIPP and napari versions when
+[reporting the problem](report-a-problem.md).
