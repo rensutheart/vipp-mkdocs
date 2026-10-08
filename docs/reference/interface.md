@@ -8,6 +8,13 @@ freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.
 
+!!! note "Unreleased — independent detached windows on Windows"
+    Double-click the detached window's title bar to maximize or restore it.
+    Detached VIPP and napari can minimize and restore separately, with separate
+    taskbar windows. They still share one session and viewer: redocking keeps
+    the workflow, and closing napari closes its VIPP session. Native
+    Linux/macOS window-manager behaviour has not yet been qualified.
+
 ## Dialog buttons
 
 !!! note "New in 0.16.0a1"

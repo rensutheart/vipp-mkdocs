@@ -117,6 +117,14 @@ double-click the title bar) and maximize the floating window. Hide the node
 library after adding nodes and keep the inspector visible while tuning. Use
 graph zoom for overview; use napari layers for full-resolution image comparison.
 
+!!! note "Unreleased — Windows detached-window fix"
+    Once VIPP is detached, double-click its title bar to maximize or restore it
+    without a bounce back. Minimize VIPP when you want to keep the napari viewer
+    visible, or minimize napari while keeping VIPP visible; restore either from
+    its taskbar window. This remains one session, not a second application.
+    Redock VIPP to return to the embedded layout. Closing napari still closes
+    the session. Native Linux/macOS behaviour remains unqualified.
+
 ## If VIPP is missing from the Plugins menu
 
 Check that napari is running from the same environment into which VIPP was
