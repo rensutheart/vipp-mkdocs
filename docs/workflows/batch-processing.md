@@ -187,16 +187,23 @@ those protections. Final Run validation still checks current disk state.
 It does not calculate an image or save an output. Reopen **Batch** to return to
 your retained settings and item list.
 
-Two outputs targeting the same filename cannot both be saved. Change the
-**Tag**, **Filename template**, or output subfolder on one of the affected
-`Batch Output` nodes so their destinations differ. With a template such as
-`{source_stem}__{tag}`, changing the node's display name alone does not change
-the filename.
+Two outputs targeting the same filename cannot both be saved. The fix depends
+on what shares the destination:
+
+- If one `Batch Output` node repeats a filename across samples, include
+  `{batch_id}` in **Filename template** to give each sample its own file.
+- If different output nodes share a filename, give them different **Subfolder**
+  values. Different **Tag** values also work when **Filename template** contains
+  `{tag}`, as in the default `{source_stem}__{tag}` template.
+
+Use `{batch_id}__{node_id}` in **Filename template** to separate both samples
+and output nodes. With `{source_stem}__{tag}`, changing a node's display name
+alone does not change its filename.
 
 For an output overlapping an input, choose a separate output destination.
 For an explicitly protected existing output, review that `Batch Output` node's
-existing-file setting. Return to **Batch** and use **Recheck all** after changing
-the graph. A completed check can still contain blocked outputs.
+existing-file setting. After any edits, reopen **Batch** and use **Recheck all**.
+A completed check can still contain blocked outputs.
 
 ## 3. Review overrides
 
