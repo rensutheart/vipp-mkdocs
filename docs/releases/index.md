@@ -6,6 +6,11 @@ data.
 
 ## Unreleased
 
+- [Batch output checks](../workflows/batch-processing.md#find-a-blocked-output)
+  explain blocked destinations and offer **Find problem** to select an
+  affected graph node. **Select all** and **Deselect all** apply to every
+  batch item matching the current search and filter, across pages. These
+  controls are not part of 0.16.0a3.
 - On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
   once on a title-bar double-click and can minimize or restore independently
   from napari. Both windows remain in the same session, with redocking and

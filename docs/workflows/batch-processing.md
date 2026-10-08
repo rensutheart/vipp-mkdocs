@@ -112,6 +112,15 @@ Search and filter the list before selecting samples. Checkboxes choose samples
 for multi-item actions; the highlighted row determines the details being shown.
 The list uses 50-row pages, and selections can include samples on another page.
 
+!!! info "Nightly: batch selection controls (unreleased after 0.16.0a3)"
+    **Select all** checks every sample matching the current search and filter,
+    including other pages. **Deselect all** unchecks those matching samples.
+    Samples hidden by the search or filter retain their checkbox state. Clear
+    the search and choose **All items** to select or deselect the whole batch.
+    These controls change selection only; they do not edit overrides or outputs.
+    They choose samples for selected-item actions; **Run** still processes the
+    full checked batch plan.
+
 **Recheck selected** verifies the chosen source revisions and output presence;
 it does not replace full scientific preflight for the whole collection. Use
 **Recheck all** after a scientific setting or source-definition change.
@@ -164,6 +173,30 @@ finished successfully or used the current workflow.
 Duplicate output destinations, outputs overlapping inputs, and explicitly
 protected outputs remain errors. An item-level overwrite choice cannot bypass
 those protections. Final Run validation still checks current disk state.
+
+### Find a blocked output
+
+!!! info "Nightly: actionable output checks (unreleased after 0.16.0a3)"
+    The warning names the output problem and offers **Find problem** to take
+    you to an affected `Batch Output` node in the workflow graph and inspector.
+    Each blocked output also shows its specific reason, full destination, and
+    a **Find problem** link. For duplicate destinations, the warning selects
+    one of the involved output nodes.
+
+**Find problem** hides the Batch window so you can inspect and edit the node.
+It does not calculate an image or save an output. Reopen **Batch** to return to
+your retained settings and item list.
+
+Two outputs targeting the same filename cannot both be saved. Change the
+**Tag**, **Filename template**, or output subfolder on one of the affected
+`Batch Output` nodes so their destinations differ. With a template such as
+`{source_stem}__{tag}`, changing the node's display name alone does not change
+the filename.
+
+For an output overlapping an input, choose a separate output destination.
+For an explicitly protected existing output, review that `Batch Output` node's
+existing-file setting. Return to **Batch** and use **Recheck all** after changing
+the graph. A completed check can still contain blocked outputs.
 
 ## 3. Review overrides
 
