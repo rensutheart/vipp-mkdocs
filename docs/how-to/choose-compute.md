@@ -162,6 +162,13 @@ node to see the affected input, exact proposed conversion, and memory trade-off.
 The tip remains available in Prefer GPU after calculation while that same
 blocker is still present.
 
+!!! note "Nightly: narrow inspector text (unreleased after 0.16.0a3)"
+
+    The expanded **GPU tip** now grows to fit wrapped text in a narrow
+    **Compute** inspector, keeping the full explanation above **Add
+    conversion** visible. This display fix does not change the proposed
+    conversion or apply it automatically.
+
 **Add conversion** inserts an ordinary visible **Convert Dtype** node on that
 one input. The proposed `float32` **Preserve** conversion changes storage dtype
 without rescaling pixel values, and the graph edit has one-step Undo. Shared
