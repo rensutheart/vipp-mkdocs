@@ -4,6 +4,14 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## Unreleased
+
+- On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
+  once on a title-bar double-click and can minimize or restore independently
+  from napari. Both windows remain in the same session, with redocking and
+  napari-owned session closure unchanged. Native Linux/macOS behaviour remains
+  unqualified; this fix is not part of 0.16.0a3.
+
 ## 0.16.0a3 alpha
 
 [Read the 0.16.0a3 overview](0.16.0a3.md) for fixed-template detection,
