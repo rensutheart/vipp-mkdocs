@@ -42,6 +42,15 @@ background. **In range/Outside range** instead show **Low threshold** and
 low ≤ high. Equal limits select exactly that intensity with In range, or every
 other non-NaN value with Outside range.
 
+**Unreleased after 0.16.0a3:** Threshold controls use the connected image's
+intensity units, including floating-point values outside 0–1. Converting
+`uint16` to `float32` with **Preserve** retains the original intensity values;
+see [dtype conversion guidance](../how-to/choose-compute.md#use-a-dtype-repair-only-after-reviewing-it).
+The slider spans the finite range of the displayed slice or stack histogram
+and includes the current cutoff. Numeric entry can set a cutoff beyond that
+displayed range. Dragging a guide updates the matching numeric control and
+saved cutoff, then queues recalculation.
+
 NaN pixels stay background in all four modes, so Outside range is not simply
 an inversion of In range. Loaded or scripted ranges with non-finite or reversed
 limits are rejected, not silently corrected.
