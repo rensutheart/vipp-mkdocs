@@ -22,9 +22,14 @@ group, image and sample identity fields. It follows changes in the upstream
 table rather than saving the current list of names. Numeric-looking text is
 not converted into a measurement.
 
+!!! info "Nightly: paired selection controls (unreleased after 0.16.0a3)"
+    The measurement checklist has paired **Select all** and **Deselect all**
+    buttons above it, with a scope label for eligible numeric measurements.
+
 **Select all** turns off automatic selection and saves the exact currently
 eligible field names as a manual selection. It does not bulk-select fields
-marked **not automatic**. **Select none** also turns automatic selection off
+marked **not automatic**, including IDs, text and grouping/identity fields.
+**Deselect all** also turns automatic selection off
 and leaves an empty manual selection; it never falls back to automatic mode.
 At least one measurement must be selected before calculation. Manual
 selections retain their exact names; a missing saved field must be reviewed,

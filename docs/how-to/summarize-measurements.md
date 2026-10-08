@@ -40,13 +40,17 @@ tracks eligible numeric measurement columns as the upstream table changes.
 It excludes recognized identities/metadata and the chosen grouping and
 identity fields. It neither creates measurements nor converts text to numbers.
 
-Use **Select all** to keep the currently eligible measurement names as a fixed
-manual selection, or **Select none** to clear it and choose a smaller set.
-Both turn off **Auto-select measurements**; neither selects fields marked
-**not automatic**. An empty selection cannot be calculated: choose at least
-one measurement first. These actions affect the analysis, unlike the
-Results Workspace Data tab's visible-column controls. They work identically
-in the inspector and Results Workspace.
+!!! info "Nightly: paired measurement selection (unreleased after 0.16.0a3)"
+    Use **Select all** above **Measurements** to keep the currently eligible
+    numeric measurement names as a fixed manual selection, or **Deselect all**
+    to clear all selected measurements and choose a smaller set. **Select all**
+    skips IDs, text, grouping/identity fields and other fields marked
+    **not automatic**. Both actions turn off **Auto-select measurements**.
+
+An empty selection cannot be calculated: choose at least one measurement first.
+These actions affect the analysis, unlike the Results Workspace Data tab's
+visible-column controls. They work identically in the inspector and
+Results Workspace.
 
 The controls are divided into **Measurements**, **Grouping**, **Observation
 unit** and **Statistics to report**. The short note below the missing-value

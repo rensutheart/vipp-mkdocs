@@ -8,9 +8,14 @@ data.
 
 - [Batch output checks](../workflows/batch-processing.md#find-a-blocked-output)
   explain blocked destinations and offer **Find problem** to select an
-  affected graph node. **Select all** and **Deselect all** apply to every
-  batch item matching the current search and filter, across pages. These
-  controls are not part of 0.16.0a3.
+  affected graph node. These controls are not part of 0.16.0a3.
+- [Paired bulk selection controls](../reference/interface.md#bulk-selection-controls)
+  use **Select all** and **Deselect all**, matching outlined check/minus icons,
+  consistent styling and placement above checklists or tables. Visible scopes
+  distinguish matching Batch items, all columns and eligible Statistics
+  measurements. Batch Overrides clears all samples, including hidden selections,
+  when deselecting. Selection behavior is preserved; the new convention is not
+  part of 0.16.0a3.
 - [Batch and Results windows](../reference/interface.md#batch-and-results-windows)
   have native minimize, maximize/restore and close controls. Double-click the
   title bar or unused toolbar space to maximize or restore. On Windows, place

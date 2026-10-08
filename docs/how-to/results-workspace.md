@@ -83,11 +83,15 @@ connections between workflows.
 
 In **Data**, search rows and choose which columns to show. These controls only
 change what you see: they do not exclude observations from a summary or plot.
-Use **Select all** or **Select none** above **Visible columns** to show or hide
-all columns at once, then select the individual columns you want.
+!!! info "Nightly: paired column selection (unreleased after 0.16.0a3)"
+    Use **Select all** or **Deselect all** above **Visible columns** to show or
+    hide all columns at once, then check the individual columns you want.
+    The scope is **all columns**; row search does not change that scope.
+
 Export uses the complete table, not just the visible search results or columns.
 For a saved column selection used downstream, use **Select Table Columns** in
-the workflow.
+the workflow. Its [paired selection controls](../reference/interface.md#bulk-selection-controls)
+also affect all columns, and its choices change the downstream table.
 
 **Increase Decimal** and **Decrease Decimal** controls change how
 many decimal places the **Data**, **Summary** and **View plotted data** tables

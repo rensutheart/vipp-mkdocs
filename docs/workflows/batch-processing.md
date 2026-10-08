@@ -131,6 +131,8 @@ The list uses 50-row pages, and selections can include samples on another page.
     These controls change selection only; they do not edit overrides or outputs.
     They choose samples for selected-item actions; **Run** still processes the
     full checked batch plan.
+    The pair sits above the table with its scope below it; see
+    [bulk selection controls](../reference/interface.md#bulk-selection-controls).
 
 **Recheck selected** verifies the chosen source revisions and output presence;
 it does not replace full scientific preflight for the whole collection. Use
@@ -233,6 +235,16 @@ Use **Find samples**, **Show samples**, and **Find node or parameter** to narrow
 the view. **Show columns…** controls which parameters are visible; hiding a
 column does not delete its values.
 
+!!! info "Nightly: paired override selection (unreleased after 0.16.0a3)"
+    **Select all** above the sample table selects every sample matching the
+    filters across all pages. **Deselect all** clears **all samples**, including
+    selections hidden by filters. Check the scope and selected count before
+    applying an edit.
+
+    In **Show columns…**, the same pair checks or unchecks **all parameter
+    columns**, including those hidden by search. Choose **OK** to apply the
+    visibility choices; existing override values remain unchanged.
+
 For several samples, check their rows and choose **Edit selected…**. First choose
 the parameters to change, then choose **Set value** or **Use workflow value**
 for each. **Apply to selected samples** commits the validated draft.
@@ -242,9 +254,10 @@ overrides.
 The selection and reset controls have different jobs:
 
 - **Select this page** changes checkboxes on the visible page.
-- **Select all matching** selects every sample matching the filters, including
+- **Select all** selects every sample matching the filters, including
   other pages. Check the selected count before applying an edit.
-- **Deselect all** only removes selection; no parameter values change.
+- **Deselect all** clears every sample selection, including hidden samples;
+  no parameter values change.
 - **Reset selected…** restores all parameter defaults for checked samples,
   including hidden columns and selected samples on other pages.
 - **Reset all overrides…** restores all sample parameters **and** all batch
