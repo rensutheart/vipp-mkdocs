@@ -18,7 +18,7 @@
         <link rel="prev" href="../display-settings/">
       
       
-        <link rel="next" href="../seeded-segmentation/">
+        <link rel="next" href="../fiji-imagej-compatibility/">
       
       
       <link rel="icon" href="../../assets/branding/vipp-mark.svg">
@@ -2603,6 +2603,8 @@
       
         
       
+        
+      
     
     
     
@@ -2779,6 +2781,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#imagej-gaussian-blur-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageJ Gaussian Blur compatibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#binary-threshold-cutoff-or-intensity-range" class="md-nav__link">
     <span class="md-ellipsis">
       Binary Threshold: cutoff or intensity range
@@ -2866,6 +2877,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fiji-imagej-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fiji/ImageJ compatibility
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3697,6 +3731,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#imagej-gaussian-blur-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageJ Gaussian Blur compatibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#binary-threshold-cutoff-or-intensity-range" class="md-nav__link">
     <span class="md-ellipsis">
       Binary Threshold: cutoff or intensity range
@@ -3808,6 +3851,19 @@
 <p>Use this reference when cutoff choice, histogram scope, or numeric precision
 could change your analysis. For a first segmentation, start with the
 <a href="../../workflows/segmentation-label-cleanup/">label-cleanup tutorial</a>.</p>
+<h2 id="imagej-gaussian-blur-compatibility">ImageJ Gaussian Blur compatibility<a class="headerlink" href="#imagej-gaussian-blur-compatibility" title="Permanent link">&para;</a></h2>
+<p><strong>Unreleased after 0.16.0a3:</strong> Choose <strong>ImageJ Gaussian Blur</strong> when reproducing
+an ImageJ 1.54p slice-wise Gaussian step before thresholding. Its <strong>Sigma
+(pixels)</strong> is the standard deviation, with a supported range of 0–8.5 pixels.
+Larger sigma requires ImageJ's downsampling algorithm and is rejected.</p>
+<p>This CPU operation accepts scalar uint8, uint16 and finite float32 images with
+trailing YX axes. Extract the nuclear channel first when building a tissue ROI.
+Leading Z, time or channel positions are processed independently; they are
+never blurred together. Input arrays and spatial calibration are preserved.
+Unsupported types and non-finite input require an explicit conversion or
+correction before running the operation.</p>
+<p>For the kernel, independent evidence and unsupported ImageJ behavior, see
+<a href="../fiji-imagej-compatibility/#imagej-gaussian-blur">Fiji/ImageJ compatibility</a>.</p>
 <h2 id="binary-threshold-cutoff-or-intensity-range">Binary Threshold: cutoff or intensity range<a class="headerlink" href="#binary-threshold-cutoff-or-intensity-range" title="Permanent link">&para;</a></h2>
 <p>Binary Threshold offers <strong>Foreground: Above / Below / In range / Outside range</strong>.
 Older workflows without a saved <strong>Foreground</strong> choice use <strong>Above</strong> and produce
@@ -3928,8 +3984,9 @@ method dropdown.</p>
 <p>Existing workflows saved with the former ImageJ <code>Triangle</code>
 choice retain that source-derived calculation as fixed legacy compatibility;
 it is not interchangeable with VIPP's generic <code>Triangle Threshold</code>, whose
-conversion and histogram contract differs. Independent ImageJ-generated golden
-parity is pending.</p>
+conversion and histogram contract differs. Broad independent ImageJ-generated
+golden parity remains pending; the <a href="../fiji-imagej-compatibility/#imagej-default-threshold">compatibility reference</a>
+distinguishes that gap from bounded acquired-workflow evidence.</p>
 <p>Bool handling, other floating dtypes, and RGB/RGBA luma
 reduction are VIPP extensions and are not claimed as ImageJ-exact. NaNs become
 zero during plane conversion; infinite float values are rejected explicitly
@@ -4067,7 +4124,7 @@ modes actually process.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 21:51:06 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 06:45:13 UTC">October 7, 2026</span>
   </span>
 
     
@@ -4122,13 +4179,13 @@ modes actually process.</p>
         
         
           
-          <a href="../seeded-segmentation/" class="md-footer__link md-footer__link--next" aria-label="Next: Seeded segmentation">
+          <a href="../fiji-imagej-compatibility/" class="md-footer__link md-footer__link--next" aria-label="Next: Fiji/ImageJ compatibility">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Seeded segmentation
+                Fiji/ImageJ compatibility
               </div>
             </div>
             <div class="md-footer__button md-icon">
