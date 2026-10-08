@@ -26,6 +26,15 @@ in **Results Workspace**, without replacing your workflow nodes.
 Use the window's title-bar **Maximize** button for more room. **Restore**
 returns it to its previous size; both actions leave the analysis unchanged.
 
+!!! info "Nightly: independent results window (unreleased after 0.16.0a3)"
+    Use the native **Minimize** control, or double-click the title bar or unused
+    space in the top selection toolbar to maximize or restore. On Windows,
+    **Results Workspace** can stay on another monitor while napari or detached
+    VIPP is minimized. Reopening the minimized workspace restores it and retains
+    its previous maximized state. Ending the host session closes the window;
+    see [Batch and Results windows](../reference/interface.md#batch-and-results-windows)
+    for the platform boundary.
+
 Choose the chain you want to explore:
 
 - **Workflow** lists every open workflow. Selecting one activates its workflow

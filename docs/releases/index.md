@@ -11,6 +11,13 @@ data.
   affected graph node. **Select all** and **Deselect all** apply to every
   batch item matching the current search and filter, across pages. These
   controls are not part of 0.16.0a3.
+- [Batch and Results windows](../reference/interface.md#batch-and-results-windows)
+  have native minimize, maximize/restore and close controls. Double-click the
+  title bar or unused toolbar space to maximize or restore. On Windows, place
+  each on a separate monitor and keep them visible when napari or detached VIPP is
+  minimized. Reopening retains a minimized window's previous maximized state;
+  the windows remain in the same session. Native Linux/macOS ownership and
+  minimization remain unqualified; this change is not part of 0.16.0a3.
 - On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
   once on a title-bar double-click and can minimize or restore independently
   from napari. Both windows remain in the same session, with redocking and

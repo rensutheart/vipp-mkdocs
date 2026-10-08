@@ -15,6 +15,17 @@ sample does not run the collection.
 The footer keeps the current activity and next action visible. You can return to
 an earlier tab without starting a check or a run merely by opening that tab.
 
+!!! info "Nightly: independent Batch window (unreleased after 0.16.0a3)"
+    Use the title-bar **Minimize**, **Maximize/Restore** and **Close** controls.
+    Double-click the title bar or unused space beside **Open config** and
+    **Save config** to maximize or restore. On Windows, keep Batch on another
+    monitor while napari or detached VIPP is minimized. Reopening a minimized
+    Batch window restores it, including its previous maximized state.
+    Minimizing or **Hide window** keeps an active run going; use
+    [Stop safely](#stop-safely) to cancel it. The window remains part of its
+    host session; see [Batch and Results windows](../reference/interface.md#batch-and-results-windows)
+    for the platform boundary.
+
 ## 1. Set up sources and destination
 
 Start with a workflow that you have already validated on representative data.

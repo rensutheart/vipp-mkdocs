@@ -15,6 +15,23 @@ floating window.
     the workflow, and closing napari closes its VIPP session. Native
     Linux/macOS window-manager behaviour has not yet been qualified.
 
+## Batch and Results windows
+
+!!! note "Unreleased after 0.16.0a3: independent workspace windows"
+    **Batch workflow** and **Results Workspace** have native **Minimize**,
+    **Maximize/Restore** and **Close** controls. Double-click the title bar or
+    unused space beside the top toolbar controls to maximize or restore the
+    window. Buttons, selectors and editable fields keep their usual interaction.
+
+    On Windows, move and resize each workspace independently, including on
+    separate monitors. Minimizing napari or detached VIPP leaves these
+    workspace windows visible. Reopening a minimized workspace restores it,
+    including its maximized state if it was maximized before minimizing.
+
+    The windows share the same session; ending that session closes them.
+    Batch running, hiding and cancellation rules still apply. Native
+    Linux/macOS ownership and minimization behaviour has not yet been qualified.
+
 ## Dialog buttons
 
 !!! note "New in 0.16.0a1"
