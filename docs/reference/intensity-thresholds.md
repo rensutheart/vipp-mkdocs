@@ -46,9 +46,10 @@ other non-NaN value with Outside range.
 intensity units, including floating-point values outside 0–1. Converting
 `uint16` to `float32` with **Preserve** retains the original intensity values;
 see [dtype conversion guidance](../how-to/choose-compute.md#use-a-dtype-repair-only-after-reviewing-it).
-The slider spans the finite range of the displayed slice or stack histogram
-and includes the current cutoff. Numeric entry can set a cutoff beyond that
-displayed range. Dragging a guide updates the matching numeric control and
+For large float images, the displayed slice or stack histogram supplies a
+slider window that also includes the current cutoff. Numeric entry can set a
+cutoff beyond that window. Inputs known to stay within 0–1 retain the usual
+0–1 control range. Dragging a guide updates the matching numeric control and
 saved cutoff, then queues recalculation.
 
 NaN pixels stay background in all four modes, so Outside range is not simply
