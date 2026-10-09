@@ -171,6 +171,14 @@ output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
 
+!!! note "Unreleased (nightly): graph wires"
+
+    Wires use separate lanes instead of sharing a line segment. Crossings and
+    shared port endpoints remain possible. The wire menu also has a direct
+    **Replace with tunnel...** action, with a wider click target around the
+    visible wire. See [Keep long graphs readable](../how-to/edit-graph.md#keep-long-graphs-readable)
+    and [Use tunnels for repeated sources](../how-to/edit-graph.md#use-tunnels-for-repeated-sources).
+
 Drop a supported image file directly onto an `Image Source` card to open it.
 With that card selected, ++ctrl+v++ / ++cmd+v++ accepts a copied file or image
 pixels. File-backed inputs retain their reader metadata; raw clipboard pixels

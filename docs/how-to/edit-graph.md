@@ -161,6 +161,12 @@ step was omitted and recalculate decisive outputs before accepting the branch.
     around other cards settle when you release. Overlapping cards can still
     hide connections: separate them or use **Auto Arrange**.
 
+!!! info "Unreleased (nightly): separate wire lanes"
+
+    Wires use separate lanes so you can follow each connection where branches
+    approach or leave one another. They can cross, and connections from the
+    same port share that endpoint, but they do not run along the same segment.
+
 ### Choose a port-label mode
 
 Open **Display settings → Input/output labels**, with **When needed**, **Always**, and **Never**. The behavior is unchanged from earlier labels; see
@@ -200,6 +206,17 @@ retain priority, including those added after VIPP opens.
 Named tunnels let one output feed distant nodes without long crossing wires.
 Create a tunnel from an output, give it a semantic name such as `nuclei_labels`
 or `red_channel`, and attach compatible inputs as subscribers.
+
+!!! info "Unreleased (nightly): replace a wire with a tunnel"
+
+    1. Right-click the wire or just beside it. The click target extends around
+       the visible line.
+    2. Choose **Replace with tunnel...** directly in the wire menu.
+    3. If prompted, give the tunnel a meaningful name and confirm. VIPP reuses
+       an existing tunnel from the same output port automatically.
+
+    Replacement affects the clicked connection and is one undoable edit. The
+    same output still supplies the same input through the named tunnel.
 
 Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use
