@@ -106,6 +106,12 @@ grayscale values and label IDs up to 65,535; other ordinary raster routes are
 8-bit display exports, and JPEG cannot store alpha. Use a scientific image
 format when axes, calibration, stacks, or exact label identity matter.
 
+!!! info "Unreleased: OME-Zarr export compatibility"
+    Development builds after 0.16.0a3 restore local OME-Zarr 0.4/0.5 image
+    and analysis-dataset exports with `ome-zarr` 0.20 and newer. Exported
+    channel display metadata, calibration and VIPP history are retained.
+    See [the compatibility fix](https://github.com/rensutheart/napari-vipp/pull/78).
+
 For additional readers, see [optional format packages](../getting-started/installation.md).
 
 <span id="mesh-export-nightly"></span>

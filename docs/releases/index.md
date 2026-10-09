@@ -6,6 +6,10 @@ data.
 
 ## Unreleased
 
+- Restore [OME-Zarr 0.4/0.5 image and analysis-dataset exports](../reference/import-export.md#format-details)
+  with `ome-zarr` 0.20 and newer, retaining channel display metadata,
+  calibration and VIPP history. This [compatibility fix](https://github.com/rensutheart/napari-vipp/pull/78)
+  is not part of 0.16.0a3.
 - On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
   once on a title-bar double-click and can minimize or restore independently
   from napari. Both windows remain in the same session, with redocking and
