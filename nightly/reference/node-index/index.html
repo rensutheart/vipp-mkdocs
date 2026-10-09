@@ -580,6 +580,8 @@
       
         
       
+        
+      
     
     
     
@@ -623,6 +625,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1765,6 +1790,8 @@
       
         
       
+        
+      
     
     
     
@@ -1915,6 +1942,29 @@
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/review-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Review images in linked views
     
   </span>
   
@@ -2605,6 +2655,8 @@
       
         
       
+        
+      
     
     
     
@@ -2720,6 +2772,15 @@
   
     <nav class="md-nav" aria-label="Image Data">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#review" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#detection" class="md-nav__link">
@@ -3038,6 +3099,29 @@
   
   <span class="md-ellipsis">
     Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked image review
     
   </span>
   
@@ -3930,6 +4014,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#review" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detection" class="md-nav__link">
     <span class="md-ellipsis">
       Detection
@@ -4226,8 +4319,8 @@
 
 
 <h1 id="node-index">Node Index<a class="headerlink" href="#node-index" title="Permanent link">&para;</a></h1>
-<p>This page lists all <strong>144 operation specifications</strong> registered by
-<code>NODE_LIBRARY</code> in 0.16.0a3. The palette exposes <strong>142</strong>: the two
+<p>This page lists all <strong>146 operation specifications</strong> registered by
+<code>NODE_LIBRARY</code> in 0.16.0a4. The palette exposes <strong>144</strong>: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
 selection. The 0.16.0a1 additions are <strong>Grow Regions from Seeds — CellProfiler
 Propagation</strong> and six <a href="../cellprofiler-compartments/">CellProfiler compartment stages</a>;
@@ -4237,6 +4330,15 @@ Propagation</strong> and six <a href="../cellprofiler-compartments/">CellProfile
 <p><strong>Template Match</strong>, <strong>Find Peaks</strong>, and <strong>Detect Spots per Frame</strong> are
 CPU nodes under <strong>Image Data → Detection</strong>; <strong>Build Tracks</strong> is under
 <strong>Image Data → Tracking</strong>. All four are included in the release counts below.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4</p>
+<p><strong>Review Images</strong> is a presentation-only two-input sink with <strong>Open review…</strong>,
+a linked side-by-side/overlay window and saved display recipes. It has no
+scientific image output and is included in the counts above. See
+<a href="../image-review/">the review reference</a>. <strong>Compare Images</strong> remains the
+separate quantitative comparison node. <strong>ImageJ Gaussian Blur</strong> adds the
+bounded CPU ImageJ 1.54p compatibility operation under Smoothing &amp; Denoising.</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">New in 0.16.0a2</p>
@@ -4254,7 +4356,7 @@ image/mesh type downstream. Its format menu and <strong>Batch Output</strong>'s 
 the connected input; see <a href="../../workflows/mask-to-mesh/#save-the-mesh">mesh saving</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Scope of this reference</p>
-<p>Titles and families follow the 0.16.0a3 source registry.
+<p>Titles and families follow the 0.16.0a4 source registry.
 Input and output summaries describe the ordinary/default ports; <code>Split Channels</code>,
 <code>Split Axis</code>, <code>Born-Wolf PSF</code>, and other multi-output nodes can resolve ports
 from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -4332,6 +4434,25 @@ for the accelerated node families and their current public regions.</p>
 </tbody>
 </table>
 <h2 id="image-data">Image Data<a class="headerlink" href="#image-data" title="Permanent link">&para;</a></h2>
+<h3 id="review">Review<a class="headerlink" href="#review" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Inputs</th>
+<th>Outputs</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Review Images</code> (new in 0.16.0a4)</td>
+<td>current aligned Image A, optional Image B</td>
+<td>none</td>
+<td>Open linked side-by-side or overlay panes; display recipes do not change scientific arrays or calculations. See <a href="../image-review/">linked image review</a>.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="detection">Detection<a class="headerlink" href="#detection" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4721,7 +4842,7 @@ and is not merely a display adjustment. See
 <td>Gaussian smoothing.</td>
 </tr>
 <tr>
-<td><code>ImageJ Gaussian Blur</code> (unreleased after 0.16.0a3)</td>
+<td><code>ImageJ Gaussian Blur</code> (new in 0.16.0a4)</td>
 <td>image</td>
 <td>CPU ImageJ 1.54p direct Gaussian on scalar uint8/uint16/finite float32 YX planes, sigma 0–8.5 pixels. See <a href="../fiji-imagej-compatibility/#imagej-gaussian-blur">compatibility limits</a>.</td>
 </tr>
@@ -5520,7 +5641,7 @@ older summaries retain their legacy calculations until explicit upgrade.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 06:45:13 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
   </span>
 
     

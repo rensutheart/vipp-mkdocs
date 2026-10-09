@@ -580,6 +580,8 @@
       
         
       
+        
+      
     
     
     
@@ -623,6 +625,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1823,6 +1848,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#find-a-blocked-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Find a blocked output
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1957,6 +1991,8 @@
       
         
           
+        
+      
         
       
         
@@ -2141,6 +2177,29 @@
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/review-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Review images in linked views
     
   </span>
   
@@ -2829,6 +2888,8 @@
       
         
       
+        
+      
     
     
     
@@ -2933,6 +2994,29 @@
   
   <span class="md-ellipsis">
     Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/image-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked image review
     
   </span>
   
@@ -3884,6 +3968,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#find-a-blocked-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Find a blocked output
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4048,6 +4141,18 @@ sample does not run the collection.</p>
 </table>
 <p>The footer keeps the current activity and next action visible. You can return to
 an earlier tab without starting a check or a run merely by opening that tab.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4: independent Batch window</p>
+<p>Use the title-bar <strong>Minimize</strong>, <strong>Maximize/Restore</strong> and <strong>Close</strong> controls.
+Double-click the title bar or unused space beside <strong>Open config</strong> and
+<strong>Save config</strong> to maximize or restore. On Windows, keep Batch on another
+monitor while napari or detached VIPP is minimized. Reopening a minimized
+Batch window restores it, including its previous maximized state.
+Minimizing or <strong>Hide window</strong> keeps an active run going; use
+<a href="#stop-safely">Stop safely</a> to cancel it. The window remains part of its
+host session; see <a href="../../reference/interface/#batch-and-results-windows">Batch and Results windows</a>
+for the platform boundary.</p>
+</div>
 <h2 id="1-set-up-sources-and-destination">1. Set up sources and destination<a class="headerlink" href="#1-set-up-sources-and-destination" title="Permanent link">&para;</a></h2>
 <p>Start with a workflow that you have already validated on representative data.
 Add an explicit <code>Batch Output</code> node for each image, mask, label image, RGB image,
@@ -4123,6 +4228,18 @@ samples for actions, so selecting a row need not navigate away from the list.</e
 <p>Search and filter the list before selecting samples. Checkboxes choose samples
 for multi-item actions; the highlighted row determines the details being shown.
 The list uses 50-row pages, and selections can include samples on another page.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4: batch selection controls</p>
+<p><strong>Select all</strong> checks every sample matching the current search and filter,
+including other pages. <strong>Deselect all</strong> unchecks those matching samples.
+Samples hidden by the search or filter retain their checkbox state. Clear
+the search and choose <strong>All items</strong> to select or deselect the whole batch.
+These controls change selection only; they do not edit overrides or outputs.
+They choose samples for selected-item actions; <strong>Run</strong> still processes the
+full checked batch plan.
+The pair sits above the table with its scope below it; see
+<a href="../../reference/interface/#bulk-selection-controls">bulk selection controls</a>.</p>
+</div>
 <p><strong>Recheck selected</strong> verifies the chosen source revisions and output presence;
 it does not replace full scientific preflight for the whole collection. Use
 <strong>Recheck all</strong> after a scientific setting or source-definition change.
@@ -4183,6 +4300,34 @@ finished successfully or used the current workflow.</p>
 <p>Duplicate output destinations, outputs overlapping inputs, and explicitly
 protected outputs remain errors. An item-level overwrite choice cannot bypass
 those protections. Final Run validation still checks current disk state.</p>
+<h3 id="find-a-blocked-output">Find a blocked output<a class="headerlink" href="#find-a-blocked-output" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4: actionable output checks</p>
+<p>The warning names the output problem and offers <strong>Find problem</strong> to take
+you to an affected <code>Batch Output</code> node in the workflow graph and inspector.
+Each blocked output also shows its specific reason, full destination, and
+a <strong>Find problem</strong> link. For duplicate destinations, the warning selects
+one of the involved output nodes.</p>
+</div>
+<p><strong>Find problem</strong> hides the Batch window so you can inspect and edit the node.
+It does not calculate an image or save an output. Reopen <strong>Batch</strong> to return to
+your retained settings and item list.</p>
+<p>Two outputs targeting the same filename cannot both be saved. The fix depends
+on what shares the destination:</p>
+<ul>
+<li>If one <code>Batch Output</code> node repeats a filename across samples, include
+  <code>{batch_id}</code> in <strong>Filename template</strong> to give each sample its own file.</li>
+<li>If different output nodes share a filename, give them different <strong>Subfolder</strong>
+  values. Different <strong>Tag</strong> values also work when <strong>Filename template</strong> contains
+  <code>{tag}</code>, as in the default <code>{source_stem}__{tag}</code> template.</li>
+</ul>
+<p>Use <code>{batch_id}__{node_id}</code> in <strong>Filename template</strong> to separate both samples
+and output nodes. With <code>{source_stem}__{tag}</code>, changing a node's display name
+alone does not change its filename.</p>
+<p>For an output overlapping an input, choose a separate output destination.
+For an explicitly protected existing output, review that <code>Batch Output</code> node's
+existing-file setting. After any edits, reopen <strong>Batch</strong> and use <strong>Recheck all</strong>.
+A completed check can still contain blocked outputs.</p>
 <h2 id="3-review-overrides">3. Review overrides<a class="headerlink" href="#3-review-overrides" title="Permanent link">&para;</a></h2>
 <h3 id="per-sample-parameter-overrides">Per-sample parameter overrides<a class="headerlink" href="#per-sample-parameter-overrides" title="Permanent link">&para;</a></h3>
 <p>Rows are samples and columns are eligible numeric scientific parameters. The
@@ -4194,6 +4339,16 @@ apply to the entire batch; neither edits the authored workflow defaults.</em></p
 <p>Use <strong>Find samples</strong>, <strong>Show samples</strong>, and <strong>Find node or parameter</strong> to narrow
 the view. <strong>Show columns…</strong> controls which parameters are visible; hiding a
 column does not delete its values.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4: paired override selection</p>
+<p><strong>Select all</strong> above the sample table selects every sample matching the
+filters across all pages. <strong>Deselect all</strong> clears <strong>all samples</strong>, including
+selections hidden by filters. Check the scope and selected count before
+applying an edit.</p>
+<p>In <strong>Show columns…</strong>, the same pair checks or unchecks <strong>all parameter
+columns</strong>, including those hidden by search. Choose <strong>OK</strong> to apply the
+visibility choices; existing override values remain unchanged.</p>
+</div>
 <p>For several samples, check their rows and choose <strong>Edit selected…</strong>. First choose
 the parameters to change, then choose <strong>Set value</strong> or <strong>Use workflow value</strong>
 for each. <strong>Apply to selected samples</strong> commits the validated draft.
@@ -4202,9 +4357,10 @@ overrides.</p>
 <p>The selection and reset controls have different jobs:</p>
 <ul>
 <li><strong>Select this page</strong> changes checkboxes on the visible page.</li>
-<li><strong>Select all matching</strong> selects every sample matching the filters, including
+<li><strong>Select all</strong> selects every sample matching the filters, including
   other pages. Check the selected count before applying an edit.</li>
-<li><strong>Deselect all</strong> only removes selection; no parameter values change.</li>
+<li><strong>Deselect all</strong> clears every sample selection, including hidden samples;
+  no parameter values change.</li>
 <li><strong>Reset selected…</strong> restores all parameter defaults for checked samples,
   including hidden columns and selected samples on other pages.</li>
 <li><strong>Reset all overrides…</strong> restores all sample parameters <strong>and</strong> all batch
@@ -4416,7 +4572,7 @@ QC, intended outputs, and the reported outcomes independently.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 12:03:47 UTC">September 21, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
   </span>
 
     

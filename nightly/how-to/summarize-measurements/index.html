@@ -580,6 +580,8 @@
       
         
       
+        
+      
     
     
     
@@ -623,6 +625,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1767,6 +1792,8 @@
       
         
       
+        
+      
     
     
     
@@ -1920,6 +1947,29 @@
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../review-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Review images in linked views
     
   </span>
   
@@ -2712,6 +2762,8 @@
       
         
       
+        
+      
     
     
     
@@ -2816,6 +2868,29 @@
   
   <span class="md-ellipsis">
     Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/image-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked image review
     
   </span>
   
@@ -3819,13 +3894,18 @@ explains empty groups and undefined results.</p>
 tracks eligible numeric measurement columns as the upstream table changes.
 It excludes recognized identities/metadata and the chosen grouping and
 identity fields. It neither creates measurements nor converts text to numbers.</p>
-<p>Use <strong>Select all</strong> to keep the currently eligible measurement names as a fixed
-manual selection, or <strong>Select none</strong> to clear it and choose a smaller set.
-Both turn off <strong>Auto-select measurements</strong>; neither selects fields marked
-<strong>not automatic</strong>. An empty selection cannot be calculated: choose at least
-one measurement first. These actions affect the analysis, unlike the
-Results Workspace Data tab's visible-column controls. They work identically
-in the inspector and Results Workspace.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4: paired measurement selection</p>
+<p>Use <strong>Select all</strong> above <strong>Measurements</strong> to keep the currently eligible
+numeric measurement names as a fixed manual selection, or <strong>Deselect all</strong>
+to clear all selected measurements and choose a smaller set. <strong>Select all</strong>
+skips IDs, text, grouping/identity fields and other fields marked
+<strong>not automatic</strong>. Both actions turn off <strong>Auto-select measurements</strong>.</p>
+</div>
+<p>An empty selection cannot be calculated: choose at least one measurement first.
+These actions affect the analysis, unlike the Results Workspace Data tab's
+visible-column controls. They work identically in the inspector and
+Results Workspace.</p>
 <p>The controls are divided into <strong>Measurements</strong>, <strong>Grouping</strong>, <strong>Observation
 unit</strong> and <strong>Statistics to report</strong>. The short note below the missing-value
 choice explains the selected policy; hover for the full details. Sample SD
@@ -3953,7 +4033,7 @@ sample counts are not interchangeable evidence of biological replication.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 12:03:47 UTC">September 21, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
   </span>
 
     

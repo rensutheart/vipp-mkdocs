@@ -580,6 +580,8 @@
       
         
       
+        
+      
     
     
     
@@ -623,6 +625,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1765,6 +1790,8 @@
       
         
       
+        
+      
     
     
     
@@ -1915,6 +1942,29 @@
   
   <span class="md-ellipsis">
     Inspect and compare outputs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/review-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Review images in linked views
     
   </span>
   
@@ -2605,6 +2655,8 @@
       
         
       
+        
+      
     
     
     
@@ -2735,9 +2787,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#batch-and-results-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch and Results windows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dialog-buttons" class="md-nav__link">
     <span class="md-ellipsis">
       Dialog buttons
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-selection-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bulk selection controls
     </span>
   </a>
   
@@ -2978,6 +3048,29 @@
   
   <span class="md-ellipsis">
     Graph display settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked image review
     
   </span>
   
@@ -3860,9 +3953,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#batch-and-results-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch and Results windows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dialog-buttons" class="md-nav__link">
     <span class="md-ellipsis">
       Dialog buttons
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-selection-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bulk selection controls
     </span>
   </a>
   
@@ -4106,19 +4217,34 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.16.0a3. Some labels
+<p>Labels below match napari-vipp 0.16.0a4. Some labels
 shorten to icons when the window is narrow.</p>
 <p>When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.</p>
 <div class="admonition note">
-<p class="admonition-title">Unreleased — independent detached windows on Windows</p>
+<p class="admonition-title">New in 0.16.0a4 — independent detached windows on Windows</p>
 <p>Double-click the detached window's title bar to maximize or restore it.
 Detached VIPP and napari can minimize and restore separately, with separate
 taskbar windows. They still share one session and viewer: redocking keeps
 the workflow, and closing napari closes its VIPP session. Native
 Linux/macOS window-manager behaviour has not yet been qualified.</p>
+</div>
+<h2 id="batch-and-results-windows">Batch and Results windows<a class="headerlink" href="#batch-and-results-windows" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a4: independent workspace windows</p>
+<p><strong>Batch workflow</strong> and <strong>Results Workspace</strong> have native <strong>Minimize</strong>,
+<strong>Maximize/Restore</strong> and <strong>Close</strong> controls. Double-click the title bar or
+unused space beside the top toolbar controls to maximize or restore the
+window. Buttons, selectors and editable fields keep their usual interaction.</p>
+<p>On Windows, move and resize each workspace independently, including on
+separate monitors. Minimizing napari or detached VIPP leaves these
+workspace windows visible. Reopening a minimized workspace restores it,
+including its maximized state if it was maximized before minimizing.</p>
+<p>The windows share the same session; ending that session closes them.
+Batch running, hiding and cancellation rules still apply. Native
+Linux/macOS ownership and minimization behaviour has not yet been qualified.</p>
 </div>
 <h2 id="dialog-buttons">Dialog buttons<a class="headerlink" href="#dialog-buttons" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
@@ -4164,6 +4290,46 @@ it does not undo completed work or settings already applied. Controls such
 as <strong>Stop safely</strong>, <strong>Cancel download</strong> and <strong>Cancel check</strong> stop active
 work and remain distinct from closing the window.</p>
 </div>
+<h2 id="bulk-selection-controls">Bulk selection controls<a class="headerlink" href="#bulk-selection-controls" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a4: paired selection buttons</p>
+<p>Bulk checkbox controls use <strong>Select all</strong> followed by <strong>Deselect all</strong> above
+the checklist or table. The pair shares one style, with outlined box icons
+containing a checkmark and a minus. A scope label explains which entries
+each action affects.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Checklist or table</th>
+<th>What the pair affects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch <strong>Items &amp; outputs</strong></td>
+<td>Items matching the current search and filter across all pages. Both actions preserve filtered-out checkbox states.</td>
+</tr>
+<tr>
+<td>Batch <strong>Overrides</strong> sample rows</td>
+<td><strong>Select all</strong> selects matching samples across all pages; <strong>Deselect all</strong> clears every sample, including filtered-out selections.</td>
+</tr>
+<tr>
+<td>Results Workspace <strong>Visible columns</strong> and <strong>Select Table Columns</strong></td>
+<td>All columns in the respective checklist. Workspace visibility changes only the view; Select Table Columns changes the saved downstream table selection.</td>
+</tr>
+<tr>
+<td>Statistics <strong>Measurements</strong></td>
+<td><strong>Select all</strong> chooses eligible numeric measurements, skipping IDs, text and grouping/identity fields. <strong>Deselect all</strong> clears the manual measurement selection. Both turn off automatic selection.</td>
+</tr>
+<tr>
+<td>Batch <strong>Show columns…</strong></td>
+<td>All parameter-column checkboxes, including those hidden by search. Choose <strong>OK</strong> to apply visibility choices.</td>
+</tr>
+</tbody>
+</table>
+<p>Selecting entries does not reset overrides. Read the scope before applying a
+selected-item action; Batch <strong>Run</strong> still processes the full checked plan.</p>
 <h2 id="workflow-tabs">Workflow tabs<a class="headerlink" href="#workflow-tabs" title="Permanent link">&para;</a></h2>
 <p>Table- and mesh-only graph nodes do not reserve
 a thumbnail area or show <strong>No preview</strong>, even before calculation. Their
@@ -4826,7 +4992,7 @@ of ordinary graph progress. See <a href="../../workflows/batch-processing/">proc
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 08:20:04 UTC">October 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
   </span>
 
     
