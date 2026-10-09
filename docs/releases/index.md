@@ -6,6 +6,12 @@ data.
 
 ## Unreleased
 
+- [Graph wires](../how-to/edit-graph.md#keep-long-graphs-readable) prefer shorter
+  nearby gap lanes before distant perimeter lanes. A left-to-right connection
+  with a large vertical detour beyond its connected cards can use a shorter
+  clear route with several bends when a bounded local search finds one.
+  Some layouts still require longer detours. This is nightly behavior after
+  0.16.0a3.
 - On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
   once on a title-bar double-click and can minimize or restore independently
   from napari. Both windows remain in the same session, with redocking and

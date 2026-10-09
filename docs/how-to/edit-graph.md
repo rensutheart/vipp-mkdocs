@@ -168,6 +168,11 @@ step was omitted and recalculate decisive outputs before accepting the branch.
     includes different outputs on the same node. Connections from the same
     output port can share a route; crossings remain possible.
 
+    Shorter lanes through nearby gaps are preferred to distant routes around
+    the graph. If a left-to-right wire would travel far above or below its
+    connected cards, VIPP can try a shorter clear route with several bends.
+    The local search is bounded; some layouts still require longer detours.
+
     Keep editing while VIPP refines complicated wire routes. Wires may briefly
     use temporary routes before settling.
 

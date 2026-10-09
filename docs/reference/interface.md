@@ -180,6 +180,11 @@ and the accepted edit is atomic and undoable.
     visible wire. See [Keep long graphs readable](../how-to/edit-graph.md#keep-long-graphs-readable)
     and [Use tunnels for repeated sources](../how-to/edit-graph.md#use-tunnels-for-repeated-sources).
 
+    Routing prefers shorter nearby gap lanes to distant perimeter lanes.
+    A left-to-right wire with a large vertical detour beyond its connected
+    cards can use a shorter clear route with several bends when the bounded
+    local search finds one. Some layouts still require longer detours.
+
 !!! note "Unreleased (nightly): tunnel context actions"
 
     | Action | Effect |
