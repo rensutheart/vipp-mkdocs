@@ -117,3 +117,12 @@ The application is developed in the
 [`napari-vipp` repository](https://github.com/rensutheart/napari-vipp). This
 site is the quick, searchable manual; slower teaching material can live in a
 separate course or book.
+
+## Acknowledgments
+
+This work is based on research supported in part by the National Research
+Foundation (NRF) of South Africa through the Thuthuka Post PhD Track
+(Grant No. TTK240321210363).
+
+Opinions, findings, conclusions and recommendations expressed are those of the
+authors, and the NRF accepts no liability in this regard.
