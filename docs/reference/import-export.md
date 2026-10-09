@@ -29,6 +29,12 @@ Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
 as acquisition metadata.
 
+!!! info "Unreleased: older OME-TIFF unit names"
+    VIPP accepts `micrometer` and `micrometre` (including plurals) in OME
+    spatial pixel-size and plane-position unit fields as equivalents of `µm`.
+    This reader compatibility preserves numeric calibration and pixels without
+    rewriting the source file. Other unsupported unit names still fail to load.
+
 For an inspectable multi-series TIFF, NPZ, Zarr, microscope container, or
 similar source, VIPP records a frozen `SourceItem v1`: stable logical selector,
 reader/backend and version, normalized shape/axes/metadata, and exact container
