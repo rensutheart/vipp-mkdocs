@@ -191,6 +191,8 @@ and the accepted edit is atomic and undoable.
 
     Where card and wire clearance allow, a wire can keep a longer straight
     departure and turn near its destination to reduce intermediate bends.
+    A clear end can be straightened independently while retaining a needed
+    obstacle detour at the opposite end.
 
 !!! note "Unreleased (nightly): tunnel context actions"
 

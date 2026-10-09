@@ -12,8 +12,9 @@ data.
   clear route with several bends when a bounded local search finds one.
   Where card and wire clearance allow, wires can also stay straight longer
   before turning near the destination, reducing unnecessary intermediate
-  bends. Some layouts still require longer detours. This is nightly behavior
-  after 0.16.0a3.
+  bends. Each clear end can be straightened independently while keeping a
+  needed obstacle detour at the other end. Some layouts still require longer
+  detours. This is nightly behavior after 0.16.0a3.
 - On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
   once on a title-bar double-click and can minimize or restore independently
   from napari, with its own taskbar entry. Selecting **Plugins → VIPP Workflow

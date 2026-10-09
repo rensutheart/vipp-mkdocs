@@ -175,7 +175,8 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 
     Where cards and other wire lanes leave enough space, a wire can stay
     straight longer and turn near its destination, avoiding unnecessary
-    intermediate bends.
+    intermediate bends. VIPP can also straighten a clear end independently,
+    while keeping a needed detour at the other end.
 
     Keep editing while VIPP refines complicated wire routes. Wires may briefly
     use temporary routes before settling.
