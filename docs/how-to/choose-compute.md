@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.16.0a3 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.16.0a4 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -161,6 +161,13 @@ finite-`float32` GPU region, the node can show a small **GPU tip**. Select the
 node to see the affected input, exact proposed conversion, and memory trade-off.
 The tip remains available in Prefer GPU after calculation while that same
 blocker is still present.
+
+!!! note "New in 0.16.0a4: narrow inspector text"
+
+    The expanded **GPU tip** now grows to fit wrapped text in a narrow
+    **Compute** inspector, keeping the full explanation above **Add
+    conversion** visible. This display fix does not change the proposed
+    conversion or apply it automatically.
 
 **Add conversion** inserts an ordinary visible **Convert Dtype** node on that
 one input. The proposed `float32` **Preserve** conversion changes storage dtype

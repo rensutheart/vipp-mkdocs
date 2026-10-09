@@ -16,6 +16,29 @@ DOCS = ROOT / "docs"
 # These protect material safety/interpretation details formerly checked against
 # duplicate application guides. They belong beside the public text now.
 REQUIRED = {
+    "how-to/review-images.md": (
+        "New in 0.16.0a4",
+        "Review Images",
+        "Open review",
+        "does not start an analysis calculation",
+        "Link viewpoint",
+        "Both panes always show the same timepoint and slice",
+        "Oblique",
+        "does not calculate RACC",
+        "not a computed",
+    ),
+    "reference/image-review.md": (
+        "presentation-only sink",
+        "no scientific output",
+        "trailing component axis",
+        "never inferred",
+        "not voxelwise RGB volume",
+        "RGBA",
+        "Linux/macOS remain unqualified",
+        "scientific cache keys",
+        "not different timepoints or",
+        "runtime-only navigation",
+    ),
     "reference/detection.md": (
         "New in 0.16.0a3",
         "half-integer",

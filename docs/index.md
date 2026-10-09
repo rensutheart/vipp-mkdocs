@@ -37,10 +37,10 @@ hide:
 <p class="vipp-image-caption">A complete label-cleanup graph shown in 0.15.0a1. In 0.15.0a2, the pictured Preview menu is called Display settings. For day-to-day authoring, enlarge or undock VIPP so the graph remains the primary work surface.</p>
 
 !!! warning "Alpha release: validate before interpreting"
-    This manual covers **napari-vipp 0.16.0a3**. Download
+    This manual covers **napari-vipp 0.16.0a4**. Download
     only from the canonical
-    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a3)
-    or [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a3/).
+    [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4)
+    or [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a4/).
     Verify every intentionally unsigned Windows or macOS installer against its
     official checksum before opening it.
     Do not treat unperformed external fresh-machine or novice checks as passes.
@@ -49,18 +49,18 @@ hide:
     Treat visual inspection, reference data, and domain review as part of the
     analysis—not as optional cleanup after it.
 
-!!! note "New in 0.16.0a3"
-    [Pattern detection, basic tracking and adjacent-frame registration](releases/0.16.0a3.md)
-    add calibrated detection tables, one-to-one trajectories and read-only
-    source review. New node-card shortcuts make results easier to open, and
-    workflow tabs retain their own preview view without carrying crop outlines
-    into another workflow.
+!!! note "New in 0.16.0a4"
+    [Linked image review and focused usability/compatibility fixes](releases/0.16.0a4.md)
+    add a separate side-by-side/overlay view that updates accepted processing
+    results together. Batch/Results controls, independent Windows workspace
+    windows, ImageJ Gaussian Blur and reader/export fixes are included.
+    Display settings remain separate from scientific calculations.
 
 !!! important "Upgrading to 0.16"
-    0.16.0a3 writes workflow schema 6. Valid schema-3, schema-4, and schema-5
+    0.16.0a4 writes workflow schema 6. Valid schema-3, schema-4, and schema-5
     workflows migrate explicitly; cached results and source pixels are not
     saved in workflow JSON, and generated Python is pinned to its creator
-    version. Read the [0.16.0a3 release notes](releases/0.16.0a3.md) before upgrading and
+    version. Read the [0.16.0a4 release notes](releases/0.16.0a4.md) before upgrading and
     revalidate calculated results afterward.
 
     Batch configs and manifests are version 6. Verified resume requires a
@@ -110,7 +110,7 @@ flowchart LR
 | Ask a question or report a reproducible problem | [Support routes](troubleshooting/report-a-problem.md) |
 | Prepare methods and provenance for a paper | [Report a VIPP analysis](scientific-practice/reporting.md) |
 | Choose and verify CPU/GPU execution | [CPU and GPU compute](how-to/choose-compute.md) |
-| Review everything changed in this alpha | [0.16.0a3 release notes](releases/0.16.0a3.md) |
+| Review everything changed in this alpha | [0.16.0a4 release notes](releases/0.16.0a4.md) |
 | Contribute a node or documentation fix | [Contributor guide](developer/index.md) |
 
 The application is developed in the

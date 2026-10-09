@@ -12,6 +12,12 @@ rather than treating a thumbnail as evidence for every decision.
 | Label-volume histogram | Size-filter cutoff review | Shape or identity correctness |
 | Table preview | Columns, rows, units, obvious missingness | Statistical validation of measurements |
 
+!!! info "New in 0.16.0a4"
+    **Review Images** adds a dedicated linked side-by-side/overlay window for
+    current, aligned intensity, mask/labels and explicit RGB inputs. Its
+    inspector-sidebar display settings do not change pixels or recalculate
+    analysis. Follow [Review images in linked views](review-images.md).
+
 ## Use the inspector for the selected data
 
 The inspector now presents sections according to the node's scientific role.

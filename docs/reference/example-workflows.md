@@ -1,6 +1,6 @@
 # Example Workflows
 
-VIPP 0.16.0a3 contains **31** registered example workflows under:
+VIPP 0.16.0a4 contains **35** registered example workflows under:
 
 ```text
 examples/
@@ -8,6 +8,15 @@ examples/
 
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
+
+!!! info "New in 0.16.0a4"
+    Four **Image Review** examples bring the catalogue to
+    **35**: `review-channels-2d`, `review-mask-3d`,
+    `review-labels-time-series` and `review-rgb-index-3d`. Follow
+    [Review images in linked views](../how-to/review-images.md). The RGB/index
+    example is a constructed display phantom, not a computed RACC result.
+    The **Exhaustive Inspector Showcase** also includes Review Images beside
+    the registration lane's aligned/reference comparison.
 
 !!! info "New in 0.16.0a3"
     **Detection & Peaks** adds
@@ -81,6 +90,15 @@ instead asks for a working folder before opening the configured batch workspace.
 
 ## Workflow Index
 
+### New in 0.16.0a4
+
+| File | Inputs | Purpose |
+| --- | --- | --- |
+| `synthetic-image-review-channels-2d.json` | Aligned red and green scalar images | Independent contrast and linked two-channel review. |
+| `synthetic-image-review-mask-3d.json` | Anisotropic intensity and Boolean mask | Linked 3D/orthogonal review of two authored physical spheres. |
+| `synthetic-image-review-labels-time-series.json` | Intensity and categorical label series | Shared time navigation without changing the original label IDs. |
+| `synthetic-image-review-rgb-index-3d.json` | Explicit RGB and synthetic numeric index | Encoded-colour slices beside a fixed 0–1 scale; not a computed RACC result. |
+
 ### New in 0.16.0a3
 
 0.16.0a3 adds four examples to the 27 previously released examples. Open
@@ -144,11 +162,15 @@ Use:
 python scripts\launch_vipp_intensity_workflow.py <name>
 ```
 
-Use `--list` to print your version's exact IDs. The table lists the 0.16.0a3 IDs
+Use `--list` to print your version's exact IDs. The table lists the 0.16.0a4 IDs
 and marks newly added examples:
 
 | ID | Example title |
 | --- | --- |
+| `review-channels-2d` | Linked Red and Green Channel Review (new in 0.16.0a4) |
+| `review-mask-3d` | 3D Intensity and Mask Review (new in 0.16.0a4) |
+| `review-labels-time-series` | Time-series Intensity and Label Review (new in 0.16.0a4) |
+| `review-rgb-index-3d` | 3D RGB and Synthetic Index Review (new in 0.16.0a4) |
 | `exhaustive-inspector` | Exhaustive Inspector Showcase |
 | `graph-authoring` | Graph Editing Acceptance Check |
 | `responsive-crop` | Responsive Volumetric Crop Acceptance |

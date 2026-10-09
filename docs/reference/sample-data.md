@@ -1,12 +1,20 @@
 # Sample Data
 
-VIPP 0.16.0a3 includes **26** deterministic microscopy-style samples, including a
+VIPP 0.16.0a4 includes **34** deterministic microscopy-style samples, including a
 bimodal threshold gallery. They are available inside
 `Image Source`:
 
 ```text
 Image Source > Source = sample
 ```
+
+!!! info "New in 0.16.0a4"
+    Eight aligned image-review inputs bring the sample inventory to
+    **34**: red/green 2D intensities, a 3D intensity and Boolean mask, time-series
+    intensity and categorical labels, and an explicit RGB volume with a numeric
+    synthetic 0–1 index. Open the paired [review examples](../how-to/review-images.md).
+    The index is not a computed RACC result. These samples also have a separate
+    napari sample menu entry, **VIPP synthetic image-review samples**.
 
 !!! info "New in 0.16.0a3"
     **VIPP synthetic 2D template
@@ -61,6 +69,10 @@ File > Open Sample > VIPP synthetic microscopy samples
 | `VIPP synthetic 3D template detection` | `TCZYX` | New in 0.16.0a3: volumetric patterns with anisotropic sampling and known calibrated centers. Select T=1 and C=1. |
 | `VIPP synthetic 2D spot tracking` | `TCYX` | New in 0.16.0a3: moving spots, an empty frame and a crossing that is ambiguous for position-only linking. |
 | `VIPP synthetic 3D label tracking` | `TZYX` | New in 0.16.0a3: anisotropic objects with changing frame-local labels, a missed observation and a later appearance. |
+| `VIPP review 2D red intensity` / `VIPP review 2D green intensity` | `YX` | New in 0.16.0a4: aligned scalar channels for linked and additive-overlay review. |
+| `VIPP review 3D intensity` / `VIPP review 3D mask` | `ZYX` | New in 0.16.0a4: anisotropic intensity and Boolean mask containing two authored physical spheres. |
+| `VIPP review time-series intensity` / `VIPP review time-series labels` | `TZYX` | New in 0.16.0a4: four shared timepoints with categorical IDs 7 and 42. |
+| `VIPP review 3D RGB composite` / `VIPP review 3D synthetic index` | `ZYXC` / `ZYX` | New in 0.16.0a4: explicit RGB with a constructed 0–1 numeric display phantom, not a RACC result. |
 
 ## Registration samples — new in 0.16.0a2
 
@@ -73,7 +85,8 @@ are available through **Image Source** and the separate napari sample-data entry
 Use the [registration examples](../how-to/register-images.md#start-with-a-known-answer-example)
 for their connected workflows and known synthetic motion. Together with the
 16 original microscopy samples and four detection/tracking samples above,
-these form the 26-sample catalogue in 0.16.0a3.
+these form the earlier 26-sample catalogue in 0.16.0a3. The eight image-review
+inputs added in 0.16.0a4 bring the current total to 34.
 
 ## Documentation Samples Versus Core Samples
 

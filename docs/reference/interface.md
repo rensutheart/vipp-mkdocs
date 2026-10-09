@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a3. Some labels
+Labels below match napari-vipp 0.16.0a4. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -8,12 +8,29 @@ freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.
 
-!!! note "Unreleased — independent detached windows on Windows"
+!!! note "New in 0.16.0a4 — independent detached windows on Windows"
     Double-click the detached window's title bar to maximize or restore it.
     Detached VIPP and napari can minimize and restore separately, with separate
     taskbar windows. They still share one session and viewer: redocking keeps
     the workflow, and closing napari closes its VIPP session. Native
     Linux/macOS window-manager behaviour has not yet been qualified.
+
+## Batch and Results windows
+
+!!! note "New in 0.16.0a4: independent workspace windows"
+    **Batch workflow** and **Results Workspace** have native **Minimize**,
+    **Maximize/Restore** and **Close** controls. Double-click the title bar or
+    unused space beside the top toolbar controls to maximize or restore the
+    window. Buttons, selectors and editable fields keep their usual interaction.
+
+    On Windows, move and resize each workspace independently, including on
+    separate monitors. Minimizing napari or detached VIPP leaves these
+    workspace windows visible. Reopening a minimized workspace restores it,
+    including its maximized state if it was maximized before minimizing.
+
+    The windows share the same session; ending that session closes them.
+    Batch running, hiding and cancellation rules still apply. Native
+    Linux/macOS ownership and minimization behaviour has not yet been qualified.
 
 ## Dialog buttons
 
@@ -36,6 +53,25 @@ floating window.
     it does not undo completed work or settings already applied. Controls such
     as **Stop safely**, **Cancel download** and **Cancel check** stop active
     work and remain distinct from closing the window.
+
+## Bulk selection controls
+
+!!! info "New in 0.16.0a4: paired selection buttons"
+    Bulk checkbox controls use **Select all** followed by **Deselect all** above
+    the checklist or table. The pair shares one style, with outlined box icons
+    containing a checkmark and a minus. A scope label explains which entries
+    each action affects.
+
+| Checklist or table | What the pair affects |
+| --- | --- |
+| Batch **Items & outputs** | Items matching the current search and filter across all pages. Both actions preserve filtered-out checkbox states. |
+| Batch **Overrides** sample rows | **Select all** selects matching samples across all pages; **Deselect all** clears every sample, including filtered-out selections. |
+| Results Workspace **Visible columns** and **Select Table Columns** | All columns in the respective checklist. Workspace visibility changes only the view; Select Table Columns changes the saved downstream table selection. |
+| Statistics **Measurements** | **Select all** chooses eligible numeric measurements, skipping IDs, text and grouping/identity fields. **Deselect all** clears the manual measurement selection. Both turn off automatic selection. |
+| Batch **Show columns…** | All parameter-column checkboxes, including those hidden by search. Choose **OK** to apply visibility choices. |
+
+Selecting entries does not reset overrides. Read the scope before applying a
+selected-item action; Batch **Run** still processes the full checked plan.
 
 ## Workflow tabs
 

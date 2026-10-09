@@ -5,7 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.16.0a3 release notes](../releases/0.16.0a3.md) | Review fixed-template detection, calibrated basic tracking, previous-frame registration and safer result inspection. |
+| [0.16.0a4 release notes](../releases/0.16.0a4.md) | Review linked image views, ImageJ Gaussian Blur and focused Batch/Results, window and I/O fixes. |
 | [0.16.0a2 release notes](../releases/0.16.0a2.md) | Review registration, reusable transforms, per-label skeletons and CPU median acceleration. |
 | [0.16.0a1 release notes](../releases/0.16.0a1.md) | Review Results Workspace, descriptive statistics and plots, batch measurement collection and seeded compartments. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
@@ -26,8 +26,9 @@ task sequences.
 | [Colocalization metrics](colocalization-metrics.md) | Read exact Pearson, Manders, and Costes definitions and compatibility limits. |
 | [RACC-like index](racc-index.md) | Understand the regression geometry, parameters, and failure cases. |
 | [Object association](association-metrics.md) | Distinguish overlap, nearest-centroid, and event-region measurements. |
-| [Example workflows](example-workflows.md) | Choose one of 31 guided examples, including detection, tracking, registration and separate developer/testing workflows. |
-| [Bundled sample data](sample-data.md) | Choose one of 26 deterministic samples. |
+| [Example workflows](example-workflows.md) | Choose one of 35 guided examples, including linked image review, detection, tracking, registration and separate developer/testing workflows. |
+| [Linked image review](image-review.md) | Review aligned paired inputs with presentation-only recipes, controls and explicit RGB rendering boundaries. |
+| [Bundled sample data](sample-data.md) | Choose one of 34 deterministic samples. |
 | [Workflow and export contract](workflow-contract.md) | Understand schema 6 SourceItems, compute and bypass intent, shared-executor Python/CLI, and version-5 batch artifacts. |
 | [Supported input and output](import-export.md) | Select a format and review metadata/dtype limitations. |
 | [Cache and memory](cache-memory.md) | Understand responsiveness and RAM behavior. |

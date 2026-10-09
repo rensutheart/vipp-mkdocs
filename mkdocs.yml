@@ -120,6 +120,7 @@ nav:
   - Home: index.md
   - Release notes:
       - Release notes: releases/index.md
+      - 0.16.0a4: releases/0.16.0a4.md
       - 0.16.0a3: releases/0.16.0a3.md
       - 0.16.0a2: releases/0.16.0a2.md
       - 0.16.0a1: releases/0.16.0a1.md
@@ -171,6 +172,7 @@ nav:
       - Crop an image or volume: how-to/crop-images.md
       - Grow regions from seeds: how-to/grow-regions-from-seeds.md
       - Inspect and compare outputs: how-to/inspect-outputs.md
+      - Review images in linked views: how-to/review-images.md
       - Register images and correct drift: how-to/register-images.md
       - Detect repeated patterns: how-to/detect-patterns.md
       - Track objects and spots: how-to/track-objects.md
@@ -200,6 +202,7 @@ nav:
       - All nodes: reference/node-index.md
       - Toolbar and settings: reference/interface.md
       - Graph display settings: reference/display-settings.md
+      - Linked image review: reference/image-review.md
       - Intensity and thresholds: reference/intensity-thresholds.md
       - Fiji/ImageJ compatibility: reference/fiji-imagej-compatibility.md
       - Seeded segmentation: reference/seeded-segmentation.md

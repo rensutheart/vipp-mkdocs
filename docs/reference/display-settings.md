@@ -145,3 +145,9 @@ Both remain in the gear menu; neither changes pixels.
 
 For full-resolution inspection and exported figures, see
 [inspect and compare outputs](../how-to/inspect-outputs.md).
+
+!!! info "New in 0.16.0a4"
+    **Review Images** has separate per-input display controls in an inspector
+    sidebar, with selectable linked panes and workflow-saved presentation
+    recipes. These do not change graph thumbnail statistics or scientific
+    results. See [linked image review](image-review.md).

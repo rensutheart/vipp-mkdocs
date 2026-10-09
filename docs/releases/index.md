@@ -4,13 +4,23 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Unreleased
+## 0.16.0a4 alpha
 
-- On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
-  once on a title-bar double-click and can minimize or restore independently
-  from napari. Both windows remain in the same session, with redocking and
-  napari-owned session closure unchanged. Native Linux/macOS behaviour remains
-  unqualified; this fix is not part of 0.16.0a3.
+[Read the 0.16.0a4 overview](0.16.0a4.md) for linked image review with accepted
+live updates, bounded ImageJ Gaussian Blur and focused Batch/Results, window,
+threshold-control and OME compatibility fixes. Four review examples bring the
+catalogue to 35, with 34 bundled samples. Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a4/) with the
+[matching installation instructions](../getting-started/installation.md).
+Review presentation does not change scientific arrays or add an AI, predictive
+tracking or GPU detection capability.
+
+The [OME-Zarr compatibility fix](https://github.com/rensutheart/napari-vipp/pull/78)
+restores [local 0.4/0.5 image and analysis-dataset exports](../reference/import-export.md#format-details)
+with `ome-zarr` 0.20 and newer, retaining channel display metadata, calibration
+and VIPP history. It is not part of 0.16.0a3; format support does not imply
+complete metadata fidelity.
 
 ## 0.16.0a3 alpha
 
