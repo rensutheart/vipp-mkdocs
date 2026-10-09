@@ -173,8 +173,9 @@ and the accepted edit is atomic and undoable.
 
 !!! note "Unreleased (nightly): graph wires"
 
-    Wires use separate lanes instead of sharing a line segment. Crossings and
-    shared port endpoints remain possible. The wire menu also has a direct
+    Wires from different source output ports use separate lanes, including
+    outputs on the same node. Wires from the same output port can share a
+    route; crossings remain possible. The wire menu also has a direct
     **Replace with tunnel...** action, with a wider click target around the
     visible wire. See [Keep long graphs readable](../how-to/edit-graph.md#keep-long-graphs-readable)
     and [Use tunnels for repeated sources](../how-to/edit-graph.md#use-tunnels-for-repeated-sources).

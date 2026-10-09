@@ -163,9 +163,10 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 
 !!! info "Unreleased (nightly): separate wire lanes"
 
-    Wires use separate lanes so you can follow each connection where branches
-    approach or leave one another. They can cross, and connections from the
-    same port share that endpoint, but they do not run along the same segment.
+    Wires from different source output ports use separate lanes so you can
+    follow each connection where branches approach or leave one another. This
+    includes different outputs on the same node. Connections from the same
+    output port can share a route; crossings remain possible.
 
 ### Choose a port-label mode
 
