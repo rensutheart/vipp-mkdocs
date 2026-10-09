@@ -15,6 +15,17 @@ sample does not run the collection.
 The footer keeps the current activity and next action visible. You can return to
 an earlier tab without starting a check or a run merely by opening that tab.
 
+!!! info "Nightly: independent Batch window (unreleased after 0.16.0a3)"
+    Use the title-bar **Minimize**, **Maximize/Restore** and **Close** controls.
+    Double-click the title bar or unused space beside **Open config** and
+    **Save config** to maximize or restore. On Windows, keep Batch on another
+    monitor while napari or detached VIPP is minimized. Reopening a minimized
+    Batch window restores it, including its previous maximized state.
+    Minimizing or **Hide window** keeps an active run going; use
+    [Stop safely](#stop-safely) to cancel it. The window remains part of its
+    host session; see [Batch and Results windows](../reference/interface.md#batch-and-results-windows)
+    for the platform boundary.
+
 ## 1. Set up sources and destination
 
 Start with a workflow that you have already validated on representative data.
@@ -112,6 +123,17 @@ Search and filter the list before selecting samples. Checkboxes choose samples
 for multi-item actions; the highlighted row determines the details being shown.
 The list uses 50-row pages, and selections can include samples on another page.
 
+!!! info "Nightly: batch selection controls (unreleased after 0.16.0a3)"
+    **Select all** checks every sample matching the current search and filter,
+    including other pages. **Deselect all** unchecks those matching samples.
+    Samples hidden by the search or filter retain their checkbox state. Clear
+    the search and choose **All items** to select or deselect the whole batch.
+    These controls change selection only; they do not edit overrides or outputs.
+    They choose samples for selected-item actions; **Run** still processes the
+    full checked batch plan.
+    The pair sits above the table with its scope below it; see
+    [bulk selection controls](../reference/interface.md#bulk-selection-controls).
+
 **Recheck selected** verifies the chosen source revisions and output presence;
 it does not replace full scientific preflight for the whole collection. Use
 **Recheck all** after a scientific setting or source-definition change.
@@ -165,6 +187,37 @@ Duplicate output destinations, outputs overlapping inputs, and explicitly
 protected outputs remain errors. An item-level overwrite choice cannot bypass
 those protections. Final Run validation still checks current disk state.
 
+### Find a blocked output
+
+!!! info "Nightly: actionable output checks (unreleased after 0.16.0a3)"
+    The warning names the output problem and offers **Find problem** to take
+    you to an affected `Batch Output` node in the workflow graph and inspector.
+    Each blocked output also shows its specific reason, full destination, and
+    a **Find problem** link. For duplicate destinations, the warning selects
+    one of the involved output nodes.
+
+**Find problem** hides the Batch window so you can inspect and edit the node.
+It does not calculate an image or save an output. Reopen **Batch** to return to
+your retained settings and item list.
+
+Two outputs targeting the same filename cannot both be saved. The fix depends
+on what shares the destination:
+
+- If one `Batch Output` node repeats a filename across samples, include
+  `{batch_id}` in **Filename template** to give each sample its own file.
+- If different output nodes share a filename, give them different **Subfolder**
+  values. Different **Tag** values also work when **Filename template** contains
+  `{tag}`, as in the default `{source_stem}__{tag}` template.
+
+Use `{batch_id}__{node_id}` in **Filename template** to separate both samples
+and output nodes. With `{source_stem}__{tag}`, changing a node's display name
+alone does not change its filename.
+
+For an output overlapping an input, choose a separate output destination.
+For an explicitly protected existing output, review that `Batch Output` node's
+existing-file setting. After any edits, reopen **Batch** and use **Recheck all**.
+A completed check can still contain blocked outputs.
+
 ## 3. Review overrides
 
 ### Per-sample parameter overrides
@@ -182,6 +235,16 @@ Use **Find samples**, **Show samples**, and **Find node or parameter** to narrow
 the view. **Show columns…** controls which parameters are visible; hiding a
 column does not delete its values.
 
+!!! info "Nightly: paired override selection (unreleased after 0.16.0a3)"
+    **Select all** above the sample table selects every sample matching the
+    filters across all pages. **Deselect all** clears **all samples**, including
+    selections hidden by filters. Check the scope and selected count before
+    applying an edit.
+
+    In **Show columns…**, the same pair checks or unchecks **all parameter
+    columns**, including those hidden by search. Choose **OK** to apply the
+    visibility choices; existing override values remain unchanged.
+
 For several samples, check their rows and choose **Edit selected…**. First choose
 the parameters to change, then choose **Set value** or **Use workflow value**
 for each. **Apply to selected samples** commits the validated draft.
@@ -191,9 +254,10 @@ overrides.
 The selection and reset controls have different jobs:
 
 - **Select this page** changes checkboxes on the visible page.
-- **Select all matching** selects every sample matching the filters, including
+- **Select all** selects every sample matching the filters, including
   other pages. Check the selected count before applying an edit.
-- **Deselect all** only removes selection; no parameter values change.
+- **Deselect all** clears every sample selection, including hidden samples;
+  no parameter values change.
 - **Reset selected…** restores all parameter defaults for checked samples,
   including hidden columns and selected samples on other pages.
 - **Reset all overrides…** restores all sample parameters **and** all batch
