@@ -28,6 +28,12 @@ review workflows with:
 python scripts/launch_vipp_intensity_workflow.py --list
 ```
 
+!!! note "Unreleased (nightly)"
+    `launch_vipp_sample.py` registers VIPP under the same dock name as napari's
+    plugin entry.
+    The Plugins menu can then [restore the same minimized floating widget](../getting-started/launching.md#restore-a-minimized-floating-window-on-windows)
+    in that viewer without creating a duplicate.
+
 The editable `.[dev]` environment is the portable CPU development baseline. On
 an NVIDIA qualification host, create a separate CPython 3.12 environment for
 exactly one CUDA track; do not add CUDA 12 and CUDA 13 extras to the same

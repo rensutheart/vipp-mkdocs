@@ -8,11 +8,15 @@ freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.
 
-!!! note "Unreleased — independent detached windows on Windows"
+!!! note "Unreleased (nightly) — independent detached windows on Windows"
     Double-click the detached window's title bar to maximize or restore it.
-    Detached VIPP and napari can minimize and restore separately, with separate
-    taskbar windows. They still share one session and viewer: redocking keeps
-    the workflow, and closing napari closes its VIPP session. Native
+    Floating VIPP has its own taskbar entry; VIPP and napari can minimize and
+    restore separately. In the same napari viewer, **Plugins → VIPP Workflow
+    (napari-vipp)** also restores a minimized floating VIPP window, retaining
+    its workflow tabs, calculated results, and previous maximized state.
+    See [Restore a minimized floating window](../getting-started/launching.md#restore-a-minimized-floating-window-on-windows).
+    They still share one session and viewer: redocking keeps the workflow,
+    and closing napari closes its VIPP session. Native
     Linux/macOS window-manager behaviour has not yet been qualified.
 
 ## Dialog buttons

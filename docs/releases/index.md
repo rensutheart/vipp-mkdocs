@@ -14,9 +14,13 @@ data.
   0.16.0a3.
 - On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
   once on a title-bar double-click and can minimize or restore independently
-  from napari. Both windows remain in the same session, with redocking and
-  napari-owned session closure unchanged. Native Linux/macOS behaviour remains
-  unqualified; this fix is not part of 0.16.0a3.
+  from napari, with its own taskbar entry. Selecting **Plugins → VIPP Workflow
+  (napari-vipp)** in the same napari viewer also restores a minimized floating
+  VIPP window, retaining workflow tabs, calculated results, and its previous
+  maximized state. See [recovery steps](../getting-started/launching.md#restore-a-minimized-floating-window-on-windows).
+  Both windows remain in the same session, with redocking and napari-owned
+  session closure unchanged. Native Linux/macOS behaviour remains unqualified;
+  this is nightly behavior after 0.16.0a3.
 
 ## 0.16.0a3 alpha
 
