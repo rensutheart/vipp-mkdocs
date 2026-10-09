@@ -9,6 +9,15 @@ examples/
 They are intended for regression tests, screenshots, tutorials, and manual
 review.
 
+!!! info "Unreleased after 0.16.0a3"
+    Development adds four **Image Review** examples, bringing the catalogue to
+    **35**: `review-channels-2d`, `review-mask-3d`,
+    `review-labels-time-series` and `review-rgb-index-3d`. Follow
+    [Review images in linked views](../how-to/review-images.md). The RGB/index
+    example is a constructed display phantom, not a computed RACC result.
+    The **Exhaustive Inspector Showcase** also includes Review Images beside
+    the registration lane's aligned/reference comparison.
+
 !!! info "New in 0.16.0a3"
     **Detection & Peaks** adds
     **Repeated 2D Pattern Detection** (`template-detection-2d`) and

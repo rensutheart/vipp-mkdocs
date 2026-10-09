@@ -8,6 +8,14 @@ bimodal threshold gallery. They are available inside
 Image Source > Source = sample
 ```
 
+!!! info "Unreleased after 0.16.0a3"
+    Eight aligned image-review inputs bring the development sample inventory to
+    **34**: red/green 2D intensities, a 3D intensity and Boolean mask, time-series
+    intensity and categorical labels, and an explicit RGB volume with a numeric
+    synthetic 0–1 index. Open the paired [review examples](../how-to/review-images.md).
+    The index is not a computed RACC result. These samples also have a separate
+    napari sample menu entry, **VIPP synthetic image-review samples**.
+
 !!! info "New in 0.16.0a3"
     **VIPP synthetic 2D template
     detection** (`TCYX`) and **VIPP synthetic 3D template detection** (`TCZYX`)

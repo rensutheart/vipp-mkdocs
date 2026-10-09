@@ -12,6 +12,13 @@ Propagation** and six [CellProfiler compartment stages](cellprofiler-compartment
     CPU nodes under **Image Data → Detection**; **Build Tracks** is under
     **Image Data → Tracking**. All four are included in the release counts below.
 
+!!! info "Unreleased after 0.16.0a3"
+    **Review Images** is a presentation-only two-input sink with **Open review…**,
+    a linked side-by-side/overlay window and saved display recipes. It has no
+    scientific image output and is not part of the released counts above. See
+    [the review reference](image-review.md). **Compare Images** remains the
+    separate quantitative comparison node.
+
 !!! info "New in 0.16.0a2"
     Five additions are included in the counts above: **Estimate
     Registration**, **Apply Transform**, **Compare Images**, **Skeletonize
