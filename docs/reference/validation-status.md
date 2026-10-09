@@ -5,6 +5,17 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## Unreleased linked image review
+
+**Review Images** has deterministic synthetic scalar, mask, label/time-series
+and explicit RGB/index examples plus focused local Windows development checks.
+It is display-only, not an independently validated scientific image operation.
+Native Linux/macOS, minimum dependencies, large-volume memory/performance and
+acquired-microscopy accuracy remain untested. The
+[review reference](image-review.md#3d-colour-rendering-boundary) distinguishes
+native RGB slices from the explicitly labelled 3D component-MIP adapter and
+does not claim napari-racc custom-shader parity.
+
 ## 0.16.0a3 scope and evidence
 
 Use the [0.16.0a3 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a3)

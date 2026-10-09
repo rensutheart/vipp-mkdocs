@@ -27,6 +27,7 @@ task sequences.
 | [RACC-like index](racc-index.md) | Understand the regression geometry, parameters, and failure cases. |
 | [Object association](association-metrics.md) | Distinguish overlap, nearest-centroid, and event-region measurements. |
 | [Example workflows](example-workflows.md) | Choose one of 31 guided examples, including detection, tracking, registration and separate developer/testing workflows. |
+| [Linked image review](image-review.md) | Unreleased Review Images: aligned paired inputs, presentation-only recipes, controls and RGB rendering boundaries. |
 | [Bundled sample data](sample-data.md) | Choose one of 26 deterministic samples. |
 | [Workflow and export contract](workflow-contract.md) | Understand schema 6 SourceItems, compute and bypass intent, shared-executor Python/CLI, and version-5 batch artifacts. |
 | [Supported input and output](import-export.md) | Select a format and review metadata/dtype limitations. |
