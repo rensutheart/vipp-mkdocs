@@ -173,12 +173,22 @@ and the accepted edit is atomic and undoable.
 
 !!! note "Unreleased (nightly): graph wires"
 
-    Wires from different source output ports use separate lanes, including
+    Wires from different source output ports settle into separate lanes, including
     outputs on the same node. Wires from the same output port can share a
     route; crossings remain possible. The wire menu also has a direct
     **Replace with tunnel...** action, with a wider click target around the
     visible wire. See [Keep long graphs readable](../how-to/edit-graph.md#keep-long-graphs-readable)
     and [Use tunnels for repeated sources](../how-to/edit-graph.md#use-tunnels-for-repeated-sources).
+
+!!! note "Unreleased (nightly): tunnel context actions"
+
+    | Action | Effect |
+    | --- | --- |
+    | **Replace with wire** on an input tunnel badge | Convert the clicked subscription to a direct wire; the other subscribers retain the tunnel. |
+    | **Replace with wires** on an output tunnel's source badge | Convert all subscribers to direct wires and remove the named tunnel. |
+
+    Each action is one undoable edit and preserves the connections' source and
+    input ports and calculated results.
 
 Drop a supported image file directly onto an `Image Source` card to open it.
 With that card selected, ++ctrl+v++ / ++cmd+v++ accepts a copied file or image

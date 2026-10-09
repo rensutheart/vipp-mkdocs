@@ -163,10 +163,13 @@ step was omitted and recalculate decisive outputs before accepting the branch.
 
 !!! info "Unreleased (nightly): separate wire lanes"
 
-    Wires from different source output ports use separate lanes so you can
+    Wires from different source output ports settle into separate lanes so you can
     follow each connection where branches approach or leave one another. This
     includes different outputs on the same node. Connections from the same
     output port can share a route; crossings remain possible.
+
+    Keep editing while VIPP refines complicated wire routes. Wires may briefly
+    use temporary routes before settling.
 
 ### Choose a port-label mode
 
@@ -218,6 +221,18 @@ or `red_channel`, and attach compatible inputs as subscribers.
 
     Replacement affects the clicked connection and is one undoable edit. The
     same output still supplies the same input through the named tunnel.
+
+!!! info "Unreleased (nightly): replace a tunnel with wires"
+
+    - To show one subscriber's connection as a wire, right-click its input
+      tunnel badge and choose **Replace with wire**. The other subscribers
+      keep using the named tunnel.
+    - To show every subscriber's connection as a wire, right-click the output
+      tunnel's source badge and choose **Replace with wires**. VIPP converts
+      all subscribers and removes the named tunnel.
+
+    Each action is one undoable edit. The same outputs continue to supply the
+    same inputs, and calculated results stay available.
 
 Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use
