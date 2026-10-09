@@ -15,7 +15,7 @@ sample does not run the collection.
 The footer keeps the current activity and next action visible. You can return to
 an earlier tab without starting a check or a run merely by opening that tab.
 
-!!! info "Nightly: independent Batch window (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: independent Batch window"
     Use the title-bar **Minimize**, **Maximize/Restore** and **Close** controls.
     Double-click the title bar or unused space beside **Open config** and
     **Save config** to maximize or restore. On Windows, keep Batch on another
@@ -123,7 +123,7 @@ Search and filter the list before selecting samples. Checkboxes choose samples
 for multi-item actions; the highlighted row determines the details being shown.
 The list uses 50-row pages, and selections can include samples on another page.
 
-!!! info "Nightly: batch selection controls (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: batch selection controls"
     **Select all** checks every sample matching the current search and filter,
     including other pages. **Deselect all** unchecks those matching samples.
     Samples hidden by the search or filter retain their checkbox state. Clear
@@ -189,7 +189,7 @@ those protections. Final Run validation still checks current disk state.
 
 ### Find a blocked output
 
-!!! info "Nightly: actionable output checks (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: actionable output checks"
     The warning names the output problem and offers **Find problem** to take
     you to an affected `Batch Output` node in the workflow graph and inspector.
     Each blocked output also shows its specific reason, full destination, and
@@ -235,7 +235,7 @@ Use **Find samples**, **Show samples**, and **Find node or parameter** to narrow
 the view. **Show columns…** controls which parameters are visible; hiding a
 column does not delete its values.
 
-!!! info "Nightly: paired override selection (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: paired override selection"
     **Select all** above the sample table selects every sample matching the
     filters across all pages. **Deselect all** clears **all samples**, including
     selections hidden by filters. Check the scope and selected count before

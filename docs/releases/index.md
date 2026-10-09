@@ -4,30 +4,17 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
-## Unreleased
+## 0.16.0a4 alpha
 
-- [Batch output checks](../workflows/batch-processing.md#find-a-blocked-output)
-  explain blocked destinations and offer **Find problem** to select an
-  affected graph node. These controls are not part of 0.16.0a3.
-- [Paired bulk selection controls](../reference/interface.md#bulk-selection-controls)
-  use **Select all** and **Deselect all**, matching outlined check/minus icons,
-  consistent styling and placement above checklists or tables. Visible scopes
-  distinguish matching Batch items, all columns and eligible Statistics
-  measurements. Batch Overrides clears all samples, including hidden selections,
-  when deselecting. Selection behavior is preserved; the new convention is not
-  part of 0.16.0a3.
-- [Batch and Results windows](../reference/interface.md#batch-and-results-windows)
-  have native minimize, maximize/restore and close controls. Double-click the
-  title bar or unused toolbar space to maximize or restore. On Windows, place
-  each on a separate monitor and keep them visible when napari or detached VIPP is
-  minimized. Reopening retains a minimized window's previous maximized state;
-  the windows remain in the same session. Native Linux/macOS ownership and
-  minimization remain unqualified; this change is not part of 0.16.0a3.
-- On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
-  once on a title-bar double-click and can minimize or restore independently
-  from napari. Both windows remain in the same session, with redocking and
-  napari-owned session closure unchanged. Native Linux/macOS behaviour remains
-  unqualified; this fix is not part of 0.16.0a3.
+[Read the 0.16.0a4 overview](0.16.0a4.md) for linked image review with accepted
+live updates, bounded ImageJ Gaussian Blur and focused Batch/Results, window,
+threshold-control and OME compatibility fixes. Four review examples bring the
+catalogue to 35, with 34 bundled samples. Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a4/) with the
+[matching installation instructions](../getting-started/installation.md).
+Review presentation does not change scientific arrays or add an AI, predictive
+tracking or GPU detection capability.
 
 ## 0.16.0a3 alpha
 

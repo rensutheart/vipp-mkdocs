@@ -40,7 +40,7 @@ tracks eligible numeric measurement columns as the upstream table changes.
 It excludes recognized identities/metadata and the chosen grouping and
 identity fields. It neither creates measurements nor converts text to numbers.
 
-!!! info "Nightly: paired measurement selection (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: paired measurement selection"
     Use **Select all** above **Measurements** to keep the currently eligible
     numeric measurement names as a fixed manual selection, or **Deselect all**
     to clear all selected measurements and choose a smaller set. **Select all**

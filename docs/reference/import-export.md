@@ -29,7 +29,7 @@ Always inspect the resulting shape, axes, scale, unit, channel mapping, dtype,
 and chosen series. Missing fields can be inferred; an inference is not the same
 as acquisition metadata.
 
-!!! info "Unreleased: older OME-TIFF unit names"
+!!! info "New in 0.16.0a4: older OME-TIFF unit names"
     VIPP accepts `micrometer` and `micrometre` (including plurals) in OME
     spatial pixel-size and plane-position unit fields as equivalents of `µm`.
     This reader compatibility preserves numeric calibration and pixels without

@@ -26,7 +26,7 @@ in **Results Workspace**, without replacing your workflow nodes.
 Use the window's title-bar **Maximize** button for more room. **Restore**
 returns it to its previous size; both actions leave the analysis unchanged.
 
-!!! info "Nightly: independent results window (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: independent results window"
     Use the native **Minimize** control, or double-click the title bar or unused
     space in the top selection toolbar to maximize or restore. On Windows,
     **Results Workspace** can stay on another monitor while napari or detached
@@ -83,7 +83,7 @@ connections between workflows.
 
 In **Data**, search rows and choose which columns to show. These controls only
 change what you see: they do not exclude observations from a summary or plot.
-!!! info "Nightly: paired column selection (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: paired column selection"
     Use **Select all** or **Deselect all** above **Visible columns** to show or
     hide all columns at once, then check the individual columns you want.
     The scope is **all columns**; row search does not change that scope.

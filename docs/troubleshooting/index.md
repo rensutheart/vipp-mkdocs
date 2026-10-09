@@ -30,7 +30,7 @@ those details and your VIPP version when [reporting the problem](report-a-proble
 
 ## Repeated layer-list loading errors
 
-!!! note "Nightly: layer-list repaint recovery (unreleased after 0.16.0a3)"
+!!! note "New in 0.16.0a4: layer-list repaint recovery"
 
     VIPP now guards napari's layer-list loading indicator and thumbnail when a
     layer row disappears during a display update. This addresses repeated

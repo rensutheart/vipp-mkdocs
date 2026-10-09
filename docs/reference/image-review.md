@@ -1,8 +1,8 @@
 # Review Images
 
-!!! info "Unreleased after 0.16.0a3"
-    This reference describes the development implementation. It is not a claim
-    that the feature shipped in the published 0.16.0a3 release.
+!!! info "New in 0.16.0a4"
+    Review Images requires a runtime containing this presentation-only node.
+    It is not available in 0.16.0a3 despite the unchanged workflow schema.
 
 Review Images is a **presentation-only sink**: required **Image A**, optional
 **Image B**, and no scientific output image or table. Its compact graph card

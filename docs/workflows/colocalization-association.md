@@ -118,7 +118,7 @@ for tissue presence: review whether it includes the relevant sparsely
 nucleated regions and excludes genuine gaps. It retains nuclei and does not
 segment individual cells or their cytoplasm.
 
-**Unreleased after 0.16.0a3:** A slice-specific ImageJ-style mask can use
+**New in 0.16.0a4:** A slice-specific ImageJ-style mask can use
 **ImageJ Gaussian Blur → ImageJ Default Threshold (8-bit) → Dilate → Closing →
 Fill Holes**. Extract a scalar nuclear channel first, record the Gaussian sigma
 and threshold policy, and choose **2D per XY slice (advanced)** for Fill Holes.

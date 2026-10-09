@@ -1,8 +1,8 @@
 # Review images in linked views
 
-!!! info "Unreleased after 0.16.0a3"
-    **Review Images** is available in the development/nightly implementation,
-    not in the published 0.16.0a3 installation.
+!!! info "New in 0.16.0a4"
+    **Review Images** requires 0.16.0a4 or newer. Use the manual version selector
+    to match the software installed for your analysis.
 
 Compare two aligned results with a familiar inspector sidebar: an intensity
 image beside its segmentation, red beside green, or an RGB composite beside a

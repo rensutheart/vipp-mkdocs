@@ -1,7 +1,7 @@
 # Node Index
 
-This page lists all **144 operation specifications** registered by
-`NODE_LIBRARY` in 0.16.0a3. The palette exposes **142**: the two
+This page lists all **146 operation specifications** registered by
+`NODE_LIBRARY` in 0.16.0a4. The palette exposes **144**: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
 selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
@@ -12,12 +12,13 @@ Propagation** and six [CellProfiler compartment stages](cellprofiler-compartment
     CPU nodes under **Image Data → Detection**; **Build Tracks** is under
     **Image Data → Tracking**. All four are included in the release counts below.
 
-!!! info "Unreleased after 0.16.0a3"
+!!! info "New in 0.16.0a4"
     **Review Images** is a presentation-only two-input sink with **Open review…**,
     a linked side-by-side/overlay window and saved display recipes. It has no
-    scientific image output and is not part of the released counts above. See
+    scientific image output and is included in the counts above. See
     [the review reference](image-review.md). **Compare Images** remains the
-    separate quantitative comparison node.
+    separate quantitative comparison node. **ImageJ Gaussian Blur** adds the
+    bounded CPU ImageJ 1.54p compatibility operation under Smoothing & Denoising.
 
 !!! info "New in 0.16.0a2"
     Five additions are included in the counts above: **Estimate
@@ -35,7 +36,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.16.0a3 source registry.
+    Titles and families follow the 0.16.0a4 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
@@ -75,6 +76,12 @@ for the accelerated node families and their current public regions.
 | **Total** | **144** |
 
 ## Image Data
+
+### Review
+
+| Node | Inputs | Outputs | Purpose |
+| --- | --- | --- | --- |
+| `Review Images` (new in 0.16.0a4) | current aligned Image A, optional Image B | none | Open linked side-by-side or overlay panes; display recipes do not change scientific arrays or calculations. See [linked image review](image-review.md). |
 
 ### Detection
 
@@ -204,7 +211,7 @@ and is not merely a display adjustment. See
 | --- | --- | --- |
 | `Average Blur` | image | Simple local averaging. |
 | `Gaussian Blur` | image | Gaussian smoothing. |
-| `ImageJ Gaussian Blur` (unreleased after 0.16.0a3) | image | CPU ImageJ 1.54p direct Gaussian on scalar uint8/uint16/finite float32 YX planes, sigma 0–8.5 pixels. See [compatibility limits](fiji-imagej-compatibility.md#imagej-gaussian-blur). |
+| `ImageJ Gaussian Blur` (new in 0.16.0a4) | image | CPU ImageJ 1.54p direct Gaussian on scalar uint8/uint16/finite float32 YX planes, sigma 0–8.5 pixels. See [compatibility limits](fiji-imagej-compatibility.md#imagej-gaussian-blur). |
 | `Smooth — CellProfiler Gaussian` (new in 0.16.0a1) | image | One YX float32 plane; diameter-to-sigma conversion and normalized borders from CP4.2.6. See [profile](cellprofiler-compartments.md). |
 | `Gaussian Blur 3D` | image | Volumetric Gaussian smoothing. |
 | `Median Filter` | image | Remove salt-and-pepper noise. |

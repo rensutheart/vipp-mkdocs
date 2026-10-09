@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.16.0a3 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.16.0a4 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -162,7 +162,7 @@ node to see the affected input, exact proposed conversion, and memory trade-off.
 The tip remains available in Prefer GPU after calculation while that same
 blocker is still present.
 
-!!! note "Nightly: narrow inspector text (unreleased after 0.16.0a3)"
+!!! note "New in 0.16.0a4: narrow inspector text"
 
     The expanded **GPU tip** now grows to fit wrapped text in a narrow
     **Compute** inspector, keeping the full explanation above **Add

@@ -22,7 +22,7 @@ group, image and sample identity fields. It follows changes in the upstream
 table rather than saving the current list of names. Numeric-looking text is
 not converted into a measurement.
 
-!!! info "Nightly: paired selection controls (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: paired selection controls"
     The measurement checklist has paired **Select all** and **Deselect all**
     buttons above it, with a scope label for eligible numeric measurements.
 

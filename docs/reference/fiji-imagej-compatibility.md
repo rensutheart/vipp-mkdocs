@@ -11,7 +11,7 @@ for a biological question.
 
 | VIPP operation | Use it for | Evidence boundary |
 | --- | --- | --- |
-| [ImageJ Gaussian Blur](#imagej-gaussian-blur) | An ImageJ 1.54p slice-wise Gaussian step | 37 independent reference cases; an acquired mask workflow also matches. Unreleased after 0.16.0a3. |
+| [ImageJ Gaussian Blur](#imagej-gaussian-blur) | An ImageJ 1.54p slice-wise Gaussian step | 37 independent reference cases; an acquired mask workflow also matches. New in 0.16.0a4. |
 | [ImageJ Default Threshold (8-bit)](#imagej-default-threshold) | Per-plane byte conversion followed by ImageJ Default | Experimental, source-aligned; acquired workflow comparison passes, broad independent goldens remain pending. |
 | [Sigma Filter](#sigma-filter) | Sigma Filter Plus edge-preserving smoothing | 14 independent unsigned-image cases match; two intentional differences are documented. |
 | [Remove Outliers (Binary)](#remove-outliers-binary) | ImageJ-style bright-speck removal or dark-notch filling on a binary mask | Source-aligned binary specialization with footprint/majority checks; external Fiji execution parity is not established. |
@@ -19,7 +19,7 @@ for a biological question.
 
 ## ImageJ Gaussian Blur
 
-**Unreleased after 0.16.0a3:** Choose this separate CPU node for ImageJ 1.54p's
+**New in 0.16.0a4:** Choose this separate CPU node for ImageJ 1.54p's
 direct Gaussian convolution. It accepts non-empty scalar `uint8`, `uint16` and
 finite `float32` images with trailing YX axes. Leading Z, time and channel
 positions are processed independently. Shape, dtype and physical grid are

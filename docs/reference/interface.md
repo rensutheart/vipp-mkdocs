@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a3. Some labels
+Labels below match napari-vipp 0.16.0a4. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -8,7 +8,7 @@ freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
 floating window.
 
-!!! note "Unreleased — independent detached windows on Windows"
+!!! note "New in 0.16.0a4 — independent detached windows on Windows"
     Double-click the detached window's title bar to maximize or restore it.
     Detached VIPP and napari can minimize and restore separately, with separate
     taskbar windows. They still share one session and viewer: redocking keeps
@@ -17,7 +17,7 @@ floating window.
 
 ## Batch and Results windows
 
-!!! note "Unreleased after 0.16.0a3: independent workspace windows"
+!!! note "New in 0.16.0a4: independent workspace windows"
     **Batch workflow** and **Results Workspace** have native **Minimize**,
     **Maximize/Restore** and **Close** controls. Double-click the title bar or
     unused space beside the top toolbar controls to maximize or restore the
@@ -56,7 +56,7 @@ floating window.
 
 ## Bulk selection controls
 
-!!! info "Nightly: paired selection buttons (unreleased after 0.16.0a3)"
+!!! info "New in 0.16.0a4: paired selection buttons"
     Bulk checkbox controls use **Select all** followed by **Deselect all** above
     the checklist or table. The pair shares one style, with outlined box icons
     containing a checkmark and a minus. A scope label explains which entries

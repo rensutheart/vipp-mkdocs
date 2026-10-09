@@ -117,7 +117,7 @@ double-click the title bar) and maximize the floating window. Hide the node
 library after adding nodes and keep the inspector visible while tuning. Use
 graph zoom for overview; use napari layers for full-resolution image comparison.
 
-!!! note "Unreleased — Windows detached-window fix"
+!!! note "New in 0.16.0a4 — Windows detached-window fix"
     Once VIPP is detached, double-click its title bar to maximize or restore it
     without a bounce back. Minimize VIPP when you want to keep the napari viewer
     visible, or minimize napari while keeping VIPP visible; restore either from

@@ -17,7 +17,7 @@ DOCS = ROOT / "docs"
 # duplicate application guides. They belong beside the public text now.
 REQUIRED = {
     "how-to/review-images.md": (
-        "Unreleased after 0.16.0a3",
+        "New in 0.16.0a4",
         "Review Images",
         "Open review",
         "does not start an analysis calculation",

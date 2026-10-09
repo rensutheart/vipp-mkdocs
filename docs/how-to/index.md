@@ -9,7 +9,7 @@ How-to guides answer a focused question once you know the basic interface.
 | retain a smaller image region without dropping time points or channels | [Crop an image or volume](crop-images.md) |
 | grow labelled seeds into 2D regions or segment a 3D volume with watershed | [Grow regions from seeds](grow-regions-from-seeds.md) (Propagation is new in 0.16.0a1) |
 | compare intermediate outputs in napari | [Inspect and compare outputs](inspect-outputs.md) |
-| compare aligned images, masks or RGB in linked panes | [Review images in linked views](review-images.md) (unreleased after 0.16.0a3) |
+| compare aligned images, masks or RGB in linked panes | [Review images in linked views](review-images.md) (new in 0.16.0a4) |
 | align two images or correct whole-volume time-lapse drift | [Register images and correct drift](register-images.md) (new in 0.16.0a2) |
 | locate repeated structures without segmenting boundaries | [Detect repeated patterns](detect-patterns.md) (new in 0.16.0a3) |
 | follow objects or spots through an XY/XYZ time series | [Track objects and spots](track-objects.md) (new in 0.16.0a3) |

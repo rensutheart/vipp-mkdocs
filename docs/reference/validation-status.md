@@ -5,7 +5,14 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
-## Unreleased linked image review
+## 0.16.0a4 scope and evidence
+
+Use the [0.16.0a4 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4)
+for exact assets, checksums and recorded qualification, and its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a4/docs/release-qualification-baseline.md)
+for changed-domain versus carried-forward evidence. This alpha adds linked
+image review and bounded ImageJ Gaussian Blur, with focused Batch/Results,
+window, threshold-control and OME I/O compatibility fixes.
 
 **Review Images** has deterministic synthetic scalar, mask, label/time-series
 and explicit RGB/index examples plus focused local Windows development checks.
@@ -14,7 +21,24 @@ Native Linux/macOS, minimum dependencies, large-volume memory/performance and
 acquired-microscopy accuracy remain untested. The
 [review reference](image-review.md#3d-colour-rendering-boundary) distinguishes
 native RGB slices from the explicitly labelled 3D component-MIP adapter and
-does not claim napari-racc custom-shader parity.
+does not claim napari-racc custom-shader parity. Its contracts and local
+evidence are recorded in the
+[image-review implementation record](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a4/docs/image-review-implementation.md).
+
+**ImageJ Gaussian Blur** has 37 independent ImageJ 1.54p reference cases plus a
+bounded acquired workflow comparison, as described in the
+[Fiji/ImageJ reference](fiji-imagej-compatibility.md#imagej-gaussian-blur).
+The operation is CPU-only, slice-wise and restricted to its declared
+dtype/sigma domain. It does not broaden ordinary volumetric Gaussian or GPU
+scientific admission.
+
+Exact-candidate CI, clean wheel/source installs, affected native viewer and
+dependency checks, installer artifacts and earlier GUI lifecycles are separate
+domains. Read the release's exact-artifact record rather than treating local
+Windows tests as final multi-platform or full frozen-installer GUI acceptance.
+Independent Windows minimization/ownership is not a native Linux/macOS
+window-manager guarantee. Reader/writer round-trip tests are not proof of
+complete OME metadata fidelity or biological validity.
 
 ## 0.16.0a3 scope and evidence
 

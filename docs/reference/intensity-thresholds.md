@@ -6,7 +6,7 @@ could change your analysis. For a first segmentation, start with the
 
 ## ImageJ Gaussian Blur compatibility
 
-**Unreleased after 0.16.0a3:** Choose **ImageJ Gaussian Blur** when reproducing
+**New in 0.16.0a4:** Choose **ImageJ Gaussian Blur** when reproducing
 an ImageJ 1.54p slice-wise Gaussian step before thresholding. Its **Sigma
 (pixels)** is the standard deviation, with a supported range of 0–8.5 pixels.
 Larger sigma requires ImageJ's downsampling algorithm and is rejected.
@@ -42,7 +42,7 @@ background. **In range/Outside range** instead show **Low threshold** and
 low ≤ high. Equal limits select exactly that intensity with In range, or every
 other non-NaN value with Outside range.
 
-**Unreleased after 0.16.0a3:** Threshold controls use the connected image's
+**New in 0.16.0a4:** Threshold controls use the connected image's
 intensity units, including floating-point values outside 0–1. Converting
 `uint16` to `float32` with **Preserve** retains the original intensity values;
 see [dtype conversion guidance](../how-to/choose-compute.md#use-a-dtype-repair-only-after-reviewing-it).
