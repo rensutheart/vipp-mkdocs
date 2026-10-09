@@ -189,6 +189,9 @@ and the accepted edit is atomic and undoable.
     cards can use a shorter clear route with several bends when the bounded
     local search finds one. Some layouts still require longer detours.
 
+    Where card and wire clearance allow, a wire can keep a longer straight
+    departure and turn near its destination to reduce intermediate bends.
+
 !!! note "Unreleased (nightly): tunnel context actions"
 
     | Action | Effect |

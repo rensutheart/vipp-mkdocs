@@ -173,6 +173,10 @@ step was omitted and recalculate decisive outputs before accepting the branch.
     connected cards, VIPP can try a shorter clear route with several bends.
     The local search is bounded; some layouts still require longer detours.
 
+    Where cards and other wire lanes leave enough space, a wire can stay
+    straight longer and turn near its destination, avoiding unnecessary
+    intermediate bends.
+
     Keep editing while VIPP refines complicated wire routes. Wires may briefly
     use temporary routes before settling.
 
