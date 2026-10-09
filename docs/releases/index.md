@@ -16,6 +16,12 @@ and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a4/) with the
 Review presentation does not change scientific arrays or add an AI, predictive
 tracking or GPU detection capability.
 
+The [OME-Zarr compatibility fix](https://github.com/rensutheart/napari-vipp/pull/78)
+restores [local 0.4/0.5 image and analysis-dataset exports](../reference/import-export.md#format-details)
+with `ome-zarr` 0.20 and newer, retaining channel display metadata, calibration
+and VIPP history. It is not part of 0.16.0a3; format support does not imply
+complete metadata fidelity.
+
 ## 0.16.0a3 alpha
 
 [Read the 0.16.0a3 overview](0.16.0a3.md) for fixed-template detection,
