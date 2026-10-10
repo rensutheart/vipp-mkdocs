@@ -83,6 +83,11 @@ REQUIRED = {
         "15 GiB",
         "5 GiB",
         "Advanced details",
+        "Unreleased after 0.16.0a4",
+        "Get setup help",
+        "durable registration mismatch",
+        "prior installation",
+        "Windows registry",
     ),
     "getting-started/macos.md": (
         "SHA256SUMS-macOS-",
