@@ -5,6 +5,16 @@ review an analysis.
 
 ## Workflow JSON
 
+!!! note "Unreleased assistant sessions"
+    Ordinary workflow JSON still does not persist an agent investigation.
+    Separate local `.vipp-session` files can contain conversation, drafts and
+    supported retained investigation evidence, including image/result arrays.
+    Open is passive; exact fresh binding and sharing choices are required before
+    a paused continuation, and used allowance is retained. Credentials, live-MCP
+    capabilities and actual-transmission grants are not restored. Unsupported or
+    incompatible sessions stay history only. See
+    [save/reopen a session](../how-to/workflow-assistant.md#save-and-reopen-an-assistant-session).
+
 A saved workflow represents the editable graph. It can include:
 
 - node operation IDs, titles, parameters, and canvas positions;
@@ -21,6 +31,26 @@ Workflow tabs are independent live sessions, not one multi-workflow file.
 **Save workflow** serializes the active tab only. Other open tabs, their
 caches, undo/redo histories, transient viewport, and in-flight state are not
 bundled into that JSON.
+
+Unreleased graph-only recovery stores separate working-copy generations for
+all nonempty workflow tabs, including unnamed tabs. Tab identities/order,
+original path/resolution base and active tab are retained, but recovery installs
+new dirty copies without original-file writes or calculation. It neither embeds
+arrays nor restores an assistant. See
+[recover interrupted workflows](../how-to/save-share-export.md#recover-interrupted-workflows).
+
+??? info "Unreleased local assistant archive boundaries"
+    The passive container is stored ZIP with canonical JSON and hash-named,
+    non-pickle NPY/PNG evidence. Archive bytes are capped at 512 MiB and the JSON
+    document at 32 MiB. Scientific source/result snapshots retain their 64 MiB
+    and element-count bounds; combined candidate, image, mesh, notebook and
+    ordinary resource limits can reject a smaller session. Unsupported evidence
+    can retain history without continuation. Hashes check integrity, not the
+    authorship or scientific truth of an untrusted archive. Saving or opening
+    does not execute an operation, restore provider credentials or send data.
+    Original source/grid, graph, compute and operation contracts must match
+    before explicit resume; old runtime clocks, locks, workers, live tickets and
+    evidence-transmission grants cannot supply current authority.
 
 !!! info "Collected results — new in 0.16.0a1"
     A results workflow's **Table Source** references an external

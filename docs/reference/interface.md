@@ -138,6 +138,217 @@ graph context row holds sidebar toggles, **Find in workflow**, **Refresh**,
 **Focus**, **Auto Arrange**, **Tunnels…**, and zoom. This keeps graph navigation
 separate from file and execution actions.
 
+### Workflow assistant
+
+!!! note "Unreleased development prototype"
+    **Workflow assistant…** opens a separate non-modal native workspace for
+    one selected cached Image Source with explicit spatial and any time/channel
+    axes; individual nodes still enforce their dimensional contracts.
+    **Goal**, **Discussion** and **Plans**
+    separate input/aim, retained conversation and draft review.
+    Goal's default-off **Investigate with trial runs** changes Send to
+    **Start investigation**. Its trial-attempt limit is 1–5 (default 3), separate
+    from initiative, input-preview permission and output-evidence permission.
+    Starting explicitly authorizes detached trials under finite action,
+    model-call, preview-byte and 30-minute total limits; changing controls alone
+    starts nothing. The same continuing loop serves new Goal investigations and
+    accepted-result refinement. Up to six small diagnostic probes can compare
+    ideas without spending a full trial, each limited to eight safe nodes,
+    four outputs and an explicit native region of 262,144 input voxels. Their
+    time, actions and shared evidence still consume the original budgets;
+    probe results cannot be accepted directly. ChatGPT's **Review before
+    finishing** starts on. A proposed
+    finish pauses for **Keep improving** (optional feedback, same remaining
+    session budgets), **Good enough — review plan** (accept the exact completed
+    choice as a checked draft), or **Stop — keep accepted workflow**. Review
+    blocks concurrent model work. Human pause/review time is excluded from the
+    shared native investigation's active-time allowance; attempts, calls,
+    actions and image allowances are not renewed. With at least two selected
+    trials, one of that total is held for the first Keep improving decision,
+    with action/call room to assess it. Continuing releases that capacity,
+    not an extra allowance; one-trial settings and other exhausted limits can
+    still prevent further tests. A still-current completed
+    nomination may be accepted after the work deadline without starting new
+    work. Known addressable issues may receive further bounded tests; limitations
+    do not need to be erased or relabelled as success. See
+    [reviewing a proposed finish](../how-to/workflow-assistant.md#review-a-proposed-finish).
+    Choosing the accepted starting result keeps it without adding a duplicate.
+    A selected alternative still needs a
+    checked **Add to workflow** and separate **Run workflow**. Trial selection
+    is not scientific validation. A compact eligible-node index and bounded
+    multi-node contract lookup support discovery. The experiment record separates
+    model hypotheses and assessments from exact candidate and measurement evidence.
+    Explicit native-grid regional diagnostics are separate from presentation
+    crops/projections; their numerical counts do not identify wanted anatomy. See
+    [bounded investigation](../how-to/workflow-assistant.md#investigate-before-choosing-a-plan).
+    Its unreleased assessment view can preserve exact cached matched before/after
+    image pairs and state when a pair is omitted or unavailable. Measured
+    before/after mesh-topology warnings remain separate from a quality judgment;
+    closed boundaries alone do not certify a simple solid. Both features retain
+    the same independent permissions and finite budgets. See
+    [how evidence stays in view](../how-to/workflow-assistant.md#how-it-keeps-evidence-in-view).
+    Discussion scrolls as one main page with natural-height conversation/question
+    sections, default-collapsed **Original goal** and **Conversation history** with
+    right/down chevrons, open current-question cards, readable answer rows and
+    a bounded message box. Collapsed disclosure rows are compact; expanded spacing
+    and header click targets are unchanged. The current question appendix is not duplicated in the
+    rendered conversation; full chat/draft history and earlier questions/answers
+    remain retained and readable. Expanded history aligns neutral bordered
+    assistant bubbles left and user messages right in blue-accent blocks matching
+    the stage tabs, with sender labels inside each block. A blue-tinted inset with
+    a blue outline inside the user reply holds both **Assistant’s question** and
+    its referenced text, separate from the bold **Your answer** heading and literal
+    answer. Free messages do not show generated question labels; retained
+    text and requests are unchanged. Full-width numbered
+    tabs highlight the current stage; framed input/goal, composer and summary
+    areas stay readable in light and dark themes. An AI sparkle identifies its
+    title and workflow-toolbar action. The navigation row puts Back left and
+    the current step in the centre; Close sits in the very bottom strip beside
+    **Planning only · Add and Run are separate actions**. Goal has a single
+    **Send goal** action and initially no Next button. Once draft history exists,
+    **Next: Discussion** returns to retained discussion without sending or
+    renewing sign-in/approval. Discussion keeps **View plan**; Plans has no Next.
+    These shortcuts are disabled while planning; an initial failed request with
+    no draft keeps Next hidden. All tabs remain available for passive
+    browsing, including empty states and error details before the first draft.
+    Goal uses a compact, bounded editor; Goal and Discussion editor heights grow
+    modestly with available viewport space and respect the current font size.
+    Fixed action strips sit below scrolling content: Goal's preview and Send,
+    Discussion's preview, **Send message** and **Send answers** when questions
+    exist, and Plans' **Add to workflow** / **Run workflow**. The Discussion
+    message box stays inside its main scroll; Plans heading, draft selector,
+    review, **Advanced details**, caveat and refinement scroll above Add/Run. Layout changes do not
+    alter retained text, request approval or execution authority.
+    Goal's **Assistant initiative** slider offers **Ask first**, **Balanced**
+    and **Use best judgment** (default), with enforced question caps of 3/2/1
+    per response. Its compact endpoint labels sit close to the track; the chosen
+    mode starts the explanation below in bold. Use best judgment delegates routine
+    choices as reviewable
+    assumptions and aims for zero routine questions, but can retain one genuine
+    blocker. It changes drafting style, not model reasoning, temperature or
+    execution. Changing it retains text/answers/history, cancels old requests
+    and revokes stale Add/Run eligibility until a fresh explicit request.
+    The pinned status row names the new initiative/image-preview choice and
+    offers **Update plan** after a draft/in-flight request, not an AI-failure warning.
+    Without either, the change is informational. Update keeps goal/answers
+    but excludes and retains unsent Discussion text; fresh input is captured by
+    explicit action, not the option change, with the current image opt-in. Retryable
+    failures offer **Retry plan/message/answers** with unchanged attempt/repair
+    limits; an edited message says **Send edited message** and sends its visible
+    text. **Answer questions** and **Review goal** only navigate; **Check connection**
+    opens Settings and **Show details** opens Advanced details for failures that
+    need inspection. These passive actions do not send. Recovery never replaces
+    or reruns already-added nodes, restores stale Add/Run permission or introduces
+    automatic retries. Success clears the action; the no-AI label is **Refresh example**.
+    Under Use best judgment, blank fields may be delegated with **Send answers**;
+    the current unanswered-question plan still cannot be added. No calibration,
+    unavailable operation or scientific success is invented by this preference.
+    **Send goal**, **Send message** and **Send answers** share a paper-plane
+    icon, replaced by an inline spinner with a sending label while pending.
+    Assistant buttons use roomier icon-to-label spacing, including sending
+    states, without changing captions, shortcuts or actions.
+    A checked reply automatically opens
+    Discussion when clarification questions remain, otherwise Plans.
+    A Settings gear remains separate from the header connection check, which
+    reports sign-in rather than plan validity or scientific success. Tabs,
+    **Back**, **Next: Discussion** and Discussion's **View plan** only navigate.
+    **Settings** stages Codex/local/no-AI choices with Apply/Cancel; the
+    connection indicator is status-only. Its compact, theme-aware window has
+    a distinct live status card, **Sign in with ChatGPT…** / **Sign in again…**
+    browser actions and a separate read-only **Check connection** action.
+    Optional model, thinking effort and bounded attempt/time limits start
+    collapsed under **Advanced**. Its expanded content matches the surrounding
+    card background while input fields remain distinct; behavior is unchanged.
+    Planning attempts default to and are capped at **600 seconds** for either
+    provider; up to two attempts, including validation repair, can use **20 minutes**.
+    A live elapsed clock measures the local request wait, not remote-model
+    liveness, token generation, reasoning progress or a completion percentage.
+    **Cancel request** remains available.
+    Opening Settings or changing a provider does
+    not send a goal or image. Cancel discards staged settings, but does not erase
+    a completed browser sign-in. **Connection setup needs an update** offers
+    **Repair connection setup** directly in the card for a recognized change in
+    the installed runtime's feature inventory. Repair verifies the intact
+    VIPP-owned template, backs up its managed configuration/marker, updates only
+    owned feature flags and rechecks status. It does not change saved credentials,
+    open sign-in or send a model request, and needs no manual JSON/config edit.
+    Repair is immediate; Cancel does not undo it after completion.
+    **Connection setup needs attention** covers other blocked configurations:
+    sign-in is paused and **Advanced → Connection details** is diagnostic, not
+    the fix. Arbitrary modified, redirected or extra configuration is not reset
+    or bypassed.
+    Explicit Send,
+    Update or retry
+    approves the visibly disclosed request; **Include input image previews**
+    and **Assess workflow outputs** are independent prominent Goal choices,
+    both off by default. Selecting them sends nothing. Earlier text-only drafts are
+    read-only and remain browsable without sending.
+    The sharing preview has a distinct framed scroll area and framed read-only
+    **Advanced shared-data details**. Short content stays compact; long text and
+    images scroll without shortening the full request. Opening it does not send
+    or copy data to the clipboard. Automatic checks replace
+    manual JSON validation; **Advanced details** holds optional technical text. Find it
+    in the three-dot **Workflow actions** menu beside **Save**.
+    **Proposal JSON**, **Request**, **Attempts** and shared-data JSON use a
+    fixed-width font. JSON fields have local light/dark-aware syntax colours;
+    Attempts is font-only and **Plan text**/Goal/chat remain normal prose.
+    Colour cues do not validate or repair JSON—even incomplete text can be
+    coloured. Literal text, read-only/editor roles, copy/undo and Add/Run checks
+    are unchanged.
+    **Assumptions to check** and **What to check after running** are independent
+    chevron sections, collapsed by default. Expand either to read its complete
+    hanging-bullet list. Current clarification questions and blocking warnings
+    stay prominent outside these sections. Every accepted assumption is preserved,
+    also in Advanced details/history/graph notes after Add.
+    Separate **What to check after running** prompts cover wanted parts
+    versus background, separate masks/whole Z stacks, and size scale/units/edge
+    objects where applicable. This generic, non-exhaustive human guidance is not
+    automatic validation or new plan facts and does not enter plan JSON/history.
+    Future requests ask for everyday choice/reason/check explanations, retaining
+    uncertainty and caveats; existing assumptions are not rewritten.
+    **Add to workflow** makes one undoable edit without running analysis;
+    **Run workflow** separately invokes normal guarded Calculate-all after Add.
+    The assistant exposes all 146 registered nodes with eligibility/reasons and
+    can draft 143 operations. Image Source and Table Source need user-selected
+    bindings; Batch Output needs the separate batch setup. Branched and
+    converging drafts support up to 64 new nodes/128 connections/256 ports. Dynamic
+    mesh combination supports up to 16 connected inputs; channel combination
+    and mask OR/XOR support up to 12; split/PSF counts resolve from actual input
+    metadata. Goal's **Save outputs** choice offers **Ask me when saving**, **Same folder
+    as input** and **Choose folder…**. A Save Image plan needs an explicit local
+    destination. Same-folder saving requires exactly one verified input file or
+    OME-Zarr store; samples/live and all multi-file bindings require the picker,
+    even when several files share one parent folder.
+    Actual paths stay local behind `USER_OUTPUT_DIRECTORY`. Send and Add never
+    write; explicit Run retains no-overwrite and normal calculation/resource
+    policies. Full lossless catalogue metadata shares the existing 192 KiB
+    request budget with the complete bounded dialogue; responses stay at 128 KiB.
+    Preview generation remains scalar YX/ZYX only. No external program, custom
+    code or automatic refinement is added by library access alone.
+    With **Assess workflow outputs** enabled, a successful explicit Run exposes
+    **Preview results shared** and **Assess results**. Preview is passive;
+    Assess explicitly sends the run-bound source/output diagnostics and permitted
+    images. The independent input-preview option controls source pixels and
+    source-intensity overlays; output assessment does not enable it. Codex
+    receives bounded output PNGs; the legacy non-investigative local assessment
+    connector uses measurements only. Shared local image-capable investigations
+    can use independently approved input/output previews.
+    Changed source, graph or output revisions invalidate old evidence. The
+    report separates goal checks, findings, suggested changes and limitations;
+    its verdict is not proof of accuracy. **Revise using results** explicitly
+    requests a fresh checked draft with actual measured feedback and report,
+    and resends the same approved bounded output PNGs to Codex under current
+    consents and the shared limit; legacy non-investigative local revision
+    remains measurements-only.
+    Add and Run remain separate manual
+    actions. These separate assessment actions do not start a rerun loop or
+    automatically Add; explicitly started bounded investigations/refinement
+    have their own trial authority and finite allowances.
+    See
+    [Propose a starting workflow](../how-to/workflow-assistant.md) for input,
+    privacy and evaluation boundaries. The published 0.16.0a4 toolbar does
+    not include this control.
+
 ### Workflow actions menu
 
 !!! note "New in 0.16.0a1"

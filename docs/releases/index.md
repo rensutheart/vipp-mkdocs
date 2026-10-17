@@ -4,6 +4,191 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## Unreleased development prototype
+
+The shared assistant now supports reviewed same-topology edits to eligible
+existing nodes, graph-only workflow autosave/crash recovery, and local assistant
+session files with explicitly approved paused continuation. Recovery and session
+Open never calculate or contact a model. In-place changes require a tested
+selection, a recovery checkpoint and one Undo; broader rewiring still uses a
+separate branch. See [workflow recovery](../how-to/save-share-export.md#recover-interrupted-workflows)
+and [saved assistant sessions](../how-to/workflow-assistant.md#save-and-reopen-an-assistant-session).
+These are development capabilities, not a new numbered release or evidence of
+model accuracy.
+
+ChatGPT investigations and accepted-result refinement default **Review before
+finishing** on. A proposed final choice pauses for **Keep improving**, **Good
+enough — review plan** or **Stop — keep accepted workflow**. Further tests can
+address remaining issues under the
+original goal, but use the same consumed budgets, protected baseline, notebook
+and active-time allowance. Human pause/review time is excluded in the shared
+native continuation; consumed work is not reset. Accepting keeps the
+exact completed choice and its limitations for separate checked Add/Run, while
+Stop leaves the accepted graph unchanged. This is neither a quality guarantee
+nor unlimited retry. The local connector's earlier refinement path is unchanged.
+See [review a proposed finish](../how-to/workflow-assistant.md#review-a-proposed-finish).
+
+Bounded investigations can keep exact cached matched before/after preview pairs
+through assessment and disclose omitted or unavailable comparisons. A measured
+mesh-topology review exposes before/after counts and warnings rather than treating
+closed boundaries as proof of a simple solid or correct anatomy. Descriptions
+do not supply unseen images; existing sharing choices and all image/request/test
+budgets remain unchanged. These updates neither repair geometry nor choose a
+winner, and are not a scientific-quality claim. See
+[how evidence stays in view](../how-to/workflow-assistant.md#how-it-keeps-evidence-in-view).
+
+The Workflow assistant gains explicit completed-result assessment. Goal shows
+prominent independent **Include input image previews** and **Assess workflow
+outputs** choices, both off by default. After an explicit Run, **Preview results
+shared** discloses actual run-bound diagnostics and permitted images; **Assess
+results** sends them only when clicked. Input pixels remain a separate choice.
+Codex can use bounded output images; legacy non-investigative local assessment
+uses measurements only. The shared native investigation also supports
+independently approved previews with image-capable local models.
+The report explains goal checks, findings, suggested changes and limitations,
+not a proof-of-accuracy score. **Revise using results** separately requests a new
+checked draft from measured feedback, the report and the same bounded
+consent-approved output PNGs for Codex; legacy non-investigative local revision
+remains measurements-only.
+Source/graph/output changes invalidate evidence. Add and Run stay manual;
+these separate assessment actions do not start a refinement loop or automatic
+Add. Explicitly started bounded investigations/refinement have separate trial
+authority and finite allowances.
+
+Planning attempts now default to and are capped at 600 seconds (10 minutes) for
+both providers. Up to two attempts, including one validation repair, can use
+20 minutes of model-request time. A live local elapsed clock makes the wait
+visible, not remote-model liveness or reasoning progress; cancellation remains
+available. The clock itself enables neither sharing nor automatic execution.
+
+The [Workflow assistant](../how-to/workflow-assistant.md) offers a native
+Goal/Discussion/Plans workspace through a restricted Codex connector, a trusted
+local model or a clearly labelled no-AI example. Full-width numbered tabs,
+framed input/message/summary areas, an AI sparkle, a Settings gear and a bottom
+Close button beside the planning-only note, separate from navigation, match
+light and dark themes. Settings gains a compact, theme-aware connection card,
+explicit Sign in with ChatGPT / Sign in again browser actions and a separate
+Check connection action, with progress shown in place. Optional model, thinking
+effort and bounded attempt/time limits start collapsed under Advanced. Expanded
+Advanced has a continuous card background with distinct input fields, without
+settings or sign-in behavior changes. Apply
+accepts staged provider/model edits; Cancel discards them but does not erase a
+completed browser sign-in. Opening or changing Settings does not send a model
+request. A recognized runtime-feature inventory change instead shows Connection
+setup needs an update with an explicit Repair connection setup action in the
+card. Repair verifies the intact VIPP-owned template, backs up its managed
+configuration/marker, updates only owned disabled-feature flags and rechecks
+status. No manual JSON/config edit, browser sign-in or model request is needed;
+saved credentials are untouched. Repair is immediate, not undone by cancelling
+staged settings. Other modified, redirected or extra configuration stays blocked
+as Connection setup needs attention, with diagnostic details under Advanced;
+managed-profile protection is not reset or bypassed.
+Goal starts with one clear Send goal action and no Next.
+Once draft history exists, Next: Discussion returns to retained discussion
+without sending or signing in again. Discussion keeps View plan; Plans has no
+Next. These shortcuts are disabled while planning, and an initial failed request
+without a draft leaves Next hidden.
+Goal starts with a compact, bounded editor; both Goal and Discussion editors
+grow modestly with available viewport space and respect font size. Action strips
+stay visible below scrolling content: Goal Preview/Send, Discussion Preview/Send
+message plus Send answers when questions exist, and Plans Add/Run. The message
+box stays in Discussion's scrolling page, while Plans heading, draft selector,
+review, Advanced details, caveat and refinement scroll above Add/Run. Resizing and scrolling do
+not transmit, add or calculate.
+Goal's Assistant initiative slider offers Ask first, Balanced and Use best
+judgment (default), with enforced per-response question caps of 3/2/1. The compact
+slider keeps endpoint labels close to the track and shows the chosen mode in
+bold at the start of the explanation below. Use best judgment aims to avoid
+routine questions by making explicit reviewable
+assumptions, while allowing one genuine blocker. Blank fields can delegate a
+fresh draft through explicit Send answers, without making an unanswered plan
+addable. Policy changes keep text/answers/history but cancel old requests and
+revoke stale Add/Run eligibility. More initiative is not model reasoning,
+temperature, scientific success or automatic execution; sending remains explicit.
+The pinned status row identifies changed initiative/image-preview choices and
+offers Update plan after a draft/in-flight request, with information rather than
+a stale warning without either. Update keeps goal/answers, excludes and retains an
+unsent message, and explicitly captures/sends fresh context under the current
+image opt-in. Retry plan/message/answers start fresh bounded requests with the
+same repair limit; edited messages say Send edited message. Required questions,
+changed inputs, connection/model/image issues and integration/protocol issues
+instead offer passive Answer questions, Review goal, Check connection or Show
+details. Preview still captures without sending; choices never upload by
+themselves. No new automatic retry loop, raised limits, old invalid-response feedback,
+stale Add/Run permission or replacement/rerun of already-added nodes is introduced.
+Assistant buttons have roomier icon-to-label spacing, including sending states;
+captions, shortcuts and actions are unchanged.
+Discussion scrolls as one main page with clear conversation/question sections,
+initially collapsed original-goal/conversation disclosures with right/down
+chevrons, open current-question cards, readable answer rows and a bounded message box.
+Collapsed rows are compact; expanded spacing, chevrons and header click targets
+are unchanged.
+The rendered conversation omits the current duplicated question appendix while
+answer cards show it. Full chat/draft history and earlier questions/answers remain.
+Expanded history puts neutral bordered assistant bubbles left and user messages
+right in blue-accent blocks matching the stage tabs, with sender labels inside
+each block.
+The question caption and reference text share a blue-tinted inset with a blue
+outline inside the user reply, separate from the bold Your answer heading and
+literal answer. Free messages no longer show generated question labels;
+retained text and requests are unchanged.
+The Send goal/message/answers actions share a paper-plane icon; a matching inline
+spinner and sending label occupy its place during
+planning; a checked response opens Discussion for clarification or Plans
+otherwise. All tabs stay available for passive browsing; Discussion offers
+View plan after a draft exists. Back, tabs, Next: Discussion and View plan remain
+passive
+navigation. The header connection check reports confirmed
+sign-in, not plan validity or scientific success. Navigation does not send or
+execute; readable conversation and text-only draft history remain separate from
+settings and the graph. Earlier drafts are read-only. Explicit Send approves
+the disclosed request without a repeated permission checkbox. Include input
+image previews remains off by default; input PNG previews require explicit
+permission. Shared investigations support image-capable local models as well
+as the cloud connection, under those independent choices. A framed,
+content-sized sharing preview
+keeps short requests compact and longer text/images scrollable, with the complete
+JSON under Advanced shared-data details. Opening it does not send or copy request
+data. Readable step cards, clarification fields,
+automatic checks and one bounded AI repair replace manual JSON validation.
+Proposal JSON, Request, Attempts and shared-data JSON use a system fixed-width
+font. JSON fields gain local light/dark-aware lexical colours; Attempts is
+font-only, and Plan text/Goal/chat keep their normal fonts. Colour cues are not
+validation or repair, including for incomplete JSON; literal text, read-only
+roles, copying/undo, request data and Add/Run guards remain unchanged.
+Assumptions to check and What to check after running use independent chevron
+sections, collapsed by default. Expanding either shows its full hanging-bullet
+list without rewriting or dropping accepted assumptions; originals remain in
+Advanced details, history and graph notes after Add. Current questions and
+blocking warnings remain prominent. Separate What to check after running offers conditional human
+review of wanted parts/background, separate masks/whole Z stacks and size
+scale/units/edge objects. It is generic, non-exhaustive guidance, not automatic
+validation or new plan facts, and does not enter plan JSON/history. Future AI
+requests ask for everyday choice/reason/check wording with uncertainty and
+caveats preserved; exact parameters remain in their parameter fields.
+One undoable graph addition remains separate from an explicit guarded Run
+through ordinary Calculate-all; no AI-led scientific iteration is started.
+Registry-wide authoring now permits 143 of all 146 registered operations, with
+normal parameter/port definitions and metadata checks. Only Image Source, Table
+Source and Batch Output require separate source/batch setup. Branched/converging
+drafts retain 64-new-node/128-connection bounds and now a 256-port cap; split/PSF
+counts resolve from actual input metadata. Explicitly described time/channel
+images, masks and labels are conditional on each node's dimensional contract,
+not treated as interchangeable scalar data. Sources stay bounded to cached
+finite 64 MiB inputs; previews remain scalar YX/ZYX only.
+Goal gains a local Save outputs folder choice. Save Image plans can use an explicitly
+chosen folder or exactly one verified input file/store, including the exact
+answer **use the same folder as input**. Samples/live images and all multi-file
+inputs require Choose folder, even with one shared parent folder. The model
+receives `USER_OUTPUT_DIRECTORY`, not the actual path.
+Send/Add never save; a separate explicit Run preserves no-overwrite, calibration,
+format and resource checks. Lossless shared tables retain the complete catalogue,
+parameter help and bounded dialogue under the existing 192 KiB request limit;
+proposal responses remain limited to 128 KiB. This is source-aligned authoring,
+not new evidence of AI accuracy or successful output assessment. External
+programs, custom-code execution and autonomous tuning remain excluded.
+It is not part of the published 0.16.0a4 release.
+
 ## 0.16.0a4 alpha
 
 [Read the 0.16.0a4 overview](0.16.0a4.md) for linked image review with accepted
