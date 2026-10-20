@@ -19,6 +19,7 @@ interchangeable.
 | Batch config (version 6) | Recreate source bindings, stable SourceItems, axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, individual existing-output choices, output definitions, naming, policy, workflow association, and compute request | Input bytes, actual run decisions, finalized outcome |
 | Batch manifest/archive (version 6) and sidecars | Audit planned inputs/outputs, SourceItems, source axes, effective settings, identities, hashes, compute decisions, cleanup, errors and item/output status; verify compatible whole completed items for resume | One atomic transaction, cross-version/relocated recovery, or proof of biological validity |
 | Reproducibility package (new in 0.15.0a3) | Review and share an offline report, portable recipe, version summaries and sanitized available run evidence | Raw/result data, original run receipts, resumable state, an installed or locked environment |
+| Workflow recovery copies (unreleased/nightly) | Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs | Scientific caches, Undo history, automatic Run or overwritten original workflow files |
 
 Use [Export a reproducibility package](export-reproducibility-package.md) for
 the review-before-sharing procedure. The workflow action describes a current
@@ -110,6 +111,41 @@ duplicate. Earlier release-to-release procedures remain available for older
 workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-to-0120a1).
+
+## Recover interrupted workflows
+
+!!! note "Unreleased/nightly — working copies are not Save"
+    VIPP keeps separate graph working copies after a short pause in editing
+    (about two seconds), with a thirty-second check for pending edits. This does
+    not change the original workflow JSON or clear its modified marker. Continue
+    to use **Save** for the record you intend to keep or share.
+
+After an interrupted session, VIPP offers **Recover interrupted workflows**.
+You can also open it from **Workflow actions → Recover interrupted workflows…**
+(the three-dot menu beside Save).
+
+1. Select the interrupted workspace, then choose **Recover selected**. Its named
+   and unnamed workflow tabs open as new unsaved **Recovered — …** copies,
+   preserving their order and selected tab. Existing tabs/files stay untouched.
+2. Check the sources and graph, then **Save workflow as…** to keep a recovered
+   analysis. The original path is not overwritten by recovery.
+3. Calculate explicitly when ready. Recovery does not restore calculated arrays,
+   tables, Undo history or in-flight work, and never runs a workflow or writer
+   automatically. You need the original input files again.
+
+**Keep for later** leaves the copy available. **Discard selected recovery…**
+stops offering that interrupted workspace; it does not delete your ordinary
+saved workflow files. Another running VIPP instance is never offered as a crash.
+If the latest copy is damaged, a verified previous copy can be offered with that
+label. Copies that cannot be verified are kept for attention, not silently
+opened or repaired.
+
+Use **Workflow actions → Choose recovery folder…** if the recovery status reports a
+folder/disk problem. This chooses working-copy storage, not the default Save or
+result-output destination. Clean shutdown retires only its own managed working
+copies; it does not erase older interrupted workspaces or another live instance.
+The newest unsaved edit can still be lost if interruption happens before a
+checkpoint succeeds, so recovery is not a backup or source-data archive.
 
 ## Save a selected output
 

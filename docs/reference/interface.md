@@ -168,6 +168,13 @@ separate from file and execution actions.
 
     In 0.15.0a5, these workflow actions were in the gear menu.
 
+!!! note "Unreleased/nightly — workflow recovery"
+    **Recover interrupted workflows…** opens verified graph working copies as
+    new unsaved tabs, without replacing open tabs or original saved files.
+    **Choose recovery folder…** changes the storage for those working copies,
+    not the normal Save or result-output location. Neither action calculates a
+    workflow. See [Recover interrupted workflows](../how-to/save-share-export.md#recover-interrupted-workflows).
+
 ### Finding nodes
 
 Use **Find a node to add…** in the Nodes panel to add an operation, or
