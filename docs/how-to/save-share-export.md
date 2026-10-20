@@ -52,6 +52,24 @@ Bundled examples remain templates and are never overwritten in place.
 Use ++ctrl+shift+s++ or **Save workflow as…** when the active tab
 should be written to a different name or location without changing the normal
 save policy.
+
+!!! info "Unreleased: move workflows with their data"
+    Saving writes local image, measurement-dataset and Save Image destinations
+    relative to the workflow file where possible. Attached batch folders and
+    source items use the same base. Files on another Windows drive or share
+    remain absolute. Input data and the VIPP environment are not embedded.
+
+    Copy the workflow and its data together, preserving their folder structure.
+    Relative paths are resolved from the workflow's folder, not the folder from
+    which you launch VIPP. **Save workflow as…** recalculates paths for the new
+    location while retaining the same input files; it does not copy those files.
+    Input revisions, selectors and measurement-dataset checksums remain checked.
+
+    Per-sample parameter overrides stay bound to the same input content and
+    logical selection. Individual **Skip/Overwrite** choices remain tied to
+    exact source and output locations: after moving a project, reset those
+    choices and check the batch again before running.
+
 If a Batch workspace is active, VIPP asks what to save:
 
 - **Yes** attaches the current versioned batch configuration to the same
@@ -131,6 +149,14 @@ runtime. Regenerate and revalidate it after every upgrade, including alpha
 updates. UI caches, pinned layers, and graph layout are presentation state and
 are intentionally absent.
 
+!!! info "Unreleased: portable Python exports"
+    **Export Python…** writes local source and Save Image paths relative to the
+    saved script where possible. Run or import that `.py` file directly; its
+    paths resolve from the script's folder even when your working directory is
+    elsewhere. Copy the script and data together while preserving their folder
+    structure. The required VIPP version and dependencies must still be
+    installed separately.
+
 Python callers can pass a complete `ComputeRequest`, progress callback, and
 cooperative cancellation token. The generated CLI accepts
 `--compute-mode`, `--fallback-policy`, repeatable `--node-preference`,
@@ -181,6 +207,16 @@ Use **Batch → Save config** to write
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
+
+!!! info "Unreleased: relative batch configuration paths"
+    **Save config** stores local workflow, input-folder, output-folder and
+    SourceItem paths relative to the config file where possible. Saving a
+    loaded config in another folder recalculates those paths to retain the
+    same workflow, inputs and output destination; it does not move the files.
+    Copy the config, workflow and data together to move a complete project.
+    Source paths inside the workflow still resolve from the workflow's folder.
+    Individual **Skip/Overwrite** choices require review after relocation,
+    as described under [Save a workflow](#save-a-workflow).
 
 Version-6 configs store the complete configured compute request, reviewed
 source-axis declarations, stable SourceItems, typed per-sample numeric

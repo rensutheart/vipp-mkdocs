@@ -223,6 +223,16 @@ batch output, or export.
 | **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
 
+**Unreleased — nightly:** **Set up GPU…** / **Repair GPU setup…** starts the
+supported Windows setup from a status card with next-step guidance, installation
+review, progress, cancellation and verification. The session GPU choice stays
+visible; expand **Advanced details** for the package track, technical evidence
+and explained, copy-only manual command. **Verify GPU setup** checks without
+installing packages. **Save support report…** and **Close** stay in the footer.
+**Open VIPP with GPU** opens the verified
+environment in a separate window; current workflows stay in the original
+window. See [in-app GPU setup](../getting-started/windows-cuda.md#set-up-gpu-from-inside-vipp).
+
 New sessions default to **Auto**. A schema-3 workflow loads as **CPU** because
 the old file did not author compute intent. With no exact compatible history,
 Auto uses reviewed GPU defaults. Accelerated-only history makes the next global

@@ -38,9 +38,62 @@ therefore blocked even if another device qualifies.
 Only the NVIDIA display driver is a system-wide CUDA prerequisite. The VIPP
 installer supplies the user-space CUDA libraries inside its environment.
 
+## Set up GPU from inside VIPP
+
+!!! info "Unreleased — nightly only"
+    The steps below apply to the in-app setup added after 0.16.0a3. Numbered
+    releases without this action use the standard installer described above.
+
+If **Compute setup and memory…** reports that CuPy is missing, the current VIPP
+environment does not have the optional GPU library. On supported Windows
+computers, VIPP can install it without copying commands into a terminal:
+
+1. Open **Compute setup and memory…**. Read the status and select the prominent
+   **Set up GPU…** or **Repair GPU setup…** action beside its next-step guidance.
+   You do not need to open advanced details.
+2. Let VIPP check the hardware, Python, available disk space and the exact VIPP
+   build. The setup window groups its status, next action and installation
+   information into cards. Review **Installation location**—the separate copy
+   where GPU support will be installed—then select **Install GPU support** or
+   **Repair GPU setup**. An internet connection is needed to download dependencies.
+   If this exact build is already verified, the window instead offers **Open
+   VIPP with GPU**; another installation is not needed.
+3. Follow the installation progress. Use **Cancel setup** to stop, or **Try
+   again** after addressing a reported failure. VIPP verifies the GPU
+   environment before offering **Open VIPP with GPU**.
+4. Select **Open VIPP with GPU** to launch that environment in a new window.
+   Your current window and its workflows remain open. Save any edits there,
+   then open the saved workflows in the new window; unsaved tabs are not
+   transferred automatically.
+
+The primary action and **Close** or **Cancel setup** stay in the footer while
+long content scrolls. **Technical details** is collapsed initially; expand its
+chevron to read the monospaced setup log. Opening details does not install or
+change anything. When a verified GPU copy is already ready, the summary focuses
+on opening it rather than showing download estimates for a new installation.
+
+Setup uses a separate managed CUDA environment and leaves the current CPU
+environment unchanged. Its reviewed location is specific to this VIPP build,
+so a standard GPU installation can remain alongside it. It retains the exact
+VIPP wheel used by this build, including local unreleased changes. If that
+wheel is unavailable or no longer
+matches, setup stops with an explanation; it does not substitute another build
+with the same version number. Keep the original build bundle available and
+follow the reported recovery instruction.
+
+The supported route requires native 64-bit Windows, CPython 3.12, and the
+NVIDIA hardware and driver requirements above. Setup cannot install a display
+driver or turn an unsupported GPU into a supported one. It reports the
+specific blocker when this route is unavailable.
+
+Installing the GPU environment does not change saved compute choices or make
+every node GPU-capable. Reopen the workflow, select its desired compute policy,
+and inspect the actual-run badges as described in [Choose and verify
+compute](../how-to/choose-compute.md).
+
 ## Managed location and temporary files
 
-One-click setup obtains canonical Windows Local App Data through
+The standard installer obtains canonical Windows Local App Data through
 `SHGetKnownFolderPath(FOLDERID_LocalAppData)` and accepts only
 `VIPP\environments\cuda13` beneath it for the managed GPU track. Spaces are
 supported. CuPy 14.1.1 requires this complete environment path to contain ASCII
@@ -88,6 +141,14 @@ Advanced technical detail remains under **Show advanced details**. A
 privacy-redacted report suitable for support can be saved from the window or
 created with `vipp-compute-doctor --track cuda13 --support-bundle
 ".\vipp-compute-support.json"` from the active CUDA environment.
+
+In the unreleased nightly layout, the session GPU choice stays visible and the
+status groups the recommended setup or repair action with its explanation.
+Expand the chevron beside **Advanced details** for the package track, technical
+evidence and labelled **Manual command**. Its explanation distinguishes manual
+setup from verification; copying a command does not run it. **Verify GPU setup**
+only checks the environment—it does not install packages. **Save support report…**
+and **Close** remain in the footer while long content scrolls.
 
 The exact internal managed environment path can change after update or repair,
 so the shortcut and graphical command are preferable to guessing a nested
