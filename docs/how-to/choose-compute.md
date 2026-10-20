@@ -110,8 +110,13 @@ title row as the record of what produced the node output.
    GPU** and **VIPP GPU coverage**—then follow the one
    recommended next step. Open **Show advanced details** only when you need the
    scientific stack, device, eligibility, RAM/VRAM, and provider evidence. The
-   window can save a privacy-redacted support report; VIPP never executes a
-   repair command automatically.
+   window can save a privacy-redacted support report. In the unreleased nightly
+   build, the status groups a prominent **Set up GPU…** or **Repair GPU setup…**
+   action with next-step guidance. The **Advanced details** chevron opens the
+   package track, evidence and explained manual command; copying that command
+   or selecting **Verify GPU setup** never installs packages. Setup opens a
+   reviewed installation in a separate environment; see [Set up GPU from inside
+   VIPP](../getting-started/windows-cuda.md#set-up-gpu-from-inside-vipp).
 3. Keep **Auto** for normal calculation and read the actual-run summary and
    per-node badges. Auto starts with reviewed safe GPU defaults. Successful,
    fallback-free completed full-pipeline runs—whether CPU, GPU, or mixed—add
