@@ -145,7 +145,7 @@ A completed scientific pipeline can be followed by Stack contrast work for its
 node-card thumbnails. This is a separate presentation calculation: it does not
 mean a node is recalculating or that its CPU/CuPy provenance changed.
 
-!!! note "Nightly: thumbnail progress cleanup (unreleased)"
+!!! note "New in 0.16.0a5: thumbnail progress cleanup"
 
     Results Workspace and workflow-tab readiness checks no longer interrupt
     queued thumbnail previews. When a tab change discards obsolete thumbnail

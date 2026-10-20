@@ -12,14 +12,14 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a4; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a5; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
 | Batch config (version 6) | Recreate source bindings, stable SourceItems, axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, individual existing-output choices, output definitions, naming, policy, workflow association, and compute request | Input bytes, actual run decisions, finalized outcome |
 | Batch manifest/archive (version 6) and sidecars | Audit planned inputs/outputs, SourceItems, source axes, effective settings, identities, hashes, compute decisions, cleanup, errors and item/output status; verify compatible whole completed items for resume | One atomic transaction, cross-version/relocated recovery, or proof of biological validity |
 | Reproducibility package (new in 0.15.0a3) | Review and share an offline report, portable recipe, version summaries and sanitized available run evidence | Raw/result data, original run receipts, resumable state, an installed or locked environment |
-| Workflow recovery copies (unreleased/nightly) | Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs | Scientific caches, Undo history, automatic Run or overwritten original workflow files |
+| Workflow recovery copies (new in 0.16.0a5) | Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs | Batch workspace/configuration, scientific caches, Undo history, automatic Run or overwritten original workflow files |
 
 Use [Export a reproducibility package](export-reproducibility-package.md) for
 the review-before-sharing procedure. The workflow action describes a current
@@ -54,7 +54,7 @@ Use ++ctrl+shift+s++ or **Save workflow as…** when the active tab
 should be written to a different name or location without changing the normal
 save policy.
 
-!!! info "Unreleased: move workflows with their data"
+!!! info "New in 0.16.0a5: move workflows with their data"
     Saving writes local image, measurement-dataset and Save Image destinations
     relative to the workflow file where possible. Attached batch folders and
     source items use the same base. Files on another Windows drive or share
@@ -114,7 +114,7 @@ the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-t
 
 ## Recover interrupted workflows
 
-!!! note "Unreleased/nightly — working copies are not Save"
+!!! note "New in 0.16.0a5 — working copies are not Save"
     VIPP keeps separate graph working copies after a short pause in editing
     (about two seconds), with a thirty-second check for pending edits. This does
     not change the original workflow JSON or clear its modified marker. Continue
@@ -132,6 +132,10 @@ You can also open it from **Workflow actions → Recover interrupted workflows�
 3. Calculate explicitly when ready. Recovery does not restore calculated arrays,
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.
+
+Recovery does not reconstruct the Batch workspace or its configuration. Save
+the Batch configuration separately, then reopen it and review sources, output
+paths and run choices before running a recovered graph in Batch.
 
 **Keep for later** leaves the copy available. **Discard selected recovery…**
 stops offering that interrupted workspace; it does not delete your ordinary
@@ -185,7 +189,7 @@ runtime. Regenerate and revalidate it after every upgrade, including alpha
 updates. UI caches, pinned layers, and graph layout are presentation state and
 are intentionally absent.
 
-!!! info "Unreleased: portable Python exports"
+!!! info "New in 0.16.0a5: portable Python exports"
     **Export Python…** writes local source and Save Image paths relative to the
     saved script where possible. Run or import that `.py` file directly; its
     paths resolve from the script's folder even when your working directory is
@@ -244,7 +248,7 @@ run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
 
-!!! info "Unreleased: relative batch configuration paths"
+!!! info "New in 0.16.0a5: relative batch configuration paths"
     **Save config** stores local workflow, input-folder, output-folder and
     SourceItem paths relative to the config file where possible. Saving a
     loaded config in another folder recalculates those paths to retain the

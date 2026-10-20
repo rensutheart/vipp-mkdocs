@@ -1,15 +1,15 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.16.0a4 uses one standard CUDA 13 installation for every current
-reviewed GPU implementation. The normal Windows installer is the recommended
+VIPP 0.16.0a5 uses the CUDA 13 package track for every current reviewed GPU
+implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no separate CUDA Toolkit or build tools are required.
 
-!!! warning "Use the exact 0.16.0a4 release"
+!!! warning "Use the exact 0.16.0a5 release"
     Download the installer and checksum only from the
-    [official v0.16.0a4 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4).
-    Verify `VIPP-Setup-0.16.0a4-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.16.0a4.txt` before opening it. This alpha is
+    [official v0.16.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5).
+    Verify `VIPP-Setup-0.16.0a5-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.16.0a5.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
 
 ## Choose the standard NVIDIA route
@@ -19,7 +19,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.16.0a4 boundary |
+| Requirement | 0.16.0a5 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -40,9 +40,9 @@ installer supplies the user-space CUDA libraries inside its environment.
 
 ## Set up GPU from inside VIPP
 
-!!! info "Unreleased — nightly only"
-    The steps below apply to the in-app setup added after 0.16.0a3. Numbered
-    releases without this action use the standard installer described above.
+!!! info "New in 0.16.0a5"
+    In-app setup installs GPU support in a separate copy of the exact VIPP
+    build. Earlier releases without this action use the standard installer.
 
 If **Compute setup and memory…** reports that CuPy is missing, the current VIPP
 environment does not have the optional GPU library. On supported Windows
@@ -75,7 +75,7 @@ on opening it rather than showing download estimates for a new installation.
 Setup uses a separate managed CUDA environment and leaves the current CPU
 environment unchanged. Its reviewed location is specific to this VIPP build,
 so a standard GPU installation can remain alongside it. It retains the exact
-VIPP wheel used by this build, including local unreleased changes. If that
+VIPP wheel used by this build. If that
 wheel is unavailable or no longer
 matches, setup stops with an explanation; it does not substitute another build
 with the same version number. Keep the original build bundle available and
@@ -137,12 +137,12 @@ Open **Compute setup and memory** to refresh the concise qualification rows:
 1. **CUDA and GPU** — can the pinned CUDA/CuPy runtime allocate and execute;
 2. **VIPP GPU coverage** — which reviewed operation regions are available.
 
-Advanced technical detail remains under **Show advanced details**. A
+Advanced technical detail remains under **Advanced details**. A
 privacy-redacted report suitable for support can be saved from the window or
 created with `vipp-compute-doctor --track cuda13 --support-bundle
 ".\vipp-compute-support.json"` from the active CUDA environment.
 
-In the unreleased nightly layout, the session GPU choice stays visible and the
+The session GPU choice stays visible and the
 status groups the recommended setup or repair action with its explanation.
 Expand the chevron beside **Advanced details** for the package track, technical
 evidence and labelled **Manual command**. Its explanation distinguishes manual
@@ -170,7 +170,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.16.0a4"
+  "napari-vipp[gpu-cuda13]==0.16.0a5"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -205,7 +205,7 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. GPU providers in 0.16.0a4
+The completed-node badge reports what actually ran. GPU providers in 0.16.0a5
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request.
 
@@ -282,4 +282,4 @@ favored CuPy in all 14 matched cases; see the
 [measurement benchmarks](https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison).
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[official v0.16.0a4 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4).
+[official v0.16.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5).

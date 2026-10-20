@@ -128,7 +128,7 @@ graph zoom for overview; use napari layers for full-resolution image comparison.
 
 ## Restore a minimized floating window on Windows
 
-!!! note "Unreleased (nightly)"
+!!! note "New in 0.16.0a5"
     Floating VIPP has its own taskbar entry. Restore the existing window through
     either the taskbar or its original napari viewer:
 

@@ -161,7 +161,7 @@ step was omitted and recalculate decisive outputs before accepting the branch.
     around other cards settle when you release. Overlapping cards can still
     hide connections: separate them or use **Auto Arrange**.
 
-!!! info "Unreleased (nightly): separate wire lanes"
+!!! info "New in 0.16.0a5: separate wire lanes"
 
     Wires from different source output ports settle into separate lanes so you can
     follow each connection where branches approach or leave one another. This
@@ -221,7 +221,7 @@ Named tunnels let one output feed distant nodes without long crossing wires.
 Create a tunnel from an output, give it a semantic name such as `nuclei_labels`
 or `red_channel`, and attach compatible inputs as subscribers.
 
-!!! info "Unreleased (nightly): replace a wire with a tunnel"
+!!! info "New in 0.16.0a5: replace a wire with a tunnel"
 
     1. Right-click the wire or just beside it. The click target extends around
        the visible line.
@@ -232,7 +232,7 @@ or `red_channel`, and attach compatible inputs as subscribers.
     Replacement affects the clicked connection and is one undoable edit. The
     same output still supplies the same input through the named tunnel.
 
-!!! info "Unreleased (nightly): replace a tunnel with wires"
+!!! info "New in 0.16.0a5: replace a tunnel with wires"
 
     - To show one subscriber's connection as a wire, right-click its input
       tunnel badge and choose **Replace with wire**. The other subscribers

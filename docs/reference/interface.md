@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a4. Some labels
+Labels below match napari-vipp 0.16.0a5. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -16,7 +16,7 @@ floating window.
     and closing napari closes its VIPP session. Native
     Linux/macOS window-manager behaviour has not yet been qualified.
 
-!!! note "Unreleased (nightly) — restore a minimized floating window"
+!!! note "New in 0.16.0a5 — restore a minimized floating window"
     In the same napari viewer, **Plugins → VIPP Workflow (napari-vipp)** restores
     a minimized floating VIPP window, retaining its workflow tabs, calculated
     results, and previous maximized state. See [Restore a minimized floating
@@ -168,12 +168,13 @@ separate from file and execution actions.
 
     In 0.15.0a5, these workflow actions were in the gear menu.
 
-!!! note "Unreleased/nightly — workflow recovery"
+!!! note "New in 0.16.0a5 — workflow recovery"
     **Recover interrupted workflows…** opens verified graph working copies as
     new unsaved tabs, without replacing open tabs or original saved files.
     **Choose recovery folder…** changes the storage for those working copies,
     not the normal Save or result-output location. Neither action calculates a
-    workflow. See [Recover interrupted workflows](../how-to/save-share-export.md#recover-interrupted-workflows).
+    workflow or reconstructs the Batch workspace/configuration. Save Batch
+    configuration separately. See [Recover interrupted workflows](../how-to/save-share-export.md#recover-interrupted-workflows).
 
 ### Finding nodes
 
@@ -221,7 +222,7 @@ output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
 
-!!! note "Unreleased (nightly): graph wires"
+!!! note "New in 0.16.0a5: graph wires"
 
     Wires from different source output ports settle into separate lanes, including
     outputs on the same node. Wires from the same output port can share a
@@ -240,7 +241,7 @@ and the accepted edit is atomic and undoable.
     A clear end can be straightened independently while retaining a needed
     obstacle detour at the opposite end.
 
-!!! note "Unreleased (nightly): tunnel context actions"
+!!! note "New in 0.16.0a5: tunnel context actions"
 
     | Action | Effect |
     | --- | --- |
@@ -302,7 +303,7 @@ batch output, or export.
 | **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
 
-**Unreleased — nightly:** **Set up GPU…** / **Repair GPU setup…** starts the
+**New in 0.16.0a5:** **Set up GPU…** / **Repair GPU setup…** starts the
 supported Windows setup from a status card with next-step guidance, installation
 review, progress, cancellation and verification. The session GPU choice stays
 visible; expand **Advanced details** for the package track, technical evidence
