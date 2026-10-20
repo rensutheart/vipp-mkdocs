@@ -582,6 +582,8 @@
       
         
       
+        
+      
     
     
     
@@ -625,6 +627,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1468,6 +1493,15 @@
   <a href="#give-the-graph-enough-space" class="md-nav__link">
     <span class="md-ellipsis">
       Give the graph enough space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restore-a-minimized-floating-window-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore a minimized floating window on Windows
     </span>
   </a>
   
@@ -3839,6 +3873,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#restore-a-minimized-floating-window-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore a minimized floating window on Windows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#if-vipp-is-missing-from-the-plugins-menu" class="md-nav__link">
     <span class="md-ellipsis">
       If VIPP is missing from the Plugins menu
@@ -3994,9 +4037,25 @@ graph zoom for overview; use napari layers for full-resolution image comparison.
 <p>Once VIPP is detached, double-click its title bar to maximize or restore it
 without a bounce back. Minimize VIPP when you want to keep the napari viewer
 visible, or minimize napari while keeping VIPP visible; restore either from
-its taskbar window. This remains one session, not a second application.
+its own taskbar window. See <a href="#restore-a-minimized-floating-window-on-windows">Restore a minimized floating window</a>
+if VIPP seems to have disappeared. This remains one session.
 Redock VIPP to return to the embedded layout. Closing napari still closes
 the session. Native Linux/macOS behaviour remains unqualified.</p>
+</div>
+<h2 id="restore-a-minimized-floating-window-on-windows">Restore a minimized floating window on Windows<a class="headerlink" href="#restore-a-minimized-floating-window-on-windows" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a5</p>
+<p>Floating VIPP has its own taskbar entry. Restore the existing window through
+either the taskbar or its original napari viewer:</p>
+<ol>
+<li>Select VIPP's taskbar window to restore it.</li>
+<li>If it is still minimized, return to the same napari viewer and choose
+   <strong>Plugins → VIPP Workflow (napari-vipp)</strong>.</li>
+</ol>
+<p>VIPP restores the same floating window, open workflow tabs, and calculated
+results. If it was maximized before minimizing, it returns maximized.
+Use the menu recovery while VIPP is minimized; a visible widget retains
+the menu's normal show/hide behaviour.</p>
 </div>
 <h2 id="if-vipp-is-missing-from-the-plugins-menu">If VIPP is missing from the Plugins menu<a class="headerlink" href="#if-vipp-is-missing-from-the-plugins-menu" title="Permanent link">&para;</a></h2>
 <p>Check that napari is running from the same environment into which VIPP was
@@ -4033,7 +4092,7 @@ or <strong>Open</strong> inside VIPP.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 20, 2026 12:33:17 UTC">October 20, 2026</span>
   </span>
 
     

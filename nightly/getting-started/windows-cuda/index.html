@@ -582,6 +582,8 @@
       
         
       
+        
+      
     
     
     
@@ -625,6 +627,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1377,6 +1402,15 @@
   <a href="#choose-the-standard-nvidia-route" class="md-nav__link">
     <span class="md-ellipsis">
       Choose the standard NVIDIA route
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-gpu-from-inside-vipp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up GPU from inside VIPP
     </span>
   </a>
   
@@ -3836,6 +3870,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#set-up-gpu-from-inside-vipp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up GPU from inside VIPP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managed-location-and-temporary-files" class="md-nav__link">
     <span class="md-ellipsis">
       Managed location and temporary files
@@ -3965,16 +4008,16 @@
 
 
 <h1 id="windows-nvidia-gpu-setup">Windows NVIDIA GPU setup<a class="headerlink" href="#windows-nvidia-gpu-setup" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.16.0a4 uses one standard CUDA 13 installation for every current
-reviewed GPU implementation. The normal Windows installer is the recommended
+<p>VIPP 0.16.0a5 uses the CUDA 13 package track for every current reviewed GPU
+implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no separate CUDA Toolkit or build tools are required.</p>
 <div class="admonition warning">
-<p class="admonition-title">Use the exact 0.16.0a4 release</p>
+<p class="admonition-title">Use the exact 0.16.0a5 release</p>
 <p>Download the installer and checksum only from the
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4">official v0.16.0a4 release</a>.
-Verify <code>VIPP-Setup-0.16.0a4-Windows-x86_64-UNSIGNED.exe</code> against
-<code>SHA256SUMS-Windows-0.16.0a4.txt</code> before opening it. This alpha is
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5">official v0.16.0a5 release</a>.
+Verify <code>VIPP-Setup-0.16.0a5-Windows-x86_64-UNSIGNED.exe</code> against
+<code>SHA256SUMS-Windows-0.16.0a5.txt</code> before opening it. This alpha is
 intentionally unsigned, so <strong>Unknown publisher</strong> is expected.</p>
 </div>
 <h2 id="choose-the-standard-nvidia-route">Choose the standard NVIDIA route<a class="headerlink" href="#choose-the-standard-nvidia-route" title="Permanent link">&para;</a></h2>
@@ -3986,7 +4029,7 @@ different managed installation.</p>
 <thead>
 <tr>
 <th>Requirement</th>
-<th>0.16.0a4 boundary</th>
+<th>0.16.0a5 boundary</th>
 </tr>
 </thead>
 <tbody>
@@ -4027,8 +4070,57 @@ choosing its default. A mixed workstation with one older visible device is
 therefore blocked even if another device qualifies.</p>
 <p>Only the NVIDIA display driver is a system-wide CUDA prerequisite. The VIPP
 installer supplies the user-space CUDA libraries inside its environment.</p>
+<h2 id="set-up-gpu-from-inside-vipp">Set up GPU from inside VIPP<a class="headerlink" href="#set-up-gpu-from-inside-vipp" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a5</p>
+<p>In-app setup installs GPU support in a separate copy of the exact VIPP
+build. Earlier releases without this action use the standard installer.</p>
+</div>
+<p>If <strong>Compute setup and memory…</strong> reports that CuPy is missing, the current VIPP
+environment does not have the optional GPU library. On supported Windows
+computers, VIPP can install it without copying commands into a terminal:</p>
+<ol>
+<li>Open <strong>Compute setup and memory…</strong>. Read the status and select the prominent
+   <strong>Set up GPU…</strong> or <strong>Repair GPU setup…</strong> action beside its next-step guidance.
+   You do not need to open advanced details.</li>
+<li>Let VIPP check the hardware, Python, available disk space and the exact VIPP
+   build. The setup window groups its status, next action and installation
+   information into cards. Review <strong>Installation location</strong>—the separate copy
+   where GPU support will be installed—then select <strong>Install GPU support</strong> or
+   <strong>Repair GPU setup</strong>. An internet connection is needed to download dependencies.
+   If this exact build is already verified, the window instead offers <strong>Open
+   VIPP with GPU</strong>; another installation is not needed.</li>
+<li>Follow the installation progress. Use <strong>Cancel setup</strong> to stop, or <strong>Try
+   again</strong> after addressing a reported failure. VIPP verifies the GPU
+   environment before offering <strong>Open VIPP with GPU</strong>.</li>
+<li>Select <strong>Open VIPP with GPU</strong> to launch that environment in a new window.
+   Your current window and its workflows remain open. Save any edits there,
+   then open the saved workflows in the new window; unsaved tabs are not
+   transferred automatically.</li>
+</ol>
+<p>The primary action and <strong>Close</strong> or <strong>Cancel setup</strong> stay in the footer while
+long content scrolls. <strong>Technical details</strong> is collapsed initially; expand its
+chevron to read the monospaced setup log. Opening details does not install or
+change anything. When a verified GPU copy is already ready, the summary focuses
+on opening it rather than showing download estimates for a new installation.</p>
+<p>Setup uses a separate managed CUDA environment and leaves the current CPU
+environment unchanged. Its reviewed location is specific to this VIPP build,
+so a standard GPU installation can remain alongside it. It retains the exact
+VIPP wheel used by this build. If that
+wheel is unavailable or no longer
+matches, setup stops with an explanation; it does not substitute another build
+with the same version number. Keep the original build bundle available and
+follow the reported recovery instruction.</p>
+<p>The supported route requires native 64-bit Windows, CPython 3.12, and the
+NVIDIA hardware and driver requirements above. Setup cannot install a display
+driver or turn an unsupported GPU into a supported one. It reports the
+specific blocker when this route is unavailable.</p>
+<p>Installing the GPU environment does not change saved compute choices or make
+every node GPU-capable. Reopen the workflow, select its desired compute policy,
+and inspect the actual-run badges as described in <a href="../../how-to/choose-compute/">Choose and verify
+compute</a>.</p>
 <h2 id="managed-location-and-temporary-files">Managed location and temporary files<a class="headerlink" href="#managed-location-and-temporary-files" title="Permanent link">&para;</a></h2>
-<p>One-click setup obtains canonical Windows Local App Data through
+<p>The standard installer obtains canonical Windows Local App Data through
 <code>SHGetKnownFolderPath(FOLDERID_LocalAppData)</code> and accepts only
 <code>VIPP\environments\cuda13</code> beneath it for the managed GPU track. Spaces are
 supported. CuPy 14.1.1 requires this complete environment path to contain ASCII
@@ -4067,10 +4159,17 @@ CUDA installation is still required for its optional GPU dependencies.</p>
 <li><strong>CUDA and GPU</strong> — can the pinned CUDA/CuPy runtime allocate and execute;</li>
 <li><strong>VIPP GPU coverage</strong> — which reviewed operation regions are available.</li>
 </ol>
-<p>Advanced technical detail remains under <strong>Show advanced details</strong>. A
+<p>Advanced technical detail remains under <strong>Advanced details</strong>. A
 privacy-redacted report suitable for support can be saved from the window or
 created with <code>vipp-compute-doctor --track cuda13 --support-bundle
 ".\vipp-compute-support.json"</code> from the active CUDA environment.</p>
+<p>The session GPU choice stays visible and the
+status groups the recommended setup or repair action with its explanation.
+Expand the chevron beside <strong>Advanced details</strong> for the package track, technical
+evidence and labelled <strong>Manual command</strong>. Its explanation distinguishes manual
+setup from verification; copying a command does not run it. <strong>Verify GPU setup</strong>
+only checks the environment—it does not install packages. <strong>Save support report…</strong>
+and <strong>Close</strong> remain in the footer while long content scrolls.</p>
 <p>The exact internal managed environment path can change after update or repair,
 so the shortcut and graphical command are preferable to guessing a nested
 Python path. For a manually created environment, run its own command directly:</p>
@@ -4084,7 +4183,7 @@ working directory:</p>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">`</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="s2">"napari[pyqt6]&gt;=0.6"</span> <span class="p">`</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="s2">"napari-vipp[gpu-cuda13]==0.16.0a4"</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="s2">"napari-vipp[gpu-cuda13]==0.16.0a5"</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe"</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"</span>
 </span></code></pre></div>
@@ -4114,7 +4213,7 @@ parameters, extended measurement columns, scientific parity, or memory needs
 remain on CPU with an explanation. <strong>Auto</strong> can correctly select CPU when the
 complete workload is faster there. <strong>Prefer GPU</strong> still allows visible CPU
 fallback.</p>
-<p>The completed-node badge reports what actually ran. GPU providers in 0.16.0a4
+<p>The completed-node badge reports what actually ran. GPU providers in 0.16.0a5
 appear as <strong>GPU · CuPy</strong>; an amber <strong>CPU fallback</strong> badge identifies a failed or
 ineligible accelerator request.</p>
 <h2 id="runtime-behavior-and-provenance">Runtime behavior and provenance<a class="headerlink" href="#runtime-behavior-and-provenance" title="Permanent link">&para;</a></h2>
@@ -4173,7 +4272,7 @@ benchmarks. See the
 favored CuPy in all 14 matched cases; see the
 <a href="https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison">measurement benchmarks</a>.</p>
 <p>Continue with <a href="../../how-to/choose-compute/">Choose CPU or GPU compute</a> and the
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4">official v0.16.0a4 release</a>.</p>
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5">official v0.16.0a5 release</a>.</p>
 
 
 
@@ -4194,7 +4293,7 @@ favored CuPy in all 14 matched cases; see the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 20, 2026 12:33:17 UTC">October 20, 2026</span>
   </span>
 
     

@@ -582,6 +582,8 @@
       
         
       
+        
+      
     
     
     
@@ -625,6 +627,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -4121,6 +4146,23 @@ While dragging, attached wires keep clear of their endpoint cards; routes
 around other cards settle when you release. Overlapping cards can still
 hide connections: separate them or use <strong>Auto Arrange</strong>.</p>
 </div>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a5: separate wire lanes</p>
+<p>Wires from different source output ports settle into separate lanes so you can
+follow each connection where branches approach or leave one another. This
+includes different outputs on the same node. Connections from the same
+output port can share a route; crossings remain possible.</p>
+<p>Shorter lanes through nearby gaps are preferred to distant routes around
+the graph. If a left-to-right wire would travel far above or below its
+connected cards, VIPP can try a shorter clear route with several bends.
+The local search is bounded; some layouts still require longer detours.</p>
+<p>Where cards and other wire lanes leave enough space, a wire can stay
+straight longer and turn near its destination, avoiding unnecessary
+intermediate bends. VIPP can also straighten a clear end independently,
+while keeping a needed detour at the other end.</p>
+<p>Keep editing while VIPP refines complicated wire routes. Wires may briefly
+use temporary routes before settling.</p>
+</div>
 <h3 id="choose-a-port-label-mode">Choose a port-label mode<a class="headerlink" href="#choose-a-port-label-mode" title="Permanent link">&para;</a></h3>
 <p>Open <strong>Display settings → Input/output labels</strong>, with <strong>When needed</strong>, <strong>Always</strong>, and <strong>Never</strong>. The behavior is unchanged from earlier labels; see
 <a href="../../reference/display-settings/">Graph display settings</a> for the label mapping.</p>
@@ -4168,6 +4210,31 @@ retain priority, including those added after VIPP opens.</p>
 <p>Named tunnels let one output feed distant nodes without long crossing wires.
 Create a tunnel from an output, give it a semantic name such as <code>nuclei_labels</code>
 or <code>red_channel</code>, and attach compatible inputs as subscribers.</p>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a5: replace a wire with a tunnel</p>
+<ol>
+<li>Right-click the wire or just beside it. The click target extends around
+   the visible line.</li>
+<li>Choose <strong>Replace with tunnel...</strong> directly in the wire menu.</li>
+<li>If prompted, give the tunnel a meaningful name and confirm. VIPP reuses
+   an existing tunnel from the same output port automatically.</li>
+</ol>
+<p>Replacement affects the clicked connection and is one undoable edit. The
+same output still supplies the same input through the named tunnel.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a5: replace a tunnel with wires</p>
+<ul>
+<li>To show one subscriber's connection as a wire, right-click its input
+  tunnel badge and choose <strong>Replace with wire</strong>. The other subscribers
+  keep using the named tunnel.</li>
+<li>To show every subscriber's connection as a wire, right-click the output
+  tunnel's source badge and choose <strong>Replace with wires</strong>. VIPP converts
+  all subscribers and removes the named tunnel.</li>
+</ul>
+<p>Each action is one undoable edit. The same outputs continue to supply the
+same inputs, and calculated results stay available.</p>
+</div>
 <p>Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use
 <strong>Tunnels...</strong> to focus the source, reveal subscribers, rename, or remove it.</p>
@@ -4216,7 +4283,7 @@ workflow.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 12:03:47 UTC">September 21, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 20, 2026 12:33:17 UTC">October 20, 2026</span>
   </span>
 
     
