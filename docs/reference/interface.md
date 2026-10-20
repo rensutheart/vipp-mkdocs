@@ -10,10 +10,17 @@ floating window.
 
 !!! note "New in 0.16.0a4 — independent detached windows on Windows"
     Double-click the detached window's title bar to maximize or restore it.
-    Detached VIPP and napari can minimize and restore separately, with separate
-    taskbar windows. They still share one session and viewer: redocking keeps
-    the workflow, and closing napari closes its VIPP session. Native
+    Floating VIPP has its own taskbar entry; VIPP and napari can minimize and
+    restore separately.
+    They still share one session and viewer: redocking keeps the workflow,
+    and closing napari closes its VIPP session. Native
     Linux/macOS window-manager behaviour has not yet been qualified.
+
+!!! note "Unreleased (nightly) — restore a minimized floating window"
+    In the same napari viewer, **Plugins → VIPP Workflow (napari-vipp)** restores
+    a minimized floating VIPP window, retaining its workflow tabs, calculated
+    results, and previous maximized state. See [Restore a minimized floating
+    window](../getting-started/launching.md#restore-a-minimized-floating-window-on-windows).
 
 ## Batch and Results windows
 
@@ -206,6 +213,35 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
+
+!!! note "Unreleased (nightly): graph wires"
+
+    Wires from different source output ports settle into separate lanes, including
+    outputs on the same node. Wires from the same output port can share a
+    route; crossings remain possible. The wire menu also has a direct
+    **Replace with tunnel...** action, with a wider click target around the
+    visible wire. See [Keep long graphs readable](../how-to/edit-graph.md#keep-long-graphs-readable)
+    and [Use tunnels for repeated sources](../how-to/edit-graph.md#use-tunnels-for-repeated-sources).
+
+    Routing prefers shorter nearby gap lanes to distant perimeter lanes.
+    A left-to-right wire with a large vertical detour beyond its connected
+    cards can use a shorter clear route with several bends when the bounded
+    local search finds one. Some layouts still require longer detours.
+
+    Where card and wire clearance allow, a wire can keep a longer straight
+    departure and turn near its destination to reduce intermediate bends.
+    A clear end can be straightened independently while retaining a needed
+    obstacle detour at the opposite end.
+
+!!! note "Unreleased (nightly): tunnel context actions"
+
+    | Action | Effect |
+    | --- | --- |
+    | **Replace with wire** on an input tunnel badge | Convert the clicked subscription to a direct wire; the other subscribers retain the tunnel. |
+    | **Replace with wires** on an output tunnel's source badge | Convert all subscribers to direct wires and remove the named tunnel. |
+
+    Each action is one undoable edit and preserves the connections' source and
+    input ports and calculated results.
 
 Drop a supported image file directly onto an `Image Source` card to open it.
 With that card selected, ++ctrl+v++ / ++cmd+v++ accepts a copied file or image

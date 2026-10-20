@@ -161,6 +161,26 @@ step was omitted and recalculate decisive outputs before accepting the branch.
     around other cards settle when you release. Overlapping cards can still
     hide connections: separate them or use **Auto Arrange**.
 
+!!! info "Unreleased (nightly): separate wire lanes"
+
+    Wires from different source output ports settle into separate lanes so you can
+    follow each connection where branches approach or leave one another. This
+    includes different outputs on the same node. Connections from the same
+    output port can share a route; crossings remain possible.
+
+    Shorter lanes through nearby gaps are preferred to distant routes around
+    the graph. If a left-to-right wire would travel far above or below its
+    connected cards, VIPP can try a shorter clear route with several bends.
+    The local search is bounded; some layouts still require longer detours.
+
+    Where cards and other wire lanes leave enough space, a wire can stay
+    straight longer and turn near its destination, avoiding unnecessary
+    intermediate bends. VIPP can also straighten a clear end independently,
+    while keeping a needed detour at the other end.
+
+    Keep editing while VIPP refines complicated wire routes. Wires may briefly
+    use temporary routes before settling.
+
 ### Choose a port-label mode
 
 Open **Display settings → Input/output labels**, with **When needed**, **Always**, and **Never**. The behavior is unchanged from earlier labels; see
@@ -200,6 +220,29 @@ retain priority, including those added after VIPP opens.
 Named tunnels let one output feed distant nodes without long crossing wires.
 Create a tunnel from an output, give it a semantic name such as `nuclei_labels`
 or `red_channel`, and attach compatible inputs as subscribers.
+
+!!! info "Unreleased (nightly): replace a wire with a tunnel"
+
+    1. Right-click the wire or just beside it. The click target extends around
+       the visible line.
+    2. Choose **Replace with tunnel...** directly in the wire menu.
+    3. If prompted, give the tunnel a meaningful name and confirm. VIPP reuses
+       an existing tunnel from the same output port automatically.
+
+    Replacement affects the clicked connection and is one undoable edit. The
+    same output still supplies the same input through the named tunnel.
+
+!!! info "Unreleased (nightly): replace a tunnel with wires"
+
+    - To show one subscriber's connection as a wire, right-click its input
+      tunnel badge and choose **Replace with wire**. The other subscribers
+      keep using the named tunnel.
+    - To show every subscriber's connection as a wire, right-click the output
+      tunnel's source badge and choose **Replace with wires**. VIPP converts
+      all subscribers and removes the named tunnel.
+
+    Each action is one undoable edit. The same outputs continue to supply the
+    same inputs, and calculated results stay available.
 
 Tunnels change graph presentation, not data. Rename a tunnel when its meaning
 changes; never leave a subscriber attached to a misleading name. Use

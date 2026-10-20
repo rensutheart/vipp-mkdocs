@@ -4,6 +4,27 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## Unreleased
+
+- [Graph wires](../how-to/edit-graph.md#keep-long-graphs-readable) prefer shorter
+  nearby gap lanes before distant perimeter lanes. A left-to-right connection
+  with a large vertical detour beyond its connected cards can use a shorter
+  clear route with several bends when a bounded local search finds one.
+  Where card and wire clearance allow, wires can also stay straight longer
+  before turning near the destination, reducing unnecessary intermediate
+  bends. Each clear end can be straightened independently while keeping a
+  needed obstacle detour at the other end. Some layouts still require longer
+  detours. This is nightly behavior after 0.16.0a4.
+- On Windows, [detached VIPP](../reference/interface.md) maximizes or restores
+  once on a title-bar double-click and can minimize or restore independently
+  from napari, with its own taskbar entry. Selecting **Plugins → VIPP Workflow
+  (napari-vipp)** in the same napari viewer also restores a minimized floating
+  VIPP window, retaining workflow tabs, calculated results, and its previous
+  maximized state. See [recovery steps](../getting-started/launching.md#restore-a-minimized-floating-window-on-windows).
+  Both windows remain in the same session, with redocking and napari-owned
+  session closure unchanged. Native Linux/macOS behaviour remains unqualified;
+  the menu recovery is nightly behavior after 0.16.0a4.
+
 ## 0.16.0a4 alpha
 
 [Read the 0.16.0a4 overview](0.16.0a4.md) for linked image review with accepted
