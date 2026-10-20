@@ -65,6 +65,11 @@ interrupt calculations or change the installation.
 Checksum verification does not add a digital signature to an unsigned alpha.
 Follow the normal [Windows warning guidance](installation.md#verify-the-download-and-pass-the-windows-warning).
 
+If setup stops during its computer checks or reports a Windows registration
+conflict, follow [installation troubleshooting](installation.md#troubleshooting)
+before trying the update again. Downloading and opening an installer does not
+repair conflicting saved installation records.
+
 ## Browser and manual update routes
 
 **Download in browser** and **Checksums** open official GitHub assets in your

@@ -119,6 +119,8 @@ The network-idle timeout is 120 seconds, not a total installation-time limit.
 After a temporary connection failure, the incomplete candidate is rolled back
 and any previous working VIPP remains active. Choose **Try again** after the
 connection recovers, review the current settings, and install again.
+Registration conflicts need a different next step; see
+[Troubleshooting](#troubleshooting).
 
 ### Read the live installation log
 
@@ -135,6 +137,33 @@ connection recovers, review the current settings, and install again.
     For the full record, use **Advanced details → Open setup log**. Review any
     log or screenshot before sharing it. The log does not estimate how much
     time is left or let you enter terminal commands.
+
+### Troubleshooting
+
+!!! note "Unreleased after 0.16.0a4: registration-conflict checks"
+    Future setup checks the Windows **Apps & Features** registration during
+    **Checking this computer**, before downloading packages or replacing the
+    environment. If setup cannot verify the registration or safely recover an
+    interrupted transaction, it stops with **Get setup help** instead of a
+    retry action. This behavior is not part of the immutable 0.16.0a4 installer.
+
+If setup reports a registration conflict or an unsafe interrupted transaction,
+repeated retries will not repair the durable registration mismatch. The Windows
+entry and saved setup records need investigation. An older **Installed apps**
+version, even with the same VIPP name and folder, is not proof that its
+uninstaller is safe for the current copy. The blocked update keeps the prior
+installation in place; it does not install the new version.
+
+1. Expand **Advanced details** and save its text. Use **Open setup log**, when
+   available, to keep a copy of the full setup log as well.
+2. In the unreleased setup, choose **Get setup help**. For 0.16.0a4, use
+   [installation support](../troubleshooting/report-a-problem.md) directly.
+   Include the installer filename, installed VIPP version, CPU or NVIDIA GPU
+   route, and exact stop message. Review diagnostics for identifying paths or
+   other sensitive details before sharing.
+3. Keep the prior installation and setup records until support has reviewed
+   the conflict. Do not delete or rename VIPP folders, edit the Windows registry,
+   or run an older or unexpected **Installed apps** entry to force the update.
 
 ### Update, repair, or remove
 
