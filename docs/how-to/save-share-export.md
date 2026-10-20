@@ -12,13 +12,14 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a4; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a5; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
 | Batch config (version 6) | Recreate source bindings, stable SourceItems, axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, individual existing-output choices, output definitions, naming, policy, workflow association, and compute request | Input bytes, actual run decisions, finalized outcome |
 | Batch manifest/archive (version 6) and sidecars | Audit planned inputs/outputs, SourceItems, source axes, effective settings, identities, hashes, compute decisions, cleanup, errors and item/output status; verify compatible whole completed items for resume | One atomic transaction, cross-version/relocated recovery, or proof of biological validity |
 | Reproducibility package (new in 0.15.0a3) | Review and share an offline report, portable recipe, version summaries and sanitized available run evidence | Raw/result data, original run receipts, resumable state, an installed or locked environment |
+| Workflow recovery copies (new in 0.16.0a5) | Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs | Batch workspace/configuration, scientific caches, Undo history, automatic Run or overwritten original workflow files |
 
 Use [Export a reproducibility package](export-reproducibility-package.md) for
 the review-before-sharing procedure. The workflow action describes a current
@@ -52,6 +53,24 @@ Bundled examples remain templates and are never overwritten in place.
 Use ++ctrl+shift+s++ or **Save workflow as…** when the active tab
 should be written to a different name or location without changing the normal
 save policy.
+
+!!! info "New in 0.16.0a5: move workflows with their data"
+    Saving writes local image, measurement-dataset and Save Image destinations
+    relative to the workflow file where possible. Attached batch folders and
+    source items use the same base. Files on another Windows drive or share
+    remain absolute. Input data and the VIPP environment are not embedded.
+
+    Copy the workflow and its data together, preserving their folder structure.
+    Relative paths are resolved from the workflow's folder, not the folder from
+    which you launch VIPP. **Save workflow as…** recalculates paths for the new
+    location while retaining the same input files; it does not copy those files.
+    Input revisions, selectors and measurement-dataset checksums remain checked.
+
+    Per-sample parameter overrides stay bound to the same input content and
+    logical selection. Individual **Skip/Overwrite** choices remain tied to
+    exact source and output locations: after moving a project, reset those
+    choices and check the batch again before running.
+
 If a Batch workspace is active, VIPP asks what to save:
 
 - **Yes** attaches the current versioned batch configuration to the same
@@ -93,6 +112,45 @@ workflows.
 Recreate schema-1/2 graphs deliberately; do not edit only the JSON version. See
 the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-to-0120a1).
 
+## Recover interrupted workflows
+
+!!! note "New in 0.16.0a5 — working copies are not Save"
+    VIPP keeps separate graph working copies after a short pause in editing
+    (about two seconds), with a thirty-second check for pending edits. This does
+    not change the original workflow JSON or clear its modified marker. Continue
+    to use **Save** for the record you intend to keep or share.
+
+After an interrupted session, VIPP offers **Recover interrupted workflows**.
+You can also open it from **Workflow actions → Recover interrupted workflows…**
+(the three-dot menu beside Save).
+
+1. Select the interrupted workspace, then choose **Recover selected**. Its named
+   and unnamed workflow tabs open as new unsaved **Recovered — …** copies,
+   preserving their order and selected tab. Existing tabs/files stay untouched.
+2. Check the sources and graph, then **Save workflow as…** to keep a recovered
+   analysis. The original path is not overwritten by recovery.
+3. Calculate explicitly when ready. Recovery does not restore calculated arrays,
+   tables, Undo history or in-flight work, and never runs a workflow or writer
+   automatically. You need the original input files again.
+
+Recovery does not reconstruct the Batch workspace or its configuration. Save
+the Batch configuration separately, then reopen it and review sources, output
+paths and run choices before running a recovered graph in Batch.
+
+**Keep for later** leaves the copy available. **Discard selected recovery…**
+stops offering that interrupted workspace; it does not delete your ordinary
+saved workflow files. Another running VIPP instance is never offered as a crash.
+If the latest copy is damaged, a verified previous copy can be offered with that
+label. Copies that cannot be verified are kept for attention, not silently
+opened or repaired.
+
+Use **Workflow actions → Choose recovery folder…** if the recovery status reports a
+folder/disk problem. This chooses working-copy storage, not the default Save or
+result-output destination. Clean shutdown retires only its own managed working
+copies; it does not erase older interrupted workspaces or another live instance.
+The newest unsaved edit can still be lost if interruption happens before a
+checkpoint succeeds, so recovery is not a backup or source-data archive.
+
 ## Save a selected output
 
 Select the desired output and choose **Save selected output...**. The available
@@ -130,6 +188,14 @@ The script records the exact VIPP version that created it and refuses another
 runtime. Regenerate and revalidate it after every upgrade, including alpha
 updates. UI caches, pinned layers, and graph layout are presentation state and
 are intentionally absent.
+
+!!! info "New in 0.16.0a5: portable Python exports"
+    **Export Python…** writes local source and Save Image paths relative to the
+    saved script where possible. Run or import that `.py` file directly; its
+    paths resolve from the script's folder even when your working directory is
+    elsewhere. Copy the script and data together while preserving their folder
+    structure. The required VIPP version and dependencies must still be
+    installed separately.
 
 Python callers can pass a complete `ComputeRequest`, progress callback, and
 cooperative cancellation token. The generated CLI accepts
@@ -181,6 +247,16 @@ Use **Batch → Save config** to write
 run, retain the latest manifest, run-id archive, and item sidecars. The optional
 `vipp_batch_pipeline.py` is a version-locked launcher for that config and
 workflow; it is not a substitute for the pair.
+
+!!! info "New in 0.16.0a5: relative batch configuration paths"
+    **Save config** stores local workflow, input-folder, output-folder and
+    SourceItem paths relative to the config file where possible. Saving a
+    loaded config in another folder recalculates those paths to retain the
+    same workflow, inputs and output destination; it does not move the files.
+    Copy the config, workflow and data together to move a complete project.
+    Source paths inside the workflow still resolve from the workflow's folder.
+    Individual **Skip/Overwrite** choices require review after relocation,
+    as described under [Save a workflow](#save-a-workflow).
 
 Version-6 configs store the complete configured compute request, reviewed
 source-axis declarations, stable SourceItems, typed per-sample numeric

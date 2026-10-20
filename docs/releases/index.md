@@ -4,6 +4,18 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a5 alpha
+
+[Read the 0.16.0a5 overview](0.16.0a5.md) for standalone workflow crash recovery,
+portable workflow/batch/Python paths, no-overwrite image write protection,
+guided Windows GPU setup, registration-conflict guidance, graph routing and
+thumbnail cleanup. Unfinished AI assistant/agent/MCP/webhook features are not
+included. Use the canonical
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a5/) with the
+[matching installation instructions](../getting-started/installation.md).
+Scientific algorithms, GPU admission and schema numbers are unchanged.
+
 ## 0.16.0a4 alpha
 
 [Read the 0.16.0a4 overview](0.16.0a4.md) for linked image review with accepted

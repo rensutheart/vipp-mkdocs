@@ -8,16 +8,16 @@ packages.
 
 **[Check the official VIPP releases](https://github.com/rensutheart/napari-vipp/releases)**
 
-!!! warning "Use only the exact 0.16.0a4 files"
-    Obtain the `v0.16.0a4` installers, checksums, wheel, and source archive from the
-    [official release page](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4).
+!!! warning "Use only the exact 0.16.0a5 files"
+    Obtain the `v0.16.0a5` installers, checksums, wheel, and source archive from the
+    [official release page](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5).
     The release manifest identifies the exact immutable tag and embedded wheel.
     Do not use a similarly named file from another site.
 
 !!! warning "Unsigned alpha — verify before running"
     Download
-    `VIPP-Setup-0.16.0a4-Windows-x86_64-UNSIGNED.exe` only from the official
-    `v0.16.0a4` entry on the
+    `VIPP-Setup-0.16.0a5-Windows-x86_64-UNSIGNED.exe` only from the official
+    `v0.16.0a5` entry on the
     [VIPP GitHub releases page](https://github.com/rensutheart/napari-vipp/releases).
     This alpha is intentionally not Authenticode-signed, so Windows will report
     **Unknown publisher**. The `-UNSIGNED` filename is intentional. Do
@@ -26,17 +26,17 @@ packages.
 ### Verify the download and pass the Windows warning
 
 1. Download the installer and
-   `SHA256SUMS-Windows-0.16.0a4.txt` from the same
+   `SHA256SUMS-Windows-0.16.0a5.txt` from the same
    official GitHub release.
 2. Open PowerShell in the download folder and run:
 
     ```powershell
     Get-FileHash -Algorithm SHA256 `
-      .\VIPP-Setup-0.16.0a4-Windows-x86_64-UNSIGNED.exe
+      .\VIPP-Setup-0.16.0a5-Windows-x86_64-UNSIGNED.exe
     ```
 
 3. Compare the full 64-character result with the line for the installer in
-   `SHA256SUMS-Windows-0.16.0a4.txt`. If it differs, stop and delete the file.
+   `SHA256SUMS-Windows-0.16.0a5.txt`. If it differs, stop and delete the file.
 4. Double-click the installer. At **Windows protected your PC**, choose **More
    info**, check that the app name ends in `-UNSIGNED.exe` and the publisher is
    **Unknown publisher**, then choose **Run anyway**.
@@ -77,7 +77,7 @@ app, not by opening a different shortcut. The CPU and CUDA dependency
 installations remain separate; the common launcher does not add GPU packages
 to a CPU-only installation.
 
-!!! important "CUDA location in 0.16.0a4"
+!!! important "CUDA location in 0.16.0a5"
     One-click setup obtains canonical Windows Local App Data through
     `SHGetKnownFolderPath(FOLDERID_LocalAppData)` and accepts only
     `VIPP\environments\cpu` or `VIPP\environments\cuda13` beneath it. A custom
@@ -119,6 +119,8 @@ The network-idle timeout is 120 seconds, not a total installation-time limit.
 After a temporary connection failure, the incomplete candidate is rolled back
 and any previous working VIPP remains active. Choose **Try again** after the
 connection recovers, review the current settings, and install again.
+Registration conflicts need a different next step; see
+[Troubleshooting](#troubleshooting).
 
 ### Read the live installation log
 
@@ -135,6 +137,33 @@ connection recovers, review the current settings, and install again.
     For the full record, use **Advanced details → Open setup log**. Review any
     log or screenshot before sharing it. The log does not estimate how much
     time is left or let you enter terminal commands.
+
+### Troubleshooting
+
+!!! note "New in 0.16.0a5: registration-conflict checks"
+    Setup checks the Windows **Apps & Features** registration during
+    **Checking this computer**, before downloading packages or replacing the
+    environment. If setup cannot verify the registration or safely recover an
+    interrupted transaction, it stops with **Get setup help** instead of a
+    retry action.
+
+If setup reports a registration conflict or an unsafe interrupted transaction,
+repeated retries will not repair the durable registration mismatch. The Windows
+entry and saved setup records need investigation. An older **Installed apps**
+version, even with the same VIPP name and folder, is not proof that its
+uninstaller is safe for the current copy. The blocked update keeps the prior
+installation in place; it does not install the new version.
+
+1. Expand **Advanced details** and save its text. Use **Open setup log**, when
+   available, to keep a copy of the full setup log as well.
+2. Choose **Get setup help**, or open
+   [installation support](../troubleshooting/report-a-problem.md) directly.
+   Include the installer filename, installed VIPP version, CPU or NVIDIA GPU
+   route, and exact stop message. Review diagnostics for identifying paths or
+   other sensitive details before sharing.
+3. Keep the prior installation and setup records until support has reviewed
+   the conflict. Do not delete or rename VIPP folders, edit the Windows registry,
+   or run an older or unexpected **Installed apps** entry to force the update.
 
 ### Update, repair, or remove
 
@@ -160,7 +189,7 @@ when they are unchanged and recorded as owned by that installation; modified
 or unrelated shortcuts are not silently replaced.
 
 An installer-owned CUDA copy already stored under a non-ASCII path cannot be
-updated or repaired in place by 0.16.0a4. Setup may first complete and record
+updated or repaired in place by 0.16.0a5. Setup may first complete and record
 recovery from an earlier interrupted transaction; after that separate
 recovery, the newly blocked selection performs no new mutation of the old
 environment, shortcuts, or ownership record. Do not move or rename that
@@ -177,7 +206,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ## macOS installer — recommended
 
-VIPP 0.16.0a4 has separate offline packages for Apple Silicon and Intel Macs.
+VIPP 0.16.0a5 has separate offline packages for Apple Silicon and Intel Macs.
 Each package includes Python and napari, installs a private CPU-only environment
 under `~/Library/vipp`, and creates `~/Applications/VIPP.app`. No terminal or
 separate Python installation is required for the normal route.
@@ -190,11 +219,11 @@ launch, and removal.
 
 ## Linux and advanced manual installation
 
-VIPP 0.16.0a4 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
+VIPP 0.16.0a5 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
 environment, then install the exact alpha. An exact prerelease pin does not need
 pip's `--pre` option.
 
-The commands below use the exact `0.16.0a4` package pin.
+The commands below use the exact `0.16.0a5` package pin.
 
 === "Windows manual"
 
@@ -203,7 +232,7 @@ The commands below use the exact `0.16.0a4` package pin.
     & ".\.venv-vipp\Scripts\python.exe" -m pip install --upgrade pip
     & ".\.venv-vipp\Scripts\python.exe" -m pip install `
       "napari[pyqt6]>=0.6" `
-      "napari-vipp==0.16.0a4"
+      "napari-vipp==0.16.0a5"
     & ".\.venv-vipp\Scripts\vipp.exe"
     ```
 
@@ -214,7 +243,7 @@ The commands below use the exact `0.16.0a4` package pin.
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
     python -m pip install "napari[pyside6]>=0.6" \
-      "napari-vipp==0.16.0a4"
+      "napari-vipp==0.16.0a5"
     vipp
     ```
 
@@ -225,7 +254,7 @@ The commands below use the exact `0.16.0a4` package pin.
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
     python -m pip install "napari[pyqt6]>=0.6" \
-      "napari-vipp==0.16.0a4"
+      "napari-vipp==0.16.0a5"
     vipp
     ```
 
@@ -250,7 +279,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.16.0a4
+0.16.0a5
 ```
 
 Inside napari, choose **Plugins → VIPP Workflow (napari-vipp)**.
@@ -278,7 +307,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.16.0a4"
+  "napari-vipp[gpu-cuda13]==0.16.0a5"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -297,12 +326,12 @@ novice check into a pass.
 
 ## Optional microscope readers
 
-Native CZI, Leica LIF/LOF/XLIF, Nikon ND2 and Olympus OIF/OIB/OIR readers are included in 0.16.0a4 plugin and desktop installations. No microscope extra is needed for these routes. **Image Source → Reader support** provides checks and guided setup for missing packages; see [microscope reader support](reader-support.md).
+Native CZI, Leica LIF/LOF/XLIF, Nikon ND2 and Olympus OIF/OIB/OIR readers are included in 0.16.0a5 plugin and desktop installations. No microscope extra is needed for these routes. **Image Source → Reader support** provides checks and guided setup for missing packages; see [microscope reader support](reader-support.md).
 
 Bio-Formats remains optional for IMS/VSI and broader fallback support. Install it with the Python from the exact environment that launches VIPP, then restart napari:
 
 ```text
-python -m pip install "napari-vipp[bioformats]==0.16.0a4"
+python -m pip install "napari-vipp[bioformats]==0.16.0a5"
 ```
 
 Its first use can download Java and Bio-Formats and require internet access. For older software, use the [0.15.0a1 installation manual](https://rensutheart.github.io/vipp-mkdocs/0.15.0a1/getting-started/installation/).

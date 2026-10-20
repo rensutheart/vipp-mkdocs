@@ -16,6 +16,35 @@ DOCS = ROOT / "docs"
 # These protect material safety/interpretation details formerly checked against
 # duplicate application guides. They belong beside the public text now.
 REQUIRED = {
+    "reference/import-export.md": (
+        "No-overwrite image writes",
+        "private staging",
+        "atomically publishes",
+        "destination is still absent",
+        "symbolic link",
+        "does not fall back to an unsafe overwrite",
+        "separately authorized overwrite request",
+        "not an atomic transaction",
+    ),
+    "how-to/save-share-export.md": (
+        "Recover interrupted workflows",
+        "working copies are not Save",
+        "about two seconds",
+        "thirty-second check",
+        "Recover selected",
+        "new unsaved",
+        "Existing tabs/files stay untouched",
+        "does not restore calculated arrays",
+        "does not reconstruct the Batch workspace",
+        "Save the Batch configuration separately",
+        "Keep for later",
+        "Discard selected recovery",
+        "Another running VIPP instance is never offered as a crash",
+        "verified previous copy",
+        "Choose recovery folder",
+        "another live instance",
+        "not a backup or source-data archive",
+    ),
     "how-to/review-images.md": (
         "New in 0.16.0a4",
         "Review Images",
@@ -83,6 +112,11 @@ REQUIRED = {
         "15 GiB",
         "5 GiB",
         "Advanced details",
+        "New in 0.16.0a5: registration-conflict checks",
+        "Get setup help",
+        "durable registration mismatch",
+        "prior installation",
+        "Windows registry",
     ),
     "getting-started/macos.md": (
         "SHA256SUMS-macOS-",

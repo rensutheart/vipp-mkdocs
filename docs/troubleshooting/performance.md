@@ -145,6 +145,14 @@ A completed scientific pipeline can be followed by Stack contrast work for its
 node-card thumbnails. This is a separate presentation calculation: it does not
 mean a node is recalculating or that its CPU/CuPy provenance changed.
 
+!!! note "New in 0.16.0a5: thumbnail progress cleanup"
+
+    Results Workspace and workflow-tab readiness checks no longer interrupt
+    queued thumbnail previews. When a tab change discards obsolete thumbnail
+    work, VIPP clears its **Calculating thumbnail contrast…** indicator and
+    activity entry. These changes affect presentation only; image measurements
+    and statistics are unchanged.
+
 Use the controls independently:
 
 - **Thumbnail detail** chooses Low (90 × 55), Standard (180 × 110), High

@@ -5,6 +5,22 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a5 scope and evidence
+
+The [0.16.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5)
+and its [qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a5/docs/release-qualification-baseline.md)
+identify exact source, artifacts and changed-domain versus carried evidence.
+This alpha changes persistence, local output publication, Windows setup and
+presentation—not scientific algorithms, the operation catalogue or GPU
+admission. See the [release overview](../releases/0.16.0a5.md).
+
+Graph recovery is not recovery of source data or calculated results. A safe
+no-overwrite write is not an atomic transaction across all batch files.
+Source tests, clean package checks, native setup/launch checks and frozen
+installer lifecycles remain distinct evidence; local checks do not establish
+full cross-platform GUI or filesystem coverage. Existing scientific limits
+below remain applicable. No AI/agent/MCP features are included in this release.
+
 ## 0.16.0a4 scope and evidence
 
 Use the [0.16.0a4 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a4)

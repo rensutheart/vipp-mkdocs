@@ -120,6 +120,20 @@ format when axes, calibration, stacks, or exact label identity matter.
 
 For additional readers, see [optional format packages](../getting-started/installation.md).
 
+### No-overwrite image writes
+
+**New in 0.16.0a5:** when an image save requests no overwrite, VIPP first writes
+the complete file or directory store to private staging beside the destination.
+It then atomically publishes the result only if that destination is still absent.
+An existing file, store or symbolic link—including one created while saving—
+is not replaced. If the filesystem cannot safely publish without replacement,
+the save fails; it does not fall back to an unsafe overwrite.
+
+Choose a different output name or review the failure before trying again.
+This protection does not change a separately authorized overwrite request,
+scientific serialization or format limits. It is not an atomic transaction
+across all batch outputs, sidecars and manifests.
+
 <span id="mesh-export-nightly"></span>
 
 ### Mesh export

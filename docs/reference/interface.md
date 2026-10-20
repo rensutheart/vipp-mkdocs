@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a4. Some labels
+Labels below match napari-vipp 0.16.0a5. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -10,10 +10,17 @@ floating window.
 
 !!! note "New in 0.16.0a4 — independent detached windows on Windows"
     Double-click the detached window's title bar to maximize or restore it.
-    Detached VIPP and napari can minimize and restore separately, with separate
-    taskbar windows. They still share one session and viewer: redocking keeps
-    the workflow, and closing napari closes its VIPP session. Native
+    Floating VIPP has its own taskbar entry; VIPP and napari can minimize and
+    restore separately.
+    They still share one session and viewer: redocking keeps the workflow,
+    and closing napari closes its VIPP session. Native
     Linux/macOS window-manager behaviour has not yet been qualified.
+
+!!! note "New in 0.16.0a5 — restore a minimized floating window"
+    In the same napari viewer, **Plugins → VIPP Workflow (napari-vipp)** restores
+    a minimized floating VIPP window, retaining its workflow tabs, calculated
+    results, and previous maximized state. See [Restore a minimized floating
+    window](../getting-started/launching.md#restore-a-minimized-floating-window-on-windows).
 
 ## Batch and Results windows
 
@@ -161,6 +168,14 @@ separate from file and execution actions.
 
     In 0.15.0a5, these workflow actions were in the gear menu.
 
+!!! note "New in 0.16.0a5 — workflow recovery"
+    **Recover interrupted workflows…** opens verified graph working copies as
+    new unsaved tabs, without replacing open tabs or original saved files.
+    **Choose recovery folder…** changes the storage for those working copies,
+    not the normal Save or result-output location. Neither action calculates a
+    workflow or reconstructs the Batch workspace/configuration. Save Batch
+    configuration separately. See [Recover interrupted workflows](../how-to/save-share-export.md#recover-interrupted-workflows).
+
 ### Finding nodes
 
 Use **Find a node to add…** in the Nodes panel to add an operation, or
@@ -206,6 +221,35 @@ node dropped onto an existing wire can split that connection in place. Named
 output tunnels can be rerouted by dragging their source badge to another
 compatible output; preview/commit share type, cycle, and topology validation,
 and the accepted edit is atomic and undoable.
+
+!!! note "New in 0.16.0a5: graph wires"
+
+    Wires from different source output ports settle into separate lanes, including
+    outputs on the same node. Wires from the same output port can share a
+    route; crossings remain possible. The wire menu also has a direct
+    **Replace with tunnel...** action, with a wider click target around the
+    visible wire. See [Keep long graphs readable](../how-to/edit-graph.md#keep-long-graphs-readable)
+    and [Use tunnels for repeated sources](../how-to/edit-graph.md#use-tunnels-for-repeated-sources).
+
+    Routing prefers shorter nearby gap lanes to distant perimeter lanes.
+    A left-to-right wire with a large vertical detour beyond its connected
+    cards can use a shorter clear route with several bends when the bounded
+    local search finds one. Some layouts still require longer detours.
+
+    Where card and wire clearance allow, a wire can keep a longer straight
+    departure and turn near its destination to reduce intermediate bends.
+    A clear end can be straightened independently while retaining a needed
+    obstacle detour at the opposite end.
+
+!!! note "New in 0.16.0a5: tunnel context actions"
+
+    | Action | Effect |
+    | --- | --- |
+    | **Replace with wire** on an input tunnel badge | Convert the clicked subscription to a direct wire; the other subscribers retain the tunnel. |
+    | **Replace with wires** on an output tunnel's source badge | Convert all subscribers to direct wires and remove the named tunnel. |
+
+    Each action is one undoable edit and preserves the connections' source and
+    input ports and calculated results.
 
 Drop a supported image file directly onto an `Image Source` card to open it.
 With that card selected, ++ctrl+v++ / ++cmd+v++ accepts a copied file or image
@@ -258,6 +302,16 @@ batch output, or export.
 | **Find fastest pipeline…** | In Custom mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present grouped per-node/per-implementation evidence for review. A scientifically successful but speed-inconclusive result remains inspectable and changes nothing. |
 | **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
+
+**New in 0.16.0a5:** **Set up GPU…** / **Repair GPU setup…** starts the
+supported Windows setup from a status card with next-step guidance, installation
+review, progress, cancellation and verification. The session GPU choice stays
+visible; expand **Advanced details** for the package track, technical evidence
+and explained, copy-only manual command. **Verify GPU setup** checks without
+installing packages. **Save support report…** and **Close** stay in the footer.
+**Open VIPP with GPU** opens the verified
+environment in a separate window; current workflows stay in the original
+window. See [in-app GPU setup](../getting-started/windows-cuda.md#set-up-gpu-from-inside-vipp).
 
 New sessions default to **Auto**. A schema-3 workflow loads as **CPU** because
 the old file did not author compute intent. With no exact compatible history,

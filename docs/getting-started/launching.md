@@ -121,9 +121,25 @@ graph zoom for overview; use napari layers for full-resolution image comparison.
     Once VIPP is detached, double-click its title bar to maximize or restore it
     without a bounce back. Minimize VIPP when you want to keep the napari viewer
     visible, or minimize napari while keeping VIPP visible; restore either from
-    its taskbar window. This remains one session, not a second application.
+    its own taskbar window. See [Restore a minimized floating window](#restore-a-minimized-floating-window-on-windows)
+    if VIPP seems to have disappeared. This remains one session.
     Redock VIPP to return to the embedded layout. Closing napari still closes
     the session. Native Linux/macOS behaviour remains unqualified.
+
+## Restore a minimized floating window on Windows
+
+!!! note "New in 0.16.0a5"
+    Floating VIPP has its own taskbar entry. Restore the existing window through
+    either the taskbar or its original napari viewer:
+
+    1. Select VIPP's taskbar window to restore it.
+    2. If it is still minimized, return to the same napari viewer and choose
+       **Plugins → VIPP Workflow (napari-vipp)**.
+
+    VIPP restores the same floating window, open workflow tabs, and calculated
+    results. If it was maximized before minimizing, it returns maximized.
+    Use the menu recovery while VIPP is minimized; a visible widget retains
+    the menu's normal show/hide behaviour.
 
 ## If VIPP is missing from the Plugins menu
 
