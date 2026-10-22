@@ -1,15 +1,15 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.16.0a5 uses the CUDA 13 package track for every current reviewed GPU
+VIPP 0.16.0a6 uses the CUDA 13 package track for every current reviewed GPU
 implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no separate CUDA Toolkit or build tools are required.
 
-!!! warning "Use the exact 0.16.0a5 release"
+!!! warning "Use the exact 0.16.0a6 release"
     Download the installer and checksum only from the
-    [official v0.16.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5).
-    Verify `VIPP-Setup-0.16.0a5-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.16.0a5.txt` before opening it. This alpha is
+    [official v0.16.0a6 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a6).
+    Verify `VIPP-Setup-0.16.0a6-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.16.0a6.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
 
 ## Choose the standard NVIDIA route
@@ -19,7 +19,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.16.0a5 boundary |
+| Requirement | 0.16.0a6 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -170,7 +170,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.16.0a5"
+  "napari-vipp[gpu-cuda13]==0.16.0a6"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -205,7 +205,7 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. GPU providers in 0.16.0a5
+The completed-node badge reports what actually ran. GPU providers in 0.16.0a6
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request.
 
@@ -282,4 +282,4 @@ favored CuPy in all 14 matched cases; see the
 [measurement benchmarks](https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison).
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[official v0.16.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5).
+[official v0.16.0a6 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a6).

@@ -5,7 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
-| [0.16.0a5 release notes](../releases/0.16.0a5.md) | Review workflow recovery, portable paths, image write safety, GPU setup and focused graph/UI fixes. |
+| [0.16.0a6 release notes](../releases/0.16.0a6.md) | Review startup improvements, background reader preparation and Windows setup retries. |
 | [0.16.0a2 release notes](../releases/0.16.0a2.md) | Review registration, reusable transforms, per-label skeletons and CPU median acceleration. |
 | [0.16.0a1 release notes](../releases/0.16.0a1.md) | Review Results Workspace, descriptive statistics and plots, batch measurement collection and seeded compartments. |
 | [CPU and GPU compute](../how-to/choose-compute.md) | Choose CPU, Auto, Prefer GPU, or Custom; read exact eligibility, benchmarks, badges, fallback, and provenance. |
