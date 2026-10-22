@@ -4,6 +4,14 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a6 alpha
+
+[Read the 0.16.0a6 overview](0.16.0a6.md) for earlier responsive startup feedback,
+ordinary vector splash lettering, background reader preparation and bounded
+Windows setup retries. Scientific algorithms and schemas are unchanged.
+Use the [GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a6)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a6/).
+
 ## 0.16.0a5 alpha
 
 [Read the 0.16.0a5 overview](0.16.0a5.md) for standalone workflow crash recovery,

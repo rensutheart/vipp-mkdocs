@@ -1,5 +1,24 @@
 # Performance
 
+## If Startup Is Slow
+
+Record the VIPP version, the splash message that remains visible longest, and
+whether this is the first launch after restarting the computer or a later
+launch. Compare those separately: later launches can reuse files already in
+memory and are not a cold-start measurement.
+
+On Windows, retained startup logs are under `%LOCALAPPDATA%\VIPP\logs`.
+Keep the log for the slow launch when [reporting a problem](report-a-problem.md).
+
+!!! note "New in 0.16.0a6"
+    Startup logs include elapsed time, process CPU time and the time spent in
+    the previous stage. These distinguish loading napari, loading VIPP,
+    building the interface and preparing the welcome workflow. Once the interface
+    opens, OME-Zarr and OME-XML libraries warm up in the background while you
+    work. A file selected before that finishes may still wait for its library;
+    later selections reuse the loaded libraries. Image interpretation and
+    analysis are unchanged.
+
 ## If Updates Feel Slow
 
 Try these in order:

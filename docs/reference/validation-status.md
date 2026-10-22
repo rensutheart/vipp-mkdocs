@@ -5,6 +5,17 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a6 scope and evidence
+
+The [0.16.0a6 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a6)
+changes startup presentation, reader-import scheduling and Windows installer
+file-lock retries. Scientific algorithms, image interpretation, schema numbers,
+GPU admission, dependency pins and the macOS installer engine are unchanged.
+The [qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a6/docs/release-qualification-baseline.md)
+separates affected checks from carried evidence. See the
+[release overview](../releases/0.16.0a6.md) for measurement and lifecycle limits.
+No fixed startup duration or instant first-file loading is promised.
+
 ## 0.16.0a5 scope and evidence
 
 The [0.16.0a5 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a5)

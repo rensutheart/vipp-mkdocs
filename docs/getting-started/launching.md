@@ -27,6 +27,24 @@ than one managed installation exists.
 
 ## During startup
 
+!!! note "New in 0.16.0a6 — startup diagnostics"
+    The splash is painted before the main application starts. Its elapsed
+    timer and minimize/hide controls stay responsive while Windows creates
+    the application process. On Windows, the initial branding and live clock
+    also appear before system fonts finish preparing. The early splash uses
+    sharp prepared lettering for the same version, live stage and elapsed time,
+    with slightly larger grey text. The elapsed clock continues throughout.
+    The status message uses scalable Inter Medium lettering throughout startup,
+    including after the other labels switch to normal text rendering.
+
+    The startup log now records elapsed time, process CPU time and the time
+    spent in each stage. After the interface opens, OME reader libraries warm
+    up in the background so later file selection can reuse them. You can work
+    while that happens. Selecting a file immediately can still require a wait
+    for its library to finish loading. See
+    [slow startup](../troubleshooting/performance.md#if-startup-is-slow)
+    for what to record when reporting a delay.
+
 Startup shows the VIPP brand, real progress milestones, elapsed time, and
 retained diagnostics. The normal Auto launch has no **Automatic** label or
 compute-profile description on the splash. Compute controls and actual-run

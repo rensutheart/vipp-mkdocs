@@ -1,6 +1,6 @@
 # Sample Data
 
-VIPP 0.16.0a5 includes **34** deterministic microscopy-style samples, including a
+VIPP 0.16.0a6 includes **34** deterministic microscopy-style samples, including a
 bimodal threshold gallery. They are available inside
 `Image Source`:
 
