@@ -12,14 +12,14 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a6; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a7; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
 | Batch config (version 6) | Recreate source bindings, stable SourceItems, axis declarations, per-sample numeric overrides, batch Run/Bypass profiles, individual existing-output choices, output definitions, naming, policy, workflow association, and compute request | Input bytes, actual run decisions, finalized outcome |
 | Batch manifest/archive (version 6) and sidecars | Audit planned inputs/outputs, SourceItems, source axes, effective settings, identities, hashes, compute decisions, cleanup, errors and item/output status; verify compatible whole completed items for resume | One atomic transaction, cross-version/relocated recovery, or proof of biological validity |
 | Reproducibility package (new in 0.15.0a3) | Review and share an offline report, portable recipe, version summaries and sanitized available run evidence | Raw/result data, original run receipts, resumable state, an installed or locked environment |
-| Workflow recovery copies (new in 0.16.0a5) | Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs | Batch workspace/configuration, scientific caches, Undo history, automatic Run or overwritten original workflow files |
+| Workflow recovery copies (new in 0.16.0a5) | Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs; from 0.16.0a7, rebuild safe automatic results | Batch workspace/configuration, scientific caches, Undo history or overwritten original workflow files; manual/file-writing steps remain paused |
 
 Use [Export a reproducibility package](export-reproducibility-package.md) for
 the review-before-sharing procedure. The workflow action describes a current
@@ -29,6 +29,13 @@ recipe; the batch-results action uses recorded archived evidence.
 
 Choose **Open** and select a saved workflow `.json` file. VIPP opens it in a new
 tab, keeping existing workflows and unsaved edits intact.
+
+!!! note "New in 0.16.0a7"
+    Ordinary workflows load their bound sources when opened. If the saved
+    selection is a manual step with no available result, the initial view shows
+    an available Image Source instead; the manual step is not calculated.
+    **Calculate all** also works when a workflow has no calculated results yet,
+    even if no parameters have changed.
 
 **New in 0.15.0a3:** drag a local workflow `.json` file from your file
 manager onto VIPP's workflow canvas, tab strip, or inspector to open it in a new
@@ -70,6 +77,38 @@ save policy.
     logical selection. Individual **Skip/Overwrite** choices remain tied to
     exact source and output locations: after moving a project, reset those
     choices and check the batch again before running.
+
+### Choose relative or absolute paths
+
+!!! note "New in 0.16.0a7"
+    Open the gear menu and choose **Settings → Workflow paths**:
+
+    | Choice | Use it when |
+    | --- | --- |
+    | **Relative to workflow file** (default) | You will move or share the workflow and its data together, preserving their folder structure. |
+    | **Absolute file locations** | The data will stay in place, but you may move just the workflow JSON. The saved file names the full locations. |
+
+    The choice applies the next time you **Save**, **Save workflow as…**, or
+    create a timestamped workflow copy. It also applies to a batch configuration
+    attached to that workflow. It does not change the separate **Export Python…**
+    or Batch **Save config** actions, and it never moves or copies data.
+
+To move only the workflow while leaving its data in place:
+
+1. Open the workflow where its relative paths still resolve correctly.
+2. Choose **Settings → Workflow paths → Absolute file locations**.
+3. **Save**, then move the workflow JSON with your file manager. Alternatively,
+   use **Save workflow as…** to write it directly to the new location.
+
+**Save workflow as…** retains the same resolved input and output locations in
+either path mode. Choose the destination inside VIPP when possible, rather than
+moving an already saved relative-path file with a file manager.
+
+Changing to absolute paths cannot identify an original folder after a relative
+workflow has already been moved on its own. Reopen a copy in the original
+location, or relink and verify the missing sources before saving. Review output
+destinations too. Absolute paths are useful for fixed local data, not a portable
+project: another computer must have the same locations.
 
 If a Batch workspace is active, VIPP asks what to save:
 
@@ -129,9 +168,24 @@ You can also open it from **Workflow actions → Recover interrupted workflows�
    preserving their order and selected tab. Existing tabs/files stay untouched.
 2. Check the sources and graph, then **Save workflow as…** to keep a recovered
    analysis. The original path is not overwritten by recovery.
-3. Calculate explicitly when ready. Recovery does not restore calculated arrays,
+3. In 0.16.0a5–a6, calculate explicitly when ready. Recovery does not restore calculated arrays,
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.
+
+!!! note "New in 0.16.0a7 — automatic recovery previews"
+    Recovery loads available samples or verified files and recalculates
+    automatic processing steps, such as Gaussian Blur and Otsu Threshold.
+    These are newly calculated results, not restored cached arrays.
+    Missing or changed inputs are reported rather than replaced with a sample.
+
+    Manual steps remain paused even if their saved **Auto Recalculate** setting
+    is on. File-writing nodes and steps that depend on paused nodes also wait.
+    Use a manual step's **Calculate** action to run that step without enabling
+    unrelated file writers. **Calculate all** releases the recovery restriction:
+    check output paths first, because enabled auto-save nodes can then write.
+
+    An available recovery copy no longer pauses the separate starter sample
+    when VIPP opens. **Keep for later** does not prevent viewing that sample.
 
 Recovery does not reconstruct the Batch workspace or its configuration. Save
 the Batch configuration separately, then reopen it and review sources, output

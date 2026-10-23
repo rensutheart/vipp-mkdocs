@@ -5,6 +5,24 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a7 scope and evidence
+
+The [0.16.0a7 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7)
+changes initial source loading, guarded automatic recovery calculation and
+workflow-save path selection. Its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a7/docs/release-qualification-baseline.md)
+separates these affected boundaries from unchanged scientific kernels, GPU
+admission, dependency pins and installer engines. See the
+[release overview](../releases/0.16.0a7.md) for the user-visible changes and limits.
+
+Recovered automatic outputs are freshly calculated, not restored scientific
+caches. Manual and file-writing steps stay paused until the documented explicit
+actions; an automatic preview is not scientific validation. Relative/absolute
+path selection does not move data, repair missing sources or archive them.
+Focused source checks and carried lifecycle evidence do not establish every
+reader, a complete fresh-user installer lifecycle or full cross-platform GUI
+coverage. Unfinished AI assistant, agent, MCP and webhook features are excluded.
+
 ## 0.16.0a6 scope and evidence
 
 The [0.16.0a6 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a6)

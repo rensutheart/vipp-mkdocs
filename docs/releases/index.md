@@ -4,6 +4,15 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a7 alpha
+
+[Read the 0.16.0a7 overview](0.16.0a7.md) for initial source loading,
+recalculated automatic recovery results with manual/file-writing steps paused,
+and relative or absolute workflow-save paths. Scientific algorithms and schemas
+are unchanged; unfinished AI features are not included. Use the
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a7/).
+
 ## 0.16.0a6 alpha
 
 [Read the 0.16.0a6 overview](0.16.0a6.md) for earlier responsive startup feedback,
