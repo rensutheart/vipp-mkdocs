@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a6. Some labels
+Labels below match napari-vipp 0.16.0a7. Some labels
 shorten to icons when the window is narrow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
@@ -405,6 +405,20 @@ and port names. These settings never alter scientific arrays.
 
 See [Graph display settings](display-settings.md) for the options, exact-statistics
 behavior, and the mapping from earlier interface labels.
+
+## Workflow saving settings
+
+The gear menu's **Workflow saving** controls whether Save overwrites the current
+JSON, confirms each overwrite, or creates timestamped copies. **Save workflow
+as…** in the three-dot workflow menu chooses a destination independently.
+
+!!! note "New in 0.16.0a7"
+    Beside **Workflow saving**, **Workflow paths** chooses **Relative to workflow
+    file** (default) or **Absolute file locations** for subsequent workflow
+    saves, including attached batch configuration. Relative paths suit a project
+    moved with its data; absolute paths suit data kept in place while only the
+    workflow moves. The choice does not move files or repair paths after an
+    untracked move. See [choose relative or absolute paths](../how-to/save-share-export.md#choose-relative-or-absolute-paths).
 
 ## Execution and memory settings
 

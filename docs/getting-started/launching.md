@@ -27,6 +27,13 @@ than one managed installation exists.
 
 ## During startup
 
+!!! note "New in 0.16.0a7 — initial source loading"
+    The starter sample loads automatically, even when an interrupted workspace
+    is available for recovery. **Keep for later** leaves that starter view
+    usable. Opening an ordinary workflow loads its bound sources too; a saved
+    manual selection without a result initially shows an available source
+    without calculating that manual step. See [open and recover workflows](../how-to/save-share-export.md).
+
 !!! note "New in 0.16.0a6 — startup diagnostics"
     The splash is painted before the main application starts. Its elapsed
     timer and minimize/hide controls stay responsive while Windows creates

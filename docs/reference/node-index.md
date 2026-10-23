@@ -1,7 +1,7 @@
 # Node Index
 
 This page lists all **146 operation specifications** registered by
-`NODE_LIBRARY` in 0.16.0a6. The palette exposes **144**: the two
+`NODE_LIBRARY` in 0.16.0a7. The palette exposes **144**: the two
 legacy scatter raster operations remain loadable but are hidden from new-node
 selection. The 0.16.0a1 additions are **Grow Regions from Seeds — CellProfiler
 Propagation** and six [CellProfiler compartment stages](cellprofiler-compartments.md);
@@ -36,7 +36,7 @@ image/mesh type downstream. Its format menu and **Batch Output**'s menu follow
 the connected input; see [mesh saving](../workflows/mask-to-mesh.md#save-the-mesh).
 
 !!! info "Scope of this reference"
-    Titles and families follow the 0.16.0a6 source registry.
+    Titles and families follow the 0.16.0a7 source registry.
     Input and output summaries describe the ordinary/default ports; `Split Channels`,
     `Split Axis`, `Born-Wolf PSF`, and other multi-output nodes can resolve ports
     from runtime data. Parameter widgets, defaults, and bounds in the installed
