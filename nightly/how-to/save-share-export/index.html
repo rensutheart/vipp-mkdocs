@@ -586,6 +586,8 @@
       
         
       
+        
+      
     
     
     
@@ -629,6 +631,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2265,6 +2290,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Save a workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-relative-or-absolute-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose relative or absolute paths
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3850,6 +3890,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Save a workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-relative-or-absolute-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choose relative or absolute paths
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3952,7 +4007,7 @@ saving</strong>. In 0.15.0a5, these actions were in the gear menu. See the
 <tbody>
 <tr>
 <td>Workflow JSON (schema 6)</td>
-<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a6; optionally restore an attached versioned batch configuration</td>
+<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a7; optionally restore an attached versioned batch configuration</td>
 <td>Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes</td>
 </tr>
 <tr>
@@ -3987,8 +4042,8 @@ saving</strong>. In 0.15.0a5, these actions were in the gear menu. See the
 </tr>
 <tr>
 <td>Workflow recovery copies (new in 0.16.0a5)</td>
-<td>Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs</td>
-<td>Batch workspace/configuration, scientific caches, Undo history, automatic Run or overwritten original workflow files</td>
+<td>Recover graph working copies of interrupted named/unnamed tabs into new unsaved tabs; from 0.16.0a7, rebuild safe automatic results</td>
+<td>Batch workspace/configuration, scientific caches, Undo history or overwritten original workflow files; manual/file-writing steps remain paused</td>
 </tr>
 </tbody>
 </table>
@@ -3998,6 +4053,14 @@ recipe; the batch-results action uses recorded archived evidence.</p>
 <h2 id="open-a-workflow">Open a workflow<a class="headerlink" href="#open-a-workflow" title="Permanent link">&para;</a></h2>
 <p>Choose <strong>Open</strong> and select a saved workflow <code>.json</code> file. VIPP opens it in a new
 tab, keeping existing workflows and unsaved edits intact.</p>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a7</p>
+<p>Ordinary workflows load their bound sources when opened. If the saved
+selection is a manual step with no available result, the initial view shows
+an available Image Source instead; the manual step is not calculated.
+<strong>Calculate all</strong> also works when a workflow has no calculated results yet,
+even if no parameters have changed.</p>
+</div>
 <p><strong>New in 0.15.0a3:</strong> drag a local workflow <code>.json</code> file from your file
 manager onto VIPP's workflow canvas, tab strip, or inspector to open it in a new
 tab. Dropping a file uses the same workflow validation as <strong>Open</strong>. Recorded
@@ -4034,6 +4097,48 @@ logical selection. Individual <strong>Skip/Overwrite</strong> choices remain tie
 exact source and output locations: after moving a project, reset those
 choices and check the batch again before running.</p>
 </div>
+<h3 id="choose-relative-or-absolute-paths">Choose relative or absolute paths<a class="headerlink" href="#choose-relative-or-absolute-paths" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a7</p>
+<p>Open the gear menu and choose <strong>Settings → Workflow paths</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Relative to workflow file</strong> (default)</td>
+<td>You will move or share the workflow and its data together, preserving their folder structure.</td>
+</tr>
+<tr>
+<td><strong>Absolute file locations</strong></td>
+<td>The data will stay in place, but you may move just the workflow JSON. The saved file names the full locations.</td>
+</tr>
+</tbody>
+</table>
+<p>The choice applies the next time you <strong>Save</strong>, <strong>Save workflow as…</strong>, or
+create a timestamped workflow copy. It also applies to a batch configuration
+attached to that workflow. It does not change the separate <strong>Export Python…</strong>
+or Batch <strong>Save config</strong> actions, and it never moves or copies data.</p>
+</div>
+<p>To move only the workflow while leaving its data in place:</p>
+<ol>
+<li>Open the workflow where its relative paths still resolve correctly.</li>
+<li>Choose <strong>Settings → Workflow paths → Absolute file locations</strong>.</li>
+<li><strong>Save</strong>, then move the workflow JSON with your file manager. Alternatively,
+   use <strong>Save workflow as…</strong> to write it directly to the new location.</li>
+</ol>
+<p><strong>Save workflow as…</strong> retains the same resolved input and output locations in
+either path mode. Choose the destination inside VIPP when possible, rather than
+moving an already saved relative-path file with a file manager.</p>
+<p>Changing to absolute paths cannot identify an original folder after a relative
+workflow has already been moved on its own. Reopen a copy in the original
+location, or relink and verify the missing sources before saving. Review output
+destinations too. Absolute paths are useful for fixed local data, not a portable
+project: another computer must have the same locations.</p>
 <p>If a Batch workspace is active, VIPP asks what to save:</p>
 <ul>
 <li><strong>Yes</strong> attaches the current versioned batch configuration to the same
@@ -4089,10 +4194,24 @@ You can also open it from <strong>Workflow actions → Recover interrupted workf
    preserving their order and selected tab. Existing tabs/files stay untouched.</li>
 <li>Check the sources and graph, then <strong>Save workflow as…</strong> to keep a recovered
    analysis. The original path is not overwritten by recovery.</li>
-<li>Calculate explicitly when ready. Recovery does not restore calculated arrays,
+<li>In 0.16.0a5–a6, calculate explicitly when ready. Recovery does not restore calculated arrays,
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a7 — automatic recovery previews</p>
+<p>Recovery loads available samples or verified files and recalculates
+automatic processing steps, such as Gaussian Blur and Otsu Threshold.
+These are newly calculated results, not restored cached arrays.
+Missing or changed inputs are reported rather than replaced with a sample.</p>
+<p>Manual steps remain paused even if their saved <strong>Auto Recalculate</strong> setting
+is on. File-writing nodes and steps that depend on paused nodes also wait.
+Use a manual step's <strong>Calculate</strong> action to run that step without enabling
+unrelated file writers. <strong>Calculate all</strong> releases the recovery restriction:
+check output paths first, because enabled auto-save nodes can then write.</p>
+<p>An available recovery copy no longer pauses the separate starter sample
+when VIPP opens. <strong>Keep for later</strong> does not prevent viewing that sample.</p>
+</div>
 <p>Recovery does not reconstruct the Batch workspace or its configuration. Save
 the Batch configuration separately, then reopen it and review sources, output
 paths and run choices before running a recovered graph in Batch.</p>
@@ -4272,7 +4391,7 @@ a manifest, or durable replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 22, 2026 09:00:56 UTC">October 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 07:37:15 UTC">October 23, 2026</span>
   </span>
 
     
