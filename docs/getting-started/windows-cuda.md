@@ -126,8 +126,8 @@ underlying dependency tool reports a trustworthy byte total.
     log](installation.md#read-the-live-installation-log) for the full-log option.
 
 !!! info "Unreleased: development installer updates"
-    The `0.16.0a8.dev5` test installer adds an always-visible **Update method**
-    choice; it is not part of the published 0.16.0a7 release. Its default
+    The `0.16.0a8.dev6` test installer shows **Update method** during **Review**;
+    these choices are not part of the published 0.16.0a7 release. Its default
     **Automatic — reuse compatible packages** can reuse a healthy owned CUDA
     installation's dependencies for an application-only VIPP update when the
     requirements and Python runtime still match. **Incremental update only**

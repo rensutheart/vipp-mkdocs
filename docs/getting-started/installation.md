@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev5"
+!!! warning "Development test installer only — 0.16.0a8.dev6"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -224,6 +224,11 @@ installation. Initial checks inspect the local installation, Python, hardware
 and update compatibility; they no longer run a complete online PyPI resolution
 before enabling the approval button. A fresh route resolves its exact package
 set after approval, before creating the replacement.
+
+Setup has two focused stages: **Review** contains the update-method choices,
+explanation and space estimates. After you approve **Update** or **Install**,
+**Installing** shows the selected method, progress and installation log instead.
+Selecting a method alone does not start installation.
 
 | Update method | When to choose it |
 | --- | --- |
@@ -238,6 +243,14 @@ that candidate, and installs the new VIPP package without replacing those
 dependencies. Dependency, VIPP and applicable CUDA acceptance checks still run
 before the replacement becomes current. The running environment is not
 modified in place.
+
+Compatible dependency versions are retained even if newer versions exist on
+PyPI. If the new VIPP build requires different versions, **Automatic** uses
+**Fresh installation**; explicitly requiring **Incremental update only** stops
+with an explanation instead. Fresh resolves versions compatible with VIPP's
+requirements and downloads missing required packages, reusing exact verified
+cached packages where available. It does not promise to install every dependency's
+newest available version.
 
 Both methods retain hash-verified package downloads for reuse; a cached file is
 not trusted merely because its name or version matches. Incremental updates
