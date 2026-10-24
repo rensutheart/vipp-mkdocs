@@ -126,7 +126,7 @@ underlying dependency tool reports a trustworthy byte total.
     log](installation.md#read-the-live-installation-log) for the full-log option.
 
 !!! info "Unreleased: development installer updates"
-    The `0.16.0a8.dev8` test installer shows **Update method** during **Review**;
+    The `0.16.0a8.dev9` test installer shows **Update method** during **Review**;
     these choices are not part of the published 0.16.0a7 release. Its default
     **Automatic — reuse compatible packages** can reuse a healthy owned CUDA
     installation's dependencies for an application-only VIPP update when the

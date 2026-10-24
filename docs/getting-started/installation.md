@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev8"
+!!! warning "Development test installer only — 0.16.0a8.dev9"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -260,8 +260,21 @@ not trusted merely because its name or version matches. Incremental updates
 still read, verify and copy files and need temporary disk space, so they are
 not instantaneous. Fresh installs can avoid repeat downloads when the exact
 packages are cached, but still rebuild and check an environment. Follow the
-actual package counts, phase, byte progress when available, and installation
-log rather than expecting a fixed completion time.
+actual progress rather than expecting a fixed completion time.
+
+During **Installing**, the stage list shows where you are out of six stages:
+preparation, workspace, packages, verification, shortcuts and finalization.
+The current task has its own progress bar and exact counts when available:
+files checked/copied, package files verified, or acceptance checks completed.
+These are task counts, not a prediction of the remaining installation time.
+For a pip batch, setup shows the known number of packages but does not invent
+individual completion while pip is working; the batch completes only after
+pip succeeds. Some subprocess operations remain indeterminate.
+
+Select **Show installation log** for the bounded live package output; it opens
+automatically if setup fails. **Advanced details → Open setup log** retains
+the full diagnostic record. Cancelling still waits for safe cleanup, and a
+stopped setup does not mark the remaining stages complete.
 
 **Open VIPP** uses the selected installation's Python and DLL directories,
 without carrying the setup program's Python/Qt loader overrides into VIPP.
