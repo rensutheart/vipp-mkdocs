@@ -213,6 +213,58 @@ Remove either installation from **Windows Settings → Apps → Installed apps**
 Each entry has its own ownership-bound uninstaller, so removing CPU does not
 remove CUDA and removing CUDA does not remove CPU.
 
+### Development update methods (unreleased)
+
+!!! warning "Development test installer only — 0.16.0a8.dev2"
+    These choices are being developed after 0.16.0a7. They are not part of the
+    numbered release above, and the test installer is not a published release.
+
+The development installer shows **Update method** before you approve an
+installation. Initial checks inspect the local installation, Python, hardware
+and update compatibility; they no longer run a complete online PyPI resolution
+before enabling the approval button. A fresh route resolves its exact package
+set after approval, before creating the replacement.
+
+| Update method | When to choose it |
+| --- | --- |
+| **Automatic — reuse compatible packages** (default) | Reuse dependencies for a healthy installer-owned update when the new VIPP requirements and Python runtime are compatible. Otherwise, review the explanation for a fresh installation. |
+| **Incremental update only** | Require the dependency-reuse route. If it is unsafe or a required dependency needs changing, setup stops; it does not silently choose Fresh. |
+| **Fresh installation** | Rebuild a complete, separate environment, including when dependencies or the Python runtime need changing, or when repairing an installation. |
+
+The first incremental route is an **application-only update**, not an upgrade
+of individual dependency versions. It verifies and copies the installed
+dependency files into a separate candidate, regenerates their launchers for
+that candidate, and installs the new VIPP package without replacing those
+dependencies. Dependency, VIPP and applicable CUDA acceptance checks still run
+before the replacement becomes current. The running environment is not
+modified in place.
+
+Both methods retain hash-verified package downloads for reuse; a cached file is
+not trusted merely because its name or version matches. Incremental updates
+still read, verify and copy files and need temporary disk space, so they are
+not instantaneous. Fresh installs can avoid repeat downloads when the exact
+packages are cached, but still rebuild and check an environment. Follow the
+actual package counts, phase, byte progress when available, and installation
+log rather than expecting a fixed completion time.
+
+#### Repair a stale Windows entry (unreleased)
+
+The development installer can offer **Repair registration…** when the Windows
+entry is stale but setup can verify that it belongs to the same managed VIPP
+installation. Review the old and expected values and the backup location, then
+confirm the repair. This repairs only the Windows installation entry, not the
+environment or your workflows. Setup checks again afterward; an update still
+requires your separate approval.
+
+The review may report that the obsolete uninstaller is already missing. It can
+still offer repair when the complete entry and the current installation pass
+verification; it does not run or recreate the old uninstaller. A present but
+altered file is not treated as a missing file.
+
+An unfamiliar, incomplete or changed entry remains blocked. Do not delete the
+entry or run an older uninstaller to bypass the check; keep the details for
+support. Cancelling the review leaves the entry unchanged.
+
 ## macOS installer — recommended
 
 VIPP 0.16.0a7 has separate offline packages for Apple Silicon and Intel Macs.
