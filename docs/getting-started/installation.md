@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev4"
+!!! warning "Development test installer only — 0.16.0a8.dev5"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -246,6 +246,11 @@ not instantaneous. Fresh installs can avoid repeat downloads when the exact
 packages are cached, but still rebuild and check an environment. Follow the
 actual package counts, phase, byte progress when available, and installation
 log rather than expecting a fixed completion time.
+
+**Open VIPP** uses the selected installation's Python and DLL directories,
+without carrying the setup program's Python/Qt loader overrides into VIPP.
+This prevents DLL conflicts when setup was launched from another development
+tool. It does not change Windows PATH or reinstall the GPU environment.
 
 #### Repair a stale Windows entry (unreleased)
 
