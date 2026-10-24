@@ -215,9 +215,10 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev12"
-    These choices are being developed after 0.16.0a7. They are not part of the
-    numbered release above, and the test installer is not a published release.
+!!! warning "UNRELEASED DEVELOPMENT — changed-package updates"
+    This section describes development work after 0.16.0a7, not the published
+    numbered release above. Use only the exact private test build supplied for
+    this feature; an earlier development installer may have different limits.
 
 The development installer shows **Update method** before you approve an
 installation. Initial checks inspect the local installation, Python, hardware
@@ -241,24 +242,46 @@ an existing version is unrecognized.
 | Update method | When to choose it |
 | --- | --- |
 | **Automatic — fastest safe method** (default) | Prefer In-place when it is safe; otherwise choose Replacement or Fresh and show the selected method before approval. |
-| **In-place update — change VIPP only** | Change the VIPP package in the current environment without copying its dependencies. Requires a healthy, compatible installation with VIPP closed and the app-use safety check already installed. |
+| **In-place update — update changed packages** | Update VIPP and any required new or changed dependencies in the current environment. Retain compatible installed packages instead of copying a complete environment. Requires a verified installation and a safe closed-app boundary. |
 | **Replacement update — copy existing packages** | Verify and copy compatible installed dependencies into a separate environment, then install the new VIPP package there. |
-| **Fresh installation** | Rebuild a complete, separate environment, including when dependencies or the Python runtime need changing, or when repairing an installation. |
+| **Fresh installation** | Rebuild a complete, separate environment, including when the Python runtime or package layout cannot be updated safely in place, or when repairing an installation. |
 
-For the fastest route, save your work and **close VIPP before approving the
-update**. In-place changes only VIPP; it leaves existing dependency files where
-they are rather than copying or upgrading them. It requires compatible
-dependencies, the same Python/compute route and the same startup-safety
-protocol. Older builds need one **Replacement update — copy existing packages**
-first to install that safety check. Setup does not silently enable in-place
-updates for an older installation that cannot coordinate with it.
+!!! warning "In-place only: keep VIPP closed"
+    **Keep VIPP closed. Do not open it until setup finishes.** Save your work and
+    close VIPP before approving an in-place update. This includes any rollback
+    or recovery. Replacement and Fresh use a separate environment and do not
+    require this closed-app boundary.
 
-In-place keeps a small backup of the VIPP application files for transaction
-recovery, not a second complete environment. Keep VIPP closed until setup
-finishes, including any rollback or recovery. The previous full environment is
-**not** separately available throughout an in-place update. Setup still checks
-the result before reporting success; it does not re-hash every unchanged
-dependency file.
+Setup identifies the existing managed installation from its verified ownership
+records; choosing a different folder is not a way to bypass an update blocker.
+An older installation does not automatically need a one-time full copy, but it
+is eligible for in-place changes only if setup can verify that no process is
+using its exact environment and establish the required startup-exclusion guard.
+Age or a missing safety marker alone is not proof that an installation is safe
+to change.
+
+In-place keeps transaction backups of the files it changes, not a second
+complete environment. Compatible dependency versions and their files stay in
+place; required new or changed packages are installed before acceptance. The
+previous full environment is **not** separately available throughout this
+route. Setup still verifies the changed package set and its acceptance checks
+before reporting success; it does not re-hash every unchanged dependency file.
+
+If setup positively detects that VIPP is running, it shows **Close VIPP to
+continue**:
+
+1. Save your work and close VIPP yourself. Setup does not force-close it.
+2. Return to setup and choose **Check again**.
+3. Review the newly checked method and package changes before approving the
+   update again. Closing the message or the app does not restart the update.
+
+An unknown process identity, a persistent file lock, an incompatible Python ABI,
+or an unsupported package/launcher layout is not treated as a safe closed app.
+Read the specific blocker. Choose **Replacement update — copy existing
+packages** or **Fresh installation** only when setup offers and verifies that
+route; an explicitly selected unavailable method stops rather than silently
+changing methods. If no route is safe, keep the diagnostics for support. Do not
+delete installation folders or edit Windows registration to force an update.
 
 Replacement verifies and copies dependency files, regenerates their launchers,
 and checks the separate candidate before switching to it. Fresh resolves and
@@ -268,21 +291,21 @@ replacement passes checks. Neither requires modifying a manually managed
 environment elsewhere.
 
 Compatible dependency versions are retained even if newer versions exist on
-PyPI. If the new VIPP build needs different dependencies, use **Fresh
-installation**. An explicitly selected In-place or Replacement route stops
-with an explanation when it is unavailable; it does not silently switch to a
-different method. Fresh resolves versions compatible with VIPP's requirements
-and downloads missing required packages, reusing exact verified cached packages
-where available. It does not promise to install every dependency's newest
-available version.
+PyPI. In-place can install a dependency change required by the new VIPP build
+when that change passes its safety checks; a required dependency change does
+not by itself demand a Fresh installation. Fresh resolves the complete set
+compatible with VIPP's requirements. Both reuse exact hash-verified cached
+downloads where available and download missing required packages. None of the
+methods promises to upgrade every dependency to its newest available version,
+work with every package layout, or downgrade a newer installed VIPP.
 
 A cached download is trusted only after its exact hash is verified, not merely
 because its name or version matches. Replacement still reads, verifies and
 copies files and needs temporary disk space. Fresh can avoid repeat downloads
 when the exact packages are cached, but still rebuilds and checks an
-environment. In-place avoids the dependency-copy stage, not the approval,
-backup and acceptance checks. Follow the actual progress rather than expecting
-a fixed completion time.
+environment. In-place avoids copying unchanged dependencies, not the required
+downloads, approval, backup or acceptance checks. Follow the actual progress
+rather than expecting a fixed completion time.
 
 During **Installing**, one ordered stage list shows where you are out of six stages:
 preparation, workspace, packages, verification, shortcuts and finalization.

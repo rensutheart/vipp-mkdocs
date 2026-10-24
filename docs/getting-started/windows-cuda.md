@@ -125,29 +125,47 @@ underlying dependency tool reports a trustworthy byte total.
     to follow new messages again. See [Read the live installation
     log](installation.md#read-the-live-installation-log) for the full-log option.
 
-!!! info "Unreleased: development installer updates"
-    The private `0.16.0a8.dev12` test installer shows **Update method** during
-    **Review**; these choices are not part of the published 0.16.0a7 release.
-    **Automatic — fastest safe method** prefers **In-place update — change
-    VIPP only** when the standard managed CUDA installation is compatible and
-    VIPP is closed. Dependencies stay where they are, without a full copy.
-    Older builds need one **Replacement update — copy existing packages**
-    first to install the app-use safety check; changes to that protocol also
-    require Replacement. Review the selected method before approval.
+!!! info "UNRELEASED DEVELOPMENT: changed-package installer updates"
+    The development installer shows **Update method** during **Review**; these
+    choices are not part of the published 0.16.0a7 release. Use the exact test
+    build supplied for this feature, not an earlier development installer.
+    **Automatic — fastest safe method** prefers **In-place update — update
+    changed packages** when the verified standard CUDA installation is eligible.
+    It updates VIPP and required new or changed dependencies, retaining compatible
+    installed packages and avoiding a complete environment copy. It does not
+    promise every dependency's newest version.
+
+    **Keep VIPP closed. Do not open it until setup finishes**—including any
+    rollback or recovery. If setup positively detects a running VIPP, **Close
+    VIPP to continue** asks you to save and close it yourself, then choose
+    **Check again** and review the new decision. Setup never force-closes the
+    app or restarts the update automatically. Replacement and Fresh use a
+    separate environment and do not require this in-place closed-app boundary.
+
+    An older installation is not forced through a one-time full copy solely
+    because of its age. In-place still requires verified quiescence of that
+    exact environment and the startup-exclusion guard. Unknown process facts,
+    persistent locks, an incompatible Python ABI or an unsupported package layout
+    remain specific blockers, not proof that it is safe to proceed. Review
+    **Replacement update — copy existing packages** or **Fresh installation**
+    when setup offers a verified alternative; do not bypass its ownership or
+    CUDA-path checks.
 
     Initial local checks no longer wait for a full online package resolution.
     Replacement verifies and copies existing dependency files into a separate
     environment. **Fresh installation** resolves and rebuilds the required
     package set, reusing hash-verified cached downloads and fetching missing
-    packages. If this VIPP build needs different dependencies, choose Fresh;
-    these methods do not promise every dependency's newest available version.
+    packages. A dependency change required by VIPP can also use In-place when
+    its transaction passes the safety checks. An explicitly selected method
+    stops when unavailable rather than silently changing methods.
 
-    In-place backs up the VIPP application files for recovery, not the complete
-    GPU environment. Keep VIPP closed until it finishes; the previous full
-    environment is not separately available during that route. Replacement
+    In-place backs up changed package files for recovery, not the complete
+    GPU environment; unchanged dependency files stay in place. The previous
+    full environment is not separately available during that route. Replacement
     and Fresh keep the previous working environment unchanged until the
     candidate passes acceptance. Applicable CUDA checks and the existing
-    free-space gates still apply.
+    free-space gates still apply. No method permits a VIPP downgrade or promises
+    support for every existing environment layout.
     See [Development update methods](installation.md#development-update-methods-unreleased)
     for the choices and limits. This does not change the separate **Set up
     GPU…** dialog or its build-specific CUDA copies into an in-place updater.
