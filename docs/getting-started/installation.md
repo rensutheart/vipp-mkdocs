@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev6"
+!!! warning "Development test installer only — 0.16.0a8.dev7"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -229,6 +229,9 @@ Setup has two focused stages: **Review** contains the update-method choices,
 explanation and space estimates. After you approve **Update** or **Install**,
 **Installing** shows the selected method, progress and installation log instead.
 Selecting a method alone does not start installation.
+The selector stays in place while a changed choice is checked, and Update stays
+unavailable until that exact choice is ready. Selecting the same method again
+does not repeat the check. The bordered stage indicators are not clickable tabs.
 
 | Update method | When to choose it |
 | --- | --- |
