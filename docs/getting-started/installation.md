@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev7"
+!!! warning "Development test installer only — 0.16.0a8.dev8"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -272,8 +272,10 @@ tool. It does not change Windows PATH or reinstall the GPU environment.
 
 The development installer can offer **Repair registration…** when the Windows
 entry is stale but setup can verify that it belongs to the same managed VIPP
-installation. Review the old and expected values and the backup location, then
-confirm the repair. This repairs only the Windows installation entry, not the
+installation. The confirmation gives a short version and location summary;
+expand **Technical details** to inspect or copy the exact changes and backup
+location. **Cancel** is selected by default; choose **Repair entry** only after
+reviewing it. This repairs only the Windows installation entry, not the
 environment or your workflows. Setup checks again afterward; an update still
 requires your separate approval.
 
