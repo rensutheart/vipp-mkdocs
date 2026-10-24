@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev9"
+!!! warning "Development test installer only — 0.16.0a8.dev10"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -231,7 +231,8 @@ explanation and space estimates. After you approve **Update** or **Install**,
 Selecting a method alone does not start installation.
 The selector stays in place while a changed choice is checked, and Update stays
 unavailable until that exact choice is ready. Selecting the same method again
-does not repeat the check. The bordered stage indicators are not clickable tabs.
+does not repeat the check. **Setup steps** shows Review, Install and Ready as
+progress through setup, not clickable tabs.
 
 | Update method | When to choose it |
 | --- | --- |
@@ -262,7 +263,7 @@ not instantaneous. Fresh installs can avoid repeat downloads when the exact
 packages are cached, but still rebuild and check an environment. Follow the
 actual progress rather than expecting a fixed completion time.
 
-During **Installing**, the stage list shows where you are out of six stages:
+During **Installing**, one ordered stage list shows where you are out of six stages:
 preparation, workspace, packages, verification, shortcuts and finalization.
 The current task has its own progress bar and exact counts when available:
 files checked/copied, package files verified, or acceptance checks completed.
@@ -271,10 +272,20 @@ For a pip batch, setup shows the known number of packages but does not invent
 individual completion while pip is working; the batch completes only after
 pip succeeds. Some subprocess operations remain indeterminate.
 
+**Total installation time** starts when you approve installation and includes
+all stages and safe cleanup. It stays visible and stops counting when setup
+finishes or stops. The current-stage timer is separate; neither is a prediction
+of the remaining time. Time spent checking or deciding before approval is not
+included in the installation total.
+
 Select **Show installation log** for the bounded live package output; it opens
-automatically if setup fails. **Advanced details → Open setup log** retains
-the full diagnostic record. Cancelling still waits for safe cleanup, and a
-stopped setup does not mark the remaining stages complete.
+automatically if setup fails. **View diagnostics…** opens a larger resizable
+read-only window. **Activity output** contains a captured, bounded copy of
+recent package messages; **Setup details** contains the captured setup facts.
+These views stay still while you read them. Select **Refresh** to capture the
+latest information. **Open raw setup log** opens the separate structured event
+record; it is not the same display as recent package output. Cancelling still
+waits for safe cleanup, and a stopped setup does not mark later stages complete.
 
 **Open VIPP** uses the selected installation's Python and DLL directories,
 without carrying the setup program's Python/Qt loader overrides into VIPP.
