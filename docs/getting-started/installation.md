@@ -215,7 +215,7 @@ remove CUDA and removing CUDA does not remove CPU.
 
 ### Development update methods (unreleased)
 
-!!! warning "Development test installer only — 0.16.0a8.dev11"
+!!! warning "Development test installer only — 0.16.0a8.dev12"
     These choices are being developed after 0.16.0a7. They are not part of the
     numbered release above, and the test installer is not a published release.
 
@@ -235,38 +235,54 @@ does not repeat the check. **Setup steps** shows Review, Install and Ready as
 progress through setup, not clickable tabs.
 The setup pages share a consistent visual hierarchy. A completed review does
 not show a moving installation progress bar; installation starts only after
-approval. Development versions are ordered numerically, so dev10 follows dev9.
-Setup still refuses genuine downgrades and cannot authorize a replacement when
+approval. Setup refuses genuine downgrades and cannot authorize an update when
 an existing version is unrecognized.
 
 | Update method | When to choose it |
 | --- | --- |
-| **Automatic — reuse compatible packages** (default) | Reuse dependencies for a healthy installer-owned update when the new VIPP requirements and Python runtime are compatible. Otherwise, review the explanation for a fresh installation. |
-| **Incremental update only** | Require the dependency-reuse route. If it is unsafe or a required dependency needs changing, setup stops; it does not silently choose Fresh. |
+| **Automatic — fastest safe method** (default) | Prefer In-place when it is safe; otherwise choose Replacement or Fresh and show the selected method before approval. |
+| **In-place update — change VIPP only** | Change the VIPP package in the current environment without copying its dependencies. Requires a healthy, compatible installation with VIPP closed and the app-use safety check already installed. |
+| **Replacement update — copy existing packages** | Verify and copy compatible installed dependencies into a separate environment, then install the new VIPP package there. |
 | **Fresh installation** | Rebuild a complete, separate environment, including when dependencies or the Python runtime need changing, or when repairing an installation. |
 
-The first incremental route is an **application-only update**, not an upgrade
-of individual dependency versions. It verifies and copies the installed
-dependency files into a separate candidate, regenerates their launchers for
-that candidate, and installs the new VIPP package without replacing those
-dependencies. Dependency, VIPP and applicable CUDA acceptance checks still run
-before the replacement becomes current. The running environment is not
-modified in place.
+For the fastest route, save your work and **close VIPP before approving the
+update**. In-place changes only VIPP; it leaves existing dependency files where
+they are rather than copying or upgrading them. It requires compatible
+dependencies, the same Python/compute route and the same startup-safety
+protocol. Older builds need one **Replacement update — copy existing packages**
+first to install that safety check. Setup does not silently enable in-place
+updates for an older installation that cannot coordinate with it.
+
+In-place keeps a small backup of the VIPP application files for transaction
+recovery, not a second complete environment. Keep VIPP closed until setup
+finishes, including any rollback or recovery. The previous full environment is
+**not** separately available throughout an in-place update. Setup still checks
+the result before reporting success; it does not re-hash every unchanged
+dependency file.
+
+Replacement verifies and copies dependency files, regenerates their launchers,
+and checks the separate candidate before switching to it. Fresh resolves and
+installs the complete required package set in a separate environment. These
+two routes keep the previous working environment unchanged until the
+replacement passes checks. Neither requires modifying a manually managed
+environment elsewhere.
 
 Compatible dependency versions are retained even if newer versions exist on
-PyPI. If the new VIPP build requires different versions, **Automatic** uses
-**Fresh installation**; explicitly requiring **Incremental update only** stops
-with an explanation instead. Fresh resolves versions compatible with VIPP's
-requirements and downloads missing required packages, reusing exact verified
-cached packages where available. It does not promise to install every dependency's
-newest available version.
+PyPI. If the new VIPP build needs different dependencies, use **Fresh
+installation**. An explicitly selected In-place or Replacement route stops
+with an explanation when it is unavailable; it does not silently switch to a
+different method. Fresh resolves versions compatible with VIPP's requirements
+and downloads missing required packages, reusing exact verified cached packages
+where available. It does not promise to install every dependency's newest
+available version.
 
-Both methods retain hash-verified package downloads for reuse; a cached file is
-not trusted merely because its name or version matches. Incremental updates
-still read, verify and copy files and need temporary disk space, so they are
-not instantaneous. Fresh installs can avoid repeat downloads when the exact
-packages are cached, but still rebuild and check an environment. Follow the
-actual progress rather than expecting a fixed completion time.
+A cached download is trusted only after its exact hash is verified, not merely
+because its name or version matches. Replacement still reads, verifies and
+copies files and needs temporary disk space. Fresh can avoid repeat downloads
+when the exact packages are cached, but still rebuilds and checks an
+environment. In-place avoids the dependency-copy stage, not the approval,
+backup and acceptance checks. Follow the actual progress rather than expecting
+a fixed completion time.
 
 During **Installing**, one ordered stage list shows where you are out of six stages:
 preparation, workspace, packages, verification, shortcuts and finalization.
@@ -287,7 +303,7 @@ Select **Show installation log** for the bounded live package output; it opens
 automatically if setup fails. **View diagnostics…** opens a larger resizable
 read-only window. **Activity output** contains a captured, bounded copy of
 recent package messages; **Setup details** contains the captured setup facts.
-These views stay still while you read them. Select **Refresh** to capture the
+These views stay still while you read them. Select **Refresh snapshot** to capture the
 latest information. **Open raw setup log** opens the separate structured event
 record; it is not the same display as recent package output. Cancelling still
 waits for safe cleanup, and a stopped setup does not mark later stages complete.

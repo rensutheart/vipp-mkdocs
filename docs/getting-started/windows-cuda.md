@@ -126,23 +126,31 @@ underlying dependency tool reports a trustworthy byte total.
     log](installation.md#read-the-live-installation-log) for the full-log option.
 
 !!! info "Unreleased: development installer updates"
-    The `0.16.0a8.dev11` test installer shows **Update method** during **Review**;
-    these choices are not part of the published 0.16.0a7 release. Its default
-    **Automatic — reuse compatible packages** can reuse a healthy owned CUDA
-    installation's dependencies for an application-only VIPP update when the
-    requirements and Python runtime still match. **Incremental update only**
-    stops if that route is unavailable; **Fresh installation** rebuilds the
-    complete environment. Review any fresh-route explanation before approving.
+    The private `0.16.0a8.dev12` test installer shows **Update method** during
+    **Review**; these choices are not part of the published 0.16.0a7 release.
+    **Automatic — fastest safe method** prefers **In-place update — change
+    VIPP only** when the standard managed CUDA installation is compatible and
+    VIPP is closed. Dependencies stay where they are, without a full copy.
+    Older builds need one **Replacement update — copy existing packages**
+    first to install the app-use safety check; changes to that protocol also
+    require Replacement. Review the selected method before approval.
 
     Initial local checks no longer wait for a full online package resolution.
-    Both routes stage a separate replacement, keep the running environment
-    unchanged, and can reuse hash-verified downloads. The incremental route
-    verifies and copies dependency files, regenerates launchers, then checks the
-    replacement, including the CUDA acceptance checks. Copying and verification
-    still take time and disk space; the existing free-space gates remain.
+    Replacement verifies and copies existing dependency files into a separate
+    environment. **Fresh installation** resolves and rebuilds the required
+    package set, reusing hash-verified cached downloads and fetching missing
+    packages. If this VIPP build needs different dependencies, choose Fresh;
+    these methods do not promise every dependency's newest available version.
+
+    In-place backs up the VIPP application files for recovery, not the complete
+    GPU environment. Keep VIPP closed until it finishes; the previous full
+    environment is not separately available during that route. Replacement
+    and Fresh keep the previous working environment unchanged until the
+    candidate passes acceptance. Applicable CUDA checks and the existing
+    free-space gates still apply.
     See [Development update methods](installation.md#development-update-methods-unreleased)
     for the choices and limits. This does not change the separate **Set up
-    GPU…** dialog into an incremental updater.
+    GPU…** dialog or its build-specific CUDA copies into an in-place updater.
 
 ## Verify the installation
 
