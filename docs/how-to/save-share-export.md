@@ -172,6 +172,26 @@ You can also open it from **Workflow actions → Recover interrupted workflows�
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.
 
+!!! note "Unreleased (nightly): recover or discard several workspaces"
+    Select several entries with **Ctrl-click** (**Command-click** on macOS),
+    select a range with
+    **Shift-click**, or choose **Select all**.
+    **Clear selection** deselects them without changing any recovery copies.
+    The selection count shows how many workspaces the next action affects.
+
+    **Recover selected** opens the selected workspaces in list order as new
+    unsaved tabs. The last successfully recovered workspace becomes active;
+    other recovered tabs rebuild their previews when you activate them. If a
+    workspace cannot be recovered, its copy is kept and successful recoveries
+    stay open. Check any reported problem before retrying.
+
+    **Discard selected** asks you to confirm the number of selected
+    copies, with **No** selected by default. Successful discards stop offering
+    only those recovery copies; ordinary saved workflow files are not deleted.
+    If a discard cannot be confirmed, its entry stays listed: check the reported
+    problem before retrying. Unselected copies stay available. **Keep for later**
+    leaves all remaining copies for another time.
+
 !!! note "New in 0.16.0a7 — automatic recovery previews"
     Recovery loads available samples or verified files and recalculates
     automatic processing steps, such as Gaussian Blur and Otsu Threshold.
