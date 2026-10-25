@@ -23,6 +23,13 @@ when first used, so that first read may require internet access and extra time.
 
 ## Check or fix a reader
 
+!!! note "Unreleased — clearer setup review"
+    Reader setup separates the exact package list you approve from optional
+    activity output. It shows Review, Close VIPP/napari, and Install/check as
+    three steps, with total and current-stage elapsed time. Unknown totals stay
+    indeterminate. Reviewing packages does not authorize installation; the
+    close-app and existing-package safeguards are unchanged.
+
 1. Select any **Image Source** node, including a newly added node. You do not need
    to open a file or change its source mode.
 2. Expand the separate **Reader support** inspector section, marked

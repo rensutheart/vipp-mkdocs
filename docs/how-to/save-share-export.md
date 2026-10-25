@@ -3,6 +3,11 @@
 VIPP offers several outputs that solve different problems. They are not
 interchangeable.
 
+!!! note "Unreleased — output labels"
+    The development inspector uses **Export source/image/mask/labels/table…**
+    for its cached-output actions. This separates writing a result from
+    workflow **Save**. Existing file formats and overwrite confirmations remain.
+
 !!! note "New in 0.16.0a1"
     Use the three-dot **Workflow actions** menu immediately after **Save** for
     **Save workflow as…**, **Export Python…**, **Export reproducibility package…**

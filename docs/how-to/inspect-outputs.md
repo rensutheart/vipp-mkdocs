@@ -3,6 +3,12 @@
 VIPP has several inspection surfaces. Choose the one that answers the question
 rather than treating a thumbnail as evidence for every decision.
 
+!!! note "Unreleased — clearer result actions"
+    Development builds label the full-data windows **Open full table…** and
+    **Open full scatter…** instead of **Open in window**. Writing a cached
+    result uses **Export…**; workflow **Save** is unchanged. These are label and
+    layout changes, not new calculations or altered result data.
+
 | Surface | Good for | Not sufficient for |
 | --- | --- | --- |
 | Node thumbnail | Rapid whole-graph scan | Fine boundaries, rare failures, or quantitative QC |

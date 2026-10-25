@@ -3,6 +3,24 @@
 Labels below match napari-vipp 0.16.0a7. Some labels
 shorten to icons when the window is narrow.
 
+!!! note "Unreleased — consistent sizing and clearer dialogs"
+    The development UI uses a shared heading/body hierarchy and sizes numeric
+    fields, table rows and scrollable previews from the current interface font.
+    Windows fit the available screen when first opened; you can resize them
+    afterwards. Long inspector guidance still wraps rather than requiring
+    horizontal scrolling. These changes do not alter scientific parameters or
+    calculated results.
+
+    Action, dismissal and stop controls retain distinct roles. Merely focusing
+    a button does not make it an implicit Enter-key action; dialogs with a
+    deliberate default, such as an explicit confirmation, keep that behavior.
+    Read the confirmation before discarding recovery copies or exporting files.
+
+    Result actions also distinguish viewing from writing: **Open full table…**
+    and **Open full scatter…** replace the generic **Open in window** labels;
+    **Export source/image/mask/labels/table…** replaces the inspector's context-
+    specific **Save** output labels. Workflow **Save** still saves the workflow.
+
 When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
