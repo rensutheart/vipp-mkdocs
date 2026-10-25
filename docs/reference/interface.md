@@ -11,6 +11,12 @@ shorten to icons when the window is narrow.
     horizontal scrolling. These changes do not alter scientific parameters or
     calculated results.
 
+    Slider number fields keep a compact, consistent width when labels wrap;
+    longer current values can expand the field. Connected-input cards use a
+    compact layout and bold heading without hiding scientific metadata.
+    Recovery checkboxes have explicit contrast in both light and dark themes;
+    row clicks and checkbox multi-selection keep their existing behavior.
+
     Action, dismissal and stop controls retain distinct roles. Merely focusing
     a button does not make it an implicit Enter-key action; dialogs with a
     deliberate default, such as an explicit confirmation, keep that behavior.
