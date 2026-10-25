@@ -283,6 +283,14 @@ route; an explicitly selected unavailable method stops rather than silently
 changing methods. If no route is safe, keep the diagnostics for support. Do not
 delete installation folders or edit Windows registration to force an update.
 
+Package descriptions in `METADATA` can legitimately be larger than startup
+scripts. Newer private development installers use separate size limits for
+distribution metadata and executable startup/control files. If a size check
+blocks setup, its diagnostics identify the file category, full filename,
+observed size and limit. Keep that message for support; do not trim or delete
+package metadata, remove a startup guard, or bypass the check. Use the corrected
+test build or a verified alternative that setup explicitly offers.
+
 Replacement verifies and copies dependency files, regenerates their launchers,
 and checks the separate candidate before switching to it. Fresh resolves and
 installs the complete required package set in a separate environment. These
