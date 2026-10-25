@@ -290,6 +290,10 @@ blocks setup, its diagnostics identify the file category, full filename,
 observed size and limit. Keep that message for support; do not trim or delete
 package metadata, remove a startup guard, or bypass the check. Use the corrected
 test build or a verified alternative that setup explicitly offers.
+Setup also validates the standard, package-owned pywin32 startup helper in its
+normal installed location, checking ownership, file hashes and search-path order
+without importing it. A missing, changed or competing helper remains a blocker;
+do not copy or move it to work around the check.
 
 Replacement verifies and copies dependency files, regenerates their launchers,
 and checks the separate candidate before switching to it. Fresh resolves and
