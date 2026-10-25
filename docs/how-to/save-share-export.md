@@ -173,19 +173,21 @@ You can also open it from **Workflow actions â†’ Recover interrupted workflowsâ€
    automatically. You need the original input files again.
 
 !!! note "Unreleased (nightly): recover or discard several workspaces"
-    Select several entries with **Ctrl-click** (**Command-click** on macOS),
-    select a range with
-    **Shift-click**, or choose **Select all**.
-    **Clear selection** deselects them without changing any recovery copies.
-    The selection count shows how many workspaces the next action affects.
+    No workspaces are checked initially. Click a row outside its checkbox to
+    choose only that workspace. To choose several, tick their checkboxes: each
+    checkbox changes only that row, without needing Ctrl or Shift.
+    **Select all** checks every workspace; **Clear selection** unchecks them
+    without changing any recovery copies. The count and actions apply only to
+    checked workspaces, not the highlighted row.
 
-    **Recover selected** opens the selected workspaces in list order as new
-    unsaved tabs. The last successfully recovered workspace becomes active;
-    other recovered tabs rebuild their previews when you activate them. If a
-    workspace cannot be recovered, its copy is kept and successful recoveries
-    stay open. Check any reported problem before retrying.
+    **Recover selected** opens all tabs from the checked workspaces in list
+    order as new unsaved copies. The last successfully recovered workspace
+    becomes active; other recovered tabs rebuild their previews when you
+    activate them. If a workspace cannot be recovered, its copy stays available
+    and checked for retry. Successful recoveries stay open and are not opened
+    again when you retry the failed entries. Check any reported problem first.
 
-    **Discard selected** asks you to confirm the number of selected
+    **Discard selected** asks you to confirm the number of checked
     copies, with **No** selected by default. Successful discards stop offering
     only those recovery copies; ordinary saved workflow files are not deleted.
     If a discard cannot be confirmed, its entry stays listed: check the reported
