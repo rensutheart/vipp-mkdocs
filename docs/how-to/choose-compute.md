@@ -1,6 +1,6 @@
 # Choose and verify CPU or GPU compute
 
-VIPP 0.16.0a7 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
+VIPP 0.16.0a8 lets one workflow request **CPU**, **Auto**, **Prefer GPU**, or
 **Custom** compute. The request is not the execution record: the node badge
 and accepted run provenance say what actually ran.
 
@@ -429,7 +429,7 @@ succeeds.
 ## Keep interactive and durable execution aligned
 
 Interactive calculation, saved batch runners, and generated Python/CLI use the
-same execution service. Interactive **Save selected output...** and **Export OME
+same execution service. Interactive **Export…** and **Export OME
 dataset...** serialize accepted cached values instead; they do not rerun the graph
 or create exact compute-provenance sidecars. Preserve:
 

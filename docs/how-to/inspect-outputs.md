@@ -3,11 +3,16 @@
 VIPP has several inspection surfaces. Choose the one that answers the question
 rather than treating a thumbnail as evidence for every decision.
 
-!!! note "Unreleased — clearer result actions"
-    Development builds label the full-data windows **Open full table…** and
+!!! note "New in 0.16.0a8 — clearer result actions"
+    The full-data windows use **Open full table…** and
     **Open full scatter…** instead of **Open in window**. Writing a cached
     result uses **Export…**; workflow **Save** is unchanged. These are label and
     layout changes, not new calculations or altered result data.
+
+Connected-input cards name the receiving role and source node. They show the
+output port when it distinguishes a connection. Expand **Input metadata** for
+incoming image, table or transform details, or **Output metadata** for the
+selected result. The cards describe the existing graph; they do not edit it.
 
 | Surface | Good for | Not sufficient for |
 | --- | --- | --- |
@@ -53,7 +58,7 @@ mask.
 **Improved in 0.15.0a5:** the **Intensity Histogram** node's inspector
 plot grows vertically to keep the graph, axis labels and wrapped channel legend
 readable in a narrow panel or with larger fonts. Scroll the inspector to reach
-the sections below it. **Open in window** still provides a resizable detailed
+the sections below it. **Open histogram…** still provides a resizable detailed
 view; resizing does not recalculate or change the histogram values.
 
 !!! info "New in 0.16.0a3"
@@ -156,7 +161,7 @@ or benchmarking implementations.
 
 ## Inspect colocalization scatter at useful resolution
 
-Select `Colocalization Metrics` or its masked variant and use **Open in window**
+Select `Colocalization Metrics` or its masked variant and use **Open full scatter…**
 in the scatter section. The larger resizable view provides density bins,
 colormap, logarithmic density, populated-range zoom, equal-axis scales, and PNG
 or TIFF export at an explicit **Export size**.
@@ -189,7 +194,7 @@ scatter inspection.
 
 ## Open a complete result table
 
-In a table-producing node's **Results** section, use **Open in window**. This
+In a table-producing node's **Results** section, use **Open full table…**. This
 opens the complete table in a resizable sortable view, not only the compact
 inspector preview. Click a column heading to sort ascending, then again to sort
 descending. Review units, missing values, and status/error columns alongside

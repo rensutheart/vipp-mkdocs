@@ -4,6 +4,14 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a8 alpha
+
+[Read the 0.16.0a8 overview](0.16.0a8.md) for Windows update methods, recovery
+of several interrupted workspaces, and graph, inspector and viewer
+improvements. Unfinished AI features are not included. Use the
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a8/).
+
 ## 0.16.0a7 alpha
 
 [Read the 0.16.0a7 overview](0.16.0a7.md) for initial source loading,

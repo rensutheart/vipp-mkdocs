@@ -93,6 +93,10 @@ For a saved column selection used downstream, use **Select Table Columns** in
 the workflow. Its [paired selection controls](../reference/interface.md#bulk-selection-controls)
 also affect all columns, and its choices change the downstream table.
 
+**New in 0.16.0a8:** full tables default to **Fit to contents**. Choose
+**Equal widths** or drag a column divider to resize it. These display choices
+also apply in the standalone full table and do not change exported values.
+
 **Increase Decimal** and **Decrease Decimal** controls change how
 many decimal places the **Data**, **Summary** and **View plotted data** tables
 display, starting at 3. Hover over a cell for its full original value. Each table

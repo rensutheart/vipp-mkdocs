@@ -166,7 +166,7 @@ from that cached density without recalculating a scientific result.
 card and inspector need one channel to present at a time. If downstream
 connections use exactly one distinct output port, VIPP presents that channel in
 the split node's thumbnail, napari inspect or pinned layer, histogram, output
-metadata, dimension controls, and **Save selected output...** action. Multiple
+metadata, dimension controls, and **Export…** action. Multiple
 branches may consume the same port; that remains one distinct used output.
 
 If no output is connected, or the graph uses two or more different channel

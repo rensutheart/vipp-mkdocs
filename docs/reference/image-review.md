@@ -36,6 +36,13 @@ The original scientific buffers are read-only.
 
 ## Display and navigation
 
+**New in 0.16.0a8:** if a full intensity volume exceeds the renderer's 3D
+budget, Review Images can show a labelled smaller intensity preview. The
+original physical extent and alignment are preserved. Masks and labels are
+not reduced, and 2D slices retain full resolution. If the renderer cannot
+allocate a 3D texture, use **2D slice** to inspect the original result.
+This changes display only, not image data or measurements.
+
 - **Top toolbar:** Side by side or Overlay; 2D slice or 3D volume where the
   spatial data supports it; Link viewpoint, Axes and Scale bar. Icons follow the
   active palette without replacing the controls' text labels.

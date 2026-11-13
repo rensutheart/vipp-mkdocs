@@ -140,6 +140,14 @@ zero during plane conversion; infinite float values are rejected explicitly
 instead of preserving ImageJ's collapsed all-zero plane. The node does not
 change the scientific contract of VIPP's generic Triangle or Isodata nodes.
 
+### Hysteresis Threshold memory
+
+**New in 0.16.0a8:** **Hysteresis Threshold** checks in bounded chunks for
+high-threshold voxels inside low-threshold components instead of creating a
+full-volume float64 temporary. Thresholds, connectivity and the output mask
+are unchanged. Component labeling still needs memory for the full plane or
+volume being processed.
+
 ### Non-finite data and histogram interaction
 
 For the generic global threshold nodes, NaN, positive infinity, and negative

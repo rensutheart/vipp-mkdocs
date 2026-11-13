@@ -50,6 +50,9 @@ between them can therefore look unchanged. Label colours and already encoded
 
 These controls are labelled **Applies immediately.**
 
+**New in 0.16.0a8:** long input/output labels wrap beside graph ports. Hover
+over a port to read its full label and data type; the connection is unchanged.
+
 ## Resolution and exact statistics
 
 | Resolution | Backing pixels |

@@ -3,8 +3,8 @@
 VIPP offers several outputs that solve different problems. They are not
 interchangeable.
 
-!!! note "Unreleased — output labels"
-    The development inspector uses **Export source/image/mask/labels/table…**
+!!! note "New in 0.16.0a8 — output labels"
+    The inspector uses **Export source/image/mask/labels/table…**
     for its cached-output actions. This separates writing a result from
     workflow **Save**. Existing file formats and overwrite confirmations remain.
 
@@ -17,7 +17,7 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a7; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a8; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
@@ -168,8 +168,9 @@ After an interrupted session, VIPP offers **Recover interrupted workflows**.
 You can also open it from **Workflow actions → Recover interrupted workflows…**
 (the three-dot menu beside Save).
 
-1. Select the interrupted workspace, then choose **Recover selected**. Its named
-   and unnamed workflow tabs open as new unsaved **Recovered — …** copies,
+1. Check the interrupted workspaces you want, then choose **Recover selected
+   (N)**. Their named and unnamed workflow tabs open as new unsaved
+   **Recovered — …** copies,
    preserving their order and selected tab. Existing tabs/files stay untouched.
 2. Check the sources and graph, then **Save workflow as…** to keep a recovered
    analysis. The original path is not overwritten by recovery.
@@ -177,7 +178,7 @@ You can also open it from **Workflow actions → Recover interrupted workflows�
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.
 
-!!! note "Unreleased (nightly): recover or discard several workspaces"
+!!! note "New in 0.16.0a8: recover or discard several workspaces"
     No workspaces are checked initially. Click a row outside its checkbox to
     choose only that workspace. To choose several, tick their checkboxes: each
     checkbox changes only that row, without needing Ctrl or Shift.
@@ -218,9 +219,8 @@ Recovery does not reconstruct the Batch workspace or its configuration. Save
 the Batch configuration separately, then reopen it and review sources, output
 paths and run choices before running a recovered graph in Batch.
 
-**Keep for later** leaves the copy available. **Discard selected recovery…**
-stops offering that interrupted workspace; it does not delete your ordinary
-saved workflow files. Another running VIPP instance is never offered as a crash.
+**Keep for later** leaves recovery copies available. Another running VIPP
+instance is never offered as a crash.
 If the latest copy is damaged, a verified previous copy can be offered with that
 label. Copies that cannot be verified are kept for attention, not silently
 opened or repaired.
@@ -232,9 +232,11 @@ copies; it does not erase older interrupted workspaces or another live instance.
 The newest unsaved edit can still be lost if interruption happens before a
 checkpoint succeeds, so recovery is not a backup or source-data archive.
 
-## Save a selected output
+<span id="save-a-selected-output"></span>
 
-Select the desired output and choose **Save selected output...**. The available
+## Export a selected output
+
+Select the desired output and choose its **Export…** action. The available
 format depends on the data type and dimensionality. For tables use CSV or TSV;
 for scientific images prefer a format that can represent the axes, dtype, and
 calibration you need.

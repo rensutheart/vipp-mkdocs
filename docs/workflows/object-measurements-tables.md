@@ -5,7 +5,7 @@ Measurement workflows turn labels, Boolean masks or mesh objects into tables.
 ## Inspect and export the complete table
 
 Select a calculated measurement node and expand **Results**. The compact table
-provides a quick preview; **Open in window** opens every row in a resizable
+provides a quick preview; **Open full table…** opens every row in a resizable
 result-table window. Click column headings to sort and inspect outliers, units,
 missing values, and per-object status/error fields.
 

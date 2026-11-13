@@ -23,7 +23,7 @@ when first used, so that first read may require internet access and extra time.
 
 ## Check or fix a reader
 
-!!! note "Unreleased — clearer setup review"
+!!! note "New in 0.16.0a8 — clearer setup review"
     Reader setup separates the exact package list you approve from optional
     activity output. It shows Review, Close VIPP/napari, and Install/check as
     three steps, with total and current-stage elapsed time. Unknown totals stay

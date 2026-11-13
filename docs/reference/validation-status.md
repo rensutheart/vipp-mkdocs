@@ -5,6 +5,17 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a8 scope and evidence
+
+Use the [0.16.0a8 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8)
+for exact artifacts and the
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a8/docs/release-qualification-baseline.md)
+for changed-domain evidence. Setup transactions, multi-workspace recovery,
+viewer/inspector behavior and Hysteresis Threshold memory use are distinct
+checks. A display-only preview does not validate an analysis, and a renderer
+choice does not qualify scientific GPU execution. See the
+[release overview](../releases/0.16.0a8.md) for changes and limitations.
+
 ## 0.16.0a7 scope and evidence
 
 The [0.16.0a7 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7)
