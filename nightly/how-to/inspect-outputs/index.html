@@ -588,6 +588,8 @@
       
         
       
+        
+      
     
     
     
@@ -631,6 +633,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -4012,6 +4037,17 @@
 <h1 id="inspect-and-compare-outputs">Inspect and compare outputs<a class="headerlink" href="#inspect-and-compare-outputs" title="Permanent link">&para;</a></h1>
 <p>VIPP has several inspection surfaces. Choose the one that answers the question
 rather than treating a thumbnail as evidence for every decision.</p>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a8 — clearer result actions</p>
+<p>The full-data windows use <strong>Open full table…</strong> and
+<strong>Open full scatter…</strong> instead of <strong>Open in window</strong>. Writing a cached
+result uses <strong>Export…</strong>; workflow <strong>Save</strong> is unchanged. These are label and
+layout changes, not new calculations or altered result data.</p>
+</div>
+<p>Connected-input cards name the receiving role and source node. They show the
+output port when it distinguishes a connection. Expand <strong>Input metadata</strong> for
+incoming image, table or transform details, or <strong>Output metadata</strong> for the
+selected result. The cards describe the existing graph; they do not edit it.</p>
 <table>
 <thead>
 <tr>
@@ -4083,7 +4119,7 @@ mask.</p>
 <p><strong>Improved in 0.15.0a5:</strong> the <strong>Intensity Histogram</strong> node's inspector
 plot grows vertically to keep the graph, axis labels and wrapped channel legend
 readable in a narrow panel or with larger fonts. Scroll the inspector to reach
-the sections below it. <strong>Open in window</strong> still provides a resizable detailed
+the sections below it. <strong>Open histogram…</strong> still provides a resizable detailed
 view; resizing does not recalculate or change the histogram values.</p>
 <div class="admonition info">
 <p class="admonition-title">New in 0.16.0a3</p>
@@ -4198,7 +4234,7 @@ what produced the displayed pixels or table.</p>
 <p>See <a href="../choose-compute/">choose and verify CPU or GPU compute</a> before comparing
 or benchmarking implementations.</p>
 <h2 id="inspect-colocalization-scatter-at-useful-resolution">Inspect colocalization scatter at useful resolution<a class="headerlink" href="#inspect-colocalization-scatter-at-useful-resolution" title="Permanent link">&para;</a></h2>
-<p>Select <code>Colocalization Metrics</code> or its masked variant and use <strong>Open in window</strong>
+<p>Select <code>Colocalization Metrics</code> or its masked variant and use <strong>Open full scatter…</strong>
 in the scatter section. The larger resizable view provides density bins,
 colormap, logarithmic density, populated-range zoom, equal-axis scales, and PNG
 or TIFF export at an explicit <strong>Export size</strong>.</p>
@@ -4223,7 +4259,7 @@ workflows and through headless calls when a durable raster is required, but
 are hidden from the palette. Use the metrics-node pop-out for new interactive
 scatter inspection.</p>
 <h2 id="open-a-complete-result-table">Open a complete result table<a class="headerlink" href="#open-a-complete-result-table" title="Permanent link">&para;</a></h2>
-<p>In a table-producing node's <strong>Results</strong> section, use <strong>Open in window</strong>. This
+<p>In a table-producing node's <strong>Results</strong> section, use <strong>Open full table…</strong>. This
 opens the complete table in a resizable sortable view, not only the compact
 inspector preview. Click a column heading to sort ascending, then again to sort
 descending. Review units, missing values, and status/error columns alongside
@@ -4307,7 +4343,7 @@ replacement for them.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 13, 2026 16:10:56 UTC">November 13, 2026</span>
   </span>
 
     

@@ -588,6 +588,8 @@
       
         
       
+        
+      
     
     
     
@@ -631,6 +633,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2317,9 +2342,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#save-a-selected-output" class="md-nav__link">
+  <a href="#export-a-selected-output" class="md-nav__link">
     <span class="md-ellipsis">
-      Save a selected output
+      Export a selected output
     </span>
   </a>
   
@@ -3917,9 +3942,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#save-a-selected-output" class="md-nav__link">
+  <a href="#export-a-selected-output" class="md-nav__link">
     <span class="md-ellipsis">
-      Save a selected output
+      Export a selected output
     </span>
   </a>
   
@@ -3989,6 +4014,12 @@
 <p>VIPP offers several outputs that solve different problems. They are not
 interchangeable.</p>
 <div class="admonition note">
+<p class="admonition-title">New in 0.16.0a8 — output labels</p>
+<p>The inspector uses <strong>Export source/image/mask/labels/table…</strong>
+for its cached-output actions. This separates writing a result from
+workflow <strong>Save</strong>. Existing file formats and overwrite confirmations remain.</p>
+</div>
+<div class="admonition note">
 <p class="admonition-title">New in 0.16.0a1</p>
 <p>Use the three-dot <strong>Workflow actions</strong> menu immediately after <strong>Save</strong> for
 <strong>Save workflow as…</strong>, <strong>Export Python…</strong>, <strong>Export reproducibility package…</strong>
@@ -4007,7 +4038,7 @@ saving</strong>. In 0.15.0a5, these actions were in the gear menu. See the
 <tbody>
 <tr>
 <td>Workflow JSON (schema 6)</td>
-<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a7; optionally restore an attached versioned batch configuration</td>
+<td>Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a8; optionally restore an attached versioned batch configuration</td>
 <td>Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes</td>
 </tr>
 <tr>
@@ -4189,8 +4220,9 @@ to use <strong>Save</strong> for the record you intend to keep or share.</p>
 You can also open it from <strong>Workflow actions → Recover interrupted workflows…</strong>
 (the three-dot menu beside Save).</p>
 <ol>
-<li>Select the interrupted workspace, then choose <strong>Recover selected</strong>. Its named
-   and unnamed workflow tabs open as new unsaved <strong>Recovered — …</strong> copies,
+<li>Check the interrupted workspaces you want, then choose <strong>Recover selected
+   (N)</strong>. Their named and unnamed workflow tabs open as new unsaved
+   <strong>Recovered — …</strong> copies,
    preserving their order and selected tab. Existing tabs/files stay untouched.</li>
 <li>Check the sources and graph, then <strong>Save workflow as…</strong> to keep a recovered
    analysis. The original path is not overwritten by recovery.</li>
@@ -4198,6 +4230,27 @@ You can also open it from <strong>Workflow actions → Recover interrupted workf
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a8: recover or discard several workspaces</p>
+<p>No workspaces are checked initially. Click a row outside its checkbox to
+choose only that workspace. To choose several, tick their checkboxes: each
+checkbox changes only that row, without needing Ctrl or Shift.
+<strong>Select all</strong> checks every workspace; <strong>Clear selection</strong> unchecks them
+without changing any recovery copies. The count and actions apply only to
+checked workspaces, not the highlighted row.</p>
+<p><strong>Recover selected</strong> opens all tabs from the checked workspaces in list
+order as new unsaved copies. The last successfully recovered workspace
+becomes active; other recovered tabs rebuild their previews when you
+activate them. If a workspace cannot be recovered, its copy stays available
+and checked for retry. Successful recoveries stay open and are not opened
+again when you retry the failed entries. Check any reported problem first.</p>
+<p><strong>Discard selected</strong> asks you to confirm the number of checked
+copies, with <strong>No</strong> selected by default. Successful discards stop offering
+only those recovery copies; ordinary saved workflow files are not deleted.
+If a discard cannot be confirmed, its entry stays listed: check the reported
+problem before retrying. Unselected copies stay available. <strong>Keep for later</strong>
+leaves all remaining copies for another time.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">New in 0.16.0a7 — automatic recovery previews</p>
 <p>Recovery loads available samples or verified files and recalculates
@@ -4215,9 +4268,8 @@ when VIPP opens. <strong>Keep for later</strong> does not prevent viewing that s
 <p>Recovery does not reconstruct the Batch workspace or its configuration. Save
 the Batch configuration separately, then reopen it and review sources, output
 paths and run choices before running a recovered graph in Batch.</p>
-<p><strong>Keep for later</strong> leaves the copy available. <strong>Discard selected recovery…</strong>
-stops offering that interrupted workspace; it does not delete your ordinary
-saved workflow files. Another running VIPP instance is never offered as a crash.
+<p><strong>Keep for later</strong> leaves recovery copies available. Another running VIPP
+instance is never offered as a crash.
 If the latest copy is damaged, a verified previous copy can be offered with that
 label. Copies that cannot be verified are kept for attention, not silently
 opened or repaired.</p>
@@ -4227,8 +4279,9 @@ result-output destination. Clean shutdown retires only its own managed working
 copies; it does not erase older interrupted workspaces or another live instance.
 The newest unsaved edit can still be lost if interruption happens before a
 checkpoint succeeds, so recovery is not a backup or source-data archive.</p>
-<h2 id="save-a-selected-output">Save a selected output<a class="headerlink" href="#save-a-selected-output" title="Permanent link">&para;</a></h2>
-<p>Select the desired output and choose <strong>Save selected output...</strong>. The available
+<p><span id="save-a-selected-output"></span></p>
+<h2 id="export-a-selected-output">Export a selected output<a class="headerlink" href="#export-a-selected-output" title="Permanent link">&para;</a></h2>
+<p>Select the desired output and choose its <strong>Export…</strong> action. The available
 format depends on the data type and dimensionality. For tables use CSV or TSV;
 for scientific images prefer a format that can represent the axes, dtype, and
 calibration you need.</p>
@@ -4391,7 +4444,7 @@ a manifest, or durable replay/resume.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 07:37:15 UTC">October 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 13, 2026 16:10:56 UTC">November 13, 2026</span>
   </span>
 
     

@@ -588,6 +588,8 @@
       
         
       
+        
+      
     
     
     
@@ -631,6 +633,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -4058,16 +4083,16 @@
 
 
 <h1 id="windows-nvidia-gpu-setup">Windows NVIDIA GPU setup<a class="headerlink" href="#windows-nvidia-gpu-setup" title="Permanent link">&para;</a></h1>
-<p>VIPP 0.16.0a7 uses the CUDA 13 package track for every current reviewed GPU
+<p>VIPP 0.16.0a8 uses the CUDA 13 package track for every current reviewed GPU
 implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no separate CUDA Toolkit or build tools are required.</p>
 <div class="admonition warning">
-<p class="admonition-title">Use the exact 0.16.0a7 release</p>
+<p class="admonition-title">Use the exact 0.16.0a8 release</p>
 <p>Download the installer and checksum only from the
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7">official v0.16.0a7 release</a>.
-Verify <code>VIPP-Setup-0.16.0a7-Windows-x86_64-UNSIGNED.exe</code> against
-<code>SHA256SUMS-Windows-0.16.0a7.txt</code> before opening it. This alpha is
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8">official v0.16.0a8 release</a>.
+Verify <code>VIPP-Setup-0.16.0a8-Windows-x86_64-UNSIGNED.exe</code> against
+<code>SHA256SUMS-Windows-0.16.0a8.txt</code> before opening it. This alpha is
 intentionally unsigned, so <strong>Unknown publisher</strong> is expected.</p>
 </div>
 <h2 id="choose-the-standard-nvidia-route">Choose the standard NVIDIA route<a class="headerlink" href="#choose-the-standard-nvidia-route" title="Permanent link">&para;</a></h2>
@@ -4079,7 +4104,7 @@ different managed installation.</p>
 <thead>
 <tr>
 <th>Requirement</th>
-<th>0.16.0a7 boundary</th>
+<th>0.16.0a8 boundary</th>
 </tr>
 </thead>
 <tbody>
@@ -4199,6 +4224,46 @@ messages. Scroll up without losing your place, then select <strong>Jump to lates
 to follow new messages again. See <a href="../installation/#read-the-live-installation-log">Read the live installation
 log</a> for the full-log option.</p>
 </div>
+<div class="admonition info">
+<p class="admonition-title">New in 0.16.0a8: changed-package installer updates</p>
+<p>The Windows installer shows <strong>Update method</strong> during <strong>Review</strong>.
+<strong>Automatic — fastest safe method</strong> prefers <strong>In-place update — update
+changed packages</strong> when the verified standard CUDA installation is eligible.
+It updates VIPP and required new or changed dependencies, retaining compatible
+installed packages and avoiding a complete environment copy. It does not
+promise every dependency's newest version.</p>
+<p><strong>Keep VIPP closed. Do not open it until setup finishes</strong>—including any
+rollback or recovery. If setup positively detects a running VIPP, <strong>Close
+VIPP to continue</strong> asks you to save and close it yourself, then choose
+<strong>Check again</strong> and review the new decision. Setup never force-closes the
+app or restarts the update automatically. Replacement and Fresh use a
+separate environment and do not require this in-place closed-app boundary.</p>
+<p>An older installation is not forced through a one-time full copy solely
+because of its age. In-place still requires verified quiescence of that
+exact environment and the startup-exclusion guard. Unknown process facts,
+persistent locks, an incompatible Python ABI or an unsupported package layout
+remain specific blockers, not proof that it is safe to proceed. Review
+<strong>Replacement update — copy existing packages</strong> or <strong>Fresh installation</strong>
+when setup offers a verified alternative; do not bypass its ownership or
+CUDA-path checks.</p>
+<p>Initial local checks no longer wait for a full online package resolution.
+Replacement verifies and copies existing dependency files into a separate
+environment. <strong>Fresh installation</strong> resolves and rebuilds the required
+package set, reusing hash-verified cached downloads and fetching missing
+packages. A dependency change required by VIPP can also use In-place when
+its transaction passes the safety checks. An explicitly selected method
+stops when unavailable rather than silently changing methods.</p>
+<p>In-place backs up changed package files for recovery, not the complete
+GPU environment; unchanged dependency files stay in place. The previous
+full environment is not separately available during that route. Replacement
+and Fresh keep the previous working environment unchanged until the
+candidate passes acceptance. Applicable CUDA checks and the existing
+free-space gates still apply. No method permits a VIPP downgrade or promises
+support for every existing environment layout.
+See <a href="../installation/#windows-update-methods">Windows update methods</a>
+for the choices and limits. This does not change the separate <strong>Set up
+GPU…</strong> dialog or its build-specific CUDA copies into an in-place updater.</p>
+</div>
 <h2 id="verify-the-installation">Verify the installation<a class="headerlink" href="#verify-the-installation" title="Permanent link">&para;</a></h2>
 <p>Open the <a href="../launching/#use-the-installed-shortcut-on-windows">installed VIPP launcher</a>.
 <strong>New in 0.15.0a5:</strong> CUDA installations use one <strong>VIPP</strong> shortcut and
@@ -4233,7 +4298,7 @@ working directory:</p>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\python.exe"</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">`</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="s2">"napari[pyqt6]&gt;=0.6"</span> <span class="p">`</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="s2">"napari-vipp[gpu-cuda13]==0.16.0a7"</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="s2">"napari-vipp[gpu-cuda13]==0.16.0a8"</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe"</span> <span class="p">-</span><span class="n">-track</span> <span class="n">cuda13</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"</span>
 </span></code></pre></div>
@@ -4263,7 +4328,7 @@ parameters, extended measurement columns, scientific parity, or memory needs
 remain on CPU with an explanation. <strong>Auto</strong> can correctly select CPU when the
 complete workload is faster there. <strong>Prefer GPU</strong> still allows visible CPU
 fallback.</p>
-<p>The completed-node badge reports what actually ran. GPU providers in 0.16.0a7
+<p>The completed-node badge reports what actually ran. GPU providers in 0.16.0a8
 appear as <strong>GPU · CuPy</strong>; an amber <strong>CPU fallback</strong> badge identifies a failed or
 ineligible accelerator request.</p>
 <h2 id="runtime-behavior-and-provenance">Runtime behavior and provenance<a class="headerlink" href="#runtime-behavior-and-provenance" title="Permanent link">&para;</a></h2>
@@ -4322,7 +4387,7 @@ benchmarks. See the
 favored CuPy in all 14 matched cases; see the
 <a href="https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison">measurement benchmarks</a>.</p>
 <p>Continue with <a href="../../how-to/choose-compute/">Choose CPU or GPU compute</a> and the
-<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7">official v0.16.0a7 release</a>.</p>
+<a href="https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8">official v0.16.0a8 release</a>.</p>
 
 
 
@@ -4343,7 +4408,7 @@ favored CuPy in all 14 matched cases; see the
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 07:37:15 UTC">October 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 13, 2026 16:10:56 UTC">November 13, 2026</span>
   </span>
 
     

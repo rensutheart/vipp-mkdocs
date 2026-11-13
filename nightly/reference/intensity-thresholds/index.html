@@ -588,6 +588,8 @@
       
         
       
+        
+      
     
     
     
@@ -631,6 +633,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2977,6 +3002,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hysteresis-threshold-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hysteresis Threshold memory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#non-finite-data-and-histogram-interaction" class="md-nav__link">
     <span class="md-ellipsis">
       Non-finite data and histogram interaction
@@ -3927,6 +3961,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hysteresis-threshold-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hysteresis Threshold memory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#non-finite-data-and-histogram-interaction" class="md-nav__link">
     <span class="md-ellipsis">
       Non-finite data and histogram interaction
@@ -4151,6 +4194,12 @@ reduction are VIPP extensions and are not claimed as ImageJ-exact. NaNs become
 zero during plane conversion; infinite float values are rejected explicitly
 instead of preserving ImageJ's collapsed all-zero plane. The node does not
 change the scientific contract of VIPP's generic Triangle or Isodata nodes.</p>
+<h3 id="hysteresis-threshold-memory">Hysteresis Threshold memory<a class="headerlink" href="#hysteresis-threshold-memory" title="Permanent link">&para;</a></h3>
+<p><strong>New in 0.16.0a8:</strong> <strong>Hysteresis Threshold</strong> checks in bounded chunks for
+high-threshold voxels inside low-threshold components instead of creating a
+full-volume float64 temporary. Thresholds, connectivity and the output mask
+are unchanged. Component labeling still needs memory for the full plane or
+volume being processed.</p>
 <h3 id="non-finite-data-and-histogram-interaction">Non-finite data and histogram interaction<a class="headerlink" href="#non-finite-data-and-histogram-interaction" title="Permanent link">&para;</a></h3>
 <p>For the generic global threshold nodes, NaN, positive infinity, and negative
 infinity are excluded from cutoff fitting and become background in the
@@ -4283,7 +4332,7 @@ modes actually process.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 13:55:21 UTC">October 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 13, 2026 16:10:56 UTC">November 13, 2026</span>
   </span>
 
     

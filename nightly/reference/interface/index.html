@@ -588,6 +588,8 @@
       
         
       
+        
+      
     
     
     
@@ -631,6 +633,29 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/0.16.0a8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.16.0a8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2955,6 +2980,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#viewer-graphics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viewer graphics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compute-controls" class="md-nav__link">
     <span class="md-ellipsis">
       Compute controls
@@ -4130,6 +4164,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#viewer-graphics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viewer graphics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compute-controls" class="md-nav__link">
     <span class="md-ellipsis">
       Compute controls
@@ -4310,8 +4353,52 @@
 
 
 <h1 id="toolbar-and-settings">Toolbar and settings<a class="headerlink" href="#toolbar-and-settings" title="Permanent link">&para;</a></h1>
-<p>Labels below match napari-vipp 0.16.0a7. Some labels
+<p>Labels below match napari-vipp 0.16.0a8. Some labels
 shorten to icons when the window is narrow.</p>
+<div class="admonition note">
+<p class="admonition-title">New in 0.16.0a8 — consistent sizing and clearer dialogs</p>
+<p>VIPP uses a shared heading/body hierarchy and sizes numeric
+fields, table rows and scrollable previews from the current interface font.
+Windows fit the available screen when first opened; you can resize them
+afterwards. Long inspector guidance still wraps rather than requiring
+horizontal scrolling. These changes do not alter scientific parameters or
+calculated results.</p>
+<p>Slider number fields keep a compact, consistent width when labels wrap;
+longer current values can expand the field. Connected-input cards use a
+compact layout and bold heading without hiding scientific metadata.
+Graph thumbnail messages wrap inside the preview. <strong>View dimensions</strong>
+above the graph navigates the current image (for example, its Z plane,
+time point or channel); it does not edit a node. When positions are shown
+without sliders, <strong>Show sliders</strong> opens sliders for those same axes.
+In the narrowest dock, <strong>View dimensions</strong> opens all the navigation controls.
+Recovery checkboxes have explicit contrast in both light and dark themes;
+row clicks and checkbox multi-selection keep their existing behavior.</p>
+<p>While a VIPP layer switches from 2D to 3D, the pixel value under the
+cursor can briefly be blank until the 3D slice is ready. This does not
+change the image, workflow, or calculated results.</p>
+<p>While VIPP loads an image source or its presentation preview in the
+background, the strip above the workflow graph shows the phase in bold
+and the current action separately. For a known local file, the strip shows
+its filename instead of the full path. Hover for the full diagnostic.
+A measured byte or step count, when available, applies to that phase, not
+the whole workflow. It appears to the right of the progress bar when it
+fits, or on a separate line in a very narrow dock or with larger text.
+Use <strong>Cancel load</strong> to stop at the next safe checkpoint. The strip stays
+visible if you select another node.</p>
+<p>The inspector keeps the operation name above the controls. Open
+<strong>Node details…</strong> to read the node's configured settings one at a time,
+with an optional <strong>JSON</strong> view. This is a snapshot taken when the dialog
+opens, not a record of which arguments were used in a calculation.
+Edit settings and check input-dependent guidance in the inspector itself.</p>
+<p>Action, dismissal and stop controls retain distinct roles. Merely focusing
+a button does not make it an implicit Enter-key action; dialogs with a
+deliberate default, such as an explicit confirmation, keep that behavior.
+Read the confirmation before discarding recovery copies or exporting files.</p>
+<p>Result actions also distinguish viewing from writing: <strong>Open full table…</strong>
+and <strong>Open full scatter…</strong> replace the generic <strong>Open in window</strong> labels;
+<strong>Export source/image/mask/labels/table…</strong> replaces the inspector's context-
+specific <strong>Save</strong> output labels. Workflow <strong>Save</strong> still saves the workflow.</p>
+</div>
 <p>When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
 original dock constraints; those embedded constraints should not remain on the
@@ -4525,6 +4612,10 @@ configuration separately. See <a href="../../how-to/save-share-export/#recover-i
 and <strong>clipping → Clamp Intensity</strong>. British spellings such as
 <strong>normalise</strong> and <strong>skeletonisation</strong> work too. Results keep their usual node
 names; searching does not change the workflow or its calculations.</p>
+<p><strong>New in 0.16.0a8:</strong> the Nodes panel matches each typed word against operation
+names, aliases and categories. If there is no direct match, it can try a small
+typo or abbreviation. For example, <strong>otsu</strong> and <strong>ostu</strong> both find
+<strong>Otsu Threshold</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">New in 0.16.0a1</p>
 <p>Every node has an optional <strong>Name</strong> field in its inspector and a
@@ -4687,6 +4778,24 @@ keeps time/channel dimensions intact. Dragging margins updates a lightweight
 edit on release. <strong>ROI outline thickness</strong> is clearly separated from crop
 margins because it changes only the 2D/3D guide, not pixels, workflow hashes,
 batch output, or export.</p>
+<h2 id="viewer-graphics">Viewer graphics<a class="headerlink" href="#viewer-graphics" title="Permanent link">&para;</a></h2>
+<p>In standalone VIPP on Windows, open the toolbar gear and find <strong>Viewer
+graphics</strong>. <strong>Active</strong> shows the current renderer and <strong>Next launch</strong> shows
+the saved choice. Hover for details or why an option is unavailable.</p>
+<ul>
+<li><strong>Auto</strong> (default) lets the system choose the OpenGL renderer.</li>
+<li><strong>GPU</strong> requests hardware OpenGL through the system graphics driver.</li>
+<li><strong>CPU</strong> requests software OpenGL when the bundled renderer is available.</li>
+</ul>
+<p>If <strong>Restart needed</strong> appears, save your work and reopen VIPP to apply the
+choice. This local preference is separate from workflow <strong>Compute</strong> and does
+not change analysis or scientific GPU admission. In an existing napari
+session, napari owns the renderer.</p>
+<p>A large intensity result can show a labelled, reduced-resolution <strong>3D
+preview</strong> on its original physical grid extent. <strong>2D slices</strong> still show
+the full-resolution result. Masks and labels are never reduced for display.
+If the renderer cannot draw them, use 2D. A 3D display notice is separate from
+workflow progress and does not change calculated or exported data.</p>
 <h2 id="compute-controls">Compute controls<a class="headerlink" href="#compute-controls" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4718,6 +4827,9 @@ batch output, or export.</p>
 </tr>
 </tbody>
 </table>
+<p>The run summary shows <strong>CPU</strong> once for a CPU-only run, omits zero CPU counts
+for GPU-only runs, and retains mixed-run and fallback information. Hover for
+the full counts and decision reasons.</p>
 <p><strong>New in 0.16.0a5:</strong> <strong>Set up GPU…</strong> / <strong>Repair GPU setup…</strong> starts the
 supported Windows setup from a status card with next-step guidance, installation
 review, progress, cancellation and verification. The session GPU choice stays
@@ -4900,6 +5012,10 @@ installed layer API supports them. Labels follow displayed rank, omit a hidden
 RGB/RGBA component axis, and update on layer reuse. Hidden or provisional source
 previews cannot replace the selected scientific layer's labels. This is viewer
 presentation only and never changes <code>ImageState</code> or operation semantics.</p>
+<p>A channel slider keeps its <strong>C</strong> label when another
+layer still uses that axis. When the channel axis goes away, the viewer keeps
+your Z position. <strong>2D YX</strong> on Subtract Background processes one slice at a time
+without flattening the stack; its result can still be viewed in 3D.</p>
 <h3 id="tune-one-node-in-isolation">Tune one node in isolation<a class="headerlink" href="#tune-one-node-in-isolation" title="Permanent link">&para;</a></h3>
 <p><strong>Tune node in isolation</strong> is available in the selected-node inspector and the
 node context menu. The selected node must have a coherent cached result, and no
@@ -4928,18 +5044,20 @@ workflow JSON.</p>
 <p>Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
-<strong>Pin selected</strong>, <strong>Save selected output...</strong>, and an explicit reset of the
+<strong>Pin selected</strong>, a context-specific <strong>Export…</strong> action, and a reset of the
 selected output's remembered display profile.</p>
-<p>The settings summary below <strong>Name</strong> wraps to show
-its full text, and unchanged connected-input details stay steady while you
-adjust parameters.</p>
+<p>Use <strong>Node details…</strong> for the selected node's configured settings snapshot.
+The inspector remains where you edit parameters and see input-dependent
+guidance. Section headings wrap in narrow docks, and parameter rows switch
+together between inline and stacked layouts without separating sliders from
+their number boxes.</p>
 <h3 id="scrolling-past-drop-downs">Scrolling past drop-downs<a class="headerlink" href="#scrolling-past-drop-downs" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
-<p class="admonition-title">New in 0.16.0a2</p>
-<p>Using the mouse wheel over a <strong>closed drop-down</strong> scrolls the inspector
-without changing the selected value, even when that control has keyboard
-focus. Open the drop-down to scroll through its choices. Click and keyboard
-selection still work normally.</p>
+<p class="admonition-title">New in 0.16.0a8</p>
+<p>Scrolling over a slider, number box or <strong>closed drop-down</strong> moves the
+inspector without changing the value, even when the control has focus.
+Click, drag or use the keyboard to edit; an open drop-down still scrolls
+through its choices.</p>
 </div>
 <h3 id="numeric-parameter-entry">Numeric parameter entry<a class="headerlink" href="#numeric-parameter-entry" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
@@ -5076,7 +5194,7 @@ queues interactive recalculation. This is a scientific parameter edit: save
 the workflow after accepting it. VIPP reuses unchanged input counts while a
 manual marker moves and refreshes the output histogram after the output changes.</p>
 <h2 id="colocalization-scatter-controls">Colocalization scatter controls<a class="headerlink" href="#colocalization-scatter-controls" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Open in window</strong> in a metrics node's scatter section. The inspector and
+<p>Use <strong>Open full scatter…</strong> in a metrics node's scatter section. The inspector and
 resizable pop-out share a linked colormap; colour and log-density changes reuse
 the cached density. <strong>Density bins</strong> can request up to 4,096 bins per axis in
 the pop-out, subject to a background memory preflight. The compact inspector
@@ -5164,7 +5282,7 @@ of ordinary graph progress. See <a href="../../workflows/batch-processing/">proc
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 07:37:15 UTC">October 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 13, 2026 16:10:56 UTC">November 13, 2026</span>
   </span>
 
     
