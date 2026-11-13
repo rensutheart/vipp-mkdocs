@@ -54,7 +54,7 @@ intermediates under their normal retention policy.
 
 When exactly one distinct output is connected, that channel drives the split
 node's thumbnail, inspect/pinned layer, histogram, metadata, dimensions, and
-**Save selected output…**. Several consumers of the same port still count as one.
+**Export…**. Several consumers of the same port still count as one.
 
 With no connected output, or several different outputs in use, these surfaces
 use the saved **Thumbnail channel**. This presentation choice neither rewires

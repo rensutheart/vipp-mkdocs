@@ -128,7 +128,7 @@ The inspector keeps the short summary separate from the full evidence:
   objects. The full table keeps the per-group details.
 - The compact Results preview shows group values, **valid n** and selected
   statistics.
-- **Open in window** and **Export CSV/TSV…** include the complete table, with
+- **Open full table…** and **Export CSV/TSV…** include the complete table, with
   exclusion reasons, image/sample counts where supplied, and the saved recipe.
 
 Connect the output to

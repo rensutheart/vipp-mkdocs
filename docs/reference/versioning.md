@@ -8,14 +8,14 @@ This manual has two publication tracks and release-numbered snapshots.
 | **nightly** | Documentation built from this repository's `main` branch | Previewing unreleased docs and interfaces |
 | **0.x.y…** | Immutable snapshot published for a particular release | Reopening old workflows or reporting exact methods |
 
-This manual covers VIPP **0.16.0a7**. Use the
-[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7)
+This manual covers VIPP **0.16.0a8**. Use the
+[canonical GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8)
 for the exact manual-install wheel, unsigned Windows installer, separate
 unsigned Apple Silicon and Intel macOS packages, checksums and qualification
-evidence. Use the [PyPI 0.16.0a7 page](https://pypi.org/project/napari-vipp/0.16.0a7/)
+evidence. Use the [PyPI 0.16.0a8 page](https://pypi.org/project/napari-vipp/0.16.0a8/)
 for an exact package pin. The nightly manual may describe later unreleased work.
 
-[0.16.0a7](../releases/0.16.0a7.md) retains
+[0.16.0a8](../releases/0.16.0a8.md) retains
 workflow, batch-config and manifest schema 6 from 0.15.0a3, including verified resume.
 Earlier manifests cannot supply the new recovery evidence. New operations and
 reproduction references still require a compatible runtime; unchanged schema
@@ -37,7 +37,7 @@ selector in the site header. If they differ:
 - install the release described by the manual in a separate environment.
 
 Do not assume a workflow saved by one alpha release is compatible with another.
-VIPP 0.16.0a7 writes workflow schema version 6, batch configuration version 6,
+VIPP 0.16.0a8 writes workflow schema version 6, batch configuration version 6,
 and manifest schema version 6; workflow versions 1 and 2 are rejected. Valid schema-3
 workflows load with explicit CPU intent, schema-4 workflows retain authored
 compute intent, and schema-5 workflows retain canonical SourceItem evidence.
@@ -47,6 +47,21 @@ cached scientific results. Recalculate and compare graph structure, parameters,
 selected items, reader/backend, axes, channels, physical grids, dynamic ports,
 compute request, node behavior, actual backend, and results on known sample
 data. See the [workflow contract](workflow-contract.md).
+
+## Move from 0.16.0a7 to 0.16.0a8
+
+Keep original workflows, data and decisive outputs. Schemas remain 6;
+regenerate Python exports using the installed version.
+
+On Windows, review the [update method](../getting-started/installation.md#windows-update-methods)
+before approval. Save and close VIPP for In-place, and keep it closed until
+setup and any recovery finish. A separate prior environment is available
+only with Replacement or Fresh, not In-place.
+
+Choose interrupted workspaces by checkbox when recovering several at once.
+Recovered graphs still open as unsaved copies, with manual steps and file
+writers paused. A reduced 3D intensity preview is display-only; use the
+original result for analysis. See the [0.16.0a8 release notes](../releases/0.16.0a8.md).
 
 ## Move from 0.16.0a6 to 0.16.0a7
 
@@ -448,10 +463,10 @@ python -m pip install --pre napari-vipp
 
 To reproduce a specific alpha exactly, use a fresh environment and record the
 distribution surface as well as the version. An exact prerelease does not need
-`--pre`. For 0.16.0a7, use the exact package pin:
+`--pre`. For 0.16.0a8, use the exact package pin:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.16.0a7"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp==0.16.0a8"
 ```
 
 On macOS use `napari[pyside6]` instead of `napari[pyqt6]`; macOS remains CPU-only.
@@ -459,7 +474,7 @@ On macOS use `napari[pyside6]` instead of `napari[pyqt6]`; macOS remains CPU-onl
 For the optional CUDA 13 extra, use a separate 64-bit CPython 3.12 environment:
 
 ```text
-python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.16.0a7"
+python -m pip install "napari[pyqt6]>=0.6" "napari-vipp[gpu-cuda13]==0.16.0a8"
 vipp-compute-doctor --track cuda13
 ```
 

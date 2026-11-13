@@ -1,15 +1,15 @@
 # Windows NVIDIA GPU setup
 
-VIPP 0.16.0a7 uses the CUDA 13 package track for every current reviewed GPU
+VIPP 0.16.0a8 uses the CUDA 13 package track for every current reviewed GPU
 implementation. The normal Windows installer is the recommended
 route. It installs CuPy/CuPyX and the matching CUDA component packages inside a
 private VIPP environment; no separate CUDA Toolkit or build tools are required.
 
-!!! warning "Use the exact 0.16.0a7 release"
+!!! warning "Use the exact 0.16.0a8 release"
     Download the installer and checksum only from the
-    [official v0.16.0a7 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7).
-    Verify `VIPP-Setup-0.16.0a7-Windows-x86_64-UNSIGNED.exe` against
-    `SHA256SUMS-Windows-0.16.0a7.txt` before opening it. This alpha is
+    [official v0.16.0a8 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8).
+    Verify `VIPP-Setup-0.16.0a8-Windows-x86_64-UNSIGNED.exe` against
+    `SHA256SUMS-Windows-0.16.0a8.txt` before opening it. This alpha is
     intentionally unsigned, so **Unknown publisher** is expected.
 
 ## Choose the standard NVIDIA route
@@ -19,7 +19,7 @@ In setup, keep **Automatic** or expand **Advanced details** and select
 explains any failed requirement. A blocked GPU choice never silently becomes a
 different managed installation.
 
-| Requirement | 0.16.0a7 boundary |
+| Requirement | 0.16.0a8 boundary |
 | --- | --- |
 | Operating system | Native 64-bit Windows |
 | Python | 64-bit CPython 3.12; 3.12.10 is the installer reference |
@@ -125,6 +125,49 @@ underlying dependency tool reports a trustworthy byte total.
     to follow new messages again. See [Read the live installation
     log](installation.md#read-the-live-installation-log) for the full-log option.
 
+!!! info "New in 0.16.0a8: changed-package installer updates"
+    The Windows installer shows **Update method** during **Review**.
+    **Automatic — fastest safe method** prefers **In-place update — update
+    changed packages** when the verified standard CUDA installation is eligible.
+    It updates VIPP and required new or changed dependencies, retaining compatible
+    installed packages and avoiding a complete environment copy. It does not
+    promise every dependency's newest version.
+
+    **Keep VIPP closed. Do not open it until setup finishes**—including any
+    rollback or recovery. If setup positively detects a running VIPP, **Close
+    VIPP to continue** asks you to save and close it yourself, then choose
+    **Check again** and review the new decision. Setup never force-closes the
+    app or restarts the update automatically. Replacement and Fresh use a
+    separate environment and do not require this in-place closed-app boundary.
+
+    An older installation is not forced through a one-time full copy solely
+    because of its age. In-place still requires verified quiescence of that
+    exact environment and the startup-exclusion guard. Unknown process facts,
+    persistent locks, an incompatible Python ABI or an unsupported package layout
+    remain specific blockers, not proof that it is safe to proceed. Review
+    **Replacement update — copy existing packages** or **Fresh installation**
+    when setup offers a verified alternative; do not bypass its ownership or
+    CUDA-path checks.
+
+    Initial local checks no longer wait for a full online package resolution.
+    Replacement verifies and copies existing dependency files into a separate
+    environment. **Fresh installation** resolves and rebuilds the required
+    package set, reusing hash-verified cached downloads and fetching missing
+    packages. A dependency change required by VIPP can also use In-place when
+    its transaction passes the safety checks. An explicitly selected method
+    stops when unavailable rather than silently changing methods.
+
+    In-place backs up changed package files for recovery, not the complete
+    GPU environment; unchanged dependency files stay in place. The previous
+    full environment is not separately available during that route. Replacement
+    and Fresh keep the previous working environment unchanged until the
+    candidate passes acceptance. Applicable CUDA checks and the existing
+    free-space gates still apply. No method permits a VIPP downgrade or promises
+    support for every existing environment layout.
+    See [Windows update methods](installation.md#windows-update-methods)
+    for the choices and limits. This does not change the separate **Set up
+    GPU…** dialog or its build-specific CUDA copies into an in-place updater.
+
 ## Verify the installation
 
 Open the [installed VIPP launcher](launching.md#use-the-installed-shortcut-on-windows).
@@ -170,7 +213,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.16.0a7"
+  "napari-vipp[gpu-cuda13]==0.16.0a8"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -205,7 +248,7 @@ remain on CPU with an explanation. **Auto** can correctly select CPU when the
 complete workload is faster there. **Prefer GPU** still allows visible CPU
 fallback.
 
-The completed-node badge reports what actually ran. GPU providers in 0.16.0a7
+The completed-node badge reports what actually ran. GPU providers in 0.16.0a8
 appear as **GPU · CuPy**; an amber **CPU fallback** badge identifies a failed or
 ineligible accelerator request.
 
@@ -282,4 +325,4 @@ favored CuPy in all 14 matched cases; see the
 [measurement benchmarks](https://github.com/rensutheart/napari-vipp/blob/23e5866cfad7562cb1490e4405ff874cedf964b2/docs/benchmarks/measurements-cupy-windows-rtx5090.md#historical-provider-comparison).
 
 Continue with [Choose CPU or GPU compute](../how-to/choose-compute.md) and the
-[official v0.16.0a7 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7).
+[official v0.16.0a8 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8).

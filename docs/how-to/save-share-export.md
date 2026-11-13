@@ -3,6 +3,11 @@
 VIPP offers several outputs that solve different problems. They are not
 interchangeable.
 
+!!! note "New in 0.16.0a8 — output labels"
+    The inspector uses **Export source/image/mask/labels/table…**
+    for its cached-output actions. This separates writing a result from
+    workflow **Save**. Existing file formats and overwrite confirmations remain.
+
 !!! note "New in 0.16.0a1"
     Use the three-dot **Workflow actions** menu immediately after **Save** for
     **Save workflow as…**, **Export Python…**, **Export reproducibility package…**
@@ -12,7 +17,7 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a7; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a8; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
@@ -163,14 +168,37 @@ After an interrupted session, VIPP offers **Recover interrupted workflows**.
 You can also open it from **Workflow actions → Recover interrupted workflows…**
 (the three-dot menu beside Save).
 
-1. Select the interrupted workspace, then choose **Recover selected**. Its named
-   and unnamed workflow tabs open as new unsaved **Recovered — …** copies,
+1. Check the interrupted workspaces you want, then choose **Recover selected
+   (N)**. Their named and unnamed workflow tabs open as new unsaved
+   **Recovered — …** copies,
    preserving their order and selected tab. Existing tabs/files stay untouched.
 2. Check the sources and graph, then **Save workflow as…** to keep a recovered
    analysis. The original path is not overwritten by recovery.
 3. In 0.16.0a5–a6, calculate explicitly when ready. Recovery does not restore calculated arrays,
    tables, Undo history or in-flight work, and never runs a workflow or writer
    automatically. You need the original input files again.
+
+!!! note "New in 0.16.0a8: recover or discard several workspaces"
+    No workspaces are checked initially. Click a row outside its checkbox to
+    choose only that workspace. To choose several, tick their checkboxes: each
+    checkbox changes only that row, without needing Ctrl or Shift.
+    **Select all** checks every workspace; **Clear selection** unchecks them
+    without changing any recovery copies. The count and actions apply only to
+    checked workspaces, not the highlighted row.
+
+    **Recover selected** opens all tabs from the checked workspaces in list
+    order as new unsaved copies. The last successfully recovered workspace
+    becomes active; other recovered tabs rebuild their previews when you
+    activate them. If a workspace cannot be recovered, its copy stays available
+    and checked for retry. Successful recoveries stay open and are not opened
+    again when you retry the failed entries. Check any reported problem first.
+
+    **Discard selected** asks you to confirm the number of checked
+    copies, with **No** selected by default. Successful discards stop offering
+    only those recovery copies; ordinary saved workflow files are not deleted.
+    If a discard cannot be confirmed, its entry stays listed: check the reported
+    problem before retrying. Unselected copies stay available. **Keep for later**
+    leaves all remaining copies for another time.
 
 !!! note "New in 0.16.0a7 — automatic recovery previews"
     Recovery loads available samples or verified files and recalculates
@@ -191,9 +219,8 @@ Recovery does not reconstruct the Batch workspace or its configuration. Save
 the Batch configuration separately, then reopen it and review sources, output
 paths and run choices before running a recovered graph in Batch.
 
-**Keep for later** leaves the copy available. **Discard selected recovery…**
-stops offering that interrupted workspace; it does not delete your ordinary
-saved workflow files. Another running VIPP instance is never offered as a crash.
+**Keep for later** leaves recovery copies available. Another running VIPP
+instance is never offered as a crash.
 If the latest copy is damaged, a verified previous copy can be offered with that
 label. Copies that cannot be verified are kept for attention, not silently
 opened or repaired.
@@ -205,9 +232,11 @@ copies; it does not erase older interrupted workspaces or another live instance.
 The newest unsaved edit can still be lost if interruption happens before a
 checkpoint succeeds, so recovery is not a backup or source-data archive.
 
-## Save a selected output
+<span id="save-a-selected-output"></span>
 
-Select the desired output and choose **Save selected output...**. The available
+## Export a selected output
+
+Select the desired output and choose its **Export…** action. The available
 format depends on the data type and dimensionality. For tables use CSV or TSV;
 for scientific images prefer a format that can represent the axes, dtype, and
 calibration you need.

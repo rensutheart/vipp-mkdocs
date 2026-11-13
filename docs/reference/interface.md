@@ -1,7 +1,56 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a7. Some labels
+Labels below match napari-vipp 0.16.0a8. Some labels
 shorten to icons when the window is narrow.
+
+!!! note "New in 0.16.0a8 — consistent sizing and clearer dialogs"
+    VIPP uses a shared heading/body hierarchy and sizes numeric
+    fields, table rows and scrollable previews from the current interface font.
+    Windows fit the available screen when first opened; you can resize them
+    afterwards. Long inspector guidance still wraps rather than requiring
+    horizontal scrolling. These changes do not alter scientific parameters or
+    calculated results.
+
+    Slider number fields keep a compact, consistent width when labels wrap;
+    longer current values can expand the field. Connected-input cards use a
+    compact layout and bold heading without hiding scientific metadata.
+    Graph thumbnail messages wrap inside the preview. **View dimensions**
+    above the graph navigates the current image (for example, its Z plane,
+    time point or channel); it does not edit a node. When positions are shown
+    without sliders, **Show sliders** opens sliders for those same axes.
+    In the narrowest dock, **View dimensions** opens all the navigation controls.
+    Recovery checkboxes have explicit contrast in both light and dark themes;
+    row clicks and checkbox multi-selection keep their existing behavior.
+
+    While a VIPP layer switches from 2D to 3D, the pixel value under the
+    cursor can briefly be blank until the 3D slice is ready. This does not
+    change the image, workflow, or calculated results.
+
+    While VIPP loads an image source or its presentation preview in the
+    background, the strip above the workflow graph shows the phase in bold
+    and the current action separately. For a known local file, the strip shows
+    its filename instead of the full path. Hover for the full diagnostic.
+    A measured byte or step count, when available, applies to that phase, not
+    the whole workflow. It appears to the right of the progress bar when it
+    fits, or on a separate line in a very narrow dock or with larger text.
+    Use **Cancel load** to stop at the next safe checkpoint. The strip stays
+    visible if you select another node.
+
+    The inspector keeps the operation name above the controls. Open
+    **Node details…** to read the node's configured settings one at a time,
+    with an optional **JSON** view. This is a snapshot taken when the dialog
+    opens, not a record of which arguments were used in a calculation.
+    Edit settings and check input-dependent guidance in the inspector itself.
+
+    Action, dismissal and stop controls retain distinct roles. Merely focusing
+    a button does not make it an implicit Enter-key action; dialogs with a
+    deliberate default, such as an explicit confirmation, keep that behavior.
+    Read the confirmation before discarding recovery copies or exporting files.
+
+    Result actions also distinguish viewing from writing: **Open full table…**
+    and **Open full scatter…** replace the generic **Open in window** labels;
+    **Export source/image/mask/labels/table…** replaces the inspector's context-
+    specific **Save** output labels. Workflow **Save** still saves the workflow.
 
 When the VIPP dock is detached from napari, its floating window can be resized
 freely in width and height or maximized. Reattaching it restores napari's
@@ -187,6 +236,11 @@ and **clipping → Clamp Intensity**. British spellings such as
 **normalise** and **skeletonisation** work too. Results keep their usual node
 names; searching does not change the workflow or its calculations.
 
+**New in 0.16.0a8:** the Nodes panel matches each typed word against operation
+names, aliases and categories. If there is no direct match, it can try a small
+typo or abbreviation. For example, **otsu** and **ostu** both find
+**Otsu Threshold**.
+
 !!! note "New in 0.16.0a1"
     Every node has an optional **Name** field in its inspector and a
     **Rename…** context action. **Reset**, or an empty name,
@@ -293,6 +347,27 @@ edit on release. **ROI outline thickness** is clearly separated from crop
 margins because it changes only the 2D/3D guide, not pixels, workflow hashes,
 batch output, or export.
 
+## Viewer graphics
+
+In standalone VIPP on Windows, open the toolbar gear and find **Viewer
+graphics**. **Active** shows the current renderer and **Next launch** shows
+the saved choice. Hover for details or why an option is unavailable.
+
+- **Auto** (default) lets the system choose the OpenGL renderer.
+- **GPU** requests hardware OpenGL through the system graphics driver.
+- **CPU** requests software OpenGL when the bundled renderer is available.
+
+If **Restart needed** appears, save your work and reopen VIPP to apply the
+choice. This local preference is separate from workflow **Compute** and does
+not change analysis or scientific GPU admission. In an existing napari
+session, napari owns the renderer.
+
+A large intensity result can show a labelled, reduced-resolution **3D
+preview** on its original physical grid extent. **2D slices** still show
+the full-resolution result. Masks and labels are never reduced for display.
+If the renderer cannot draw them, use 2D. A 3D display notice is separate from
+workflow progress and does not change calculated or exported data.
+
 ## Compute controls
 
 | Control | Effect |
@@ -302,6 +377,10 @@ batch output, or export.
 | **Find fastest pipeline…** | In Custom mode, benchmark scientifically eligible implementations for unlocked nodes, validate a proposed whole-pipeline assignment, and present grouped per-node/per-implementation evidence for review. A scientifically successful but speed-inconclusive result remains inspectable and changes nothing. |
 | **Fail if a selected GPU cannot run** | Return an error when an explicitly selected GPU implementation is unavailable or ineligible for the exact call/memory plan instead of using a fallback-safe visible CPU decision. A non-fallback-safe rejection fails under either policy. |
 | **Compute setup and memory…** | Verify the optional GPU stack, show typed eligibility/repair guidance, and inspect host RAM plus discrete VRAM or unified memory where supported. |
+
+The run summary shows **CPU** once for a CPU-only run, omits zero CPU counts
+for GPU-only runs, and retains mixed-run and fallback information. Hover for
+the full counts and decision reasons.
 
 **New in 0.16.0a5:** **Set up GPU…** / **Repair GPU setup…** starts the
 supported Windows setup from a status card with next-step guidance, installation
@@ -484,6 +563,11 @@ RGB/RGBA component axis, and update on layer reuse. Hidden or provisional source
 previews cannot replace the selected scientific layer's labels. This is viewer
 presentation only and never changes `ImageState` or operation semantics.
 
+A channel slider keeps its **C** label when another
+layer still uses that axis. When the channel axis goes away, the viewer keeps
+your Z position. **2D YX** on Subtract Background processes one slice at a time
+without flattening the stack; its result can still be viewed in 3D.
+
 ### Tune one node in isolation
 
 **Tune node in isolation** is available in the selected-node inspector and the
@@ -516,20 +600,22 @@ workflow JSON.
 Depending on the selected node/output, the inspector can show parameters,
 execution state, output metadata/history, output and input histograms, label
 volume distribution, colocalization scatter, table preview, auto contrast,
-**Pin selected**, **Save selected output...**, and an explicit reset of the
+**Pin selected**, a context-specific **Export…** action, and a reset of the
 selected output's remembered display profile.
 
-The settings summary below **Name** wraps to show
-its full text, and unchanged connected-input details stay steady while you
-adjust parameters.
+Use **Node details…** for the selected node's configured settings snapshot.
+The inspector remains where you edit parameters and see input-dependent
+guidance. Section headings wrap in narrow docks, and parameter rows switch
+together between inline and stacked layouts without separating sliders from
+their number boxes.
 
 ### Scrolling past drop-downs
 
-!!! note "New in 0.16.0a2"
-    Using the mouse wheel over a **closed drop-down** scrolls the inspector
-    without changing the selected value, even when that control has keyboard
-    focus. Open the drop-down to scroll through its choices. Click and keyboard
-    selection still work normally.
+!!! note "New in 0.16.0a8"
+    Scrolling over a slider, number box or **closed drop-down** moves the
+    inspector without changing the value, even when the control has focus.
+    Click, drag or use the keyboard to edit; an open drop-down still scrolls
+    through its choices.
 
 ### Numeric parameter entry
 
@@ -675,7 +761,7 @@ manual marker moves and refreshes the output histogram after the output changes.
 
 ## Colocalization scatter controls
 
-Use **Open in window** in a metrics node's scatter section. The inspector and
+Use **Open full scatter…** in a metrics node's scatter section. The inspector and
 resizable pop-out share a linked colormap; colour and log-density changes reuse
 the cached density. **Density bins** can request up to 4,096 bins per axis in
 the pop-out, subject to a background memory preflight. The compact inspector

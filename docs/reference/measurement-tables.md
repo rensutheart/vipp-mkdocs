@@ -16,7 +16,7 @@ per-column units where the calculation defines them.
     cached data, without calculating or changing selection. Multi-output nodes
     use the last displayed table output, or the first table output if the
     displayed output is not a table. Table sources, transforms and writers have
-    no new graph shortcut; use the inspector's **Open in window** for their
+    no new graph shortcut; use the inspector's **Open full table…** for their
     table results.
     See [inspect outputs](../how-to/inspect-outputs.md#open-a-complete-result-table)
     for missing and stale results.

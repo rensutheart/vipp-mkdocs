@@ -174,7 +174,7 @@ and recounts the complete ROI. This is a scientific parameter change, not merely
 a plot adjustment: wait for the exact count, recalculate stale manual outputs,
 and save the workflow afterward.
 
-Use **Open in window** in the scatter section of `Colocalization Metrics` or
+Use **Open full scatter…** in the scatter section of `Colocalization Metrics` or
 its masked variant for a larger interactive view. Colormap and log-density
 changes redraw cached density; bin changes calculate a new density in the
 background. **Export size** controls square PNG or TIFF output independently

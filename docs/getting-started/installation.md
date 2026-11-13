@@ -8,16 +8,16 @@ packages.
 
 **[Check the official VIPP releases](https://github.com/rensutheart/napari-vipp/releases)**
 
-!!! warning "Use only the exact 0.16.0a7 files"
-    Obtain the `v0.16.0a7` installers, checksums, wheel, and source archive from the
-    [official release page](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a7).
+!!! warning "Use only the exact 0.16.0a8 files"
+    Obtain the `v0.16.0a8` installers, checksums, wheel, and source archive from the
+    [official release page](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8).
     The release manifest identifies the exact immutable tag and embedded wheel.
     Do not use a similarly named file from another site.
 
 !!! warning "Unsigned alpha — verify before running"
     Download
-    `VIPP-Setup-0.16.0a7-Windows-x86_64-UNSIGNED.exe` only from the official
-    `v0.16.0a7` entry on the
+    `VIPP-Setup-0.16.0a8-Windows-x86_64-UNSIGNED.exe` only from the official
+    `v0.16.0a8` entry on the
     [VIPP GitHub releases page](https://github.com/rensutheart/napari-vipp/releases).
     This alpha is intentionally not Authenticode-signed, so Windows will report
     **Unknown publisher**. The `-UNSIGNED` filename is intentional. Do
@@ -26,17 +26,17 @@ packages.
 ### Verify the download and pass the Windows warning
 
 1. Download the installer and
-   `SHA256SUMS-Windows-0.16.0a7.txt` from the same
+   `SHA256SUMS-Windows-0.16.0a8.txt` from the same
    official GitHub release.
 2. Open PowerShell in the download folder and run:
 
     ```powershell
     Get-FileHash -Algorithm SHA256 `
-      .\VIPP-Setup-0.16.0a7-Windows-x86_64-UNSIGNED.exe
+      .\VIPP-Setup-0.16.0a8-Windows-x86_64-UNSIGNED.exe
     ```
 
 3. Compare the full 64-character result with the line for the installer in
-   `SHA256SUMS-Windows-0.16.0a7.txt`. If it differs, stop and delete the file.
+   `SHA256SUMS-Windows-0.16.0a8.txt`. If it differs, stop and delete the file.
 4. Double-click the installer. At **Windows protected your PC**, choose **More
    info**, check that the app name ends in `-UNSIGNED.exe` and the publisher is
    **Unknown publisher**, then choose **Run anyway**.
@@ -77,7 +77,7 @@ app, not by opening a different shortcut. The CPU and CUDA dependency
 installations remain separate; the common launcher does not add GPU packages
 to a CPU-only installation.
 
-!!! important "CUDA location in 0.16.0a7"
+!!! important "CUDA location in 0.16.0a8"
     One-click setup obtains canonical Windows Local App Data through
     `SHGetKnownFolderPath(FOLDERID_LocalAppData)` and accepts only
     `VIPP\environments\cpu` or `VIPP\environments\cuda13` beneath it. A custom
@@ -133,17 +133,17 @@ Registration conflicts need a different next step; see
 
 ### Read the live installation log
 
-!!! note "New in 0.16.0a1"
-    **Installation log** appears above **Advanced details** and shows package
-    download and installation messages as setup receives them. The installation
-    status and settings remain separate from this read-only log.
+!!! note "New in 0.16.0a8"
+    Select **Show installation log** during installation to see recent package
+    download and installation messages. It opens automatically if setup fails.
+    The status and reviewed settings remain separate from this read-only log.
 
     - Leave the log at the bottom to follow new messages automatically.
     - Scroll up to read earlier messages without being pulled back down.
     - Select **Jump to latest**, or scroll to the bottom, to resume following.
 
     The on-screen view keeps only recent output and redacts sensitive details.
-    For the full record, use **Advanced details → Open setup log**. Review any
+    For the full record, use **Advanced details → Open raw setup log**. Review any
     log or screenshot before sharing it. The log does not estimate how much
     time is left or let you enter terminal commands.
 
@@ -163,8 +163,9 @@ version, even with the same VIPP name and folder, is not proof that its
 uninstaller is safe for the current copy. The blocked update keeps the prior
 installation in place; it does not install the new version.
 
-1. Expand **Advanced details** and save its text. Use **Open setup log**, when
-   available, to keep a copy of the full setup log as well.
+1. Open **View diagnostics…** and save the relevant snapshot text. In
+   **Advanced details**, use **Open raw setup log** when available for the
+   full event record.
 2. Choose **Get setup help**, or open
    [installation support](../troubleshooting/report-a-problem.md) directly.
    Include the installer filename, installed VIPP version, CPU or NVIDIA GPU
@@ -183,8 +184,9 @@ requires review and approval; this does not silently install or restart VIPP.
 
 The installer does not silently replace an existing installation:
 
-- an older installer-owned copy is offered as **Update** and remains usable
-  until the replacement passes acceptance;
+- an older installer-owned copy is offered as **Update**. Only Replacement and
+  Fresh keep a separate prior environment until acceptance; In-place requires
+  VIPP closed throughout the transaction;
 - rerunning the same version offers **Open VIPP** and **Repair**;
 - a newer version is not downgraded;
 - unrelated folders and manually managed napari environments are never
@@ -198,7 +200,7 @@ when they are unchanged and recorded as owned by that installation; modified
 or unrelated shortcuts are not silently replaced.
 
 An installer-owned CUDA copy already stored under a non-ASCII path cannot be
-updated or repaired in place by 0.16.0a7. Setup may first complete and record
+updated or repaired in place by 0.16.0a8. Setup may first complete and record
 recovery from an earlier interrupted transaction; after that separate
 recovery, the newly blocked selection performs no new mutation of the old
 environment, shortcuts, or ownership record. Do not move or rename that
@@ -213,9 +215,159 @@ Remove either installation from **Windows Settings → Apps → Installed apps**
 Each entry has its own ownership-bound uninstaller, so removing CPU does not
 remove CUDA and removing CUDA does not remove CPU.
 
+### Windows update methods
+
+**New in 0.16.0a8:** setup shows **Update method** before you approve an
+installation. Initial checks inspect the local installation, Python, hardware
+and update compatibility; they no longer run a complete online PyPI resolution
+before enabling the approval button. A fresh route resolves its exact package
+set after approval, before creating the replacement.
+
+Setup has two focused stages: **Review** contains the update-method choices,
+explanation and space estimates. After you approve **Update** or **Install**,
+**Installing** shows the selected method, progress and installation log instead.
+Selecting a method alone does not start installation.
+The selector stays in place while a changed choice is checked, and Update stays
+unavailable until that exact choice is ready. Selecting the same method again
+does not repeat the check. **Setup steps** shows Review, Install and Ready as
+progress through setup, not clickable tabs.
+The setup pages share a consistent visual hierarchy. A completed review does
+not show a moving installation progress bar; installation starts only after
+approval. Setup refuses genuine downgrades and cannot authorize an update when
+an existing version is unrecognized.
+
+| Update method | When to choose it |
+| --- | --- |
+| **Automatic — fastest safe method** (default) | Prefer In-place when it is safe; otherwise choose Replacement or Fresh and show the selected method before approval. |
+| **In-place update — update changed packages** | Update VIPP and any required new or changed dependencies in the current environment. Retain compatible installed packages instead of copying a complete environment. Requires a verified installation and a safe closed-app boundary. |
+| **Replacement update — copy existing packages** | Verify and copy compatible installed dependencies into a separate environment, then install the new VIPP package there. |
+| **Fresh installation** | Rebuild a complete, separate environment, including when the Python runtime or package layout cannot be updated safely in place, or when repairing an installation. |
+
+!!! warning "In-place only: keep VIPP closed"
+    **Keep VIPP closed. Do not open it until setup finishes.** Save your work and
+    close VIPP before approving an in-place update. This includes any rollback
+    or recovery. Replacement and Fresh use a separate environment and do not
+    require this closed-app boundary.
+
+Setup identifies the existing managed installation from its verified ownership
+records; choosing a different folder is not a way to bypass an update blocker.
+An older installation does not automatically need a one-time full copy, but it
+is eligible for in-place changes only if setup can verify that no process is
+using its exact environment and establish the required startup-exclusion guard.
+Age or a missing safety marker alone is not proof that an installation is safe
+to change.
+
+In-place keeps transaction backups of the files it changes, not a second
+complete environment. Compatible dependency versions and their files stay in
+place; required new or changed packages are installed before acceptance. The
+previous full environment is **not** separately available throughout this
+route. Setup still verifies the changed package set and its acceptance checks
+before reporting success; it does not re-hash every unchanged dependency file.
+
+If setup positively detects that VIPP is running, it shows **Close VIPP to
+continue**:
+
+1. Save your work and close VIPP yourself. Setup does not force-close it.
+2. Return to setup and choose **Check again**.
+3. Review the newly checked method and package changes before approving the
+   update again. Closing the message or the app does not restart the update.
+
+An unknown process identity, a persistent file lock, an incompatible Python ABI,
+or an unsupported package/launcher layout is not treated as a safe closed app.
+Read the specific blocker. Choose **Replacement update — copy existing
+packages** or **Fresh installation** only when setup offers and verifies that
+route; an explicitly selected unavailable method stops rather than silently
+changing methods. If no route is safe, keep the diagnostics for support. Do not
+delete installation folders or edit Windows registration to force an update.
+
+Package descriptions in `METADATA` can legitimately be larger than startup
+scripts. Setup uses separate size limits for
+distribution metadata and executable startup/control files. If a size check
+blocks setup, its diagnostics identify the file category, full filename,
+observed size and limit. Keep that message for support; do not trim or delete
+package metadata, remove a startup guard, or bypass the check. Use only a
+verified alternative that setup explicitly offers.
+Setup also validates the standard, package-owned pywin32 startup helper in its
+normal installed location, checking ownership, file hashes and search-path order
+without importing it. A missing, changed or competing helper remains a blocker;
+do not copy or move it to work around the check.
+
+Replacement verifies and copies dependency files, regenerates their launchers,
+and checks the separate candidate before switching to it. Fresh resolves and
+installs the complete required package set in a separate environment. These
+two routes keep the previous working environment unchanged until the
+replacement passes checks. Neither requires modifying a manually managed
+environment elsewhere.
+
+Compatible dependency versions are retained even if newer versions exist on
+PyPI. In-place can install a dependency change required by the new VIPP build
+when that change passes its safety checks; a required dependency change does
+not by itself demand a Fresh installation. Fresh resolves the complete set
+compatible with VIPP's requirements. Both reuse exact hash-verified cached
+downloads where available and download missing required packages. None of the
+methods promises to upgrade every dependency to its newest available version,
+work with every package layout, or downgrade a newer installed VIPP.
+
+A cached download is trusted only after its exact hash is verified, not merely
+because its name or version matches. Replacement still reads, verifies and
+copies files and needs temporary disk space. Fresh can avoid repeat downloads
+when the exact packages are cached, but still rebuilds and checks an
+environment. In-place avoids copying unchanged dependencies, not the required
+downloads, approval, backup or acceptance checks. Follow the actual progress
+rather than expecting a fixed completion time.
+
+During **Installing**, one ordered stage list shows where you are out of six stages:
+preparation, workspace, packages, verification, shortcuts and finalization.
+The current task has its own progress bar and exact counts when available:
+files checked/copied, package files verified, or acceptance checks completed.
+These are task counts, not a prediction of the remaining installation time.
+For a pip batch, setup shows the known number of packages but does not invent
+individual completion while pip is working; the batch completes only after
+pip succeeds. Some subprocess operations remain indeterminate.
+
+**Total installation time** starts when you approve installation and includes
+all stages and safe cleanup. It stays visible and stops counting when setup
+finishes or stops. The current-stage timer is separate; neither is a prediction
+of the remaining time. Time spent checking or deciding before approval is not
+included in the installation total.
+
+Select **Show installation log** for the bounded live package output; it opens
+automatically if setup fails. **View diagnostics…** opens a larger resizable
+read-only window. **Activity output** contains a captured, bounded copy of
+recent package messages; **Setup details** contains the captured setup facts.
+These views stay still while you read them. Select **Refresh snapshot** to capture the
+latest information. **Open raw setup log** opens the separate structured event
+record; it is not the same display as recent package output. Cancelling still
+waits for safe cleanup, and a stopped setup does not mark later stages complete.
+
+**Open VIPP** uses the selected installation's Python and DLL directories,
+without carrying the setup program's Python/Qt loader overrides into VIPP.
+This prevents DLL conflicts when setup was launched from another development
+tool. It does not change Windows PATH or reinstall the GPU environment.
+
+#### Repair a stale Windows entry
+
+Setup can offer **Repair registration…** when the Windows
+entry is stale but setup can verify that it belongs to the same managed VIPP
+installation. The confirmation gives a short version and location summary;
+expand **Technical details** to inspect or copy the exact changes and backup
+location. **Cancel** is selected by default; choose **Repair entry** only after
+reviewing it. This repairs only the Windows installation entry, not the
+environment or your workflows. Setup checks again afterward; an update still
+requires your separate approval.
+
+The review may report that the obsolete uninstaller is already missing. It can
+still offer repair when the complete entry and the current installation pass
+verification; it does not run or recreate the old uninstaller. A present but
+altered file is not treated as a missing file.
+
+An unfamiliar, incomplete or changed entry remains blocked. Do not delete the
+entry or run an older uninstaller to bypass the check; keep the details for
+support. Cancelling the review leaves the entry unchanged.
+
 ## macOS installer — recommended
 
-VIPP 0.16.0a7 has separate offline packages for Apple Silicon and Intel Macs.
+VIPP 0.16.0a8 has separate offline packages for Apple Silicon and Intel Macs.
 Each package includes Python and napari, installs a private CPU-only environment
 under `~/Library/vipp`, and creates `~/Applications/VIPP.app`. No terminal or
 separate Python installation is required for the normal route.
@@ -228,11 +380,11 @@ launch, and removal.
 
 ## Linux and advanced manual installation
 
-VIPP 0.16.0a7 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
+VIPP 0.16.0a8 supports CPython 3.12 and 3.13 for CPU use. Create a dedicated
 environment, then install the exact alpha. An exact prerelease pin does not need
 pip's `--pre` option.
 
-The commands below use the exact `0.16.0a7` package pin.
+The commands below use the exact `0.16.0a8` package pin.
 
 === "Windows manual"
 
@@ -241,7 +393,7 @@ The commands below use the exact `0.16.0a7` package pin.
     & ".\.venv-vipp\Scripts\python.exe" -m pip install --upgrade pip
     & ".\.venv-vipp\Scripts\python.exe" -m pip install `
       "napari[pyqt6]>=0.6" `
-      "napari-vipp==0.16.0a7"
+      "napari-vipp==0.16.0a8"
     & ".\.venv-vipp\Scripts\vipp.exe"
     ```
 
@@ -252,7 +404,7 @@ The commands below use the exact `0.16.0a7` package pin.
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
     python -m pip install "napari[pyside6]>=0.6" \
-      "napari-vipp==0.16.0a7"
+      "napari-vipp==0.16.0a8"
     vipp
     ```
 
@@ -263,7 +415,7 @@ The commands below use the exact `0.16.0a7` package pin.
     source vipp-env/bin/activate
     python -m pip install --upgrade pip
     python -m pip install "napari[pyqt6]>=0.6" \
-      "napari-vipp==0.16.0a7"
+      "napari-vipp==0.16.0a8"
     vipp
     ```
 
@@ -288,7 +440,7 @@ python -c "import importlib.metadata as m; print(m.version('napari-vipp'))"
 Expected for this release:
 
 ```text
-0.16.0a7
+0.16.0a8
 ```
 
 Inside napari, choose **Plugins → VIPP Workflow (napari-vipp)**.
@@ -316,7 +468,7 @@ py -3.12 -m venv ".venv-vipp-gpu-cu13"
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv-vipp-gpu-cu13\Scripts\python.exe" -m pip install `
   "napari[pyqt6]>=0.6" `
-  "napari-vipp[gpu-cuda13]==0.16.0a7"
+  "napari-vipp[gpu-cuda13]==0.16.0a8"
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp-compute-doctor.exe" --track cuda13
 & ".\.venv-vipp-gpu-cu13\Scripts\vipp.exe"
 ```
@@ -335,12 +487,12 @@ novice check into a pass.
 
 ## Optional microscope readers
 
-Native CZI, Leica LIF/LOF/XLIF, Nikon ND2 and Olympus OIF/OIB/OIR readers are included in 0.16.0a7 plugin and desktop installations. No microscope extra is needed for these routes. **Image Source → Reader support** provides checks and guided setup for missing packages; see [microscope reader support](reader-support.md).
+Native CZI, Leica LIF/LOF/XLIF, Nikon ND2 and Olympus OIF/OIB/OIR readers are included in 0.16.0a8 plugin and desktop installations. No microscope extra is needed for these routes. **Image Source → Reader support** provides checks and guided setup for missing packages; see [microscope reader support](reader-support.md).
 
 Bio-Formats remains optional for IMS/VSI and broader fallback support. Install it with the Python from the exact environment that launches VIPP, then restart napari:
 
 ```text
-python -m pip install "napari-vipp[bioformats]==0.16.0a7"
+python -m pip install "napari-vipp[bioformats]==0.16.0a8"
 ```
 
 Its first use can download Java and Bio-Formats and require internet access. For older software, use the [0.15.0a1 installation manual](https://rensutheart.github.io/vipp-mkdocs/0.15.0a1/getting-started/installation/).
