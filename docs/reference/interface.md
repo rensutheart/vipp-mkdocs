@@ -194,6 +194,12 @@ graph context row holds sidebar toggles, **Find in workflow**, **Refresh**,
 **Focus**, **Auto Arrange**, **Tunnels…**, and zoom. This keeps graph navigation
 separate from file and execution actions.
 
+!!! note "Unreleased (nightly) — panning the workflow canvas"
+    To pan, press and drag on empty canvas space. If a drag is interrupted,
+    release the button and start a new drag. Moving the pointer alone does not
+    pan the canvas, even while a node is running. Dropping a node from the
+    library or adjusting an inspector slider does not start a pan.
+
 ### Workflow actions menu
 
 !!! note "New in 0.16.0a1"
@@ -472,6 +478,10 @@ an actionable error uses a filled, full-width alert. A message is not the
 execution record: the toolbar actual-run summary and per-node badges carry the
 compact compute result, while the detailed execution/provenance view explains
 implementation and fallback decisions.
+
+!!! note "Unreleased (nightly) — steady calculation progress"
+    Routine calculation progress keeps the same footer height as the run
+    advances. Long warnings and errors can still wrap so they remain readable.
 
 Napari's status bar at the bottom of the viewer is separate. It belongs to the
 viewer and reports coordinates, values, and layer interaction; VIPP does not

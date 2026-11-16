@@ -164,6 +164,11 @@ the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-t
     not change the original workflow JSON or clear its modified marker. Continue
     to use **Save** for the record you intend to keep or share.
 
+!!! note "Unreleased (nightly) — untouched startup workflow"
+    New recovery copies skip the **Untitled** workflow that opens at startup if
+    you leave it unchanged. Loading the starter preview does not count as an
+    edit. If you edit that workflow, VIPP keeps its working copy as usual.
+
 After an interrupted session, VIPP offers **Recover interrupted workflows**.
 You can also open it from **Workflow actions → Recover interrupted workflows…**
 (the three-dot menu beside Save).
