@@ -5,6 +5,16 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a9 scope and evidence
+
+The [0.16.0a9 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a9)
+and its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a9/docs/release-qualification-baseline.md)
+separate recovery eligibility, canvas gestures, routine progress layout and
+Crop viewer-layer checks from unchanged calculation, installer and GPU
+boundaries. A responsive preview does not validate the crop or the downstream
+analysis. See the [release overview](../releases/0.16.0a9.md).
+
 ## 0.16.0a8 scope and evidence
 
 Use the [0.16.0a8 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a8)

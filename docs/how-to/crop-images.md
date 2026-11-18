@@ -38,6 +38,14 @@ and restores the incoming tab's own preview view. Returning to Crop Stack
 recreates its outline from that workflow's retained settings. This does not
 recalculate the image or change the crop margins.
 
+!!! note "New in 0.16.0a9 — steadier Crop previews"
+    Selecting Crop Stack coordinates its source image and outline with
+    napari's layer-list updates, including when recovered results first become
+    available. Adjusting margins reuses the unchanged source
+    layer instead of repeatedly assigning its image data. Changes to the
+    source or calibration still update the display; the crop margins,
+    commit behavior and scientific result are unchanged.
+
 ## Channels and calibration
 
 Crop Stack protects a known channel axis. **Channel axis override** appears
