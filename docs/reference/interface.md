@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a8. Some labels
+Labels below match napari-vipp 0.16.0a9. Some labels
 shorten to icons when the window is narrow.
 
 !!! note "New in 0.16.0a8 — consistent sizing and clearer dialogs"
@@ -194,7 +194,7 @@ graph context row holds sidebar toggles, **Find in workflow**, **Refresh**,
 **Focus**, **Auto Arrange**, **Tunnels…**, and zoom. This keeps graph navigation
 separate from file and execution actions.
 
-!!! note "Unreleased (nightly) — panning the workflow canvas"
+!!! note "New in 0.16.0a9 — panning the workflow canvas"
     To pan, press and drag on empty canvas space. If a drag is interrupted,
     release the button and start a new drag. Moving the pointer alone does not
     pan the canvas, even while a node is running. Dropping a node from the
@@ -479,7 +479,7 @@ execution record: the toolbar actual-run summary and per-node badges carry the
 compact compute result, while the detailed execution/provenance view explains
 implementation and fallback decisions.
 
-!!! note "Unreleased (nightly) — steady calculation progress"
+!!! note "New in 0.16.0a9 — steady calculation progress"
     Routine calculation progress keeps the same footer height as the run
     advances. Long warnings and errors can still wrap so they remain readable.
 

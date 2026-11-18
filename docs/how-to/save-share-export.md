@@ -17,7 +17,7 @@ interchangeable.
 
 | Artifact | Use it for | Does not contain |
 | --- | --- | --- |
-| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a8; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
+| Workflow JSON (schema 6) | Reopen/edit the graph and authored compute/bypass request in VIPP 0.16.0a9; optionally restore an attached versioned batch configuration | Cached pixels/tables, actual-run implementation provenance, Python environment, source bytes |
 | Exported Python | Execute immutable validated workflow JSON through VIPP's shared headless executor with compute/progress/cancellation controls | Interactive UI, caches, a portable runtime environment |
 | Saved image/table plus provenance sidecar | Analysis result or QC artifact bound to one execution/output when exported through the generated program | Parameter rationale, input archive, proof of biological validity |
 | OME analysis dataset | Reference image plus associated graph label outputs | A complete project/archive, arbitrary standalone table provenance, or an exact compute-provenance sidecar |
@@ -164,7 +164,7 @@ the separate [schema-1/2 rebuild procedure](../reference/versioning.md#upgrade-t
     not change the original workflow JSON or clear its modified marker. Continue
     to use **Save** for the record you intend to keep or share.
 
-!!! note "Unreleased (nightly) — untouched startup workflow"
+!!! note "New in 0.16.0a9 — untouched startup workflow"
     New recovery copies skip the **Untitled** workflow that opens at startup if
     you leave it unchanged. Loading the starter preview does not count as an
     edit. If you edit that workflow, VIPP keeps its working copy as usual.

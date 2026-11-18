@@ -4,6 +4,14 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a9 alpha
+
+[Read the 0.16.0a9 overview](0.16.0a9.md) for cleaner startup recovery,
+interrupted-pan handling, steadier calculation progress and Crop viewer-layer
+updates. Scientific results and schema numbers are unchanged. Use the
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a9)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a9/).
+
 ## 0.16.0a8 alpha
 
 [Read the 0.16.0a8 overview](0.16.0a8.md) for Windows update methods, recovery
