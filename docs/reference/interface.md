@@ -278,7 +278,7 @@ typo or abbreviation. For example, **otsu** and **ostu** both find
 | **Tunnels...** | Manage named graph outputs and subscribers. |
 | **Auto Arrange** | Apply a one-shot source-to-sink layout; undo restores positions. |
 | **Focus** | Recover the graph center without changing zoom, selection, layout, cache state, or undo history. |
-| **Refresh** | Re-evaluate ordinary automatic graph state. |
+| **Refresh** | Reload the graph's file sources and recalculate automatic stages. Use it to [accept a changed image reader](../troubleshooting/common-pitfalls.md#the-saved-image-reader-has-changed). |
 | **Calculate all** | Calculate manual nodes that are not current. During isolated tuning, first apply the tuned result and release the temporary downstream boundary. |
 | **Undo / Redo** | Reverse or restore supported workflow edits. Parameter changes restore in place and invalidate only the changed node and descendants; one completed slider gesture contributes one history step. |
 
