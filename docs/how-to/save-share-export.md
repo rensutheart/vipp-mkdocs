@@ -35,6 +35,13 @@ recipe; the batch-results action uses recorded archived evidence.
 Choose **Open** and select a saved workflow `.json` file. VIPP opens it in a new
 tab, keeping existing workflows and unsaved edits intact.
 
+!!! note "Unreleased — nightly only"
+    To reopen a workflow, hover over **Workflow actions → Open Recent** and
+    select its full path. This lists your ten most recently opened or saved
+    workflows across launches. If a file has moved or its drive is offline,
+    restore access or use **Open** to choose its new location. Clearing the
+    recent list does not delete any workflow files.
+
 !!! note "New in 0.16.0a7"
     Ordinary workflows load their bound sources when opened. If the saved
     selection is a manual step with no available result, the initial view shows
