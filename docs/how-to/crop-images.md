@@ -7,7 +7,7 @@ Cropping changes the scientific image; it is not a display zoom.
 
 1. Connect the image to **Crop Stack** and select the node.
 2. Check the axes and physical spacing in **Output Metadata**.
-3. Adjust the margins, using the overlay to review the retained region.
+3. Adjust the margins and check which region the preview retains.
 4. Release the slider or finish numeric entry to commit the crop.
 5. Inspect the cropped output and its updated origin before continuing.
 
@@ -22,6 +22,21 @@ nonspatial axes remain complete. A `QYX` TIFF does not become a Z stack by shape
 alone: first review its [axis declaration](../concepts/axes-and-metadata.md#tiff-page-labels-at-an-image-source).
 
 ## Understand the overlay
+
+!!! note "Unreleased (nightly) — Crop bounds in the Inspector"
+    On Windows, if the viewer uses Intel hardware OpenGL or VIPP cannot
+    identify the renderer, look for **Crop bounds (schematic)** in the
+    Inspector. Shading shows the XY area you keep; a separate bar shows the
+    retained Z range when present. Both follow the margins as you drag. This
+    is a diagram of sample bounds, not an image or a physical-scale drawing.
+
+    In this mode the viewer shows the cropped image after calculation instead
+    of drawing an outline on a separate source layer. You do not need to change
+    **Compute**: the preview does not alter the cropped pixels or calibration.
+    Other supported renderers keep the usual outline described below. To try
+    the schematic on another machine, launch VIPP with the environment variable
+    `VIPP_SAFE_CROP_PREVIEW=1` set for that process. A normal launch restores
+    automatic selection.
 
 - The 2D outline is orange on a retained Z plane and red on an excluded plane.
 - The 3D view uses a transparent wireframe, not a filled volume.
