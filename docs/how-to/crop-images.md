@@ -7,7 +7,7 @@ Cropping changes the scientific image; it is not a display zoom.
 
 1. Connect the image to **Crop Stack** and select the node.
 2. Check the axes and physical spacing in **Output Metadata**.
-3. Adjust the margins, using the overlay to review the retained region.
+3. Adjust the margins and check which region the preview retains.
 4. Release the slider or finish numeric entry to commit the crop.
 5. Inspect the cropped output and its updated origin before continuing.
 
@@ -22,6 +22,23 @@ nonspatial axes remain complete. A `QYX` TIFF does not become a Z stack by shape
 alone: first review its [axis declaration](../concepts/axes-and-metadata.md#tiff-page-labels-at-an-image-source).
 
 ## Understand the overlay
+
+!!! note "Unreleased (nightly) — Live crop outline on Intel graphics"
+    On Windows with Intel or unidentified graphics, select **Crop Stack**.
+    In 2D the viewer keeps the input visible, including the pixels outside
+    the orange rectangle. Drag a margin to see what you will keep before
+    releasing it. The rectangle turns red if the current slice is outside
+    the crop. On a maximum-intensity projection, it stays orange if **any**
+    slice in the displayed slab intersects the crop. The projection still
+    shows the input, not a projection of the cropped result.
+
+    Switch to 3D to see the same bounds as a wireframe, or back to 2D to
+    inspect a slice. If only a source window was loaded, the viewer shows
+    that window at its calibrated position. The **Crop bounds (schematic)**
+    diagram is also available in the Inspector. These previews do not change
+    the graph's output thumbnails or the **Compute** setting.
+    To try this display mode on another machine, start VIPP with
+    `VIPP_SAFE_CROP_PREVIEW=1` set for that process.
 
 - The 2D outline is orange on a retained Z plane and red on an excluded plane.
 - The 3D view uses a transparent wireframe, not a filled volume.
