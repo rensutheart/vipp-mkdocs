@@ -5,6 +5,7 @@ task sequences.
 
 | Page | Use |
 | --- | --- |
+| [0.16.0a10 release notes](../releases/0.16.0a10.md) | Review recent workflows, live Crop bounds and explicit reader refresh. |
 | [0.16.0a9 release notes](../releases/0.16.0a9.md) | Review startup recovery, canvas gestures, progress and Crop viewer fixes. |
 | [0.16.0a8 release notes](../releases/0.16.0a8.md) | Review Windows update methods, multi-workspace recovery and inspection improvements. |
 | [0.16.0a2 release notes](../releases/0.16.0a2.md) | Review registration, reusable transforms, per-label skeletons and CPU median acceleration. |

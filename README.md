@@ -40,6 +40,11 @@ python scripts/check_manual.py --application-repo ../napari-vipp
 
 ## Versions
 
+Read the [VIPP 0.16.0a10 overview](docs/releases/0.16.0a10.md) for this
+release's changes. For the hosted manual, choose
+[stable](https://rensutheart.github.io/vipp-mkdocs/stable/) or
+[nightly](https://rensutheart.github.io/vipp-mkdocs/nightly/) to match your app.
+
 The site uses [mike](https://github.com/jimporter/mike):
 
 - **stable** points to the manual for the current supported release;

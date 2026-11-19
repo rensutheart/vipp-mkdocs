@@ -4,6 +4,14 @@ Release notes describe behavior that changes when VIPP is upgraded. They are
 not a substitute for validating an analysis on representative and held-out
 data.
 
+## 0.16.0a10 alpha
+
+[Read the 0.16.0a10 overview](0.16.0a10.md) for recent-workflow history,
+live Crop bounds on Windows Intel graphics and an explicit changed-reader
+refresh action. All AI application features are excluded. Use the
+[GitHub release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a10)
+and [PyPI page](https://pypi.org/project/napari-vipp/0.16.0a10/).
+
 ## 0.16.0a9 alpha
 
 [Read the 0.16.0a9 overview](0.16.0a9.md) for cleaner startup recovery,

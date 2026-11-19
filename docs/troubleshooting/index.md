@@ -7,6 +7,7 @@ or label image.
 | Symptom | Start here |
 | --- | --- |
 | Wrong objects, counts, channels, units, or stale tables | [Common problems](common-pitfalls.md) |
+| A saved workflow reports that its image reader or version changed | [Refresh the file sources](common-pitfalls.md#the-saved-image-reader-has-changed) |
 | Slow interaction or high RAM use | [Performance and memory](performance.md) |
 | Auto/Prefer GPU/Custom uses CPU, GPU setup fails, or optimizer progress pauses | [Choose and verify CPU or GPU compute](../how-to/choose-compute.md) |
 | Installation/plugin discovery problem | [Install VIPP](../getting-started/installation.md) |

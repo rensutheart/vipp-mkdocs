@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a9. Some labels
+Labels below match napari-vipp 0.16.0a10. Some labels
 shorten to icons when the window is narrow.
 
 !!! note "New in 0.16.0a8 — consistent sizing and clearer dialogs"
@@ -202,6 +202,13 @@ separate from file and execution actions.
 
 ### Workflow actions menu
 
+!!! note "New in 0.16.0a10 — recent workflows"
+    Hover over **Workflow actions → Open Recent** to see the ten latest opened
+    or saved workflows, newest first. Each entry shows its full file path and
+    opens through the normal workflow checks in a new tab. The list persists
+    between launches; built-in examples and cancelled or failed opens are not
+    added. **Clear recent workflows** clears the list, not the files.
+
 !!! note "New in 0.16.0a1"
     The three-dot **Workflow actions** button sits immediately after **Save**,
     before **Batch workflow**. It separates commands for the active workflow
@@ -271,7 +278,7 @@ typo or abbreviation. For example, **otsu** and **ostu** both find
 | **Tunnels...** | Manage named graph outputs and subscribers. |
 | **Auto Arrange** | Apply a one-shot source-to-sink layout; undo restores positions. |
 | **Focus** | Recover the graph center without changing zoom, selection, layout, cache state, or undo history. |
-| **Refresh** | Re-evaluate ordinary automatic graph state. |
+| **Refresh** | Reload the graph's file sources and recalculate automatic stages. Use it to [accept a changed image reader](../troubleshooting/common-pitfalls.md#the-saved-image-reader-has-changed). |
 | **Calculate all** | Calculate manual nodes that are not current. During isolated tuning, first apply the tuned result and release the temporary downstream boundary. |
 | **Undo / Redo** | Reverse or restore supported workflow edits. Parameter changes restore in place and invalidate only the changed node and descendants; one completed slider gesture contributes one history step. |
 
