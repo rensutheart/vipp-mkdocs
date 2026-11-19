@@ -202,6 +202,13 @@ separate from file and execution actions.
 
 ### Workflow actions menu
 
+!!! note "Unreleased — nightly only"
+    Hover over **Workflow actions → Open Recent** to see the ten latest opened
+    or saved workflows, newest first. Each entry shows its full file path and
+    opens through the normal workflow checks in a new tab. The list persists
+    between launches; built-in examples and cancelled or failed opens are not
+    added. **Clear recent workflows** clears the list, not the files.
+
 !!! note "New in 0.16.0a1"
     The three-dot **Workflow actions** button sits immediately after **Save**,
     before **Batch workflow**. It separates commands for the active workflow
