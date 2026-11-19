@@ -5,6 +5,17 @@ qualification separate from carried-forward scientific and installer records.
 It is a claim boundary, not a certificate that every node, reader, or workflow
 is validated for every assay.
 
+## 0.16.0a10 scope and evidence
+
+The [0.16.0a10 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a10)
+and its
+[qualification declaration](https://github.com/rensutheart/napari-vipp/blob/v0.16.0a10/docs/release-qualification-baseline.md)
+distinguish recent-workflow history, guarded Crop previews and explicit
+reader-refresh behavior from unchanged scientific algorithms, GPU admission
+and installer mechanics. A live outline or schematic does not validate a crop;
+accepting a changed reader requires review of the interpreted source. See the
+[release overview](../releases/0.16.0a10.md).
+
 ## 0.16.0a9 scope and evidence
 
 The [0.16.0a9 release](https://github.com/rensutheart/napari-vipp/releases/tag/v0.16.0a9)

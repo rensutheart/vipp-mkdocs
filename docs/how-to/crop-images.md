@@ -23,7 +23,7 @@ alone: first review its [axis declaration](../concepts/axes-and-metadata.md#tiff
 
 ## Understand the overlay
 
-!!! note "Unreleased (nightly) — Live crop outline on Intel graphics"
+!!! note "New in 0.16.0a10 — live crop outline on Intel graphics"
     On Windows with Intel or unidentified graphics, select **Crop Stack**.
     In 2D the viewer keeps the input visible, including the pixels outside
     the orange rectangle. Drag a margin to see what you will keep before

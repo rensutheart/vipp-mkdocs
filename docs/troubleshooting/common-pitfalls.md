@@ -212,10 +212,10 @@ Fix:
 A different reader or version may interpret the same image differently.
 Refresh only if you intend to use the current reader.
 
-1. Click **Refresh** on the graph toolbar, next to **Focus**. In the
-   **unreleased nightly** build, you can also click
-   **Refresh file sources** directly in the warning. Both actions reload the
-   current graph's file sources, not just the selected node.
+1. Click **Refresh** on the graph toolbar, next to **Focus**. **New in
+   0.16.0a10:** you can also click **Refresh file sources** directly in the
+   warning. Both actions reload the current graph's file sources, not just the
+   selected node.
 2. Check the preview, channels, axes and calibration before saving the workflow.
 3. For a collection, **Refresh** reloads the representative sample. To verify
    the collection separately, review the folder and pattern in **Batch workflow

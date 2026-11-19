@@ -1,6 +1,6 @@
 # Toolbar and settings
 
-Labels below match napari-vipp 0.16.0a9. Some labels
+Labels below match napari-vipp 0.16.0a10. Some labels
 shorten to icons when the window is narrow.
 
 !!! note "New in 0.16.0a8 — consistent sizing and clearer dialogs"
@@ -202,7 +202,7 @@ separate from file and execution actions.
 
 ### Workflow actions menu
 
-!!! note "Unreleased — nightly only"
+!!! note "New in 0.16.0a10 — recent workflows"
     Hover over **Workflow actions → Open Recent** to see the ten latest opened
     or saved workflows, newest first. Each entry shows its full file path and
     opens through the normal workflow checks in a new tab. The list persists
